@@ -1,0 +1,50 @@
+name: Step 5, Merge your pull request
+
+# This step triggers after a pull requst is merged to `main`
+# This step sets STEP to X
+# This step closes <details id=5> and opens <details id=X>
+
+# This will run every time we create push a commit to `main`
+# Reference https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  # Need `contents: read` to checkout the repository
+  # Need `contents: write` to update the step metadata
+  contents: write
+
+jobs:
+  on_merge:
+    name: On merge
+
+    # We will only run this action when:
+    # 1. This repository isn't the template repository
+    # 2. The STEP is currently 5 (see update-step.sh)
+    # Reference https://docs.github.com/en/actions/learn-github-actions/contexts
+    # Reference https://docs.github.com/en/actions/learn-github-actions/expressions
+    if: ${{ github.repository_owner != 'githublearn' }}
+
+    # We'll run Ubuntu for performance instead of Mac or Windows
+    runs-on: ubuntu-latest
+
+    steps:
+      # We'll need to check out the repository so that we can edit the README
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Let's get all the branches
+
+      # Update README to close <details id=5>
+      # and open <details id=X>
+      # and set STEP to 'X'
+      - name: Update to step X
+        run: ./.github/script/update-step.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FROM_STEP: 5
+          TO_STEP: X
+          BRANCH_NAME: TBD
