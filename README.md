@@ -150,11 +150,10 @@ For more information about configuring front matter, see the [Jekyll front matte
 1. Browse to **Files Changed** tab in the pull request from the `my-pages` branch.
 1. Click **Create new file**.
 1. Name the file `_posts/YYYY-MM-DD-title.md`.
-1. Replace the `YYYY-MM-DD` with today's date, and change the `title` of your first blog post if you'd like. _Note:_ If you do edit the title, make sure there are hyphens between your words.
-
+1. Replace the `YYYY-MM-DD` with today's date, and change the `title` of your first blog post if you'd like.
+   > If you do edit the title, make sure there are hyphens between your words.
    > If your blog post date doesn't follow the correct date convention, you'll receive an error and your site won't build. For more information, see "[Page build failed: Invalid post date](https://help.github.com/articles/page-build-failed-invalid-post-date/)".
 1. Type the following content at the top of your blog post:
-
    ```yaml
    ---
    title: "YOUR-TITLE"
@@ -178,7 +177,7 @@ For more information about configuring front matter, see the [Jekyll front matte
 <details id=5>
 <summary><strong>:shipit: Step 5: Merge your pull request</strong></summary>
 
-### Nice work friend :header:! People will be reading your blog in no time!
+### Nice work friend :heart:! People will be reading your blog in no time!
 
 You can now [merge](https://help.github.com/articles/github-glossary/#merge) your pull request!
 
