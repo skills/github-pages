@@ -1,54 +1,4 @@
-# GitHub Pages
 
-_Learn how to create a site or blog from your GitHub repositories with GitHub Pages._
-
-![](https://repository-images.githubusercontent.com/139185178/e16dc080-586c-11ea-8483-f28caf36a352)
-
-**Tags**: GitHub, GitHub Pages
-
----
-
-Did you know you can host your personal, organization, and project sites on GitHub? With GitHub Pages, you can quickly create a site from your GitHub repositories—a great way to share static content related to your repository like resumes, portfolios, and project blogs. 
-
-If you're new to GitHub Pages, or you want to learn how to build and host a GitHub Pages site, you're in the right place. With GitHub Pages, you can host content like documentation, resumes, or any other static content that you’d like.
-
-## What you'll learn
-
-In this course, you’ll learn how to:
-
-- Enable GitHub Pages
-- Choose a theme with Jekyll
-- Use YAML front matter
-- Customize your site
-- Create and edit blog posts
-
-You'll know the answers to questions like:
-
-- What is GitHub pages?
-- How do I make sites with GitHub Pages?
-- How do I create my own blog?
-
-## What you'll build
-
-In this course, you'll build a simple personal blog site with GitHub Pages. You'll be able to add posts and share your blog with anyone.
-
-![Screenshot_2021-04-07 Welcome to my blog](https://user-images.githubusercontent.com/29868089/113876198-76721580-97f2-11eb-89eb-e6c7375ad7cc.png)
-
-## Prerequisites
-
-For this course, you'll need to know how to create a branch on GitHub, commit changes using Git, and open a pull request on GitHub. If you need a refresher on the GitHub flow, check out the [Introduction to GitHub course](https://lab.github.com/githubtraining/introduction-to-github). We'll assume you know what [blogs](https://en.wikipedia.org/wiki/Blog) are and how they work.
-
-## Projects used
-
-- [Jekyll](https://jekyllrb.com), a static site generator
-- [Jekyll minima theme](https://github.com/jekyll/minima), a one-size-fits-all Jekyll theme for writers
-
-## Audience
-
-This is a great beginner course. If you're wanting to run your own blog, personal site, project site, or portfolio, this is the best course for you. This is a wonderful course for students, project maintainers, and small businesses.
-
-
----
 
 ## Step 1: Enable GitHub Pages
 
@@ -62,9 +12,6 @@ In this course, you'll create a blog hosted on GitHub Pages and learn how to:
 - Use [Jekyll](https://jekyllrb.com/), a static site generator
 - Customize Jekyll sites with a theme and content
 
-### New to GitHub?
-
-For this course, you'll need to know how to create a branch on GitHub, commit changes using Git, and open a pull request on GitHub. If you need a refresher on the GitHub flow, check out the [Introduction to GitHub course]({{ host }}/courses/introduction-to-github).
 
 ### :keyboard: Activity: Generate a GitHub Pages site
 
@@ -116,22 +63,7 @@ For example, if you type `closes #2` in your pull request description, the open 
 
 If you would like assistance troubleshooting the issue you are encountering, create a post on the [GitHub Community]({{ communityBoard }}) board. You might also want to search for your issue to see if other people have resolved it in the past.
 
-<hr>
-<h3 align="center">Check below for next steps.</h3>
 
-
-## Step 3: Merge your pull request
-
-You can merge<sup>[:book:](https://help.github.com/articles/github-glossary/#merge)</sup> your pull request now @{{ user.username }}! :ship: 
-
-### :keyboard: Activity: Merge your pull request
-
-1. Click **Merge pull request** below.
-1. Click **Confirm merge**.
-1. Click **Delete branch**.
-
-<hr>
-<h3 align="center">Watch below for my response.</h3>
 
 
 ## Step 4: Customize Site Details

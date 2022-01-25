@@ -5,11 +5,11 @@
   Add your open source license, GitHub uses Creative Commons Attribution 4.0 International.
 -->
 
-<img src=TBD_social_image width=300 align=right>
+<img src=https://repository-images.githubusercontent.com/139185178/e16dc080-586c-11ea-8483-f28caf36a352 width=300 align=right>
 
-# TBD course title
+# GitHub Pages
 
-_TBD course description_
+_Learn how to create a site or blog from your GitHub repositories with GitHub Pages._
 
 <!--
   <<< Author notes: Start of the course >>>
@@ -23,18 +23,18 @@ _TBD course description_
 <details id=0 open>
 <summary><strong>:golf: Start</strong></summary>
 
-**To start this course: [<img width="150" alt="Use this template" src="https://user-images.githubusercontent.com/1221423/148581131-555c0fb8-5361-4450-a760-75fa6219a2fc.png">](https://github.com/githublearn/TBD/generate)**
+**To start this course: [<img width="150" alt="Use this template" src="https://user-images.githubusercontent.com/1221423/148581131-555c0fb8-5361-4450-a760-75fa6219a2fc.png">](https://github.com/githublearn/github-pages/generate)**
 
 > We recommend creating a public repository, as private repositories will [use Actions minutes](https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions).<br>
 > After you make your own repository, wait about 20 seconds and refresh. I will go to the next step.
 
-TBD welcome paragraph
+With GitHub Pages, you can host project blogs, documentation, resumes, portfolios, or any other static content you'd like. Your GitHub repository can easily become its own website. In this course, we'll show you how to set up your own site or blog using GitHub Pages.
 
-- **Who is this for**: TBD
-- **What you'll learn**: TBD
-- **What you'll build**: TBD
-- **Prerequisites**: TBD
-- **How long**: This course is TBD steps and takes less than TBD.
+- **Who is this for**: Beginners, students, project maintainers, small businesses
+- **What you'll learn**: Build a GitHub Pages blog site with Jekyll.
+- **What you'll build**: We'll build a simple GitHub pages site with a blog. We'll use [Jekyll](https://jekyllrb.com), a static site generator.
+- **Prerequisites**: If you need to learn about branches, commits, and pull requests, take [Introduction to GitHub](https://lab.github.com/githubtraining/introduction-to-github) first. We'll assume you are familiar with [blogs](https://en.wikipedia.org/wiki/Blog).
+- **How long**: This course is 5 steps and takes less than one hour.
 
 </details>
 
@@ -47,7 +47,7 @@ TBD welcome paragraph
 -->
 
 <details id=1>
-<summary><strong>:TBD: Step 1: TBD</strong></summary>
+<summary><strong>:TBD: Step 1: Enable GitHub Pages</strong></summary>
 
 ### :wave: Welcome to "TBD"!
 
@@ -68,7 +68,7 @@ TBD welcome paragraph
 -->
 
 <details id=2>
-<summary><strong>:TBD: Step 2: TBD</strong></summary>
+<summary><strong>:TBD: Step 2: Configure your site</strong></summary>
 
 ### :tada: You did TBD!
 
@@ -90,7 +90,7 @@ TBD
 -->
 
 <details id=3>
-<summary><strong>:TBD: Step 3: TBD</strong></summary>
+<summary><strong>:TBD: Step 3: Customize your homepage</strong></summary>
 
 ### Nice work TBD :sparkles:
 
@@ -112,7 +112,7 @@ TBD
 -->
 
 <details id=4>
-<summary><strong>:TBD: Step 4: TBD</strong></summary>
+<summary><strong>:TBD: Step 4: Create a blog post</strong></summary>
 
 ### Nicely done friend! :sparkles:
 
