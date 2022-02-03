@@ -1,14 +1,14 @@
 name: Step 1, Enable GitHub Pages
 
-# This step triggers after TBD
+# This step triggers after we run a pages build
 # This step sets STEP to 2
 # This step closes <details id=1> and opens <details id=2>
 
-# This will run every time we TBD
+# This will run every time we run a pages build
 # Reference https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows
 on:
   workflow_dispatch:
-  TBD:
+  page_build:
 
 permissions:
   # Need `contents: read` to checkout the repository
@@ -16,8 +16,8 @@ permissions:
   contents: write
 
 jobs:
-  on_TBD:
-    name: On TBD
+  on_enable_github_pages:
+    name: On enable github pages
 
     # We will only run this action when:
     # 1. This repository isn't the template repository
