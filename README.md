@@ -65,7 +65,7 @@ The first step to publishing your blog to the web is to enable GitHub Pages on t
 
 <!--
   <<< Author notes: Step 2 >>>
-  Start this step by acknowledging the first step.
+  Start this step by acknowledging the previous step.
   Define terms and link to docs.github.com.
   Historic note: previous version checked for empty pull request, changed to the correct theme `minima`.
 -->
@@ -97,7 +97,7 @@ We need to use a blog-ready theme. For this activity, we will use a theme named 
 
 <!--
   <<< Author notes: Step 3 >>>
-  Start this step by acknowledging the first step.
+  Start this step by acknowledging the previous step.
   Define terms and link to docs.github.com.
   Historic note: previous version checked the homepage content was not empty.
 -->
@@ -122,7 +122,7 @@ You can customize your homepage by adding content to either an `index.md` file o
 
 <!--
   <<< Author notes: Step 4 >>>
-  Start this step by acknowledging the first step.
+  Start this step by acknowledging the previous step.
   Define terms and link to docs.github.com.
   Historic note: previous version checked the file path. Previous version checked the front matter formatting.
 -->
@@ -170,7 +170,7 @@ For more information about configuring front matter, see the [Jekyll front matte
 
 <!--
   <<< Author notes: Step 5 >>>
-  Start this step by acknowledging the first step.
+  Start this step by acknowledging the previous step.
   Define terms and link to docs.github.com.
 -->
 
