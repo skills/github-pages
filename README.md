@@ -34,7 +34,7 @@ With GitHub Pages, you can host project blogs, documentation, resumes, portfolio
 - **What you'll learn**: Build a GitHub Pages blog site with Jekyll.
 - **What you'll build**: We'll build a simple GitHub pages site with a blog. We'll use [Jekyll](https://jekyllrb.com), a static site generator.
 - **Prerequisites**: If you need to learn about branches, commits, and pull requests, take [Introduction to GitHub](https://lab.github.com/githubtraining/introduction-to-github) first. We'll assume you are familiar with [blogs](https://en.wikipedia.org/wiki/Blog).
-- **How long**: This course is 5 steps and takes less than one hour.
+- **How long**: This course is five steps long and takes less than one hour to complete.
 
 </details>
 
@@ -73,7 +73,7 @@ The first step to publishing your blog to the web is to enable GitHub Pages on t
 <details id=2>
 <summary><strong>:juggling_person: Step 2: Configure your site</strong></summary>
 
-### :tada: You turned on GitHub Pages!
+### You turned on GitHub Pages! :tada:
 
 We'll work in a branch, `my-pages`, that I created for you to get this site looking great. :sparkle:
 
@@ -130,7 +130,7 @@ You can customize your homepage by adding content to either an `index.md` file o
 <details id=4>
 <summary><strong>:newspaper: Step 4: Create a blog post</strong></summary>
 
-### Your home page is looking great! :sparkles:
+### Your home page is looking great! :cowboy_hat_face:
 
 GitHub Pages uses Jekyll. In Jekyll, we can create a blog by using specially named files and frontmatter. The files must be named `_posts/YYYY-MM-DD-title.md`. You must also include `title` and `date` in your frontmatter.
 
@@ -214,7 +214,7 @@ Here's a recap of all the tasks you've accomplished in your repository:
 
 - Keep working on your GitHub Pages site... we love seeing what you come up with!
 - We'd love to hear what you thought of this course [in our community forum](https://github.community/c/education/github-learning-lab/34).
-- [Take another GitHub Learn Course](https://github.com/githublearn).
+- [Take another GitHub Learn course](https://github.com/githublearn).
 - [Read the GitHub Getting Started docs](https://docs.github.com/en/get-started).
 - To find projects to contribute to, check out [GitHub Explore](https://github.com/explore).
 
