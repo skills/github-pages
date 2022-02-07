@@ -13,7 +13,7 @@ _Learn how to create a site or blog from your GitHub repositories with GitHub Pa
 
 <!--
   <<< Author notes: Start of the course >>>
-  Include start button, a note about actions minutes,
+  Include start button, a note about Actions minutes,
   and tell the learner why they should take the course.
   Each step should be wrapped in <details>/<summary>, with an `id` set.
   The start <details> should have `open` as well.
