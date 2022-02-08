@@ -152,7 +152,7 @@ For more information about configuring front matter, see the [Jekyll front matte
 1. Name the file `_posts/YYYY-MM-DD-title.md`.
 1. Replace the `YYYY-MM-DD` with today's date, and change the `title` of your first blog post if you'd like.
    > If you do edit the title, make sure there are hyphens between your words.
-   > If your blog post date doesn't follow the correct date convention, you'll receive an error and your site won't build. For more information, see "[Page build failed: Invalid post date](https://help.github.com/articles/page-build-failed-invalid-post-date/)".
+   > If your blog post date doesn't follow the correct date convention, you'll receive an error and your site won't build. For more information, see "[Page build failed: Invalid post date](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/troubleshooting-jekyll-build-errors-for-github-pages-sites)".
 1. Type the following content at the top of your blog post:
    ```yaml
    ---
@@ -179,7 +179,7 @@ For more information about configuring front matter, see the [Jekyll front matte
 
 ### Nice work friend :heart:! People will be reading your blog in no time!
 
-You can now [merge](https://help.github.com/articles/github-glossary/#merge) your pull request!
+You can now [merge](https://docs.github.com/en/get-started/quickstart/github-glossary#merge) your pull request!
 
 ### :keyboard: Activity: Merge your pull request
 
