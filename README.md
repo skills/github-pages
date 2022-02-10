@@ -147,8 +147,8 @@ For more information about configuring front matter, see the [Jekyll front matte
 
 ### :keyboard: Activity: Create a blog post
 
-1. Browse to **Files Changed** tab in the pull request from the `my-pages` branch.
-1. Click **Create new file**.
+1. Browse to the `my-pages` branch.
+1. Click the `Add file` dropdown menu and then on `Create new file`.
 1. Name the file `_posts/YYYY-MM-DD-title.md`.
 1. Replace the `YYYY-MM-DD` with today's date, and change the `title` of your first blog post if you'd like.
    > If you do edit the title, make sure there are hyphens between your words.
