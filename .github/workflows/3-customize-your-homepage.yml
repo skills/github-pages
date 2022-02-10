@@ -1,14 +1,18 @@
 name: Step 3, Customize your homepage
 
-# This step triggers after TBD
+# This step triggers after the learner updates their homepage 
 # This step sets STEP to 4
 # This step closes <details id=3> and opens <details id=4>
 
-# This will run every time we TBD
+# This will run every time we update `index.md` in the `my-pages` branch 
 # Reference https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows
 on:
   workflow_dispatch:
-  TBD:
+  push:
+    branches:
+      - my-pages
+    paths:
+      - index.md
 
 permissions:
   # Need `contents: read` to checkout the repository
@@ -16,8 +20,8 @@ permissions:
   contents: write
 
 jobs:
-  on_TBD:
-    name: On TBD
+  on_homepage_update:
+    name: On homepage update 
 
     # We will only run this action when:
     # 1. This repository isn't the template repository
@@ -35,8 +39,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0 # Let's get all the branches
-
-      # TBD include any further steps here
+          ref: my-pages
 
       # Update README to close <details id=3>
       # and open <details id=4>
@@ -47,4 +50,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FROM_STEP: 3
           TO_STEP: 4
-          BRANCH_NAME: TBD
+          BRANCH_NAME: my-pages

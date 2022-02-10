@@ -15,7 +15,9 @@ on:
 permissions:
   # Need `contents: read` to checkout the repository
   # Need `contents: write` to update the step metadata
+  # Need `pull-requests: write` to create a pull request
   contents: write
+  pull-requests: write
 
 jobs:
   on_start:
@@ -38,10 +40,37 @@ jobs:
         with:
           fetch-depth: 0 # Let's get all the branches
 
-      # TBD Include any additional set up steps here
-      # TBD set up `my-pages` branch
-      # TBD add `_config.yml` blank file
-      # TBD add `index.md` file with title: frontmatter
+      - name: Create my-pages branch, initial Pages files, and pull request
+        run: |
+          echo "Make sure we are on step 0"
+          if [ "$(cat .github/script/STEP)" != 0 ]
+          then
+            echo "Current step is not 0"
+            exit 0
+          fi
+
+          echo "Make a branch"
+          BRANCH=my-pages
+          git checkout -b $BRANCH
+
+          echo "Create config and homepage files"
+          touch _config.yml
+          printf "%s\n%s\n%s\n\n" "---" "title: Welcome to my blog" "---" > index.md
+
+          echo "Make a commit"
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add _config.yml index.md
+          git commit --message="Create config and homepages files"
+
+          echo "Push"
+          git push --set-upstream origin $BRANCH
+
+          echo "Make a pull request"
+          # Reference https://cli.github.com/manual/gh_pr_create
+          gh pr create --title "GitHub Pages" --body "GitHub Pages"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Update README to close <details id=0>
       # and open <details id=1>
@@ -52,4 +81,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FROM_STEP: 0
           TO_STEP: 1
-          BRANCH_NAME: TBD
+          BRANCH_NAME: my-pages 
