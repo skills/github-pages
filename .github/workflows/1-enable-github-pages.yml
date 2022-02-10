@@ -35,8 +35,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0 # Let's get all the branches
-
-      # TBD include any further steps here
+          ref: my-pages
 
       # Update README to close <details id=1>
       # and open <details id=2>
@@ -47,4 +46,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FROM_STEP: 1
           TO_STEP: 2
-          BRANCH_NAME: TBD
+          BRANCH_NAME: my-pages 
