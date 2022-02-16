@@ -9,7 +9,7 @@
 
 # GitHub Pages
 
-_Learn how to create a site or blog from your GitHub repositories with GitHub Pages._
+_Learn how to create a site or blog with GitHub Pages._
 
 <!--
   <<< Author notes: Start of the course >>>
@@ -31,9 +31,9 @@ _Learn how to create a site or blog from your GitHub repositories with GitHub Pa
 With GitHub Pages, you can host project blogs, documentation, resumes, portfolios, or any other static content you'd like. Your GitHub repository can easily become its own website. In this course, we'll show you how to set up your own site or blog using GitHub Pages.
 
 - **Who is this for**: Beginners, students, project maintainers, small businesses.
-- **What you'll learn**: Build a GitHub Pages blog site with Jekyll.
-- **What you'll build**: We'll build a simple GitHub pages site with a blog. We'll use [Jekyll](https://jekyllrb.com), a static site generator.
-- **Prerequisites**: If you need to learn about branches, commits, and pull requests, take [Introduction to GitHub](https://lab.github.com/githubtraining/introduction-to-github) first. We'll assume you are familiar with [blogs](https://en.wikipedia.org/wiki/Blog).
+- **What you'll learn**: How to build a GitHub Pages site.
+- **What you'll build**: We'll build a simple GitHub Pages site with a blog. We'll use [Jekyll](https://jekyllrb.com), a static site generator.
+- **Prerequisites**: If you need to learn about branches, commits, and pull requests, take [Introduction to GitHub](https://lab.github.com/githubtraining/introduction-to-github) first. 
 - **How long**: This course is five steps long and takes less than one hour to complete.
 
 </details>
@@ -51,14 +51,14 @@ With GitHub Pages, you can host project blogs, documentation, resumes, portfolio
 
 ### Welcome to GitHub Pages and Jekyll :tada:!
 
-The first step to publishing your blog to the web is to enable GitHub Pages on this [repository](https://docs.github.com/en/get-started/quickstart/github-glossary#repository). When you enable GitHub Pages on a repository, GitHub takes the content that's on the main branch and publishes a website based on its contents.
+The first step is to enable GitHub Pages on this [repository](https://docs.github.com/en/get-started/quickstart/github-glossary#repository). When you enable GitHub Pages on a repository, GitHub takes the content that's on the main branch and publishes a website based on its contents.
 
 ### :keyboard: Activity: Enable GitHub Pages
 
 1. Open a new browser tab, and work on the steps in your second tab while you read the instructions in this tab.
 1. Under your repository name, click **Settings**.
-1. In the "GitHub Pages" section, in the Source drop-down, select **main branch**.
-1. Wait about _one minute_ then refresh this page for the next step.
+1. In the "GitHub Pages" section, use the Source drop-down, then select **main branch**.
+1. Wait about _one minute_, then refresh this page for the next step.
    > Turning on GitHub Pages creates a deployment of your repository. I may take up to a minute to respond as I await the deployment. Future steps will be about 20 seconds; this step is slower.
 
 </details>
@@ -134,7 +134,7 @@ You can customize your homepage by adding content to either an `index.md` file o
 
 GitHub Pages uses Jekyll. In Jekyll, we can create a blog by using specially named files and frontmatter. The files must be named `_posts/YYYY-MM-DD-title.md`. You must also include `title` and `date` in your frontmatter.
 
-**What is _front matter_**: The syntax Jekyll files use is called YAML front matter. It goes at the top of your file and looks something like this:
+**What is _frontmatter_?**: The syntax Jekyll files use is called YAML frontmatter. It goes at the top of your file and looks something like this:
 
 ```yml
 ---
@@ -143,12 +143,12 @@ date: 2019-01-20
 ---
 ```
 
-For more information about configuring front matter, see the [Jekyll front matter documentation](https://jekyllrb.com/docs/frontmatter/).
+For more information about configuring front matter, see the [Jekyll frontmatter documentation](https://jekyllrb.com/docs/frontmatter/).
 
 ### :keyboard: Activity: Create a blog post
 
-1. Browse to **Files Changed** tab in the pull request from the `my-pages` branch.
-1. Click **Create new file**.
+1. Browse to the `my-pages` branch.
+1. Click the `Add file` dropdown menu and then on `Create new file`.
 1. Name the file `_posts/YYYY-MM-DD-title.md`.
 1. Replace the `YYYY-MM-DD` with today's date, and change the `title` of your first blog post if you'd like.
    > If you do edit the title, make sure there are hyphens between your words.
@@ -177,7 +177,7 @@ For more information about configuring front matter, see the [Jekyll front matte
 <details id=5>
 <summary><strong>:shipit: Step 5: Merge your pull request</strong></summary>
 
-### Nice work friend :heart:! People will be reading your blog in no time!
+### Nice work, friend :heart:! People will be reading your blog in no time!
 
 You can now [merge](https://docs.github.com/en/get-started/quickstart/github-glossary#merge) your pull request!
 

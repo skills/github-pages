@@ -47,4 +47,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FROM_STEP: 5
           TO_STEP: X
-          BRANCH_NAME: TBD
+          BRANCH_NAME: my-pages 
