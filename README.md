@@ -176,7 +176,7 @@ For more information about configuring front matter, see the [Jekyll frontmatter
 -->
 
 <details id=5>
-<summary><h2>:shipit: Step 5: Merge your pull request</h2></summary>
+<summary><h2>:squirrel: Step 5: Merge your pull request</h2></summary>
 
 _Nice work, friend :heart:! People will be reading your blog in no time!_
 
