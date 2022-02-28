@@ -21,10 +21,11 @@ _Learn how to create a site or blog with GitHub Pages._
 -->
 
 <details id=0 open>
-<summary><strong>:golf: Start</strong></summary>
+<summary><h2>:golf: Start</h2></summary>
 
-### [![start-course](https://user-images.githubusercontent.com/1221423/154366775-5491926f-9ed1-4a4a-a229-0810c0ed7e5e.svg)](https://github.com/githublearn/github-pages/generate)
+[![start-course](https://user-images.githubusercontent.com/1221423/154366775-5491926f-9ed1-4a4a-a229-0810c0ed7e5e.svg)](https://github.com/githublearn/github-pages/generate)
 
+> When you select **Start course** or **Use this template**, you will be prompted to create a new repository.
 > We recommend creating a public repository, as private repositories will [use Actions minutes](https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions).<br>
 > After you make your own repository, wait about 20 seconds and refresh. I will go to the next step.
 
@@ -47,9 +48,9 @@ With GitHub Pages, you can host project blogs, documentation, resumes, portfolio
 -->
 
 <details id=1>
-<summary><strong>:gear: Step 1: Enable GitHub Pages</strong></summary>
+<summary><h2>:gear: Step 1: Enable GitHub Pages</h2></summary>
 
-### Welcome to GitHub Pages and Jekyll :tada:!
+_Welcome to GitHub Pages and Jekyll :tada:!_
 
 The first step is to enable GitHub Pages on this [repository](https://docs.github.com/en/get-started/quickstart/github-glossary#repository). When you enable GitHub Pages on a repository, GitHub takes the content that's on the main branch and publishes a website based on its contents.
 
@@ -71,9 +72,9 @@ The first step is to enable GitHub Pages on this [repository](https://docs.githu
 -->
 
 <details id=2>
-<summary><strong>:juggling_person: Step 2: Configure your site</strong></summary>
+<summary><h2>:juggling_person: Step 2: Configure your site</h2></summary>
 
-### You turned on GitHub Pages! :tada:
+_You turned on GitHub Pages! :tada:_
 
 We'll work in a branch, `my-pages`, that I created for you to get this site looking great. :sparkle:
 
@@ -103,9 +104,9 @@ We need to use a blog-ready theme. For this activity, we will use a theme named 
 -->
 
 <details id=3>
-<summary><strong>:house_with_garden: Step 3: Customize your homepage</strong></summary>
+<summary><h2>:house_with_garden: Step 3: Customize your homepage</h2></summary>
 
-### Nice work setting the theme! :sparkles:
+_Nice work setting the theme! :sparkles:_
 
 You can customize your homepage by adding content to either an `index.md` file or the `README.md` file. GitHub Pages first looks for an `index.md` file. Your repository has an `index.md` file so we can update it to include your personalized content.
 
@@ -128,9 +129,9 @@ You can customize your homepage by adding content to either an `index.md` file o
 -->
 
 <details id=4>
-<summary><strong>:newspaper: Step 4: Create a blog post</strong></summary>
+<summary><h2>:newspaper: Step 4: Create a blog post</h2></summary>
 
-### Your home page is looking great! :cowboy_hat_face:
+_Your home page is looking great! :cowboy_hat_face:_
 
 GitHub Pages uses Jekyll. In Jekyll, we can create a blog by using specially named files and frontmatter. The files must be named `_posts/YYYY-MM-DD-title.md`. You must also include `title` and `date` in your frontmatter.
 
@@ -175,9 +176,9 @@ For more information about configuring front matter, see the [Jekyll frontmatter
 -->
 
 <details id=5>
-<summary><strong>:shipit: Step 5: Merge your pull request</strong></summary>
+<summary><h2>:shipit: Step 5: Merge your pull request</h2></summary>
 
-### Nice work, friend :heart:! People will be reading your blog in no time!
+_Nice work, friend :heart:! People will be reading your blog in no time!_
 
 You can now [merge](https://docs.github.com/en/get-started/quickstart/github-glossary#merge) your pull request!
 
@@ -195,9 +196,9 @@ You can now [merge](https://docs.github.com/en/get-started/quickstart/github-glo
 -->
 
 <details id=X>
-<summary><strong>:checkered_flag: Finish</strong></summary>
+<summary><h2>:checkered_flag: Finish</h2></summary>
 
-### Congratulations friend, you've completed this course!
+_Congratulations friend, you've completed this course!_
 
 <img src=https://octodex.github.com/images/constructocat2.jpg alt=celebrate width=300 align=right>
 
