@@ -25,7 +25,6 @@ jobs:
 
     # We will only run this action when:
     # 1. This repository isn't the template repository
-    # 2. The STEP is currently 3 (see update-step.sh)
     # Reference https://docs.github.com/en/actions/learn-github-actions/contexts
     # Reference https://docs.github.com/en/actions/learn-github-actions/expressions
     if: ${{ github.repository_owner != 'githublearn' }}
@@ -45,9 +44,10 @@ jobs:
       # and open <details id=4>
       # and set STEP to '4'
       - name: Update to step 4
-        run: ./.github/script/update-step.sh
+        uses: githublearn/action-update-step@v1.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ env.GITHUB_REPOSITORY }}
           FROM_STEP: 3
           TO_STEP: 4
           BRANCH_NAME: my-pages
