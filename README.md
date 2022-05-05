@@ -5,8 +5,6 @@
   Add your open source license, GitHub uses Creative Commons Attribution 4.0 International.
 -->
 
-<img src=https://user-images.githubusercontent.com/1221423/156946935-db991134-eeff-40f0-b302-b77bbb75fe17.svg width=300 align=right>
-
 # GitHub Pages
 
 _Learn how to create a site or blog with GitHub Pages._
@@ -21,7 +19,7 @@ _Learn how to create a site or blog with GitHub Pages._
 -->
 
 <details id=0 open>
-<summary><h2>:golf: Start</h2></summary>
+<summary><h2>Start</h2></summary>
 
 [![start-course](https://user-images.githubusercontent.com/1221423/154366775-5491926f-9ed1-4a4a-a229-0810c0ed7e5e.svg)](https://github.com/skills/github-pages/generate)
 
@@ -48,7 +46,7 @@ With GitHub Pages, you can host project blogs, documentation, resumes, portfolio
 -->
 
 <details id=1>
-<summary><h2>:gear: Step 1: Enable GitHub Pages</h2></summary>
+<summary><h2>Step 1: Enable GitHub Pages</h2></summary>
 
 _Welcome to GitHub Pages and Jekyll :tada:!_
 
@@ -72,7 +70,7 @@ The first step is to enable GitHub Pages on this [repository](https://docs.githu
 -->
 
 <details id=2>
-<summary><h2>:juggling_person: Step 2: Configure your site</h2></summary>
+<summary><h2>Step 2: Configure your site</h2></summary>
 
 _You turned on GitHub Pages! :tada:_
 
@@ -104,7 +102,7 @@ We need to use a blog-ready theme. For this activity, we will use a theme named 
 -->
 
 <details id=3>
-<summary><h2>:house_with_garden: Step 3: Customize your homepage</h2></summary>
+<summary><h2>Step 3: Customize your homepage</h2></summary>
 
 _Nice work setting the theme! :sparkles:_
 
@@ -129,7 +127,7 @@ You can customize your homepage by adding content to either an `index.md` file o
 -->
 
 <details id=4>
-<summary><h2>:newspaper: Step 4: Create a blog post</h2></summary>
+<summary><h2>Step 4: Create a blog post</h2></summary>
 
 _Your home page is looking great! :cowboy_hat_face:_
 
@@ -176,7 +174,7 @@ For more information about configuring front matter, see the [Jekyll frontmatter
 -->
 
 <details id=5>
-<summary><h2>:chipmunk: Step 5: Merge your pull request</h2></summary>
+<summary><h2>Step 5: Merge your pull request</h2></summary>
 
 _Nice work, friend :heart:! People will be reading your blog in no time!_
 
@@ -196,7 +194,7 @@ You can now [merge](https://docs.github.com/en/get-started/quickstart/github-glo
 -->
 
 <details id=X>
-<summary><h2>:checkered_flag: Finish</h2></summary>
+<summary><h2>Finish</h2></summary>
 
 _Congratulations friend, you've completed this course!_
 
