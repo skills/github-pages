@@ -7,7 +7,7 @@
 
 # GitHub Pages
 
-_Learn how to create a site or blog with GitHub Pages._
+_Create a site or blog from your GitHub repositories with GitHub Pages._
 
 <!--
   <<< Author notes: Start of the course >>>
