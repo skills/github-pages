@@ -59,7 +59,7 @@ The first step is to enable GitHub Pages on this [repository](https://docs.githu
 
 1. Open a new browser tab, and work on the steps in your second tab while you read the instructions in this tab.
 1. Under your repository name, click **Settings**.
-1. In the "GitHub Pages" section, use the Source drop-down, then select **main branch**.
+1. Click **Pages**, In the "GitHub Pages" section, use the Source drop-down, then select **main branch**.
 1. Wait about _one minute_, then refresh this page for the next step.
    > Turning on GitHub Pages creates a deployment of your repository. I may take up to a minute to respond as I await the deployment. Future steps will be about 20 seconds; this step is slower.
 
