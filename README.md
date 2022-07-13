@@ -25,7 +25,7 @@ With GitHub Pages, you can host project blogs, documentation, resumes, portfolio
 - **Who is this for**: Beginners, students, project maintainers, small businesses.
 - **What you'll learn**: How to build a GitHub Pages site.
 - **What you'll build**: We'll build a simple GitHub Pages site with a blog. We'll use [Jekyll](https://jekyllrb.com), a static site generator.
-- **Prerequisites**: If you need to learn about branches, commits, and pull requests, take [Introduction to GitHub](https://lab.github.com/githubtraining/introduction-to-github) first. 
+- **Prerequisites**: If you need to learn about branches, commits, and pull requests, take [Introduction to GitHub](https://github.com/skills/introduction-to-github) first.
 - **How long**: This course is five steps long and takes less than one hour to complete.
 
 ## How to start this course
