@@ -30,7 +30,7 @@ With GitHub Pages, you can host project blogs, documentation, resumes, portfolio
 
 ## How to start this course
 
-1. Above these instructions, right-click **Use this template** and open the link in a new tab.
+1. Above these instructions, right-click **Use this template** and open the link in a new tab. If you do not see the **Use this template** button above, make sure you are logged into GitHub.
    ![Use this template](https://user-images.githubusercontent.com/1221423/169618716-fb17528d-f332-4fc5-a11a-eaa23562665e.png)
 2. In the new tab, follow the prompts to create a new repository.
    - For owner, choose your personal account or an organization to host the repository.
