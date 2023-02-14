@@ -93,8 +93,8 @@ We need to use a blog-ready theme. For this activity, we will use a theme named 
     ```
 1. (optional) You can modify the other configuration variables such as `title:`, `author:`, and `description:` to further customize your site.
 1. Commit your changes.
-2. (optional) Create a pull request to view all the changes you'll make throughout this course. Click the **Pull Requests** tab, click **New pull request**, set `base: main` and `compare:my-pages`.
-3. Wait about 20 seconds then refresh this page for the next step.
+1. (optional) Create a pull request to view all the changes you'll make throughout this course. Click the **Pull Requests** tab, click **New pull request**, set `base: main` and `compare:my-pages`.
+1. Wait about 20 seconds then refresh this page for the next step.
 
 </details>
 
@@ -187,8 +187,8 @@ You can now [merge](https://docs.github.com/en/get-started/quickstart/github-glo
 ### :keyboard: Activity: Merge your changes
 
 1. Merge your changes from `my-pages` into `main`. If you created the pull request in step 2, just open that PR and click on **Merge Changes**. If you did not create the pull request earlier, you can do it now by following the instructions in step 2.
-2. (optional) Delete the branch `my-pages`.
-3. Wait about 20 seconds then refresh this page for the next step.
+1. (optional) Delete the branch `my-pages`.
+1. Wait about 20 seconds then refresh this page for the next step.
 
 </details>
 
