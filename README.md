@@ -186,7 +186,7 @@ You can now [merge](https://docs.github.com/en/get-started/quickstart/github-glo
 
 ### :keyboard: Activity: Merge your changes
 
-1. Merge your changes from `my-pages` into `main`. If you created the pull request in step 2, just open that PR and click on **Merge Changes**. If you did not create the pull request earlier, you can do it now by following the instructions in step 2.
+1. Merge your changes from `my-pages` into `main`. If you created the pull request in step 2, just open that PR and click on **Merge pull request**. If you did not create the pull request earlier, you can do it now by following the instructions in step 2.
 1. (optional) Delete the branch `my-pages`.
 1. Wait about 20 seconds then refresh this page for the next step.
 
