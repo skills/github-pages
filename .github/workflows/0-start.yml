@@ -65,10 +65,6 @@ jobs:
 
           echo "Push"
           git push --set-upstream origin $BRANCH
-
-          echo "Make a pull request"
-          # Reference https://cli.github.com/manual/gh_pr_create
-          gh pr create --title "GitHub Pages" --body "GitHub Pages"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
