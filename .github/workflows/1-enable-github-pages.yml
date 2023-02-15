@@ -19,6 +19,7 @@ permissions:
 jobs:
   on_enable_github_pages:
     name: On enable github pages
+    needs: get_current_step
 
     # We will only run this action when:
     # 1. This repository isn't the template repository
