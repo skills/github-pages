@@ -28,6 +28,9 @@ With GitHub Pages, you can host project blogs, documentation, resumes, portfolio
 - **What you'll build**: We'll build a simple GitHub Pages site with a blog. We'll use [Jekyll](https://jekyllrb.com), a static site generator.
 - **Prerequisites**: If you need to learn about branches, commits, and pull requests, take [Introduction to GitHub](https://github.com/skills/introduction-to-github) first.
 - **How long**: This course is five steps long and takes less than one hour to complete.
+  
+**Course tips:**
+  - Glossary terms will be _emphasised_ and linked to their definiton.
 
 ## How to start this course
 
@@ -36,8 +39,9 @@ With GitHub Pages, you can host project blogs, documentation, resumes, portfolio
 2. In the new tab, follow the prompts to create a new repository.
    - For owner, choose your personal account or an organization to host the repository.
    - We recommend creating a public repository—private repositories will [use Actions minutes](https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions).
+   - Name the repository something easy for you to recognize and remember.
    ![Screenshot of the "Create a new repository" page. The "Public" repository option is highlighted with an orange box.](/images/create-a-repository.png)
-3. After your new repository is created, wait about 20 seconds, then refresh the page. Follow the step-by-step instructions in the new repository's README.
+3. After your new repository is created, wait about 20 seconds, then refresh the page. Follow the step-by-step instructions in the new repository's README. [GitHub Actions](https://docs.github.com/en/actions) will automatically close this welcome and open the first step.
 
 </details>
 
