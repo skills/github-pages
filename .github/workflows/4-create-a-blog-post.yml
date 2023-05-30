@@ -34,7 +34,7 @@ jobs:
       current_step: ${{ steps.get_step.outputs.current_step }}
 
   on_create_blog_post:
-    name: On create blog post 
+    name: On create blog post
     needs: get_current_step
 
     # We will only run this action when:

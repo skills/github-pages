@@ -34,7 +34,7 @@ jobs:
       current_step: ${{ steps.get_step.outputs.current_step }}
 
   on_config_update:
-    name: On config update 
+    name: On config update
     needs: get_current_step
 
     # We will only run this action when:

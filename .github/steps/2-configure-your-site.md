@@ -20,9 +20,9 @@ We need to use a blog-ready theme. For this activity, we will use a theme named 
 1. Browse to the `_config.yml` file in the `my-pages` branch.
 1. In the upper right corner, open the file editor.
 1. Add a `theme:` set to **minima** so it shows in the `_config.yml` file as below:
-    ```yml
-    theme: minima
-    ```
+   ```yml
+   theme: minima
+   ```
 1. (optional) You can modify the other configuration variables such as `title:`, `author:`, and `description:` to further customize your site.
 1. Commit your changes.
 1. (optional) Create a pull request to view all the changes you'll make throughout this course. Click the **Pull Requests** tab, click **New pull request**, set `base: main` and `compare:my-pages`.
