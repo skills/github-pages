@@ -18,8 +18,7 @@ permissions:
   contents: write
 
 jobs:
-  # Get the current step from .github/steps/-step.txt so we can
-  # limit running the main job when the learner is on the same step.
+  # Get the current step to only run the main job when the learner is on the same step.
   get_current_step:
     name: Check current step number
     runs-on: ubuntu-latest
@@ -56,7 +55,7 @@ jobs:
           fetch-depth: 0 # Let's get all the branches
 
       # In README.md, switch step 5 for step X.
-            - name: Update to step X
+      - name: Update to step X
         uses: skills/action-update-step@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
