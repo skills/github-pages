@@ -57,11 +57,11 @@ jobs:
           fetch-depth: 0 # Let's get all the branches.
           ref: my-pages
 
-      # In README.md, switch step 4 for step 5.
+      # In README.md, switch step 4 for step 52 (Step 5 with 2).
       - name: Update to step 5
         uses: skills/action-update-step@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           from_step: 4
-          to_step: 5
+          to_step: 52
           branch_name: my-pages
