@@ -1,11 +1,8 @@
 <header>
 
-<!--
-  <<< Author notes: Course header >>>
-  Include a 1280×640 image, course title in sentence case, and a concise description in emphasis.
-  In your repository settings: enable template repository, add your 1280×640 social image, auto delete head branches.
-  Add your open source license, GitHub uses MIT license.
--->
+  <<< Author: Course header >>>
+  
+  ![isabelschoeps.github](https://github.com/skills/github-pages/assets/127110010/627b69c2-a244-4261-8f43-c2ae911bff04)
 
 # GitHub Pages
 
