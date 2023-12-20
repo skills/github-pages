@@ -1,6 +1,6 @@
 <header>
 
-  <<< Author: Course header >>>
+  <<< Author: Isabel Schoeps Thiel >>>
   
   ![isabelschoeps.github](https://github.com/skills/github-pages/assets/127110010/627b69c2-a244-4261-8f43-c2ae911bff04)
 
