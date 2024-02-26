@@ -74,8 +74,8 @@ jobs:
           printf "%s\n%s\n%s\n\n" "---" "title: Welcome to my blog" "---" > index.md
 
           echo "Make a commit"
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          git config user.name github-actions[bot]
+          git config user.email github-actions[bot]@users.noreply.github.com
           git add _config.yml index.md
           git commit --message="Create config and homepages files"
 
