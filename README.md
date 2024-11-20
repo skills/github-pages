@@ -1,5 +1,5 @@
 <header>
-
+<meta name="google-site-verification" content="BxgJ69bIPUa6hoHnL9wy8CcBufAyWTs64RFcYjrZ3aI" />
 <!--
   <<< Author notes: Course header >>>
   Include a 1280×640 image, course title in sentence case, and a concise description in emphasis.
