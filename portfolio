@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filmmaker Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">Filmmaker's Name</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Welcome to My World of Cinema</h1>
+        <p>Creating stories that inspire, entertain, and connect.</p>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2>About Me</h2>
+        <p>I am a passionate filmmaker with expertise in storytelling, directing, and editing. Over the years, I've worked on projects ranging from documentaries to commercials, always striving for excellence and creativity.</p>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <h2>Portfolio</h2>
+        <div class="portfolio-gallery">
+            <div class="portfolio-item">
+                <video src="project1.mp4" controls></video>
+                <h3>Project Title 1</h3>
+                <p>Description of the project goes here.</p>
+            </div>
+            <div class="portfolio-item">
+                <video src="project2.mp4" controls></video>
+                <h3>Project Title 2</h3>
+                <p>Description of the project goes here.</p>
+            </div>
+            <!-- Add more projects as needed -->
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <h2>Services</h2>
+        <ul>
+            <li>Directing</li>
+            <li>Cinematography</li>
+            <li>Editing</li>
+            <li>Screenwriting</li>
+        </ul>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <h2>Testimonials</h2>
+        <blockquote>
+            "Working with [Name] was an incredible experience. Their vision brought our project to life."
+            <cite>- Client Name</cite>
+        </blockquote>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>Contact</h2>
+        <form action="https://formspree.io/f/mysite" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Filmmaker's Name. All rights reserved.</p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+    </footer>
+</body>
+</html>
