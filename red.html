@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dynamic VAST Tag Generator</title>
+</head>
+<body>
+  <h1>Dynamic VAST Tag Generator</h1>
+  <script src="//imasdk.googleapis.com/pal/sdkloader/pal.js"></script>
+  
+  <script>
+    // Define the base GAM VAST Tag
+    const BASE_GAM_VAST_TAG = "https://pubads.g.doubleclick.net/gampad/ads?";
+
+    // Example parameters to be passed dynamically
+    const vastParams = {
+      iu: "/123456789/example_ad_unit", // Ad Unit Path
+      description_url: encodeURIComponent("https://example.com"), // Description URL
+      sz: "640x480", // Size
+      sc: "true", // Storage Consent
+      cust_params: encodeURIComponent("key1=value1&key2=value2"), // Custom Parameters
+      env: "vp", // Video Player Environment
+      output: "vast", // Output Type
+      unviewed_position_start: "1" // Custom GAM parameter
+    };
+
+    // Generate a nonce and redirect with the updated URL
+    function generateNonceAndRedirect() {
+      const consentSettings = new goog.pal.ConsentSettings();
+      consentSettings.allowStorage = true; // Assuming storage consent has been given
+
+      const nonceLoader = new goog.pal.NonceLoader(consentSettings);
+      const request = new goog.pal.NonceRequest();
+
+      // Set the parameters for nonce generation
+      request.adWillAutoPlay = true;
+      request.adWillPlayMuted = false;
+      request.continuousPlayback = false;
+      request.descriptionUrl = vastParams.description_url;
+      request.iconsSupported = true;
+      request.playerType = "CustomPlayer";
+      request.playerVersion = "1.0";
+      request.ppid = "SamplePPID";
+      request.sessionId = "SampleSessionID";
+      request.supportedApiFrameworks = "2,7,9";
+      request.url = "https://example.com/video";
+      request.videoHeight = 480;
+      request.videoWidth = 640;
+
+      // Generate the nonce
+      nonceLoader.loadNonceManager(request)
+        .then((manager) => {
+          const nonce = manager.getNonce();
+
+          // Add the nonce and other parameters to the VAST tag
+          const updatedVastTag = `${BASE_GAM_VAST_TAG}${Object.entries(vastParams)
+            .map(([key, value]) => `${key}=${value}`)
+            .join("&")}&nonce=${nonce}`;
+
+          console.log("Redirecting to VAST tag:", updatedVastTag);
+
+          // Redirect the user to the updated VAST tag
+          window.location.href = updatedVastTag;
+        })
+        .catch((error) => {
+          console.error("Error generating nonce:", error);
+        });
+    }
+
+    // Call the function to generate the nonce and redirect
+    generateNonceAndRedirect();
+  </script>
+</body>
+</html>
