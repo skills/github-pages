@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expression Calculation</title>
+    <style>
+        :root {
+            --uv-styles-color-primary: #e74c3c; /* اللون الأحمر البين */
+            --uv-styles-color-on-primary: #fff;
+            --uv-styles-color-text-default: #3c4043;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+            line-height: 1.3;
+            color: var(--uv-styles-color-text-default);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://lesalarie.ma/wp-content/uploads/2019/01/Nexteer.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        h1 {
+            color: #e74c3c; /* اللون الأحمر */
+            font-size: 3em;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* تأثير الظل للنص */
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9); /* خلفية شفافة قليلاً */
+            padding: 15px; /* تقليل التباعد الداخلي */
+            border-radius: 10px; /* تقليل نصف القطر */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* إضافة ظل */
+            max-width: 300px; /* تصغير العرض الأقصى */
+            width: 80%; /* تقليل العرض النسبي */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input {
+            margin: 8px 0; /* تقليل المسافة بين المدخلات */
+            padding: 8px; /* تقليل المسافة الداخلية */
+            font-size: 1em; /* تصغير حجم النص */
+            width: 100%;
+            border-radius: 5px; /* تقليل الزوايا */
+            border: 2px solid #ccc;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #e74c3c; /* تغيير اللون عند التركيز */
+            outline: none;
+        }
+
+        button {
+            padding: 8px 15px; /* تقليل المسافة الداخلية للزر */
+            font-size: 1em; /* تصغير حجم النص */
+            background-color: var(--uv-styles-color-primary);
+            color: var(--uv-styles-color-on-primary);
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 5px; /* تقليل الزوايا */
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #c0392b; /* لون داكن عند المرور */
+        }
+
+        .message {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #d9534f;
+        }
+
+        .message.success {
+            color: green;
+        }
+
+        .footer-text {
+            font-size: 1em;
+            color: white;
+            margin-top: 20px;
+            font-family: 'Cursive', sans-serif;
+        }
+
+        .footer-year {
+            font-size: 0.9em;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Nexteer Automotive</h1>
+    <div class="container">
+        <input type="text" id="username" placeholder="Enter Username">
+        <input type="password" id="password" placeholder="Enter Password">
+        <button onclick="validateUser()">Submit</button>
+        <div id="message" class="message"></div>
+        <div class="result" id="result" style="display:none;"></div>
+    </div>
+    <div class="footer-text">Mohamed Benrahou</div>
+    <div class="footer-year">2024-2025</div>
+
+    <script>
+        function calculateExpression(day, hour) {
+            return ((day * day) + (hour * 3) + day) + 50;
+        }
+
+        function displayResult(result) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = `${result}`;
+            resultDiv.style.display = 'block';
+        }
+
+        function validateUser() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const messageDiv = document.getElementById('message');
+
+            if (username === "" || password === "") {
+                messageDiv.textContent = "Please enter both username and password.";
+                messageDiv.classList.remove('success');
+                return;
+            }
+
+            if (username === "Admin" && password === "Manukraft") {
+                const now = new Date();
+                const day = now.getDate();
+                const hour = now.getHours();
+                const result = calculateExpression(day, hour);
+
+                messageDiv.textContent = "Login successful!";
+                messageDiv.classList.add('success');
+                displayResult(result);
+            } else {
+                messageDiv.textContent = "Invalid username or password.";
+                messageDiv.classList.remove('success');
+            }
+        }
+    </script>
+</body>
+</html>
