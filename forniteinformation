@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historia de Fortnite</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>La Historia de Fortnite el mejor juego battle royale</h1>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#historia">Historia</a></li>
+                <li><a href="#impacto">Impacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio">
+            <h2>Bienvenidos</h2>
+            <p>Fortnite es uno de los videojuegos más populares del mundo. Desarrollado por Epic Games, este título ha revolucionado la industria con su jugabilidad, eventos en vivo y constante evolución.</p>
+        </section>
+
+        <section id="historia">
+            <h2>Historia de Fortnite</h2>
+            <p>Fortnite fue lanzado inicialmente el 25 de julio de 2017 como un juego de supervivencia cooperativa titulado <strong>Fortnite: Save the World</strong>. Más tarde, el 26 de septiembre de 2017, se lanzó <strong>Fortnite Battle Royale</strong>, un modo gratuito que rápidamente ganó popularidad mundial.</p>
+            <p>A lo largo de los años, Fortnite ha introducido temporadas y capítulos que han renovado el mapa, agregado personajes y narrado una historia que ha mantenido a los jugadores enganchados.</p>
+        </section>
+
+        <section id="modos">
+            <h2>Modos de Juego</h2>
+            <ul>
+                <li><strong>Save the World:</strong> Un modo cooperativo donde los jugadores luchan contra hordas de enemigos.</li>
+                <li><strong>Battle Royale:</strong> El modo más popular donde 100 jugadores compiten para ser el último en pie.</li>
+                <li><strong>Modo Creativo:</strong> Una plataforma para que los jugadores diseñen sus propios mundos y minijuegos.</li>
+            </ul>
+        </section>
+
+        <section id="impacto">
+            <h2>Impacto Cultural</h2>
+            <p>Fortnite no es solo un juego; es un fenómeno cultural. Ha sido escenario de conciertos virtuales, colaboraciones con grandes franquicias y eventos en vivo que han redefinido la forma de experimentar los videojuegos.</p>
+            >Lanzado en 2017 por Epic Games, Fortnite comenzó como un juego de supervivencia llamado <strong>Save the World</strong>. Poco después, el modo <strong>Battle Royale</strong> se convirtió en un fenómeno global. Con actualizaciones constantes, temporadas temáticas y colaboraciones masivas, Fortnite ha marcado un hito en la industria.</p>
+</section>
+    </main>
+
+    </footer>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortnite: Historia y Modos de Juego</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Fortnite:Evolución</h1>
+        <nav>
+            <ul>
+                <li><a href="#modos">Modos de Juego</a></li>
+                <li><a href="#jugadores">Jugadores</a></li>
+                <li><a href="#reinventarse">Reinvención</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+               </section>
+
+        <section id="modos">
+            <h2>Modos de Juego</h2>
+            <article>
+                <h3>1. Save the World</h3>
+                <p>Un modo cooperativo donde los jugadores luchan contra oleadas de enemigos mientras construyen estructuras defensivas.</p>
+            </article>
+            <article>
+                <h3>2. Battle Royale</h3>
+                <p>Compite contra 100 jugadores en un mapa que cambia constantemente. Incluye la construcción como mecánica clave.</p>
+            </article>
+            <article>
+                <h3>3. Modo Creativo</h3>
+                <p>Diseña tus propios mapas y minijuegos con herramientas avanzadas. Ideal para jugadores creativos.</p>
+            </article>
+            <article>
+                <h3>4. Zero Build</h3>
+                <p>Un modo sin construcción para jugadores que prefieren la acción pura.</p>
+            </article>
+        </section>
+
+        <section id="jugadores">
+            <h2>La Comunidad de Jugadores</h2>
+            <p>Fortnite cuenta con más de <strong>400 millones de jugadores registrados</strong> a nivel mundial. Es especialmente popular entre adolescentes, streamers y profesionales de esports. Los eventos en vivo, como conciertos virtuales y torneos, han unido a la comunidad global.</p>
+        </section>
+
+        <section id="reinventarse">
+            <h2>Fortnite y su Capacidad de Reinventarse</h2>
+            <p>Fortnite se destaca por su capacidad de mantenerse relevante. Esto incluye:</p>
+            <ul>
+                <li>Colaboraciones con franquicias como Marvel, DC, Star Wars y más.</li>
+                <li>Eventos en vivo interactivos que cambian la narrativa del juego.</li>
+                <li>Actualizaciones frecuentes con nuevos mapas, armas y personajes.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>HECHO PORR @JOSEYESEX EL MASFANDEFORNITE.</p>
+    </footer>
+</body>
+</html>
