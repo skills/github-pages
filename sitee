@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ОМК | ОУК</title>
+    <style>
+        body {
+            background-color: black;
+            color: yellow;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: blue;
+            padding: 10px;
+            text-align: center;
+            color: white;
+        }
+        h1, h2 {
+            margin: 0;
+        }
+        .main-content {
+            padding: 20px;
+        }
+        .highlight {
+            color: blue;
+            font-weight: bold;
+        }
+        .footer {
+            background-color: blue;
+            padding: 5px;
+            text-align: center;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>ОМК (официална медиа на коджакафалията)</h1>
+        <h2>ОУК (официални училищни клюки)</h2>
+    </header>
+    
+    <div class="main-content">
+        <p>Добре дошли на нашия уебсайт! Това е официалната медия на <span class="highlight">Коджакафалията</span> и мястото, където можете да научите всички важни новини и <span class="highlight">училищни клюки</span>!</p>
+        <p>Тук ще споделяме актуална информация, забавни факти и новини, свързани с нашето училище и с <span class="highlight">Коджакафалията</span>.</p>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 ОМК | ОУК. Всички права запазени.</p>
+    </div>
+
+    <script>
+        // Sample JavaScript to display an alert when the page loads
+        window.onload = function() {
+            alert("Добре дошли на сайта ОМК | ОУК!");
+        };
+    </script>
+</body>
+</html>
