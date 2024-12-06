@@ -1,0 +1,41 @@
+// الأسعار الأساسية قبل إضافة المكسب
+const basePrices = {
+  100: 1.50,
+  500: 7.50,
+  1000: 15.00
+};
+
+// إضافة 3 جنيهات على كل سعر
+const markup = 3;
+
+function updatePrices() {
+  // تحديث الأسعار على الصفحة
+  for (let quantity in basePrices) {
+    let price = basePrices[quantity] + markup;
+    document.getElementById(`price-${quantity}`).innerText = `الجنيه: ${price} جنيه`;
+  }
+}
+
+// جلب الأسعار من API (هذا هو المكان الذي ستضيف فيه الـ API)
+function fetchPricesFromAPI() {
+  fetch('https://api.example.com/get_prices')  // رابط الـ API الخاص بك
+    .then(response => response.json())  // تحويل البيانات إلى JSON
+    .then(data => {
+      // افترض أن الـ API يعيد الأسعار في شكل كائن
+      basePrices[100] = data.price_100;  // تحديث السعر لـ 100 جوهرة
+      basePrices[500] = data.price_500;  // تحديث السعر لـ 500 جوهرة
+      basePrices[1000] = data.price_1000;  // تحديث السعر لـ 1000 جوهرة
+
+      // بعد التحديث، نقوم بتحديث الأسعار في الصفحة
+      updatePrices();
+    })
+    .catch(error => {
+      console.error('خطأ في جلب البيانات من API:', error);
+    });
+}
+
+// تحديث الأسعار عند تحميل الصفحة
+window.onload = function() {
+  fetchPricesFromAPI();  // جلب الأسعار من الـ API
+  updatePrices();  // التحديث اليدوي للأسعار (في حال فشل الـ API)
+};
