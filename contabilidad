@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Qu&eacute; es la Contabilidad?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #34495e;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 16px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        section {
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        p, ul {
+            margin: 10px 0;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 15px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>¿Qu&eacute; es la Contabilidad?</h1>
+    </header>
+    
+    <nav>
+        <a href="#que-es">¿Qu&eacute; es la contabilidad?</a>
+        <a href="#fines">Fines fundamentales</a>
+        <a href="#impuestos">Art&iacute;culos sobre impuestos</a>
+        <a href="#leyes">Leyes de contabilidad</a>
+        <a href="#luca-pacioli">Luca Pacioli</a>
+        <a href="#partida-doble">Partida doble</a>
+    </nav>
+
+    <section id="que-es">
+        <h2>¿Qu&eacute; es la contabilidad?</h2>
+        <p>
+            La contabilidad es una disciplina que se encarga de estudiar, registrar, clasificar y analizar las transacciones econ&oacute;micas y financieras de una entidad, con el fin de proporcionar informaci&oacute;n &uacute;til para la toma de decisiones. Es considerada el lenguaje de los negocios, ya que permite expresar de manera clara y comprensible la situaci&oacute;n financiera de una empresa, instituci&oacute;n o individuo.
+        </p>
+        <p>
+            En el contexto empresarial, la contabilidad tiene un rol crucial en la planificaci&oacute;n y control de recursos, as&iacute; como en la elaboraci&oacute;n de estrategias a largo plazo. A trav&eacute;s de la contabilidad, se puede conocer el rendimiento financiero de la entidad, lo que facilita la evaluaci&oacute;n de su capacidad para generar ganancias, asumir riesgos y cumplir con sus obligaciones financieras.
+        </p>
+        <p>
+            Para lograr este objetivo, la contabilidad emplea una serie de principios y normativas que permiten la correcta recolecci&oacute;n y presentaci&oacute;n de la informaci&oacute;n financiera. Algunos de los conceptos m&aacute;s fundamentales incluyen los activos, pasivos, patrimonio neto, ingresos, gastos y flujos de efectivo.
+        </p>
+        <p><strong>Ejemplos adicionales de conceptos contables importantes:</strong></p>
+        <ul>
+            <li><strong>Activo corriente:</strong> Son los activos que se espera convertir en efectivo o consumir en el curso del ciclo operativo normal de la empresa, como el inventario y las cuentas por cobrar.</li>
+            <li><strong>Pasivo corriente:</strong> Son las deudas que la empresa debe pagar en el corto plazo, como las cuentas por pagar a proveedores o pr&eacute;stamos a corto plazo.</li>
+            <li><strong>Capital de trabajo:</strong> Es el dinero disponible que la empresa tiene para financiar su operaci&oacute;n diaria, calculado como la diferencia entre los activos corrientes y los pasivos corrientes.</li>
+            <li><strong>Depreciaci&oacute;n:</strong> Es la p&eacute;rdida de valor de los activos fijos debido al uso o al paso del tiempo, y debe ser registrada peri&oacute;dicamente para reflejar el valor real de los activos en los estados financieros.</li>
+            <li><strong>Equidad:</strong> Tambi&eacute;n conocida como patrimonio, es la parte de los activos de la empresa que pertenece a los accionistas despu&eacute;s de descontar los pasivos.</li>
+        </ul>
+        <img src="contabilidaddetalle.jpg" alt="Conceptos b&aacute;sicos de la contabilidad">
+    </section>
+
+    <section id="fines">
+        <h2>Fines fundamentales de la contabilidad</h2>
+        <p>
+            La contabilidad no solo se trata de registrar transacciones, sino de proporcionar informaci&oacute;n clave que permita a los usuarios internos y externos tomar decisiones informadas sobre el futuro econ&oacute;mico de la entidad. Estos son algunos de los fines m&aacute;s importantes:
+        </p>
+        <ul>
+            <li><strong>Control financiero:</strong> La contabilidad ayuda a garantizar que los recursos de una empresa se utilicen de manera eficiente, evitando el despilfarro y asegurando que las operaciones sean rentables. Esto se logra a trav&eacute;s de la recopilaci&oacute;n y an&aacute;lisis de datos financieros clave, como el flujo de caja y los estados de resultados.</li>
+            <li><strong>Proveer informaci&oacute;n para la toma de decisiones:</strong> Los informes financieros proporcionados por la contabilidad permiten a los directivos y gerentes tomar decisiones basadas en datos concretos, como determinar si deben expandir su l&iacute;nea de productos, invertir en nueva tecnolog&iacute;a o reducir costos.</li>
+            <li><strong>Cumplimiento fiscal:</strong> La contabilidad es fundamental para cumplir con las leyes fiscales de cada pa&iacute;s, ya que asegura que la empresa calcule y pague los impuestos correctamente, evitando sanciones y problemas con las autoridades fiscales. Esto incluye la correcta contabilizaci&oacute;n de los impuestos sobre la renta, el IVA, el impuesto sobre las ganancias de capital, entre otros.</li>
+            <li><strong>Evaluaci&oacute;n del desempe&ntilde;o:</strong> A trav&eacute;s de la contabilidad, una empresa puede evaluar su desempe&ntilde;o financiero en un per&iacute;odo determinado. Los estados financieros permiten medir la rentabilidad, la solvencia y la liquidez de la organizaci&oacute;n, lo que facilita la identificaci&oacute;n de &aacute;reas de mejora y el ajuste de estrategias para alcanzar los objetivos financieros.</li>
+            <li><strong>Transparencia financiera:</strong> La contabilidad asegura que la informaci&oacute;n financiera se presente de manera clara y comprensible, lo que permite a las partes interesadas, como accionistas, inversionistas y autoridades fiscales, evaluar la situaci&oacute;n financiera de la empresa. La transparencia es clave para generar confianza en el mercado y atraer inversiones.</li>
+            <li><strong>Planificaci&oacute;n y proyecci&oacute;n:</strong> La contabilidad permite hacer proyecciones financieras basadas en la historia de la empresa y las tendencias del mercado, lo cual es esencial para planificar el futuro de la empresa. A trav&eacute;s de presupuestos y estimaciones, los gerentes pueden tomar decisiones sobre la asignaci&oacute;n de recursos y la implementaci&oacute;n de estrategias de crecimiento.</li>
+        </ul>
+        <img src="finescontabilidaddetallada.jpg" alt="Ilustraci&oacute;n de los fines de la contabilidad">
+    </section>
+
+    <section id="impuestos">
+        <h2>¿Qu&eacute; art&iacute;culos nos mencionan que debemos pagar impuestos?</h2>
+        <p>
+            El pago de impuestos es una obligaci&oacute;n fiscal que las empresas y personas f&iacute;sicas deben cumplir para contribuir al financiamiento de los servicios p&uacute;blicos y el funcionamiento del gobierno. En muchos pa&iacute;ses, el pago de impuestos est&aacute; regulado por la Constituci&oacute;n, as&iacute; como por leyes fiscales espec&iacute;ficas. En el caso de M&eacute;xico, varios art&iacute;culos de la Constituci&oacute;n y del C&oacute;digo Fiscal de la Federaci&oacute;n mencionan la obligaci&oacute;n de pagar impuestos:
+        </p>
+        <ul>
+            <li><strong>Art&iacute;culo 31 de la Constituci&oacute;n Pol&iacute;tica de los Estados Unidos Mexicanos:</strong> Establece que los mexicanos deben contribuir al gasto p&uacute;blico de manera proporcional y equitativa a sus ingresos. Este art&iacute;culo es la base para la creaci&oacute;n de impuestos como el ISR (Impuesto sobre la Renta) y el IVA (Impuesto al Valor Agregado).</li>
+            <li><strong>Art&iacute;culo 1 del C&oacute;digo Fiscal de la Federaci&oacute;n (CFF):</strong> Regula las relaciones entre los contribuyentes y las autoridades fiscales, estableciendo las bases para la determinaci&oacute;n y pago de impuestos, la forma en que los contribuyentes deben presentar sus declaraciones y las sanciones por el incumplimiento de estas obligaciones.</li>
+            <li><strong>Impuesto sobre la Renta (ISR):</strong> Es uno de los impuestos m&aacute;s importantes que deben pagar las personas f&iacute;sicas y morales en M&eacute;xico. El ISR grava los ingresos obtenidos por las personas, ya sea por salarios, ganancias o rendimientos.</li>
+            <li><strong>Impuesto al Valor Agregado (IVA):</strong> Este impuesto se aplica a las ventas de bienes y servicios, y es obligatorio para empresas que superan un determinado umbral de ingresos. El IVA es uno de los impuestos indirectos m&aacute;s comunes a nivel global.</li>
+        </ul>
+        <p>
+            Estos impuestos son la principal fuente de financiamiento para el gobierno y permiten garantizar la prestaci&oacute;n de servicios p&uacute;blicos como la educaci&oacute;n, la salud y la seguridad. Adem&aacute;s, la contabilidad es esencial para calcular y reportar correctamente los impuestos a pagar, evitando problemas legales y sanciones.
+        </p>
+        <img src="pagoimpuestosmx.jpg" alt="Pago de impuestos en M&eacute;xico">
+    </section>
+
+    <section id="leyes">
+        <h2>¿Qu&eacute; art&iacute;culos y leyes nos mencionan que debemos llevar contabilidad?</h2>
+        <p>
+            En M&eacute;xico, la obligaci&oacute;n de llevar contabilidad est&aacute; claramente establecida en varias leyes fiscales y comerciales. Estas leyes buscan garantizar la transparencia financiera de las empresas, as&iacute; como el cumplimiento de sus obligaciones tributarias. Algunas de las principales normativas que exigen llevar contabilidad son:
+        </p>
+        <ul>
+            <li><strong>Art&iacute;culo 28 del C&oacute;digo Fiscal de la Federaci&oacute;n (CFF):</strong> Este art&iacute;culo establece que todos los contribuyentes deben mantener un registro detallado y actualizado de sus operaciones financieras. Adem&aacute;s, deben conservar los documentos y comprobantes fiscales por un per&iacute;odo determinado, lo que facilita la verificaci&oacute;n de las autoridades fiscales.</li>
+            <li><strong>Ley del Impuesto sobre la Renta (ISR):</strong> Obliga a las personas f&iacute;sicas y morales a llevar una contabilidad formal que respalde los ingresos, egresos y gastos para calcular el impuesto correspondiente. La Ley del ISR tambi&eacute;n establece las sanciones en caso de no cumplir con estas disposiciones.</li>
+            <li><strong>Ley General de Sociedades Mercantiles:</strong> Regula el funcionamiento de las sociedades mercantiles y requiere que todas las empresas mantengan una contabilidad organizada y accesible. Esta ley establece la obligatoriedad de llevar libros contables, como el libro diario y el libro mayor, para asegurar la correcta administraci&oacute;n de los recursos.</li>
+        </ul>
+        <img src="leyescontables.jpg" alt="Normas contables aplicables">
+    </section>
+
+    <section id="luca-pacioli">
+        <h2>¿Qui&eacute;n es Luca Pacioli?</h2>
+        <p>
+            Luca Pacioli, tambi&eacute;n conocido como el "Padre de la Contabilidad", fue un matem&aacute;tico y fraile franciscano italiano del Renacimiento. Naci&oacute; en 1445 en Sansepolcro, Italia, y su contribuci&oacute;n m&aacute;s importante al mundo de las finanzas fue la publicaci&oacute;n de su obra *Summa de Arithmetica, Geometria, Proportioni et Proportionalit&aacute;* en 1494, que incluye una secci&oacute;n dedicada al m&eacute;todo de la partida doble.
+        </p>
+        <p>
+            Aunque el concepto de la partida doble ya se utilizaba en Italia antes de Pacioli, fue &eacute;l quien lo formaliz&oacute; y lo explic&oacute; de manera sistem&aacute;tica. Este sistema revoluci&oacute;n&oacute; la contabilidad al proporcionar un m&eacute;todo claro y preciso para registrar las transacciones financieras de una entidad. Gracias a la partida doble, cada transacci&oacute;n afecta a dos cuentas: una en el "debe" y otra en el "haber", lo que asegura la coherencia y el equilibrio de los registros financieros.
+        </p>
+        <p>
+            La obra de Pacioli no solo sent&oacute; las bases de la contabilidad moderna, sino que tambi&eacute;n contribuy&oacute; al desarrollo de las matem&aacute;ticas, la geometr&iacute;a y la aritm&eacute;tica. Por esta raz&oacute;n, es considerado uno de los grandes precursores de la ciencia contable.
+        </p>
+        <img src="lucapaciolidetalle.jpg" alt="Luca Pacioli, padre de la contabilidad">
+    </section>
+
+    <section id="partida-doble">
+        <h2>¿A qu&eacute; se refiere la partida doble?</h2>
+        <p>
+            La partida doble es un principio fundamental de la contabilidad que establece que toda transacci&oacute;n debe ser registrada en al menos dos cuentas contables: una en el "debe" y otra en el "haber". Este sistema asegura que los registros financieros sean equilibrados y que el total de los activos siempre sea igual al total de los pasivos m&aacute;s el capital de los accionistas.
+        </p>
+        <p>
+            El concepto de partida doble se basa en el principio de que cualquier movimiento de dinero o bienes tiene un efecto sobre m&aacute;s de una cuenta. Esto ayuda a mantener la precisi&oacute;n en los estados financieros y a prevenir errores o fraudes.
+        </p>
+        <p>
+            Un ejemplo cl&aacute;sico de la partida doble es el siguiente: cuando una empresa compra un activo (como un equipo de oficina) mediante un pr&eacute;stamo, se registran dos transacciones:
+        </p>
+        <ul>
+            <li>En el "debe" se aumenta la cuenta de activos (equipo).</li>
+            <li>En el "haber" se aumenta la cuenta de pasivos (pr&eacute;stamo por pagar).</li>
+        </ul>
+        <p>
+            Este equilibrio asegura que las transacciones sean registradas correctamente, lo que facilita la creaci&oacute;n de estados financieros confiables.
+        </p>
+        <img src="partidadobledetalle.jpg" alt="Sistema de partida doble en contabilidad">
+    </section>
+
+    <footer>
+        <p>Creado por [Uriel Toxqui Acatecatl] – 2024</p>
+    </footer>
+</body>
+</html>
