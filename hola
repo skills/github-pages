@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portafolio Personal">
+    <title>Mi Sitio Web Personal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#about">Sobre mí</a></li>
+                <li><a href="#projects">Proyectos</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="hero">
+            <h1>¡Hola, soy [Tu Nombre]!</h1>
+            <p>Bienvenido/a a mi página personal. Aquí encontrarás información sobre mí y mis proyectos.</p>
+        </section>
+        <section id="about">
+            <h2>Sobre mí</h2>
+            <p>Escribe aquí una breve descripción sobre quién eres, tus habilidades, intereses o experiencia.</p>
+        </section>
+        <section id="projects">
+            <h2>Proyectos</h2>
+            <div class="project">
+                <h3>Proyecto 1</h3>
+                <p>Descripción de tu proyecto. ¿Qué hiciste? ¿Por qué es especial?</p>
+            </div>
+            <div class="project">
+                <h3>Proyecto 2</h3>
+                <p>Descripción de otro proyecto interesante.</p>
+            </div>
+        </section>
+        <section id="contact">
+            <h2>Contacto</h2>
+            <p>¡Ponte en contacto conmigo! Puedes escribirme a <a href="mailto:tucorreo@example.com">tucorreo@example.com</a>.</p>
+        </section>
+    </main>
+    <footer>
+        <p>© 2024 [Tu Nombre]. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
