@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GreenMorph - Home</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="images/logo.png" alt="GreenMorph Logo">
+     GreenMorph
+    </div>
+    <nav>
+      <ul>
+         <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="about.html" class="active">About Us</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="order-traking.html">Track Order</a></li>
+
+      </ul>
+    </nav>
+    <div class="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </header>
+
+  <!-- Banner -->
+  <section class="banner">
+  <div class="banner-text">
+    <h1>Welcome to GreenMorph</h1>
+    <p>Transforming Waste into Wonders</p>
+  </div>
+</section>
+
+
+  <!-- Prototype Section -->
+  <section class="prototype">
+    <h2>Our Prototype</h2>
+    <p>Discover our innovative ideas and designs.</p>
+    <a href="prototype.pdf" class="btn">View Prototype</a>
+  </section>
+
+  <!-- Products Section -->
+  <section class="products">
+    <h2>Our Products</h2>
+    <div class="product-grid">
+      <!-- Add Sample Product Cards -->
+      <div class="product-card">
+        <img src="images/sample1.jpg" alt="Product 1">
+        <h3>Sample Product 1</h3>
+        <p>$10.99</p>
+        <a href="#" class="btn">Buy Now</a>
+        <a href="#" class="btn-outline">View More</a>
+      </div>
+      <div class="product-card">
+        <img src="images/sample2.jpg" alt="Product 2">
+        <h3>Sample Product 2</h3>
+        <p>$12.99</p>
+        <a href="#" class="btn">Buy Now</a>
+        <a href="#" class="btn-outline">View More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Payment Partners -->
+  <section class="payment-partners">
+  <h2>Our Payment Partner</h2>
+  <div class="reveal">
+    <img src="images/pay.png" alt="Payment Partners" class="payment-img">
+  </div>
+</section>
+
+
+  <!-- Contact Section -->
+  <section class="contact">
+    <h2>Contact Us</h2>
+    <address>
+      <strong>Author Anup Singh Building,</strong><br>
+      1no. Balijan, Bakalia, Karbi Anglong, Assam<br>
+      <strong>Mobile No:</strong> +91 9101256063<br>
+      <strong>Email:</strong> coo.cmo@greenmorph.run.place<br>
+    </address>
+    <div class="map">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14322.414819632548!2d93.1932744!3d26.0616065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3745a3007f547c0b%3A0xd33008f47476f9f7!2sAuthor%20Office%20Anup%20Singh!5e0!3m2!1sen!2sin!4v1699199354256!5m2!1sen!2sin"
+        width="100%" 
+        height="300" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy">
+      </iframe>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p><strong>© 2024 GreenMorph | All Rights Reserved</strong></p>
+    <p>
+      <a href="terms.html">Terms & Conditions</a> | 
+      <a href="policy.html">Privacy Policy</a> | 
+      <a href="payment.html">Payment & Refund Policy</a> | 
+      <a href="shipping.html">Shipping Policy</a>
+    </p>
+  </footer>
+
+  <!-- JavaScript for Hamburger Menu -->
+  <script>
+    const hamburger = document.querySelector('.hamburger');
+    const nav = document.querySelector('nav ul');
+    hamburger.addEventListener('click', () => {
+      nav.classList.toggle('show');
+    });
+  </script>
+</body>
+</html>
