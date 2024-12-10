@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dear Sann</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .hidden {
+            display: none;
+        }
+        button {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #ff5252;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="step1">
+            <h1>Hi Love,</h1>
+            <p>I just wanted to tell you how much you mean to me. You're truly amazing, and I feel so lucky to have you in my life. 💖</p>
+            <button onclick="nextStep('step2')">Next</button>
+        </div>
+
+        <div id="step2" class="hidden">
+            <h1>Where should we go?</h1>
+            <p>Let me know your preference for our next date location:</p>
+            <button onclick="nextStep('step3')">A Romantic Restaurant</button>
+            <button onclick="nextStep('step3')">A Peaceful Park</button>
+        </div>
+
+        <div id="step3" class="hidden">
+            <h1>What would you like to eat?</h1>
+            <p>Choose your favorite type of food:</p>
+            <button onclick="nextStep('step4')">Italian</button>
+            <button onclick="nextStep('step4')">Asian</button>
+            <button onclick="nextStep('step4')">Mexican</button>
+        </div>
+
+        <div id="step4" class="hidden">
+            <h1>What should we do?</h1>
+            <p>Pick an activity for us:</p>
+            <button onclick="nextStep('step5')">Movie Night</button>
+            <button onclick="nextStep('step5')">Stargazing</button>
+            <button onclick="nextStep('step5')">Adventure Walk</button>
+        </div>
+
+        <div id="step5" class="hidden">
+            <h1>Thank You!</h1>
+            <p>Your choices mean so much to me. Can't wait to plan our time together. ❤️</p>
+        </div>
+    </div>
+
+    <script>
+        function nextStep(stepId) {
+            // Hide all steps
+            const steps = document.querySelectorAll('.container > div');
+            steps.forEach(step => step.classList.add('hidden'));
+
+            // Show the selected step
+            document.getElementById(stepId).classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
