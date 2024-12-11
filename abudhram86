@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to My World</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fbc2eb);
+            color: #333;
+            text-align: center;
+        }
+
+        header {
+            padding: 20px;
+            background-color: #ff6f61;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+
+        .social-links {
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #ff6f61;
+            font-size: 1.2em;
+        }
+
+        .social-links a:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .video-embed {
+            margin: 20px 0;
+        }
+
+        footer {
+            background-color: #ff6f61;
+            color: white;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to My World</h1>
+    </header>
+
+    <div class="social-links">
+        <p>Connect with me:</p>
+        <a href="https://www.instagram.com" target="_blank">Instagram</a>
+    </div>
+
+    <div class="content">
+        <h2>Legend of Zelda: Ocarina of Time Gameplay</h2>
+        <p>Enjoy some iconic gameplay from one of the greatest games ever made!</p>
+
+        <div class="video-embed">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+            title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <div class="video-embed">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/bwq6gDB9zxQ" 
+            title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Welcome to My World</p>
+    </footer>
+</body>
+</html>
