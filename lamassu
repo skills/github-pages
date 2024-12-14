@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تطبيقاتي</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      padding: 20px;
+    }
+    h1 {
+      color: #4CAF50;
+    }
+    .app-links {
+      list-style: none;
+      padding: 0;
+    }
+    .app-links li {
+      margin: 15px 0;
+    }
+    .app-links a {
+      text-decoration: none;
+      color: #007BFF;
+      font-size: 1.2em;
+    }
+    .app-links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>تطبيقاتي</h1>
+    <p>يمكنك تحميل تطبيقاتي من الروابط التالية:</p>
+    <ul class="app-links">
+      <!-- أضف الروابط هنا -->
+      <li><a href="https://https://apps.apple.com/us/app/lamassu/id1601905124
+      <li><a href="https://play.google.com/store/apps/details?id=uk.co.jacksi.lamasucard&pcampaignid=web_share
+    </ul>
+  </div>
+</body>
+</html>
