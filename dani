@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pyetje me Alternativa</title>
+    <style>
+        body {
+            background-color: #f5c6cb; /* Sfondi rozë */
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .button {
+            background-color: #ff69b4; /* Ngjyrë rozë për butonin */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .button:hover {
+            background-color: #ff1493; /* Ngjyrë më e errët për hover */
+        }
+
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .message {
+            color: #FF6347; /* Ngjyrë portokalli për mesazhin */
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .flowers {
+            margin-top: 30px;
+        }
+
+        .flowers img {
+            width: 100px;
+            margin: 5px;
+        }
+
+        h1 {
+            color: #d3006d; /* Ngjyrë rozë e errët për titullin */
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Pyetje me Alternativa</h1>
+
+    <div class="question">
+        <p>1. Cili të pëlqen më shumë?</p>
+        <label><input type="radio" name="q1" value="Lego"> Lego</label>
+        <label><input type="radio" name="q1" value="Pazulla"> Pazulla</label>
+    </div>
+
+    <div class="question">
+        <p>2. Cili ngjyrë të pëlqen më shumë?</p>
+        <label><input type="radio" name="q2" value="Roz"> Roz</label>
+        <label><input type="radio" name="q2" value="Lejla"> Lejla</label>
+    </div>
+
+    <div class="question">
+        <p>3. Cili është mjeti që të pëlqen më shumë?</p>
+        <label><input type="radio" name="q3" value="Makine"> Makinë</label>
+        <label><input type="radio" name="q3" value="Motorr"> Motorr</label>
+    </div>
+
+    <button class="button" onclick="showResult()">ACCEPT</button>
+
+    <div class="result" id="result"></div>
+    <div class="message" id="message"></div>
+
+    <div class="flowers">
+        <!-- Trendafila Rozë -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/58/Rose_yellow_red.jpg" alt="Trendafil Rozë">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Rose_White_and_Yellow.jpg" alt="Trendafil Rozë">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Red_and_white_roses.jpg" alt="Trendafil Rozë">
+    </div>
+
+    <script>
+        function showResult() {
+            var q1 = document.querySelector('input[name="q1"]:checked');
+            var q2 = document.querySelector('input[name="q2"]:checked');
+            var q3 = document.querySelector('input[name="q3"]:checked');
+
+            if (q1 && q2 && q3) {
+                // Shfaqim përgjigjet e zgjedhura për secilën pyetje
+                var resultText = `
+                    1. Zgjedhja e parë: ${q1.value}<br>
+                    2. Zgjedhja e dytë: ${q2.value}<br>
+                    3. Zgjedhja e tretë: ${q3.value}<br>
+                `;
+                document.getElementById('result').innerHTML = resultText;
+
+                // Shfaqim mesazhin "A E SHEF QE JE E ZJUAR"
+                document.getElementById('message').innerHTML = "A E SHEF QE JE E ZJUAR";
+            } else {
+                alert("Ju lutem, plotësoni të gjitha pyetjet.");
+            }
+        }
+    </script>
+</body>
+</html>
