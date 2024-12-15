@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QT Designs Showcase</title>
+    <style>
+        /* Reset and styling for the body */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url('https://i.imgur.com/tWxPAZp.png') no-repeat center center fixed; /* Background image */
+            background-size: cover;
+            color: #fff; /* Text color */
+        }
+
+        /* Gallery container grid layout */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Automatically adjust grid items */
+            gap: 15px; /* Gap between grid items */
+            padding: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        /* Design item styles */
+        .design-item {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 10px; /* Rounded corners */
+        }
+
+        /* Image styling within each design item */
+        .design-item img {
+            width: 100%;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+            border-radius: 8px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth hover transition */
+        }
+
+        /* Hover effect on images */
+        .design-item:hover img {
+            transform: scale(1.05); /* Slight zoom on hover */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Shadow effect on hover */
+        }
+
+        /* Popup styling */
+        .popup {
+            display: none; /* Initially hidden */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95); /* Semi-transparent background */
+            z-index: 999;
+            overflow-y: auto; /* Enable scrolling if content overflows */
+        }
+
+        /* Content styling within popup */
+        .popup-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100%;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        /* Image styling in popup */
+        .popup img {
+            width: 90%;
+            max-height: 70vh;
+            object-fit: contain; /* Ensures image doesn't stretch */
+            border-bottom: 3px solid #fff;
+            margin-top: 20px;
+        }
+
+        /* Content block inside the popup */
+        .popup .content {
+            margin-top: 20px;
+            padding: 20px;
+            width: 80%;
+            line-height: 1.8;
+            font-size: 18px;
+            color: #fff;
+            text-align: justify;
+            background-color: rgba(0, 0, 0, 0.8); /* Dark background */
+            border-radius: 10px;
+            max-height: 50vh;
+            overflow-y: auto; /* Scrollable content */
+        }
+
+        /* Close button styling */
+        .popup .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 30px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* Tooltip styling */
+        .tooltip {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            color: #fff;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 5px;
+            white-space: nowrap;
+            z-index: 1000;
+        }
+
+        /* Word highlight styling */
+        .word {
+            position: relative;
+            cursor: pointer;
+            color: #ffd700; /* Gold color */
+        }
+
+        /* Word hover effect */
+        .word:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Gallery to display designs -->
+    <div class="gallery">
+        <div class="design-item" onclick="openPopup('design1')">
+            <img src="https://i.imgur.com/aD8iT9K.png" alt="Design 1">
+        </div>
+        <div class="design-item" onclick="openPopup('design2')">
+            <img src="https://i.imgur.com/KzuaDJ8.png" alt="Design 2">
+        </div>
+        <div class="design-item" onclick="openPopup('design3')">
+            <img src="https://i.imgur.com/1y8XyyK.png" alt="Design 3">
+        </div>
+    </div>
+
+    <!-- Popup window that displays when clicking a design -->
+    <div class="popup" id="popup">
+        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <div class="popup-content">
+            <img src="" id="popup-img" alt="Popup Image">
+            <div class="content" id="popup-content"></div>
+        </div>
+    </div>
+
+    <!-- Tooltip to display word definitions -->
+    <div class="tooltip" id="tooltip"></div>
+
+    <!-- JavaScript for handling popup and tooltips -->
+    <script>
+        const tooltip = document.getElementById('tooltip');
+        const popup = document.getElementById('popup');
+        const popupImg = document.getElementById('popup-img');
+        const popupContent = document.getElementById('popup-content');
+        
+        // Content for each design
+        const designs = {
+            design1: {
+                img: 'https://i.imgur.com/aD8iT9K.png',
+                content: `<p>
+            Johnson, a <span class="word">farmer</span> known for his <span class="word">eco-friendly</span> methods, 
+            not only <span class="word">cultivated</span> organic vegetables like tomatoes and corn but also 
+            adopted a <span class="word">greener</span> lifestyle. His <span class="word">sustainable</span> practices, 
+            which included <span class="word">crop</span> rotation and limiting the use of <span class="word">household</span> 
+            appliances to reduce his <span class="word">carbon</span> footprint, earned him 1st prize in "The Best Farmer" competition.
+        </p>
+        <p>
+            Johnson actively worked to raise <span class="word">awareness</span> about eco-friendly farming, 
+            encouraging others to <span class="word">recycle</span> and cut down on harmful chemicals. One day, 
+            Johnson visited his friend Timmy, who ran his farm quite differently. Timmy decided to maximize 
+            profits by using <span class="word">excessive</span> pesticides to meet deadlines. Johnson warned him, 
+            "Timmy, this is dangerous. It's not only bad for natural resources but also harmful to people's health."
+        </p>
+        <p>
+            Timmy laughed, replying: "We'll die before the environment is destroyed. For me, money is the best." 
+            But soon, one of Timmy's customers was taken to the hospital due to <span class="word">food</span> poisoning. 
+            Timmy's farm was examined by the local police. His illegal use of chemicals was discovered. As a result, 
+            his farm must be closed. After that, Johnson visited Timmy: "I'm going to be penalized, I think I'll 
+            goad all my life for my actions. I just... want some money."
+        </p>
+        <p>
+            We can get the moral lesson from this story that we should adopt a <span class="word">sustainable</span> 
+            lifestyle like Johnson. Protect the <span class="word">environment</span>, protect ourselves.
+        </p>
+    </div>`, 
+                canvaLink: 'https://www.canva.com/design/DAGS-sDcTU0/...',
+                downloadLink: 'https://i.imgur.com/aD8iT9K.png'
+            },
+            design2: {
+                img: 'https://i.imgur.com/KzuaDJ8.png',
+                content:`
+        <p>Tommy always <span class="word">considers</span> himself the <span class="word">breadwinner</span>, 
+        thinking his <span class="word">responsibility</span> ends with bringing in the <span class="word">money</span>. 
+        Meanwhile, his wife, Ellie, <span class="word">managed</span> the house as the <span class="word">homemaker</span>, 
+        balancing her <span class="word">full-time</span> job and <span class="word">endless</span> <span class="word">household</span> 
+        <span class="word">chores</span>.</p>
+
+        <p>One evening, Ellie came home <span class="word">exhausted</span> to a <span class="word">messy</span> house. 
+        She <span class="word">sighed</span>, began <span class="word">cleaning</span>, and still had to get 
+        <span class="word">groceries</span>. Tommy sat on the couch, not offering any <span class="word">help</span>.</p>
+
+        <p>“Tommy,” Ellie said, <span class="word">frustrated</span>, “I can’t keep doing all the <span class="word">heavy</span> 
+        <span class="word">lifting</span> around here. You need to share the <span class="word">responsibility</span>.”</p>
+
+        <p>Tommy looked <span class="word">surprised</span>. “I’m the <span class="word">breadwinner</span>,” he 
+        replied. “I thought that was enough.”</p>
+
+        <p>“I’m a <span class="word">breadwinner</span> and <span class="word">homemaker</span> too,” Ellie 
+        explained. “It’s not just about earning <span class="word">money</span>. We’re a <span class="word">family</span>, 
+        and we need to share everything—even the <span class="word">chores</span>.”</p>
+
+        <p>Since then, Tommy began <span class="word">helping</span> with <span class="word">groceries</span> and 
+        <span class="word">cleaning</span> up after dinner. Their son, Thomas, joined in, seeing his father’s 
+        <span class="word">change</span>.</p>
+
+        <p>Now, they share the <span class="word">household</span> <span class="word">chores</span> together. 
+        This not only <span class="word">reduces</span> Ellie’s <span class="word">pressure</span> but also 
+        <span class="word">strengthens</span> their <span class="word">relationship</span>. They start to 
+        <span class="word">develop</span> <span class="word">family</span> <span class="word">values</span> 
+        such as <span class="word">teamwork</span> and <span class="word">respect</span>. Moreover, they all 
+        know that every <span class="word">family</span> member’s <span class="word">contribution</span> is 
+        <span class="word">valuable</span>.</p>
+    `
+,
+                canvaLink: 'https://www.canva.com/design/DAGQ6pwv4Lo/...',
+                downloadLink: 'https://i.imgur.com/KzuaDJ8.png'
+            },
+            design3: {
+                img: 'https://i.imgur.com/1y8XyyK.png',
+                content: `<p>
+            Mathew, a <span class="word">person</span> who has a <span class="word">passion</span> for 
+            <span class="word">mental</span> <span class="word">health</span> <span class="word">issues</span>, 
+            began his <span class="word">volunteering</span> journey during his <span class="word">summer</span> break. 
+            He signed up to attend an online mental health <span class="word">support</span> forum, offering 
+            <span class="word">resources</span> and hosting peer-support sessions for people in need. The 
+            <span class="word">task</span> was moderate to conversations, which needed patience and compassion. 
+            Mathew found <span class="word">fulfilment</span> in helping participants like a teenager named Evan, who slowly overcame her <span class="word">shyness</span> and shared her struggles.
+        </p>
+        <p>
+            Inspired by his early success, Mathew <span class="word">founded</span> his <span class="word">initiative</span>: organizing 
+            online treatment <span class="word">workshops</span> to help participants express their emotions. The 
+            sessions gained <span class="word">popularity</span> and Mathew felt he was making a <span class="word">difference</span>.
+        </p>
+        <p>
+            However, his journey wasn’t without <span class="word">challenges</span>. Mathew <span class="word">struggled</span> with 
+            his mental health, attacks of <span class="word">stress</span> that sometimes left him <span class="word">overwhelmed</span> and 
+            <span class="word">exhausted</span>.
+        </p>
+        <p>
+            One <span class="word">incident</span> nearly <span class="word">derailed</span> him—during a live workshop, he experienced 
+            a tension attack, suddenly ending the session. The <span class="word">chagrin</span> and <span class="word">guilt</span> made him consider giving up.
+        </p>
+        <p>
+            But Mathew <span class="word">refused</span> to quit. He sought <span class="word">support</span> from his <span class="word">peers</span> on the forum, 
+            who encouraged him to focus on <span class="word">progress</span> rather than <span class="word">ideals</span>.
+        </p>
+        <p>
+            By the end of the year, Mathew had helped <span class="word">hundreds</span> of people while discovering 
+            his <span class="word">strength</span>. After all, he received a lot of <span class="word">letters</span> as thanks from people who 
+            were helped by him. His journey was a <span class="word">testament</span> to the idea that even amidst struggles, one can still shine a light on others.
+        </p>
+    </div>`
+,
+                canvaLink: 'https://www.canva.com/design/DAGYUohT2R4/...',
+                downloadLink: 'https://i.imgur.com/KzuaDJ8.png'
+            }
+        };
+
+        // Open the popup and display content for the selected design
+        function openPopup(designId) {
+            const design = designs[designId];
+            popupImg.src = design.img;
+            popupContent.innerHTML = design.content;
+            popup.style.display = 'flex';
+
+            // Tooltip for word definitions
+            document.querySelectorAll('.word').forEach(wordElement => {
+                wordElement.addEventListener('mouseenter', async (event) => {
+                    const word = event.target.innerText.trim();
+                    const definition = await fetchWordDefinition(word);
+                    tooltip.style.display = 'block';
+                    tooltip.style.left = `${event.pageX + 10}px`;
+                    tooltip.style.top = `${event.pageY + 10}px`;
+                    tooltip.textContent = definition;
+                });
+
+                wordElement.addEventListener('mousemove', (event) => {
+                    tooltip.style.left = `${event.pageX + 10}px`;
+                    tooltip.style.top = `${event.pageY + 10}px`;
+                });
+
+                wordElement.addEventListener('mouseleave', () => {
+                    tooltip.style.display = 'none';
+                });
+            });
+        }
+
+        // Close the popup
+        function closePopup() {
+            popup.style.display = 'none';
+        }
+
+        // Fetch word definition from API
+        async function fetchWordDefinition(word) {
+            try {
+                const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+                const data = await response.json();
+                if (data[0] && data[0].meanings[0]) {
+                    return data[0].meanings[0].definitions[0].definition;
+                }
+            } catch (error) {
+                console.error('Error fetching word definition:', error);
+            }
+            return 'Definition not available';
+        }
+    </script>
+</body>
+</html>
