@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Countdown</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #ff6f00;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 600px;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #fff;
+        }
+
+        p {
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .countdown {
+            font-size: 50px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .teams {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+        }
+
+        .team {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Match Countdown: Union Boufarachouch vs Union Driouch</h1>
+        <p>Get ready for the exciting match on 22nd December 2024!</p>
+        
+        <div class="countdown" id="countdown">
+            Loading...
+        </div>
+        
+        <div class="teams">
+            <div class="team">Union Boufarachouch</div>
+            <div class="team">vs</div>
+            <div class="team">Union Driouch</div>
+        </div>
+        
+        <div class="footer">
+            <p>Stay tuned for more updates!</p>
+        </div>
+    </div>
+
+    <script>
+        // Set the date of the match
+        const matchDate = new Date("December 22, 2024 00:00:00").getTime();
+
+        // Update the countdown every 1 second
+        const countdownFunction = setInterval(function() {
+            const now = new Date().getTime();
+            const timeLeft = matchDate - now;
+
+            // Calculate the time left in days, hours, minutes, and seconds
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            // Display the countdown
+            document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            // If the countdown is over
+            if (timeLeft < 0) {
+                clearInterval(countdownFunction);
+                document.getElementById("countdown").innerHTML = "The match has started!";
+            }
+        }, 1000);
+    </script>
+    
+</body>
+</html>
