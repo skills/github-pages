@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>French TV au Kenya: Lesson on French Verbs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #0056b3;
+        }
+        .exercise {
+            background-color: #eef;
+            border: 1px solid #ccd;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .btn {
+            background-color: #0056b3;
+            color: beige;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #004a99;
+        }
+    </style>
+</head>
+<body>
+    <h1>French TV Kenya: Lesson on French Verbs</h1>
+    <h2>Introduction to Verbs</h2>
+    <p>In French, verbs can be categorized into regular and irregular verbs. Regular verbs follow a consistent conjugation pattern, while irregular verbs have unique conjugations that must be memorized. In this lesson, we will focus on verbs in the <strong>present tense</strong>.</p>
+
+    <h2>Regular Verbs</h2>
+    <p>Regular verbs in French are grouped into three categories based on their endings: <strong>-er</strong>, <strong>-ir</strong>, and <strong>-re</strong>.</p>
+    <ul>
+        <li><strong>-ER verbs:</strong> Examples: <em>parler</em> (to talk), <em>aimer</em> (to love), <em>manger</em> (to eat).</li>
+        <li><strong>-IR verbs:</strong> Examples: <em>finir</em> (to finish), <em>choisir</em> (to choose).</li>
+        <li><strong>-RE verbs:</strong> Examples: <em>vendre</em> (to sell), <em>attendre</em> (to wait).</li>
+    </ul>
+
+    <h3>Conjugation of Regular Verbs ending with ER in Present Tense</h3>
+    <p>Example: Conjugation of the verb <em>parler</em> (to talk):</p>
+    <ul>
+        <li><strong>Je parle</strong> (I talk)</li>
+        <li><strong>Tu parles</strong> (You talk)</li>
+        <li><strong>Il/Elle parle</strong> (He/She talks)</li>
+        <li><strong>Nous parlons</strong> (We talk)</li>
+        <li><strong>Vous parlez</strong> (You talk, formal/plural)</li>
+        <li><strong>Ils/Elles parlent</strong> (They talk)</li>
+    </ul>
+<p2>Example2: Conjugaison du verbe <em>aimer<em/> (to like):</p2>
+<ul>
+        <li><strong>Je aime* J'aime</strong> (I like)</li>
+        <li><strong>Tu aimes</strong> (You like)</li>
+        <li><strong>Il/Elle aime</strong> (He/she likes)</li>
+        <li><strong> Nous aimons</strong> (We like)</li>
+        <li><strong> Vous aimez</strong> (You like)</li>
+        <li><strong> Ils/Elles aiment</strong> (They like)</li>
+</ul>
+<h4>Conjugation of Regular Verbs ending with IR in Present Tense</h4>
+    <p>Example: Conjugation of the verb <em>Finir</em> (to finish):</p>
+    <ul>
+        <li><strong>Je finis</strong> (I finish)</li>
+        <li><strong>Tu finis</strong> (You finish)</li>
+        <li><strong>Il/Elle finit</strong> (He/She finish)</li>
+        <li><strong>Nous finissons</strong> (We finish)</li>
+        <li><strong>Vous finissez</strong> (You finish, formal/plural)</li>
+        <li><strong>Ils/Elles finissent</strong> (They finish)</li>
+    </ul>
+<h5><strong>Conjugation of Regular Verbs ending with RE in Present Tenses</strong></h5>
+    <p>Example: Conjugation of the verb <em>Attendre</em> (to wait):</p>
+    <ul>
+        <li><strong>J'attend</strong> (I wait)</li>
+        <li><strong>Tu attends</strong> (You wait)</li>
+        <li><strong>Il/Elle attend</strong> (He/She waits)</li>
+        <li><strong>Nous attendons</strong> (We wait)</li>
+        <li><strong>Vous attendez</strong> (You wait, formal/plural)</li>
+        <li><strong>Ils/Elles attendent</strong> (They wait)</li>
+    </ul>
+
+
+
+
+
+    <h2>Irregular Verbs</h2>
+    <p>Irregular verbs do not follow the regular conjugation patterns and must be learned individually. Here are some common irregular verbs:</p>
+    <ul>
+        <li><strong>Être</strong> (to be): Je suis, Tu es, Il/Elle est, Nous sommes, Vous êtes, Ils/Elles sont</li>
+        <li><strong>Avoir</strong> (to have): J'ai, Tu as, Il/Elle a, Nous avons, Vous avez, Ils/Elles ont</li>
+        <li><strong>Aller</strong> (to go): Je vais, Tu vas, Il/Elle va, Nous allons, Vous allez, Ils/Elles vont</li>
+        <li><strong>Faire</strong> (to do/make): Je fais, Tu fais, Il/Elle fait, Nous faisons, Vous faites, Ils/Elles font</li>
+    </ul>
+
+    <h3>Conjugation Practice</h3>
+    <div class="exercise">
+        <p><strong>Fill in the blanks:</strong></p>
+        <ol>
+            <li>Je ______ (parler) français.</li>
+            <li>Nous ______ (finir) nos devoirs.</li>
+            <li>Ils ______ (être) heureux.</li>
+            <li>Tu ______ (avoir) un livre.</li>
+            <li>Elle ______ (aller) à l'école.</li>
+        </ol>
+        <a href="#" class="btn">Check Answers</a>
+    </div>
+
+    <h3>More Exercises</h3>
+    <div class="exercise">
+        <p>Conjugate the following verbs in the present tense:</p>
+        <ul>
+            <li><em>Manger</em> (to eat)</li>
+            <li><em>Choisir</em> (to choose)</li>
+            <li><em>Attendre</em> (to wait)</li>
+            <li><em>Faire</em> (to do/make)</li>
+            <li><em>Avoir</em> (to have)</li>
+        </ul>
+        <a href="#" class="btn">Submit Answers</a>
+    </div>
+</body>
+</html>
