@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba Tu Inteligencia En Matemáticas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .game-section {
+            margin-top: 20px;
+        }
+
+        .game-section input[type="number"] {
+            font-size: 1.2rem;
+            padding: 10px;
+            width: 100px;
+            text-align: center;
+            margin-right: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .game-section button {
+            font-size: 1rem;
+            padding: 10px 20px;
+            color: #fff;
+            background: #ff5722;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .game-section button:hover {
+            background: #e64a19;
+        }
+
+        .score-board {
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Prueba Tu Inteligencia En Matemáticas</h1>
+        <div id="auth-section">
+            <h2>Inicia Sesión</h2>
+            <input type="email" id="email" placeholder="Correo Electrónico">
+            <input type="password" id="password" placeholder="Contraseña">
+            <button onclick="login()">Ingresar</button>
+        </div>
+        <div id="game-section" class="game-section" style="display: none;">
+            <h2>Nivel: <span id="level">1</span></h2>
+            <p>Resuelve: <span id="question"></span></p>
+            <input type="number" id="answer" placeholder="Tu respuesta">
+            <button onclick="submitAnswer()">Enviar</button>
+        </div>
+        <div id="score-board" class="score-board" style="display: none;">
+            <p>Puntaje: <span id="score">0</span></p>
+        </div>
+        <div class="footer">Creado por Daviiidcas</div>
+    </div>
+
+    <script>
+        let level = 1;
+        let score = 0;
+        let correctAnswer;
+
+        function login() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            if (email && password) {
+                document.getElementById('auth-section').style.display = 'none';
+                document.getElementById('game-section').style.display = 'block';
+                document.getElementById('score-board').style.display = 'block';
+                generateQuestion();
+            } else {
+                alert('Por favor, completa ambos campos.');
+            }
+        }
+
+        function generateQuestion() {
+            const num1 = Math.floor(Math.random() * level * 10) + 1;
+            const num2 = Math.floor(Math.random() * level * 10) + 1;
+            const operations = ['+', '-', '*'];
+            const operation = operations[Math.floor(Math.random() * operations.length)];
+
+            correctAnswer = eval(`${num1} ${operation} ${num2}`);
+            document.getElementById('question').textContent = `${num1} ${operation} ${num2}`;
+        }
+
+        function submitAnswer() {
+            const userAnswer = parseInt(document.getElementById('answer').value);
+
+            if (userAnswer === correctAnswer) {
+                score++;
+                level = Math.min(Math.floor(score / 10) + 1, 10);
+                alert('¡Correcto!');
+                document.getElementById('score').textContent = score;
+                document.getElementById('level').textContent = level;
+                generateQuestion();
+            } else {
+                alert('Incorrecto. Intenta de nuevo.');
+            }
+
+            document.getElementById('answer').value = '';
+        }
+    </script>
+</body>
+</html>
