@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trend Sphere - News & Blogs</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Trend Sphere</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#news">News</a></li>
+                <li><a href="#blogs">Blogs</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <h2>Welcome to Trend Sphere</h2>
+        <p>Stay updated with the latest news and trending blogs.</p>
+        <button onclick="scrollToSection('news')">Explore News</button>
+    </section>
+
+    <section id="news" class="news-section">
+        <h2>Latest News</h2>
+        <div class="news-container">
+            <article>
+                <img src="news1.jpg" alt="News 1">
+                <h3>Breaking News Title</h3>
+                <p>Summary of the latest news goes here.</p>
+                <a href="#">Read More</a>
+            </article>
+            <article>
+                <img src="news2.jpg" alt="News 2">
+                <h3>Top Story Headline</h3>
+                <p>Summary of the second top story here.</p>
+                <a href="#">Read More</a>
+            </article>
+        </div>
+    </section>
+
+    <section id="blogs" class="blog-section">
+        <h2>Trending Blogs</h2>
+        <div class="blog-container">
+            <article>
+                <img src="blog1.jpg" alt="Blog 1">
+                <h3>Blog Title 1</h3>
+                <p>Excerpt of a popular blog post.</p>
+                <a href="#">Read More</a>
+            </article>
+            <article>
+                <img src="blog2.jpg" alt="Blog 2">
+                <h3>Blog Title 2</h3>
+                <p>Excerpt of another trending blog.</p>
+                <a href="#">Read More</a>
+            </article>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <p>&copy; 2024 Trend Sphere. All rights reserved.</p>
+        <a href="mailto:contact@trendsphere.com">Contact Us</a>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
