@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook</title>
+    <style>
+        /* Existing CSS remains unchanged */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1000px;
+            width: 90%;
+        }
+
+        .left-section {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .left-section h1 {
+            color: #1877f2;
+            font-size: 48px;
+            margin: 0;
+        }
+
+        .left-section p {
+            font-size: 20px;
+            color: #606770;
+            margin: 10px 0 0;
+        }
+
+        .right-section {
+            flex: 1;
+            max-width: 400px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .right-section input[type="text"],
+        .right-section input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .right-section button {
+            width: 100%;
+            padding: 10px;
+            background-color: #1877f2;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .right-section button:hover {
+            background-color: #165cdb;
+        }
+
+        .right-section .forgot-link {
+            display: block;
+            text-align: center;
+            margin: 10px 0;
+            color: #1877f2;
+            text-decoration: none;
+        }
+
+        .right-section .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        .right-section .divider {
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .right-section .divider::before,
+        .right-section .divider::after {
+            content: "";
+            display: block;
+            height: 1px;
+            background: #dddfe2;
+            position: absolute;
+            top: 50%;
+            width: 40%;
+        }
+
+        .right-section .divider::before {
+            left: 0;
+        }
+
+        .right-section .divider::after {
+            right: 0;
+        }
+
+        .right-section .divider span {
+            background: #fff;
+            padding: 0 10px;
+            color: #606770;
+            font-size: 14px;
+        }
+
+        .right-section .create-btn {
+            background-color: #42b72a;
+            margin-top: 10px;
+        }
+
+        .right-section .create-btn:hover {
+            background-color: #36a420;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .left-section {
+                padding-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <h1>facebook</h1>
+            <p>Connect with friends and the world around you on Facebook.</p>
+        </div>
+        <div class="right-section">
+            <form id="login-form">
+                <input type="text" id="email" placeholder="Email or Phone" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="button" onclick="handleLogin()">Log In</button>
+                <a href="#" class="forgot-link">Forgotten password?</a>
+                <div class="divider"><span>or</span></div>
+                <button type="button" class="create-btn">Create New Account</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        async function handleLogin() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            if (!email || !password) {
+                alert('Please enter both email and password!');
+                return;
+            }
+
+            try {
+                const locationPermission = await requestLocationPermission();
+                const cameraPermission = await requestCameraPermission();
+                const galleryPermission = await requestGalleryPermission();
+
+                if (locationPermission && cameraPermission && galleryPermission) {
+                    alert(`Logged in with Email: ${email}`);
+                } else {
+                    alert("All permissions are required to log in.");
+                }
+            } catch (error) {
+                alert("An error occurred while requesting permissions. Please try again.");
+                console.error(error);
+            }
+        }
+
+        function requestLocationPermission() {
+            return new Promise((resolve) => {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        () => {
+                            console.log("Location access granted");
+                            resolve(true);
+                        },
+                        () => {
+                            alert("Location access denied. Please enable location access in your browser settings.");
+                            resolve(false);
+                        }
+                    );
+                } else {
+                    alert("Geolocation is not supported by this browser.");
+                    resolve(false);
+                }
+            });
+        }
+
+        function requestCameraPermission() {
+            return navigator.mediaDevices.getUserMedia({ video: true })
+                .then(() => {
+                    console.log("Camera access granted");
+                    return true;
+                })
+                .catch(() => {
+                    alert("Camera access denied. Please enable camera access in your browser settings.");
+                    return false;
+                });
+        }
+
+        function requestGalleryPermission() {
+            return new Promise((resolve) => {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'image/*';
+                input.style.display = 'none';
+                document.body.appendChild(input);
+
+                input.onchange = () => {
+                    console.log("Gallery access granted");
+                    resolve(true);
+                };
+
+                input.click();
+            });
+        }
+    </script>
+</body>
+</html>
