@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ekstraklasa | The Classic Soccer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+        }
+        header {
+            background-color: black;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #222;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        nav a::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: orange;
+            transition: all 0.3s ease;
+        }
+        nav a:hover::before {
+            left: 0;
+            width: 100%;
+        }
+        nav a:hover {
+            color: orange;
+        }
+        main {
+            padding: 2rem;
+            text-align: center;
+        }
+        section {
+            margin-bottom: 2rem;
+        }
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ekstraklasa | The Classic Soccer</h1>
+    </header>
+    <nav>
+        <a href="#rules">Regulamin</a>
+        <a href="#announcements">Ogłoszenia</a>
+        <a href="#gallery">Galeria</a>
+        <a href="#matches">Mecze</a>
+        <a href="#results">Wyniki</a>
+        <a href="#contact">Kontakt</a>
+    </nav>
+    <main>
+        <section id="rules">
+            <h2>Regulamin</h2>
+            <p>Zapoznaj się z zasadami naszego serwera Discord.</p>
+            <ul>
+                <li>Szanuj innych użytkowników serwera.</li>
+                <li>Nie używaj wulgaryzmów ani obraźliwego języka.</li>
+                <li>Nie spamuj na kanałach tekstowych.</li>
+                <li>Stosuj się do poleceń administratorów i moderatorów.</li>
+                <li>Unikaj kontrowersyjnych tematów, takich jak polityka czy religia.</li>
+                <li>Publikuj treści wyłącznie zgodne z zasadami Discorda.</li>
+                <li>Nadużywanie mikrofonu na kanałach głosowych jest zabronione.</li>
+            </ul>
+        </section>
+        <section id="announcements">
+            <h2>Ogłoszenia</h2>
+            <p>Aktualne informacje i ogłoszenia dotyczące serwera.</p>
+            <p><strong>Turniej przedsezonowy:</strong> Już wkrótce odbędzie się turniej przedsezonowy! Zwycięska drużyna zdobędzie 10 tysięcy dla swojego klubu. Chętne drużyny zapraszamy na nasz serwer Discord, aby zgłosić swój udział!</p>
+        </section>
+        <section id="gallery">
+            <h2>Galeria</h2>
+            <p>Przeglądaj zdjęcia i grafiki związane z naszym serwerem.</p>
+        </section>
+        <section id="matches">
+            <h2>Mecze</h2>
+            <p>Terminy nadchodzących meczów i wydarzeń.</p>
+        </section>
+        <section id="results">
+            <h2>Wyniki</h2>
+            <p>Sprawdź wyniki ostatnich meczów.</p>
+        </section>
+        <section id="contact">
+            <h2>Kontakt</h2>
+            <p>Skontaktuj się z nami poprzez email: <a href="mailto:example@example.com">example@example.com</a></p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Ekstraklasa | The Classic Soccer. Wszystkie prawa zastrzeżone.</p>
+    </footer>
+</body>
+</html>
