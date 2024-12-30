@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kwincy Alleyne - Resume</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 2rem 0;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        .section {
+            background: #fff;
+            margin: 1rem 0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            margin: 0.5rem 0;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Kwincy Alleyne</h1>
+        <p>IT Specialist | Automation Expert | Customer Service Advocate</p>
+    </header>
+    
+    <div class="container">
+        <section class="section">
+            <h2>Contact</h2>
+            <p>Washington, DC 20009</p>
+            <p>Phone: 571-408-0068</p>
+            <p>Email: <a href="mailto:kwincy15@gmail.com">kwincy15@gmail.com</a></p>
+        </section>
+
+        <section class="section">
+            <h2>Accomplishments</h2>
+            <ul>
+                <li>Cisco Certified Cybersecurity Analyst</li>
+                <li>Published author with citations in medical research</li>
+                <li>Recognized for maintaining SLA agreements and VIP support</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Skills</h2>
+            <ul>
+                <li>IT Support & Troubleshooting (Azure AD, AWS, M365)</li>
+                <li>Automation (Python, VBScript, Power BI)</li>
+                <li>Data Analysis & Reporting</li>
+                <li>Leadership & Training</li>
+                <li>Video Teleconference (VTC) Audio/Visual Equipment</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Professional Experience</h2>
+            <h3>Office of Technology Specialist</h3>
+            <p>Cravath, Swaine, and Moore LLP, Washington, DC</p>
+            <p>November 2023 - September 2024</p>
+
+            <h3>IT Specialist Tier II</h3>
+            <p>United States Securities and Exchange Commission, Washington, DC</p>
+            <p>January 2023 - November 2023</p>
+
+            <h3>IT Help Desk Specialist Tier I</h3>
+            <p>Washington Metropolitan Area Transit Authority, WMATA</p>
+            <p>July 2022 - January 2023</p>
+
+            <h3>Information Technology Help Desk Manager</h3>
+            <p>Old Dominion University</p>
+            <p>December 2018 - January 2020</p>
+        </section>
+
+        <section class="section">
+            <h2>Education</h2>
+            <p>Bachelor of Science, Old Dominion University, Norfolk, VA</p>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Kwincy Alleyne. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
+
