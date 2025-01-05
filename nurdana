@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shahsultan Choyhonasi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fdf5e6;
+        }
+        header {
+            background-color: #d4a373;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        main {
+            padding: 20px;
+        }
+        .menu-section {
+            margin: 20px 0;
+        }
+        .menu-item {
+            border: 1px solid #ccc;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #fff;
+            text-align: center;
+        }
+        .menu-item h3 {
+            margin: 10px 0;
+            color: #d4a373;
+        }
+        .menu-item p {
+            margin: 5px 0;
+        }
+        footer {
+            background-color: #d4a373;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        .order-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #d4a373;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .order-btn:hover {
+            background-color: #c39166;
+        }
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+            .menu-item {
+                margin: 10px auto;
+                padding: 10px;
+                width: 90%;
+            }
+            header {
+                padding: 15px;
+            }
+            .order-btn {
+                width: 100%;
+                padding: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Shahsultan Choyhonasi</h1>
+        <p>Үздік қазақ және өзбек тағамдары!</p>
+    </header>
+    <main>
+        <section>
+            <h2>Меню</h2>
+            <div class="menu-section">
+                <h3>Ыстық тағамдар</h3>
+                <div class="menu-item">
+                    <h3>Лагман</h3>
+                    <p>Бағасы: 1500 тг</p>
+                    <a href="https://wa.me/77711700999?text=Сәлеметсіз бе! Мен Лагман тапсырыс бергім келеді." class="order-btn">Тапсырыс беру</a>
+                </div>
+                <div class="menu-item">
+                    <h3>Манты</h3>
+                    <p>Бағасы: 1500 тг</p>
+                    <a href="https://wa.me/77711700999?text=Сәлеметсіз бе! Мен Манты тапсырыс бергім келеді." class="order-btn">Тапсырыс беру</a>
+                </div>
+                <!-- Добавьте другие блюда -->
+            </div>
+            <div class="menu-section">
+                <h3>Сусындар</h3>
+                <div class="menu-item">
+                    <h3>Сүт қосылған шай</h3>
+                    <p>Бағасы: 250 тг</p>
+                    <a href="https://wa.me/77711700999?text=Сәлеметсіз бе! Мен Сүт қосылған шай тапсырыс бергім келеді." class="order-btn">Тапсырыс беру</a>
+                </div>
+                <!-- Добавьте другие напитки -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>Бізге қоңырау шалыңыз: +77711700999 | Kaspi & Halyk арқылы төлемдер</p>
+    </footer>
+</body>
+</html>
