@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Services Portal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Online Services Portal</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="air-tickets.html">Air Tickets</a></li>
+                <li><a href="aadhar.html">Aadhaar</a></li>
+                <li><a href="pan.html">PAN</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="services">
+            <h2>Our Services</h2>
+            <div class="service">
+                <h3>Air Tickets</h3>
+                <p>Book your air tickets easily.</p>
+                <a href="air-tickets.html">Learn More</a>
+            </div>
+            <div class="service">
+                <h3>Aadhaar</h3>
+                <p>Access Aadhaar services.</p>
+                <a href="aadhar.html">Learn More</a>
+            </div>
+            <div class="service">
+                <h3>PAN</h3>
+                <p>Manage your PAN card.</p>
+                <a href="pan.html">Learn More</a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Online Services Portal</p>
+    </footer>
+</body>
+</html>
