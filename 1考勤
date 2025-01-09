@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>考勤打卡</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .container h1 {
+            margin-bottom: 20px;
+        }
+        .container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .container button:hover {
+            background-color: #218838;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>考勤打卡</h1>
+        <input type="text" id="studentId" placeholder="输入学号">
+        <input type="text" id="studentName" placeholder="输入名字">
+        <button onclick="checkIn()">打卡</button>
+        <div id="message" class="message"></div>
+    </div>
+
+    <script>
+        const attendanceList = {
+            "20230101": "张三",
+            "20230102": "李四",
+            "20230103": "王五"
+        };
+
+        function checkIn() {
+            const studentId = document.getElementById('studentId').value.trim();
+            const studentName = document.getElementById('studentName').value.trim();
+            const messageDiv = document.getElementById('message');
+
+            if (attendanceList[studentId] && attendanceList[studentId] === studentName) {
+                messageDiv.textContent = '打卡成功！';
+                messageDiv.style.color = 'green';
+            } else {
+                messageDiv.textContent = '学号或名字不匹配，打卡失败！';
+                messageDiv.style.color = 'red';
+            }
+        }
+    </script>
+</body>
+</html>
