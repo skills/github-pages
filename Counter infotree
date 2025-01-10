@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contador Circular</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+    }
+
+    .contador-container {
+      display: flex;
+      gap: 20px;
+    }
+
+    .contador {
+      position: relative;
+      text-align: center;
+      width: 120px;
+      height: 120px;
+    }
+
+    .time-display {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .label {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    svg {
+      transform: rotate(-90deg); /* Gira el círculo para que empiece desde arriba */
+    }
+  </style>
+</head>
+<body>
+  <div class="contador-container">
+    <!-- Contador de Horas -->
+    <div id="contador-horas" class="contador">
+      <svg width="120" height="120">
+        <circle cx="60" cy="60" r="50" stroke="#d3d3d3" stroke-width="8" fill="none" />
+        <circle
+          cx="60"
+          cy="60"
+          r="50"
+          stroke="#4caf50"
+          stroke-width="8"
+          fill="none"
+          stroke-dasharray="314.16"
+          stroke-dashoffset="0"
+          class="progress-circle"
+        />
+      </svg>
+      <div class="time-display" id="horas">00</div>
+      <div class="label">Horas</div>
+    </div>
+
+    <!-- Contador de Minutos -->
+    <div id="contador-minutos" class="contador">
+      <svg width="120" height="120">
+        <circle cx="60" cy="60" r="50" stroke="#d3d3d3" stroke-width="8" fill="none" />
+        <circle
+          cx="60"
+          cy="60"
+          r="50"
+          stroke="#2196f3"
+          stroke-width="8"
+          fill="none"
+          stroke-dasharray="314.16"
+          stroke-dashoffset="0"
+          class="progress-circle"
+        />
+      </svg>
+      <div class="time-display" id="minutos">00</div>
+      <div class="label">Minutos</div>
+    </div>
+
+    <!-- Contador de Segundos -->
+    <div id="contador-segundos" class="contador">
+      <svg width="120" height="120">
+        <circle cx="60" cy="60" r="50" stroke="#d3d3d3" stroke-width="8" fill="none" />
+        <circle
+          cx="60"
+          cy="60"
+          r="50"
+          stroke="#f44336"
+          stroke-width="8"
+          fill="none"
+          stroke-dasharray="314.16"
+          stroke-dashoffset="0"
+          class="progress-circle"
+        />
+      </svg>
+      <div class="time-display" id="segundos">00</div>
+      <div class="label">Segundos</div>
+    </div>
+  </div>
+
+  <script>
+    let totalHoras = 0;
+    let totalMinutos = 5;
+    let totalSegundos = 0;
+
+    function actualizarContador() {
+      const circleHoras = document.querySelector("#contador-horas .progress-circle");
+      const circleMinutos = document.querySelector("#contador-minutos .progress-circle");
+      const circleSegundos = document.querySelector("#contador-segundos .progress-circle");
+
+      const horas = totalHoras.toString().padStart(2, "0");
+      const minutos = totalMinutos.toString().padStart(2, "0");
+      const segundos = totalSegundos.toString().padStart(2, "0");
+
+      document.getElementById("horas").textContent = horas;
+      document.getElementById("minutos").textContent = minutos;
+      document.getElementById("segundos").textContent = segundos;
+
+      const radio = 50;
+      const perimetro = 2 * Math.PI * radio;
+
+      circleHoras.style.strokeDashoffset =
+        perimetro - (perimetro * totalHoras) / 24;
+      circleMinutos.style.strokeDashoffset =
+        perimetro - (perimetro * totalMinutos) / 60;
+      circleSegundos.style.strokeDashoffset =
+        perimetro - (perimetro * totalSegundos) / 60;
+
+      if (totalSegundos > 0) {
+        totalSegundos--;
+      } else if (totalMinutos > 0) {
+        totalSegundos = 59;
+        totalMinutos--;
+      } else if (totalHoras > 0) {
+        totalMinutos = 59;
+        totalSegundos = 59;
+        totalHoras--;
+      } else {
+        clearInterval(intervalo);
+      }
+    }
+
+    const intervalo = setInterval(actualizarContador, 1000);
+  </script>
+</body>
+</html>
