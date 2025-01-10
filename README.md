@@ -37,7 +37,7 @@ In this course, you will:
 4. Create a blog post
 5. Merge your pull request
 
-### How to start this course
+### How to start this course one
 
 <!-- For start course, run in JavaScript:
 'https://github.com/new?' + new URLSearchParams({
