@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Resultados</title>
+						<style>
+				body{
+			background-color: lightpink;
+			color: black;
+		}
+
+	</style>
+</head>
+<body>
+	<center>
+<br>
+<br>
+<?php
+   $post =(isset($_POST['lado'])&&!empty($_POST['lado']));
+       if ($post) 
+
+       {
+       	
+       	$lado=htmlspecialchars($_POST['lado']);
+       	echo "EL AREA DEL CUADRADO ES:";
+       	$Area=$lado * $lado;
+       	echo $Area;
+       }
+       else
+       {
+	echo "falta datos y no se puede";
+}
+?>
+<br>
+<br>
+<a href="datoscuadrado.php">REGRESAR A LOS DATOS</a>
+<br>
+<br>
+<a href="javascript:history.go(-2)">VOLVER AL MENU</a>
+</center>
+</body>
+</html>
