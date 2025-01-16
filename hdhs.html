@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoaGames</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f3f3;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header p {
+            margin: 10px 0;
+        }
+        .header a {
+            display: inline-block;
+            padding: 10px 20px;
+            text-align: center;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            border-radius: 30px;
+            text-decoration: none;
+            margin: 10px 0;
+            width: 200px;
+        }
+        .header a:hover {
+            background-color: #0056b3;
+        }
+        .bold-text {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        .color-changing {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            transition: background-color 1s ease-in-out;
+            color: white;
+        }
+        .note-text {
+            font-weight: bold;
+            font-size: 16px;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            color: #333; /* Set color to static (dark grey) */
+        }
+        .square-box {
+            width: 200px;
+            height: 50px;
+            margin-top: 10px;
+            border-radius: 10px;
+            text-align: center;
+            line-height: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 1s ease-in-out;
+        }
+        .blue-box {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: left;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+        .blue-box-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .history {
+            margin-top: 20px;
+        }
+        .history table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .history th, .history td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Header Section -->
+    <div class="header">
+        <div><span class="color-changing" id="teamText">PS OFFICIAL TEAM OᴡɴᴇR</span></div>
+        <p><span class="note-text" id="noteText">NOTE: FIRST REGISTER USING THE LINK BY CLICKING ON REGISTER, DON'T USE OLD ACCOUNT</span></p>
+        <a href="https://dmwin6.com/#/register?invitationCode=26663674806" target="_blank" class="color-changing" id="registerBtn">Register</a>
+        <a href="https://t.me/+dKhCoT2sLQ81NTY1" target="_blank" class="color-changing" id="telegramBtn">Join Telegram</a>
+        <div class="square-box" id="wingoMessage">WINGO 1 MINUTE</div>
+    </div>
+
+    <!-- Blue Box Section -->
+    <div class="blue-box">
+        <div class="blue-box-row">
+            <strong>Time remaining:</strong>
+            <span id="timer">00:59</span>
+        </div>
+        <div class="blue-box-row">
+            <strong>SERVER:</strong>
+            <span id="serverNumber">959383</span> <!-- Random Number initially displayed here -->
+        </div>
+        <div class="blue-box-row">
+            <strong>NUMBER:</strong>
+            <span id="number">4</span>
+        </div>
+        <div class="blue-box-row">
+            <strong>RESULT:</strong>
+            <span id="result">Big</span>
+        </div>
+    </div>
+
+    <div class="history">
+        <h3>Game History</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Server</th>
+                <th>Number</th>
+                <th>Big/Small</th>
+            </tr>
+            </thead>
+            <tbody id="historyBody">
+            <!-- Results will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    // Function to generate a random 6-digit number with a non-sequential appearance
+    function generateRandomNumber() {
+        let num = "";
+        while (num.length < 6) {
+            // Generating a random 6-digit number with no starting zeros
+            let randDigit = Math.floor(Math.random() * 9); // 0-8
+            if (num.length === 0) {
+                randDigit = Math.floor(Math.random() * 9) + 1; // Ensure the first digit is from 1 to 9
+            }
+            num += randDigit;
+        }
+        return num;
+    }
+
+    // Start Timer Function
+    function startTimer() {
+        let timer = 59;
+        const interval = setInterval(() => {
+            if (timer > 0) {
+                timer--;
+                document.getElementById("timer").textContent = `00:${timer < 10 ? "0" + timer : timer}`;
+            } else {
+                timer = 59;
+                transferToHistory();
+                document.getElementById("timer").textContent = "00:59";
+            }
+        }, 1000);
+    }
+
+    function transferToHistory() {
+        const currentServer = document.getElementById("serverNumber").textContent;
+        const currentNumber = document.getElementById("number").textContent;
+        const currentResult = document.getElementById("result").textContent;
+        const historyBody = document.getElementById("historyBody");
+
+        const newRow = `<tr>
+            <td>${currentServer}</td>
+            <td>${currentNumber}</td>
+            <td>${currentResult}</td>
+        </tr>`;
+        historyBody.innerHTML = newRow + historyBody.innerHTML;
+        
+        // Replace the server number with a new random 6-digit number
+        const newServerNumber = generateRandomNumber();
+        document.getElementById("serverNumber").textContent = newServerNumber;
+
+        document.getElementById("number").textContent = "Waiting...";
+        document.getElementById("result").textContent = "Waiting...";
+
+        generateNextResult();
+    }
+
+    function generateNextResult() {
+        const randomNumber = Math.floor(Math.random() * 10);
+        const bigSmall = randomNumber >= 5 ? "Big" : "Small";
+        document.getElementById("number").textContent = randomNumber;
+        document.getElementById("result").textContent = bigSmall;
+    }
+
+    // Color changing functionality for multiple elements
+    function changeColor() {
+        const colors = ['#007bff', '#28a745', '#ffc107', '#dc3545']; // Array of colors to cycle through
+        const elements = ['teamText', 'registerBtn', 'telegramBtn', 'wingoMessage']; // Array of element IDs
+
+        elements.forEach(id => {
+            let element = document.getElementById(id);
+            let currentColor = element.style.backgroundColor;
+            let newColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            // Ensure the color changes from the current one
+            while (newColor === currentColor) {
+                newColor = colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            element.style.backgroundColor = newColor;
+        });
+    }
+
+    setInterval(changeColor, 1000); // Change color every second
+    generateNextResult();
+    startTimer();
+</script>
+
+</body>
+  </html>
