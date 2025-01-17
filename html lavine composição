@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lavine Composições</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<!-- Imagem de capa -->
+<header>
+    <img src="C:\Users\013200321\Downloads\channels4_banner.jpg" alt="Imagem de Capa" class="capa"> 
+    
+</header>
+        </div>
+        <nav>
+        </nav>
+    </header>
+
+    <section id="home">
+        <div class="intro">
+            <h2>Bem-vindo ao Lavine Composições</h2>
+            <p>Aqui você encontra letras de músicas emocionantes, criadas com paixão e dedicação.</p>
+            <li><a href="#home">Início</a></li>
+                <li><a href="#letras">Letras de Músicas</a></li>
+                <li><a href="#contato">Contato</a></li>
+        </div>
+    </section>
+
+    <section id="letras">
+        <div class="letras-content">
+            <h2>Letras de Músicas</h2>
+            
+            <!-- Letra 1: "Waking up without you" -->
+            <div class="letra">
+                <pre>
+
+                </pre>
+                <h3>Waking up without you</h3>
+
+                <p> I failed you.</p>
+                <p>I know, I was childish and stupid.</p>
+                <p>I'm not ready to see you leave.</p>
+                <p>I didn’t think about the consequences.</p>
+                <p>It cost me everything I had.</p>
+                <p>And now, there's nothing left to do.</p>
+                <p>I can't change the past.</p>
+                <p>Don't leave me alone again.</p>
+                <p>Words hurt too.</p>
+                <p>I was too drunk, with a confused mind.</p>
+                <p>When we drink too much, we cross the line.</p>
+                <p>We say terrible things that hurt.</p>
+                <p>And even break things.</p>
+                <p>The next day, we don’t remember.</p>
+                <p>But the scars remain.</p>
+                <p>If I could go back to the night before,</p>
+                <p>I would change everything.</p>
+                <p>You don’t deserve to go through all this.</p>
+                <p>I can’t let you go like this.</p>
+                <p>Not before you forgive me for everything.</p>
+                <p>I’ll fight for our love.</p>
+                <p>Do you remember when we started?</p>
+                <p>We said we’d be together forever.</p>
+                <p>We could talk one more time.</p>
+                <p>But I... but I...</p>
+                <h4>(Chorus)</h4>
+                <p>I can’t let you go.</p>
+                <p>I’ll fight for our love.</p>
+                <p>But now I can’t let you go.</p>
+                <p>Don’t give up on me.</p>
+                <p>But now I can’t let you go.</p>
+                <p>Don’t go far away.</p>
+                <p>I’m sorry for all the times I yelled.</p>
+                <p>It hurt you, it was too strong.</p>
+                <p>Your heart is full of sorrow.</p>
+                <h4>(Chorus)</h4>
+                <p>I can’t let you go.</p>
+                <p>I’ll fight for our love.</p>
+                <p>But now I can’t let you go.</p>
+                <p>Don’t give up on me.</p>
+                <p>But now I can’t let you go.</p>
+                <p>Don’t go far away.</p>
+                <p>I’ll fight for our love.</p>
+                <p>Do you remember when we started?</p>
+                <p>We said we’d be together forever.</p>
+                <p>We could talk one more time.</p>
+            </div>
+
+            <!-- Letra 2: "Bad Day" -->
+            <div class="letra">
+                <pre>
+
+                </pre>
+
+                <h3>Bad Day</h3>
+                <p>You made your choices without thinking.</p>
+                <p>You answer my calls, but only to listen.</p>
+                <p>You don’t want to say a word.</p>
+                <p>You’d rather act like a child, full of anger.</p>
+                <p>Everything is going wrong,</p>
+                <p>With you.</p>
+                <p>Even if it makes you walk away from me,</p>
+                <p>It’s just another Bad Day.</p>
+                <p>Everyone goes through it.</p>
+                <h4>Verse 2:</h4>
+                <p>You didn’t try hard enough.</p>
+                <p>Now you’re changing your address.</p>
+                <p>That’s the weakest solution you could find,</p>
+                <p>Just to run away from what you really feel.</p>
+                <p>You won’t get very far.</p>
+                <p>Tell me how you’ll survive alone in loneliness,</p>
+                <p>Without me to take care of you.</p>
+                <h4>(Chorus)</h4>
+                <p>Because love does that,</p>
+                <p>It’s addictive like a drug.</p>
+                <p>It controls us intensely.</p>
+                <p>We become dependent on each other.</p>
+                <p>And when we’re apart,</p>
+                <p>It makes us</p>
+                <p>Have flashbacks and want more.</p>
+                <p>You won’t be able to resist.</p>
+                <h4>Bridge:</h4>
+                <p>And I</p>
+                <p>Might not see you again.</p>
+                <p>But when you spend lonely nights,</p>
+                <p>Your heart will start</p>
+                <p>Beating fast, calling out for me.</p>
+                <p>No matter how far you go,</p>
+                <p>Your heart will always bring you back.</p>
+                <h4>Verse 3:</h4>
+                <p>It’s just another Bad Day.</p>
+                <p>I’m here with you</p>
+                <p>To protect you, to care more for you.</p>
+                <p>You just need to trust</p>
+                <p>That everyone can truly love.</p>
+                <p>Everything reminds me of you.</p>
+                <p>When I look at the stars,</p>
+                <p>I see them shining, forming,</p>
+                <p>Drawing your initials in the night sky.</p>
+                <h4>Verse 4:</h4>
+                <p>Sometimes we end up disappointing.</p>
+                <p>I feel like I wasn’t everything you expected.</p>
+                <p>Without your presence inside,</p>
+                <p>It will only be emptiness.</p>
+                <p>I don’t want us to be strangers.</p>
+                <p>Tell me how you’ll survive alone in loneliness,</p>
+                <p>Without me to take care of you.</p>
+                <p>You won’t be able to resist.</p>
+                <h4>Bridge:</h4>
+                <p>And I</p>
+                <p>Might not see you again.</p>
+                <p>But when you spend lonely nights,</p>
+                <p>Your heart will start</p>
+                <p>Beating fast, calling out for me.</p>
+                <p>No matter how far you go,</p>
+                <p>Your heart will always bring you back.</p>
+            </div>
+
+          
+            
+
+            </div>
+                  <!--letra 3: "just Me"-->
+
+                    <strong> Title:</strong>
+
+                        <strong>just Me</strong>
+
+                <p>The nights went by so fast,</p>
+                <p>We don’t need to pretend anymore</p>
+                <p>That we were happier than ever.</p>
+                <p>We’ve already reached our limit.</p>
+
+                <p>Now you can go places</p>
+                <p>Without making up excuses,</p>
+                <p>And spend sleepless nights.</p>
+                <p>Screw the flowers sent every morning,</p>
+                <p>That won’t make me forget.</p>
+
+                <p>You thought you’d get away this time,</p>
+<p>You don’t need me anymore.</p>
+<p>You won’t miss me</p>
+<p>When I’m no longer around.</p>
+<p>But it’s fine, you don’t care,</p>
+<p>Just like you won’t care</p>
+<p>About anyone crossing your path.</p>
+
+<p>I still had hope in you,</p>
+<P>I noticed it as time went by,</P>
+<P>Because nothing changed in you.</P>
+
+<P>You were like a drug</P>
+<P>When you chose someone else.</P>
+<P>Now you’re trying a new chapter,</P>
+<P>But I still receive flowers.</P>
+<P>It must be hard to move on,</P>
+<P>Even with someone new.</P>
+<P>But I don’t care anymore.</P>
+
+
+---
+
+<P>Clorus</P>
+
+<p>Because now it’ll just be me,</p>
+<p>Only me, and no one else.</p>
+<p>I hope that one day you become better,</p>
+<p>That all the harm you caused me</p>
+<p>Returns to you, with many thorns.</p>
+--
+
+<p>We were falling apart,</p>
+<p>You’re just another guy who conquers</p>
+<p>And then destroys everything in sight.</p>
+<p>Everything we had is left behind.</p>
+
+
+<P>I tried in every way to make us happy</P>
+<P>But it was never enough; you wanted more.</P>
+<P>You don’t have to be this way,</P>
+<P>Just become better to live.</P>
+<P>Don’t let this destroy your life.</P>
+
+<P>We drifted apart</P>
+<P>Because it was best for both of us.</P>
+<P>The summer dreams, postponed,</P>
+<P>Will now have new voices to tell them.</P>
+
+<P>When you’re crying,,</P>
+<P>Your tears will dry too,</P>
+<p>Just like mine did.</p>
+<P>When you chose someone else.</P>
+
+<P>When your heart is on fire,</P>
+<P>There’ll be someone new to put it out.</P>
+<P>I hope that one day you become better.</P>
+<P>You thought you’d get away this time,</P>
+<P>You don’t need me anymore.
+<P>You won’t miss me</P>
+<P>When I’m no longer around.</P>
+<P>But it’s fine, you don’t care,</P>
+<P>Just like you won’t care,</P>
+<P>About anyone crossing your path.</P>
+
+<pre>
+
+</pre>
+
+  
+  
+
+</P>
+
+</div>
+
+    <p>
+
+
+ 
+        <!--letra 4 " walking blindly"-->
+
+    </p>
+    
+    <strong>  Walking blindly
+
+    </strong>
+    <pre>
+    </pre>
+
+    <strong>intro</strong>
+    
+    <p>I'm in the darkness with you.</p>
+    <p>There's a mist covering our vision.</p>
+    <p>We’re walking in circles.</p>
+    <p>This place is so vast,</p>
+    <p>it sends chills.</p>
+    <p>We can’t find a way out,</p>
+    <p>we always stop in the same spot.</p>
+    <p>We’re in an endless labyrinth,</p>
+    <p>full of trees on all sides.</p>
+    
+    <p>Oh, oh; oh, oh</p>
+    <p>We’re lost.</p>
+    
+    <p>Chorus</p>
+    
+    <p>Calm down, dear, calm down, dear.</p>
+    <p>We only have each other,</p>
+    <p>to take care of.</p>
+    <p>Even if evil tries to separate us,</p>
+    <p>don't let go of my hand.</p>
+    <p>We’ll find a way out.</p>
+    <p>I’ll protect you</p>
+    <p>from all harm.</p>
+    
+    <p>Oh, oh, oh, oh</p>
+    <p>There must be some light at the end.</p>
+    <p>Keep walking.</p>
+    
+    <p>The darkness of the forest can confuse us,</p>
+    <p>causing illusions,</p>
+    <p>bringing our deepest fears.</p>
+    <p>Scary screams come from within,</p>
+    <p>but they won’t intimidate us.</p>
+    <p>They’re the evil spirits of the forest,</p>
+    <p>testing our limits.</p>
+    <p>They’re everywhere,</p>
+    <p>waiting for a moment of weakness.</p>
+    <p>But together, we can defeat them.</p>
+    <p>Whatever happens, don’t let them in.</p>
+    <p>Our minds are easy targets.</p>
+    
+    <p>Don't let go of my hand.</p>
+    <p>Let’s keep walking.</p>
+    <p>I’ll protect you.</p>
+    <p>The only way to find an exit</p>
+    <p>is by fighting our own fears.</p>
+    <p>We’re lost.</p>
+    
+    <p>Chorus</p>
+    
+    <p>Calm down, dear, calm down, dear.</p>
+    <p>We only have each other,</p>
+    <p>to take care of.</p>
+    <p>Even if evil tries to separate us,</p>
+    <p>we’re stronger together.</p>
+    <p>Don't let go of my hand.</p>
+    <p>We’ll find a way out.</p>
+    <p>I’ll protect you</p>
+    <p>from all harm.</p>
+    
+    <p>Oh, oh, oh, oh</p>
+    
+    <p>Together, we can defeat them.</p>
+    <p>Whatever happens, don’t let them in.</p>
+    <p>Our minds are easy targets.</p>
+    <p>Don’t let go of my hand.</p>
+    <p>Let’s keep walking.</p>
+    <p>We’ll find a light in the darkness.</p>
+    
+    <div>
+
+    </div>
+ 
+    <strong> Title</strong> 
+</div>
+
+<p>
+
+</div>
+     <strong> Nightmares</strong>
+    
+    <p>Every time I go to sleep,</p>
+    <p>with all the lights on,</p>
+    <p>it's because I'm afraid of you.</p>
+    <p>But I will overcome this.</p>
+    <p>I will break free from these chains,</p>
+    <p>escape from this trap.</p>
+    <p>I am not your pet.</p>
+    <p>I will destroy you.</p>
+    <p>I'm no longer a frightened girl.</p>
+    <p>You are not real,</p>
+    <p>you exist only in my imagination,</p>
+    <p>just a haunting from the past,</p>
+    <p>coming to play with me.</p>
+    
+    <p>I have nightmares about you every night,</p>
+    <p>when I'm under your control.</p>
+    <p>You turn me into a puppet,</p>
+    <p>I’m paralyzed, unable to move,</p>
+    <p>I can't wake up.</p>
+    <p>You take me to places I don’t want to go,</p>
+    <p>and I'm tired of this.</p>
+    <p>I don't want to play anymore.</p>
+    <p>I can't be your prisoner forever,</p>
+    <p>I'm no longer a scared little girl.</p>
+    <p>I'm breaking these chains.</p>
+    
+    <p>Chorus:</p>
+    <p>No more sleeping with the lights on.</p>
+    <p>You are not real,</p>
+    <p>just a creation of my mind,</p>
+    <p>that comes every night to play.</p>
+    <p>You are not real,</p>
+    <p>only an illusion in my head.</p>
+    <p>I'm freeing myself from you,</p>
+    <p>I don’t want to play anymore.</p>
+    <p>You are not real,</p>
+    <p>just a creation of my mind.</p>
+    
+    <p>Bridge:</p>
+    <p>I'm breaking these chains,</p>
+    <p>I won’t be your pet,</p>
+    <p>I don’t want to be your puppet anymore.</p>
+    <p>All I want is to defeat you,</p>
+    <p>you can’t have control over me.</p>
+    <p>There's no more room for you here,</p>
+    <p>I have control over myself now.</p>
+    <p>I'm breaking these chains,</p>
+    <p>I'm done with this.</p>
+    <p>I'm no longer a frightened girl.</p>
+</div>
+
+<pre>
+
+
+</pre>
+
+<strong>Title</strong>
+
+<pre>
+
+</pre>
+
+
+<strong>It Was All an Illusion</strong>
+
+
+<p>We had wonderful months together,<br>
+With unforgettable, pleasurable nights.<br>
+I wasn’t ready to find out.<br>
+It was only a matter of time<br>
+For it all to end this way.</p>
+
+<p>The whole truth would eventually appear.<br>
+Your phone with changed passwords.<br>
+You tried to hide everything,<br>
+But you couldn’t.</p>
+
+<p>You let this happen.<br>
+I trusted all your words.</p>
+
+<p>Now, our dinners together in the late afternoon<br>
+Won’t be the same anymore.</p>
+
+<p>I spent all the holidays alone,<br>
+Watching our favorite shows,<br>
+With those funny jokes<br>
+That we used to laugh at all night long.</p>
+
+<p>Did your heart feel love for me?</p>
+
+<p>Some clothes you left here<br>
+Will soon be thrown away.<br>
+The photos from our last outing,<br>
+Remembering how happy we were.</p>
+
+<p>But all of this will now be just memories,<br>
+That will fade with time.</p>
+
+<p>Our lives will find other paths.</p>
+
+<p>Now your voice is no longer heard here.<br>
+We weren’t meant to be together.<br>
+You didn’t take care of the one you claimed to love.</p>
+
+<p>Everything that begins always has an end.<br>
+Some end happily, others do not.</p>
+
+<p>We used to play chess together;<br>
+It was our favorite pastime.</p>
+
+<p>The days went by, and everything changed.</p>
+
+<p><strong>Chorus:</strong></p>
+
+<p>Sorry, dear,<br>
+But now<br>
+Your lies are over.</p>
+
+<p>I gave you the best of me.</p>
+
+<p>It was beautiful, very magical while it lasted.<br>
+Sometimes we choose wrongly.<br>
+The heart has its limits.</p>
+
+<p>I endured all the pain.</p>
+
+<p>We started too soon,<br>
+But the signs didn’t take long to appear.</p>
+
+<p>Your strange behavior,<br>
+Frequently sleeping away from home.</p>
+
+<p>When I kissed you, you rejected me,<br>
+Pretended that everything was fine.</p>
+
+<p>Your eyes carried the lie.<br>
+The truth always appears.</p>
+
+<p>I was too fragile not to notice.</p>
+
+<p>Sometimes we need to make<br>
+Hard decisions<br>
+To move forward.</p>
+
+<pre>
+
+
+</pre>
+
+
+
+<strong> TItle:</strong>
+<pre>
+
+</pre>
+
+<b>Hold My Hand</b>
+<pre>
+
+</pre>
+
+<p>Please don't cry, dear,<br>
+Be strong, you can do it,<br>
+I know it’s not easy.<br>
+It may take some time,<br>
+But little by little, you’ll heal.</p>
+
+<p>Remember when you were young,<br>
+I taught you that one day,<br>
+When this moment comes,<br>
+We must let go of the ones we love.</p>
+
+<p>You won’t be alone,<br>
+I’ll be here,<br>
+Always with you.</p>
+
+<p><strong>Chorus:</strong><br>
+I won’t leave you alone,<br>
+I’ll be here.<br>
+I won’t leave you alone,<br>
+I’ll be here.<br>
+I won’t leave you alone,<br>
+I’ll be here.</p>
+
+<p>When this moment comes,<br>
+We feel an endless pain.<br>
+When I hold your hand,<br>
+It won’t be the last time, I promise.</p>
+
+<p>We’ve spent an incredible lifetime together,<br>
+But the clock is about to strike.<br>
+Don’t be discouraged, I’ll be near,<br>
+Even if you can’t see me.</p>
+
+<p>We built a legacy together,<br>
+A story worthy of a movie.<br>
+It will be hard to leave you,<br>
+But my mission is complete.</p>
+
+<p>You’ve become a great man,<br>
+And I’ll be walking your path.<br>
+From wherever I am, I’ll be watching you.</p>
+
+<p>Now I need you to be strong.</p>
+
+<p><strong>Chorus:</strong><br>
+I won’t leave you alone,<br>
+I’ll be here.<br>
+I won’t leave you alone,<br>
+I’ll be here.<br>
+I won’t leave you alone,<br>
+I’ll be here.</p>
+
+<p>When you’re feeling sad,<br>
+Remember when we were together.<br>
+I’ll be holding your hand, I promise</p>
+<pre>
+
+</pre>
+
+<P>COMPOSITORA</P>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lavine sena </title>
+</head>
+<body>
+    <h1>lavine sena</h1>
+    <img src="C:\Users\013200321\Pictures\lavine  sena.jpg" alt="C:\Users\013200321\Pictures\lavine  sena.jpg"
+    width="100" height="200">
+
+</body>
+
+</html>
+
+
+                    <section id="contato">
+                        <div class="contato-content">
+                            <h2>Entre em Contato</h2>
+                            <p>Se você quer saber mais ou entrar em contato comigo, aqui estão os links para as minhas redes e formas de comunicação:</p>
+                            
+                            <ul>
+                                <!-- Link para E-mail -->
+                                <li><a href="mailto:laviniasenaoficial@gmail.com">Enviar E-mail</a></li>
+                                
+                                <!-- Link para WhatsApp -->
+                                <li><a href="https://wa.me/5587998059879" target="_blank">Enviar WhatsApp</a></li>
+                                
+                                <!-- Link para Instagram -->
+                                <li><a href="https://www.instagram.com/lavine_official1/profilecard/?igsh=MXA1dTdqdHA1M2xwMQ==" target="_blank">Visite no Instagram</a></li>
+                            </ul>
+                        </div>
+                    </section>
+                    <footer>
+                        <p>&copy; 2025 Lavine Composições. Todos os direitos reservados.</p>
+                    </footer>
+                </body>
+                </html>
