@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Halaman Web Sederhana</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 16px;
+            color: #666;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background-color: #005f6b;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Selamat datang di Halaman Web Sederhana!</h1>
+    </header>
+
+    <div class="container">
+        <h2>Tentang Halaman Ini</h2>
+        <p>
+            Ini adalah halaman web sederhana yang dibuat menggunakan HTML dan CSS. Anda dapat menambahkan lebih banyak konten di sini, seperti gambar, teks, dan elemen interaktif lainnya.
+        </p>
+
+        <img src="https://via.placeholder.com/800x400" alt="Contoh Gambar">
+
+        <p>Di bawah ini adalah tombol yang dapat Anda klik untuk melanjutkan:</p>
+        <a href="#" class="btn">Klik Saya</a>
+    </div>
+
+</body>
+</html>
