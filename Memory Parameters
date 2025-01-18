@@ -1,0 +1,233 @@
+
+Database RAM Size: 140 GB RAM
+
+alter system reset memory_target scope=spfile;
+alter system reset memory_max_target scope=spfile;
+alter system reset sga_max_size scope=spfile;
+alter system set filesystemio_options=setall scope=spfile;
+alter system set sga_target=90000m scope=spfile;
+alter system set pga_aggregate_target=20000m scope=spfile;
+alter system set pga_aggregate_limit=50000m scope=spfile;
+alter system set shared_pool_size=4000m scope=spfile;
+alter system set streams_pool_size=512m scope=spfile;
+alter system set inmemory_size=1000m scope=spfile;
+
+/etc/sysctl.conf:
+vm.nr_hugepages = 20100 
+
+
+Database RAM Size: 98 GB RAM
+
+ alter system reset memory_target scope=spfile;
+alter system reset memory_max_target scope=spfile;
+alter system reset sga_max_size scope=spfile;
+alter system set filesystemio_options=setall scope=spfile;
+alter system set sga_target=40000m scope=spfile;
+alter system set pga_aggregate_target=12000m scope=spfile;
+alter system set pga_aggregate_limit=48000m scope=spfile;
+alter system set shared_pool_size=4000m scope=spfile;
+alter system set streams_pool_size=512m scope=spfile;
+alter system set inmemory_size=1000m scope=spfile;
+
+/etc/sysctl.conf:
+vm.nr_hugepages = 20100 
+
+
+Database RAM Size:  32G RAM
+
+alter system set compatible='12.2.0.1' scope=spfile; 
+alter system set filesystemio_options=setall scope=spfile;
+alter system reset memory_target scope=spfile;
+alter system reset memory_max_target scope=spfile;
+alter system set sga_target=20000m scope=spfile;
+alter system set pga_aggregate_target=4000m scope=spfile;
+alter system set shared_pool_size=4000m scope=spfile;
+alter system set inmemory_size=1000m scope=spfile;
+alter system set pga_aggregate_limit=10000m scope=spfile;
+
+
+/opt/CA/AccessControl/bin/sesu - root
+
+sudo vi /etc/sysctl.conf
+vm.nr_hugepages = 10100 <- we set, requires server bounce to take effect. 
+
+-- After DB bounce.... 
+-- Set a table to use the inmemory store to trigger usage for the ULA.
+alter table odba.odba_db_size_hist inmemory;
+
+
+Database RAM Size:  48G RAM
+
+alter system set compatible='12.2.0.1' scope=spfile; 
+alter system set filesystemio_options=none scope=spfile;
+alter system reset memory_target scope=spfile;
+alter system reset memory_max_target scope=spfile;
+alter system set sga_target=36000m scope=spfile;
+alter system set pga_aggregate_target=4000m scope=spfile;
+alter system set shared_pool_size=4000m scope=spfile;
+alter system set inmemory_size=1000m scope=spfile;
+alter system set pga_aggregate_limit=10000m scope=spfile;
+
+
+/opt/CA/AccessControl/bin/sesu - root
+
+sudo vi /etc/sysctl.conf
+vm.nr_hugepages = 18300 <- already set and reserved
+
+-- After DB bounce.... 
+-- Set a table to use the inmemory store to trigger usage for the ULA.
+alter table odba.odba_db_size_hist inmemory;
+
+-- After DB bounce.... 
+-- Set a table to use the inmemory store to trigger usage for the ULA.
+alter table odba.odba_db_size_hist inmemory;
+
+
+Database RAM Size:  32G RAM
+
+alter system set compatible='12.2.0.1' scope=spfile; 
+alter system set filesystemio_options=none scope=spfile;
+alter system reset memory_target scope=spfile;
+alter system reset memory_max_target scope=spfile;
+alter system set sga_target=20000m scope=spfile;
+alter system set pga_aggregate_target=4000m scope=spfile;
+alter system set shared_pool_size=4000m scope=spfile;
+alter system set inmemory_size=1000m scope=spfile;
+alter system set pga_aggregate_limit=10000m scope=spfile;
+
+
+/opt/CA/AccessControl/bin/sesu - root
+
+sudo vi /etc/sysctl.conf
+vm.nr_hugepages = 10100 <- already set and reserved.
+
+-- After DB bounce.... 
+-- Set a table to use the inmemory store to trigger usage for the ULA.
+alter table odba.odba_db_size_hist inmemory;
+
+
+Database RAM Size:  48G RAM
+
+alter system set compatible='12.2.0.1' scope=spfile; 
+alter system set filesystemio_options=none scope=spfile;
+alter system reset memory_target scope=spfile;
+alter system reset memory_max_target scope=spfile;
+alter system set sga_target=25000m scope=spfile;
+alter system set pga_aggregate_target=4000m scope=spfile;
+alter system set shared_pool_size=4000m scope=spfile;
+alter system set inmemory_size=1000m scope=spfile;
+alter system set pga_aggregate_limit=10000m scope=spfile;
+
+
+/opt/CA/AccessControl/bin/sesu - root
+
+sudo vi /etc/sysctl.conf
+vm.nr_hugepages = 12800 <- already set and reserved.
+
+-- After DB bounce.... 
+-- Set a table to use the inmemory store to trigger usage for the ULA.
+alter table odba.odba_db_size_hist inmemory;
+
+
+Database RAM Size:  16G RAM
+
+alter system set compatible='18.5.0.0' scope=spfile; 
+alter system set filesystemio_options=none scope=spfile;
+alter system reset memory_target scope=spfile;
+alter system reset memory_max_target scope=spfile;
+alter system set sga_target=11000m scope=spfile;
+alter system set pga_aggregate_target=1000m scope=spfile;
+alter system set shared_pool_size=3000m scope=spfile;
+alter system set inmemory_size=300m scope=spfile;
+alter system set pga_aggregate_limit=3000m scope=spfile;
+
+* No hugepages because the VM is so tight on space.
+
+
+Database RAM Size:  16G RAM 
+
+alter system set compatible='18.5.0.0' scope=spfile; 
+alter system set filesystemio_options=none scope=spfile;
+alter system reset memory_target scope=spfile;
+alter system reset memory_max_target scope=spfile;
+alter system set sga_target=11000m scope=spfile;
+alter system set pga_aggregate_target=1000m scope=spfile;
+alter system set shared_pool_size=3000m scope=spfile;
+alter system set inmemory_size=300m scope=spfile;
+alter system set pga_aggregate_limit=3000m scope=spfile;
+
+* No hugepages because the VM is so tight on space.
+
+
+Database RAM Size:  16G RAM  
+
+-- alter system set compatible='18.5.0.0' scope=spfile; 
+-- alter system set filesystemio_options=none scope=spfile;
+alter system reset memory_target scope=spfile;
+alter system reset memory_max_target scope=spfile;
+alter system set sga_target=11000m scope=spfile;
+alter system set pga_aggregate_target=2000m scope=spfile;
+alter system set shared_pool_size=3000m scope=spfile;
+alter system set inmemory_size=300m scope=spfile;
+alter system set pga_aggregate_limit=4000m scope=spfile;
+
+* No hugepages because the VM is so tight on space.
+
+
+
+Database RAM Size:  16G RAM  
+
+-- alter system set compatible='18.5.0.0' scope=spfile; 
+-- alter system set filesystemio_options=none scope=spfile;
+alter system reset memory_target scope=spfile;
+alter system reset memory_max_target scope=spfile;
+alter system set sga_target=11000m scope=spfile;
+alter system set pga_aggregate_target=2000m scope=spfile;
+alter system set shared_pool_size=3000m scope=spfile;
+alter system set inmemory_size=300m scope=spfile;
+alter system set pga_aggregate_limit=4000m scope=spfile;
+
+* No hugepages because the VM is so tight on space.
+
+
+-- After DB bounce.... 
+-- Set a table to use the inmemory store to trigger usage for the ULA.
+alter table odba.odba_db_size_hist inmemory;
+
+
+Database RAM Size: 20 GB RAM
+
+
+alter system set filesystemio_options=setall scope=spfile;
+alter system reset memory_target scope=spfile;
+alter system reset memory_max_target scope=spfile;
+alter system set sga_target=10000m scope=spfile;
+alter system set inmemory_size=512m scope=spfile;
+alter system set shared_pool_size=4000m scope=spfile;
+alter system set pga_aggregate_target=3000m scope=spfile;
+alter system set streams_pool_size=512m scope=spfile;
+
+/etc/sysctl.conf:
+vm.nr_hugepages = 5100  
+
+
+
+
+Database RAM Size: 24 GB RAM
+
+
+alter system set filesystemio_options=setall scope=spfile;
+alter system reset memory_target scope=spfile;
+alter system reset memory_max_target scope=spfile;
+alter system set sga_target=12000m scope=spfile;
+alter system set inmemory_size=1000m scope=spfile;
+alter system set shared_pool_size=4000m scope=spfile;
+alter system set pga_aggregate_target=2500m scope=spfile;
+alter system set streams_pool_size=512m scope=spfile;
+
+/etc/sysctl.conf:
+vm.nr_hugepages = 5100  
+
+
+
+15216934912
