@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحويل الصوت إلى كلمات في جدول</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            text-align: center;
+        }
+        h1 {
+            margin-top: 20px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            font-size: 1.2rem;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+            transform: scale(1.1);
+        }
+        button:active {
+            transform: scale(0.9);
+        }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+            background-color: #fff;
+            color: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background: #4CAF50;
+            color: white;
+        }
+        td {
+            font-size: 1rem;
+        }
+        #table {
+            overflow-x: auto;
+        }
+        footer {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body dir="rtl">
+    <h1><i class="fas fa-microphone"></i> تحويل الصوت إلى كلمات في جدول</h1>
+    <button id="start"><i class="fas fa-play"></i> ابدأ التسجيل</button>
+    <button id="stop"><i class="fas fa-stop"></i> أوقف التسجيل</button>
+    <button id="download"><i class="fas fa-download"></i> تحميل Excel</button>
+    
+    <table id="table">
+        <thead>
+            <tr>
+                <th>الكلمات</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <footer>
+        &copy; 2025 - تحويل الصوت إلى كلمات | تصميم ديناميكي بواسطة مبدع.
+    </footer>
+
+    <script>
+        const startButton = document.getElementById("start");
+        const stopButton = document.getElementById("stop");
+        const downloadButton = document.getElementById("download");
+        const tableBody = document.getElementById("table").getElementsByTagName('tbody')[0];
+
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            alert("المتصفح لا يدعم ميزة التعرف على الصوت.");
+        } else {
+            const recognition = new SpeechRecognition();
+            recognition.lang = "ar-SA";
+            recognition.continuous = true;
+            recognition.interimResults = false;
+
+            startButton.addEventListener("click", () => {
+                try {
+                    console.log("محاولة بدء الميكروفون...");
+                    recognition.start();
+                    startButton.disabled = true;
+                    stopButton.disabled = false;
+                    console.log("المايكروفون بدأ العمل!");
+                } catch (err) {
+                    console.error("خطأ أثناء تشغيل الميكروفون:", err);
+                    alert("تعذر بدء التسجيل. تأكد من السماح بالميكروفون.");
+                }
+            });
+
+            stopButton.addEventListener("click", () => {
+                recognition.stop();
+                startButton.disabled = false;
+                stopButton.disabled = true;
+                console.log("تم إيقاف التسجيل.");
+            });
+
+            recognition.onresult = (event) => {
+                const transcript = Array.from(event.results)
+                    .map(result => result[0].transcript)
+                    .join(" ");
+                console.log("النص المكتشف:", transcript);
+
+                const words = transcript.split(/\s+/);
+                words.forEach(word => {
+                    const row = tableBody.insertRow();
+                    const cell = row.insertCell(0);
+                    cell.textContent = word;
+                });
+            };
+
+            recognition.onerror = (event) => {
+                console.error("حدث خطأ أثناء استخدام الميكروفون:", event.error);
+                alert("خطأ: " + event.error);
+            };
+
+            downloadButton.addEventListener("click", () => {
+                const wb = XLSX.utils.table_to_book(document.getElementById('table'), { sheet: "Sheet1" });
+                const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
+
+                const buf = new ArrayBuffer(wbout.length);
+                const view = new Uint8Array(buf);
+                for (let i = 0; i < wbout.length; i++) view[i] = wbout.charCodeAt(i) & 0xff;
+                const blob = new Blob([buf], { type: "application/octet-stream" });
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(blob);
+                link.download = "output.xlsx";
+                link.click();
+            });
+        }
+    </script>
+</body>
+</html>
