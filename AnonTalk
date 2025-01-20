@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnonTalk</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #4f4b63;
+            color: white;
+        }
+        header {
+            background-color: #3c3750;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+        header nav {
+            display: flex;
+            gap: 15px;
+        }
+        header nav a {
+            color: #ddd;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        header nav a:hover {
+            text-decoration: underline;
+        }
+        .main-container {
+            text-align: center;
+            padding: 30px;
+        }
+        .main-container h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .posts {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .post {
+            background-color: #2e2b3a;
+            padding: 15px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: left;
+        }
+        .post h3 {
+            margin: 0;
+            font-size: 16px;
+        }
+        .post p {
+            margin: 10px 0 20px;
+        }
+        .post .stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+        footer {
+            background-color: #3c3750;
+            padding: 15px 20px;
+            text-align: center;
+        }
+        footer a {
+            color: #ddd;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        .login-container {
+            background-color: #4f4b63;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+        }
+        .login-container input {
+            padding: 10px;
+            margin: 10px 0;
+            width: 250px;
+            border: none;
+            border-radius: 5px;
+        }
+        .login-container button {
+            padding: 10px 20px;
+            background-color: #6e68a6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .login-container button:hover {
+            background-color: #5c5492;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>AnonTalk</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Explore</a>
+            <a href="#">Profile</a>
+            <a href="#">Sign Up</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <h2>KEEP IT REAL, KEEP IT ANONYMOUS</h2>
+        <p>AnonTalk is where you can spill your thoughts and ask questions without anyone knowing who you are. Totally anonymous, totally free.</p>
+        <button>Join the conversation</button>
+
+        <div class="posts">
+            <div class="post">
+                <h3>SophiaLee76</h3>
+                <p>Why does my cat act like I’m a servant? Because you are...</p>
+                <div class="stats">
+                    <span>15k ❤️</span>
+                    <span>482 💬</span>
+                    <span>Share</span>
+                </div>
+            </div>
+            <div class="post">
+                <h3>JohnW_87</h3>
+                <p>What do you do when you accidentally text the wrong person?</p>
+                <div class="stats">
+                    <span>58k ❤️</span>
+                    <span>2.3k 💬</span>
+                    <span>Share</span>
+                </div>
+            </div>
+            <div class="post">
+                <h3>UrbanRider_45</h3>
+                <p>How come I can binge-watch...</p>
+                <div class="stats">
+                    <span>28k ❤️</span>
+                    <span>396 💬</span>
+                    <span>Share</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p><a href="#">Resources</a> | <a href="#">Contact</a> | <a href="#">Support</a></p>
+    </footer>
+
+    <!-- Login Screen -->
+    <div class="login-container">
+        <h2>Welcome Back</h2>
+        <input type="text" placeholder="Create username">
+        <input type="password" placeholder="Create password">
+        <button>Continue</button>
+    </div>
+</body>
+</html>
