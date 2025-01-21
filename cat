@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love & Christmas Tree</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+        }
+        .container {
+            text-align: center;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        canvas {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Generate Love & Christmas Tree</h1>
+        <button onclick="drawHeart()">Generate Heart</button>
+        <button onclick="drawChristmasTree()">Generate Christmas Tree</button>
+        <canvas id="artCanvas" width="400" height="400"></canvas>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('artCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function drawHeart() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'red';
+            ctx.beginPath();
+            ctx.moveTo(200, 250);
+            ctx.bezierCurveTo(200, 200, 150, 150, 100, 200);
+            ctx.bezierCurveTo(50, 250, 150, 350, 200, 400);
+            ctx.bezierCurveTo(250, 350, 350, 250, 300, 200);
+            ctx.bezierCurveTo(250, 150, 200, 200, 200, 250);
+            ctx.fill();
+        }
+
+        function drawChristmasTree() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'green';
+
+            // Draw tree layers
+            ctx.beginPath();
+            ctx.moveTo(200, 50);
+            ctx.lineTo(150, 150);
+            ctx.lineTo(250, 150);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.moveTo(200, 100);
+            ctx.lineTo(130, 200);
+            ctx.lineTo(270, 200);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.moveTo(200, 150);
+            ctx.lineTo(110, 250);
+            ctx.lineTo(290, 250);
+            ctx.closePath();
+            ctx.fill();
+
+            // Draw trunk
+            ctx.fillStyle = 'brown';
+            ctx.fillRect(180, 250, 40, 50);
+        }
+    </script>
+</body>
+</html>
