@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hôtel Le SA'DABOU</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        header { background: #333; color: white; padding: 20px; text-align: center; }
+        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+        nav a:hover { text-decoration: underline; }
+        section { padding: 40px 20px; text-align: center; }
+        section:nth-child(even) { background: #f4f4f4; }
+        img { max-width: 100%; height: auto; margin: 20px 0; }
+        footer { background: #333; color: white; text-align: center; padding: 10px 0; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        th { background-color: #333; color: white; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Hôtel Le SA'DABOU</h1>
+    <nav>
+        <a href="#about">À propos</a>
+        <a href="#rooms">Nos Chambres</a>
+        <a href="#restaurant-bar">Restaurant & Bar</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<section id="about">
+    <h2>À propos de nous</h2>
+    <img src="placeholder.jpg" alt="Image de l'hôtel" />
+    <p>Situé au rond-point CCC, face à l’église des Témoins de Jéhovah, Hôtel Le SA'DABOU vous offre des chambres confortables, un service de qualité et des installations modernes pour un séjour agréable.</p>
+</section>
+
+<section id="rooms">
+    <h2>Nos Chambres</h2>
+    <img src="placeholder.jpg" alt="Image des chambres" />
+    <h3>Chambres Ventilées</h3>
+    <table>
+        <tr>
+            <th>Description</th>
+            <th>Temps</th>
+            <th>Prix (FCFA)</th>
+        </tr>
+        <tr>
+            <td>Nuitée</td>
+            <td>24h</td>
+            <td>10,000</td>
+        </tr>
+        <tr>
+            <td>Sieste</td>
+            <td>-</td>
+            <td>3,000</td>
+        </tr>
+        <tr>
+            <td>Sieste (2h)</td>
+            <td>-</td>
+            <td>5,000</td>
+        </tr>
+    </table>
+    <h3>Chambres Climatisées</h3>
+    <table>
+        <tr>
+            <th>Description</th>
+            <th>Temps</th>
+            <th>Prix (FCFA)</th>
+        </tr>
+        <tr>
+            <td>Nuitée</td>
+            <td>24h</td>
+            <td>15,000</td>
+        </tr>
+        <tr>
+            <td>Sieste</td>
+            <td>-</td>
+            <td>5,000</td>
+        </tr>
+        <tr>
+            <td>Sieste (2h)</td>
+            <td>-</td>
+            <td>7,500</td>
+        </tr>
+    </table>
+</section>
+
+<section id="restaurant-bar">
+    <h2>Restaurant & Bar</h2>
+    <img src="placeholder.jpg" alt="Image du restaurant ou du bar" />
+    <p>Découvrez une variété de plats locaux et internationaux à partir de 2.000 FCFA.</p>
+    <p>Détendez-vous avec nos boissons fraîches à partir de 1.000 FCFA.</p>
+</section>
+
+<section id="contact">
+    <h2>Contactez-Nous</h2>
+    <img src="placeholder.jpg" alt="Image de contact ou localisation" />
+    <p><strong>Adresse :</strong> Rond-point CCC, Douala, Cameroun</p>
+    <p><strong>Téléphone :</strong> +237 677 057 959</p>
+    <p><strong>Email :</strong> <a href="mailto:hotellesadabou@gmail.com">hotellesadabou@gmail.com</a></p>
+    <form>
+        <label for="name">Nom :</label><br>
+        <input type="text" id="name" name="name" required><br>
+        <label for="email">Email :</label><br>
+        <input type="email" id="email" name="email" required><br>
+        <label for="message">Message :</label><br>
+        <textarea id="message" name="message" rows="4" required></textarea><br>
+        <button type="submit">Envoyer</button>
+    </form>
+</section>
+
+<footer>
+    <p>&copy; 2025 Hôtel Le SA'DABOU. Tous droits réservés.</p>
+</footer>
+
+</body>
+</html>
