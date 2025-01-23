@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EVQ CONFIGURATOR V1.0</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        let connectedDevice = null;
+        let characteristics = [];
+        const Service_uuid = 0x0180; // Replace with your ESP32 BLE service UUID
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        const csrftoken = getCookie('csrftoken');
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!/^(GET|HEAD|OPTIONS|TRACE)$/.test(settings.type)) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+
+        function fillForm() {
+            document.getElementById("hb_interval").value = 30;
+            document.getElementById("ws_ping_interval").value = 60;
+            document.getElementById("meter_sv_interval").value = 20;
+            document.getElementById("vendor_name").value = "EVQPOINT";
+            document.getElementById("url").value = "ws://api.plugeasy.in/w";
+            document.getElementById("ssid_name").value = "Intelli_Avi otz";
+            document.getElementById("ssid_psw").value = "12345678";
+        }
+
+        async function scanBLE() {
+            try {
+                const device = await navigator.bluetooth.requestDevice({
+                    acceptAllDevices: true,
+                    optionalServices: [Service_uuid]
+                });
+
+                const listItem = document.createElement('li');
+                listItem.textContent = `Device: ${device.name || 'Unnamed'}, Address: ${device.id}`;
+
+                const connectButton = document.createElement('button');
+                connectButton.textContent = 'Connect';
+                connectButton.onclick = async () => await connectToDevice(device);
+
+                const disconnectButton = document.createElement('button');
+                disconnectButton.textContent = 'Disconnect';
+                disconnectButton.onclick = () => disconnectDevice(device);
+                disconnectButton.disabled = true;
+
+                listItem.appendChild(connectButton);
+                listItem.appendChild(disconnectButton);
+                document.getElementById('devices').appendChild(listItem);
+
+                device.connectButton = connectButton;
+                device.disconnectButton = disconnectButton;
+            } catch (error) {
+                console.error('Error scanning for BLE devices:', error);
+                alert('Error scanning for BLE devices: ' + error.message);
+            }
+        }
+
+        async function connectToDevice(device) {
+            try {
+                const server = await device.gatt.connect();
+                console.log('Connected to device:', device.name);
+
+                connectedDevice = device;
+                device.connectButton.disabled = true;
+                device.disconnectButton.disabled = false;
+
+                const service = await server.getPrimaryService(Service_uuid);
+                characteristics = await service.getCharacteristics();
+
+                if (!characteristics || characteristics.length === 0) {
+                    alert('No characteristics found for the connected device.');
+                    return;
+                }
+
+                console.log('Characteristics:', characteristics);
+                alert('Device connected and characteristics are ready!');
+
+                $('#read-btn').prop('disabled', false);
+                $('#write-btn').prop('disabled', false);
+                $('input[type="text"], input[type="password"], input[type="number"]').prop('disabled', false);
+            } catch (error) {
+                console.error('Error connecting to device:', error);
+                alert('Error connecting to device: ' + error.message);
+            }
+        }
+
+        function disconnectDevice(device) {
+            if (device.gatt.connected) {
+                device.gatt.disconnect();
+                device.connectButton.disabled = false;
+                device.disconnectButton.disabled = true;
+
+                $('#read-btn').prop('disabled', true);
+                $('#write-btn').prop('disabled', true);
+                $('input[type="text"], input[type="password"], input[type="number"]').prop('disabled', true);
+
+                alert('Device disconnected!');
+            }
+        }
+
+        async function readData() {
+            if (!connectedDevice) {
+                alert('Please connect to a device first.');
+                return;
+            }
+            if (!characteristics || characteristics.length === 0) {
+                alert('No characteristics found for the connected device.');
+                return;
+            }
+
+            try {
+                let rawData = '';  // To store raw data from characteristics
+
+                for (const char of characteristics) {
+                    if (char.properties.read) {
+                        try {
+                            const value = await char.readValue();
+                            rawData += new TextDecoder().decode(value);
+                            console.log(`Raw Data from ${char.uuid}:`, rawData);  // Debugging
+                        } catch (error) {
+                            console.error(`Error reading characteristic ${char.uuid}:`, error);
+                        }
+                    }
+                }
+
+                // Assuming the device sends JSON data with the parameters we want
+                let parsedData = {};
+                if (rawData.startsWith('{')) {
+                    // If the data is JSON
+                    parsedData = JSON.parse(rawData);
+                } else {
+                    alert('Unexpected data format from BLE device.');
+                    return;
+                }
+
+                console.log('Parsed Data:', parsedData);  // Debugging
+
+                // Assign values to the input fields
+                document.getElementById("hb_interval").value = parsedData.HB_interval || '';
+                document.getElementById("ws_ping_interval").value = parsedData.WS_Ping_interval || '';
+                document.getElementById("vendor_name").value = parsedData.VENDOR_name || '';
+                document.getElementById("url").value = parsedData.URL || '';
+                document.getElementById("ssid_name").value = parsedData.SSID_name || '';
+                document.getElementById("ssid_psw").value = parsedData.SSID_psw || '';
+                document.getElementById("meter_sv_interval").value = parsedData.Meter_SV_interval || '';
+
+                alert('Data read and assigned successfully!');
+            } catch (error) {
+                console.error('Error reading data:', error);
+                alert('Error reading data: ' + error.message);
+            }
+        }
+
+        async function writeData() {
+            if (!connectedDevice) {
+                alert('Please connect to a device first.');
+                return;
+            }
+            if (!characteristics || characteristics.length === 0) {
+                alert('No characteristics found for the connected device.');
+                return;
+            }
+
+            try {
+                // Collect values from the form fields
+                const dataToWrite = {
+                    HB_interval: document.getElementById("hb_interval").value,
+                    WS_Ping_interval: document.getElementById("ws_ping_interval").value,
+                    VENDOR_name: document.getElementById("vendor_name").value,
+                    URL: document.getElementById("url").value,
+                    SSID_name: document.getElementById("ssid_name").value,
+                    SSID_psw: document.getElementById("ssid_psw").value,
+                    Meter_SV_interval: document.getElementById("meter_sv_interval").value,
+                };
+
+                console.log('Data to write:', dataToWrite);  // Debugging
+
+                // Convert the object to a JSON string
+                const jsonString = JSON.stringify(dataToWrite);
+
+                for (const char of characteristics) {
+                    if (char.properties.write) {
+                        try {
+                            // Write the data to the first writable characteristic
+                            await char.writeValue(new TextEncoder().encode(jsonString));
+                            alert('Data written successfully!');
+                            break; // Exit after successful write
+                        } catch (error) {
+                            console.error(`Error writing to characteristic ${char.uuid}:`, error);
+                        }
+                    } else {
+                        console.warn(`Characteristic ${char.uuid} does not support writing.`);
+                    }
+                }
+            } catch (error) {
+                console.error('Error writing data:', error);
+                alert('Error writing data: ' + error.message);
+            }
+        }
+
+        function loadConfig() {
+            const fileInput = document.getElementById('file-input');
+            fileInput.click();
+            fileInput.onchange = function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        try {
+                            const data = JSON.parse(e.target.result);
+                            // Populate the form fields with the data
+                            for (const key in data) {
+                                if (data.hasOwnProperty(key)) {
+                                    const field = document.getElementById(key);
+                                    if (field) {
+                                        field.value = data[key];
+                                    }
+                                }
+                            }
+                            alert('Configuration loaded successfully!');
+                        } catch (error) {
+                            console.error('Error parsing the file:', error);
+                            alert('Invalid configuration file!');
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+            };
+        }
+
+        // Function to save form data to JSON file
+        async function saveConfigWithFilePicker() {
+            const data = {};
+            // Collect data from all form fields
+            const inputs = document.querySelectorAll('input[type="text"], input[type="password"], input[type="number"]');
+            inputs.forEach(input => {
+                if (input.id) {
+                    data[input.id] = input.value;
+                }
+            });
+
+            const json = JSON.stringify(data, null, 2);
+            try {
+                // Open file picker for saving the file
+                const handle = await window.showSaveFilePicker({
+                    suggestedName: 'config.json',
+                    types: [{
+                        description: 'JSON Files',
+                        accept: { 'application/json': ['.json'] },
+                    }],
+                });
+
+                // Create a writable stream and write data to file
+                const writableStream = await handle.createWritable();
+                await writableStream.write(json);
+                await writableStream.close();
+
+                alert('Configuration saved successfully!');
+            } catch (err) {
+                console.error('Error saving file:', err);
+                alert('Error saving file: ' + err.message);
+            }
+        }
+
+        // Attach functions to buttons
+        $(document).ready(function() {
+            $('#load-btn').click(loadConfig);
+            $('#saveButton').click(saveConfigWithFilePicker);
+        });
+    </script>
+</head>
+<body style="background-color:violet">
+    <h2>EVQ CONFIGURATOR V1.0</h2>
+    <label>Com Port:</label>
+    <button onclick="scanBLE()">Scan</button>
+    <ul id="devices"></ul>
+    <button id="load-btn">Load</button>
+    <input type="file" id="file-input" style="display:none">
+    <button id="saveButton">Save</button>
+    <button id="read-btn" onclick="readData()" disabled>Read Data</button>
+    <button id="write-btn" onclick="writeData()" disabled>Write Data</button>
+
+    <form method="post" action="{% url 'autofill_fun' %}">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td><label for="hb_interval">HB_interval:</label></td>
+                <td><input type="number" id="hb_interval" name="h_interval" value="" style="background-color:lightblue" disabled></td>
+            </tr>
+            <tr>
+                <td><label for="ws_ping_interval">WS_Ping_interval:</label></td>
+                <td><input type="number" id="ws_ping_interval" name="ws_ping_interval" value="" style="background-color:lightblue" disabled></td>
+            </tr>
+            <tr>
+                <td><label for="vendor_name">VENDOR_name:</label></td>
+                <td><input type="text" id="vendor_name" name="vendor_name" value="" style="background-color:lightblue" disabled></td>
+            </tr>
+            <tr>
+                <td><label for="url">URL:</label></td>
+                <td><input type="text" id="url" name="url" value="" style="background-color:lightblue" disabled></td>
+            </tr>
+            <tr>
+                <td><label for="ssid_name">SSID_name:</label></td>
+                <td><input type="text" id="ssid_name" name="ssid_username" value="" style="background-color:lightblue" disabled></td>
+            </tr>
+            <tr>
+                <td><label for="ssid_psw">SSID_psw:</label></td>
+                <td><input type="text" id="ssid_psw" name="ssid_psw" value="" style="background-color:lightblue" disabled></td>
+            </tr>
+            <tr>
+                <td><label for="meter_sv_interval">Meter_SV_interval:</label></td>
+                <td><input type="text" id="meter_sv_interval" name="meter_sv_interval" value="" style="background-color:lightblue" disabled></td>
+            </tr>
+            <tr>
+                <td><button type="button" onclick="fillForm()" style="background-color:khaki">Default Config</button></td>
+                <td><input type="reset" value="Clear Data" style="background-color:khaki"></td>
+            </tr>
+            <tr>
+            <td colspan="2"><input type="submit" value="Submit" style="background-color:khaki"></td>
+            </tr>
+        </table>
+    </form>
+    <div id="current-data"></div>
+</body>
+</html>
+
