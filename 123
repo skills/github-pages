@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KMD Project Development - Alexander Volobuev</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #f0f4f8, #d9e2ec);
+            color: #333;
+        }
+        header {
+            background-color: #0078d4;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            margin: 5px 0 0;
+        }
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        section {
+            margin-bottom: 20px;
+        }
+        section h2 {
+            color: #0078d4;
+            border-bottom: 2px solid #0078d4;
+            padding-bottom: 5px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            margin: 10px 0;
+        }
+        a {
+            color: #0078d4;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: #f0f4f8;
+            border-top: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Alexander Volobuev</h1>
+        <p>KMD Project Developer | Tekla Structures Expert</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>About Me</h2>
+            <p>I am a professional specializing in the development of KMD (detailed metal structure drawings) using Tekla Structures. With years of experience in the field, I deliver precise and reliable solutions for construction and fabrication projects of any scale.</p>
+        </section>
+
+        <section>
+            <h2>Services</h2>
+            <ul>
+                <li>Development of detailed KMD drawings for metal structures</li>
+                <li>3D modeling and detailing using Tekla Structures</li>
+                <li>Consultation and optimization of fabrication processes</li>
+                <li>Custom solutions for complex construction projects</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Contact</h2>
+            <p>Email: <a href="mailto:alexander.volobuev@example.com">alexander.volobuev@example.com</a></p>
+            <p>Phone: +7 (123) 456-78-90</p>
+            <p>LinkedIn: <a href="https://linkedin.com/in/alexander-volobuev" target="_blank">linkedin.com/in/alexander-volobuev</a></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Alexander Volobuev. All rights reserved.</p>
+    </footer>
+</body>
+</html>
