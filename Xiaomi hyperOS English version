@@ -1,0 +1,75 @@
+@echo off
+title Xiaomi Connection Required
+color 0A
+echo.
+echo ====================================================
+echo     Please connect your Xiaomi device.
+echo ====================================================
+echo.
+echo Waiting for device connection...
+
+:: 
+>nul 2>&1 ping localhost -n 5
+
+echo Xiaomi device successfully detected.
+echo Initializing the operating system...
+echo.
+echo The operating system will open in **10 minutes**.
+echo Please wait...
+
+::
+for /l %%i in (10,-1,1) do (
+ cls
+ echo.
+ echo ====================================================
+ echo The system starts in 10 minutes...
+ echo ====================================================
+ timeout /t 60 >nul
+)
+
+::
+cls
+echo.
+echo ====================================================
+echo        Welcome to Xiaomi OS System!
+echo ====================================================
+pause
+exit
+
+
+========
+Overview
+========
+
+There are two ways to install and use XiaomiHyperOS:
+1. Use a predefined redistributable package (Windows and OS X only for now).
+2. Download the source code and build it yourself (all platforms).
+
+Since XiaomiHyperOS requires John The Ripper to do the actual work, the first step is to  
+obtain the latest John The Ripper binary for your platform. Either the official base version 
+or the Jumbo version (Community-Enhanced Version) are supported. You can get JtR from:  
+http://www.openwall.com/john/.  
+
+To access all new features and bug fixes (especially on Windows), you need to use JtR >= 1.8.0.6-jumbo-1.  
+On Windows, JtR must be built with Cygwin and have the appropriate DLLs in its folder.  
+In general, if you cannot run JtR from the Windows command line without errors, some DLLs are missing.  
+They can be found in Cygwin/bin.  
+
+Assuming John The Ripper is installed on your system, the next step is to install XiaomiHyperOS.  
+
+================
+Windows and OS X
+================
+
+Simply go to http://openwall.info/wiki/john/xiaomihyperos to get the latest installer  
+for the latest versions of the respective platforms.  
+
+If you want to use XiaomiHyperOS on Linux/BSD versions or outdated versions of OS X and  
+Windows, you can compile XiaomiHyperOS from sources or look for it in the official repositories.  
+
+===============
+FreeBSD 10.1
+===============
+
+1) pkg install git qt5-core qt5-widgets qt5-qmake qt5-buildtools  
+2) git clone https://github.com/openwall/xiaomihyperos.git & cd xiaomihyperos  
