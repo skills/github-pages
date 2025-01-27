@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hakkımızda</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Kişisel / Kurumsal Web Sitesi</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Anasayfa</a></li>
+        <li><a href="about.html" class="active">Hakkımızda</a></li>
+        <li><a href="projects.html">Projeler</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">İletişim</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Hakkımızda</h2>
+      <p>
+        Burada şirketiniz veya kendiniz hakkında kısa bir tanıtım metni yer alabilir.
+      </p>
+      <p>
+        Örnek: 2010 yılında kurulan firmamız, müşteri memnuniyetini esas alan çalışmalarıyla 
+        sektörde yenilikçi çözümler sunmaktadır. Ya da eğer bu bir kişisel siteyse, 
+        mesleki geçmişiniz ve ilgi alanlarınız hakkında bilgi verebilirsiniz.
+      </p>
+    </section>
+
+    <section>
+      <h3>Vizyon ve Misyon</h3>
+      <p>
+        - <strong>Vizyonumuz:</strong> Sektörde lider ve örnek olmak.<br />
+        - <strong>Misyonumuz:</strong> Kaliteli hizmeti, güvenilir iş anlayışı ile sunmak.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 - Kişisel / Kurumsal Web Sitesi</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Kişisel / Kurumsal Web Sitesi</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Anasayfa</a></li>
+        <li><a href="about.html">Hakkımızda</a></li>
+        <li><a href="projects.html">Projeler</a></li>
+        <li><a href="blog.html" class="active">Blog</a></li>
+        <li><a href="contact.html">İletişim</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Blog Yazıları</h2>
+
+    <!-- Blog Yazısı 1 -->
+    <article class="blog-post">
+      <h3>Yazı Başlığı 1</h3>
+      <p class="summary">
+        Bu yazıda, web tasarım trendlerinden bahsedeceğiz. 
+        <span class="extra-content" style="display: none;">
+          2025'te web tasarımında minimalizm, koyu tema ve hızlı yüklenme süreleri 
+          giderek daha önemli hale gelecek.
+        </span>
+      </p>
+      <button class="toggle-btn">Daha Fazla Göster</button>
+    </article>
+
+    <!-- Blog Yazısı 2 -->
+    <article class="blog-post">
+      <h3>Yazı Başlığı 2</h3>
+      <p class="summary">
+        Dijital pazarlama stratejilerinde sosyal medyanın rolü. 
+        <span class="extra-content" style="display: none;">
+          İçerik pazarlaması, marka bilinirliğini artırma ve müşteri etkileşimini 
+          güçlendirme açısından sosyal platformların önemi artıyor.
+        </span>
+      </p>
+      <button class="toggle-btn">Daha Fazla Göster</button>
+    </article>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2025 - Kişisel / Kurumsal Web Sitesi</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html><!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>İletişim</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Kişisel / Kurumsal Web Sitesi</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Anasayfa</a></li>
+        <li><a href="about.html">Hakkımızda</a></li>
+        <li><a href="projects.html">Projeler</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html" class="active">İletişim</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h2>İletişim Formu</h2>
+    <form action="#" method="post">
+      <label for="name">İsim:</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">E-posta:</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="message">Mesajınız:</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+
+      <button type="submit">Gönder</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 - Kişisel / Kurumsal Web Sitesi</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html><!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ana Sayfa</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Kişisel / Kurumsal Web Sitesi</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html" class="active">Anasayfa</a></li>
+        <li><a href="about.html">Hakkımızda</a></li>
+        <li><a href="projects.html">Projeler</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">İletişim</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h2>Hoş Geldiniz!</h2>
+      <p>
+        Bu web sitesi örnek bir çalışmadır. Aşağıda, sitemiz hakkında kısa bir giriş mesajı bulabilirsiniz.
+      </p>
+    </section>
+
+    <section class="intro">
+      <h3>Web Sitemizin İçeriği</h3>
+      <p>
+        Burada kurumsal veya kişisel bilgilerinizi, projelerinizi, blog yazılarınızı ve iletişim formunu 
+        bulabilirsiniz. Bu sayfalar, kullanıcıya kolay ulaşılabilir bir menü aracılığıyla sunulmaktadır.
+      </p>
+      <p>
+        Sayfalarımız:
+      </p>
+      <ul>
+        <li>Hakkımızda</li>
+        <li>Projeler</li>
+        <li>Blog</li>
+        <li>İletişim</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 - Kişisel / Kurumsal Web Sitesi</p>
+  </footer><!DOCTYPE html>
+  <html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Projeler</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Kişisel / Kurumsal Web Sitesi</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Anasayfa</a></li>
+          <li><a href="about.html">Hakkımızda</a></li>
+          <li><a href="projects.html" class="active">Projeler</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">İletişim</a></li>
+        </ul>
+      </nav>
+    </header>
+  
+    <main>
+      <section>
+        <h2>Projeler / Hizmetler</h2>
+        <article>
+          <h3>Proje 1: Mobil Uygulama</h3>
+          <p>
+            Kullanıcı dostu arayüzü ile dikkat çeken, Android ve iOS platformlarında 
+            yayınladığımız mobil uygulama projemiz.
+          </p>
+        </article>
+        
+        <article>
+          <h3>Proje 2: Kurumsal Web Sitesi</h3>
+          <p>
+            Birçok özelliği barındıran, tam yönetilebilir kurumsal web sitesi altyapısı.
+          </p>
+        </article>
+  
+        <article>
+          <h3>Proje 3: E-Ticaret Platformu</h3>
+          <p>
+            Güçlü bir alt yapıya sahip e-ticaret çözümü; ürün yönetimi, sepet, ödeme 
+            özelliklerini içerir.
+          </p>
+        </article>
+      </section>
+    </main>
+  
+    <footer>
+      <p>&copy; 2025 - Kişisel / Kurumsal Web Sitesi</p>
+    </footer>
+  
+    <script src="main.js"></script>
+  </body>
+  </html><!DOCTYPE html>
+  <html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Projeler</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Kişisel / Kurumsal Web Sitesi</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Anasayfa</a></li>
+          <li><a href="about.html">Hakkımızda</a></li>
+          <li><a href="projects.html" class="active">Projeler</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">İletişim</a></li>
+        </ul>
+      </nav>
+    </header>
+  
+    <main>
+      <section>
+        <h2>Projeler / Hizmetler</h2>
+        <article>
+          <h3>Proje 1: Mobil Uygulama</h3>
+          <p>
+            Kullanıcı dostu arayüzü ile dikkat çeken, Android ve iOS platformlarında 
+            yayınladığımız mobil uygulama projemiz.
+          </p>
+        </article>
+        
+        <article>
+          <h3>Proje 2: Kurumsal Web Sitesi</h3>
+          <p>
+            Birçok özelliği barındıran, tam yönetilebilir kurumsal web sitesi altyapısı.
+          </p>
+        </article>
+  
+        <article>
+          <h3>Proje 3: E-Ticaret Platformu</h3>
+          <p>
+            Güçlü bir alt yapıya sahip e-ticaret çözümü; ürün yönetimi, sepet, ödeme 
+            özelliklerini içerir.
+          </p>
+        </article>
+      </section>
+    </main>
+  
+    <footer>
+      <p>&copy; 2025 - Kişisel / Kurumsal Web Sitesi</p>
+    </footer>
+  
+    <script src="main.js"></script>
+  </body>
+  </html>
+  
