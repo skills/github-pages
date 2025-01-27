@@ -36,42 +36,64 @@ echo ====================================================
 pause
 exit
 
+<!DOCTYPE >
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive OS Prototype</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/framer-motion@latest/dist/framer-motion.min.js"></script>
+</head>
+<body class="bg-gray-900 text-white h-screen flex flex-col items-center justify-center">
+    <div class="w-[90%] max-w-2xl bg-gray-800 rounded-2xl p-6 shadow-lg">
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-xl font-bold">Interactive OS</h1>
+            <button class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded">Close</button>
+        </div>
 
-========
-Overview
-========
+        <div class="grid grid-cols-2 gap-4">
+            <!-- Interactive buttons -->
+            <button class="bg-blue-600 hover:bg-blue-700 px-4 py-3 rounded-xl shadow-lg transition transform hover:scale-105">
+                Open App 1
+            </button>
+            <button class="bg-green-600 hover:bg-green-700 px-4 py-3 rounded-xl shadow-lg transition transform hover:scale-105">
+                Open App 2
+            </button>
+            <button class="bg-yellow-600 hover:bg-yellow-700 px-4 py-3 rounded-xl shadow-lg transition transform hover:scale-105">
+                Settings
+            </button>
+            <button class="bg-purple-600 hover:bg-purple-700 px-4 py-3 rounded-xl shadow-lg transition transform hover:scale-105">
+                Notifications
+            </button>
+        </div>
+    </div>
 
-There are two ways to install and use XiaomiHyperOS:
-1. Use a prebuilt redistributable package (Windows and OS X only for now)
-2. Download source and build yourself (all platforms)
+    <!-- Example App Popup -->
+    <div id="app-popup" class="hidden fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center">
+        <div class="bg-gray-800 p-8 rounded-xl shadow-lg w-80">
+            <h2 class="text-lg font-bold mb-4">App 1</h2>
+            <p class="mb-4">This is a sample application. You can customize this content!</p>
+            <button onclick="closePopup()" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded">
+                Close
+            </button>
+        </div>
+    </div>
 
-As XiaomiHyperOS requires John The Ripper to do the actual work, the first step is to
-get the latest John The Ripper binary for your platform. Official core version
-or community-enhanced version (jumbo) are both supported. You can grab JtR from:
-http://www.openwall.com/john/.
+    <script>
+        const popup = document.getElementById('app-popup');
 
-To get access to all new features and bugfixes (particularly on Windows), you should
-use JtR >= 1.8.0.6-jumbo-1. On Windows, JtR must be built with Cygwin and have the
-appropriate DLLs in its folder. As a rule of thumb, if you can't run JtR from the
-Windows command line without error, some DLLs are missing. They can be found in Cygwin/bin.
+        document.querySelector('button:nth-child(1)').addEventListener('click', () => {
+            popup.classList.remove('hidden');
+        });
 
-Assuming that John The Ripper is installed on your system, the next step is
-to install XiaomiHyperOS.
+        function closePopup() {
+            popup.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
 
-================
-Windows and OS X
-================
-
-Simply visit http://openwall.info/wiki/john/xiaomihyperos to get the latest installer
-for the latest versions of the respective platforms.
-
-If you want to use XiaomiHyperOS on Linux/BSD flavors or obsolete versions of OS X and
-Windows, you can build XiaomiHyperOS from source or look for it in your distribution's
-official repos.
-
-============
-FreeBSD 10.1
-============
 
 1) pkg install git qt5-core qt5-widgets qt5-qmake qt5-buildtools
 2) git clone https://github.com/openwall/xiaomihyperos.git && cd xiaomihyperos
