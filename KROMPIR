@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vijolični krompir - Naravna pridelava</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Vijolični krompir</h1>
+        <p>100% naravno pridelan domač krompir</p>
+    </header>
+
+    <section class="hero">
+        <img src="naslovna-slika.jpg" alt="Vijolični krompir">
+    </section>
+
+    <section class="izdelki">
+        <h2>Naša ponudba</h2>
+        <div class="izdelek">
+            <img src="izdelek1.jpg" alt="Vijolični krompir - 1kg">
+            <h3>Vijolični krompir - 1 kg</h3>
+            <p>Cena: 3,50 €</p>
+        </div>
+        <div class="izdelek">
+            <img src="izdelek2.jpg" alt="Vijolični krompir - 5kg">
+            <h3>Vijolični krompir - 5 kg</h3>
+            <p>Cena: 15,00 €</p>
+        </div>
+        <div class="izdelek">
+            <img src="izdelek3.jpg" alt="Semenski vijolični krompir">
+            <h3>Semenski vijolični krompir</h3>
+            <p>Cena: 10,00 €/kg</p>
+        </div>
+    </section>
+
+    <section class="kontakt">
+        <h2>Kontakt</h2>
+        <p>Za naročila in dodatne informacije nas kontaktirajte:</p>
+        <p>Email: <a href="mailto:info@vijolcnikrompir.si">info@vijolcnikrompir.si</a></p>
+        <p>Telefon: +386 40 123 456</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Vijolični Krompir | Vse pravice pridržane</p>
+    </footer>
+
+</body>
+</html>
