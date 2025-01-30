@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карельское Поморье</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        header {
+            background: url('pomor_sky.jpg') no-repeat center center/cover;
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+        }
+        nav {
+            background: #34495e;
+            overflow: hidden;
+        }
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+        nav a:hover, .dropdown:hover .dropbtn {
+            background-color: #2c3e50;
+        }
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+        .dropdown .dropbtn {
+            font-size: 16px;  
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .container {
+            display: flex;
+            padding: 20px;
+        }
+        .content {
+            flex: 3;
+            padding-right: 20px;
+        }
+        .news-item {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            transition: transform 0.2s;
+        }
+        .news-item:hover {
+            transform: scale(1.05);
+        }
+        .sidebar {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .calendar {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .calendar th, .calendar td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        footer {
+            background: #2c3e5e;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .content, .sidebar {
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Карельское Поморье</h1>
+        <p>Изучение краеведения Беломорского округа</p>
+    </header>
+    <nav>
+        <a href="#home">Главная</a>
+        <div class="dropdown">
+            <button class="dropbtn">О нас 
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="#history">История</a>
+                <a href="#team">Команда</a>
+                <a href="#goals">Цели и задачи</a>
+            </div>
+        </div> 
+        <div class="dropdown">
+            <button class="dropbtn">Проекты 
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="#current_projects">Текущие проекты</a>
+                <a href="#completed_projects">Завершенные проекты</a>
+            </div>
+        </div> 
+        <a href="#contacts">Контакты</a>
+    </nav>
+    <div class="container">
+        <div class="content">
+            <div class="news-item">
+                <h2>Новость 1</h2>
+                <p>Дата: 12 января 2025</p>
+                <p>Описание новости...</p>
+            </div>
+            <div class="news-item">
+                <h2>Новость 2</h2>
+                <p>Дата: 15 января 2025</p>
+                <p>Описание новости...</p>
+            </div>
+            <div class="news-item">
+                <h2>Новость 3</h2>
+                <p>Дата: 18 января 2025</p>
+                <p>Описание новости...</p>
+            </div>
+        </div>
+        <div class="sidebar">
+            <h2>Календарь</h2>
+            <table class="calendar">
+                <thead>
+                    <tr>
+                        <th>Пн</th>
+                        <th>Вт</th>
+                        <th>Ср</th>
+                        <th>Чт</th>
+                        <th>Пт</th>
+                        <th>Сб</th>
+                        <th>Вс</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>1</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                        <td>7</td>
+                        <td>8</td>
+                        <td>9</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>11</td>
+                        <td>12</td>
+                        <td>13</td>
+                        <td>14</td>
+                        <td>15</td>
+                        <td>16</td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td>18</td>
+                        <td>19</td>
+                        <td>20</td>
+                        <td>21</td>
+                        <td>22</td>
+                        <td>23</td>
+                    </tr>
+                    <tr>
+                        <td>24</td>
+                        <td>25</td>
+                        <td>26</td>
+                        <td>27</td>
+                        <td>28</td>
+                        <td>29</td>
+                        <td>30</td>
+                    </tr>
+                    <tr>
+                        <td>31</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <footer>
+        &copy; Карельское Поморье 2025. Все права защищены.
+    </footer>
+</body>
+</html>
