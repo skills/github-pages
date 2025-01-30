@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screenshot Response Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+
+        #response {
+            margin-top: 20px;
+            font-size: 18px;
+            color: green;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to the Screenshot Response Website</h1>
+    <p>Press <strong>Ctrl + Shift + S</strong> to trigger a response.</p>
+
+    <div id="response">You pressed the right keys! Here's your answer: "You just triggered the screenshot response!"</div>
+
+    <script>
+        // Function to show the response
+        function showResponse() {
+            document.getElementById('response').style.display = 'block';
+        }
+
+        // Listen for keydown event and check if Ctrl + Shift + S is pressed
+        document.addEventListener('keydown', function (event) {
+            if (event.ctrlKey && event.shiftKey && event.key === 'S') {
+                event.preventDefault(); // Prevent the default screenshot or save action
+                showResponse(); // Trigger the response
+            }
+        });
+    </script>
+
+</body>
+</html>
