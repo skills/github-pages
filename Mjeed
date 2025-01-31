@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عبدالمجيد العسكر | Abdulmajeed Alasker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #a18cd1, #fbc2eb);
+            color: #333;
+            text-align: center;
+            transition: background 0.5s ease-in-out;
+            direction: rtl; /* Right-to-left for Arabic */
+        }
+        header {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #ff4b5c;
+        }
+        section {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            background: #ff4b5c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s ease-in-out;
+        }
+        button:hover {
+            background: #e63946;
+        }
+    </style>
+    <script>
+        function changeBackground() {
+            const colors = ['#ff9a9e', '#fad0c4', '#a18cd1', '#fbc2eb', '#8ec5fc'];
+            document.body.style.background = `linear-gradient(135deg, ${colors[Math.floor(Math.random() * colors.length)]}, #fad0c4)`;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>عبدالمجيد العسكر | Abdulmajeed Alasker</h1>
+    </header>
+    <section>
+        <h2>من أنا؟ | About Me</h2>
+        <p>مرحبًا! أنا عبدالمجيد العسكر، وأحب المبارزة. أستمتع بالتحدي والمهارة في المبارزة وأؤمن بأن الرياضة تعلمنا الصبر والانضباط.</p>
+        <p>يمكنك التواصل معي أو استكشاف المزيد حول ما أقوم به!</p>
+    </section>
+    <section>
+        <h2>ميزة ممتعة | Fun Feature</h2>
+        <p>اضغط على الزر أدناه لتغيير لون الخلفية!</p>
+        <button onclick="changeBackground()">تغيير اللون | Change Color</button>
+    </section>
+</body>
+</html>
