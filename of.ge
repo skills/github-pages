@@ -1,0 +1,200 @@
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="კახეთის ტურისტული ადგილების შესახებ ინფორმაციისთვის ეწვიეთ ჩვენს საიტს. გაეცანით ჩვენს ფოტოებს და მიიღეთ სასარგებლო რჩევები.">
+    <meta name="google-site-verification" content="oXeaCeHIKPC8cOGNmYzumCsX883S8MinydtoNMTlwPQ">
+    <meta name="keywords" content="კახეთი, ტურიზმი, ტური, ფოტოები, ვალდებულებები, საქართველოს ტურიზმი">
+    <title>კახეთის ტურისტული ადგილები</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-image: url('of1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+        }
+
+        .category-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .category-list li {
+            margin: 15px 0;
+            cursor: pointer;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .category-list li:hover {
+            color: #ddd;
+        }
+
+        .content {
+            margin-left: 270px;
+            padding: 10px;
+            text-align: center;
+            color: white;
+            font-size: 30px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 5px solid black;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        /* მობილური მოწყობილობებისთვის */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                text-align: center;
+            }
+            .content {
+                margin-left: 0;
+            }
+            .gallery {
+                grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+            }
+            .gallery img {
+                height: auto;
+            }
+        }
+
+        /* შეტყობინებების პანელი - მუდამ ჩართული ზედა მარჯვენა კუთხეში */
+        .notification-panel {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        /* დაბრუნების ღილაკი */
+        .back-button {
+            display: none;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #f04;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            background-color: #c03;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>კატეგორიები</h2>
+        <ul class="category-list">
+            <li onclick="showGallery('cultural')">ტყე</li>
+            <li onclick="showGallery('mountains')">მთა ბორცვი</li>
+            <li onclick="showGallery('rivers')">მდინარე ტბა</li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <h1>ფოტოების გალერეა</h1>
+        <p>გალერეა შეიცვლის სურათებს შესაბამისი კატეგორიის მიხედვით.</p>
+        <button id="backButton" class="back-button" onclick="showMainPage()">მთავარ გვერდზე დაბრუნება</button>
+        <div id="gallery" class="gallery"></div>
+    </div>
+
+    <!-- შეტყობინებების პანელი -->
+    <div id="notification" class="notification-panel">მოხმარებლის შეტყობინება</div>
+
+    <script>
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+        }
+
+        const galleries = {
+            cultural: ['oft1.jpg', 'oft2.jpg', 'oft3.jpg', 'oft4.jpg', 'oft5.jpg', 'oft6.jpg', 'oft7.jpg', 'oft8.jpg', 't.jpg', 't2.jpg'],
+            mountains: ['of9.jpg', 'of8.jpg', 'ofg11.jpg', 'ofg12.jpg', 'ofg13.jpg', 'of.jpg', 'ofg26.jpg', 'ofg27.jpg', 'ofg28.jpg'],
+            rivers: ['of10.jpg', 'c.jpg', 'm.jpg', 'm1.jpg', 'm2.jpg', 'm3.jpg', 'm4.jpg', 'm5.jpg', 'm6.jpg', 'm7.jpg', 'm8.jpg', 'r.jpg', 'r(2).jpg'],
+        };
+
+        function showGallery(category) {
+            const galleryContainer = document.getElementById('gallery');
+            galleryContainer.innerHTML = '';
+
+            const images = galleries[category];
+            images.forEach((image, index) => {
+                const imgElement = document.createElement('img');
+                imgElement.src = image;
+                imgElement.dataset.index = index;
+                imgElement.dataset.category = category;
+                imgElement.onerror = function() {
+                    this.src = 'default.jpg';
+                };
+                imgElement.addEventListener('click', changeImage);
+                galleryContainer.appendChild(imgElement);
+            });
+            showNotification(`გალერეა შეიცვალა: ${category}`);
+            document.getElementById('backButton').style.display = 'block';
+        }
+
+        function showMainPage() {
+            document.getElementById('gallery').innerHTML = '';
+            showNotification("დაბრუნდით მთავარ გვერდზე");
+            document.getElementById('backButton').style.display = 'none';
+        }
+
+        function changeImage(event) {
+            const imgElement = event.target;
+            const category = imgElement.dataset.category;
+            const index = parseInt(imgElement.dataset.index, 10);
+            const images = galleries[category];
+
+            let nextIndex = (index + 1) % images.length;
+            imgElement.src = images[nextIndex];
+            imgElement.dataset.index = nextIndex;
+        }
+    </script>
+</body>
+</html>
