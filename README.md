@@ -7,9 +7,9 @@
   Add your open source license, GitHub uses MIT license.
 -->
 
-# GitHub Pages
+# Implementing the 32k Database Page Size in Windows Server 2025 for Enhanced Scalability
 
-_Create a site or blog from your GitHub repositories with GitHub Pages._
+Applied to: Windows Server 2025
 
 </header>
 
@@ -21,55 +21,80 @@ _Create a site or blog from your GitHub repositories with GitHub Pages._
 
 ## Welcome
 
-With GitHub Pages, you can host project blogs, documentation, resumes, portfolios, or any other static content you'd like. Your GitHub repository can easily become its own website. In this course, we'll show you how to set up your own site or blog using GitHub Pages.
+Windows Server 2025 introduces a significant enhancement to Active Directory Domain Services (AD DS) with the introduction of a 32k database page size. This upgrade aims to improve the scalability of AD DS, especially in environments with large volumes of objects or frequent modifications. By increasing the page size from the previous 8k to 32k, the frequency of page splits is reduced, minimizing database fragmentation and enhancing overall performance. This results in lower overhead for database management, making AD DS more efficient in large-scale deployments. 
 
-- **Who is this for**: Beginners, students, project maintainers, small businesses.
-- **What you'll learn**: How to build a GitHub Pages site.
-- **What you'll build**: We'll build a simple GitHub Pages site with a blog. We'll use [Jekyll](https://jekyllrb.com), a static site generator.
-- **Prerequisites**: If you need to learn about branches, commits, and pull requests, take [Introduction to GitHub](https://github.com/skills/introduction-to-github) first.
-- **How long**: This course takes less than one hour to complete.
+## Implementation Steps:
 
-In this course, you will:
+Prepare the Environment: Perform a complete backup of the current AD database to ensure data safety. 
+Adjust the Page Size: Adjust the page size. This process is irreversible, emphasizing the importance of the initial backup. 
+Testing: Conduct thorough testing in a non-production environment to ensure stability and minimize the risk of disruption during the transition. 
+Restart: Be prepared for a complete restart of directory services as part of the process. 
 
-1. Enable GitHub Pages
-2. Configure your site
-3. Customize your home page
-4. Create a blog post
-5. Merge your pull request
+## Detailed Steps:
 
-### How to start this course
+Registry Modification: Open the Registry Editor (regedit). 
 
-<!-- For start course, run in JavaScript:
-'https://github.com/new?' + new URLSearchParams({
-  template_owner: 'skills',
-  template_name: 'github-pages',
-  owner: '@me',
-  name: 'skills-github-pages',
-  description: 'My clone repository',
-  visibility: 'public',
-}).toString()
--->
+Navigate to HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NTDS\Parameters.   Create a new DWORD (32-bit) value named Database Page Size and set its value to 32768 (decimal). 
+Restart the server. 
 
-[![start-course](https://user-images.githubusercontent.com/1221423/235727646-4a590299-ffe5-480d-8cd5-8194ea184546.svg)](https://github.com/new?template_owner=skills&template_name=github-pages&owner=%40me&name=skills-github-pages&description=My+clone+repository&visibility=public)
+![image](https://github.com/user-attachments/assets/859e6c1d-5b96-4905-a020-39d61ff25ae2)
 
-1. Right-click **Start course** and open the link in a new tab.
-2. In the new tab, most of the prompts will automatically fill in for you.
-   - For owner, choose your personal account or an organization to host the repository.
-   - We recommend creating a public repository, as private repositories will [use Actions minutes](https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions).
-   - Scroll down and click the **Create repository** button at the bottom of the form.
-3. After your new repository is created, wait about 20 seconds, then refresh the page. Follow the step-by-step instructions in the new repository's README.
 
-<footer>
 
-<!--
-  <<< Author notes: Footer >>>
-  Add a link to get support, GitHub status page, code of conduct, license link.
--->
+2.  Enable the Feature: Open PowerShell or Terminal with administrative privileges. 
 
----
+Execute the following command, replacing placeholders with your server and domain names:
 
-Get help: [Post in our discussion board](https://github.com/orgs/skills/discussions/categories/github-pages) &bull; [Review the GitHub status page](https://www.githubstatus.com/)
+$params = @{
 
-&copy; 2023 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
+ Identity = 'Database 32k pages feature'
 
-</footer>
+ Scope = 'ForestOrConfigurationSet'
+
+ Server = 'your_server_name'  # use your server name, example ‘dc1’
+
+ Target = 'your_domain_name' # use your domain name ,example ‘jinish.com'
+
+}
+
+Enable-ADOptionalFeature @params
+
+You may receive the below warning. Press enter to continue. 
+
+ ![image](https://github.com/user-attachments/assets/656a039b-415f-4e1b-a7f2-5d497c605ae1)
+
+
+
+Confirm the action when prompted. 
+
+ 
+![image](https://github.com/user-attachments/assets/2ec1ba8c-d48d-41c4-9e39-c76625c24c8a)
+
+ 
+
+
+Verification:
+
+![image](https://github.com/user-attachments/assets/1646c4fa-6aa3-4746-bc96-e6945fe4bd0c)
+
+
+Open Event Viewer by typing "Event Viewer" in the Start menu search bar.   Navigate to Applications and Services Logs -> Directory Service.   Check the logs for Event ID 2404, which indicates that the Active Directory Domain Services server now supports the "Database 32k Pages Feature" optional feature. 
+
+
+
+
+# Technical Insights:
+
+The increase in page size allows for the storage of larger directory objects and accommodates up to 3,200 values in multi-valued attributes. 
+While new domain controllers will default to the 32k page size, they retain support for the legacy 8k page mode for compatibility within mixed environments. 
+The transition to the 32k page size is managed at the forest level, allowing for a gradual and controlled upgrade process. 
+This enhancement is particularly beneficial in environments with complex directory structures and extensive attribute usage. 
+
+# Benefits:
+
+Improved scalability for large environments. 
+Reduced database fragmentation. 
+Enhanced performance for AD DS operations. 
+Optimized replication, backup, and recovery processes. 
+
+By following these steps and considering the technical insights, organizations can effectively implement the 32k database page size in Windows Server 2025 and leverage the associated benefits for their AD DS environment.
