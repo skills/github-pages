@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💌 AI Love Bot 💌</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe6e6;
+            padding: 50px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+            max-width: 400px;
+            margin: auto;
+        }
+        h1 {
+            color: #ff3366;
+        }
+        .emoji {
+            font-size: 40px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .response {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="emoji">🤖 AI Love Bot Activated 💖</h1>
+        <p id="funny-intro"></p>
+        <button onclick="startTest()">Start Love Compatibility Test 💘</button>
+        <div id="test" style="display:none;">
+            <p id="question"></p>
+            <button onclick="answer('yes')">Yes</button>
+            <button onclick="answer('no')">No</button>
+            <button onclick="answer('a')">Chocolates 🍫</button>
+            <button onclick="answer('b')">Jokes 😂</button>
+            <button onclick="answer('c')">Money 💰</button>
+            <button onclick="answer('d')">Pizza 🍕</button>
+        </div>
+        <p id="score" class="response"></p>
+        <div id="proposal" style="display:none;">
+            <h2>🌹 Will You Be Mine? 🌹</h2>
+            <button onclick="finalResponse('1')">Yes! 💖</button>
+            <button onclick="finalResponse('2')">Let me think 🤔</button>
+            <button onclick="finalResponse('3')">Only if you buy me food! 🍔</button>
+            <button onclick="finalResponse('4')">Let's be besties! 😊</button>
+        </div>
+        <p id="final-message" class="response"></p>
+    </div>
+
+    <script>
+        let intros = [
+            "✨ Your charm is at 100% – Just like my WiFi signal when I'm near you! 📶😍",
+            "😎 Are you a magician? Because whenever I look at you, everyone else disappears! 🎩✨",
+            "🔥 You must be a dictionary because you add meaning to my life! 📖❤️"
+        ];
+        document.getElementById("funny-intro").innerText = intros[Math.floor(Math.random() * intros.length)];
+
+        let questions = [
+            "Do you believe in love at first sight?",
+            "What's the best way to win your heart?",
+            "If I was a lost puppy 🐶, would you adopt me?"
+        ];
+        let currentQuestion = 0;
+        
+        function startTest() {
+            document.getElementById("test").style.display = "block";
+            document.getElementById("question").innerText = questions[currentQuestion];
+        }
+
+        function answer(choice) {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                document.getElementById("question").innerText = questions[currentQuestion];
+            } else {
+                document.getElementById("test").style.display = "none";
+                let score = Math.floor(Math.random() * 51) + 50;
+                document.getElementById("score").innerText = `❤️ Love Compatibility Score: ${score}% ❤️`;
+                setTimeout(() => {
+                    document.getElementById("proposal").style.display = "block";
+                }, 2000);
+            }
+        }
+
+        function finalResponse(choice) {
+            let messages = {
+                "1": "🎉 Yay! Best decision ever! Let's plan our dream date! 😍💖",
+                "2": "⏳ Take your time... but remember, I'm not a pending friend request! 😜",
+                "3": "🍕 Deal! Let's go for food first, then love! 🍔🍟",
+                "4": "😢 Heartbroken but I respect your decision... Let's rock our friendship! 🤗"
+            };
+            document.getElementById("final-message").innerText = messages[choice];
+        }
+    </script>
+</body>
+</html>
