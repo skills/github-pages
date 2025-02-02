@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Wars Merch</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Botiga Star Wars</h1>
+        <input type="text" id="search" placeholder="Cerca productes...">
+        <button id="cart-button">Carret (<span id="cart-count">0</span>)</button>
+    </header>
+    <main>
+        <section class="productes" id="product-list">
+            <!-- Productes s'afegiran dinàmicament aquí -->
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Star Wars Merch. Tots els drets reservats.</p>
+    </footer>
+
+    <script>
+        const products = [
+            { id: 1, name: "Samarreta Darth Vader", price: 25, img: "darth_vader_tshirt.jpg" },
+            { id: 2, name: "Tassa Stormtrooper", price: 15, img: "stormtrooper_mug.jpg" },
+            { id: 3, name: "Figura Mestre Yoda", price: 40, img: "yoda_figure.jpg" }
+        ];
+
+        const cart = [];
+
+        function renderProducts() {
+            const productList = document.getElementById("product-list");
+            productList.innerHTML = "";
+            products.forEach(product => {
+                const productDiv = document.createElement("div");
+                productDiv.classList.add("producte");
+                productDiv.innerHTML = `
+                    <img src="${product.img}" alt="${product.name}">
+                    <h2>${product.name}</h2>
+                    <p>Preu: ${product.price}€</p>
+                    <button onclick="addToCart(${product.id})">Comprar</button>
+                `;
+                productList.appendChild(productDiv);
+            });
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            cart.push(product);
+            document.getElementById("cart-count").innerText = cart.length;
+        }
+
+        document.addEventListener("DOMContentLoaded", renderProducts);
+    </script>
+</body>
+</html>
