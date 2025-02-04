@@ -1,0 +1,58 @@
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+require("dotenv").config();
+
+const app = express();
+app.use(express.json());
+app.use(cors());
+
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const UserSchema = new mongoose.Schema({
+  email: String,
+  password: String,
+});
+const User = mongoose.model("User", UserSchema);
+
+app.post("/api/register", async (req, res) => {
+  const { email, password } = req.body;
+  const hashedPassword = await bcrypt.hash(password, 10);
+  try {
+    await User.create({ email, password: hashedPassword });
+    res.status(201).send("Usuario registrado");
+  } catch (error) {
+    res.status(400).send("Error al registrar");
+  }
+});
+
+app.post("/api/login", async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  if (!user || !(await bcrypt.compare(password, user.password))) {
+    return res.status(401).send("Credenciales incorrectas");
+  }
+  const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: "1h" });
+  res.json({ token });
+});
+
+app.get("/api/dashboard", async (req, res) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader) return res.status(401).send("No autorizado");
+
+  const token = authHeader.split(" ")[1];
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    res.json({ user: { email: decoded.email } });
+  } catch (error) {
+    res.status(401).send("Token inválido");
+  }
+});
+
+app.listen(5000, () => console.log("Servidor en http://localhost:5000"));
+
