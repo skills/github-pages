@@ -1,0 +1,50 @@
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { FaTwitter, FaDiscord, FaTelegram } from "react-icons/fa";
+import { useCallback } from "react";
+import debounce from "lodash.debounce";
+
+export default function ZoomerWebsite() {
+  const [wallet, setWallet] = useState("");
+
+  const handleWalletChange = useCallback(
+    debounce((value) => setWallet(value), 300),
+    []
+  );
+
+  return (
+    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4">
+      <h1 className="text-5xl font-bold text-neon-green mb-6">ZOOMER (ZMR)</h1>
+      <p className="text-lg text-center max-w-2xl mb-8">
+        La memecoin más explosiva en Solana. Hiperactiva, irreverente y lista para dominar el mercado.
+      </p>
+      <Card className="bg-gray-900 p-6 rounded-2xl shadow-lg w-full max-w-md text-center">
+        <CardContent>
+          <h2 className="text-xl font-semibold mb-4">Únete a la Revolución Zoomer</h2>
+          <Input 
+            className="mb-4" 
+            placeholder="Ingresa tu wallet para airdrop" 
+            value={wallet} 
+            onChange={(e) => handleWalletChange(e.target.value)} 
+          />
+          <Button className="w-full bg-neon-green text-black font-bold py-2 rounded-xl hover:bg-green-400">
+            Reclamar Airdrop
+          </Button>
+        </CardContent>
+      </Card>
+      <div className="flex space-x-6 mt-8">
+        <a href="https://twitter.com/zoomercoin" target="_blank" rel="noopener noreferrer" className="text-neon-green text-3xl hover:text-green-400">
+          <FaTwitter />
+        </a>
+        <a href="https://discord.gg/zoomer" target="_blank" rel="noopener noreferrer" className="text-neon-green text-3xl hover:text-green-400">
+          <FaDiscord />
+        </a>
+        <a href="https://t.me/zoomercoin" target="_blank" rel="noopener noreferrer" className="text-neon-green text-3xl hover:text-green-400">
+          <FaTelegram />
+        </a>
+      </div>
+    </div>
+  );
+}
