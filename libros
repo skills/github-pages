@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Mejores Libros de Emprendimiento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .book {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .book img {
+            max-width: 100px;
+            margin-right: 20px;
+        }
+        .book a {
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Los Mejores Libros de Emprendimiento</h1>
+        
+        <div class="book">
+            <img src="https://tse1.mm.bing.net/th?id=OIP.uOYaHA0pxqYnQ-UysawJqQHaLS&pid=Api" alt="El método Lean Startup">
+            <div>
+                <h2>El método Lean Startup</h2>
+                <p>Autor: Eric Ries</p>
+                <a href="https://www.thepowermba.com/es/blog/los-9-mejores-libros-para-emprendedores" target="_blank">Comprar aquí</a>
+            </div>
+        </div>
+
+        <div class="book">
+            <img src="https://tse2.mm.bing.net/th?id=OIP.nUYG1zRR7A4BCkj4Ml3shQHaLN&pid=Api" alt="De cero a uno">
+            <div>
+                <h2>De cero a uno</h2>
+                <p>Autor: Peter Thiel</p>
+                <a href="https://www.thepowermba.com/es/blog/los-9-mejores-libros-para-emprendedores" target="_blank">Comprar aquí</a>
+            </div>
+        </div>
+        
+        <div class="book">
+            <img src="https://tse4.mm.bing.net/th?id=OIP.-9r_zYJhHdccOKzDGJ2mugHaLd&pid=Api" alt="La estrategia del océano azul">
+            <div>
+                <h2>La estrategia del océano azul</h2>
+                <p>Autor: W. Chan Kim y Renée Mauborgne</p>
+                <a href="https://www.thepowermba.com/es/blog/los-9-mejores-libros-para-emprendedores" target="_blank">Comprar aquí</a>
+            </div>
+        </div>
+        
+        <div class="book">
+            <img src="https://tse3.mm.bing.net/th?id=OIP.7lXw0mBccdFjZGKo8O4Z8gHaLQ&pid=Api" alt="El arte de empezar 2.0">
+            <div>
+                <h2>El arte de empezar 2.0</h2>
+                <p>Autor: Guy Kawasaki</p>
+                <a href="https://emprendedores.es/casos-de-exito/10-libros-emprendedor-de-exito/" target="_blank">Comprar aquí</a>
+            </div>
+        </div>
+        
+        <div class="book">
+            <img src="https://tse3.mm.bing.net/th?id=OIP.Tx8BFhKZP1gGeBoP-2hJegHaMO&pid=Api" alt="Padre rico, padre pobre">
+            <div>
+                <h2>Padre rico, padre pobre</h2>
+                <p>Autor: Robert T. Kiyosaki</p>
+                <a href="https://ayudatpymes.com/gestron/los-10-mejores-libros-para-emprendedores/" target="_blank">Comprar aquí</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
