@@ -1,0 +1,196 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Valentín</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-image: url('https://www.publicdomainpictures.net/pictures/320000/velka/flower-pattern-pink.jpg'); /* Fondo floral */
+            background-size: cover;
+            background-position: center;
+            color: #b30000;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            display: none;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            margin: auto;
+            transition: all 0.3s ease;
+        }
+        .password-box {
+            background-color: rgba(255, 240, 245, 0.9);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            margin: auto;
+            transition: all 0.3s ease;
+        }
+        .password-box h2 {
+            font-size: 24px;
+            color: #d50000;
+            margin-bottom: 20px;
+        }
+        .menu {
+            margin-top: 20px;
+        }
+        button {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            cursor: pointer;
+            border-radius: 25px;
+            margin: 10px;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #cc0000;
+        }
+        input {
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #ff4d4d;
+            font-size: 16px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        #response {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #b30000;
+        }
+        #poem p, #valentine p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #d50000;
+        }
+        h1 {
+            font-size: 36px;
+            color: #ff3366;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        h2 {
+            font-size: 28px;
+            color: #ff6699;
+            margin-bottom: 10px;
+        }
+        
+        /* Media Queries para Responsividad */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 28px;
+            }
+            h2 {
+                font-size: 24px;
+            }
+            .password-box, .container {
+                padding: 15px;
+                width: 90%;
+            }
+            button {
+                padding: 10px 20px;
+                font-size: 16px;
+            }
+            input {
+                font-size: 14px;
+            }
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 24px;
+            }
+            h2 {
+                font-size: 22px;
+            }
+            .password-box, .container {
+                padding: 10px;
+                width: 95%;
+            }
+            button {
+                padding: 8px 18px;
+                font-size: 14px;
+            }
+            input {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <audio autoplay loop>
+        <source src="https://www.myinstants.com/media/sounds/arullo-de-estrellas.mp3" type="audio/mpeg">
+    </audio>
+    
+    <div class="password-box" id="passwordPrompt">
+        <h2>Ingresa la contraseña para continuar</h2>
+        <input type="password" id="passwordInput" placeholder="Contraseña">
+        <button onclick="checkPassword()">Ingresar</button>
+    </div>
+    
+    <div id="content" class="container">
+        <h1>Bienvenida, Princesa 💖</h1>
+        <p>Te he preparado algo especial con mucho amor. ❤️</p>
+        <div class="menu">
+            <button onclick="showPoem()">📜 </button>
+            <button onclick="showValentine()">💌</button>
+        </div>
+        <div id="poem" style="display: none;">
+            <p>Rosas son rojas, violetas son azules,<br>
+            Eres mi sueño, mi sol y mis nubes.<br>
+            Cada día contigo es un regalo sin fin,<br>
+            ¿Me dejas ser tu Valentín? 💕</p>
+        </div>
+        <div id="valentine" style="display: none;">
+            <h2>Una Pregunta Especial</h2>
+            <p>Princesa, ¿quieres ser mi San Valentín? 💘</p>
+            <button onclick="showResponse('¡Sabía que dirías que sí! ❤️')">Sí</button>
+            <button onclick="showResponse('No importa, seguiré intentándolo. 💘')">No</button>
+        </div>
+        <div id="response"></div>
+    </div>
+    
+    <script>
+        function checkPassword() {
+            let password = document.getElementById("passwordInput").value;
+            if (password === "210125") {
+                document.getElementById("content").style.display = "block";
+                document.getElementById("passwordPrompt").style.display = "none";
+            } else {
+                alert("Contraseña incorrecta, inténtalo de nuevo.");
+            }
+        }
+        
+        function showPoem() {
+            document.getElementById("poem").style.display = "block";
+            document.getElementById("valentine").style.display = "none";
+            document.getElementById("response").innerHTML = "";
+        }
+        
+        function showValentine() {
+            document.getElementById("valentine").style.display = "block";
+            document.getElementById("poem").style.display = "none";
+            document.getElementById("response").innerHTML = "";
+        }
+        
+        function showResponse(message) {
+            document.getElementById("response").innerHTML = message;
+        }
+    </script>
+</body>
+</html>
