@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres Ser Mi San Valentín?</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <div class="container">
+        <div class="invitacion">
+            <img src="https://example.com/hello-kitty.png" alt="Hello Kitty" class="kitty-img">
+            <h1>¿Quieres ser mi San Valentín?</h1>
+            <button id="aceptarBtn">Aceptar</button>
+            <p id="mensaje"></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('aceptarBtn').onclick = function() {
+            document.getElementById('mensaje').innerText = '¡Yo sabía que querías!';
+        };
+    </script>
+</body>/* estilos.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4c6e4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.invitacion h1 {
+    color: #ff66b2;
+    font-size: 36px;
+    margin: 20px 0;
+}
+
+button {
+    background-color: #ff66b2;
+    color: white;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #ff3399;
+}
+
+.kitty-img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+#mensaje {
+    font-size: 20px;
+    color: #ff66b2;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+</html>
