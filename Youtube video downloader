@@ -1,0 +1,90 @@
+YOUTUBE_API_KEY=YOUR_YOUTUBE_API_KEY
+const express = require("express");
+const axios = require("axios");
+const cors = require("cors");
+require("dotenv").config();
+
+const app = express();
+app.use(cors());
+
+const API_KEY = process.env.YOUTUBE_API_KEY;
+
+app.get("/video-info", async (req, res) => {
+    const videoId = req.query.videoId;
+    if (!videoId) {
+        return res.status(400).json({ error: "No video ID provided" });
+    }
+
+    try {
+        const apiUrl = `https://www.googleapis.com/youtube/v3/videos?id=${videoId}&key=${API_KEY}&part=snippet`;
+        const response = await axios.get(apiUrl);
+
+        if (!response.data.items.length) {
+            return res.status(404).json({ error: "Video not found" });
+        }
+
+        const video = response.data.items[0].snippet;
+        res.json({
+            title: video.title,
+            thumbnail: video.thumbnails.high.url,
+            description: video.description,
+        });
+    } catch (error) {
+        res.status(500).json({ error: "Error fetching video info" });
+    }
+});
+
+const PORT = 5000;
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+npm init -y
+npm install express axios cors dotenv
+function fetchVideoInfo() {
+    let url = document.getElementById("videoUrl").value;
+    let videoId = extractVideoID(url);
+
+    if (!videoId) {
+        alert("Invalid YouTube URL!");
+        return;
+    }
+
+    fetch(`http://localhost:5000/video-info?videoId=${videoId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+                return;
+            }
+            document.getElementById("title").innerText = data.title;
+            document.getElementById("thumbnail").src = data.thumbnail;
+            document.getElementById("description").innerText = data.description;
+            document.getElementById("videoDetails").classList.remove("hidden");
+        })
+        .catch(error => console.error("Error fetching video info:", error));
+}
+
+function extractVideoID(url) {
+    let match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:.*v=|.*\/)([^&\n?#]+))/);
+    return match ? match[1] : null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Info</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>YouTube Video Info</h1>
+        <input type="text" id="videoUrl" placeholder="Enter YouTube Video URL">
+        <button onclick="fetchVideoInfo()">Get Video Info</button>
+        <div id="videoDetails" class="hidden">
+            <h2 id="title"></h2>
+            <img id="thumbnail" alt="Thumbnail">
+            <p id="description"></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
