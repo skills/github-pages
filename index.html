@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bán Hải Sản Bình Thuận</title>
+    <style>
+    
+    /* Toàn bộ trang */
+    body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Header */
+        header {
+            background-color: #2a3d55;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        /* Menu điều hướng */
+        nav {
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 1.1em;
+        }
+
+        /* Phần sản phẩm */
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .product {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 10px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .product img {
+            width: 100%;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .product h3 {
+            font-size: 1.5em;
+            color: #333;
+        }
+ 
+        /* Footer */
+        footer {
+            background-color: #2a3d55;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body> 
+<header>
+    <h1>Hải Sản Bình Thuận</h1>
+    <p>Chuyên cung cấp hải sản tươi ngon trực tiếp từ Bình Thuận</p>
+</header>
+
+
+
+<div class="product-container">
+    <!-- Sản phẩm 1 -->
+    <div class="product">
+        <img src="https://img.vinanet.vn/zoom/500/Uploaded/thuthuy/2017_01_11/cua-bien_PFWS.png" alt="Sản phẩm 1" width="400" height="200">
+        <div class="product-info">
+            <h3>Cua Biển Tươi</h3>
+            <p>Cua biển tự nhiên ở nước ta có giá không quá đắt so với các loại hải sản khác, hàm lượng dinh dưỡng cao và không hề thua kém các loại cua nhập khẩu. Tuy nhiên, cách lựa chọn cua như thế nào cho nhiều gạch chắc thịt.</p>
+            <p class="price">200,000 VND/kg</p>
+            <button onclick="addToCart('Cua Biển Tươi', 200000)">Thêm vào giỏ</button>
+        </div>
+    </div>
+
+    <!-- Sản phẩm 2 -->
+    <div class="product">
+        <img src="https://www.nhahangquangon.com/wp-content/uploads/2020/05/tom-alaska.png" alt="Sản phẩm 2">
+        <div class="product-info">
+            <h3>Tôm Hùm Bình Thuận</h3>
+            <p>Tôm hùm chất lượng cao, thịt chắc ngọt, rất thích hợp cho các bữa tiệc.</p>
+            <p class="price">1,500,000 VND/kg</p>
+            <button onclick="addToCart('Tôm Hùm Bình Thuận', 1500000)">Thêm vào giỏ</button>
+        </div>
+    </div>
+
+    <!-- Sản phẩm 2 -->
+    <div class="product">
+        <img src="https://haisanquangninh.vn/wp-content/uploads/2021/09/IMG_2138-800x600.jpg" alt="Sản phẩm 2">
+        <div class="product-info">
+            <h3>Cua Hoàng Đế</h3>
+            <p>Cua Hoàng Đế chất lượng cao, thịt chắc ngọt, rất thích hợp cho các bữa tiệc.</p>
+            <p class="price">2.000.000 VND/kg</p>
+            <button onclick="addToCart('Tôm Hùm Bình Thuận', 2000000)">Thêm vào giỏ</button>
+        </div>
+    </div>
+
+    <!-- Sản phẩm 3 -->
+    <div class="product">
+        <img src="https://thegioifishing.com/application/upload/new/kinh-nghiem-cau-ca-mu-01.jpg" alt="Sản phẩm 3">
+        <div class="product-info">
+            <h3>Cá Mú Tươi</h3>
+            <p>Cá mú tươi, thịt ngọt, có thể chế biến nhiều món ăn hấp dẫn.</p>
+            <p class="price">300,000 VND/kg</p>
+            <button onclick="addToCart('Cá Mú Tươi', 300000)">Thêm vào giỏ</button>
+        </div>
+    </div>
+
+    <div class="product-container">
+        <!-- Sản phẩm 1 -->
+        <div class="product">
+            <img src="https://file.hstatic.net/200000325181/file/ca_nuc_bong_2_01e9558990c446968738ecf22b46a66b_grande.jpg" alt="Sản phẩm 1" width="400" height="200">
+            <div class="product-info">
+                <h3>Cá Nục</h3>
+                <p>Tươi ngon, được nuôi trồng và đánh bắt từ biển Bình Thuận.</p>
+                <p class="price">150.000 VND/kg</p>
+                <button onclick="addToCart('Cua Biển Tươi', 200000)">Thêm vào giỏ</button>
+            </div>
+        </div>
+
+         <!-- Sản phẩm 2 -->
+    <div class="product">
+        <img src="https://haisanxanh.com/uploads/images/oc-mong-tay.jpg" alt="Sản phẩm 2" with="400" height="200">
+        <div class="product-info">
+            <h3>Ốc Móng Tay</h3>
+            <p>Ốc móng tay: Phần thịt ốc móng tay chúa đầy ụ bên dưới lớp vỏ, dày, ngọt, giòn và dai, cung cấp nhiều dưỡng chất tốt cho sức khỏe như canxi, kẽm, sắt, magie,... </p>
+            <p class="price">100.000 VND/kg</p>
+            <button onclick="addToCart('Tôm Hùm Bình Thuận', 1500000)">Thêm vào giỏ</button>
+        </div>
+    </div>
+
+    <!-- Sản phẩm 2 -->
+    <div class="product">
+        <img src="https://bactom.com/wp-content/uploads/2023/06/166062769_5520173284667161_6856893389110493704_n.jpg" alt="Sản phẩm 2" width="400" height="200">
+        <div class="product-info">
+            <h3>Cá Chim Biển</h3>
+            <p>Cá chim biển là một trong những loài hải sản có hương vị thơm ngon và giàu chất dinh dưỡng nhất nước ta, thường sống ở các vùng nước mặn. .</p>
+            <p class="price">200.000 VND/kg</p>
+            <button onclick="addToCart('Tôm Hùm Bình Thuận', 200000)">Thêm vào giỏ</button>
+        </div>
+    </div>
+
+    <!-- Sản phẩm 2 -->
+    <div class="product">
+        <img src="https://bienvanguoi.wordpress.com/wp-content/uploads/2012/11/mantis-shrimp-live.jpg" alt="Sản phẩm 2">
+        <div class="product-info">
+            <h3>Tôm Tít</h3>
+            <p>Tôm tích là một trong những loại hải sản được ưa chuộng bởi thịt dai, chắc, ngọt, có thể chế biến thành nhiều món ăn ngon, hấp dẫn.</p>
+            <p class="price">350.000 VND/kg</p>
+            <button onclick="addToCart('Tôm Hùm Bình Thuận', 1500000)">Thêm vào giỏ</button>
+        </div>
+    </div>
+
+    <div class="product-container">
+        <!-- Sản phẩm 1 -->
+        <div class="product">
+            <img src="https://haisanquangninh.vn/wp-content/uploads/2021/09/img_2497_ac7dc5b255164bc88316f678859a5384_master.jpg" alt="Sản phẩm 1" width="400" height="200">
+            <div class="product-info">
+                <h3>ốc Hương</h3>
+                <p>Ốc hương là một loài ốc biển, thường được tìm thấy ở các vùng biển ven bờ, đặc biệt là ở các khu vực như miền Trung và miền Nam Việt Nam. </p>
+                <p class="price">500,000 VND/kg</p>
+                <button onclick="addToCart('Cua Biển Tươi', 200000)">Thêm vào giỏ</button>
+            </div>
+        </div>
+
+         <!-- Sản phẩm 2 -->
+        <div class="product">
+        <img src="https://haisanthanhthien.com/images/thumbs/2021/01/oc-voi-voi.jpg" alt="Sản phẩm 2" width="400" height="200">
+        <div class="product-info">
+            <h3>Ốc Vòi Voi</h3>
+            <p>Ốc Vòi Voi thực phẩm được thiên nhiên ban tặng của vùng biển tại Canada. Là một trong những loại ốc được đánh giá lớn nhất thế giới và chứa nhiều dưỡng chất cho sức khỏe..</p>
+            <p class="price">1,000,000 VND/kg</p>
+            <button onclick="addToCart('Tôm Hùm Bình Thuận', 1500000)">Thêm vào giỏ</button>
+        </div>
+    </div>
+
+     <!-- Sản phẩm 2 -->
+     <div class="product">
+        <img src="https://onggiau.com.vn/wp-content/uploads/2024/07/image-69.jpg" alt="Sản phẩm 2" width="400" height="200">
+        <div class="product-info">
+            <h3>Ốc Giác Vàng</h3>
+            <p>Ốc giác vàng được biết đến là loại hải sản mang vị ngọt, giòn rất đặc trưng. Với hương thơm tự nhiên, những món ăn từ ốc luôn kích thích vị giác và hấp dẫn người dùng. .</p>
+            <p class="price">900,000 VND/kg</p>
+            <button onclick="addToCart('Tôm Hùm Bình Thuận', 1500000)">Thêm vào giỏ</button>
+        </div>
+    </div>
+
+     <!-- Sản phẩm 2 -->
+     <div class="product">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0O5LcJFqW-ObH5wG3XUxq2V1nCVY2EQxKxg&s" alt="Sản phẩm 2" width="400" height="200">
+        <div class="product-info">
+            <h3>Sò Huyết</h3>
+            <p>Sò huyết là một loại hải sản có vị ngọt và tính mặn của biển nên rất phù hợp để chế biến nhiều món ăn. Ngoài ra, với hàm lượng dinh dưỡng cao, sò huyết còn có tác dụng bổ huyết, tốt cho những người bị thiếu máu..</p>
+            <p class="price">250,000 VND/kg</p>
+            <button onclick="addToCart('Tôm Hùm Bình Thuận', 1500000)">Thêm vào giỏ</button>
+        </div>
+    </div>
+ 
+</div>
+
+<footer>
+    <p>&copy; 2025 Hải Sản Bình Thuận | <a href="mailto:info@haisanbinhthuan.com" style="color: white;">info@haisanbinhthuan.com</a></p>
+</footer>
+
+
+
+</html>>
