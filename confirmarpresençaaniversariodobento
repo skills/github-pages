@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação de Presença - João Bento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #fff8dc;
+            color: #333;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background: #ffcc00;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #ff5733;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #e64a19;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Bem-vindo à Confirmação de Presença do Aniversário de João Bento!</h2>
+        <p>🎉 3 anos do João Bento! Confirme sua presença abaixo 🎈</p>
+        <form id="confirmForm" onsubmit="return confirmarPresenca()">
+            <input type="text" id="nome" placeholder="Seu Nome" required>
+            <input type="text" id="acompanhantes" placeholder="Quem vai mais além de você?">
+            <button type="submit">Confirmar Presença</button>
+        </form>
+    </div>
+    
+    <script>
+        function confirmarPresenca() {
+            const nome = document.getElementById("nome").value;
+            const acompanhantes = document.getElementById("acompanhantes").value;
+            
+            localStorage.setItem("nome", nome);
+            localStorage.setItem("acompanhantes", acompanhantes);
+            
+            window.location.href = "agradecimento.html";
+            return false;
+        }
+    </script>
+</body>
+</html>
+
+<!-- agradecimento.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obrigado pela Confirmação!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #fff8dc;
+            color: #333;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background: #ffcc00;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🎉 Muito obrigado pela sua confirmação! 🎈</h2>
+        <p>Estamos contando com você para comemorar essa data muito especial! 🥳</p>
+        <p>📍 O local da festa será na Pizzaria dos Heróis</p>
+        <p>📌 Av. do Turismo, 1313 - Ponta Negra, Manaus</p>
+    </div>
+</body>
+</html>
