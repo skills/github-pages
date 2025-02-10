@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Puedo ser tu San Valentín?</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>¡Atrapa los tulipanes blancos! 🌷</h1>
+        <p>Debes atrapar 10 tulipanes para ver la sorpresa.</p>
+        
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+
+        <p class="counter">Tulipanes atrapados: <span id="score">0</span>/10</p>
+        
+        <div id="game-area"></div>
+    </div>
+
+    <canvas id="particles"></canvas>
+
+    <script src="script.js"></script>
+</body>
+</html>
