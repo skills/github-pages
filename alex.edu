@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ffecd2, #fcb69f);
+            color: #333;
+            text-align: center;
+            padding: 50px;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            position: relative;
+        }
+        h1 {
+            color: #ff7e5f;
+        }
+        p {
+            font-size: 20px;
+        }
+        .button {
+            background-color: #ff7e5f;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #ff6b4e;
+        }
+        .button-no {
+            background-color: #ccc;
+            color: #333;
+            position: absolute;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .message {
+            display: none;
+            font-size: 24px;
+            color: #ff7e5f;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        function moveButton() {
+            const button = document.getElementById('button-no');
+            button.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+            button.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+        }
+
+        function showMessage() {
+            const message = document.getElementById('message');
+            message.style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>¡Hola!</h1>
+        <p>Me gustaría invitarte a salir este jueves.</p>
+        <p>¿Te gustaría acompañarme en un día bonito?</p>
+        <button class="button" onclick="showMessage()">¡Sí, me encantaría!</button>
+        <button id="button-no" class="button-no" onmouseover="moveButton()">No, gracias</button>
+        <div id="message" class="message">
+            <p>¡Yo sabía que ibas a aceptar! ❤️</p>
+        </div>
+    </div>
+</body>
+</html>
