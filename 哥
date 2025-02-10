@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小狗的专属空间</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to bottom, #fff4f4, #fceaff, #e1f1ff);
+            font-family: 'Ma Shan Zheng', cursive;
+            text-align: center;
+            color: #6d3f5b;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+            border: 3px dashed #ffacc5;
+        }
+        h1 {
+            font-family: 'ZCOOL KuaiLe', cursive;
+            font-size: 28px;
+            color: #ff5e9e;
+        }
+        .sign-in {
+            font-size: 20px;
+            background: #ff94c2;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            color: white;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+        }
+        .sign-in:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px #ff5e9e;
+        }
+        .reward {
+            display: none;
+            font-size: 18px;
+            background: #ffc107;
+            padding: 10px;
+            margin-top: 15px;
+            border-radius: 10px;
+            animation: bounce 1s infinite;
+        }
+        .pixel-cat {
+            width: 50px;
+            height: 50px;
+            background: url('https://your-pixel-cat-url.png') no-repeat center/contain;
+            display: inline-block;
+            animation: shake 2s infinite alternate;
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0); }
+        }
+        @keyframes shake {
+            0% { transform: rotate(0); }
+            25% { transform: rotate(2deg); }
+            50% { transform: rotate(0); }
+            75% { transform: rotate(-2deg); }
+            100% { transform: rotate(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🐶 小狗的专属空间 🐾</h1>
+        <div class="pixel-cat"></div>
+        <button class="sign-in" onclick="getReward()">✨ 点击签到 ✨</button>
+        <div class="reward" id="rewardBox"></div>
+    </div>
+
+    <script>
+        function getReward() {
+            let rewards = ["🐾 可爱贴纸", "🍬 甜甜糖果", "🐶 小狗抱抱", "🎀 漂亮蝴蝶结"];
+            let randomReward = rewards[Math.floor(Math.random() * rewards.length)];
+            let rewardBox = document.getElementById("rewardBox");
+            rewardBox.innerText = "恭喜获得：" + randomReward + "！";
+            rewardBox.style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
