@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>إزالة خلفية الصور</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+      <h1 class="text-3xl font-bold text-center mb-8">أداة إزالة خلفية الصور</h1>
+      
+      <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="image-input">
+            اختر صورة
+          </label>
+          <input
+            type="file"
+            id="image-input"
+            accept="image/*"
+            class="w-full p-2 border rounded"
+          />
+        </div>
+
+        <div class="mb-4">
+          <button
+            id="remove-bg"
+            class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 disabled:bg-gray-400"
+            disabled
+          >
+            إزالة الخلفية
+          </button>
+        </div>
+
+        <div id="result" class="hidden">
+          <div class="mb-4">
+            <h3 class="text-lg font-semibold mb-2">النتيجة</h3>
+            <img id="result-image" class="w-full rounded" />
+          </div>
+          <button
+            id="download"
+            class="w-full bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600"
+          >
+            تحميل الصورة
+          </button>
+        </div>
+
+        <div id="loading" class="hidden">
+          <div class="text-center py-4">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto"></div>
+            <p class="mt-2">جاري المعالجة...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
