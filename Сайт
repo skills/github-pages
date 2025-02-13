@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Особистий сайт</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        header, footer { background-color: #333; color: white; padding: 10px; }
+        .container { padding: 20px; }
+        .carousel img { width: 100px; height: 100px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Особистий сайт</h1>
+    </header>
+    
+    <section class="container">
+        <h2>Фото</h2>
+        <img src="your-photo.jpg" alt="Моє фото" width="200">
+        <h3>Моє життєве кредо</h3>
+        <p>"Живи так, щоб не було соромно!"</p>
+        <h3>Google Карта</h3>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12..." width="600" height="450"></iframe>
+    </section>
+    
+    <section class="container">
+        <h2>Я в майбутньому</h2>
+        <img src="future-photo.jpg" alt="Майбутнє">
+        <h3>Моє відео</h3>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/your-video-id"></iframe>
+        <h3>Google Календар</h3>
+        <iframe src="https://calendar.google.com/calendar/embed?src=your-calendar-url" width="600" height="450"></iframe>
+    </section>
+    
+    <section class="container">
+        <h2>Мої захоплення</h2>
+        <h3>Карусель із фото</h3>
+        <div class="carousel">
+            <img src="hobby1.jpg" alt="Хобі 1">
+            <img src="hobby2.jpg" alt="Хобі 2">
+            <img src="hobby3.jpg" alt="Хобі 3">
+        </div>
+    </section>
+    
+    <footer>
+        <p>Контактний email: your-email@example.com</p>
+    </footer>
+</body>
+</html>
