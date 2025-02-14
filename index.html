@@ -1,0 +1,304 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Casque Anti-Bruit Intellegient</title>
+        <style>
+            body{ 
+                margin: 0;
+                font-family:"Outfit" , sans-serif;
+                font-size: 17px;
+
+            }
+            
+            header, footer{
+                background-color: #333333;
+                color: whitesmoke;
+                padding: 15px 17px;
+                
+            }
+           
+            section {
+                background-color: #B0B0B0;
+                padding: 185px;
+               
+            }
+           
+            div {
+                background-color: whitesmoke;
+                padding:  185px;
+            }
+
+            header{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                
+            }
+
+            header h1 {
+                display: flex;
+                align-items: center; /* Centre verticalement l’image et le texte */
+                gap: 10px; /* Ajoute un espacement entre le texte et l'image */
+            }
+
+            header h1 img {
+                height: 50px; /* Ajuste la taille du logo */
+                width: auto; /* Garde le ratio de l’image */
+            }
+
+            
+            header ul{
+                list-style: none;
+            
+            }
+
+            
+            header ul li{
+
+                display : inline-block;
+                padding: 10px 30px;
+                /*border: solid 2px rgb(42, 41, 255);*/
+                cursor: pointer;
+                transition: background-color 0.3s ease, color 0.3s ease;
+
+            }
+              
+            header ul li:hover{
+                background-color:#B0B0B0;
+                color: white;
+                border-radius: 5px;
+            
+            }
+
+            header ul li a {
+                text-decoration: none; /* Supprime le soulignement */
+                color: white; /* Garde le texte en blanc */
+                font-weight: bold;
+            }
+
+            header ul li a:visited {
+                color: white; /* Garde la couleur blanche après avoir été cliqué */
+            }
+
+            header ul li a:hover {
+                color: #B0B0B0; /* Change de couleur au survol */
+            }
+
+            header ul li a:active {
+                color: white; /* Empêche le changement de couleur quand on clique */
+            }
+
+
+            div.premier{
+                transform: translate(-150px, 50px);
+                max-width: 600px
+                
+            }
+            
+
+            img.casque {
+                transform: translate(800px , -400px);
+                border-radius: none;
+                border: none;
+            }
+            
+            img.montre{
+
+                transform: translate(800px , -500px);
+                border-radius: none ;
+                border: none;
+                margin: none;
+            }
+
+            section.deux p{
+
+                color: rgb(0, 0, 0);
+                max-width: 600px;
+                transform: translateX(-150px);
+            }
+
+            div.trois {
+
+                color: black;
+            max-width: 600px;
+            margin: auto; 
+            display: flex;
+            justify-content: top; 
+            align-items: center; 
+            text-align: center;
+            height: 150px; 
+            margin-top: -350px;
+            }
+
+            section.quatre {
+
+               display: flex;
+               justify-content: center;
+               align-items: center;
+               
+            }
+
+            html {
+                    scroll-behavior: smooth;
+                    scroll-padding-top: 150px;
+                }   
+          
+                footer {
+                background-color: #222; /* Fond plus foncé */
+                color: white;
+                padding: 30px 20px;
+                text-align: center;
+                font-size: 16px;
+                }
+
+                footer p {
+                    margin: 10px 0;
+                    font-weight: bold;
+                }
+
+                footer ul {
+                    list-style: none;
+                    padding: 0;
+                    margin-top: 15px;
+                    display: flex;
+                    justify-content: center;
+                    gap: 20px; /* Espacement entre les liens */
+                }
+
+                footer ul li {
+                    display: inline;
+                }
+
+                footer ul li a {
+                    text-decoration: none;
+                    color: #B0B0B0;
+                    font-weight: bold;
+                    transition: color 0.3s ease;
+                }
+
+                footer ul li a:hover {
+                    color: white;
+                }
+
+                /* Ajout d'icônes pour les liens */
+                footer ul li a::before {
+                    content: "🔗"; /* Icône */
+                    margin-right: 5px;
+                }
+
+            
+        </style>
+    </head>
+    <body>
+
+    <header>
+        <h1> NIVUX
+            <img src="c:\Users\e-athevaku\Downloads\upscalemedia-transformed.jpeg" alt="logo " width="50px">
+                
+           
+            
+        </h1>
+        <ul>     
+            <li> <a href="#for-who">For Who</a> ?</li>
+            <li> <a href="#about-product"> About the Product</a> </li>
+            <li> <a href="#how"> How</a>  </li>
+            <li> <a href="Advertissement"> Product</a></li>
+
+        </ul>
+
+    </header>
+
+    <div id="for-who" class="premier">
+      
+
+        <p> This website was created to present our second-year project as students in the BUT GEII 
+        program of Cergy, at the Sarcelles campus. 
+        <br><br>
+        <strong>Our project: An intelligent noise-canceling headset.</strong>
+        <br> <br>
+        This project aims to help people with concentration and attention disorders, as well as those 
+        who experience stress due to their environment.
+        <br><br>
+        We will briefly explain our development idea to explore its full potential 
+        and see how all our ideas could be realized.
+        <br><br>
+        
+      
+
+         </p>
+    </div>
+        
+          <img class="casque" src="https://cdn.korg.com/fr/products/upload/d135ec3d44c1f233c07070734129f226.jpg" alt="casque" height="300">
+
+    <section id="about-product" class="deux">
+        <p>
+            Our project consists of linking a heart rate sensor with a noise-canceling headset.
+            <br><br>
+            By this, I mean a heart rate sensor worn on the wrist, which will be connected to the headset via Bluetooth connected grace ESP32.
+            <br><br>
+            The headset will then receive the user's data and react accordingly: the noise cancellation will be influenced by the heartbeats.
+            <br><br>
+            A program will adjust the noise cancellation level by increasing or decreasing it based on the heart rate.
+            <br>
+
+
+        </p>
+
+        
+       
+
+    </section>
+
+    <img class="montre" src="depositphotos_69206639-stock-illustration-smart-watch-with-health-app.jpg" alt="montrecoeur" height="400">
+    
+    <div id="how" class="trois">
+
+    <p>
+        We came up with the idea of the smart headset by combining the concept of a noise-canceling 
+        <br>
+        headset and making it intelligent, to help people with concentration disorders and stress bursts
+        <br>
+        A traditional noise-canceling headset is manually adjustable over a short frequency range.
+        <br>
+        Our project aims to extend this range significantly and have it adjust automatically based 
+        <br>
+        on the wearer's BPM from the smartwatch.  This will allow adaptation to any situation the wearer may face."
+ 
+
+    </p>
+       
+    </div>
+
+
+    <section id="Advertissement" class="quatre">
+        
+            <h1> <strong>* PROMOTION VIDEO TO ADD *</strong></h1>
+        
+      
+        <video width="640" height="360" controls>
+
+        <source src="c:\Users\e-athevaku\Downloads\Découvrez le casque sans fil à réduction de bruit WH-1000XM4 Sony.mp4" type="video/mp4">
+     
+        </video>
+
+    </section> 
+    
+    
+    <footer>
+        
+        <p>2025 © 2024 NIVUX - Students GEII Sarcelle F.A  AGS</p>
+        <ul>
+            <li><a href="https://www.freeprivacypolicy.com/live/eda7c9a9-3f3d-4af6-ba78-e066929505eb">Privacy Policy</a></li>
+            <li><a href="https://www.termsfeed.com/live/d57af2c2-093b-4490-82de-c48e1d055e3c">Terms of Service</a></li>
+            <li><a href="https://mycy.cyu.fr/">Support</a></li>
+        </ul>
+
+    </footer>
+
+    </body>
+    </html>
