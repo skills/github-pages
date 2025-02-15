@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Листівка з любов'ю</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffe6e6;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .button:hover {
+            background-color: #cc0000;
+        }
+        .card {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .heart {
+            font-size: 50px;
+            color: #ff4d4d;
+        }
+        .close {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #ccc;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .close:hover {
+            background-color: #999;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="button" onclick="showCard()">Відкрити листівку</button>
+
+    <div class="card" id="loveCard">
+        <div class="heart">❤️</div>
+        <h2>Я тебе люблю!</h2>
+        <button class="close" onclick="closeCard()">Закрити</button>
+    </div>
+
+    <script>
+        function showCard() {
+            document.getElementById("loveCard").style.display = "block";
+        }
+        function closeCard() {
+            document.getElementById("loveCard").style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
