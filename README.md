@@ -1,75 +1,49 @@
-<header>
+Professional Summary
 
-<!--
-  <<< Author notes: Course header >>>
-  Include a 1280×640 image, course title in sentence case, and a concise description in emphasis.
-  In your repository settings: enable template repository, add your 1280×640 social image, auto delete head branches.
-  Add your open source license, GitHub uses MIT license.
--->
+Project (01): - HoTSoS Client: Amadeus
+Technologies: - ASP.Net Core, MVC, WebAPI, SQL server 2016 Duration: - November 2018 – March 2022
+Team Size: 12
 
-# GitHub Pages
+Project Description: - HotSOS was specifically designed for the hotel enterprise where managing multiple quality standards and brands is a challenge. Corporate managers’ work closely with MTech consultants to determine which templates to apply to which brands and the information is instantly available for new hotel users – thereby reducing setup time and ensuring consistency across the entire brand. Comparison of performance of different properties of a chain can be made in real- time. 
+Information on guest incidents, service orders, costs, labor, response times, and maintenance will be readily available providing an effective basis for analysis at both the unit and corporate levels. Reports will allow managers to manage by exception and focus on the hotels in need of
+most improvement.
 
-_Create a site or blog from your GitHub repositories with GitHub Pages._
+Roles and Responsibilities:
+•	Communication with Client Business Users and Application managers of different Markets for Change requests.
+•	Support the Operations Team to provide Solution to the incidents.
+•	Co-ordinate with the team in the quality assurance work needed to ensure Bug-free delivered product.
+•	Strictly follow design architecture to maintain the integrity of the Application Design.
+•	Client sends request in the form of Change Requirement. Then I work on Impact analysis and Estimation which needs to be approved by Change Control Board in order to be implemented in a Release.
+•	Providing post-implementation, application maintenance and enhancement.
+•	Working on large changes through Service desk Management tool SDM 12.9 and keeping the track of Workflow tasks in changes.
 
-</header>
+Project 02: -		XSP (Corporate Action) Client: -	BNY San Francisco.
+Technologies: - Asp.net Web, Console, SQL server 2012 Duration: -	Jan 2017- November 2018
+Team Size: 8
 
-<!--
-  <<< Author notes: Course start >>>
-  Include start button, a note about Actions minutes,
-  and tell the learner why they should take the course.
--->
+Project Description: - XSP provides a comprehensive set of workflows that help identify key data Discrepancies. We manage the event through a centralized, fully automated electronic diary, defining entitlements for all types of recognized corporate actions events. We link the decision- makers on all voluntary and optional actions while connecting the accounting entries for the entitlements generated from these events.
 
-## Welcome
+Roles and Responsibilities:
 
-With GitHub Pages, you can host project blogs, documentation, resumes, portfolios, or any other static content you'd like. Your GitHub repository can easily become its own website. In this course, we'll show you how to set up your own site or blog using GitHub Pages.
+•	Creating technical and functional Documentation on requirements.
+•	Managing of internal and external websites for applications.
+•	Working on large changes through Service desk Management tool like Jira.
+•	Designing, developing, testing, and debugging of the applications.
+ 
+•	Understanding and analyzing the client requirements.
+•	Delivering and implementing the projects as per scheduled milestones.
+•	Resolve Production issues in a timely manner to minimize impact.
+•	Providing post-implementation, application maintenance and enhancement.
+Project (03): - Sinequa Enterprise Search Client: - Atos France
+Technologies: - ASP.Net Core, MVC, Web API, PostgreSQL Duration: - Mar 2022 - Jan 2023.
+Team Size: 10
 
-- **Who is this for**: Beginners, students, project maintainers, small businesses.
-- **What you'll learn**: How to build a GitHub Pages site.
-- **What you'll build**: We'll build a simple GitHub Pages site with a blog. We'll use [Jekyll](https://jekyllrb.com), a static site generator.
-- **Prerequisites**: If you need to learn about branches, commits, and pull requests, take [Introduction to GitHub](https://github.com/skills/introduction-to-github) first.
-- **How long**: This course takes less than one hour to complete.
+Project Description: Sinequa Enterprise Search is a complete solution for the company's electronic Documents. It has a comprehensive architecture that allows the retrieval and Indexing of all text- based data regardless of how it is stored. Sinequa provides a fully integrated search and navigation platform. It is completely based on a DOT Net architecture, including new generation Indexing connectors, management of document access security, and a Web site with a rich and powerful user Interface. Almost all the enterprise content Management systems used globally in Atos are integrated with Sinequa Search.
 
-In this course, you will:
+Roles and Responsibilities:
 
-1. Enable GitHub Pages
-2. Configure your site
-3. Customize your home page
-4. Create a blog post
-5. Merge your pull request
-
-### How to start this course
-
-<!-- For start course, run in JavaScript:
-'https://github.com/new?' + new URLSearchParams({
-  template_owner: 'skills',
-  template_name: 'github-pages',
-  owner: '@me',
-  name: 'skills-github-pages',
-  description: 'My clone repository',
-  visibility: 'public',
-}).toString()
--->
-
-[![start-course](https://user-images.githubusercontent.com/1221423/235727646-4a590299-ffe5-480d-8cd5-8194ea184546.svg)](https://github.com/new?template_owner=skills&template_name=github-pages&owner=%40me&name=skills-github-pages&description=My+clone+repository&visibility=public)
-
-1. Right-click **Start course** and open the link in a new tab.
-2. In the new tab, most of the prompts will automatically fill in for you.
-   - For owner, choose your personal account or an organization to host the repository.
-   - We recommend creating a public repository, as private repositories will [use Actions minutes](https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions).
-   - Scroll down and click the **Create repository** button at the bottom of the form.
-3. After your new repository is created, wait about 20 seconds, then refresh the page. Follow the step-by-step instructions in the new repository's README.
-
-<footer>
-
-<!--
-  <<< Author notes: Footer >>>
-  Add a link to get support, GitHub status page, code of conduct, license link.
--->
-
----
-
-Get help: [Post in our discussion board](https://github.com/orgs/skills/discussions/categories/github-pages) &bull; [Review the GitHub status page](https://www.githubstatus.com/)
-
-&copy; 2023 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
-
-</footer>
+•	Designing, developing, testing, and debugging of the applications.
+•	Understanding and analyzing the client requirements.
+•	Resolve Production issues in a timely manner to minimize impact & generating reports.
+•	Creating technical and functional Documentation on requirements.
+•	Working on large changes through Service desk Management tool SDM 12.9 and keeping the track of Workflow tasks in changes.
