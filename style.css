@@ -1,0 +1,137 @@
+.titulo {
+    padding: 10px;
+    text-align: center;
+    color: #03A062;
+    font-size: 50px;
+}
+body {
+    background-color: black;
+    height: 100%;
+    width: 100%;
+}
+.personas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: minmax(100px, auto);
+    grid-gap: 10px;
+    margin: 100px;
+}
+.persona1 {
+    grid-column: 1;
+    grid-row: 1;
+    background-color: #141414;
+    padding: 75px;
+    border-radius: 4px;
+    color: white;
+    text-align: center;
+    box-shadow: 5px 5px white;
+    margin: 40px;
+    font-size: 25px;
+}
+.persona2 {
+    grid-column: 2;
+    grid-row: 1;
+    background-color: #141414;
+    padding: 75px;
+    border-radius: 4px;
+    color: white;
+    text-align: center;
+    box-shadow: 5px 5px white;
+    margin: 40px;
+    font-size: 25px;
+}
+.persona3 {
+    grid-column: 3;
+    grid-row: 1;
+    background-color: #141414;
+    padding: 75px;
+    border-radius: 4px;
+    color: white;
+    text-align: center;
+    box-shadow: 5px 5px white;
+    margin: 40px;
+    font-size: 25px;
+}
+.persona4 {
+    grid-column: 1;
+    grid-row: 2;
+    background-color: #141414;
+    padding: 75px;
+    border-radius: 4px;
+    color: white;
+    text-align: center;
+    box-shadow: 5px 5px white;
+    margin: 40px;
+    font-size: 25px;
+}
+.persona5 {
+    grid-column: 2;
+    grid-row: 2;
+    background-color: #141414;
+    padding: 75px;
+    border-radius: 4px;
+    color: white;
+    text-align: center;
+    box-shadow: 5px 5px white;
+    margin: 40px;
+    font-size: 25px;
+}
+.persona6 {
+    grid-column: 3;
+    grid-row: 2;
+    background-color: #141414;
+    padding: 75px;
+    border-radius: 4px;
+    color: white;
+    text-align: center;
+    box-shadow: 5px 5px white;
+    margin: 40px;
+    font-size: 25px;
+}
+.persona7 {
+    grid-column: 1;
+    grid-row: 3;
+    background-color: #141414;
+    padding: 75px;
+    border-radius: 4px;
+    color: white;
+    text-align: center;
+    box-shadow: 5px 5px white;
+    margin: 40px;
+    font-size: 25px;
+}
+.persona8 {
+    grid-column: 2;
+    grid-row: 3;
+    background-color: #141414;
+    padding: 75px;
+    border-radius: 4px;
+    color: white;
+    text-align: center;
+    box-shadow: 5px 5px white;
+    margin: 40px;
+    font-size: 25px;
+}
+.persona9 {
+    grid-column: 3;
+    grid-row: 3;
+    background-color: #141414;
+    padding: 75px;
+    border-radius: 4px;
+    color: white;
+    text-align: center;
+    box-shadow: 5px 5px white;
+    margin: 40px;
+    font-size: 25px;
+}
+
+@media (max-width: 1024px) {
+    .persona {
+        flex: 1 1 calc(50% - 20px);
+    }
+}
+@media (max-width: 768px) {
+    .persona {
+        flex: 1 1 100%;
+    }
+}
