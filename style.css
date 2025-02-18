@@ -124,6 +124,18 @@ body {
     margin: 40px;
     font-size: 25px;
 }
+.persona10 {
+    grid-column: 1;
+    grid-row: 4;
+    background-color: #141414;
+    padding: 75px;
+    border-radius: 4px;
+    color: white;
+    text-align: center;
+    box-shadow: 5px 5px white;
+    margin: 40px;
+    font-size: 25px;
+}
 
 @media (max-width: 1024px) {
     .persona {
