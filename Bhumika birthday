@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bhumika's Birthday Card</title>
+  <style>
+    body {
+      background-color: #ffeef7;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    .card {
+      margin: 50px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      max-width: 600px;
+    }
+    .btn {
+      background-color: #ff91c1;
+      color: white;
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: transform 0.2s;
+    }
+    .btn:hover {
+      transform: scale(1.1);
+      background-color: #ff6aa2;
+    }
+    .hidden {
+      display: none;
+      animation: fadeIn 1s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .celebration {
+      display: none;
+      font-size: 30px;
+      margin-top: 20px;
+      animation: pop 1s ease-in-out;
+    }
+    @keyframes pop {
+      0% { transform: scale(0); }
+      50% { transform: scale(1.5); }
+      100% { transform: scale(1); }
+    }
+    .postcard {
+      border: 2px dashed #ff6aa2;
+      padding: 20px;
+      margin-top: 20px;
+      background-color: #fff0f5;
+      border-radius: 10px;
+    }
+    .ribbon {
+      background-color: #ff91c1;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: background 0.3s;
+    }
+    .ribbon:hover {
+      background-color: #ff6aa2;
+    }
+  </style>
+</head>
+<body>
+  <div class="card" id="page1">
+    <h1>Pew pew kr dunga if open nhi kra toh 😤🎀</h1>
+    <button class="btn" onclick="openCard()">Open Me!</button>
+  </div>
+
+  <div class="card hidden" id="page2">
+    <h2>Happiest Birthday Dumbo! 💌</h2>
+    <p>"This Eren will always be there for her Mika"</p>
+    <p>- Yoursss Pikachuuu 🤭</p>
+    <button class="btn" onclick="nextPage()">Next Page</button>
+  </div>
+
+  <div class="card hidden" id="page3">
+    <p>Hellow Mika once again Happy Birthday from your Pikachuuu... I'm so far away missing you sm, sending wishes on thiss okii. Have a great day ahead and mujhe sari cute cute pictures share krna... I'll be waiting for that precious smile 🤭</p>
+    <div class="postcard">
+      <p>Aha And and one thing I love you so much and nazar na lage kisi ki bhi meri Mikasa ko mwahhh 🤭❤️🧿</p>
+    </div>
+    <button class="ribbon" onclick="showCelebration()">Close with Ribbon</button>
+  </div>
+
+  <div class="celebration" id="celebration">🎉🎊🥳 Happy Birthday Bhumika! 🥳🎊🎉</div>
+
+  <script>
+    function openCard() {
+      document.getElementById('page1').style.display = 'none';
+      document.getElementById('page2').style.display = 'block';
+    }
+    function nextPage() {
+      document.getElementById('page2').style.display = 'none';
+      document.getElementById('page3').style.display = 'block';
+    }
+    function showCelebration() {
+      document.getElementById('page3').style.display = 'none';
+      document.getElementById('celebration').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
