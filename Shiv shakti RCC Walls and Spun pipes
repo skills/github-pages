@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shiv Shakti RCC Walls and Spun Pipes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: linear-gradient(to right, #ff8c00, #ff4500);
+            color: white;
+            padding: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
+        .container {
+            margin: 20px auto;
+            width: 80%;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        .animate {
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .product {
+            display: inline-block;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #eee;
+            transition: transform 0.3s;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 40%;
+        }
+        .product:hover {
+            transform: scale(1.05);
+        }
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .info {
+            margin-top: 20px;
+            text-align: left;
+            padding: 20px;
+            background: #fff8dc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            margin-top: 20px;
+            background: #333;
+            color: white;
+            padding: 15px;
+            font-size: 16px;
+        }
+        .contact-form {
+            background: #444;
+            color: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+        .contact-form button {
+            background: #ff4500;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .contact-form button:hover {
+            background: #ff8c00;
+        }
+        .owner-section {
+            margin: 20px auto;
+            width: 80%;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>Shiv Shakti RCC Walls and Spun Pipes</header>
+    <div class="container animate">
+        <h2>Welcome to Shiv Shakti RCC Walls and Spun Pipes</h2>
+        <p>We are a trusted manufacturer of high-quality RCC walls and spun pipes, known for our commitment to durability and excellence.</p>
+        <p>We provide the best service in the area with free delivery and no-cost labor charges.</p>
+        <p>Our first branch was established in Gangayacha Ahir, and our second branch is located in Mastapur.</p>
+        <div class="product">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Concrete_Blocks.jpg/640px-Concrete_Blocks.jpg" alt="RCC Wall">
+            <h3>RCC Walls</h3>
+            <p>Our RCC walls are built to last, offering unmatched strength and reliability for construction projects.</p>
+        </div>
+        <div class="product">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Concrete_pipes.jpg/640px-Concrete_pipes.jpg" alt="Spun Pipes">
+            <h3>Spun Pipes</h3>
+            <p>We provide high-quality spun pipes suitable for drainage, irrigation, and industrial applications.</p>
+        </div>
+    </div>
+    <div class="owner-section">
+        <h2>Meet Our Owners</h2>
+        <p><strong>Vikram Yadav & Dinesh</strong></p>
+        <p>With years of experience in manufacturing and construction, they have established Shiv Shakti RCC Walls and Spun Pipes as a trusted name in the industry.</p>
+    </div>
+    <div class="container info">
+        <h2>Why Choose Us?</h2>
+        <ul>
+            <li>High-quality RCC products designed for durability.</li>
+            <li>Eco-friendly and cost-effective solutions.</li>
+            <li>Trusted by leading construction companies.</li>
+            <li>State-of-the-art manufacturing process ensuring superior strength.</li>
+            <li>Reliable supply and on-time delivery.</li>
+            <li>Free delivery and no-cost labor charges.</li>
+        </ul>
+    </div>
+    <footer>
+        <p>Locations: Gangayacha Ahir & Mastapur, Rewari, Haryana</p>
+        <p>Contact: +91 72069 04376, +91 94169 89854</p>
+        <div class="contact-form">
+            <h3>Contact Us</h3>
+            <form action="#" method="post">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <input type="text" name="phone" placeholder="Your Phone Number" required>
+                <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </footer>
+</body>
+</html>
