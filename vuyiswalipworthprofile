@@ -1,0 +1,116 @@
+from IPython.core.display import display, HTML
+
+html_code = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body { background-color: #f8f9fa; }
+    .contact-section { background-color: #ffffff; padding: 40px 0; }
+    .contact-info { text-align: center; margin-bottom: 30px; }
+    .contact-info i { font-size: 36px; margin-bottom: 10px; }
+    .contact-form { max-width: 600px; margin: 0 auto; }
+    .social-icons a { display: inline-block; margin: 0 10px; color: #495057; text-decoration: none; transition: color 0.3s ease-in-out; }
+    .social-icons a:hover { color: #007bff; }
+    .social-icons i { font-size: 20px; }
+    .hero-section { background-color: #343a40; color: #ffffff; padding: 20px 0; }
+    .skills-section, .project-section, .statistics-section, .contact-section { background-color: #ffffff; padding: 40px 0; }
+    .skills-section { background-color: #ffffff; padding: 80px 0; }
+    .feature { text-align: center; margin-bottom: 40px; }
+    .feature i { font-size: 50px; margin-bottom: 20px; }
+    .feature p { font-size: 18px; }
+    .project-card { margin-bottom: 30px; }
+    h2 { margin-bottom: 50px; }
+  </style>
+  <title>Data Scientist CV</title>
+</head>
+<body>
+
+<!-- Hero Section -->
+<section class="hero-section text-center text-white">
+  <div class="container">
+    <div>
+      <img src="vuyiswaluvuno.jpg" alt="Your Image" class="img-fluid mt-4 rounded-circle" style="width: 500px; height: 500px;">
+    </div>
+    <h1 class="display-4">Vuyiswa L. Luvuno</h1>
+    <p class="lead">Passionate Data Scientist | Turning data into actionable insights</p>
+    <div>
+      <a href="#" class="btn btn-light">Download Resume</a>
+    </div>
+    <hr>
+    <div class="social-icons">
+      <a href="#" class="text-white"><i class="linkedin.com/in/vuyiswa-luvuno-a731ab176"></i> LinkedIn</a>
+      <a href="#" class="text-white"><i class="fab fa-twitter"></i> Twitter</a>
+    </div>
+  </div>
+</section>
+
+<!-- Skills Section -->
+<section id="skills" class="skills-section text-center">
+  <div class="container">
+    <h2>Skills</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="feature">
+          <i class="fas fa-chart-bar"></i>
+          <p><strong>Data Analysis and Visualization:</strong> Pandas, Matplotlib, Seaborn.</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-cogs"></i>
+          <p><strong>Machine Learning:</strong> Development and deployment of ML models.</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-brain"></i>
+          <p><strong>Deep Learning:</strong> TensorFlow, neural networks.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="feature">
+          <i class="fas fa-cogs"></i>
+          <p><strong>MLOps:</strong> Deployment and automation of ML workflows.</p>
+        </div>
+        <div class="feature">
+          <i class="fab fa-cloud"></i>
+          <p><strong>AWS:</strong> Cloud computing and data management.</p>
+        </div>
+        <div class="feature">
+          <i class="fab fa-cubes"></i>
+          <p><strong>Big Data Analytics:</strong> Hands-on experience in large-scale data processing.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="contact-section text-center">
+  <div class="container">
+    <h2>Contact</h2>
+    <div class="contact-info">
+      <div class="row">
+        <div class="col-md-4"><i class="fas fa-envelope"></i><p>Email: vuyiswalll@icloud.com</p></div>
+        <div class="col-md-4"><i class="fas fa-phone"></i><p>Phone: +27-680-904-892</p></div>
+        <div class="col-md-4"><i class="fas fa-map-marker-alt"></i><p>Johannesburg, South Africa</p></div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <form>
+        <div class="mb-3"><label>Name</label><input type="text" class="form-control" required></div>
+        <div class="mb-3"><label>Email</label><input type="email" class="form-control" required></div>
+        <div class="mb-3"><label>Message</label><textarea class="form-control" required></textarea></div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</section> 
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+"""
+
+display(HTML(html_code))
