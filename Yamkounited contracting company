@@ -1,0 +1,146 @@
+# Preparing the HTML file content based on the code provided earlier
+
+html_content = """
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>السلامة والصحة المهنية - يامكو المتحدة للمقاولات</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+        }
+        nav {
+            background-color: #4CAF50;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+        .section {
+            padding: 20px;
+            margin: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+        }
+        .content-title {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        .content-description {
+            font-size: 1.2em;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>السلامة والصحة المهنية - يامكو المتحدة للمقاولات</h1>
+    </header>
+
+    <nav>
+        <a href="#work-permits">تصاريح العمل</a>
+        <a href="#tool-box">صندوق الأدوات</a>
+        <a href="#work-inspection">فحص الأعمال</a>
+        <a href="#contact">اتصل بنا</a>
+    </nav>
+
+    <section class="section" id="work-permits">
+        <h2 class="content-title">تصاريح العمل</h2>
+        <p class="content-description">
+            في هذا القسم يتم تحديد إجراءات إصدار تصاريح العمل اليومية لضمان السلامة في مواقع العمل.
+            <br>
+            <strong>يمكنك تقديم تصريح عمل جديد عبر النموذج التالي:</strong>
+        </p>
+        <form>
+            <label for="work-description">وصف العمل:</label><br>
+            <textarea id="work-description" rows="4" cols="50" placeholder="وصف العمل..."></textarea><br><br>
+            <label for="worker-name">اسم العامل:</label><br>
+            <input type="text" id="worker-name" name="worker-name"><br><br>
+            <input type="submit" value="إرسال التصريح">
+        </form>
+    </section>
+
+    <section class="section" id="tool-box">
+        <h2 class="content-title">صندوق الأدوات</h2>
+        <p class="content-description">
+            تأكد من فحص الأدوات يوميًا قبل استخدامها لضمان السلامة.
+            <br>
+            <strong>قم بتسجيل حالة الأدوات بعد الفحص:</strong>
+        </p>
+        <form>
+            <label for="tool-name">اسم الأداة:</label><br>
+            <input type="text" id="tool-name" name="tool-name"><br><br>
+            <label for="tool-condition">حالة الأداة:</label><br>
+            <select id="tool-condition" name="tool-condition">
+                <option value="صالح للاستخدام">صالح للاستخدام</option>
+                <option value="غير صالح للاستخدام">غير صالح للاستخدام</option>
+            </select><br><br>
+            <input type="submit" value="تسجيل الفحص">
+        </form>
+    </section>
+
+    <section class="section" id="work-inspection">
+        <h2 class="content-title">فحص الأعمال</h2>
+        <p class="content-description">
+            تأكد من فحص الأعمال لضمان تنفيذها وفقًا للمعايير المطلوبة.
+            <br>
+            <strong>قم بتسجيل ملاحظاتك حول الأعمال المنفذة:</strong>
+        </p>
+        <form>
+            <label for="inspection-notes">ملاحظات الفحص:</label><br>
+            <textarea id="inspection-notes" rows="4" cols="50" placeholder="أدخل الملاحظات..."></textarea><br><br>
+            <input type="submit" value="تسجيل الملاحظات">
+        </form>
+    </section>
+
+    <section class="section" id="contact">
+        <h2 class="content-title">اتصل بنا</h2>
+        <p class="content-description">
+            في حال كان لديك أي استفسار أو بحاجة إلى مساعدة، لا تتردد في الاتصال بنا.
+        </p>
+        <form>
+            <label for="name">الاسم:</label><br>
+            <input type="text" id="name" name="name"><br><br>
+            <label for="email">البريد الإلكتروني:</label><br>
+            <input type="email" id="email" name="email"><br><br>
+            <label for="message">الرسالة:</label><br>
+            <textarea id="message" rows="4" cols="50" placeholder="أدخل رسالتك..."></textarea><br><br>
+            <input type="submit" value="إرسال">
+        </form>
+    </section>
+
+    <footer>
+        <p>© 2025 يامكو المتحدة للمقاولات. جميع الحقوق محفوظة.</p>
+    </footer>
+</body>
+</html>
+"""
+
+# Saving the HTML content into a file
+file_path = '/mnt/data/yamco_safety_and_health.html'
+with open(file_path, 'w', encoding='utf-8') as file:
+    file.write(html_content)
+
+file_path  # Returning the path for the user to download
