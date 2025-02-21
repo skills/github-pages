@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Game for Shailja</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f8f9fa; }
+        .hidden { display: none; }
+        #dob-section, #welcome-section, #game-section, #final-section { margin-top: 50px; }
+        button { padding: 10px 20px; margin-top: 10px; cursor: pointer; }
+        #surprise { margin-top: 20px; font-size: 20px; font-weight: bold; color: #28a745; }
+    </style>
+</head>
+<body>
+    <div id="dob-section">
+        <h2>Enter Your Date of Birth</h2>
+        <input type="date" id="dob-input">
+        <button onclick="checkDOB()">Submit</button>
+        <p id="dob-error" class="hidden">Please enter your correct date of birth.</p>
+    </div><div id="welcome-section" class="hidden">
+    <h2>Hello, Shailja Masih! Are you ready for the game?</h2>
+    <img src="shailja.png" alt="Shailja Masih">
+    <button onclick="startGame()">Yes</button>
+</div>
+
+<div id="game-section" class="hidden">
+    <h2 id="question-text"></h2>
+    <input type="text" id="answer-input">
+    <button onclick="submitAnswer()">Next</button>
+    <p id="reaction-text"></p>
+    <p id="score-text"></p>
+</div>
+
+<div id="final-section" class="hidden">
+    <h2>Congratulations! You've completed the game!</h2>
+    <p id="final-score"></p>
+    <div id="surprise"></div>
+</div>
+
+<script>
+    let questions = [
+        "Agar tumhe ek genie mile to tum konsi 3 wish mangogi?",
+        "Zindagi mai koi esa moment aya hai jb lga ho sb khtm hogya hai? Or wo moment kya tha?",
+        "Kbhi kuch esa kara hai jise krne k baad yh realise hua ho ki nhi mne galti krdi, m essa kse kr skti hu?"
+    ];
+    let currentQuestion = 0;
+    let score = 0;
+
+    function checkDOB() {
+        let dob = document.getElementById("dob-input").value;
+        if (dob === "2001-11-24") {
+            document.getElementById("dob-section").classList.add("hidden");
+            document.getElementById("welcome-section").classList.remove("hidden");
+        } else {
+            document.getElementById("dob-error").classList.remove("hidden");
+        }
+    }
+
+    function startGame() {
+        document.getElementById("welcome-section").classList.add("hidden");
+        document.getElementById("game-section").classList.remove("hidden");
+        loadQuestion();
+    }
+
+    function loadQuestion() {
+        if (currentQuestion < questions.length) {
+            document.getElementById("question-text").innerText = questions[currentQuestion];
+        } else {
+            endGame();
+        }
+    }
+
+    function submitAnswer() {
+        let answer = document.getElementById("answer-input").value;
+        if (answer) {
+            score += 10;
+            document.getElementById("reaction-text").innerText = "Great answer!";
+            currentQuestion++;
+            document.getElementById("answer-input").value = "";
+            loadQuestion();
+        }
+    }
+
+    function endGame() {
+        document.getElementById("game-section").classList.add("hidden");
+        document.getElementById("final-section").classList.remove("hidden");
+        document.getElementById("final-score").innerText = Your Score: ${score};
+        if (score >= 30) {
+            document.getElementById("surprise").innerText = "🎉 Surprise Unlocked! 🎁";
+        }
+    }
+</script>
+
+</body>
+</html>
