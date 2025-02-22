@@ -1,4 +1,89 @@
-<header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Namaz & Study Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+        .tracker {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #333;
+        }
+        .tracker button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .day-box {
+            border: 1px solid #fff;
+            padding: 15px;
+            margin: 10px 0;
+            background-color: #222;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Namaz & Study Tracker</h1>
+        <div id="days-container"></div>
+    </div>
+
+    <script>
+        function generateDays() {
+            const container = document.getElementById('days-container');
+            const startDate = new Date();
+            const endDate = new Date('2027-12-31');
+            
+            while (startDate <= endDate) {
+                const dayBox = document.createElement('div');
+                dayBox.classList.add('day-box');
+                dayBox.innerHTML = `<h3>${startDate.toDateString()}</h3>`;
+                
+                const namazTimes = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
+                namazTimes.forEach(namaz => {
+                    const div = document.createElement('div');
+                    div.classList.add('tracker');
+                    div.innerHTML = `${namaz} <button onclick="markDone(this)">✔</button> <button onclick="markNotDone(this)">✖</button>`;
+                    dayBox.appendChild(div);
+                });
+                
+                const studyTimes = ['5-7 AM', '7-9 PM', '10-12 AM'];
+                studyTimes.forEach(time => {
+                    const div = document.createElement('div');
+                    div.classList.add('tracker');
+                    div.innerHTML = `${time} <button onclick="markDone(this)">✔</button> <button onclick="markNotDone(this)">✖</button>`;
+                    dayBox.appendChild(div);
+                });
+                
+                container.appendChild(dayBox);
+                startDate.setDate(startDate.getDate() + 1);
+            }
+        }
+
+        function markDone(button) {
+            button.parentElement.style.backgroundColor = 'green';
+        }
+
+        function markNotDone(button) {
+            button.parentElement.style.backgroundColor = 'red';
+        }
+
+        window.onload = generateDays;
+    </script>
+</body>
+</html>
 
 <!--
   <<< Author notes: Course header >>>
