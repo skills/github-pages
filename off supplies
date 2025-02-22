@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OFF SUPPLIES | Official Store</title>
+    <style>
+        /* Estilos CSS personalizados */
+        :root {
+            --main-color: #1a1a1a;
+            --accent-color: #e60012;
+            --text-light: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+        }
+
+        .header {
+            background-color: var(--text-light);
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--main-color);
+            text-decoration: none;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .nav-link {
+            color: var(--main-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .hero {
+            background-image: url('https://images.unsplash.com/photo-1483985988355-763728e1935b');
+            background-size: cover;
+            background-position: center;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .hero-content {
+            background-color: rgba(0,0,0,0.5);
+            padding: 2rem;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        .product-title {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .cta-button {
+            background-color: var(--main-color);
+            color: var(--text-light);
+            padding: 1rem 2rem;
+            border: none;
+            text-transform: uppercase;
+            margin-top: 2rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: var(--accent-color);
+        }
+
+        footer {
+            background-color: var(--main-color);
+            color: var(--text-light);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .product-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .hero-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="#" class="logo">OFF SUPPLIES</a>
+        <nav class="nav-container">
+            <a href="#" class="nav-link">New Arrivals</a>
+            <a href="#" class="nav-link">Women</a>
+            <a href="#" class="nav-link">Men</a>
+            <a href="#" class="nav-link">Collections</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Autumn Collection 2024</h1>
+            <button class="cta-button">Discover Now</button>
+        </div>
+    </section>
+
+    <section class="new-arrivals">
+        <h2 style="text-align: center; margin: 2rem 0">New Arrivals</h2>
+        <div class="product-grid">
+            <!-- Producto 1 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1554568218-0f1715e72254" alt="Product 1" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Oversized Wool Coat</h3>
+                    <p class="product-price">$299.00</p>
+                </div>
+            </div>
+            
+            <!-- Producto 2 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03" alt="Product 2" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Structured Leather Bag</h3>
+                    <p class="product-price">$189.00</p>
+                </div>
+            </div>
+            
+            <!-- Añadir más productos siguiendo el mismo patrón -->
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2024 OFF SUPPLIES. All rights reserved.</p>
+        <div style="margin-top: 1rem">
+            <a href="#" style="color: #fff; margin: 0 1rem">Privacy Policy</a>
+            <a href="#" style="color: #fff; margin: 0 1rem">Terms of Service</a>
+        </div>
+    </footer>
+</body>
+</html>
