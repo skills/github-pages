@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOGO Offer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f8f8;
+        }
+
+        .container {
+            width: 50%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .offer-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff4081;
+        }
+
+        .offer-box {
+            border: 2px solid #ff4081;
+            padding: 15px;
+            margin: 0px 0;
+            /* border-radius: 10px; */
+            position: relative;
+            transition: background 0.3s, transform 0.2s;
+            background-color: #FFF9FA;
+        }
+
+        .offer-box.active,
+        .offer-box:hover {
+            background: #ffe6f0;
+            transform: scale(1.02);
+        }
+
+        .discount {
+            background: #ff4081;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        .most-popular {
+            background: gold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .add-to-cart {
+            background: #ff4081;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .add-to-cart:hover {
+            background: #e60073;
+            transform: scale(1.05);
+        }
+
+        .free.Delivery {
+            text-align: left;
+        }
+
+        .add.card {
+            text-align: right;
+            margin-top: -41px;
+        }
+
+        .discount1 {
+            background: #ff4081;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            position: absolute;
+            top: 10px;
+            /* left: 10px; */
+            margin-left: -26px;
+        }
+
+        .box-1 {
+            text-align: left;
+            margin-left: 108px;
+        }
+
+        .box-2 {
+            text-align: right;
+            margin-right: 43px;
+            margin-top: -54px;
+        }
+
+        .Unit1 {
+            font-size: 16px;
+            color: black;
+            font-weight: 600;
+        }
+
+        .price-2 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-top: -27px;
+        }
+
+        .price-1 {
+            font-weight: 100;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="offer-title">YAY! IT'S BOGO</h2>
+
+        <div class="offer-box ">
+            <div class="row">
+                <!-- Left Column -->
+
+                <div class="col-6 d-flex box-1">
+
+                    <div class="Unit1">
+                        <label class="w-100">
+                            <input type="radio" name="offer" class="me-2">
+                            <span>1 Unit</span> <br><br>
+                            <span class="Standard">Standard Price</span>
+                            <span class="discount1 text-danger ms-2">10%
+                                Off</span>
+                        </label>
+                    </div>
+
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-6 d-flex  justify-content-end box-2">
+                    <p class="price-2 mb-0">$10.00 USD</p>
+                    <p class="price-1 mb-0">$24.00 USD</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="offer-box">
+
+            <div class="row">
+                <!-- Left Column -->
+
+                <div class="col-6 d-flex box-1">
+
+                    <div class="Unit1">
+                        <label class="w-100">
+                            <input type="radio" name="offer" class="me-2">
+                            <span>2 Unit</span> <br><br>
+                            <span class="Standard">Standard Price</span>
+                            <span class="discount1 text-danger ms-2">10%
+                                Off</span>
+                        </label>
+                        <br><br>
+                        <select>
+                            <option>Size: 5</option>
+                            <option>Size: 6</option>
+                        </select>
+                        <select>
+                            <option>Color: Black</option>
+                            <option>Color: White</option>
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-6 d-flex  justify-content-end box-2">
+                    <span class="most-popular">MOST POPULAR</span>
+                    <p class="price-2 mb-0">$18.00 USD</p>
+                    <p class="price-1 mb-0">$24.00 USD</p>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+        <div class="offer-box">
+            <div class="row">
+                <!-- Left Column -->
+
+                <div class="col-6 d-flex box-1">
+
+                    <div class="Unit1">
+                        <label class="w-100">
+                            <input type="radio" name="offer" class="me-2">
+                            <span>3 Unit</span> <br><br>
+                            <span class="Standard">Standard Price</span>
+                            <span class="discount1 text-danger ms-2">30%
+                                Off</span>
+                        </label>
+                    </div>
+
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-6 d-flex  justify-content-end box-2">
+                    <p class="price">$24.00 USD</p>
+                    <p class="price-1 mb-0">$24.00 USD</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-4 free Delivery">
+                <p style="color: green;">Free Delivery</p>
+
+            </div>
+            <div class="col-lg-4 add card">
+                <p><strong>Total: $18.00 USD</strong></p>
+
+            </div>
+        </div>
+        <button class="add-to-cart" onclick="addToCart()">Add to
+            Cart</button>
+    </div>
+
+    <script>
+        function addToCart() {
+            alert('Item added to cart!');
+        }
+    </script>
+</body>
+
+</html>
