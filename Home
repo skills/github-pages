@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JAVA WORLD - 90s MTB Vibes</title>
+  <style>
+    body {
+      background-color: #f5f5dc;
+      color: #3e3e3e;
+      font-family: 'Courier New', monospace;
+      background-image: url('dirt-overlay.png');
+      background-blend-mode: multiply;
+      background-size: cover;
+      overflow: hidden;
+    }
+    header {
+      background-color: #4b5320;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 0 #3e3e3e;
+    }
+    .container {
+      display: flex;
+      padding: 20px;
+    }
+    .sidebar {
+      width: 200px;
+      background-color: #8b4513;
+      padding: 15px;
+      border-radius: 10px;
+      margin-right: 20px;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    }
+    .sidebar a {
+      display: block;
+      color: #f5f5dc;
+      text-decoration: none;
+      margin: 10px 0;
+      font-weight: bold;
+    }
+    .content {
+      flex-grow: 1;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+    }
+    .rides {
+      margin-top: 20px;
+    }
+    .bike-photo {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 20px;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    }
+    /* Crawling Ants Animation */
+    .ant {
+      width: 15px;
+      height: 8px;
+      background-color: black;
+      border-radius: 50% 50% 40% 40%;
+      position: absolute;
+      animation: crawl 20s linear infinite;
+      background-image: radial-gradient(circle at 30% 30%, #333, black);
+    }
+    @keyframes crawl {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      20% { transform: translate(10vw, 5vh) rotate(10deg); }
+      40% { transform: translate(30vw, 20vh) rotate(-15deg); }
+      60% { transform: translate(50vw, 40vh) rotate(20deg); }
+      80% { transform: translate(70vw, 70vh) rotate(-10deg); }
+      100% { transform: translate(90vw, 90vh) rotate(0deg); }
+    }
+    /* Moving Frog Animation */
+    .frog {
+      width: 50px;
+      height: 50px;
+      background-image: url('frog.png');
+      background-size: cover;
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      animation: hop 10s ease-in-out infinite;
+    }
+    @keyframes hop {
+      0% { transform: translate(0, 0); }
+      20% { transform: translate(80px, -30px); }
+      40% { transform: translate(160px, 0); }
+      60% { transform: translate(240px, -30px); }
+      80% { transform: translate(320px, 0); }
+      100% { transform: translate(400px, 0); }
+    }
+  </style>
+</head>
+<body>
+  <header>JAVA WORLD</header>
+  <div class="container">
+    <div class="sidebar">
+      <a href="#forum">FORUM</a>
+      <a href="#contact">CONTACT</a>
+      <a href="#links">LINKS</a>
+    </div>
+    <div class="content">
+      <h2>Welcome to JAVA WORLD</h2>
+      <p>Experience the thrill of vintage mountain biking, share your rides, and connect with fellow enthusiasts.</p>
+      <div class="rides">
+        <h3>Featured Ride</h3>
+        <p>Shred through the trails of Moab, Utah – a classic destination for every MTB legend.</p>
+      </div>
+      <img src="gary-fisher-bike.jpg" alt="Classic Gary Fisher Bike" class="bike-photo">
+    </div>
+  </div>
+  <!-- Crawling Ants -->
+  <div class="ant" style="top: 10%; left: 5%; animation-delay: 0s;"></div>
+  <div class="ant" style="top: 30%; left: 15%; animation-delay: 2s;"></div>
+  <div class="ant" style="top: 50%; left: 25%; animation-delay: 4s;"></div>
+  <div class="ant" style="top: 70%; left: 35%; animation-delay: 6s;"></div>
+  <div class="ant" style="top: 90%; left: 45%; animation-delay: 8s;"></div>
+  <!-- Moving Frog -->
+  <div class="frog"></div>
+</body>
+</html>
