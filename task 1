@@ -1,0 +1,12 @@
+import numpy as np
+import matplotlib.pyplot as plt
+np.random.seed(42)
+ages = np.random.normal(loc=35, scale=15, size=1000) 
+ages = np.clip(ages, 0, 90)  
+plt.figure(figsize=(10, 6))
+plt.hist(ages, bins=20, color='skyblue', edgecolor='black', alpha=0.7)
+plt.xlabel('Age')
+plt.ylabel('Frequency')
+plt.title('Age Distribution in a Population')
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.show()
