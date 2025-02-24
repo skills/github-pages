@@ -36,6 +36,9 @@ In this course, you will:
 3. Customize your home page
 4. Create a blog post
 5. Merge your pull request
+6. 3. Customize your home page
+4. Create a blog post
+5. Merge your pull request
 
 ### How to start this course
 
