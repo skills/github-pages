@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Detection</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        video, canvas { width: 100%; max-width: 400px; }
+        button { padding: 10px; font-size: 16px; margin: 10px; }
+        #error-message { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Plant Disease Detection</h1>
+    <video id="video" autoplay playsinline></video>
+    <button onclick="captureImage()">Capture Image</button>
+    <canvas id="canvas"></canvas>
+    <p id="diseaseName">Prediction will appear here...</p>
+    <p id="diseaseLink"></p>
+    <p id="error-message"></p>
+
+    <script>
+        async function setupCamera() {
+            const errorMessage = document.getElementById('error-message');
+
+            // Check if running on HTTPS
+            if (window.location.protocol !== "https:") {
+                errorMessage.innerText = "Warning: Camera access requires HTTPS.";
+                return;
+            }
+
+            try {
+                const video = document.getElementById('video');
+                const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+                video.srcObject = stream;
+            } catch (error) {
+                console.error('Error accessing camera:', error);
+
+                if (error.name === "NotAllowedError") {
+                    errorMessage.innerText = "Camera access denied. Please allow camera permissions.";
+                } else if (error.name === "NotFoundError") {
+                    errorMessage.innerText = "No camera found. Please check your device settings.";
+                } else if (error.name === "NotReadableError") {
+                    errorMessage.innerText = "Camera is currently in use by another application.";
+                } else {
+                    errorMessage.innerText = "Camera access error: " + error.message;
+                }
+            }
+        }
+
+        async function captureImage() {
+            const video = document.getElementById('video');
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            analyzeImage(canvas);
+        }
+
+        async function analyzeImage(canvas) {
+            const allowedCategories = ['plant', 'leaf', 'foliage', 'tree'];
+            const model = await mobilenet.load();
+            const img = tf.browser.fromPixels(canvas);
+            const predictions = await model.classify(img);
+            tf.dispose(img);
+            
+            if (predictions.length === 0) {
+                document.getElementById('diseaseName').innerText = 'No plant or leaf detected.';
+                document.getElementById('diseaseLink').innerHTML = '';
+                return;
+            }
+
+            const diseaseName = predictions[0].className;
+            if (!allowedCategories.some(category => diseaseName.toLowerCase().includes(category))) {
+                document.getElementById('diseaseName').innerText = 'No plant or leaf detected.';
+                document.getElementById('diseaseLink').innerHTML = '';
+                return;
+            }
+
+            document.getElementById('diseaseName').innerText = `Prediction: ${diseaseName} (Confidence: ${(predictions[0].probability * 100).toFixed(2)}%)`;
+            document.getElementById('diseaseLink').innerHTML = `<a href="https://www.google.com/search?q=${encodeURIComponent(diseaseName)}+plant+disease" target="_blank">More about ${diseaseName}</a>`;
+        }
+
+        setupCamera();
+    </script>
+</body>
+</html>
