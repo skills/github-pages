@@ -1,0 +1,269 @@
+<html>
+<body>
+</body>
+<script>
+
+var isRight=[];
+var rightAnswers=[];
+var wrongAnswers=[];
+var wrongNumerical=[];
+var doneLater=[];
+var isPending=[];
+var isDone=[];
+var parentObject;
+paperID="";
+subject="";
+paperDetails="29th Jan 2024 Shift I 9 to 12";
+paperDetails=" ";
+
+
+function MarkRight(ns,ne)
+{
+   for(j=ns;j<=ne;j++)
+   {
+      isRight[j]=" ";
+      isPending[j]="&#x274c";
+      isPending[j]=" ";
+      isDone[j]=" ";
+   }
+   for(j=0;j<rightAnswers.length;j++)
+   {
+      isRight[rightAnswers[j]]=" "; //"&#x2713";
+      isPending[rightAnswers[j]]=" ";
+   }
+   for(j=0;j<doneLater.length;j++)
+   {
+      isDone[doneLater[j]]=" "; //"&#x2713";
+      isPending[doneLater[j]]=" ";
+   }
+   for(j=0;j<wrongAnswers.length;j++)
+   {
+      isRight[wrongAnswers[j]]=" ";  //"&#x2716";
+   }
+}
+
+function PlanTable()
+{
+   tb=document.createElement("table");
+   tb.setAttribute("id","PlanTable");
+   tb.setAttribute("border","1 px");
+   tr=document.createElement("tr");
+   td=document.createElement("td");
+   td.innerHTML="<strong> JEE Mains (Jan) </strong>";
+   tr.appendChild(td);
+   td=document.createElement("td");
+   tr.appendChild(td);
+   td.innerHTML="<strong> 96.48 </strong>";
+   tr.appendChild(td);
+   tb.appendChild(tr);
+   tr=document.createElement("tr");
+   tb.appendChild(tr);
+   td=document.createElement("td");
+   td.innerHTML="<strong> JEE Mains (Apr) </strong>";
+   tr.appendChild(td);
+   td=document.createElement("td");
+   ipt=document.createElement("input");
+   ipt.setAttribute("type","text");
+   ipt.setAttribute("id","JEEMainsApril");
+   ipt.setAttribute("onChange","MakePlan()");
+   td.appendChild(ipt);
+   tr.appendChild(td);
+
+   tr=document.createElement("tr");
+   tb.appendChild(tr);
+   td=document.createElement("td");
+   td.innerHTML="<strong> Total Boards \% </strong>";
+   tr.appendChild(td);
+   td=document.createElement("td");
+   ipt=document.createElement("input");
+   ipt.setAttribute("type","text");
+   ipt.setAttribute("id","boardsPC");
+   ipt.setAttribute("onChange","MakePlan()");
+   td.appendChild(ipt);
+   tr.appendChild(td);
+
+   tr=document.createElement("tr");
+   tb.appendChild(tr);
+   td=document.createElement("td");
+   td.innerHTML="<strong> MPC Aggregate (out of 200) </strong>";
+   tr.appendChild(td);
+   td=document.createElement("td");
+   ipt=document.createElement("input");
+   ipt.setAttribute("type","text");
+   ipt.setAttribute("id","aggregateMPC");
+   ipt.setAttribute("onChange","MakePlan()");
+   td.appendChild(ipt);
+   tr.appendChild(td);
+   parentObject.appendChild(tb);
+   p=document.createElement("p");
+   p.setAttribute("id","tDecision");
+   parentObject.appendChild(p);
+}
+
+function MakePlan()
+{
+   ptlApr=parseFloat(document.getElementById("JEEMainsApril").value);
+   p=document.getElementById("tDecision");
+   if(ptlApr<96.48)
+   {
+       ptlApr=96.48
+   }
+   if(ptlApr>99.63)
+   {
+        p.innerHTML="With "+ptlApr+" in JEE Mains, B.Tech (ECE), NIT, Trichy is possible";  
+   }
+   else if(ptlApr>99.56)
+   {
+        p.innerHTML="With "+ptlApr+"  in JEE mains B.Tech (ECE), NIT, Trichy may be possible.  But we may have to wait till special round II";  
+   }
+   else if(ptlApr>99.1)
+   {
+        p.innerHTML="With "+ptlApr+"  in JEE mains B.Tech (Instrumentation & Control), NIT, Trichy may be possible.  But we may have to wait till special round II.  Alternatively, ECE in IITDM (Kancheepuram) is also possible";  
+   }
+   else if(ptlApr>98.25)
+   {
+        p.innerHTML="With "+ptlApr+"  in JEE mains, Dual Degree M.Tech in ECE is possible at IITDM(Kancheepuram)";  
+   }
+   else if(ptlApr>97.9)
+   {
+        p.innerHTML="With "+ptlApr+"  in JEE mains, Dual Degree M.Tech in ECE is possible at IITDM(Kancheepuram).  But, we may have to wait till Special Round II";  
+   }
+   else if(ptlApr>97.6)
+   {
+        p.innerHTML="With "+ptlApr+"  in JEE mains, Dual Degree M.Tech in ECE is possible at IITDM(Kurnool).  But decision on joining need to be considered.";  
+   }
+   else if(ptlApr>96.3)
+   {
+        p.innerHTML="With "+ptlApr+"  in JEE mains, Dual Degree M.Tech in ECE is possible at IITDM(Kurnool).  But, we may have to wait till special round II. Further, decision on joining need to be considered.";  
+   }
+//   p=document.createElement("p");
+//   parentObject.appendChild(p);
+   p.innerHTML=p.innerHTML+" <br> <br> With 97.4 in AEEE, Amrita Coimbatore (ECE) may be possible.  Sastra is another possibility based on boards percentage."
+   boardsPC=parseFloat(document.getElementById("boardsPC").value);
+   if(boardsPC>97.0)
+   {
+      p.innerHTML=p.innerHTML+" <br> <br> In addition, with "+boardsPC+"\% in CBSE boards (Total), B.Tech(ECE) in Sastra is possible and bright";
+   }
+   boardsMPC=parseFloat(document.getElementById("aggregateMPC").value);
+   if(boardsMPC>192.0)
+   {
+       p.innerHTML=p.innerHTML+"<br> <br> With "+boardsMPC+" MPC aggregate cut-off in boards, chance of ECE in SVCE becomes bright."
+   }
+   p.innerHTML=p.innerHTML+"<br><br> The above analysis excludes the following high profile institutes whose selection is <strong>NOT</strong> based on JEE Mains or Boards. <strong>IITs, IIIT(H), BITS and IISER </strong>.  For these institutes, we need to consider the performance in JEE (Advanced), IIIT-UGEE, BITSAT and IAT respectively. <br><br> VIT and SRM are not included in the analysis as of now."
+}
+
+function CreateTable(ns,ne)
+{
+   p=document.createElement("p");
+   p.innerHTML="<strong>"+subject+"</strong>";
+   p.setAttribute("style","color:#800000");
+   p.setAttribute("text-align","center");
+   parentObject.appendChild(p);
+   tb=document.createElement("table");
+   tb.setAttribute("id","AnalysisTable");
+   tb.setAttribute("border","1 px");
+   //tb.setAttribute("frame","box");
+   tr=document.createElement("tr");
+   td=document.createElement("td");
+   td.innerHTML="Q. No";
+   tr.appendChild(td);
+   td=document.createElement("td");
+   td.innerHTML="Correct?"
+   tr.appendChild(td);
+   td=document.createElement("td");
+   td.innerHTML="Rectified?"
+   tr.appendChild(td);
+   td=document.createElement("td");
+   td.innerHTML="Status &nbsp &nbsp &nbsp &nbsp &nbsp";
+   tr.appendChild(td);
+   tb.appendChild(tr);
+   
+   for(i=ns;i<=ne;i++)
+   {
+      tr=document.createElement("tr");
+      td=document.createElement("td");
+      td.innerHTML=i;
+      tr.appendChild(td);
+      /*td=document.createElement("td");
+      td.innerHTML=i+1;
+      tr.appendChild(td);*/
+      td=document.createElement("td");
+      td.innerHTML=isRight[i];
+      tr.appendChild(td);
+      td=document.createElement("td");
+      td.innerHTML=isDone[i];
+      tr.appendChild(td);
+      td=document.createElement("td");
+      td.innerHTML=isPending[i];
+      tr.appendChild(td);
+      tb.appendChild(tr);
+   }
+   parentObject.appendChild(tb);
+}
+
+/*
+paperID="22/09/2024"
+paperDetails="29th Jan 2024 Shift I : 0900 to 1200";
+paperID="Paper ID : <br><br>";
+paperDetails="Paper Details : ";
+p=document.createElement("p");
+p.innerHTML=paperID+paperDetails;  //+"( "+paperDetails+") ";
+document.body.appendChild(p);
+//parentObject=document.body;
+
+pTable=document.createElement("table");
+tr=document.createElement("tr");
+td1=document.createElement("td");
+pTable.setAttribute("border","2px");
+pTable.style.border="solid";
+tr.setAttribute("border-style","solid");
+tr.style.borderColor="#00ff00";
+tr.setAttribute("border","4px");
+tr.appendChild(td1);
+td2=document.createElement("td");
+td2.setAttribute("border","4px");
+tr.appendChild(td2);
+td3=document.createElement("td");
+tr.appendChild(td3);
+pTable.appendChild(tr);
+document.body.appendChild(pTable);
+
+ns=61;
+ne=90;
+rightAnswers=[63, 65,  66, 68, 69,  73, 74, 77, 80,81, 82, 83, 89];
+wrongAnswers=[64, 67, 75, 76, 84, 85, 86, 87];
+subject="Chemistry";
+subject="Subject : ";
+MarkRight(ns,ne);
+parentObject=td1;
+CreateTable(ns,ne);
+
+
+ns=1;
+ne=30;
+rightAnswers=[1,2,7,16];
+wrongAnswers=[4,5];
+doneLater=[6, 9, 10, 11, 12, 13, 14, 15];
+subject="Maths";
+subject="Subject : ";
+MarkRight(ns,ne);
+parentObject=td2;
+CreateTable(ns,ne);
+
+ns=31;
+ne=60;
+rightAnswers=[31,32,36,37,38,42,43,44,45,47,48,49,50,54,59];
+doneLater=[];
+wrongAnswers=[33,34,46,56,58,60];
+subject="Physics";
+subject="Subject : ";
+MarkRight(ns,ne);
+parentObject=td3;
+CreateTable(ns,ne);
+*/
+p=document.createElement("p");
+p.innerHTML="Marks in JEE Mains:<br><tab> January <br> : <br>";
+parentObject=document.body;
+PlanTable();
+</script>
+</html>
