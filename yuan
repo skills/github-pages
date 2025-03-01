@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        /* 保持原有样式不变 */
+    </style>
+</head>
+<body>
+    <div class="info-box">
+        <h2>生鲜溯源信息</h2>
+        <div>宰杀时间：<span id="slaughterTime">2025-03-01 13:15</span></div>
+        <div class="timer">保鲜剩余：<span id="countdown">14小时23分</span></div>
+        <div class="contact">养殖户：何红宇 18081018045</div>
+    </div>
+
+    <script>
+        // 基本参数设置
+        const slaughterTime = new Date(2025, 2, 1, 13, 15);
+        const preservationHours = 24;
+
+        // 计算过期时间
+        const endTime = new Date(slaughterTime.getTime() + preservationHours * 3600000);
+        console.log(`客户端时区：${Intl.DateTimeFormat().resolvedOptions().timeZone}`);
+
+        function updateCountdown() {
+            const now = new Date();
+            let diff = endTime - now;
+            
+            if (diff <= 0) {
+                document.getElementById('countdown').textContent = '已过期';
+                return;
+            }
+
+            let hours = Math.floor(diff / 3600000);
+            let minutes = Math.ceil((diff % 3600000) / 60000);
+            
+            // 处理60分钟进位
+            if(minutes === 60) {
+                hours += 1;
+                minutes = 0;
+            }
+
+            document.getElementById('countdown').textContent = 
+                `${String(hours).padStart(2, '0')}小时${String(minutes).padStart(2, '0')}分`;
+        }
+
+        // 时间格式化函数优化
+        const formatTime = (date) => {
+            return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')} ` +
+                   `${String(date.getHours()).padStart(2,'0')}:${String(date.getMinutes()).padStart(2,'0')}`;
+        };
+
+        // 初始化显示
+        document.getElementById('slaughterTime').textContent = formatTime(slaughterTime);
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
