@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ganahan ka nako?</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=San+Francisco:wght@400;700&display=swap');
+
+        body {
+            font-family: 'San Francisco', Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+        button:hover {
+            background-color: darkgreen;
+        }
+        #no {
+            background-color: red;
+        }
+        #no:hover {
+            background-color: darkred;
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #555;
+            font-weight: bold;
+        }
+        #cat-photo {
+            display: none;
+            margin-top: 20px;
+            width: 250px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Ganahan ka nako?</h1>
+    <div class="button-container">
+        <button id="yes" onclick="yesClicked()">OO</button>
+        <button id="no" onclick="noClicked()">DILI</button>
+    </div>
+    <p id="message"></p>
+    <img id="cat-photo" src="" alt="Random Cat Photo">
+
+    <script>
+        let yesButton = document.getElementById("yes");
+        let noButton = document.getElementById("no");
+        let message = document.getElementById("message");
+        let catPhoto = document.getElementById("cat-photo");
+        let yesSize = 16;
+
+        const flirtLines = [
+            "Wala ko nagpaasa, pero murag ikaw gyud akong gusto.",
+            "Kung wala ka, murag way lami ang adlaw nako.",
+            "Di ko kabalo mo flirt, pero ganahan gyud ko nimo.",
+            "Unsaon nako pag-ignore nimo kung permi man ka sa akong huna-huna?",
+            "CLICK OO!!"
+        ];
+
+        function noClicked() {
+            let randomFlirt = flirtLines[Math.floor(Math.random() * flirtLines.length)];
+            message.innerText = randomFlirt;
+            yesSize += 10;
+            yesButton.style.fontSize = yesSize + "px";
+            yesButton.style.padding = (yesSize / 2) + "px " + yesSize + "px";
+        }
+
+        function yesClicked() {
+            message.innerText = "Kabalo ko! ❤️";
+            yesButton.style.fontSize = "16px";
+            yesButton.style.padding = "10px 20px";
+            noButton.remove();
+            catPhoto.src = "https://cataas.com/cat"; // Random cat API
+            catPhoto.style.display = "block"; // Show the image
+        }
+    </script>
+
+</body>
+</html>
