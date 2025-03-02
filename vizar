@@ -1,0 +1,62 @@
+import React from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { FaVideo, FaEnvelope, FaPhone, FaPlay } from "react-icons/fa";
+import { motion } from "framer-motion";
+
+const Home = () => {
+  return (
+    <div className="min-h-screen bg-gray-900 text-white p-6">
+      {/* Hero Section */}
+      <motion.div
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center py-16"
+      >
+        <h1 className="text-5xl font-bold">Professional Video Production</h1>
+        <p className="text-lg mt-4">Bringing Your Vision to Life with Stunning Visuals</p>
+        <Button className="mt-6 bg-blue-600 hover:bg-blue-700">Get a Quote</Button>
+      </motion.div>
+
+      {/* Services Section */}
+      <div className="grid md:grid-cols-3 gap-6 my-12">
+        {["Filming", "Editing", "Animation"].map((service) => (
+          <Card key={service} className="bg-gray-800">
+            <CardContent className="p-6 text-center">
+              <FaVideo className="text-4xl mx-auto mb-4" />
+              <h2 className="text-2xl font-semibold">{service}</h2>
+              <p className="mt-2">High-quality {service.toLowerCase()} services to meet your needs.</p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Portfolio Section */}
+      <div className="my-12">
+        <h2 className="text-3xl font-semibold text-center">Our Work</h2>
+        <div className="grid md:grid-cols-3 gap-6 mt-6">
+          {["Project 1", "Project 2", "Project 3"].map((project) => (
+            <Card key={project} className="bg-gray-800">
+              <CardContent className="p-4 text-center">
+                <FaPlay className="text-3xl mx-auto mb-4" />
+                <h3 className="text-xl font-semibold">{project}</h3>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+
+      {/* Contact Section */}
+      <div className="my-12 text-center">
+        <h2 className="text-3xl font-semibold">Contact Us</h2>
+        <p className="mt-4">Have a project in mind? Let's talk!</p>
+        <div className="mt-6">
+          <p className="flex items-center justify-center gap-2"><FaEnvelope /> contact@videocompany.com</p>
+          <p className="flex items-center justify-center gap-2 mt-2"><FaPhone /> +27 123 456 789</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Home;
