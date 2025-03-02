@@ -1,0 +1,22 @@
+#include <stdio.h>
+
+int main() {
+    // Part (a): Using hardcoded inputs
+    int length1 = 10, width1 = 5; // Hardcoded values
+    int area1 = length1 * width1;
+    printf("Area of rectangle (hardcoded values): %d\n", area1);
+
+    // Part (b): Using user input
+    int length2, width2, area2;
+    
+    printf("Enter length of the rectangle: ");
+    scanf("%d", &length2);
+    
+    printf("Enter width of the rectangle: ");
+    scanf("%d", &width2);
+    
+    area2 = length2 * width2;
+    printf("Area of rectangle (user input): %d\n", area2);
+
+    return 0;
+}
