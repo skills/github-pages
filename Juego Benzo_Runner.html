@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Juego del Dinosaurio</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        var velocidad = 6;
+        var gravedad = 0.6;
+        var salto = -12;
+        var estadoSalto = false;
+        var puntaje = 0;
+        var record = localStorage.getItem("record") || 0;
+        var efectoVelocidad = false;
+        var efectoBorroso = false;
+        var pastilla;
+        var dinosaurio = { x: 50, y: 0, ancho: 40, alto: 40 };
+        var obstaculos = [];
+
+        function ajustarCanvas() {
+            canvas.width = window.innerWidth * 0.9;
+            canvas.height = window.innerHeight * 0.4;
+            dinosaurio.y = canvas.height - dinosaurio.alto;
+        }
+
+        ajustarCanvas();
+        window.addEventListener("resize", ajustarCanvas);
+
+        function dibujarDinosaurio() {
+            ctx.fillStyle = "black";
+            ctx.fillRect(dinosaurio.x, dinosaurio.y, dinosaurio.ancho, dinosaurio.alto);
+        }
+
+        function dibujarObstaculos() {
+            obstaculos.forEach((obstaculo, indice) => {
+                ctx.fillStyle = "black";
+                ctx.fillRect(obstaculo.x, obstaculo.y, obstaculo.ancho, obstaculo.alto);
+                obstaculo.x -= velocidad;
+                if (obstaculo.x < -obstaculo.ancho) {
+                    obstaculos.splice(indice, 1);
+                    puntaje++;
+                }
+            });
+        }
+
+        function crearObstaculo() {
+            var obstaculo = { x: canvas.width, y: canvas.height - 50, ancho: 30, alto: 30 };
+            obstaculos.push(obstaculo);
+        }
+
+        function crearPastilla() {
+            pastilla = { x: canvas.width, y: canvas.height - 80, ancho: 20, alto: 20 };
+            setTimeout(crearPastilla, 10000);
+        }
+
+        function dibujarPastilla() {
+            if (pastilla) {
+                ctx.fillStyle = "green";
+                ctx.fillRect(pastilla.x, pastilla.y, pastilla.ancho, pastilla.alto);
+                pastilla.x -= velocidad;
+                if (pastilla.x < -pastilla.ancho) pastilla = null;
+            }
+        }
+
+        function actualizar() {
+            if (efectoBorroso) {
+                ctx.filter = "blur(5px)";
+            } else {
+                ctx.filter = "none";
+            }
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            dibujarDinosaurio();
+            dibujarObstaculos();
+            dibujarPastilla();
+
+            if (Math.random() < 0.01) crearObstaculo();
+
+            if (estadoSalto) {
+                dinosaurio.y += salto;
+                salto += gravedad;
+                if (dinosaurio.y >= canvas.height - dinosaurio.alto) {
+                    dinosaurio.y = canvas.height - dinosaurio.alto;
+                    estadoSalto = false;
+                }
+            }
+
+            if (pastilla &&
+                dinosaurio.x < pastilla.x + pastilla.ancho &&
+                dinosaurio.x + dinosaurio.ancho > pastilla.x &&
+                dinosaurio.y < pastilla.y + pastilla.alto &&
+                dinosaurio.y + dinosaurio.alto > pastilla.y) {
+                pastilla = null;
+                velocidad += 4;
+                efectoVelocidad = true;
+                setTimeout(() => {
+                    velocidad -= 4;
+                    efectoVelocidad = false;
+                    efectoBorroso = true;
+                    setTimeout(() => { efectoBorroso = false; }, 2000);
+                }, 5000);
+            }
+
+            if (obstaculos.some(obstaculo =>
+                obstaculo.x < dinosaurio.x + dinosaurio.ancho &&
+                obstaculo.x + obstaculo.ancho > dinosaurio.x &&
+                obstaculo.y < dinosaurio.y + dinosaurio.alto &&
+                obstaculo.y + obstaculo.alto > dinosaurio.y)) {
+                alert("Game Over! Puntaje: " + puntaje);
+                if (puntaje > record) {
+                    localStorage.setItem("record", puntaje);
+                    record = puntaje;
+                }
+                puntaje = 0;
+                obstaculos = [];
+                dinosaurio.y = canvas.height - dinosaurio.alto;
+            }
+
+            ctx.font = "24px Arial";
+            ctx.fillStyle = "black";
+            ctx.fillText("Puntaje: " + puntaje, 10, 30);
+            ctx.fillText("Record: " + record, 10, 60);
+
+            requestAnimationFrame(actualizar);
+        }
+
+        document.addEventListener("keydown", function(e) {
+            if (e.key === " " && !estadoSalto) {
+                salto = -12;
+                estadoSalto = true;
+            }
+        });
+
+        document.addEventListener("touchstart", function() {
+            if (!estadoSalto) {
+                salto = -12;
+                estadoSalto = true;
+            }
+        });
+
+        crearPastilla();
+        actualizar();
+    </script>
+</body>
+</html>
