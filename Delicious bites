@@ -1,0 +1,18 @@
+<div style="text-align:center;margin-top:40px;">
+<img style="height:50%;" src="D:\/logo.png"></div>
+
+<h1 style="font-size:50px;text-align:center;"> Welcome to delicious bites</h1>
+
+<p style="font-size:20px;text-align:center;"line-height=30px;"margin-bottom:50px;>
+We believe that simple nature food tastes best.<br>Our deserts are lovingly homemade.<br>Home delivery is also available.</p>
+<div style="text-align:center;">
+<a style="font-size:40px;"background-color:red;"padding:15px35px15px35px;color="white;" href="https://www.google.com/">Read more</a>
+</div>
+
+<hr style="width:50px;">
+
+<h2 style="font-size:50px;text-align:center;">Our special deserts:</h2>
+
+<img style="width:33%;height:60%;" src="D:\/desert1.png">
+<img style="width:33%;height:60%;" src="D:\/desert2.png">
+<img style="width:33%;height:60%;" src="D:\/desert3.png">
