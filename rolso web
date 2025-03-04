@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROLSO - Administración de Condominios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #005f73;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        nav {
+            text-align: center;
+            padding: 10px;
+            background-color: #0a9396;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #005f73;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>ROLSO</h1>
+        <p>Administración de Condominios</p>
+    </header>
+    <nav>
+        <a href="#servicios">Servicios</a>
+        <a href="#diferencias">¿Por qué elegirnos?</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="container">
+        <h2>Sobre Nosotros</h2>
+        <p>En <strong>ROLSO</strong>, contamos con más de <strong>15 años de experiencia</strong> en la administración de condominios. Nos especializamos en la gestión financiera, mantenimiento y atención a residentes, brindando soluciones eficientes y transparentes.</p>
+    </div>
+    <div class="container" id="servicios">
+        <h2>Nuestros Servicios</h2>
+        <ul>
+            <li>Gestión Financiera y Contabilidad</li>
+            <li>Optimización de Procesos</li>
+            <li>Supervisión y Mantenimiento</li>
+            <li>Atención y Comunicación con los Residentes</li>
+            <li>Cumplimiento Normativo y Legal</li>
+        </ul>
+    </div>
+    <div class="container" id="diferencias">
+        <h2>¿Por qué elegirnos?</h2>
+        <ul>
+            <li>Atención personalizada y adaptada a cada condominio</li>
+            <li>Innovación tecnológica para una administración eficiente</li>
+            <li>Transparencia total en la rendición de cuentas</li>
+            <li>Red de proveedores confiables y servicio rápido</li>
+            <li>Compromiso con la comunidad y mejora de la convivencia</li>
+        </ul>
+    </div>
+    <div class="container" id="contacto">
+        <h2>Contacto</h2>
+        <p>📧 <strong>Correo:</strong> [Tu Correo Electrónico]</p>
+        <p>📞 <strong>Teléfono:</strong> [Tu Teléfono]</p>
+        <p>📍 <strong>Ubicación:</strong> [Tu Ciudad, País]</p>
+    </div>
+    <footer>
+        <p>&copy; 2025 ROLSO - Administración de Condominios. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
