@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine on Minutes</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #3a3a3a;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .navbar {
+            background-color: #4CAF50;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .navbar button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin: 0 5px;
+            font-size: 16px;
+        }
+
+        .navbar button:hover {
+            background-color: #45a049;
+        }
+
+        section {
+            padding: 20px;
+            margin: 10px;
+        }
+
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .product {
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 10px;
+            width: 200px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .product h3 {
+            font-size: 18px;
+        }
+
+        .product p {
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        .product button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .product button:hover {
+            background-color: #45a049;
+        }
+
+        .cart-summary {
+            background-color: #fff;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+        }
+
+        .cart-item button {
+            background-color: red;
+        }
+
+        footer {
+            background-color: #3a3a3a;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Medicine on Minutes</h1>
+    </header>
+
+    <div class="navbar">
+        <button onclick="navigateTo('home')">Home</button>
+        <button onclick="navigateTo('products')">Products</button>
+        <button onclick="navigateTo('checkout')">Checkout</button>
+        <button onclick="navigateTo('user')">User Details</button>
+        <button onclick="navigateTo('order-tracking')">Order Tracking</button>
+        <button onclick="navigateTo('help')">Help & Support</button>
+    </div>
+
+    <section id="home">
+        <h2>Welcome to Medicine on Minutes</h2>
+        <h3>Most Ordered Medicines</h3>
+        <div class="product-container" id="most-ordered">
+            <!-- Most Ordered Products will be inserted here -->
+        </div>
+        <form action="/search" method="get">
+            <input type="text" id="search" name="q" placeholder="Search for medicines...">
+            <button type="submit">Search</button>
+        </form>
+    </section>
+
+    <section id="products" style="display: none;">
+        <h2>Our Products</h2>
+        <div class="product-container" id="product-container">
+            <!-- Products will be dynamically inserted here -->
+        </div>
+    </section>
+
+    <section id="checkout" style="display: none;">
+        <h2>Checkout</h2>
+        <div class="cart-summary">
+            <h3>Cart Summary</h3>
+            <ul id="cart-summary-list">
+                <!-- Cart items will be dynamically inserted here -->
+            </ul>
+            <h3>Total: ₹<span id="cart-total">0</span></h3>
+            <h4>Discount (10%): ₹<span id="discount">0</span></h4>
+            <h3>Final Total: ₹<span id="final-total">0</span></h3>
+            <button onclick="proceedToPayment()">Proceed to Payment</button>
+        </div>
+
+        <div class="checkout-form" style="display: none;" id="payment-form">
+            <h3>Billing Information</h3>
+            <form onsubmit="processPayment(event)">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address" required>
+
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" name="phone" required>
+
+                <label for="payment-method">Payment Method</label>
+                <select id="payment-method" name="payment-method" required>
+                    <option value="credit-card">Credit Card</option>
+                    <option value="debit-card">Debit Card</option>
+                    <option value="paypal">PayPal</option>
+                </select>
+
+                <label for="card-details">Card Number (if applicable)</label>
+                <input type="text" id="card-details" name="card-details">
+
+                <button type="submit">Proceed to Pay</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- User Details Section -->
+    <section id="user" style="display: none;">
+        <h2>User Details</h2>
+        <div class="user-details">
+            <p><strong>Name:</strong> <span id="user-name">John Doe</span></p>
+            <p><strong>Email:</strong> <span id="user-email">johndoe@example.com</span></p>
+            <p><strong>Phone:</strong> <span id="user-phone">+91 123 456 7890</span></p>
+            <button onclick="editUserDetails()">Edit Details</button>
+        </div>
+    </section>
+
+    <!-- Order Tracking Section -->
+    <section id="order-tracking" style="display: none;">
+        <h2>Track Your Order</h2>
+        <form onsubmit="trackOrder(event)">
+            <label for="order-id">Enter Order ID</label>
+            <input type="text" id="order-id" name="order-id" required>
+            <button type="submit">Track</button>
+        </form>
+        <div id="order-status" style="display: none;">
+            <h3>Order Status</h3>
+            <p><strong>Status:</strong> <span id="status">Pending</span></p>
+            <p><strong>Estimated Delivery:</strong> <span id="delivery-date">2025-02-28</span></p>
+        </div>
+    </section>
+
+    <!-- Help & Support Section -->
+    <section id="help" style="display: none;">
+        <h2>Help & Support</h2>
+        <p>If you have any issues or questions, feel free to reach out to us at:</p>
+        <p><strong>Email:</strong> support@medicineonminutes.com</p>
+        <p><strong>Phone:</strong> +91 987 654 3210</p>
+        <p><strong>Live Chat:</strong> Available 24/7</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Medicine on Minutes</p>
+    </footer>
+
+    <script>
+        let cart = [];
+        let mostOrdered = [];
+        let products = [
+            { id: "product1", name: "Dolo 650 (Paracetamol)", price: 50, img: "dolo650.jpg", orders: 12 },
+            { id: "product2", name: "Amoxicillin (Amoxil, Biomox, Polymox)", price: 120, img: "amoxicillin.jpg", orders: 7 },
+            { id: "product3", name: "Zincovit (Zinc & Vitamin C)", price: 80, img: "zincovit.jpg", orders: 5 },
+            { id: "product4", name: "Ciprofloxacin (Cipro, Ciprolet)", price: 150, img: "cipro.jpg", orders: 6 },
+            { id: "product5", name: "Ibuprofen (Brufen, Nurofen)", price: 180, img: "ibuprofen.jpg", orders: 4 },
+            { id: "product6", name: "Azithromycin (Zithromax, AzaSite)", price: 200, img: "azithromycin.jpg", orders: 8 },
+            { id: "product7", name: "Doxycycline (Doryx, Vibramycin)", price: 170, img: "doxycycline.jpg", orders: 6 },
+            { id: "product8", name: "Metronidazole (Flagyl)", price: 140, img: "metronidazole.jpg", orders: 5 },
+            { id: "product9", name: "Cetirizine (Zyrtec)", price: 100, img: "cetirizine.jpg", orders: 9 },
+            { id: "product10", name: "Loratadine (Claritin)", price: 90, img: "loratadine.jpg", orders: 7 },
+            { id: "product11", name: "Diphenhydramine (Benadryl)", price: 80, img: "diphenhydramine.jpg", orders: 6 },
+            { id: "product12", name: "Pseudoephedrine (Sudafed)", price: 120, img: "pseudoephedrine.jpg", orders: 5 },
+            { id: "product13", name: "Guaifenesin (Mucinex)", price: 110, img: "guaifenesin.jpg", orders: 6 },
+            { id: "product14", name: "Famotidine (Pepcid)", price: 130, img: "famotidine.jpg", orders: 7 },
+            { id: "product15", name: "Atorvastatin (Lipitor)", price: 250, img: "atorvastatin.jpg", orders: 10 }
+        ];
+
+
+        // Sort products by most ordered
+        products.sort((a, b) => b.orders - a.orders);
+        mostOrdered = products.slice(0, 5);
+
+        function displayProducts(products) {
+            const container = document.getElementById('product-container');
+            container.innerHTML = '';
+            products.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.classList.add('product');
+                productDiv.innerHTML = `
+                    <img src="${product.img}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>Price: ₹${product.price}</p>
+                    <button onclick="addToCart('${product.name}', ${product.price}, '${product.id}')">Add to Cart</button>
+                `;
+                container.appendChild(productDiv);
+            });
+        }
+
+        function displayMostOrdered() {
+            const container = document.getElementById('most-ordered');
+            container.innerHTML = '';
+            mostOrdered.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.classList.add('product');
+                productDiv.innerHTML = `
+                    <img src="${product.img}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>Price: ₹${product.price}</p>
+                `;
+                container.appendChild(productDiv);
+            });
+        }
+
+        function addToCart(productName, productPrice, productId) {
+            cart.push({ name: productName, price: productPrice });
+            updateCart();
+            alert(`${productName} added to cart!`);
+        }
+
+        function removeFromCart(productName) {
+            cart = cart.filter(item => item.name !== productName);
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartList = document.getElementById('cart-summary-list');
+            cartList.innerHTML = '';
+            let total = 0;
+            cart.forEach(item => {
+                total += item.price;
+                const itemDiv = document.createElement('li');
+                itemDiv.classList.add('cart-item');
+                itemDiv.innerHTML = `
+                    <span>${item.name} - ₹${item.price}</span>
+                    <button onclick="removeFromCart('${item.name}')">Remove</button>
+                `;
+                cartList.appendChild(itemDiv);
+            });
+
+            let discount = total * 0.1;
+            let finalTotal = total - discount;
+
+            document.getElementById('cart-total').innerText = total;
+            document.getElementById('discount').innerText = discount;
+            document.getElementById('final-total').innerText = finalTotal;
+        }
+
+        function navigateTo(sectionId) {
+            document.querySelectorAll('section').forEach(section => section.style.display = 'none');
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        function proceedToPayment() {
+            document.getElementById('payment-form').style.display = 'block';
+        }
+
+        function processPayment(event) {
+            event.preventDefault();
+            alert('Payment processed successfully!');
+        }
+
+        function editUserDetails() {
+            // Edit user details functionality
+            alert('Editing user details...');
+        }
+
+        function trackOrder(event) {
+            event.preventDefault();
+            const orderId = document.getElementById('order-id').value;
+            // Simulate order tracking
+            document.getElementById('order-status').style.display = 'block';
+        }
+
+        // Initialize
+        displayProducts(products);
+        displayMostOrdered();
+    </script>
+</body>
+
+</html>
