@@ -1,0 +1,308 @@
+仓库管理系统设计方案
+（来自deepseek）
+要求设计一个仓储管理系统（原型系统），此系统支持多个仓库的设立。首先统一设立物资台账，其中需包含物资编码、物资名称、规格、材质、供应商、品牌、物资分类，用户可以自定义物资的物资分类。（建立仓库表，物资台账明细表，物资类别表）限制不同的物资名称、规格、材质的物资不能设立相同的物资编码。对于操作的仓库人员可进行入库作业、出库作业业务。入库单、出库单的业务单据编码系统自动生成，不能手工录入，可以采用年月日+流水号的方式。查询功能要求系统可查询按物资编码的库存信息、按物资分类汇总的库存信息、入库单信息、出库单信息。系统界面要求采用统一风格的模板。管理员、仓库s人员统一登录界面登录后，显示各自不同的菜单。管理员功能页可以实现仓库的新增、删除、修改基本信息管理，可以实现对物资类别的新增、删除、修改基本信息管理。（推荐使用Java，mysql）
+
+设计一个仓储管理系统（WMS）原型系统，支持多个仓库的设立和管理，以下是系统的设计思路和实现方案：
+1. 数据库设计
+1.1 仓库表 (warehouse)
+字段名	数据类型	说明
+warehouse_id	INT	仓库ID (主键)
+name	VARCHAR(100)	仓库名称
+address	VARCHAR(200)	仓库地址
+contact	VARCHAR(50)	联系人
+phone	VARCHAR(20)	联系电话
+1.2 物资台账明细表 (material)
+字段名	数据类型	说明
+material_id	INT	物资ID (主键)
+material_code	VARCHAR(50)	物资编码 (唯一)
+name	VARCHAR(100)	物资名称
+specification	VARCHAR(100)	规格
+material_type	VARCHAR(100)	材质
+supplier	VARCHAR(100)	供应商
+brand	VARCHAR(100)	品牌
+category_id	INT	物资分类ID (外键，关联material_category)
+warehouse_id	INT	仓库ID (外键，关联warehouse)
+1.3 物资类别表 (material_category)
+字段名	数据类型	说明
+category_id	INT	分类ID (主键)
+category_name	VARCHAR(100)	分类名称
+1.4 入库单表 (inbound_order)
+字段名	数据类型	说明
+inbound_id	INT	入库单ID (主键)
+order_code	VARCHAR(50)	入库单编码 (自动生成)
+material_id	INT	物资ID (外键，关联material)
+quantity	INT	入库数量
+inbound_date	DATETIME	入库日期
+operator	VARCHAR(50)	操作员
+1.5 出库单表 (outbound_order)
+字段名	数据类型	说明
+outbound_id	INT	出库单ID (主键)
+order_code	VARCHAR(50)	出库单编码 (自动生成)
+material_id	INT	物资ID (外键，关联material)
+quantity	INT	出库数量
+outbound_date	DATETIME	出库日期
+operator	VARCHAR(50)	操作员
+2. 功能模块设计
+2.1 用户登录模块
+
+登录界面：管理员和仓库人员使用统一的登录界面。
+权限控制：登录后根据用户角色显示不同的菜单。
+管理员：可以管理仓库、物资分类、查询所有仓库的库存信息。
+仓库人员：只能进行入库、出库操作，查看当前仓库的库存信息。
+
+2.2 仓库管理模块（管理员）
+
+新增仓库：管理员可以新增仓库，填写仓库的基本信息。
+修改仓库：管理员可以修改仓库的基本信息。
+删除仓库：管理员可以删除仓库（需确保仓库中没有物资）。
+2.3 物资分类管理模块（管理员）
+
+新增分类：管理员可以新增物资分类。
+修改分类：管理员可以修改物资分类的名称。
+删除分类：管理员可以删除物资分类（需确保该分类下没有物资）。
+
+2.4 物资台账管理模块
+
+新增物资：用户可以新增物资，填写物资的基本信息，并选择所属仓库和分类。
+修改物资：用户可以修改物资的基本信息。
+删除物资：用户可以删除物资（需确保该物资没有库存）。
+
+2.5 入库管理模块（仓库人员）
+入库操作：仓库人员可以选择物资、填写入库数量，系统自动生成入库单编码（格式：YYYYMMDD + 流水号）。
+入库单查询：可以按物资编码、入库日期等条件查询入库单信息。
+2.6 出库管理模块（仓库人员）
+出库操作：仓库人员可以选择物资、填写出库数量，系统自动生成出库单编码（格式：YYYYMMDD + 流水号）。
+出库单查询：可以按物资编码、出库日期等条件查询出库单信息。
+2.7 库存查询模块
+按物资编码查询库存：用户可以输入物资编码，查询该物资在各个仓库的库存信息。
+按物资分类汇总库存：用户可以按物资分类查询各个仓库的库存汇总信息。
+3. 系统界面设计
+
+统一风格模板：使用Bootstrap或其他前端框架，确保系统界面风格统一。
+菜单动态加载：根据用户角色动态加载不同的菜单项。
+表单验证：在前端和后端对用户输入进行验证，确保数据的合法性。
+4. 技术选型
+后端语言：Java (Spring Boot)
+数据库：MySQL
+前端技术：HTML, CSS, JavaScript (Vue.js 或 React)
+接口设计：RESTful API
+权限控制：Spring Security
+
+5. 关键代码示例
+5.1 自动生成入库单编码
+public String generateInboundOrderCode() {
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+    String date = sdf.format(new Date());
+    String maxCode = inboundOrderRepository.findMaxOrderCodeByDate(date);
+    if (maxCode == null) {
+        return date + "0001";
+    } else {
+        int sequence = Integer.parseInt(maxCode.substring(8)) + 1;
+        return date + String.format("%04d", sequence);
+    }}
+5.2 物资编码唯一性校验
+public boolean isMaterialCodeUnique(String materialCode) {
+    return materialRepository.findByMaterialCode(materialCode) == null;}
+5.3 按物资分类汇总库存
+SELECT 
+    mc.category_name, 
+    SUM(m.quantity) AS total_quantityFROM 
+    material mJOIN 
+    material_category mc ON m.category_id = mc.category_idGROUP BY 
+    mc.category_name;
+6. 系统部署
+开发环境：使用IntelliJ IDEA或Eclipse进行开发。
+数据库管理：使用MySQL Workbench或命令行管理数据库。
+部署环境：可以使用Tomcat或Docker进行部署。
+
+7. 测试与维护
+单元测试：使用JUnit进行单元测试，确保每个模块的功能正常。
+集成测试：测试各个模块之间的交互，确保系统整体运行正常。
+维护：定期备份数据库，监控系统运行状态，及时修复BUG。
+8. 总结
+该仓储管理系统原型设计支持多仓库管理、物资分类自定义、入库出库操作、库存查询等功能。通过合理的数据库设计和权限控制，系统能够满足管理员和仓库人员的不同需求。
+
+
+完整的结构代码：
+1. 项目结构
+src
+├── main
+│   ├── java
+│   │   └── com
+│   │       └── example
+│   │           └── wms
+│   │               ├── controller
+│   │               ├── model
+│   │               ├── repository
+│   │               ├── service
+│   │               └── WmsApplication.java
+│   └── resources
+│       ├── application.properties
+│       └── static
+│       └── templates
+└── test
+    └── java
+        └── com
+            └── example
+                └── wms
+
+2. 数据库配置 (application.properties)
+spring.datasource.url=jdbc:mysql://localhost:3306/wms_dbspring.datasource.username=rootspring.datasource.password=yourpasswordspring.jpa.hibernate.ddl-auto=updatespring.jpa.show-sql=trueserver.port=8080
+
+3. 实体类 (model 包)
+3.1 仓库实体 (Warehouse.java)
+package com.example.wms.model;
+import jakarta.persistence.*;import lombok.Data;
+@Data@Entitypublic class Warehouse {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long warehouseId;
+
+    private String name;
+    private String address;
+    private String contact;
+    private String phone;}
+3.2 物资分类实体 (MaterialCategory.java)
+package com.example.wms.model;
+import jakarta.persistence.*;import lombok.Data;
+@Data@Entitypublic class MaterialCategory {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long categoryId;
+
+    private String categoryName;}
+3.3 物资台账实体 (Material.java)
+package com.example.wms.model;
+import jakarta.persistence.*;import lombok.Data;
+@Data@Entitypublic class Material {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long materialId;
+
+    private String materialCode;
+    private String name;
+    private String specification;
+    private String materialType;
+    private String supplier;
+    private String brand;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private MaterialCategory category;
+
+    @ManyToOne
+    @JoinColumn(name = "warehouse_id")
+    私人仓库仓库;}
+3.4入库单实体（Inboundorder.java）
+包com.example.wms.model;
+导入jakarta.persistence。
+@data@entitypublic类InboundOrder {
+    @ID
+    @generatedValue（策略= generatype.Identity）
+    私人长inboundid;
+
+    私有字符串订购;
+    私人整数数量；
+    私人日期inbounddate;
+    私人字符串操作员；
+
+    @manytoone
+    @joincolumn（name = “材料_id”）
+    私人材料;}
+3.5出库单实体（outboundorder.java）
+包com.example.wms.model;
+导入jakarta.persistence。
+@data@entitypublic class outboundorder {
+    @ID
+    @generatedValue（策略= generatype.Identity）
+    私人长期出口；
+
+    私有字符串订购;
+    private Integer quantity;
+    私人日期出现；
+    私人字符串操作员；
+
+    @manytoone
+    @joincolumn （名 =“材料_id”）
+    私人材料;}
+
+4（4）
+4.1（warehouserepository.java）
+软件包com.example.wms.repository;
+导入com.example.wms.model.warehouse;导入org.springframework.data.jpa.repository.jparepository;
+公共jparepository <仓库
+4.2 categoryrepository.java）
+软件包com.example.wms.repository;
+导入com.example.wms.model.materialcategory;导入org.springframework.data.jpa.repository.jparepository;
+public界面材料类别存储库扩展了jparepository <物料类别，long> {}
+4.3（Java）（Java）java）
+软件包com.example.wms.repository;
+导入com.example.wms.model.material; org.springframework.data.jpa.repository.jparepository;
+公共jparepository <材料，long> {
+    材料（findbyMaterialCode）（（（））;};};}
+4.4入库单存储库（ inboundorderrepository.java）
+软件包com.example.wms.repository;
+导入com.example.wms.model.inboundorder; org.springframework.data.jpa.repository.jparepository;
+公共jparepositor
+    InboundOrder findtopbyOrderByOrderCodedEsc（）;}
+4.54.5（outboundordore.java）
+软件包com.example.wms.repository;
+导入com.example.wms.model.outboundorder; org.springframework.data.jpa.repository.jparepository;
+公共jparepository
+    （（（（（（（OutboundOrder FindtopbyOrderByOrderCodedesc（）;}
+
+55 （5）
+5.15.1.1 入库单服务（ inboundorderService.java）
+包com.example.wms.service;
+导入com.example.wms.model.inboundorder; com.example.wms.repository.inboundorderRepository;导入org.springframework.beans.beans.beans.beans.beans.beans.beans.beans.beans.beans.beans.beans.beans.beans.beans.beans.beans.beans.beans.beans.beans.beans.beans.beans.beans.beans.beans.factory.factory.annort ation.autowired;导入org.springfringframework.stringframework.stereotype.stereotype.seretype.seretype.seretype.seretype.SereService.Service.Service.Service.Service.Service.Service.Service.Service.Service.Ser Vice.Service.Service.Service.Service.Service.Service.Service.Service.Service。Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.service.service.service.servic.servic.servic E.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Servic.Servic.Servic.Servic.Servic.Servic.Servic.Servic.Servic.Servic.Servic.Servic.Servic.Servic.Servic.Servic.Servic.Servic.Servic.Servic.Servic.Servic.Servic.Servic.Servic.Servic E.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Serr.Serr.serr.serr.serr.serr.serr.serr.serr.serr.serr​ Vice.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service。 Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Ser Vice.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Servic E.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Ser ​Vice.Service.Service.Service.Service.Service.Service.Sere.Sere.Sere.Sere.Se.se.se.se.se.se.se.se.se.se.se.se.se.se.se.se.se.se.se.se.se.se.se.se.se Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.SsiCe.Sser.Sser.serser.serser.serser.service.service.service.service. vice.Service.Service.Service.Service.Service.Service.Service.Service.Se rvice.Service.Service.Servie.Servie ceervie ce.service.service .Service.Servic.Servic.Servic.Servic.Servic.Servic.Servic.Servic.Servic.Servic.Servic.Serv IC.Servic.Servic.Servic E.Service.Service.Servi.Servi ce.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service .Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.s ervice.Ser Vice.Service.Service.Service.Service.Service.Service.Service。Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Servi.Servi CE.Servi CE.Servi CE.Servi CE.Servi ce.service.service.service。service.servi.servi.service.service.service.service.service。Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Ser Vice.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service.Service .Service.Service.Service.Service.service.service.service.service。服务
+导入java.text.simpledateformat;导入java.util.date;
+@ServicePublic类inboundorderService {
+
+    @Autowired
+    私有InboundOrderRepository InboundOrderRepository;
+
+    公共eateateArteCode（）{
+        SimpleDateFormat SDF =新的simpleDateFormat（“ yyyymmdd”）;
+        （（（（（（（），
+        InboundOrder lastOrder = InboundOrderRepository.findtopbyOrderByOrderCodedesc（）;
+        如果（ lastOrder == null）{
+            返回日期 +“ 0001”; 0001“; 0001”; 0001“; 0001”; 0001“; 0001”; 0001”;0001”; 0001“; 0001”; 0001”;0001 ”; 0001 ”;0001 ”; 0001 ”;
+        }别的{
+            int sequence = integer.parseint lastordore.getOrderCode （（8）（8）（8） + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 ; （8）（8）） + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1; （8）（8）（8）（8）（ 8）（ 8） + 1 + 1 + 1 +1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1; （8）（8）） + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 （8）（8）（8）（8） + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1; （8）（8）） + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1; （8）（8）（8）（8）（ 8）（ 8） + 1 + 1 + 1 +1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 11 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1; （8）（8）） + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 ;8）（8）（8） + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 ; （8）（8）） + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1; （8）（8）（8）（8）（ 8）（ 8） + 1 + 1 + 1 +1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 11 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1; （8）（8）） + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 ;8）（8）（8） + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 11 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 ; （8）（8）） + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1; （8）（8）（8）（8）（ 8）（ 8） + 1 + 1 + 1 +1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 11 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 ; （8）（8）） + 1 + 1 + 1 + 1 + 1 +1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 ;
+            + + string.format（“ ％04 d”，（（（（（（（（序列）（（（（（（（（（序列）04 d“，（（序列）（（（（序列）；）（（）（（（（（序列）（）（（）（）（）（）；）04 d”，（（（（（（（序列）（（（（（（（（序列）04 d“，（（序列）（（（（序列）；）（）（（（（（序列）；）04 d“，（（（（（（序列）（（）04 d“，（（序列）（（（）（（（序列）；）
+        }
+    }
+
+    public inboundOrder saveinboundorder （（ inboundorder订单）{
+        order.SetOrderCode（generateOrdeOrderCode（）;
+        返回InboundOrderRepository.save （订单）;
+    的
+
+66666666 （（6）6（6）6（6）6（6）6（6）6）6）6）6）6（6）6（6）6 ）6 ）6）
+6.166.16 .1（inboundOrderController.java）.1（inboundOrderController.java）
+软件包com.example.wms.controller;
+导入com.example.wms.model.inboundorder; com.example.wms.service.inboundorderservice;导入org.springframework.beans.beans.beans.beans.beans.factory.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.ann otation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annota tion.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.Annotation.Annota tion.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.annotation.Annotation.Aotowied;自动;自动;自动;自动;
+@restController@requestMapping（“ /api /inbound”）public类inboundordercontroller {
+
+    @Autowired
+    私人InbounderService InbounderService；
+
+    @postmapping
+    public inboundOrder createinboundorder@requestbody inboundOrder订单{
+        返回InboundorderService.saveinBoundOrder （订单）;
+    }}}}}}}}}}}}}}}}}}}}}}}}}}}}
+
+77777777。。WMSAPPLICATION.JAVA）
+软件包com.example.wms;
+导入org.springframework.boot.springapplication;导入org.springframework.boot.autoconfigure.springbootapplication;
+@springbootapplicationpublic类wmsapplication {
+    公共静态void main（string [] args）{
+        springapplication.run（wmsapplication.class，args）;
+    }}}}}}}}}}}}
+
+88。
+创建数据库wms_db。
+运行wmsapplication启动项目。
+使用邮递员或浏览器访问
+POST /API /INBOUND创建入库单。
+获取 /API /入站查询入库单。
