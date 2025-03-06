@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>יוסף חיים חיון - הנהלת חשבונות ושירותי משרד</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .card {
+            background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-top: 50px;
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1abc9c 0%, #3498db 100%);
+            padding: 30px 0;
+            text-align: center;
+            color: white;
+        }
+        
+        .logo-container {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 50%;
+            padding: 10px;
+            margin-top: -90px;
+            margin-bottom: 20px;
+            border: 5px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info {
+            padding: 20px 40px 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #2980b9;
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+        }
+        
+        h2 {
+            color: #16a085;
+            margin-bottom: 30px;
+            font-weight: normal;
+            font-size: 1.5rem;
+        }
+        
+        .contact-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .contact-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            min-width: 200px;
+        }
+        
+        .contact-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .whatsapp {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+        }
+        
+        .phone {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        }
+        
+        .email {
+            background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
+        }
+        
+        .icon {
+            margin-left: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 600px) {
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-button {
+                width: 100%;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <!-- Header background only -->
+            </div>
+            
+            <div class="logo-container">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100%" height="100%">
+                    <defs>
+                        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#1abc9c" />
+                            <stop offset="100%" stop-color="#3498db" />
+                        </linearGradient>
+                        <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#333" flood-opacity="0.3"/>
+                        </filter>
+                    </defs>
+                    
+                    <circle cx="150" cy="150" r="130" fill="url(#bgGradient)" filter="url(#shadow)"/>
+                    <circle cx="150" cy="150" r="110" fill="#ffffff"/>
+                    
+                    <g transform="translate(90, 70)">
+                        <rect x="0" y="0" width="80" height="100" rx="6" ry="6" fill="#ffffff" stroke="#16a085" stroke-width="4"/>
+                        <line x1="15" y1="20" x2="65" y2="20" stroke="#3498db" stroke-width="4"/>
+                        <line x1="15" y1="40" x2="65" y2="40" stroke="#3498db" stroke-width="4"/>
+                        <line x1="15" y1="60" x2="65" y2="60" stroke="#3498db" stroke-width="4"/>
+                        <line x1="15" y1="80" x2="50" y2="80" stroke="#3498db" stroke-width="4"/>
+                        <rect x="50" y="65" width="35" height="45" rx="3" ry="3" fill="#2980b9" transform="rotate(-45, 67.5, 87.5)"/>
+                    </g>
+                    
+                    <text x="150" y="210" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#2980b9" filter="url(#shadow)">י.ח</text>
+                    
+                    <rect x="65" y="225" width="170" height="30" rx="15" ry="15" fill="white" stroke="#16a085" stroke-width="2"/>
+                    <text x="150" y="245" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#16a085">הנה״ח ושירותי משרד</text>
+                </svg>
+            </div>
+            
+            <div class="info">
+                <h1>יוסף חיים חיון</h1>
+                <h2>הנהלת חשבונות ושירותי משרד מרחוק</h2>
+                
+                <div class="contact-buttons">
+                    <a href="https://wa.me/972586673186" class="contact-button whatsapp" target="_blank">
+                        <span class="icon">📱</span>
+                        וואטסאפ
+                    </a>
+                    
+                    <a href="tel:+972509202363" class="contact-button phone">
+                        <span class="icon">📞</span>
+                        התקשר עכשיו
+                    </a>
+                    
+                    <a href="mailto:YOSEFH2071@GMAIL.COM" class="contact-button email">
+                        <span class="icon">✉️</span>
+                        שלח אימייל
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2025 יוסף חיים חיון. כל הזכויות שמורות.</p>
+        </div>
+    </div>
+</body>
+</html>
