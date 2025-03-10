@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akhilesh - Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            text-align: center;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 20px;
+        }
+        section {
+            padding: 20px;
+            background: #fff;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Akhilesh</h1>
+        <p>Cloud & DevOps Engineer | Azure | Terraform | Kubernetes</p>
+    </header>
+    <div class="container">
+        <section>
+            <h2>About Me</h2>
+            <p>Having 6+ years of IT experience, specializing in Cloud & DevOps Engineering with expertise in Azure DevOps, CI/CD pipelines, Terraform, and Kubernetes.</p>
+        </section>
+        <section>
+            <h2>Skills</h2>
+            <p>Azure DevOps, Jenkins, Terraform, Docker, Kubernetes, Ansible, CI/CD, Git, Linux, Windows</p>
+        </section>
+        <section>
+            <h2>Experience</h2>
+            <p><strong>Senior Software Engineer</strong> - LearningMate Solutions (2023-2025)</p>
+            <p><strong>Software Engineer</strong> - Aragen Life Sciences Limited (2020-2022)</p>
+            <p><strong>Associate Trainee</strong> - Sai Life Sciences (2017-2020)</p>
+        </section>
+        <section>
+            <h2>Contact</h2>
+            <p>Email: Akhilesh777307@gmail.com</p>
+            <p>Phone: 8328022078</p>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; 2025 Akhilesh. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
