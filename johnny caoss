@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudio de Tatuajes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <h1>Estudio de Tatuajes</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#about">Sobre Nosotros</a></li>
+                <li><a href="#portfolio">Portafolio</a></li>
+                <li><a href="#services">Servicios</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Sección Inicio -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h2>El Arte del Tatuaje</h2>
+            <p>Transformamos tus ideas en arte sobre la piel</p>
+            <a href="#contact" class="cta-btn">Reserva tu cita</a>
+        </div>
+    </section>
+
+    <!-- Sección Sobre Nosotros -->
+    <section id="about">
+        <div class="container">
+            <h2>Sobre Nosotros</h2>
+            <p>En nuestro estudio de tatuajes, ofrecemos un ambiente profesional y seguro, donde la creatividad y el arte se fusionan para brindarte tatuajes únicos. Nuestros tatuadores son expertos en diversas técnicas, con años de experiencia.</p>
+        </div>
+    </section>
+
+    <!-- Sección Portafolio -->
+    <section id="portfolio">
+        <div class="container">
+            <h2>Portafolio</h2>
+            <p>Explora una selección de nuestros trabajos recientes.</p>
+            <div class="portfolio-gallery">
+                <img src="https://via.placeholder.com/350x350" alt="Tatuaje 1">
+                <img src="https://via.placeholder.com/350x350" alt="Tatuaje 2">
+                <img src="https://via.placeholder.com/350x350" alt="Tatuaje 3">
+                <img src="https://via.placeholder.com/350x350" alt="Tatuaje 4">
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Servicios -->
+    <section id="services">
+        <div class="container">
+            <h2>Servicios</h2>
+            <div class="service-item">
+                <h3>Tatuajes Personalizados</h3>
+                <p>Creamos diseños exclusivos basados en tus ideas y preferencias.</p>
+            </div>
+            <div class="service-item">
+                <h3>Retoques y Reparaciones</h3>
+                <p>Mejoramos y restauramos tatuajes antiguos o dañados.</p>
+            </div>
+            <div class="service-item">
+                <h3>Consultas Virtuales</h3>
+                <p>Si no puedes venir en persona, ofrecemos consultas virtuales para ayudarte a planificar tu tatuaje.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section id="contact">
+        <div class="container">
+            <h2>Contacto</h2>
+            <form id="contact-form">
+                <input type="text" id="name" placeholder="Tu nombre" required>
+                <input type="email" id="email" placeholder="Tu email" required>
+                <textarea id="message" placeholder="Tu mensaje" required></textarea>
+                <button type="submit">Enviar Mensaje</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>© 2025 Estudio de Tatuajes. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
+/* Reset de márgenes y paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo de fuente y cuerpo */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Estilo de la cabecera */
+header {
+    background-color: #222;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+header .logo h1 {
+    font-size: 2.5em;
+}
+
+header nav ul {
+    list-style: none;
+    margin-top: 20px;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0 20px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.1em;
+}
+
+/* Sección Hero (Inicio) */
+.hero {
+    background-image: url('https://via.placeholder.com/1500x800'); /* Imagen de fondo */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 150px 0;
+    text-align: center;
+}
+
+.hero-content h2 {
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.cta-btn {
+    padding: 15px 25px;
+    background-color: #333;
+    color: white;
+    font-size: 1.1em;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.cta-btn:hover {
+    background-color: #555;
+}
+
+/* Sección Contenido */
+section {
+    padding: 60px 20px;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.1em;
+    margin-bottom: 40px;
+}
+
+/* Portafolio de imágenes */
+.portfolio-gallery {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.portfolio-gallery img {
+    width: 350px;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Servicios */
+.service-item {
+    margin-bottom: 30px;
+}
+
+.service-item h3 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.service-item p {
+    font-size: 1.1em;
+    color: #555;
+}
+
+/* Formulario de contacto */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+input, textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+button {
+    padding: 15px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* Pie de página */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #222;
+    color: white;
+    margin-top: 40px;
+}
+// Manejo del formulario de contacto
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();  // Prevenir el envío del formulario
+
+    // Obtener los valores del formulario
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    // Aquí puedes agregar lógica para enviar los datos a un servidor si lo necesitas
+    alert(`Gracias por tu mensaje, ${name}. Nos pondremos en contacto contigo pronto.`);
+
+    // Limpiar el formulario
+    document.getElementById('contact-form').reset();
+});
