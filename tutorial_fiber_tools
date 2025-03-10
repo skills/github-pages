@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial de Uso: Sistema de Relatório de Inspeção</title>
+    <style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    color: #1976D2;
+    margin-top: 1.5em;
+}
+
+h1 {
+    text-align: center;
+    border-bottom: 2px solid #1976D2;
+    padding-bottom: 10px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.image-caption {
+    text-align: center;
+    font-style: italic;
+    margin-top: 5px;
+    color: #666;
+    font-size: 0.9em;
+}
+
+blockquote {
+    background-color: #f5f5f5;
+    border-left: 4px solid #1976D2;
+    padding: 10px 20px;
+    margin: 20px 0;
+}
+
+.tip {
+    background-color: #e3f2fd;
+    border-left: 4px solid #2196F3;
+    padding: 10px 20px;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+.important {
+    background-color: #fff8e1;
+    border-left: 4px solid #ffc107;
+    padding: 10px 20px;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+.code-block {
+    background-color: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 15px;
+    margin: 20px 0;
+    font-family: 'Courier New', Courier, monospace;
+    white-space: pre-wrap;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #f5f5f5;
+}
+
+.toc {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    margin: 20px 0;
+}
+
+.toc-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.toc ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.toc ul ul {
+    padding-left: 20px;
+}
+
+.toc a {
+    text-decoration: none;
+    color: #1976D2;
+}
+
+.toc a:hover {
+    text-decoration: underline;
+}
+
+/* NOVAS CLASSES PARA DIVISÃO DOS TÍTULOS COM NÚMEROS */
+
+/* Essa classe envolve o título inteiro, criando linhas acima e abaixo */
+.section-divider {
+  text-align: center;
+  position: relative;
+  margin: 2em 0;
+  padding: 1em 0;
+}
+
+.section-divider::before,
+.section-divider::after {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  border-top: 2px solid #1976D2;
+}
+
+.section-divider::before {
+  top: 0;
+}
+
+.section-divider::after {
+  bottom: 0;
+}
+
+/* Estilização do número e do texto do título */
+.section-divider .section-number,
+.section-divider .section-title {
+  background: #fff; /* Cor de fundo para "quebrar" a linha */
+  padding: 0 10px;
+  position: relative;
+  z-index: 1;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #1976D2;
+}
+
+.section-divider .section-number {
+  margin-right: 0.5em;
+}
+
+@media print {
+    body {
+        font-size: 12pt;
+    }
+    
+    .no-print {
+        display: none;
+    }
+    
+    h1, h2, h3 {
+        page-break-after: avoid;
+    }
+    
+    img, table {
+        page-break-inside: avoid;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+    <h1>Tutorial de Uso: Sistema de Relatório de Inspeção</h1>
+    
+    <div class="toc">
+        <div class="toc-title">Sumário</div>
+        <ul>
+            <li><a href="#introducao">1. Introdução</a></li>
+            <li><a href="#visao-geral">2. Visão Geral da Interface</a></li>
+            <li><a href="#cabecalho">3. Informações do Cabeçalho</a></li>
+            <li><a href="#atividade">4. Atividade e Descrição</a></li>
+            <li><a href="#material">5. Material Utilizado</a></li>
+            <li><a href="#checklist">6. Inspeção do Serviço (Checklist)</a></li>
+            <li><a href="#data">7. Data da Inspeção</a></li>
+            <li><a href="#geracao-relatorio">8. Geração de Relatório</a></li>
+            <li><a href="#geracao-carimbo">9. Geração de Carimbo</a></li>
+            <li><a href="#importacao">10. Importação de Carimbo</a></li>
+            <li><a href="#solucao">11. Solução de Problemas</a></li>
+        </ul>
+    </div>
+    
+    <h2 id="introducao" class="section-divider">
+        <span class="section-number">1.</span>
+        <span class="section-title">Introdução</span>
+    </h2>
+    
+    <p>O Sistema de Relatório de Inspeção foi desenvolvido para técnicos e encarregados documentarem inspeções de serviços relacionados a instalações de fibra óptica e cabeamento. O aplicativo permite o preenchimento detalhado de informações, gerenciamento de materiais utilizados, avaliação via checklist, e geração tanto de relatórios completos quanto de carimbos padronizados para compartilhamento rápido.</p>
+    
+    <div style="text-align: center;">
+        <svg width="800" height="600" viewBox="0 0 800 600">
+            <defs>
+                <style>
+                    .app-bg { fill: #D2D2D2; }
+                    .card { fill: white; stroke: #E0E0E0; stroke-width: 1; }
+                    .card-title { fill: #1976D2; font-family: sans-serif; font-size: 18px; font-weight: bold; }
+                    .card-divider { stroke: #E0E0E0; stroke-width: 1; }
+                    .text-label { font-family: sans-serif; font-size: 14px; fill: #424242; }
+                    .text-field { fill: #F5F5F5; stroke: #E0E0E0; stroke-width: 1; }
+                    .text-input { font-family: sans-serif; font-size: 14px; fill: #212121; }
+                    .button-primary { fill: #1976D2; stroke: #1565C0; stroke-width: 1; }
+                    .button-success { fill: #4CAF50; stroke: #388E3C; stroke-width: 1; }
+                    .button-text { font-family: sans-serif; font-size: 14px; fill: white; text-anchor: middle; dominant-baseline: middle; }
+                    .icon { fill: #1976D2; }
+                    .header { fill: #1976D2; }
+                    .header-text { font-family: sans-serif; font-size: 20px; fill: white; }
+                </style>
+            </defs>
+            
+            <!-- App background -->
+            <rect width="800" height="600" class="app-bg" />
+            
+            <!-- App header -->
+            <rect width="800" height="56" class="header" />
+            <text x="20" y="35" class="header-text">Relatório de Inspeção</text>
+            
+            <!-- Import icon -->
+            <circle cx="760" cy="28" r="18" fill="white" fill-opacity="0.2" />
+            <text x="760" y="34" font-family="sans-serif" font-size="16" fill="white" text-anchor="middle">📋</text>
+            
+            <!-- Section cards -->
+            <rect x="20" y="76" width="760" height="200" rx="12" ry="12" class="card" />
+            <text x="50" y="106" class="card-title">Informações do Cabeçalho</text>
+            <line x1="20" y1="116" x2="780" y2="116" class="card-divider" />
+            
+            <rect x="20" y="296" width="760" height="180" rx="12" ry="12" class="card" />
+            <text x="50" y="326" class="card-title">Atividade e Descrição</text>
+            <line x1="20" y1="336" x2="780" y2="336" class="card-divider" />
+            
+            <!-- Bottom buttons -->
+            <rect x="250" y="500" width="140" height="40" rx="4" ry="4" class="button-primary" />
+            <text x="320" y="520" class="button-text">Gerar Relatório</text>
+            
+            <rect x="410" y="500" width="140" height="40" rx="4" ry="4" class="button-success" />
+            <text x="480" y="520" class="button-text">Gerar Carimbo</text>
+        </svg>
+        <div class="image-caption">Figura 1: Tela principal do aplicativo de Relatório de Inspeção</div>
+    </div>
+    
+    <p>Este tutorial percorrerá cada seção do aplicativo, explicando sua função e como preencher corretamente os campos para maximizar a eficiência do seu trabalho em campo.</p>
+    
+    <h2 id="visao-geral" class="section-divider">
+        <span class="section-number">2.</span>
+        <span class="section-title">Visão Geral da Interface</span>
+    </h2>
+    
+    <p>A interface do sistema é dividida em cinco seções principais:</p>
+    
+    <ol>
+        <li><strong>Informações do Cabeçalho</strong> - Dados básicos da inspeção e do responsável</li>
+        <li><strong>Atividade e Descrição</strong> - Detalhes específicos do tipo de serviço</li>
+        <li><strong>Material Utilizado</strong> - Lista de materiais consumidos durante o serviço</li>
+        <li><strong>Inspeção do Serviço</strong> - Checklist para avaliação de qualidade</li>
+        <li><strong>Data da Inspeção</strong> - Registro temporal da inspeção</li>
+    </ol>
+    
+    <p>Na parte inferior da tela, encontram-se os botões de ação:</p>
+    <ul>
+        <li><strong>Gerar Relatório</strong> - Cria um relatório completo para impressão ou salvamento</li>
+        <li><strong>Gerar Carimbo</strong> - Cria um texto padronizado para compartilhamento rápido</li>
+    </ul>
+    
+    <p>Na barra superior direita, o ícone de colagem <span style="font-size: 20px;">📋</span> permite importar um carimbo existente para edição ou visualização.</p>
+    
+    <div style="text-align: center;">
+        <svg width="800" height="800" viewBox="0 0 800 800">
+            <defs>
+                <style>
+                    .app-bg { fill: #D2D2D2; }
+                    .card { fill: white; stroke: #E0E0E0; stroke-width: 1; }
+                    .card-title { fill: #1976D2; font-family: sans-serif; font-size: 18px; font-weight: bold; }
+                    .card-divider { stroke: #E0E0E0; stroke-width: 1; }
+                    .text-label { font-family: sans-serif; font-size: 14px; fill: #424242; }
+                    .section-label { font-family: sans-serif; font-size: 18px; fill: #1976D2; }
+                    .button-primary { fill: #1976D2; stroke: #1565C0; stroke-width: 1; }
+                    .button-success { fill: #4CAF50; stroke: #388E3C; stroke-width: 1; }
+                    .button-text { font-family: sans-serif; font-size: 14px; fill: white; text-anchor: middle; dominant-baseline: middle; }
+                    .icon { fill: #1976D2; }
+                    .header { fill: #1976D2; }
+                    .header-text { font-family: sans-serif; font-size: 20px; fill: white; }
+                    .section-box { fill: none; stroke: #1976D2; stroke-width: 2; stroke-dasharray: 5,5; }
+                </style>
+            </defs>
+            
+            <!-- App background -->
+            <rect width="800" height="800" class="app-bg" />
+            
+            <!-- App header -->
+            <rect width="800" height="56" class="header" />
+            <text x="20" y="35" class="header-text">Relatório de Inspeção</text>
+            <circle cx="760" cy="28" r="18" fill="white" fill-opacity="0.2" />
+            <text x="760" y="34" font-family="sans-serif" font-size="16" fill="white" text-anchor="middle">📋</text>
+            
+            <!-- Section 1: Cabeçalho -->
+            <rect x="20" y="76" width="760" height="140" rx="12" ry="12" class="card" />
+            <rect x="20" y="76" width="760" height="140" rx="12" ry="12" class="section-box" />
+            <text x="50" y="106" class="card-title">Informações do Cabeçalho</text>
+            <text x="680" y="106" class="section-label">Seção 1</text>
+            
+            <!-- Section 2: Atividade -->
+            <rect x="20" y="236" width="760" height="140" rx="12" ry="12" class="card" />
+            <rect x="20" y="236" width="760" height="140" rx="12" ry="12" class="section-box" />
+            <text x="50" y="266" class="card-title">Atividade e Descrição</text>
+            <text x="680" y="266" class="section-label">Seção 2</text>
+            
+            <!-- Section 3: Material -->
+            <rect x="20" y="396" width="760" height="140" rx="12" ry="12" class="card" />
+            <rect x="20" y="396" width="760" height="140" rx="12" ry="12" class="section-box" />
+            <text x="50" y="426" class="card-title">Material Utilizado</text>
+            <text x="680" y="426" class="section-label">Seção 3</text>
+            
+            <!-- Section 4: Checklist -->
+            <rect x="20" y="556" width="760" height="140" rx="12" ry="12" class="card" />
+            <rect x="20" y="556" width="760" height="140" rx="12" ry="12" class="section-box" />
+            <text x="50" y="586" class="card-title">Inspeção do Serviço (Checklist)</text>
+            <text x="680" y="586" class="section-label">Seção 4</text>
+            
+            <!-- Section 5: Data -->
+            <rect x="20" y="716" width="380" height="60" rx="12" ry="12" class="card" />
+            <rect x="20" y="716" width="380" height="60" rx="12" ry="12" class="section-box" />
+            <text x="50" y="746" class="card-title">Data da Inspeção</text>
+            <text x="300" y="746" class="section-label">Seção 5</text>
+            
+            <!-- Botões de ação -->
+            <rect x="420" y="716" width="160" height="60" rx="4" ry="4" class="button-primary" />
+            <text x="500" y="746" class="button-text">Gerar Relatório</text>
+            
+            <rect x="600" y="716" width="160" height="60" rx="4" ry="4" class="button-success" />
+            <text x="680" y="746" class="button-text">Gerar Carimbo</text>
+            
+        </svg>
+        <div class="image-caption">Figura 2: Visão geral das seções do formulário</div>
+    </div>
+    
+    <h2 id="cabecalho" class="section-divider">
+        <span class="section-number">3.</span>
+        <span class="section-title">Informações do Cabeçalho</span>
+    </h2>
+    
+    <p>Esta seção contém os dados básicos relacionados ao responsável pela inspeção e à localização do serviço.</p>
+    
+    <div style="text-align: center;">
+        <svg width="800" height="400" viewBox="0 0 800 400">
+            <defs>
+                <style>
+                    .card { fill: white; stroke: #E0E0E0; stroke-width: 1; }
+                    .card-title { fill: #1976D2; font-family: sans-serif; font-size: 18px; font-weight: bold; }
+                    .card-divider { stroke: #E0E0E0; stroke-width: 1; }
+                    .text-label { font-family: sans-serif; font-size: 14px; fill: #424242; }
+                    .text-field { fill: #F5F5F5; stroke: #E0E0E0; stroke-width: 1; }
+                    .text-input { font-family: sans-serif; font-size: 14px; fill: #212121; }
+                    .icon { fill: #1976D2; }
+                </style>
+            </defs>
+            
+            <!-- Section card -->
+            <rect x="0" y="0" width="800" height="400" rx="12" ry="12" class="card" />
+            
+            <!-- Header with icon -->
+            <text x="40" y="40" class="card-title">
+                <tspan>Informações do Cabeçalho</tspan>
+            </text>
+            <circle cx="20" cy="36" r="10" class="icon" />
+            <text x="20" y="41" font-size="14px" fill="white" text-anchor="middle">i</text>
+            
+            <line x1="0" y1="60" x2="800" y2="60" class="card-divider" />
+            
+            <!-- Form fields -->
+            <text x="20" y="90" class="text-label">Selecione a Classe:</text>
+            <rect x="20" y="100" width="300" height="40" rx="8" ry="8" class="text-field" />
+            <text x="35" y="125" class="text-input">Classe F (Fibra Óptica)</text>
+            <polygon points="300,120 310,110 320,120" fill="#757575" />
+            
+            <text x="20" y="170" class="text-label">Encarregado:</text>
+            <rect x="20" y="180" width="760" height="40" rx="8" ry="8" class="text-field" />
+            <text x="35" y="205" class="text-input">NOME COMPLETO DO RESPONSÁVEL</text>
+            
+            <text x="20" y="250" class="text-label">Rota / Endereço:</text>
+            <rect x="20" y="260" width="760" height="40" rx="8" ry="8" class="text-field" />
+            <text x="35" y="285" class="text-input">AV. PAULISTA, 1000</text>
+            
+            <text x="20" y="330" class="text-label">Legal:</text>
+            <rect x="20" y="340" width="235" height="40" rx="8" ry="8" class="text-field" />
+            <text x="35" y="365" class="text-input">12345</text>
+            
+            <text x="275" y="330" class="text-label">CT:</text>
+            <rect x="275" y="340" width="235" height="40" rx="8" ry="8" class="text-field" />
+            <text x="290" y="365" class="text-input">JD</text>
+            
+            <text x="530" y="330" class="text-label">Cabo#:</text>
+            <rect x="530" y="340" width="235" height="40" rx="8" ry="8" class="text-field" />
+            <text x="545" y="365" class="text-input">01</text>
+        </svg>
+        <div class="image-caption">Figura 3: Detalhamento da seção de Informações do Cabeçalho</div>
+    </div>
+    
+    <h3>Como preencher:</h3>
+    
+    <ol>
+        <li>
+            <p><strong>Selecione a Classe</strong> - Escolha a classificação adequada do serviço usando o menu suspenso:</p>
+            <ul>
+                <li>Classe F (Fibra Óptica)</li>
+                <li>Classe L (Classe L)</li>
+                <li>Classe A (Outra Classe)</li>
+            </ul>
+            
+            <div style="text-align: center;">
+                <svg width="300" height="120" viewBox="0 0 300 120">
+                    <defs>
+                        <style>
+                            .text-field { fill: #F5F5F5; stroke: #E0E0E0; stroke-width: 1; }
+                            .dropdown-item { fill: white; }
+                            .dropdown-item-selected { fill: #E3F2FD; }
+                            .text-input { font-family: sans-serif; font-size: 14px; fill: #212121; }
+                        </style>
+                    </defs>
+                    
+                    <rect x="0" y="0" width="300" height="40" rx="8" ry="8" class="text-field" />
+                    <text x="15" y="25" class="text-input">Classe F (Fibra Óptica)</text>
+                    <polygon points="280,20 290,10 300,20" fill="#757575" />
+                    
+                    <!-- Dropdown open -->
+                    <rect x="0" y="42" width="300" height="78" rx="0" ry="0" fill="white" stroke="#E0E0E0" stroke-width="1" />
+                    <rect x="0" y="42" width="300" height="26" rx="0" ry="0" fill="#E3F2FD" />
+                    <text x="15" y="60" class="text-input">Classe F (Fibra Óptica)</text>
+                    
+                    <line x1="0" y1="68" x2="300" y2="68" stroke="#E0E0E0" stroke-width="1" />
+                    <text x="15" y="86" class="text-input">Classe L (Classe L)</text>
+                    
+                    <line x1="0" y1="94" x2="300" y2="94" stroke="#E0E0E0" stroke-width="1" />
+                    <text x="15" y="112" class="text-input">Classe A (Outra Classe)</text>
+                </svg>
+                <div class="image-caption">Figura 4: Dropdown para seleção de Classe</div>
+            </div>
+        </li>
+        
+        <li>
+            <p><strong>Encarregado</strong> - Digite o nome completo do responsável pela inspeção (campo obrigatório).</p>
+            <div class="tip">
+                <strong>Nota:</strong> Todos os textos são automaticamente convertidos para letras maiúsculas.
+            </div>
+        </li>
+        
+        <li>
+            <p><strong>Rota / Endereço</strong> - Informe o endereço completo onde o serviço foi realizado (campo obrigatório).</p>
+            <blockquote>
+                <strong>Exemplo:</strong> AV. PAULISTA, 1000
+            </blockquote>
+        </li>
+        
+        <li><p><strong>Legal</strong> - Digite o número do RE (Registro de Empregado) do responsável (campo obrigatório).</p></li>
+        
+        <li>
+            <p><strong>CT</strong> - Informe o código da Central Telefônica ou a localidade (campo obrigatório).</p>
+            <blockquote>
+                <strong>Exemplo:</strong> JD ou JARDINS
+            </blockquote>
+        </li>
+        
+        <li><p><strong>Cabo#</strong> - Digite o número do cabo inspecionado (campo obrigatório).</p></li>
+        
+        <li><p><strong>Primaria#</strong> - Informe o número da primária (campo obrigatório).</p></li>
+        
+        <li><p><strong>Lateral#</strong> - Opcional. Digite o número da lateral, se aplicável.</p></li>
+    </ol>
+    
+    <div class="important">
+        <strong>Dica:</strong> Campos marcados com asterisco (*) são obrigatórios e devem ser preenchidos para gerar o relatório ou carimbo.
+    </div>
+    
+    <h2 id="atividade" class="section-divider">
+        <span class="section-number">4.</span>
+        <span class="section-title">Atividade e Descrição</span>
+    </h2>
+    
+    <p>Nesta seção, você especificará o tipo de identificação do serviço e fornecerá uma descrição detalhada dos trabalhos executados.</p>
+    
+    <div style="text-align: center;">
+        <svg width="800" height="400" viewBox="0 0 800 400">
+            <defs>
+                <style>
+                    .card { fill: white; stroke: #E0E0E0; stroke-width: 1; }
+                    .card-title { fill: #1976D2; font-family: sans-serif; font-size: 18px; font-weight: bold; }
+                    .card-divider { stroke: #E0E0E0; stroke-width: 1; }
+                    .text-label { font-family: sans-serif; font-size: 14px; fill: #424242; }
+                    .text-field { fill: #F5F5F5; stroke: #E0E0E0; stroke-width: 1; }
+                    .text-input { font-family: sans-serif; font-size: 14px; fill: #212121; }
+                    .icon { fill: #1976D2; }
+                </style>
+            </defs>
+            
+            <!-- Section card -->
+            <rect x="0" y="0" width="800" height="400" rx="12" ry="12" class="card" />
+            
+            <!-- Header with icon -->
+            <text x="40" y="40" class="card-title">
+                <tspan>Atividade e Descrição</tspan>
+            </text>
+            <circle cx="20" cy="36" r="10" class="icon" />
+            <text x="20" y="40" font-size="14px" fill="white" text-anchor="middle">✓</text>
+            
+            <line x1="0" y1="60" x2="800" y2="60" class="card-divider" />
+            
+            <!-- Form fields -->
+            <text x="20" y="90" class="text-label">Tipo de Identificação:</text>
+            <rect x="20" y="100" width="300" height="40" rx="8" ry="8" class="text-field" />
+            <text x="35" y="125" class="text-input">SPR:</text>
+            <polygon points="300,120 310,110 320,120" fill="#757575" />
+            
+            <text x="20" y="170" class="text-label">Número do SPR:</text>
+            <rect x="20" y="180" width="350" height="40" rx="8" ry="8" class="text-field" />
+            <text x="35" y="205" class="text-input">123456</text>
+            
+            <text x="20" y="250" class="text-label">ID:</text>
+            <rect x="20" y="260" width="350" height="40" rx="8" ry="8" class="text-field" />
+            <text x="35" y="285" class="text-input">P12345</text>
+            
+            <text x="20" y="330" class="text-label">Descrição dos Serviços Executados:</text>
+            <rect x="20" y="340" width="760" height="100" rx="8" ry="8" class="text-field" />
+            <text x="35" y="365" class="text-input" style="font-size: 12px;">INSTALAÇÃO DE CABO ÓPTICO COM FUSÃO DE FIBRAS E CONFIGURAÇÃO DE EQUIPAMENTOS</text>
+        </svg>
+        <div class="image-caption">Figura 5: Seção de Atividade e Descrição</div>
+    </div>
+    
+    <h3>Como preencher:</h3>
+    
+    <ol>
+        <li>
+            <p><strong>Tipo de Identificação</strong> - Selecione o tipo de serviço utilizando o menu suspenso:</p>
+            <ul>
+                <li>SPR: (Serviço Programado)</li>
+                <li>OCORRÊNCIA: (Registro de Ocorrência)</li>
+                <li>TA: (Ticket de Anormalidade)</li>
+            </ul>
+            
+            <div style="text-align: center;">
+                <svg width="300" height="120" viewBox="0 0 300 120">
+                    <defs>
+                        <style>
+                            .text-field { fill: #F5F5F5; stroke: #E0E0E0; stroke-width: 1; }
+                            .dropdown-item { fill: white; }
+                            .dropdown-item-selected { fill: #E3F2FD; }
+                            .text-input { font-family: sans-serif; font-size: 14px; fill: #212121; }
+                        </style>
+                    </defs>
+                    
+                    <rect x="0" y="0" width="300" height="40" rx="8" ry="8" class="text-field" />
+                    <text x="15" y="25" class="text-input">SPR:</text>
+                    <polygon points="280,20 290,10 300,20" fill="#757575" />
+                    
+                    <!-- Dropdown open -->
+                    <rect x="0" y="42" width="300" height="78" rx="0" ry="0" fill="white" stroke="#E0E0E0" stroke-width="1" />
+                    <rect x="0" y="42" width="300" height="26" rx="0" ry="0" fill="#E3F2FD" />
+                    <text x="15" y="60" class="text-input">SPR:</text>
+                    
+                    <line x1="0" y1="68" x2="300" y2="68" stroke="#E0E0E0" stroke-width="1" />
+                    <text x="15" y="86" class="text-input">OCORRÊNCIA:</text>
+                    
+                    <line x1="0" y1="94" x2="300" y2="94" stroke="#E0E0E0" stroke-width="1" />
+                    <text x="15" y="112" class="text-input">TA:</text>
+                </svg>
+                <div class="image-caption">Figura 6: Seleção do tipo de identificação</div>
+            </div>
+        </li>
+        
+        <li><p><strong>Número do SPR/Ocorrência/TA</strong> - Digite o número de identificação correspondente ao tipo selecionado (campo obrigatório).</p></li>
+        
+        <li><p><strong>ID</strong> - Este campo aparece apenas quando "SPR:" é selecionado como tipo de identificação. Digite o ID do PRUMA (campo obrigatório para SPR).</p></li>
+        
+        <li>
+            <p><strong>Descrição dos Serviços Executados</strong> - Forneça uma descrição detalhada dos serviços realizados (campo obrigatório).</p>
+            <div class="important">
+                <strong>Importante:</strong> Este campo tem um limite de 800 caracteres e 8 linhas.
+            </div>
+            
+            <div style="text-align: center;">
+                <svg width="500" height="150" viewBox="0 0 500 150">
+                    <defs>
+                        <style>
+                            .text-field { fill: #F5F5F5; stroke: #E0E0E0; stroke-width: 1; }
+                            .text-label { font-family: sans-serif; font-size: 14px; fill: #424242; }
+                            .text-input { font-family: sans-serif; font-size: 12px; fill: #212121; }
+                        </style>
+                    </defs>
+                    
+                    <text x="0" y="20" class="text-label">Descrição dos Serviços Executados:</text>
+                    <rect x="0" y="30" width="500" height="120" rx="8" ry="8" class="text-field" />
+                    <text x="10" y="50" class="text-input">
+                        <tspan x="10" dy="0">INSTALAÇÃO DE CABO ÓPTICO COM FUSÃO DE FIBRAS E</tspan>
+                        <tspan x="10" dy="20">CONFIGURAÇÃO DE EQUIPAMENTOS. REALIZADO TESTE DE</tspan>
+                        <tspan x="10" dy="20">SINAL E VERIFICAÇÃO DE PERDA DE POTÊNCIA.</tspan>
+                    </text>
+                </svg>
+                <div class="image-caption">Figura 7: Campo para descrição dos serviços executados</div>
+            </div>
+        </li>
+    </ol>
+    
+    <div class="tip">
+        <strong>Dica:</strong> Seja específico na descrição. Mencione equipamentos utilizados, descrevar todo o serviço feito juntamente com a CS# e os elementos de emenda aereo e subterraneo.
+    </div>
+    
+    <h2 id="materiais" class="section-divider">
+        <span class="section-number">5.</span>
+        <span class="section-title">Material Utilizado</span>
+    </h2>
+    
+    <p>Esta seção permite registrar todos os materiais consumidos durante a execução do serviço.</p>
+    
+    <div style="text-align: center;">
+        <svg width="800" height="300" viewBox="0 0 800 300">
+            <defs>
+                <style>
+                    .card { fill: white; stroke: #E0E0E0; stroke-width: 1; }
+                    .card-title { fill: #1976D2; font-family: sans-serif; font-size: 18px; font-weight: bold; }
+                    .card-divider { stroke: #E0E0E0; stroke-width: 1; }
+                    .text-label { font-family: sans-serif; font-size: 14px; fill: #424242; }
+                    .text-field { fill: #F5F5F5; stroke: #E0E0E0; stroke-width: 1; }
+                    .text-input { font-family: sans-serif; font-size: 14px; fill: #212121; }
+                    .button-primary { fill: #1976D2; stroke: #1565C0; stroke-width: 1; }
+                    .button-text { font-family: sans-serif; font-size: 14px; fill: white; text-anchor: middle; dominant-baseline: middle; }
+                    .icon { fill: #1976D2; }
+                </style>
+            </defs>
+            
+            <!-- Section card -->
+            <rect x="0" y="0" width="800" height="300" rx="12" ry="12" class="card" />
+            
+            <!-- Header with icon -->
+            <text x="40" y="40" class="card-title">
+                <tspan>Material Utilizado</tspan>
+            </text>
+            <circle cx="20" cy="36" r="10" class="icon" />
+            <text x="20" y="41" font-size="14px" fill="white" text-anchor="middle">📦</text>
+            
+            <line x1="0" y1="60" x2="800" y2="60" class="card-divider" />
+            
+            <!-- Material rows -->
+            <text x="35" y="90" class="text-label">CODIGO</text>
+            <text x="305" y="90" class="text-label">MATERIAL GASTO</text>
+            <text x="605" y="90" class="text-label">Qtd</text>
+            
+            <!-- First row -->
+            <rect x="20" y="100" width="230" height="40" rx="8" ry="8" class="text-field" />
+            <text x="35" y="125" class="text-input">001234</text>
+            
+            <rect x="260" y="100" width="300" height="40" rx="8" ry="8" class="text-field" />
+            <text x="275" y="125" class="text-input">SPLITTER ÓPTICO 1:8</text>
+            
+            <rect x="570" y="100" width="150" height="40" rx="8" ry="8" class="text-field" />
+            <text x="585" y="125" class="text-input">1</text>
+            
+            <circle cx="750" cy="120" r="15" fill="#F44336" />
+            <text x="750" y="125" font-size="20px" fill="white" text-anchor="middle">×</text>
+            
+            <!-- Second row -->
+            <rect x="20" y="150" width="230" height="40" rx="8" ry="8" class="text-field" />
+            <text x="35" y="175" class="text-input">002345</text>
+            
+            <rect x="260" y="150" width="300" height="40" rx="8" ry="8" class="text-field" />
+            <text x="275" y="175" class="text-input">CONECTOR SC/APC</text>
+            
+            <rect x="570" y="150" width="150" height="40" rx="8" ry="8" class="text-field" />
+            <text x="585" y="175" class="text-input">8</text>
+            
+            <circle cx="750" cy="170" r="15" fill="#F44336" />
+            <text x="750" y="175" font-size="20px" fill="white" text-anchor="middle">×</text>
+            
+            <!-- Add button -->
+            <rect x="20" y="220" width="180" height="40" rx="4" ry="4" class="button-primary" />
+            <text x="110" y="240" class="button-text">Adicionar Material</text>
+        </svg>
+        <div class="image-caption">Figura 8: Seção para registro de materiais utilizados</div>
+    </div>
+    
+    <h3>Como preencher:</h3>
+    
+    <ol>
+        <li>
+            <p>Inicialmente, não há nenhum material registrado. Para adicionar um novo material, clique no botão "Adicionar Material".</p>
+            
+            <div style="text-align: center;">
+                <svg width="180" height="40" viewBox="0 0 180 40">
+                    <defs>
+                        <style>
+                            .button-primary { fill: #1976D2; stroke: #1565C0; stroke-width: 1; }
+                            .button-text { font-family: sans-serif; font-size: 14px; fill: white; text-anchor: middle; dominant-baseline: middle; }
+                        </style>
+                    </defs>
+                    
+                    <rect x="0" y="0" width="180" height="40" rx="4" ry="4" class="button-primary" />
+                    <text x="90" y="20" class="button-text">Adicionar Material</text>
+                </svg>
+                <div class="image-caption">Figura 9: Botão para adicionar um novo material</div>
+            </div>
+        </li>
+        
+        <li>
+            <p>Para cada material, preencha:</p>
+            <ul>
+                <li><strong>CODIGO</strong> - "Opcional" O código de identificação do material no sistema de inventário</li>
+                <li><strong>MATERIAL GASTO</strong> - Nome ou descrição do material utilizado</li>
+                <li><strong>Qtd</strong> - Quantidade utilizada (somente números)</li>
+            </ul>
+            
+            <div style="text-align: center;">
+                <svg width="600" height="40" viewBox="0 0 600 40">
+                    <defs>
+                        <style>
+                            .text-field { fill: #F5F5F5; stroke: #E0E0E0; stroke-width: 1; }
+                            .text-input { font-family: sans-serif; font-size: 14px; fill: #212121; }
+                        </style>
+                    </defs>
+                    
+                    <rect x="0" y="0" width="190" height="40" rx="8" ry="8" class="text-field" />
+                    <text x="15" y="25" class="text-input">001234</text>
+                    
+                    <rect x="200" y="0" width="280" height="40" rx="8" ry="8" class="text-field" />
+                    <text x="215" y="25" class="text-input">SPLITTER ÓPTICO 1:8</text>
+                    
+                    <rect x="490" y="0" width="80" height="40" rx="8" ry="8" class="text-field" />
+                    <text x="505" y="25" class="text-input">1</text>
+                    
+                    <text x="590" y="25" font-size="20px" fill="#F44336" text-anchor="middle" font-weight="bold">×</text>
+                </svg>
+                <div class="image-caption">Figura 10: Campos para registro de um material</div>
+            </div>
+        </li>
+        
+        <li>
+            <p>Para remover um material, clique no ícone de lixeira <span style="color: #F44336; font-weight: bold;">×</span> à direita do registro.</p>
+        </li>
+    </ol>
+    
+    <div class="important">
+        <strong>Importante:</strong> Se nenhum material for adicionado, o sistema marcará automaticamente a opção "NÃO" para gasto de material no carimbo gerado.
+    </div>
+    
+    <h2 id="checklist" class="section-divider">
+        <span class="section-number">6.</span>
+        <span class="section-title">Inspeção do Serviço (Checklist)</span>
+    </h2>
+    
+    <p>O checklist permite avaliar diversos aspectos da qualidade do serviço executado.</p>
+    
+    <div style="text-align: center;">
+        <svg width="800" height="400" viewBox="0 0 800 400">
+            <defs>
+                <style>
+                    .card { fill: white; stroke: #E0E0E0; stroke-width: 1; }
+                    .card-title { fill: #1976D2; font-family: sans-serif; font-size: 18px; font-weight: bold; }
+                    .card-divider { stroke: #E0E0E0; stroke-width: 1; }
+                    .text-label { font-family: sans-serif; font-size: 14px; fill: #424242; }
+                    .checklist-header { font-family: sans-serif; font-size: 18px; font-weight: bold; fill: #424242; }
+                    .checklist-item { font-family: sans-serif; font-size: 14px; font-weight: bold; fill: #424242; }
+                    .icon { fill: #1976D2; }
+                </style>
+            </defs>
+            
+            <!-- Section card -->
+            <rect x="0" y="0" width="800" height="400" rx="12" ry="12" class="card" />
+            
+            <!-- Header with icon -->
+            <text x="40" y="40" class="card-title">
+                <tspan>Inspeção do Serviço</tspan>
+            </text>
+            <circle cx="20" cy="36" r="10" class="icon" />
+            <text x="20" y="41" font-size="14px" fill="white" text-anchor="middle">✓</text>
+            
+            <line x1="0" y1="60" x2="800" y2="60" class="card-divider" />
+            
+            <!-- Checklist header -->
+            <text x="20" y="90" class="checklist-header">Check-List</text>
+            
+            <!-- Checklist items -->
+            <text x="20" y="130" class="checklist-item">Etiquetas de Identificação</text>
+            <rect x="20" y="140" width="24" height="24" fill="white" stroke="#1976D2" stroke-width="2" />
+            <text x="55" y="157" class="text-label">C</text>
+            
+            <rect x="80" y="140" width="24" height="24" fill="white" stroke="#757575" stroke-width="1" />
+            <text x="115" y="157" class="text-label">NC</text>
+            
+            <rect x="140" y="140" width="24" height="24" fill="white" stroke="#757575" stroke-width="1" />
+            <text x="175" y="157" class="text-label">NA</text>
+            
+            <line x1="20" y1="175" x2="780" y2="175" stroke="#E0E0E0" stroke-width="1" />
+            
+            <text x="20" y="205" class="checklist-item">Fechamento de emendas</text>
+            <rect x="20" y="215" width="24" height="24" fill="white" stroke="#757575" stroke-width="1" />
+            <text x="55" y="232" class="text-label">C</text>
+            
+            <rect x="80" y="215" width="24" height="24" fill="#1976D2" stroke="#1976D2" stroke-width="2" />
+            <text x="82" y="232" font-family="sans-serif" font-size="16px" fill="white" text-anchor="middle" dominant-baseline="middle">✓</text>
+            <text x="115" y="232" class="text-label">NC</text>
+            
+            <rect x="140" y="215" width="24" height="24" fill="white" stroke="#757575" stroke-width="1" />
+            <text x="175" y="232" class="text-label">NA</text>
+            
+            <line x1="20" y1="250" x2="780" y2="250" stroke="#E0E0E0" stroke-width="1" />
+            
+            <text x="20" y="280" class="checklist-item">Preparação de capas de cabo / sobra de fibras/ tubo</text>
+            <rect x="20" y="290" width="24" height="24" fill="white" stroke="#757575" stroke-width="1" />
+            <text x="55" y="307" class="text-label">C</text>
+            
+            <rect x="80" y="290" width="24" height="24" fill="white" stroke="#757575" stroke-width="1" />
+            <text x="115" y="307" class="text-label">NC</text>
+            
+            <rect x="140" y="290" width="24" height="24" fill="#1976D2" stroke="#1976D2" stroke-width="2" />
+            <text x="142" y="307" font-family="sans-serif" font-size="16px" fill="white" text-anchor="middle" dominant-baseline="middle">✓</text>
+            <text x="175" y="307" class="text-label">NA</text>
+            
+            <line x1="20" y1="325" x2="780" y2="325" stroke="#E0E0E0" stroke-width="1" />
+            
+            <!-- More items would go here -->
+        </svg>
+        <div class="image-caption">Figura 11: Checklist para inspeção de serviço</div>
+    </div>
+    
+    <h3>Como preencher:</h3>
+    
+    <p>Para cada item do checklist, selecione uma das opções:</p>
+    <ul>
+        <li><strong>C</strong> - Conforme (atende aos padrões de qualidade)</li>
+        <li><strong>NC</strong> - Não Conforme (não atende aos padrões necessários)</li>
+        <li><strong>NA</strong> - Não Aplicável (item não relevante para este serviço)</li>
+    </ul>
+    
+    <div style="text-align: center;">
+        <svg width="400" height="100" viewBox="0 0 400 100">
+            <defs>
+                <style>
+                    .checklist-item { font-family: sans-serif; font-size: 14px; font-weight: bold; fill: #424242; }
+                    .text-label { font-family: sans-serif; font-size: 14px; fill: #424242; }
+                </style>
+            </defs>
+            
+            <text x="20" y="30" class="checklist-item">Etiquetas de Identificação</text>
+            <rect x="20" y="40" width="24" height="24" fill="white" stroke="#1976D2" stroke-width="2" />
+            <path d="M25,52 L32,60 L40,45" stroke="#1976D2" stroke-width="2" fill="none" />
+            <text x="55" y="57" class="text-label">C</text>
+            
+            <rect x="80" y="40" width="24" height="24" fill="white" stroke="#757575" stroke-width="1" />
+            <text x="115" y="57" class="text-label">NC</text>
+            
+            <rect x="140" y="40" width="24" height="24" fill="white" stroke="#757575" stroke-width="1" />
+            <text x="175" y="57" class="text-label">NA</text>
+        </svg>
+        <div class="image-caption">Figura 12: Opções de marcação para cada item do checklist</div>
+    </div>
+    
+    <p>Os itens avaliados incluem:</p>
+    <ol>
+        <li>Etiquetas de Identificação</li>
+        <li>Fechamento de emendas</li>
+        <li>Preparação de capas de cabo / sobra de fibras/ tubo</li>
+        <li>Instalação e preparação de cordões monofibra</li>
+        <li>Acabamento / fixação das emendas</li>
+        <li>Retiradas de sobras</li>
+    </ol>
+    
+    <div class="important">
+        <strong>Importante:</strong> Muda de acordo "Selecione a Classe" Dependendo da classe que voce escolher os campos de checklist mudam.
+        <br><br>
+    </div>
+
+    <div class="tip">
+        <strong>Dica:</strong> Para cada item marcado como "NC" (Não Conforme), recomenda-se adicionar informações explicativas na seção de descrição dos serviços.
+    </div>
+    
+    <h2 id="data" class="section-divider">
+        <span class="section-number">7.</span>
+        <span class="section-title">Data da Inspeção</span>
+    </h2>
+    
+    <p>Nesta seção, você registrará a data em que a inspeção foi realizada.</p>
+    
+    <div style="text-align: center;">
+        <svg width="800" height="200" viewBox="0 0 800 200">
+            <defs>
+                <style>
+                    .card { fill: white; stroke: #E0E0E0; stroke-width: 1; }
+                    .card-title { fill: #1976D2; font-family: sans-serif; font-size: 18px; font-weight: bold; }
+                    .card-divider { stroke: #E0E0E0; stroke-width: 1; }
+                    .text-label { font-family: sans-serif; font-size: 14px; fill: #424242; }
+                    .text-field { fill: #F5F5F5; stroke: #E0E0E0; stroke-width: 1; }
+                    .text-input { font-family: sans-serif; font-size: 14px; fill: #212121; }
+                    .icon { fill: #1976D2; }
+                    .calendar-icon { fill: #1976D2; }
+                </style>
+            </defs>
+            
+            <!-- Section card -->
+            <rect x="0" y="0" width="800" height="200" rx="12" ry="12" class="card" />
+            
+            <!-- Header with icon -->
+            <text x="40" y="40" class="card-title">
+                <tspan>Data da Inspeção</tspan>
+            </text>
+            <circle cx="20" cy="36" r="10" class="icon" />
+            <text x="20" y="41" font-size="14px" fill="white" text-anchor="middle">📅</text>
+            
+            <line x1="0" y1="60" x2="800" y2="60" class="card-divider" />
+            
+            <!-- Date selector -->
+            <text x="20" y="100" class="text-label">Data:</text>
+            <rect x="100" y="80" width="300" height="40" rx="8" ry="8" class="text-field" />
+            <text x="120" y="105" class="text-input">09/03/2025</text>
+            
+            <!-- Calendar icon -->
+            <circle cx="380" cy="100" r="15" class="calendar-icon" />
+            <rect x="373" y="90" width="14" height="2" fill="white" />
+            <rect x="373" y="95" width="14" height="10" fill="white" />
+            <line x1="377" y1="90" x2="377" y2="87" stroke="white" stroke-width="2" />
+            <line x1="383" y1="90" x2="383" y2="87" stroke="white" stroke-width="2" />
+        </svg>
+        <div class="image-caption">Figura 13: Seletor de data para o relatório</div>
+    </div>
+    
+    <h3>Como preencher:</h3>
+    
+    <ol>
+        <li>
+            <p>Clique no campo de data para abrir o seletor de calendário.</p>
+            
+            <div style="text-align: center;">
+                <svg width="300" height="300" viewBox="0 0 300 300">
+                    <defs>
+                        <style>
+                            .calendar-bg { fill: white; stroke: #E0E0E0; stroke-width: 1; }
+                            .calendar-header { fill: #1976D2; }
+                            .calendar-day { font-family: sans-serif; font-size: 12px; fill: #424242; text-anchor: middle; dominant-baseline: middle; }
+                            .calendar-day-selected { font-family: sans-serif; font-size: 12px; fill: white; text-anchor: middle; dominant-baseline: middle; }
+                            .calendar-month { font-family: sans-serif; font-size: 14px; fill: white; text-anchor: middle; dominant-baseline: middle; }
+                            .day-circle { fill: #1976D2; }
+                        </style>
+                    </defs>
+                    
+                    <rect x="0" y="0" width="300" height="300" rx="8" ry="8" class="calendar-bg" />
+                    <rect x="0" y="0" width="300" height="40" rx="8" ry="0" class="calendar-header" />
+                    
+                    <text x="150" y="20" class="calendar-month">Março 2025</text>
+                    <polygon points="30,20 20,15 20,25" fill="white" />
+                    <polygon points="270,20 280,15 280,25" fill="white" />
+                    
+                    <!-- Days of week -->
+                    <text x="43" y="60" class="calendar-day">Dom</text>
+                    <text x="86" y="60" class="calendar-day">Seg</text>
+                    <text x="129" y="60" class="calendar-day">Ter</text>
+                    <text x="172" y="60" class="calendar-day">Qua</text>
+                    <text x="215" y="60" class="calendar-day">Qui</text>
+                    <text x="258" y="60" class="calendar-day">Sex</text>
+                    <text x="301" y="60" class="calendar-day">Sáb</text>
+                    
+                    <!-- Days grid -->
+                    <line x1="0" y1="70" x2="300" y2="70" stroke="#E0E0E0" stroke-width="1" />
+                    
+                    <!-- Week 1 -->
+                    <text x="43" y="95" class="calendar-day"></text>
+                    <text x="86" y="95" class="calendar-day"></text>
+                    <text x="129" y="95" class="calendar-day"></text>
+                    <text x="172" y="95" class="calendar-day"></text>
+                    <text x="215" y="95" class="calendar-day"></text>
+                    <text x="258" y="95" class="calendar-day"></text>
+                    <text x="301" y="95" class="calendar-day">1</text>
+                    
+                    <!-- Week 2 -->
+                    <text x="43" y="130" class="calendar-day">2</text>
+                    <text x="86" y="130" class="calendar-day">3</text>
+                    <text x="129" y="130" class="calendar-day">4</text>
+                    <text x="172" y="130" class="calendar-day">5</text>
+                    <text x="215" y="130" class="calendar-day">6</text>
+                    <text x="258" y="130" class="calendar-day">7</text>
+                    <text x="301" y="130" class="calendar-day">8</text>
+                    
+                    <!-- Week 3 -->
+                    <circle cx="43" cy="165" r="15" class="day-circle" />
+                    <text x="43" y="165" class="calendar-day-selected">9</text>
+                    <text x="86" y="165" class="calendar-day">10</text>
+                    <text x="129" y="165" class="calendar-day">11</text>
+                    <text x="172" y="165" class="calendar-day">12</text>
+                    <text x="215" y="165" class="calendar-day">13</text>
+                    <text x="258" y="165" class="calendar-day">14</text>
+                    <text x="301" y="165" class="calendar-day">15</text>
+                    
+                    <!-- More weeks would go here -->
+                </svg>
+                <div class="image-caption">Figura 14: Seletor de calendário</div>
+            </div>
+        </li>
+        
+        <li>
+            <p><strong>Selecione a data</strong> - Escolha a data em que a inspeção foi realizada clicando no dia correspondente no calendário.</p>
+            <div class="important">
+                <strong>Importante:</strong> Este campo é obrigatório e deve ser preenchido para gerar o relatório ou carimbo.
+            </div>
+        </li>
+    </ol>
+    
+    <div class="tip">
+        <strong>Dica:</strong> O formato da data será sempre DD/MM/YYYY (dia/mês/ano).
+    </div>
+    
+    <h2 id="relatorio" class="section-divider">
+        <span class="section-number">8.</span>
+        <span class="section-title">Gerar Relatório</span>
+    </h2>
+    
+    <p>Após preencher todos os campos obrigatórios, você pode gerar um relatório completo de inspeção.</p>
+    
+    <div style="text-align: center;">
+        <svg width="800" height="100" viewBox="0 0 800 100">
+            <defs>
+                <style>
+                    .button-primary { fill: #1976D2; stroke: #1565C0; stroke-width: 1; }
+                    .button-success { fill: #4CAF50; stroke: #388E3C; stroke-width: 1; }
+                    .button-text { font-family: sans-serif; font-size: 14px; fill: white; text-anchor: middle; dominant-baseline: middle; }
+                </style>
+            </defs>
+            
+            <rect x="230" y="30" width="160" height="40" rx="4" ry="4" class="button-primary" />
+            <text x="310" y="50" class="button-text">Gerar Relatório</text>
+            
+            <rect x="410" y="30" width="160" height="40" rx="4" ry="4" class="button-success" />
+            <text x="490" y="50" class="button-text">Gerar Carimbo</text>
+        </svg>
+        <div class="image-caption">Figura 15: Botões para geração de relatórios e carimbos</div>
+    </div>
+    
+    <h3>Como gerar um relatório:</h3>
+    
+    <ol>
+        <li>
+            <p>Verifique se todos os campos obrigatórios estão preenchidos. Campos obrigatórios não preenchidos serão destacados em vermelho.</p>
+            
+            <div style="text-align: center;">
+                <svg width="300" height="80" viewBox="0 0 300 80">
+                    <defs>
+                        <style>
+                            .text-field-error { fill: #F5F5F5; stroke: #F44336; stroke-width: 2; }
+                            .text-label { font-family: sans-serif; font-size: 14px; fill: #424242; }
+                            .error-text { font-family: sans-serif; font-size: 12px; fill: #F44336; }
+                        </style>
+                    </defs>
+                    
+                    <text x="10" y="20" class="text-label">Encarregado:</text>
+                    <rect x="10" y="30" width="280" height="40" rx="8" ry="8" class="text-field-error" />
+                    <text x="10" y="80" class="error-text">Obrigatório</text>
+                </svg>
+                <div class="image-caption">Figura 16: Campo obrigatório não preenchido</div>
+            </div>
+        </li>
+        
+        <li>
+            <p>Clique no botão "Gerar Relatório" na parte inferior da tela.</p>
+        </li>
+        
+        <li>
+            <p>O sistema irá processar as informações e abrir uma nova tela com o relatório formatado, pronto para impressão ou compartilhamento.</p>
+            
+            <div style="text-align: center;">
+                <svg width="800" height="500" viewBox="0 0 800 500">
+                    <defs>
+                        <style>
+                            .report-bg { fill: white; }
+                            .report-title { font-family: sans-serif; font-size: 24px; font-weight: bold; fill: #1976D2; text-anchor: middle; }
+                            .report-subtitle { font-family: sans-serif; font-size: 18px; fill: #424242; text-anchor: middle; }
+                            .report-text { font-family: sans-serif; font-size: 14px; fill: #212121; }
+                            .report-section { font-family: sans-serif; font-size: 16px; font-weight: bold; fill: #1976D2; }
+                            .report-table { fill: #F5F5F5; stroke: #E0E0E0; stroke-width: 1; }
+                            .report-header { fill: #1976D2; }
+                            .header-text { font-family: sans-serif; font-size: 14px; fill: white; }
+                            .report-row { font-family: sans-serif; font-size: 12px; fill: #212121; }
+                        </style>
+                    </defs>
+                    
+                    <rect width="800" height="500" class="report-bg" />
+                    
+                    <text x="400" y="40" class="report-title">RELATÓRIO DE INSPEÇÃO</text>
+                    <text x="400" y="70" class="report-subtitle">Classe F (Fibra Óptica)</text>
+                    
+                    <text x="50" y="120" class="report-section">Dados do Serviço:</text>
+                    <line x1="50" y1="130" x2="750" y2="130" stroke="#1976D2" stroke-width="1" />
+                    
+                    <text x="50" y="160" class="report-text">
+                        <tspan x="50" dy="0">Encarregado: NOME COMPLETO DO RESPONSÁVEL</tspan>
+                        <tspan x="50" dy="25">Rota / Endereço: AV. PAULISTA, 1000</tspan>
+                        <tspan x="50" dy="25">Legal: 12345</tspan>
+                        <tspan x="50" dy="25">SPR: 123456</tspan>
+                        <tspan x="450" dy="-75">Data: 09/03/2025</tspan>
+                        <tspan x="450" dy="25">CT: JD</tspan>
+                        <tspan x="450" dy="25">Cabo#: 01</tspan>
+                        <tspan x="450" dy="25">ID: P12345</tspan>
+                    </text>
+                    
+                    <text x="50" y="260" class="report-section">Materiais Utilizados:</text>
+                    <line x1="50" y1="270" x2="750" y2="270" stroke="#1976D2" stroke-width="1" />
+                    
+                    <rect x="50" y="290" width="700" height="30" class="report-header" />
+                    <text x="80" y="310" class="header-text">CODIGO</text>
+                    <text x="300" y="310" class="header-text">MATERIAL GASTO</text>
+                    <text x="650" y="310" class="header-text">Qtd</text>
+                    
+                    <rect x="50" y="320" width="700" height="30" class="report-table" />
+                    <text x="80" y="340" class="report-row">001234</text>
+                    <text x="300" y="340" class="report-row">SPLITTER ÓPTICO 1:8</text>
+                    <text x="650" y="340" class="report-row">1</text>
+                    
+                    <rect x="50" y="350" width="700" height="30" class="report-table" />
+                    <text x="80" y="370" class="report-row">002345</text>
+                    <text x="300" y="370" class="report-row">CONECTOR SC/APC</text>
+                    <text x="650" y="370" class="report-row">8</text>
+                    
+                    <text x="50" y="420" class="report-section">Observações:</text>
+                    <line x1="50" y1="430" x2="750" y2="430" stroke="#1976D2" stroke-width="1" />
+                    
+                    <text x="50" y="460" class="report-text">
+                        <tspan x="50" dy="0">INSTALAÇÃO DE CABO ÓPTICO COM FUSÃO DE FIBRAS E CONFIGURAÇÃO DE EQUIPAMENTOS.</tspan>
+                        <tspan x="50" dy="20">REALIZADO TESTE DE SINAL E VERIFICAÇÃO DE PERDA DE POTÊNCIA.</tspan>
+                    </text>
+                </svg>
+                <div class="image-caption">Figura 17: Visualização do relatório gerado</div>
+            </div>
+        </li>
+    </ol>
+    
+    <div class="tip">
+        <strong>Dica:</strong> O relatório gerado incluirá todas as informações preenchidas no formulário, incluindo os resultados do checklist, em um formato profissional e fácil de imprimir.
+    </div>
+    
+    <h2 id="carimbo" class="section-divider">
+        <span class="section-number">9.</span>
+        <span class="section-title">Gerar Carimbo</span>
+    </h2>
+    
+    <p>O sistema também permite a geração de um "carimbo" - um texto formatado que resume as informações mais importantes do relatório, ideal para compartilhamento rápido em sistemas de mensagens ou e-mails.</p>
+    
+    <h3>Como gerar um carimbo:</h3>
+    
+    <ol>
+        <li>
+            <p>Verifique se todos os campos obrigatórios estão preenchidos, assim como para a geração do relatório completo.</p>
+        </li>
+        
+        <li>
+            <p>Clique no botão "Gerar Carimbo" na parte inferior da tela.</p>
+            
+            <div style="text-align: center;">
+                <svg width="200" height="60" viewBox="0 0 200 60">
+                    <defs>
+                        <style>
+                            .button-success { fill: #4CAF50; stroke: #388E3C; stroke-width: 1; }
+                            .button-text { font-family: sans-serif; font-size: 14px; fill: white; text-anchor: middle; dominant-baseline: middle; }
+                            .icon-copy { font-family: sans-serif; font-size: 16px; fill: white; }
+                        </style>
+                    </defs>
+                    
+                    <rect x="10" y="10" width="180" height="40" rx="4" ry="4" class="button-success" />
+                    <text x="50" y="30" class="icon-copy">📋</text>
+                    <text x="115" y="30" class="button-text">Gerar Carimbo</text>
+                </svg>
+                <div class="image-caption">Figura 18: Botão para gerar carimbo</div>
+            </div>
+        </li>
+        
+        <li>
+            <p>O sistema irá gerar o texto do carimbo e copiá-lo automaticamente para a área de transferência do seu dispositivo.</p>
+            
+            <div class="code-block">
+CARIMBO SPR
+
+NOME: NOME COMPLETO DO RESPONSÁVEL
+RE: 12345
+
+ROTA / ENDEREÇO: AV. PAULISTA, 1000
+
+DATA: 09/03/2025
+BAIXAR (x)  CANCELAR ()
+N° SPR: 123456
+
+FACILIDADES:
+JDFH# 01
+SP#10
+*LATERAL:* 01
+
+*OBSERVAÇÃO:*
+INSTALAÇÃO DE CABO ÓPTICO COM FUSÃO DE FIBRAS E CONFIGURAÇÃO DE EQUIPAMENTOS. REALIZADO TESTE DE SINAL E VERIFICAÇÃO DE PERDA DE POTÊNCIA.
+
+*GASTO DE MATERIAL*
+(x) SIM  () NÃO
+
+001234 SPLITTER ÓPTICO 1:8 - QTD: 1
+002345 CONECTOR SC/APC - QTD: 8
+
+*ID PRUMA:* P12345
+            </div>
+            <div class="image-caption">Figura 19: Exemplo de carimbo gerado</div>
+        </li>
+        
+        <li>
+            <p>Uma mensagem será exibida confirmando que o carimbo foi copiado para a área de transferência.</p>
+            
+            <div style="text-align: center;">
+                <svg width="600" height="80" viewBox="0 0 600 80">
+                    <defs>
+                        <style>
+                            .snackbar { fill: #323232; rx: 4; ry: 4; }
+                            .snackbar-text { font-family: sans-serif; font-size: 14px; fill: white; }
+                        </style>
+                    </defs>
+                    
+                    <rect x="50" y="20" width="500" height="40" class="snackbar" />
+                    <text x="120" y="45" class="snackbar-text">Carimbo copiado para a área de transferência</text>
+                    <circle cx="90" cy="40" r="15" fill="#4CAF50" />
+                    <path d="M83,40 L88,45 L97,35" stroke="white" stroke-width="2" fill="none" />
+                </svg>
+                <div class="image-caption">Figura 20: Notificação de carimbo copiado</div>
+            </div>
+        </li>
+    </ol>
+    
+    <div class="important">
+        <strong>Importante:</strong> O carimbo contém apenas as informações mais relevantes do relatório e é formatado para fácil leitura em ambientes de texto simples, como chats e e-mails.
+    </div>
+    
+    <h2 id="importacao" class="section-divider">
+        <span class="section-number">10.</span>
+        <span class="section-title">Importação de Carimbo</span>
+    </h2>
+      
+      
+    
+    <p>O sistema permite importar um carimbo existente, facilitando a visualização ou edição de relatórios anteriores.</p>
+    
+    <h3>Como importar um carimbo:</h3>
+    
+    <ol>
+        <li>
+            <p>Na tela principal, clique no ícone de colagem <span style="font-size: 20px;">📋</span> na barra superior direita.</p>
+            
+            <div style="text-align: center;">
+                <svg width="400" height="60" viewBox="0 0 400 60">
+                    <defs>
+                        <style>
+                            .header { fill: #1976D2; }
+                            .header-text { font-family: sans-serif; font-size: 20px; fill: white; }
+                            .icon-bg { fill: white; fill-opacity: 0.2; }
+                            .icon-paste { font-family: sans-serif; font-size: 16px; fill: white; }
+                        </style>
+                    </defs>
+                    
+                    <rect width="400" height="56" class="header" />
+                    <text x="20" y="35" class="header-text">Relatório de Inspeção</text>
+                    
+                    <circle cx="360" cy="28" r="18" class="icon-bg" />
+                    <text x="360" y="34" class="icon-paste" text-anchor="middle">📋</text>
+                </svg>
+                <div class="image-caption">Figura 21: Ícone para importar carimbo</div>
+            </div>
+        </li>
+        
+        <li>
+            <p>Na janela de diálogo que se abre, cole o texto do carimbo que deseja importar.</p>
+            
+            <div style="text-align: center;">
+                <svg width="500" height="400" viewBox="0 0 500 400">
+                    <defs>
+                        <style>
+                            .dialog-bg { fill: white; stroke: #E0E0E0; stroke-width: 1; }
+                            .dialog-title { font-family: sans-serif; font-size: 18px; fill: #212121; }
+                            .dialog-text { font-family: sans-serif; font-size: 14px; fill: #424242; }
+                            .text-area { fill: #F5F5F5; stroke: #E0E0E0; stroke-width: 1; }
+                            .button-cancel { fill: #F5F5F5; stroke: #E0E0E0; stroke-width: 1; }
+                            .button-import { fill: #1976D2; stroke: #1565C0; stroke-width: 1; }
+                            .button-text-dark { font-family: sans-serif; font-size: 14px; fill: #424242; text-anchor: middle; dominant-baseline: middle; }
+                            .button-text-light { font-family: sans-serif; font-size: 14px; fill: white; text-anchor: middle; dominant-baseline: middle; }
+                        </style>
+                    </defs>
+                    
+                    <rect x="0" y="0" width="500" height="400" rx="8" ry="8" class="dialog-bg" />
+                    
+                    <text x="250" y="40" class="dialog-title" text-anchor="middle">Importar Carimbo</text>
+                    
+                    <text x="40" y="80" class="dialog-text">Cole o texto do carimbo abaixo:</text>
+                    
+                    <rect x="40" y="100" width="420" height="200" rx="4" ry="4" class="text-area" />
+                    <text x="50" y="120" class="dialog-text" style="opacity: 0.5;">Cole o carimbo aqui...</text>
+                    
+                    <rect x="290" y="330" width="80" height="40" rx="4" ry="4" class="button-cancel" />
+                    <text x="330" y="350" class="button-text-dark">Cancelar</text>
+                    
+                    <rect x="380" y="330" width="80" height="40" rx="4" ry="4" class="button-import" />
+                    <text x="420" y="350" class="button-text-light">Importar</text>
+                </svg>
+                <div class="image-caption">Figura 22: Diálogo para importação de carimbo</div>
+            </div>
+        </li>
+        
+        <li>
+            <p>Clique no botão "Importar" para processar o texto e preencher automaticamente os campos do formulário.</p>
+        </li>
+        
+        <li>
+            <p>O sistema analisará o texto e preencherá todos os campos disponíveis com as informações contidas no carimbo.</p>
+            
+            <div class="tip">
+                <strong>Dica:</strong> Após a importação, você pode modificar qualquer campo e gerar um novo relatório ou carimbo.
+            </div>
+        </li>
+    </ol>
+    
+    <div class="important">
+        <strong>Importante:</strong> O formato do carimbo deve ser semelhante ao gerado pelo sistema para garantir uma importação correta. Carimbos com formatação muito diferente podem não ser reconhecidos adequadamente.
+    </div>
+    
+<!-- This is the new section to be added as section 11 -->
+<h2 id="visualizacao-salvamento" class="section-divider">
+    <span class="section-number">11.</span>
+    <span class="section-title">Visualização e Salvamento do Relatório</span>
+</h2>
+
+<p>Após gerar o relatório, o sistema apresenta uma tela de pré-visualização que permite verificar o conteúdo antes de salvar ou compartilhar.</p>
+
+<div style="text-align: center;">
+    <svg width="800" height="500" viewBox="0 0 800 500">
+        <defs>
+            <style>
+                .app-bg { fill: #F5F5F5; }
+                .header { fill: #1976D2; }
+                .header-text { font-family: sans-serif; font-size: 20px; fill: white; }
+                .page-controls { fill: white; stroke: #E0E0E0; stroke-width: 1; }
+                .button-primary { fill: #1976D2; stroke: #1565C0; stroke-width: 1; }
+                .button-outline { fill: white; stroke: #1976D2; stroke-width: 1; }
+                .button-text-light { font-family: sans-serif; font-size: 14px; fill: white; text-anchor: middle; dominant-baseline: middle; }
+                .button-text-dark { font-family: sans-serif; font-size: 14px; fill: #1976D2; text-anchor: middle; dominant-baseline: middle; }
+                .document-preview { fill: white; stroke: #E0E0E0; stroke-width: 2; }
+                .preview-shadow { fill: rgba(0,0,0,0.2); }
+                .text-label { font-family: sans-serif; font-size: 14px; fill: #424242; }
+                .actions-bg { fill: #FAFAFA; stroke: #E0E0E0; stroke-width: 1; }
+            </style>
+        </defs>
+        
+        <!-- App background -->
+        <rect width="800" height="500" class="app-bg" />
+        
+        <!-- App header -->
+        <rect width="800" height="56" class="header" />
+        <text x="20" y="35" class="header-text">Pré-visualização do Relatório</text>
+        <!-- Zoom icons -->
+        <circle cx="720" cy="28" r="18" fill="white" fill-opacity="0.2" />
+        <text x="720" y="34" font-family="sans-serif" font-size="20px" fill="white" text-anchor="middle">+</text>
+        <circle cx="760" cy="28" r="18" fill="white" fill-opacity="0.2" />
+        <text x="760" y="34" font-family="sans-serif" font-size="20px" fill="white" text-anchor="middle">-</text>
+        
+        <!-- Page controls -->
+        <rect x="150" y="70" width="500" height="40" rx="4" ry="4" class="page-controls" />
+        <circle cx="200" cy="90" r="15" fill="#1976D2" />
+        <text x="200" y="95" font-size="18px" fill="white" text-anchor="middle">←</text>
+        <text x="400" y="95" class="text-label" text-anchor="middle">Página 1 de 2</text>
+        <circle cx="600" cy="90" r="15" fill="#1976D2" />
+        <text x="600" y="95" font-size="18px" fill="white" text-anchor="middle">→</text>
+        
+        <!-- Document preview -->
+        <rect x="180" y="130" width="440" height="270" class="preview-shadow" rx="5" ry="5" />
+        <rect x="170" y="120" width="440" height="270" class="document-preview" rx="5" ry="5" />
+        
+        <!-- Document content representation (simplified) -->
+        <rect x="190" y="140" width="400" height="50" fill="#1976D2" rx="2" ry="2" />
+        <text x="390" y="170" font-family="sans-serif" font-size="16px" fill="white" text-anchor="middle">RELATÓRIO DE INSPEÇÃO</text>
+        
+        <line x1="190" y1="210" x2="590" y2="210" stroke="#E0E0E0" stroke-width="1" />
+        <line x1="190" y1="260" x2="590" y2="260" stroke="#E0E0E0" stroke-width="1" />
+        <line x1="190" y1="310" x2="590" y2="310" stroke="#E0E0E0" stroke-width="1" />
+        
+        <!-- Action bar -->
+        <rect x="0" y="420" width="800" height="80" class="actions-bg" />
+        <text x="50" y="460" class="text-label">Zoom: 20%</text>
+        
+        <rect x="400" y="440" width="180" height="40" rx="4" ry="4" class="button-primary" />
+        <text x="490" y="460" class="button-text-light">Salvar Relatório</text>
+        
+        <rect x="600" y="440" width="150" height="40" rx="4" ry="4" class="button-outline" />
+        <text x="675" y="460" class="button-text-dark">Voltar</text>
+    </svg>
+    <div class="image-caption">Figura 23: Tela de pré-visualização do relatório</div>
+</div>
+
+<h3>Recursos da pré-visualização:</h3>
+
+<ol>
+    <li>
+        <p><strong>Controle de páginas</strong> - Navegue entre as páginas do relatório usando as setas de navegação:</p>
+        <div style="text-align: center;">
+            <svg width="500" height="40" viewBox="0 0 500 40">
+                <defs>
+                    <style>
+                        .page-controls { fill: white; stroke: #E0E0E0; stroke-width: 1; }
+                        .text-label { font-family: sans-serif; font-size: 14px; fill: #424242; }
+                    </style>
+                </defs>
+                
+                <rect x="0" y="0" width="500" height="40" rx="4" ry="4" class="page-controls" />
+                <circle cx="50" cy="20" r="15" fill="#1976D2" />
+                <text x="50" y="25" font-size="18px" fill="white" text-anchor="middle">←</text>
+                <text x="250" y="25" class="text-label" text-anchor="middle">Página 1 de 2</text>
+                <circle cx="450" cy="20" r="15" fill="#1976D2" />
+                <text x="450" y="25" font-size="18px" fill="white" text-anchor="middle">→</text>
+            </svg>
+            <div class="image-caption">Figura 24: Controles de navegação entre páginas</div>
+        </div>
+    </li>
+    
+    <li>
+        <p><strong>Controle de zoom</strong> - Ajuste o tamanho da visualização usando os botões de zoom na barra superior ou os controles na barra de ferramentas:</p>
+        <div style="text-align: center;">
+            <svg width="150" height="60" viewBox="0 0 150 60">
+                <defs>
+                    <style>
+                        .text-label { font-family: sans-serif; font-size: 14px; fill: #424242; }
+                    </style>
+                </defs>
+                
+                <circle cx="40" cy="30" r="18" fill="#1976D2" />
+                <text x="40" y="36" font-family="sans-serif" font-size="20px" fill="white" text-anchor="middle">+</text>
+                <circle cx="110" cy="30" r="18" fill="#1976D2" />
+                <text x="110" y="36" font-family="sans-serif" font-size="20px" fill="white" text-anchor="middle">-</text>
+            </svg>
+            <div class="image-caption">Figura 25: Controles de zoom</div>
+        </div>
+    </li>
+    
+    <li>
+        <p><strong>Visualização detalhada</strong> - Utilize o gesto de pinça (em dispositivos com tela sensível ao toque) ou o recurso de zoom para examinar detalhes específicos do relatório.</p>
+    </li>
+</ol>
+
+<h3>Como salvar o relatório:</h3>
+
+<ol>
+    <li>
+        <p>Após verificar o conteúdo do relatório na pré-visualização, clique no botão "Salvar Relatório" na parte inferior da tela.</p>
+        <div style="text-align: center;">
+            <svg width="200" height="60" viewBox="0 0 200 60">
+                <defs>
+                    <style>
+                        .button-primary { fill: #1976D2; stroke: #1565C0; stroke-width: 1; }
+                        .button-text-light { font-family: sans-serif; font-size: 14px; fill: white; text-anchor: middle; dominant-baseline: middle; }
+                    </style>
+                </defs>
+                
+                <rect x="10" y="10" width="180" height="40" rx="4" ry="4" class="button-primary" />
+                <text x="100" y="30" class="button-text-light">Salvar Relatório</text>
+            </svg>
+            <div class="image-caption">Figura 26: Botão para salvar o relatório</div>
+        </div>
+    </li>
+    
+    <li>
+        <p>O relatório será salvo como imagem PNG na pasta "Downloads" do seu dispositivo.</p>
+        <div class="important">
+            <strong>Importante:</strong> O aplicativo solicitará permissão para acessar o armazenamento do dispositivo na primeira vez que tentar salvar um relatório.
+        </div>
+    </li>
+    
+    <li>
+        <p>Após o salvamento, será exibida uma notificação com o caminho onde o arquivo foi salvo.</p>
+        <div style="text-align: center;">
+            <svg width="600" height="100" viewBox="0 0 600 100">
+                <defs>
+                    <style>
+                        .snackbar { fill: #323232; rx: 4; ry: 4; }
+                        .snackbar-text { font-family: sans-serif; font-size: 14px; fill: white; }
+                        .snackbar-action { font-family: sans-serif; font-size: 14px; fill: #2196F3; font-weight: bold; }
+                    </style>
+                </defs>
+                
+                <rect x="0" y="30" width="600" height="60" class="snackbar" />
+                <text x="20" y="60" class="snackbar-text">Relatório salvo com sucesso em: /storage/emulated/0/Download/relatorio_inspecao.png</text>
+                <text x="560" y="60" class="snackbar-action">ABRIR</text>
+            </svg>
+            <div class="image-caption">Figura 27: Notificação de salvamento bem-sucedido</div>
+        </div>
+    </li>
+    
+    <li>
+        <p>Se várias páginas forem geradas, cada página será salva como um arquivo separado com sufixo numérico (por exemplo, "relatorio_inspecao_1.png", "relatorio_inspecao_2.png").</p>
+    </li>
+    
+    <li>
+        <p>Para visualizar o arquivo salvo, clique na ação "Abrir" na notificação ou acesse diretamente a pasta "Downloads" do seu dispositivo.</p>
+    </li>
+</ol>
+
+<div class="tip">
+    <strong>Dica:</strong> O relatório salvo pode ser compartilhado no "CONECTA DA ICOMON" ou por e-mail, aplicativos de mensagens ou impresso diretamente do dispositivo.
+</div>
+
+<!-- Updated Problems section (now section 12) with added problems about visualization and saving -->
+<h2 id="solucao" class="section-divider">
+    <span class="section-number">12.</span>
+    <span class="section-title">Solução de Problemas</span>
+</h2>
+
+<p>Nesta seção, apresentamos soluções para problemas comuns que podem ocorrer durante o uso do sistema.</p>
+
+<h3>Problemas ao gerar relatório ou carimbo:</h3>
+
+<ul>
+    <li>
+        <p><strong>Mensagem de erro para campos obrigatórios</strong></p>
+        <div class="important">
+            <strong>Problema:</strong> Ao tentar gerar um relatório ou carimbo, aparece a mensagem "Por favor, preencha os campos obrigatórios destacados".
+            <br><br>
+            <strong>Solução:</strong> Verifique todos os campos destacados em vermelho e preencha-os corretamente. Campos obrigatórios incluem: Encarregado, Rota/Endereço, Legal, CT, Cabo#, Primaria#, Tipo de Identificação, Número de Identificação e Data.
+        </div>
+    </li>
+    
+    <li>
+        <p><strong>Formato de data incorreto</strong></p>
+        <div class="important">
+            <strong>Problema:</strong> A data está no formato incorreto ou não pode ser selecionada.
+            <br><br>
+            <strong>Solução:</strong> Use sempre o seletor de calendário clicando no campo de data para garantir o formato correto (DD/MM/YYYY).
+        </div>
+    </li>
+    
+    <li>
+        <p><strong>Campo ID não aparece</strong></p>
+        <div class="important">
+            <strong>Problema:</strong> O campo ID não está visível no formulário.
+            <br><br>
+            <strong>Solução:</strong> O campo ID só aparece quando o tipo de identificação selecionado é "SPR:". Selecione esta opção para visualizar e preencher o campo ID.
+        </div>
+    </li>
+</ul>
+
+
+<h3>Problemas na importação de carimbo:</h3>
+
+<ul>
+    <li>
+        <p><strong>Carimbo não reconhecido corretamente</strong></p>
+        <div class="important">
+            <strong>Problema:</strong> Ao importar um carimbo, alguns campos não são preenchidos corretamente ou ficam vazios.
+            <br><br>
+            <strong>Solução:</strong> Verifique se o formato do carimbo segue o padrão gerado pelo sistema. Carimbos com formatação muito diferente ou editados manualmente podem não ser importados corretamente. Para melhores resultados, cole o carimbo exatamente como foi gerado.
+        </div>
+    </li>
+    
+    <li>
+        <p><strong>Materiais não importados</strong></p>
+        <div class="important">
+            <strong>Problema:</strong> Ao importar um carimbo, os materiais não são adicionados à lista.
+            <br><br>
+            <strong>Solução:</strong> Verifique se os materiais no carimbo seguem o formato "CÓDIGO DESCRIÇÃO - QTD: NÚMERO". Caso contrário, o sistema pode não reconhecê-los corretamente. Você pode adicionar manualmente os materiais após a importação.
+        </div>
+    </li>
+</ul>
+
+<h3>Problemas na visualização e salvamento do relatório:</h3>
+
+<ul>
+    <li>
+        <p><strong>Tela de visualização não carrega</strong></p>
+        <div class="important">
+            <strong>Problema:</strong> Após clicar em "Gerar Relatório", a tela de pré-visualização não carrega ou exibe apenas um círculo de carregamento indefinidamente.
+            <br><br>
+            <strong>Solução:</strong> Este problema geralmente ocorre quando o dispositivo está com pouca memória disponível. Feche outros aplicativos em segundo plano e tente novamente. Se o problema persistir, reinicie o aplicativo ou o dispositivo.
+        </div>
+    </li>
+    
+    <li>
+        <p><strong>Erro ao salvar o relatório</strong></p>
+        <div class="important">
+            <strong>Problema:</strong> Ao tentar salvar o relatório, aparece a mensagem "Erro ao salvar o relatório".
+            <br><br>
+            <strong>Solução:</strong> Verifique se o dispositivo tem espaço de armazenamento disponível e se o aplicativo possui permissão para acessar o armazenamento. Em dispositivos Android 10 ou superior, vá em Configurações > Aplicativos > Relatório de Inspeção > Permissões > Armazenamento e conceda a permissão necessária.
+        </div>
+    </li>
+    
+    <li>
+        <p><strong>Relatório salvo não é encontrado</strong></p>
+        <div class="important">
+            <strong>Problema:</strong> O relatório é salvo com sucesso, mas não é possível encontrá-lo na pasta de downloads.
+            <br><br>
+            <strong>Solução:</strong> Em alguns dispositivos, a pasta de downloads pode ter um caminho diferente. Use um gerenciador de arquivos para procurar por "relatorio_inspecao.png" em todo o armazenamento do dispositivo. Normalmente, o arquivo é salvo em "/storage/emulated/0/Download/" ou na pasta "Downloads" no armazenamento interno.
+        </div>
+    </li>
+    
+    <li>
+        <p><strong>Problemas de zoom na visualização</strong></p>
+        <div class="important">
+            <strong>Problema:</strong> Os controles de zoom não funcionam corretamente ou a visualização fica distorcida.
+            <br><br>
+            <strong>Solução:</strong> Tente usar o gesto de pinça (pinch) para ajustar o zoom se estiver em um dispositivo com tela sensível ao toque. Se estiver em um tablet ou dispositivo maior, a funcionalidade de zoom pode ser limitada devido ao tamanho da tela. Neste caso, salve o relatório e visualize-o em um aplicativo de visualização de imagens.
+        </div>
+    </li>
+</ul>
+
+<h3>Problemas gerais:</h3>
+
+<ul>
+    <li>
+        <p><strong>Travamentos ou lentidão</strong></p>
+        <div class="important">
+            <strong>Problema:</strong> O aplicativo trava ou fica lento durante o uso.
+            <br><br>
+            <strong>Solução:</strong> Se estiver usando um dispositivo móvel, verifique o espaço de armazenamento disponível. Fechar outros aplicativos em segundo plano também pode ajudar. Em casos extremos, reiniciar o aplicativo pode resolver problemas temporários.
+        </div>
+    </li>
+    
+    <li>
+        <p><strong>Texto em maiúsculas não sendo convertido</strong></p>
+        <div class="important">
+            <strong>Problema:</strong> O texto digitado não está sendo convertido automaticamente para letras maiúsculas.
+            <br><br>
+            <strong>Solução:</strong> Esta é uma característica do sistema para facilitar a padronização. Se notar que o texto não está sendo convertido, pode haver um problema com o teclado virtual ou com o aplicativo. Tente reiniciar o aplicativo ou digitar diretamente em maiúsculas.
+        </div>
+    </li>
+</ul>
+
+<div class="tip">
+    <strong>Dica final:</strong> Em caso de problemas persistentes, tente limpar todos os campos e preencher novamente. Se o problema continuar, entre em contato com o suporte só acessar a guia "SOBRE" no APP.
+</div>
+<!-- Todos os direitos reservados -->
+<div class="footer">
+    <p>© 2025 André Alves. Todos os direitos reservados.</p>
+</div>
+</body>
+</html>
