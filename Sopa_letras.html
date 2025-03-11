@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sopa de Letras con Temporizador y Puntaje</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      width: 80%;
+    }
+
+    .sopa {
+      display: grid;
+      grid-template-columns: repeat(15, 30px);
+      grid-template-rows: repeat(15, 30px);
+      gap: 2px;
+      margin-right: 20px;
+    }
+
+    .letra {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      border: 1px solid #ccc;
+      background-color: white;
+      cursor: pointer;
+    }
+
+    .letra:hover {
+      background-color: #f5f5f5;
+    }
+
+    .letra.resaltada {
+      background-color: yellow;
+    }
+
+    .letra.correcta {
+      background-color: green;
+      color: white;
+    }
+
+    .letra.incorrecta {
+      background-color: red;
+      color: white;
+    }
+
+    .palabras {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .palabra {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .palabra.encontrada {
+      text-decoration: line-through;
+      color: green;
+    }
+
+    .brocha, .verificar, .seleccion-direccion, .deseleccionar {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      font-size: 18px;
+      border: none;
+      margin: 5px;
+    }
+
+    .brocha:hover, .verificar:hover, .seleccion-direccion:hover, .deseleccionar:hover {
+      background-color: #45a049;
+    }
+
+    .score-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-left: 20px;
+      width: 200px;
+    }
+
+    .score {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .timer {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .sopa {
+        grid-template-columns: repeat(10, 30px);
+        grid-template-rows: repeat(10, 30px);
+      }
+
+      .letra {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div>
+      <div class="sopa" id="sopa"></div>
+      <div class="palabras" id="palabras"></div>
+      <div class="brocha" id="brocha">🖌️ Selecciona las Letras</div>
+      <button class="verificar" id="verificar">Verificar Palabra</button>
+      <button class="seleccion-direccion" id="seleccion-direccion">Seleccionar Horizontal</button>
+      <button class="deseleccionar" id="deseleccionar">Deseleccionar Incorrectas</button>
+    </div>
+
+    <div class="score-container">
+      <div class="timer" id="timer">05:00</div>
+      <div class="score" id="score">Puntaje: 0</div>
+    </div>
+  </div>
+
+  <script>
+    const palabras = [
+      'METODOLOGIA', 'ESTANDARIZAR', 'SEISO', 
+      'CLASIFICACION', 'LIMPIEZA', 'SEIKETSU',
+      'DISCIPLINA', 'SEIRI', 'SHITSUKE',
+      'ORDEN', 'SEITON', 'KAIZEN'
+    ];
+
+    const gridSize = 15;
+    const sopa = document.getElementById('sopa');
+    const palabrasElement = document.getElementById('palabras');
+    const brocha = document.getElementById('brocha');
+    const verificar = document.getElementById('verificar');
+    const seleccionDireccion = document.getElementById('seleccion-direccion');
+    const deseleccionar = document.getElementById('deseleccionar');
+    const timerElement = document.getElementById('timer');
+    const scoreElement = document.getElementById('score');
+    let grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(''));
+    let isPainting = false; // Estado de la brocha (activada o desactivada)
+    let selectedCells = []; // Celdas seleccionadas
+    let foundWords = []; // Palabras encontradas
+    let direccionSeleccion = 'horizontal'; // Dirección de selección actual
+    let score = 0; // Puntaje
+    let timer = 300; // 5 minutos en segundos
+    let timerInterval;
+    let isTimeUp = false; // Bandera que indica si el tiempo se acabó
+
+    function updateTimer() {
+      const minutes = Math.floor(timer / 60);
+      const seconds = timer % 60;
+      timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+      if (timer === 0) {
+        clearInterval(timerInterval);
+        isTimeUp = true; // Activamos la bandera de tiempo agotado
+        alert('¡Se acabó el tiempo!');
+        disableSelection(); // Deshabilitar la selección de palabras
+      } else {
+        timer--;
+      }
+    }
+
+    function startTimer() {
+      timerInterval = setInterval(updateTimer, 1000);
+    }
+
+    function disableSelection() {
+      brocha.removeEventListener('click', togglePainting);
+      verificar.removeEventListener('click', verificarPalabra);
+      deseleccionar.removeEventListener('click', deselectIncorrect);
+      document.querySelectorAll('.letra').forEach(letra => {
+        letra.style.cursor = 'not-allowed'; // Deshabilitar el cursor de selección
+      });
+    }
+
+    function colocarPalabra(palabra) {
+      let colocada = false;
+      let intentos = 0;
+
+      while (!colocada && intentos < 100) {
+        intentos++;
+
+        const direccion = Math.floor(Math.random() * 8);
+        const maxX = gridSize - palabra.length;
+        const maxY = gridSize - palabra.length;
+
+        let startX, startY;
+
+        switch (direccion) {
+          case 0: // Horizontal
+            startX = Math.floor(Math.random() * gridSize);
+            startY = Math.floor(Math.random() * gridSize);
+            if (startX + palabra.length <= gridSize) {
+              let encaja = true;
+              for (let i = 0; i < palabra.length; i++) {
+                if (grid[startY][startX + i] !== '') {
+                  encaja = false;
+                  break;
+                }
+              }
+              if (encaja) {
+                for (let i = 0; i < palabra.length; i++) {
+                  grid[startY][startX + i] = palabra[i];
+                }
+                colocada = true;
+              }
+            }
+            break;
+          case 1: // Vertical
+            startX = Math.floor(Math.random() * gridSize);
+            startY = Math.floor(Math.random() * gridSize);
+            if (startY + palabra.length <= gridSize) {
+              let encaja = true;
+              for (let i = 0; i < palabra.length; i++) {
+                if (grid[startY + i][startX] !== '') {
+                  encaja = false;
+                  break;
+                }
+              }
+              if (encaja) {
+                for (let i = 0; i < palabra.length; i++) {
+                  grid[startY + i][startX] = palabra[i];
+                }
+                colocada = true;
+              }
+            }
+            break;
+          case 2: // Diagonal positiva
+            startX = Math.floor(Math.random() * gridSize);
+            startY = Math.floor(Math.random() * gridSize);
+            if (startX + palabra.length <= gridSize && startY + palabra.length <= gridSize) {
+              let encaja = true;
+              for (let i = 0; i < palabra.length; i++) {
+                if (grid[startY + i][startX + i] !== '') {
+                  encaja = false;
+                  break;
+                }
+              }
+              if (encaja) {
+                for (let i = 0; i < palabra.length; i++) {
+                  grid[startY + i][startX + i] = palabra[i];
+                }
+                colocada = true;
+              }
+            }
+            break;
+          case 3: // Diagonal negativa
+            startX = Math.floor(Math.random() * gridSize);
+            startY = Math.floor(Math.random() * gridSize);
+            if (startX - palabra.length >= 0 && startY + palabra.length <= gridSize) {
+              let encaja = true;
+              for (let i = 0; i < palabra.length; i++) {
+                if (grid[startY + i][startX - i] !== '') {
+                  encaja = false;
+                  break;
+                }
+              }
+              if (encaja) {
+                for (let i = 0; i < palabra.length; i++) {
+                  grid[startY + i][startX - i] = palabra[i];
+                }
+                colocada = true;
+              }
+            }
+            break;
+        }
+
+        intentos++;
+      }
+    }
+
+    function generarSopa() {
+      palabras.forEach(palabra => colocarPalabra(palabra));
+
+      for (let i = 0; i < gridSize; i++) {
+        for (let j = 0; j < gridSize; j++) {
+          if (grid[i][j] === '') {
+            grid[i][j] = String.fromCharCode(65 + Math.floor(Math.random() * 26)); // Letra aleatoria
+          }
+        }
+      }
+
+      for (let i = 0; i < gridSize; i++) {
+        for (let j = 0; j < gridSize; j++) {
+          const letraDiv = document.createElement('div');
+          letraDiv.classList.add('letra');
+          letraDiv.textContent = grid[i][j];
+          letraDiv.dataset.x = j;
+          letraDiv.dataset.y = i;
+          sopa.appendChild(letraDiv);
+
+          letraDiv.addEventListener('mousedown', (e) => startSelect(e, letraDiv));
+          letraDiv.addEventListener('touchstart', (e) => startSelect(e, letraDiv));
+        }
+      }
+
+      palabras.forEach(palabra => {
+        const palabraDiv = document.createElement('div');
+        palabraDiv.classList.add('palabra');
+        palabraDiv.textContent = palabra;
+        palabrasElement.appendChild(palabraDiv);
+      });
+    }
+
+    function startSelect(event, letraDiv) {
+      if (isTimeUp) return; // No permite seleccionar si el tiempo se agotó
+      event.preventDefault();
+      if (isPainting) {
+        selectedCells = [letraDiv]; // Inicia una nueva selección
+        letraDiv.classList.add('resaltada');
+
+        const mouseMove = (e) => selectRange(e, letraDiv);
+        const touchMove = (e) => selectRange(e, letraDiv);
+
+        document.addEventListener('mousemove', mouseMove);
+        document.addEventListener('touchmove', touchMove);
+
+        document.addEventListener('mouseup', () => stopSelect(mouseMove, touchMove));
+        document.addEventListener('touchend', () => stopSelect(mouseMove, touchMove));
+      }
+    }
+
+    function selectRange(event, letraDiv) {
+      if (isTimeUp) return; // No permite seleccionar si el tiempo se agotó
+
+      const target = event.target;
+      if (!selectedCells.includes(target) && target.classList.contains('letra')) {
+        if (isDireccionValida(target)) {
+          target.classList.add('resaltada');
+          selectedCells.push(target);
+        }
+      }
+    }
+
+    function stopSelect(mouseMove, touchMove) {
+      document.removeEventListener('mousemove', mouseMove);
+      document.removeEventListener('touchmove', touchMove);
+    }
+
+    function isDireccionValida(target) {
+      let startCell = selectedCells[0];
+      let targetX = parseInt(target.dataset.x);
+      let targetY = parseInt(target.dataset.y);
+      let startX = parseInt(startCell.dataset.x);
+      let startY = parseInt(startCell.dataset.y);
+
+      if (direccionSeleccion === 'horizontal') {
+        return startY === targetY;
+      }
+
+      if (direccionSeleccion === 'vertical') {
+        return startX === targetX;
+      }
+
+      if (direccionSeleccion === 'diagonal') {
+        return Math.abs(targetX - startX) === Math.abs(targetY - startY);
+      }
+
+      return false;
+    }
+
+    function verificarPalabra() {
+      if (isTimeUp) return; // No permite verificar si el tiempo se agotó
+
+      const seleccion = selectedCells.map(cell => cell.textContent).join('');
+      const palabraCorrecta = palabras.find(palabra => palabra === seleccion);
+
+      if (palabraCorrecta) {
+        selectedCells.forEach(cell => cell.classList.add('correcta'));
+        const palabraDiv = [...palabrasElement.children].find(p => p.textContent === palabraCorrecta);
+        palabraDiv.classList.add('encontrada');
+        score += 10;
+        scoreElement.textContent = `Puntaje: ${score}`;
+      } else {
+        selectedCells.forEach(cell => cell.classList.add('incorrecta'));
+      }
+
+      selectedCells = [];
+    }
+
+    function cambiarDireccion() {
+      if (direccionSeleccion === 'horizontal') {
+        direccionSeleccion = 'vertical';
+      } else if (direccionSeleccion === 'vertical') {
+        direccionSeleccion = 'diagonal';
+      } else {
+        direccionSeleccion = 'horizontal';
+      }
+      seleccionDireccion.textContent = `Seleccionar ${direccionSeleccion.charAt(0).toUpperCase() + direccionSeleccion.slice(1)}`;
+    }
+
+    function deselectIncorrect() {
+      document.querySelectorAll('.incorrecta').forEach(cell => {
+        cell.classList.remove('incorrecta');
+      });
+
+      document.querySelectorAll('.resaltada').forEach(cell => {
+        cell.classList.remove('resaltada');
+      });
+    }
+
+    // Inicialización
+    generarSopa();
+    startTimer();
+
+    brocha.addEventListener('click', () => {
+      isPainting = !isPainting;
+      brocha.textContent = isPainting ? '🚫 Selección Desactivada' : '🖌️ Selección Activada';
+    });
+
+    verificar.addEventListener('click', verificarPalabra);
+    seleccionDireccion.addEventListener('click', cambiarDireccion);
+    deseleccionar.addEventListener('click', deselectIncorrect);
+
+  </script>
+
+</body>
+</html>
