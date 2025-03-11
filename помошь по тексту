@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Іздеу жүйесі</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        #searchInput { width: 100%; padding: 10px; margin-bottom: 10px; }
+        .content p { display: none; padding: 10px; border: 1px solid #ddd; margin: 5px 0; }
+        .content p.show { display: block; background: #f9f9f9; }
+    </style>
+</head>
+<body>
+    <h2>Іздеу жүйесі</h2>
+    <input type="text" id="searchInput" placeholder="Мәтінді іздеңіз...">
+    
+    <div class="content">
+        <p>Бұл сайтта іздеу жүйесі бар.</p>
+        <p>Сіз іздеген мәтінді жылдам таба аласыз.</p>
+        <p>HTML, CSS және JavaScript арқылы жасалған.</p>
+        <p>Бұл қарапайым іздеу механизмі.</p>
+    </div>
+    
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function() {
+            let searchValue = this.value.toLowerCase();
+            let paragraphs = document.querySelectorAll('.content p');
+            
+            paragraphs.forEach(p => {
+                if (p.textContent.toLowerCase().includes(searchValue)) {
+                    p.classList.add('show');
+                } else {
+                    p.classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
