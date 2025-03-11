@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safdar Ali - Web Developer Portfolio</title>
+    <!-- Google Fonts (Monaspace Variants + Dancing Script) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Monaspace+Neon:wght@400;700&family=Monaspace+Argon:wght@400;700&family=Monaspace+Krypton:wght@400;700&display=swap" rel="stylesheet">
+    <!-- AOS Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Inline CSS -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Monaspace Argon', sans-serif;
+            background: linear-gradient(45deg, #2c3e50, #34495e);
+            background-size: 200% 200%;
+            animation: gradientBG 15s ease infinite;
+            color: #fff;
+            line-height: 1.9;
+            overflow-x: hidden;
+        }
+
+        /* Gradient Animation */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Navigation */
+        nav {
+            width: 100%;
+            background: linear-gradient(45deg, #e74c3c, #34495e); /* Royal Red */
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+            border-bottom: 4px solid #e74c3c;
+            position: static; /* Scrolls on all views */
+        }
+
+        nav .logo {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(231, 76, 60, 0.9);
+            font-style: italic;
+            animation: pulseGlow 1.8s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0% { text-shadow: 0 0 10px rgba(231, 76, 60, 0.7); }
+            50% { text-shadow: 0 0 25px rgba(231, 76, 60, 1); }
+            100% { text-shadow: 0 0 10px rgba(231, 76, 60, 0.7); }
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Monaspace Neon', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #e74c3c, #bdc3c7);
+            bottom: -8px;
+            left: 0;
+            transition: width 0.4s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        nav ul li a:hover {
+            color: #bdc3c7;
+            transform: translateY(-3px);
+            font-style: italic;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 6px solid #e74c3c;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%);
+            animation: rotateGlow 12s linear infinite;
+        }
+
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-width: 90%;
+        }
+
+        .hero h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5rem;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.6), 0 0 60px rgba(231, 76, 60, 0.4);
+            margin-bottom: 1.5rem;
+            animation: glowText 2.5s infinite;
+        }
+
+        .hero p {
+            font-family: 'Monaspace Krypton', sans-serif;
+            font-size: 1.8rem;
+            color: #fff;
+            background: linear-gradient(45deg, #34495e, #e74c3c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+        }
+
+        /* Section Styles */
+        section {
+            max-width: 1400px;
+            margin: 4rem auto;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            backdrop-filter: blur(25px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            border: 5px solid transparent;
+            border-image: linear-gradient(45deg, #2c3e50, #e74c3c) 1;
+        }
+
+        section:hover {
+            transform: scale(1.02);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(44, 62, 80, 0.3), rgba(231, 76, 60, 0.3));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+        }
+
+        section:hover::before {
+            opacity: 1;
+        }
+
+        h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.6), 0 0 60px rgba(231, 76, 60, 0.4);
+            margin-bottom: 2rem;
+            text-align: center;
+            animation: glowText 2.5s infinite;
+        }
+
+        @keyframes glowText {
+            0% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.6), 0 0 60px rgba(231, 76, 60, 0.4); }
+            50% { text-shadow: 0 0 30px rgba(255, 255, 255, 1), 0 0 50px rgba(255, 255, 255, 0.8), 0 0 80px rgba(231, 76, 60, 0.6); }
+            100% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.6), 0 0 60px rgba(231, 76, 60, 0.4); }
+        }
+
+        /* Heading Logos */
+        #about h2::before { content: "🖥️"; font-size: 2rem; margin-right: 0.8rem; }
+        #education h2::before { content: "🎓"; font-size: 2rem; margin-right: 0.8rem; }
+        #skills h2::before { content: "🛠️"; font-size: 2rem; margin-right: 0.8rem; }
+        #experience h2::before { content: "💼"; font-size: 2rem; margin-right: 0.8rem; }
+        #contact h2::before { content: "📞"; font-size: 2rem; margin-right: 0.8rem; }
+
+        p, ul li {
+            font-family: 'Monaspace Argon', sans-serif;
+            font-size: 1.2rem;
+            color: #fff;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        p:hover, ul li:hover {
+            font-style: italic;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        p::after, ul li::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #e74c3c, #bdc3c7);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.4s ease;
+        }
+
+        p:hover::after, ul li:hover::after {
+            width: 100%;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        ul li {
+            margin: 1.5rem 0;
+            padding-left: 2.5rem;
+            position: relative;
+            transition: transform 0.4s ease, color 0.4s ease;
+        }
+
+        ul li::before {
+            content: "➻";
+            color: #3498db;
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+            animation: slideArrow 1.5s infinite;
+        }
+
+        @keyframes slideArrow {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+            100% { transform: translateX(0); }
+        }
+
+        /* Contact Section */
+        .contact a {
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Monaspace Neon', sans-serif;
+            font-weight: 700;
+            background: linear-gradient(45deg, #e74c3c, #34495e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .contact a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #34495e, #bdc3c7);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.4s ease;
+        }
+
+        .contact a:hover::after {
+            width: 100%;
+        }
+
+        .contact a:hover {
+            color: #bdc3c7;
+            text-shadow: 0 0 20px rgba(189, 195, 199, 1);
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(45deg, #34495e, #e74c3c);
+            font-family: 'Monaspace Krypton', sans-serif;
+            font-size: 1.2rem;
+            box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.5);
+            border-top: 4px solid #e74c3c;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav .logo {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                align-items: flex-start;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            nav ul li a {
+                font-size: 1rem;
+            }
+
+            .hero {
+                height: 80vh;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+                padding: 0.5rem 1rem;
+            }
+
+            .hero-content {
+                padding: 1.5rem;
+                max-width: 95%;
+            }
+
+            section {
+                margin: 2rem 1rem;
+                padding: 2rem;
+            }
+
+            h2 {
+                font-size: 2.5rem;
+            }
+
+            #about h2::before, #education h2::before, #skills h2::before, 
+            #experience h2::before, #contact h2::before {
+                font-size: 1.5rem;
+                margin-right: 0.5rem;
+            }
+
+            p, ul li {
+                font-size: 1rem;
+            }
+
+            ul li {
+                padding-left: 2rem;
+            }
+
+            ul li::before {
+                font-size: 1.2rem;
+            }
+
+            footer {
+                padding: 1.5rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav .logo {
+                font-size: 1.8rem;
+            }
+
+            nav ul li a {
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+
+            p, ul li {
+                font-size: 0.9rem;
+            }
+
+            footer {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Extra Animations */
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            60% { transform: scale(1.3); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        .hero-content h1 {
+            animation: bounceIn 2s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Safdar Ali</div>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Safdar Ali</h1>
+            <p>Web Developer | Crafting Digital Excellence</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" data-aos="zoom-in-up">
+        <h2>About Me</h2>
+        <p>I’m Safdar Ali, a dedicated Web Developer with a passion for creating refined digital solutions. My journey started as a Data Entry Officer, where I’ve sharpened my precision and technical skills over months of focused work. Now, I channel that expertise into building sleek, impactful websites. Let’s collaborate to bring your vision to life!</p>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" data-aos="zoom-in-up" data-aos-delay="100">
+        <h2>Education</h2>
+        <ul>
+            <li>DAE (Mechanical) - Graduated with honors, mastering engineering precision and problem-solving.</li>
+            <li>DIT (Diploma in Information Technology) - Excelled in IT fundamentals, laying a strong foundation for coding.</li>
+        </ul>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" data-aos="zoom-in-up" data-aos-delay="200">
+        <h2>Skills</h2>
+        <ul>
+            <li>Typing Speed: 35-45 WPM - Swift and accurate data entry, refined through daily practice.</li>
+            <li>MS Office - Expert in Word, Excel, and PowerPoint for professional-grade outputs.</li>
+            <li>HTML (Beginner) - Crafting the web’s foundation, ready to expand my skillset.</li>
+        </ul>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" data-aos="zoom-in-up" data-aos-delay="300">
+        <h2>Experience</h2>
+        <p><strong>Data Entry Officer</strong> - 2 Dec 2024 to Present</p>
+        <p>Thriving in a fast-paced role, I manage data with precision and streamline processes. These skills now enhance my web development projects, delivering exceptional results for clients.</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" data-aos="zoom-in-up" data-aos-delay="400">
+        <h2>Contact</h2>
+        <p>Phone: (+92-315) 0681007 - Reach out to discuss your next project!</p>
+        <p>Email: <a href="mailto:Caam16a4@gmail.com">Caam16a4@gmail.com</a> - Send me a message to start our collaboration!</p>
+    </section>
+
+    <!-- Footer -->
+    <footer data-aos="zoom-in-up" data-aos-delay="500">
+        <p>© 2025 Safdar Ali. Let’s build your digital future together!</p>
+    </footer>
+
+    <!-- GSAP Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <!-- AOS Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Inline JavaScript -->
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1200,
+            easing: 'ease-out-back',
+            once: false,
+        });
+
+        // GSAP Animations
+        gsap.from("nav", {
+            y: -200,
+            opacity: 0,
+            duration: 1.8,
+            ease: "bounce.out"
+        });
+
+        gsap.from(".hero-content h1", {
+            y: 200,
+            opacity: 0,
+            duration: 2.2,
+            delay: 0.5,
+            ease: "power4.out"
+        });
+
+        gsap.from(".hero-content p", {
+            scale: 0,
+            opacity: 0,
+            duration: 1.5,
+            delay: 1.5,
+            ease: "elastic.out(1, 0.5)"
+        });
+
+        gsap.from("section", {
+            stagger: 0.4,
+            y: 150,
+            opacity: 0,
+            duration: 1.8,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: "section",
+                start: "top 80%"
+            }
+        });
+
+        gsap.from("ul li", {
+            stagger: 0.3,
+            x: -70,
+            opacity: 0,
+            duration: 1.2,
+            ease: "back.out(1.7)",
+            scrollTrigger: {
+                trigger: "ul",
+                start: "top 80%"
+            }
+        });
+
+        // Smooth Scroll for Navigation
+        document.querySelectorAll('nav ul li a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Parallax Effect on Hero
+        window.addEventListener('scroll', () => {
+            const scrollPos = window.scrollY;
+            gsap.to(".hero::before", {
+                y: scrollPos * 0.3,
+                duration: 0.5
+            });
+        });
+    </script>
+</body>
+</html>
