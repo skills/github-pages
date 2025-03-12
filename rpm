@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diesel Calculation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --bg-color: #ffffff;
+        --text-color: #222;
+        --input-bg: #f9f9f9;
+        --container-bg: rgba(255, 255, 255, 0.97);
+        --results-bg: #f0f7ff;
+        --border-color: #ddd;
+        --positive-color: #00a86b;
+        --negative-color: #e53935;
+        --primary-color: #007BFF;
+    }
+
+    [data-theme="dark"] {
+        --bg-color: #1a1a1a;
+        --text-color: #ffffff;
+        --input-bg: #2d2d2d;
+        --container-bg: rgba(45, 45, 45, 0.97);
+        --results-bg: #363636;
+        --border-color: #404040;
+        --positive-color: #4caf50;
+        --negative-color: #f44336;
+        --primary-color: #2196F3;
+    }
+
+    * {
+        box-sizing: border-box;
+        transition: all 0.3s ease;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: url('https://wallpapercave.com/wp/wp4563565.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        min-height: 100vh;
+        color: var(--text-color);
+    }
+
+    .container {
+        width: 90%;
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: var(--container-bg);
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(10px);
+    }
+
+    .logo {
+        display: block;
+        margin: 0 auto 24px;
+        max-width: 200px;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    h1, h3 {
+        text-align: center;
+        color: var(--text-color);
+        margin-bottom: 25px;
+        font-weight: 600;
+        font-size: 1.8rem;
+    }
+
+    .footer-text {
+        text-align: center;
+        font-size: 0.9rem;
+        color: var(--text-color);
+        margin-top: 24px;
+        font-weight: 500;
+        opacity: 0;
+        animation: fadeIn 2s forwards;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 14px 16px;
+        margin-bottom: 15px;
+        border: 2px solid var(--border-color);
+        border-radius: 12px;
+        background-color: var(--input-bg);
+        color: var(--text-color);
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    input:focus, select:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+    }
+
+    button {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 16px 24px;
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 1.1rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    button:active {
+        transform: translateY(0);
+    }
+
+    .floating-buttons {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        gap: 12px;
+        z-index: 1000;
+    }
+
+    .action-button {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        background: var(--primary-color);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .action-button:hover {
+        transform: scale(1.1);
+    }
+
+    .action-button svg {
+        width: 22px;
+        height: 22px;
+        fill: white;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1001;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(8px);
+    }
+
+    .modal-content {
+        background: var(--container-bg);
+        padding: 30px;
+        border-radius: 16px;
+        width: 90%;
+        max-width: 800px;
+        position: relative;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        max-height: 85vh;
+        overflow-y: auto;
+    }
+
+    .modal-close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: var(--text-color);
+        font-size: 24px;
+        padding: 8px 12px;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: none;
+    }
+
+    .modal-close:hover {
+        background: rgba(0, 0, 0, 0.1);
+    }
+
+    .vehicle-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background: var(--input-bg);
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .vehicle-table th,
+    .vehicle-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .vehicle-table th {
+        background-color: var(--results-bg);
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .vehicle-table tbody {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    .vehicle-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .vehicle-table tr:hover td {
+        background: rgba(0, 0, 0, 0.02);
+    }
+
+    .vehicle-table button {
+        padding: 8px 16px;
+        margin: 0;
+        font-size: 0.9rem;
+        background-color: var(--negative-color);
+    }
+
+    .search-box {
+        position: sticky;
+        top: 0;
+        background: var(--container-bg);
+        padding: 15px 0;
+        margin-bottom: 20px;
+        z-index: 2;
+    }
+
+    .search-box input {
+        width: 100%;
+    }
+
+    .vehicle-list {
+        max-height: 300px;
+        overflow-y: auto;
+        margin-top: 20px;
+        border-top: 1px solid var(--border-color);
+        padding-top: 15px;
+    }
+    .truck-icon {
+        width: 28px;
+        height: 28px;
+        transition: transform 0.5s ease;
+    }
+
+    button.animating .truck-icon {
+        animation: truckMove 1s ease;
+    }
+
+    @keyframes truckMove {
+        0% { transform: translateX(0); }
+        50% { transform: translateX(100px); }
+        100% { transform: translateX(0); }
+    }
+
+    .vehicle-form {
+        margin-bottom: 25px;
+    }
+
+    .vehicle-form input,
+    .vehicle-form select {
+        margin-bottom: 15px;
+    }
+
+    .vehicle-form button {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+
+    .vehicle-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px;
+        margin-bottom: 12px;
+        background: var(--input-bg);
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .vehicle-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .vehicle-item span {
+        font-weight: 500;
+    }
+
+    .vehicle-item button {
+        padding: 8px 16px;
+        margin: 0;
+        font-size: 0.9rem;
+        background-color: var(--negative-color);
+    }
+
+    .vehicle-form-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .vehicle-form-buttons button {
+        flex: 1;
+        max-width: 200px;
+        margin: 0;
+    }
+
+    .results-box {
+        background-color: var(--results-bg);
+        padding: 25px;
+        border-radius: 12px;
+        margin-top: 25px;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .result-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .result-item:last-child {
+        border-bottom: none;
+    }
+
+    .cost-highlight {
+        color: var(--positive-color);
+        font-weight: 600;
+        font-size: 1.1em;
+    }
+
+    .positive { color: var(--positive-color); }
+    .negative { color: var(--negative-color); }
+
+    @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            width: 95%;
+            padding: 20px;
+            margin: 20px auto;
+        }
+
+        .modal-content {
+            width: 95%;
+            height: 90vh;
+            margin: 10px;
+            padding: 20px;
+        }
+
+        .vehicle-table th,
+        .vehicle-table td {
+            padding: 12px;
+            font-size: 0.9rem;
+        }
+        .floating-buttons {
+            top: 10px;
+            right: 10px;
+            gap: 8px;
+        }
+
+        .action-button {
+            width: 40px;
+            height: 40px;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="floating-buttons">
+        <button class="action-button" onclick="toggleTheme()" title="Toggle dark mode">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.758a.75.75 0 001.06-1.061l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+            </svg>
+        </button>
+        <button class="action-button" onclick="openVehicleSettings()" title="Vehicle settings">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 4.5v-2a.75.75 0 0 1 .75-.75h2a.75.75 0 0 1 .75.75v2a.75.75 0 0 1-.75.75h-2a.75.75 0 0 1-.75-.75zm0 17v-2a.75.75 0 0 1 .75-.75h2a.75.75 0 0 1 .75.75v2a.75.75 0 0 1-.75.75h-2a.75.75 0 0 1-.75-.75zm-8.5-8.5h-2a.75.75 0 0 1-.75-.75v-2a.75.75 0 0 1 .75-.75h2a.75.75 0 0 1 .75.75v2a.75.75 0 0 1-.75.75zm17 0h-2a.75.75 0 0 1-.75-.75v-2a.75.75 0 0 1 .75-.75h2a.75.75 0 0 1 .75.75v2a.75.75 0 0 1-.75.75z"/>
+            </svg>
+        </button>
+        <button class="action-button" onclick="openVehicleDetails()" title="Vehicle Details">
+            <svg viewBox="0 0 24 24">
+                <path d="M13 6v8h-2V6h2zm4-2h-6v12h6V4zm-8 4H3v6h6V8zm14 0h-6v6h6V8zM11 2v16h10V2H11zm-8 4v12h10V6H3z"/>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Vehicle Settings Modal -->
+    <div id="vehicleModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeVehicleSettings()">&times;</button>
+            <h3>Vehicle Management</h3>
+            <div class="vehicle-form">
+                <input type="text" id="newVehicleName" placeholder="Vehicle Name">
+                <input type="number" id="newVehicleMileage" placeholder="Mileage">
+                <div class="vehicle-form-buttons">
+                    <button onclick="addVehicle()">Add Vehicle</button>
+                    <button onclick="resetToDefault()">Reset to Default</button>
+                </div>
+            </div>
+            <div id="vehicleList" class="vehicle-list"></div>
+        </div>
+    </div>
+
+    <!-- Vehicle Details Modal -->
+    <div id="vehicleDetailsModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeVehicleDetails()">&times;</button>
+            <h3>Vehicle Details</h3>
+
+            <div class="vehicle-form">
+                <input type="text" id="driverName" placeholder="Driver Name">
+                <input type="text" id="vehicleNumber" placeholder="Vehicle Number" maxlength="10">
+                <input type="tel" id="driverContact" placeholder="Mobile Number" maxlength="10">
+                <select id="vehicleTypeDetails"></select>
+                <button onclick="addVehicleDetails()">Add Details</button>
+            </div>
+
+            <div class="search-box">
+                <input type="text" id="searchVehicle" placeholder="Search by last 4 digits" maxlength="4" oninput="searchVehicleDetails()">
+            </div>
+
+            <table class="vehicle-table">
+                <thead>
+                    <tr>
+                        <th>Driver Name</th>
+                        <th>Vehicle No</th>
+                        <th>Mobile No</th>
+                        <th>Vehicle</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="vehicleDetailsList">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="container">
+        <img src="https://rpmgroupindia.com/images/logo-main.jpg" alt="RPM Group Logo" class="logo">
+        <h1>Diesel Calculation</h1>
+
+        <select id="calcMode" onchange="toggleCalculationMode()">
+            <option value="tripDistance">Trip Distance Calculation</option>
+            <option value="fuelCost">Diesel Cost Calculation</option>
+        </select>
+
+        <div id="tripDistanceMode">
+            <input type="number" id="startKm" placeholder="Start Kilometer Bharo" step="0.1">
+            <input type="number" id="endKm" placeholder="End Kilometer Bharo" step="0.1">
+            <select id="vehicleType" onchange="updateMileage()"></select>
+            <input type="number" id="dieselPrice" placeholder="Diesel Price per Litre Bharo" step="0.1">
+            <input type="number" id="prevDieselCost" placeholder="Pehle Bhare Diesel Ki Cost Bharo" step="0.1">
+            <button onclick="calculateTripDistance()">
+                <svg class="truck-icon" viewBox="0 0 24 24">
+                    <path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                </svg>
+                Calculate
+            </button>
+        </div>
+
+        <div id="fuelCostMode" style="display: none;">
+            <input type="number" id="totalKm" placeholder="Total Kilometer Bharo" step="0.1">
+            <select id="vehicleTypeCost" onchange="updateMileageCost()"></select>
+            <input type="number" id="dieselPriceCost" placeholder="Diesel Price per Litre Bharo" step="0.1">
+            <button onclick="calculateFuelCost()">
+                <svg class="truck-icon" viewBox="0 0 24 24">
+                    <path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                </svg>
+                Calculate
+            </button>
+        </div>
+
+        <div id="results" class="results-box" style="display: none;">
+            <div class="result-item">
+                <span>Total Kilometers:</span>
+                <span id="totalKmResult"></span>
+            </div>
+            <div class="result-item">
+                <span>Diesel Consumed:</span>
+                <span id="fuelConsumedResult"></span>
+            </div>
+            <div class="result-item">
+                <span>Diesel Cost:</span>
+                <span id="fuelCostResult"></span>
+            </div>
+            <div class="result-item" id="extraFuelResult"></div>
+            <div class="result-item" id="extraFuelPriceResult"></div>
+        </div>
+
+        <div class="footer-text">Made by Mayank RPM</div>
+    </div>
+
+    <script>
+        const defaultVehicles = {
+            '10FT': 8.5,
+            '14FT': 7.5,
+            'TATAACE': 14,
+            'PICKUP': 12,
+            'PICKUP 2.0': 10,
+            '20FT': 6,
+            '22FT': 5.75,
+            '24FT': 5.25,
+            '16FT': 7.0,
+            '32FT': 4.5,
+            'BUS': 6
+        };
+
+        // Enhanced Local Storage Functions
+        function saveToLocalStorage(key, value) {
+            try {
+                localStorage.setItem(key, JSON.stringify(value));
+                console.log(`Data saved to ${key} successfully`);
+            } catch (e) {
+                console.error('Error saving to localStorage:', e);
+                alert('Failed to save data. Please try again.');
+            }
+        }
+
+        function loadFromLocalStorage(key, defaultValue) {
+            try {
+                const item = localStorage.getItem(key);
+                const data = item ? JSON.parse(item) : defaultValue;
+                console.log(`Data loaded from ${key}`);
+                return data;
+            } catch (e) {
+                console.error('Error loading from localStorage:', e);
+                alert('Failed to load saved data. Using default values.');
+                return defaultValue;
+            }
+        }
+
+        // Load saved data or use defaults
+        let vehicles = loadFromLocalStorage('vehicles', defaultVehicles);
+        let vehicleDetails = loadFromLocalStorage('vehicleDetails', []);
+
+        function toggleTheme() {
+            document.documentElement.setAttribute('data-theme',
+                document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light'
+            );
+        }
+
+        function openVehicleSettings() {
+            document.getElementById('vehicleModal').style.display = 'flex';
+            updateVehicleList();
+        }
+
+        function closeVehicleSettings() {
+            document.getElementById('vehicleModal').style.display = 'none';
+        }
+
+        function openVehicleDetails() {
+            document.getElementById('vehicleDetailsModal').style.display = 'flex';
+            updateVehicleTypeDetailsSelector();
+            displayVehicleDetails();
+        }
+
+        function closeVehicleDetails() {
+            document.getElementById('vehicleDetailsModal').style.display = 'none';
+        }
+
+        function updateVehicleList() {
+            const vehicleList = document.getElementById('vehicleList');
+            vehicleList.innerHTML = '';
+            Object.entries(vehicles).forEach(([name, mileage]) => {
+                const item = document.createElement('div');
+                item.className = 'vehicle-item';
+                item.innerHTML = `
+                    <span>${name} - ${mileage} km/L</span>
+                    <button onclick="deleteVehicle('${name}')">Delete</button>
+                `;
+                vehicleList.appendChild(item);
+            });
+            updateVehicleSelectors();
+        }
+
+        function updateVehicleSelectors() {
+            ['vehicleType', 'vehicleTypeCost', 'vehicleTypeDetails'].forEach(id => {
+                const select = document.getElementById(id);
+                select.innerHTML = '';
+                Object.keys(vehicles).forEach(name => {
+                    const option = document.createElement('option');
+                    option.value = name;
+                    option.textContent = name;
+                    select.appendChild(option);
+                });
+            });
+        }
+
+        function addVehicle() {
+            const name = document.getElementById('newVehicleName').value.trim();
+            const mileage = parseFloat(document.getElementById('newVehicleMileage').value);
+
+            if (name && !isNaN(mileage) && mileage > 0) {
+                vehicles[name] = mileage;
+                saveToLocalStorage('vehicles', vehicles);
+                updateVehicleList();
+                updateVehicleSelectors();
+                document.getElementById('newVehicleName').value = '';
+                document.getElementById('newVehicleMileage').value = '';
+                alert(`Vehicle "${name}" with mileage ${mileage} km/L added successfully!`);
+            } else {
+                alert("Please fill all fields correctly. Mileage must be a positive number.");
+            }
+        }
+
+        function deleteVehicle(name) {
+            delete vehicles[name];
+            saveToLocalStorage('vehicles', vehicles);
+            updateVehicleList();
+        }
+
+        function resetToDefault() {
+            if (confirm('Reset to default vehicles?')) {
+                vehicles = {...defaultVehicles};
+                saveToLocalStorage('vehicles', vehicles);
+                updateVehicleList();
+            }
+        }
+
+        function addVehicleDetails() {
+            const driverName = document.getElementById('driverName').value;
+            const vehicleNumber = document.getElementById('vehicleNumber').value.toUpperCase();
+            const mobileNumber = document.getElementById('driverContact').value;
+            const vehicleType = document.getElementById('vehicleTypeDetails').value;
+
+            if (!driverName || !vehicleNumber || !mobileNumber || !vehicleType) {
+                alert('Please fill all fields');
+                return;
+            }
+
+            if (mobileNumber.length !== 10 || isNaN(mobileNumber)) {
+                alert('Please enter valid 10-digit mobile number');
+                return;
+            }
+
+            const newDetail = {
+                driverName,
+                vehicleNumber,
+                mobileNumber,
+                vehicleType
+            };
+
+            const existingIndex = vehicleDetails.findIndex(v => v.vehicleNumber === vehicleNumber);
+            if (existingIndex !== -1) {
+                vehicleDetails[existingIndex] = newDetail;
+            } else {
+                vehicleDetails.push(newDetail);
+            }
+
+            saveToLocalStorage('vehicleDetails', vehicleDetails);
+            clearVehicleDetailsForm();
+            displayVehicleDetails();
+        }
+
+        function clearVehicleDetailsForm() {
+            document.getElementById('driverName').value = '';
+            document.getElementById('vehicleNumber').value = '';
+            document.getElementById('driverContact').value = '';
+        }
+
+        function displayVehicleDetails(filteredDetails = null) {
+            const list = document.getElementById('vehicleDetailsList');
+            list.innerHTML = '';
+
+            const detailsToShow = filteredDetails || vehicleDetails;
+
+            if (detailsToShow.length === 0) {
+                list.innerHTML = '<tr><td colspan="5" class="no-results">No vehicle details found</td></tr>';
+                return;
+            }
+
+            detailsToShow.forEach(detail => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${detail.driverName}</td>
+                    <td>${detail.vehicleNumber}</td>
+                    <td>${detail.mobileNumber}</td>
+                    <td>${detail.vehicleType}</td>
+                    <td><button onclick="deleteVehicleDetail('${detail.vehicleNumber}')">Delete</button></td>
+                `;
+                list.appendChild(row);
+            });
+        }
+
+        function searchVehicleDetails() {
+            const searchTerm = document.getElementById('searchVehicle').value;
+            if (!searchTerm) {
+                displayVehicleDetails();
+                return;
+            }
+
+            const filteredDetails = vehicleDetails.filter(detail =>
+                detail.vehicleNumber.slice(-4).includes(searchTerm)
+            );
+            displayVehicleDetails(filteredDetails);
+        }
+
+        function deleteVehicleDetail(vehicleNumber) {
+            if (confirm('Delete this vehicle detail?')) {
+                vehicleDetails = vehicleDetails.filter(v => v.vehicleNumber !== vehicleNumber);
+                saveToLocalStorage('vehicleDetails', vehicleDetails);
+                displayVehicleDetails();
+            }
+        }
+
+        function updateMileage() {
+            const vehicleType = document.getElementById('vehicleType').value;
+            const mileage = vehicles[vehicleType];
+            if (!mileage || isNaN(mileage)) {
+                alert("Please select a valid vehicle type");
+                return;
+            }
+        }
+
+        function updateMileageCost() {
+            const vehicleType = document.getElementById('vehicleTypeCost').value;
+            const mileage = vehicles[vehicleType];
+            if (!mileage || isNaN(mileage)) {
+                alert("Please select a valid vehicle type");
+                return;
+                        }
+        }
+
+        function toggleCalculationMode() {
+            const mode = document.getElementById('calcMode').value;
+            document.getElementById('tripDistanceMode').style.display =
+                mode === 'tripDistance' ? 'block' : 'none';
+            document.getElementById('fuelCostMode').style.display =
+                mode === 'fuelCost' ? 'block' : 'none';
+            document.getElementById('results').style.display = 'none';
+        }
+
+        function calculateTripDistance() {
+            const button = document.querySelector('#tripDistanceMode button');
+            button.classList.add('animating');
+            setTimeout(() => button.classList.remove('animating'),1000);
+
+            const startKm = parseFloat(document.getElementById('startKm').value);
+            const endKm = parseFloat(document.getElementById('endKm').value);
+            const vehicleType = document.getElementById('vehicleType').value;
+            const dieselPrice = parseFloat(document.getElementById('dieselPrice').value);
+            const prevDieselCost = parseFloat(document.getElementById('prevDieselCost').value) || 0;
+            const mileage = vehicles[vehicleType];
+
+            if (isNaN(startKm) || isNaN(endKm) || isNaN(dieselPrice) || !vehicleType || !mileage) {
+                alert('Please fill all fields correctly');
+                return;
+            }
+
+            const totalKm = endKm - startKm;
+            const dieselConsumed = totalKm / mileage;
+            const dieselCost = dieselConsumed * dieselPrice;
+            const prevDieselAmount = prevDieselCost / dieselPrice;
+            const extraDiesel = prevDieselAmount - dieselConsumed;
+            const extraDieselPrice = extraDiesel * dieselPrice;
+
+            displayResults(totalKm, dieselConsumed, dieselCost, extraDiesel, extraDieselPrice);
+        }
+
+        function calculateFuelCost() {
+            const button = document.querySelector('#fuelCostMode button');
+            button.classList.add('animating');
+            setTimeout(() => button.classList.remove('animating'), 1000);
+
+            const totalKm = parseFloat(document.getElementById('totalKm').value);
+            const vehicleType = document.getElementById('vehicleTypeCost').value;
+            const dieselPrice = parseFloat(document.getElementById('dieselPriceCost').value);
+            const mileage = vehicles[vehicleType];
+
+            if (isNaN(totalKm) || isNaN(dieselPrice) || !vehicleType || !mileage) {
+                alert('Please fill all fields correctly');
+                return;
+            }
+
+            const dieselConsumed = totalKm / mileage;
+            const dieselCost = dieselConsumed * dieselPrice;
+
+            displayResults(totalKm, dieselConsumed, dieselCost);
+        }
+
+        function displayResults(totalKm, dieselConsumed, dieselCost, extraDiesel = null, extraDieselPrice = null) {
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('totalKmResult').textContent = `${totalKm.toFixed(2)} km`;
+            document.getElementById('fuelConsumedResult').textContent = `${dieselConsumed.toFixed(2)} L`;
+            document.getElementById('fuelCostResult').innerHTML = `<span class="cost-highlight">₹ ${dieselCost.toFixed(2)}</span>`;
+
+            if (extraDiesel !== null) {
+                document.getElementById('extraFuelResult').innerHTML =
+                    `<span>Extra Diesel Left:</span> <span class="${extraDiesel >= 0 ? 'positive' : 'negative'}">${Math.abs(extraDiesel).toFixed(2)} L</span>`;
+                document.getElementById('extraFuelPriceResult').innerHTML =
+                    `<span>Extra Diesel Left Price:</span> <span class="${extraDieselPrice >= 0 ? 'positive' : 'negative'}">₹ ${Math.abs(extraDieselPrice).toFixed(2)}</span>`;
+            } else {
+                document.getElementById('extraFuelResult').innerHTML = '';
+                document.getElementById('extraFuelPriceResult').innerHTML = '';
+            }
+        }
+
+        // Initialize when document is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            updateVehicleList();
+            updateVehicleSelectors();
+            toggleCalculationMode();
+        });
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+            }
+        }
+
+        function updateVehicleTypeDetailsSelector() {
+            const select = document.getElementById('vehicleTypeDetails');
+            if (!select) return;
+            
+            select.innerHTML = '';
+            Object.keys(vehicles).forEach(name => {
+                const option = document.createElement('option');
+                option.value = name;
+                option.textContent = name;
+                select.appendChild(option);
+            });
+        }
+    </script>
+</body>
+</html>
