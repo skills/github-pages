@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Pedro Artilheiro</title>
+</head>
+<body>
+<img src="https://files.vecteezy.com/system/resource/files/22263553/20230401flaxfluvasxfla32368.jpg?response-content-disposition=attachment%3Bfilename%3Dvecteezy_rio-brazil-2023-carioca-championship-flamengo-vs-fluminense_22263553.jpg&Expires=1741877630&Signature=GZhLeGBBmePCHfMya4EBURvGh4lvbO8L9ayK7F95GYh28EnEd16Sge-NuCWq7DGmqZTotlJh9wTzUPnQfOSfYWnlFMkQtxlDhGltjPW7FGQO1f7vrn1lTZJ-bh~NApw9xqEC9mWQD4P~iYdHMQXcaQgHJHtAi3vxLkNeJ5njHD-MTLPmu3u8Rv3XHbX1y0QZJO-9EvX3SLR80T22CPbEXtYzOsAeiYt1a-OOdnWOldGVoaua9y2M1eDGpSMDceLYIQbGvfCRW1e52JW-1WDezOvXRtu3s5DExhwv2ZZVFmUxOgB6jRkGyiEAGkf6DBVc7yl4SDn1kATEjRt5WXwj4g__&Key-Pair-Id=K3714PYOSHV3HB" 
+
+         alt="Símbolo do Flamengo" width="500" height="400"/>
+</body>
+</html>
+
+<table width="500" border="1" cellspacing="0" cellpadding="5" bordercolor="Black">
+<tr>
+<th>Pedro</th>  
+<th>Tiquinho</th>
+<th>Hulk</th>
+</tr>  
+<tr>
+<td>30 gols</td>
+<td>19 gols</td>
+<td>10 gols</td>
+</tr>
+</table>
