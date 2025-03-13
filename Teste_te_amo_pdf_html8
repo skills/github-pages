@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cadastro de Roteirização</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .form-container {
+            margin: 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-container input, .form-container button {
+            padding: 12px;
+            margin: 10px 0;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Estilos responsivos */
+        @media (max-width: 600px) {
+            .form-container {
+                margin: 10px;
+                padding: 15px;
+            }
+            .form-container input, .form-container button {
+                padding: 10px;
+                font-size: 14px;
+            }
+            h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1 style="text-align:center; padding-top: 20px;">Cadastro de Roteirização</h1>
+
+    <div class="form-container">
+        <label for="nome-responsavel">Nome Responsável:</label>
+        <input type="text" id="nome-responsavel" required>
+        <label for="nome-arquivo">Nome Arquivo:</label>
+        <input type="text" id="nome-arquivo" required>
+        <button class="btn" onclick="cadastrar()">Cadastrar</button>
+    </div>
+
+    <div id="gerar-pdf-container" style="display:none;">
+        <button class="btn" onclick="gerarPDF()">Gerar PDF</button>
+    </div>
+
+    <div id="gerar-novo-cadastro-container" style="display:none;">
+        <p>Gerar Novo Cadastro?</p>
+        <button class="btn" onclick="novoCadastro('sim')">Sim</button>
+        <button class="btn" onclick="novoCadastro('nao')">Não</button>
+    </div>
+
+    <script>
+        function cadastrar() {
+            const nomeResponsavel = document.getElementById('nome-responsavel').value;
+            const nomeArquivo = document.getElementById('nome-arquivo').value;
+
+            // Verificar se os campos estão preenchidos
+            if (!nomeResponsavel || !nomeArquivo) {
+                alert('Por favor, preencha todos os campos!');
+                return;
+            }
+
+            // Exibir botão "Gerar PDF"
+            document.getElementById('gerar-pdf-container').style.display = 'block';
+
+            // Exibir opção para gerar novo cadastro
+            document.getElementById('gerar-novo-cadastro-container').style.display = 'block';
+
+            // Armazenar dados em variáveis globais
+            window.dadosCadastro = {
+                nomeResponsavel,
+                nomeArquivo
+            };
+        }
+
+        function gerarPDF() {
+            const { nomeResponsavel, nomeArquivo } = window.dadosCadastro;
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Configura o fundo do PDF para preto
+            doc.setFillColor(0, 0, 0); // Preto
+            doc.rect(0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height, 'F');
+
+            // Adiciona o texto "Te Amo" no centro da página, em branco
+            doc.setFontSize(50);
+            doc.setTextColor(255, 255, 255); // Branco
+            const texto = 'TE AMO';
+            const textoWidth = doc.getStringUnitWidth(texto) * doc.internal.getFontSize() / doc.internal.scaleFactor;
+            const textoX = (doc.internal.pageSize.width - textoWidth) / 2; // Centraliza horizontalmente
+            const textoY = doc.internal.pageSize.height / 2; // Centraliza verticalmente
+            doc.text(texto, textoX, textoY);
+
+            // Gerar o PDF e abrir para download com o nome "Anexo_Mercia"
+            doc.save('Anexo_Mercia.pdf');
+        }
+
+        function novoCadastro(opcao) {
+            if (opcao === 'sim') {
+                // Limpar os campos de cadastro
+                document.getElementById('nome-responsavel').value = '';
+                document.getElementById('nome-arquivo').value = '';
+            }
+
+            // Ocultar a opção de novo cadastro
+            document.getElementById('gerar-novo-cadastro-container').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>
