@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fingerprint & Face Scanner</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/face-api.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 20px;
+            overflow: hidden;
+        }
+        h2 {
+            font-size: 26px;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        button {
+            background: linear-gradient(45deg, #ff758c, #ff7eb3);
+            border: none;
+            padding: 12px 20px;
+            margin: 10px;
+            font-size: 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.4s ease;
+            box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.2);
+        }
+        button:hover {
+            transform: scale(1.15);
+            box-shadow: 0px 10px 20px rgba(255, 255, 255, 0.4);
+        }
+        video {
+            width: 100%;
+            max-width: 400px;
+            display: block;
+            margin: 20px auto;
+            border-radius: 15px;
+            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-in-out;
+        }
+        canvas {
+            display: none;
+        }
+        #fingerprint-status, #face-status {
+            font-size: 20px;
+            margin-top: 10px;
+            font-weight: bold;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <h2>Fingerprint Authentication</h2>
+    <button onclick="authenticateFingerprint()">🔍 Scan Fingerprint</button>
+    <p id="fingerprint-status"></p>
+    
+    <h2>Face Verification</h2>
+    <video id="video" autoplay playsinline></video>
+    <canvas id="canvas"></canvas>
+    <button onclick="captureFace()">📸 Capture Face</button>
+    <button onclick="startRecording()">🎥 Record Video</button>
+    <button onclick="stopRecording()">⏹ Stop Recording</button>
+    <p id="face-status"></p>
+    
+    <script>
+        let mediaRecorder;
+        let recordedChunks = [];
+        let stream;
+        
+        async function authenticateFingerprint() {
+            if (!window.PublicKeyCredential) {
+                document.getElementById('fingerprint-status').innerText = "WebAuthn not supported";
+                return;
+            }
+            try {
+                const credential = await navigator.credentials.get({ publicKey: { challenge: new Uint8Array(32) } });
+                document.getElementById('fingerprint-status').innerText = "✅ Fingerprint authenticated successfully!";
+            } catch (error) {
+                document.getElementById('fingerprint-status').innerText = "❌ Authentication failed!";
+            }
+        }
+        
+        async function startCamera() {
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false });
+                document.getElementById('video').srcObject = stream;
+                document.getElementById('face-status').innerText = "📷 Camera ready!";
+            } catch (err) {
+                console.error("Error accessing camera: ", err);
+                document.getElementById('face-status').innerText = "⚠️ Camera access denied! Please allow camera access.";
+            }
+        }
+        
+        function captureFace() {
+            const video = document.getElementById('video');
+            const canvas = document.getElementById('canvas');
+            const context = canvas.getContext('2d');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            
+            canvas.toBlob(blob => {
+                if (blob) {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'captured_face.png';
+                    a.click();
+                    document.getElementById('face-status').innerText = "✅ Face captured and saved!";
+                } else {
+                    document.getElementById('face-status').innerText = "❌ Face capture failed!";
+                }
+            }, 'image/png');
+        }
+        
+        function startRecording() {
+            if (!stream) {
+                document.getElementById('face-status').innerText = "⚠️ Camera not started!";
+                return;
+            }
+            recordedChunks = [];
+            mediaRecorder = new MediaRecorder(stream);
+            mediaRecorder.ondataavailable = event => recordedChunks.push(event.data);
+            mediaRecorder.start();
+            document.getElementById('face-status').innerText = "🎥 Recording started...";
+        }
+        
+        function stopRecording() {
+            if (mediaRecorder && mediaRecorder.state !== "inactive") {
+                mediaRecorder.stop();
+                mediaRecorder.onstop = () => {
+                    const blob = new Blob(recordedChunks, { type: 'video/webm' });
+                    if (blob.size > 0) {
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = 'face_verification.webm';
+                        a.click();
+                        document.getElementById('face-status').innerText = "✅ Video recorded and saved!";
+                    } else {
+                        document.getElementById('face-status').innerText = "❌ Video recording failed!";
+                    }
+                };
+            }
+        }
+        
+        window.onload = startCamera;
+    </script>
+</body>
+</html>
