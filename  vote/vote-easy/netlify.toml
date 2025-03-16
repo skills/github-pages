@@ -1,0 +1,9 @@
+[build]
+  command = "bun run build"
+  publish = "build"
+
+[build.environment]
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
