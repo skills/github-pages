@@ -1,75 +1,350 @@
-<header>
+<!DOCTYPE html>
 
-<!--
-  <<< Author notes: Course header >>>
-  Include a 1280×640 image, course title in sentence case, and a concise description in emphasis.
-  In your repository settings: enable template repository, add your 1280×640 social image, auto delete head branches.
-  Add your open source license, GitHub uses MIT license.
--->
+<html lang="en">
 
-# GitHub Pages
+<head>
 
-_Create a site or blog from your GitHub repositories with GitHub Pages._
+    <meta charset="UTF-8">
 
-</header>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!--
-  <<< Author notes: Course start >>>
-  Include start button, a note about Actions minutes,
-  and tell the learner why they should take the course.
--->
+    <title>Tablet Punching Machine Information</title>
 
-## Welcome
+    <style>
 
-With GitHub Pages, you can host project blogs, documentation, resumes, portfolios, or any other static content you'd like. Your GitHub repository can easily become its own website. In this course, we'll show you how to set up your own site or blog using GitHub Pages.
+        body {
 
-- **Who is this for**: Beginners, students, project maintainers, small businesses.
-- **What you'll learn**: How to build a GitHub Pages site.
-- **What you'll build**: We'll build a simple GitHub Pages site with a blog. We'll use [Jekyll](https://jekyllrb.com), a static site generator.
-- **Prerequisites**: If you need to learn about branches, commits, and pull requests, take [Introduction to GitHub](https://github.com/skills/introduction-to-github) first.
-- **How long**: This course takes less than one hour to complete.
+            font-family: Arial, sans-serif;
 
-In this course, you will:
+            background-color: #f0f8ff;
 
-1. Enable GitHub Pages
-2. Configure your site
-3. Customize your home page
-4. Create a blog post
-5. Merge your pull request
+            margin: 0;
 
-### How to start this course
+            padding: 0;
 
-<!-- For start course, run in JavaScript:
-'https://github.com/new?' + new URLSearchParams({
-  template_owner: 'skills',
-  template_name: 'github-pages',
-  owner: '@me',
-  name: 'skills-github-pages',
-  description: 'My clone repository',
-  visibility: 'public',
-}).toString()
--->
+            display: flex;
 
-[![start-course](https://user-images.githubusercontent.com/1221423/235727646-4a590299-ffe5-480d-8cd5-8194ea184546.svg)](https://github.com/new?template_owner=skills&template_name=github-pages&owner=%40me&name=skills-github-pages&description=My+clone+repository&visibility=public)
+            flex-direction: column;
 
-1. Right-click **Start course** and open the link in a new tab.
-2. In the new tab, most of the prompts will automatically fill in for you.
-   - For owner, choose your personal account or an organization to host the repository.
-   - We recommend creating a public repository, as private repositories will [use Actions minutes](https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions).
-   - Scroll down and click the **Create repository** button at the bottom of the form.
-3. After your new repository is created, wait about 20 seconds, then refresh the page. Follow the step-by-step instructions in the new repository's README.
+            align-items: center;
 
-<footer>
+            min-height: 100vh;
 
-<!--
-  <<< Author notes: Footer >>>
-  Add a link to get support, GitHub status page, code of conduct, license link.
--->
+        }
 
----
 
-Get help: [Post in our discussion board](https://github.com/orgs/skills/discussions/categories/github-pages) &bull; [Review the GitHub status page](https://www.githubstatus.com/)
 
-&copy; 2023 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
+        .header {
 
-</footer>
+            background-color: #4CAF50;
+
+            color: #ffffff;
+
+            width: 100%;
+
+            padding: 15px 0;
+
+            text-align: center;
+
+            font-size: 28px;
+
+            font-weight: bold;
+
+        }
+
+
+
+        .container {
+
+            background-color: #ffffff;
+
+            max-width: 900px;
+
+            width: 100%;
+
+            padding: 30px;
+
+            margin-top: 20px;
+
+            border-radius: 12px;
+
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+            animation: fadeIn 0.5s ease-in;
+
+        }
+
+
+
+        h1 {
+
+            text-align: center;
+
+            color: #4CAF50;
+
+            margin-bottom: 20px;
+
+        }
+
+
+
+        h2 {
+
+            color: #2196F3;
+
+            margin-top: 30px;
+
+        }
+
+
+
+        p {
+
+            text-align: justify;
+
+            line-height: 1.6;
+
+        }
+
+
+
+        .nav-bar {
+
+            background-color: #4CAF50;
+
+            width: 100%;
+
+            padding: 10px 0;
+
+            text-align: center;
+
+        }
+
+
+
+        .nav-bar a {
+
+            color: #ffffff;
+
+            text-decoration: none;
+
+            padding: 10px 20px;
+
+            margin: 0 10px;
+
+            font-weight: bold;
+
+        }
+
+
+
+        .nav-bar a:hover {
+
+            background-color: #45a049;
+
+            border-radius: 5px;
+
+        }
+
+
+
+        @keyframes fadeIn {
+
+            from { opacity: 0; }
+
+            to { opacity: 1; }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+
+    <div class="header">
+
+        Welcome To Our Information Page
+
+    </div>
+
+
+
+    <div class="nav-bar">
+
+        <a href="#objective">Objective</a>
+
+        <a href="#principle">Principle</a>
+
+        <a href="#components">Components</a>
+
+        <a href="#working">Working</a>
+
+        <a href="#uses">Uses</a>
+
+        <a href="#applications">Applications</a>
+
+    </div>
+
+
+
+    <div class="container">
+
+        <h1>Tablet Punching Machine</h1>
+
+
+
+        <section id="objective">
+
+            <h2>Objective</h2>
+
+            <p>
+
+                The objective of a tablet punching machine is to efficiently compress powder or granulated materials into solid, uniform tablets of precise size, weight, and hardness. These machines are designed to ensure accuracy and consistency in pharmaceutical tablet production.
+
+            </p>
+
+        </section>
+
+
+
+        <section id="principle">
+
+            <h2>Principle</h2>
+
+            <p>
+
+                The tablet punching machine works on the principle of compression. Powdered material is filled into a die cavity, and pressure is applied using upper and lower punches to form a solid tablet. The applied pressure ensures the tablet's mechanical strength and stability.
+
+            </p>
+
+        </section>
+
+
+
+        <section id="components">
+
+            <h2>Components</h2>
+
+            <p>
+
+                Key components of a tablet punching machine include:
+
+                <ul>
+
+                    <li><strong>Hopper:</strong> Holds and directs powder or granules into the die cavity.</li>
+
+                    <li><strong>Die Cavity:</strong> Defines the tablet’s shape and size.</li>
+
+                    <li><strong>Punches (Upper & Lower):</strong> Compress the material into a solid tablet.</li>
+
+                    <li><strong>Cam Tracks:</strong> Guide the movement of the punches for proper compression.</li>
+
+                    <li><strong>Feeder System:</strong> Ensures continuous and even material flow.</li>
+
+                    <li><strong>Pressure Adjustment System:</strong> Controls the compression force to achieve desired tablet hardness.</li>
+
+                </ul>
+
+            </p>
+
+        </section>
+
+
+
+        <section id="working">
+
+            <h2>Working</h2>
+
+            <p>
+
+                The working of a tablet punching machine follows these key steps:
+
+                <ol>
+
+                    <li>The powder or granules are loaded into the hopper.</li>
+
+                    <li>Material flows into the die cavity through the feeder system.</li>
+
+                    <li>The upper punch descends while the lower punch rises to compress the material under controlled pressure.</li>
+
+                    <li>After compression, the upper punch retracts, and the lower punch ejects the formed tablet from the die cavity.</li>
+
+                    <li>The tablet is then collected, and the cycle continues for mass production.</li>
+
+                </ol>
+
+            </p>
+
+        </section>
+
+
+
+        <section id="uses">
+
+            <h2>Uses</h2>
+
+            <p>
+
+                Tablet punching machines are widely used in:
+
+                <ul>
+
+                    <li>Pharmaceutical industry for tablet production.</li>
+
+                    <li>Nutraceutical sector for manufacturing supplements.</li>
+
+                    <li>Food industry for creating compressed edible products.</li>
+
+                    <li>Chemical industry for producing detergent tablets and other solid forms.</li>
+
+                </ul>
+
+            </p>
+
+        </section>
+
+
+
+        <section id="applications">
+
+            <h2>Applications</h2>
+
+            <p>
+
+                These machines play a vital role in:
+
+                <ul>
+
+                    <li>Research and development for testing new tablet formulations.</li>
+
+                    <li>Mass production of medicinal tablets in pharmaceutical plants.</li>
+
+                    <li>Creating chewable, effervescent, and sustained-release tablets.</li>
+
+                </ul>
+
+            </p>
+
+        </section>
+
+    </div>
+
+</body>
+
+</html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tablet Punching Machine Information</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
