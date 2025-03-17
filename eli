@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Girasol con Canvas</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #E6E6FA; /* Fondo lila */
+        }
+        
+        #miCanvas {
+            border: 2px solid #8B4513;
+            background-color: #F5F5DC;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="miCanvas" width="600" height="600"></canvas>
+
+    <script>
+        const canvas = document.getElementById('miCanvas');
+        const ctx = canvas.getContext('2d');
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+
+        // Variables para animación de las hojas
+        let hojaIzquierdaAngle = -Math.PI / 8;
+        let hojaDerechaAngle = Math.PI / 8;
+        let hojaIzquierdaDirection = 1;
+        let hojaDerechaDirection = -1;
+
+        // Función para dibujar el girasol paso a paso
+        function dibujarGirasol() {
+            let step = 0;
+
+            function drawStep() {
+                if (step === 0) {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }
+
+                if (step < 21) {
+
+                    // Dibujar pétalos
+                    ctx.fillStyle = '#FFD700'; // Amarillo oro
+                    for (let i = 0; i < step; i++) {
+                        ctx.save();
+                        ctx.translate(centerX, centerY);
+                        ctx.rotate(i * Math.PI / 10);
+                        ctx.beginPath();
+                        ctx.ellipse(0, -60, 20, 40, 0, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.restore();
+                    }
+
+                } else if (step === 21) {
+                    // Dibujar centro del girasol
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, 40, 0, Math.PI * 2);
+                    ctx.fillStyle = '#8B4513'; // Marrón
+                    ctx.fill();
+                } else if (step === 22) {
+                    // Dibujar tallo
+                    ctx.beginPath();
+                    ctx.moveTo(centerX, centerY + 40);
+                    ctx.lineTo(centerX, canvas.height - 50);
+                    ctx.strokeStyle = '#228B22'; // Verde
+                    ctx.lineWidth = 10;
+                    ctx.stroke();
+
+                } else if (step >= 23) {
+                    // Dibujar hoja izquierda
+                    ctx.fillStyle = '#228B22';
+                    ctx.save();
+                    ctx.translate(centerX - 30, canvas.height - 100);
+                    ctx.rotate(hojaIzquierdaAngle);
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, 20, 40, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+
+                    // Dibujar hoja derecha
+                    ctx.fillStyle = '#228B22';
+                    ctx.save();
+                    ctx.translate(centerX + 30, canvas.height - 120);
+                    ctx.rotate(hojaDerechaAngle);
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, 20, 40, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+
+                    // Animar hojas
+                    hojaIzquierdaAngle += 0.01 * hojaIzquierdaDirection;
+                    hojaDerechaAngle += 0.01 * hojaDerechaDirection;
+
+                    if (hojaIzquierdaAngle > -Math.PI / 8 + 0.1 || hojaIzquierdaAngle < -Math.PI / 8 - 0.1) {
+                        hojaIzquierdaDirection *= -1;
+                    }
+                    if (hojaDerechaAngle > Math.PI / 8 + 0.1 || hojaDerechaAngle < Math.PI / 8 - 0.1) {
+                        hojaDerechaDirection *= -1;
+                    }
+                }
+
+                if (step >= 24) {
+                    ctx.font = '30px Arial';
+                    ctx.fillStyle = '#8B4513';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('HOL EL :3', centerX, centerY - 150);
+                }
+
+                step++;
+                if (step <= 24) {
+                    setTimeout(drawStep, 200);
+                } else {
+                    requestAnimationFrame(drawStep);
+                }
+            }
+
+            drawStep();
+        }
+
+        dibujarGirasol();
+    </script>
+</body>
+</html>
