@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ shop.name }} — Witchy. Bold. Irresistible.</title>
+  {{ content_for_header }}
+  
+  <!-- Fontes do Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alta&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=The+Seasons&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Afrah&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pierson&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Agrandir&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Coco+Gothic&display=swap" rel="stylesheet">
+  
+  <!-- Fonte da Adobe (substitua "yourkitid" pelo seu ID correto) -->
+  <link rel="stylesheet" href="https://use.typekit.net/yourkitid.css">
+  
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Alta', 'Playfair Display', serif;
+      background: #0e0b16;
+      color: #f8f8f2;
+      scroll-behavior: smooth;
+      cursor: none;
+    }
+    header {
+      background: #1f1b2e;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid #444;
+    }
+    header h1 {
+      font-family: 'TAN Mon Cheri', 'Cinzel', serif;
+      font-size: 3rem;
+      color: #e0b0ff;
+      margin: 0;
+    }
+    nav {
+      margin-top: 10px;
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #f8f8f2;
+      font-weight: bold;
+      font-family: 'Cocomat Pro', sans-serif;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #e0b0ff;
+    }
+    .hero {
+      background: url('https://images.unsplash.com/photo-1544025162-d76694265947?fit=crop&w=1600&q=80') center/cover no-repeat;
+      height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      color: #fff;
+      animation: fadeIn 2s ease-in-out;
+      font-family: 'The Seasons', serif;
+    }
+    .hero-content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    .hero-content p {
+      font-size: 1.2rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .section-title {
+      font-size: 2rem;
+      color: #e0b0ff;
+      margin-bottom: 20px;
+      text-align: center;
+      font-family: 'Afrah', serif;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .product-card {
+      background: #1f1b2e;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.3s;
+      font-family: 'Agrandir', sans-serif;
+    }
+    .product-card:hover {
+      transform: scale(1.05);
+    }
+    .product-card h3 {
+      margin-top: 0;
+      color: #e0b0ff;
+      font-family: 'Pierson', serif;
+    }
+    .product-card .price {
+      color: #f8f8f2;
+      margin: 10px 0;
+    }
+    .product-card form button {
+      background: #e0b0ff;
+      border: none;
+      padding: 10px 20px;
+      color: #1f1b2e;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'Coco Gothic', sans-serif;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #1f1b2e;
+      border-top: 1px solid #444;
+      font-family: 'Afrah', serif;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: #1f1b2e;
+      padding: 30px;
+      border: 2px solid #e0b0ff;
+      border-radius: 10px;
+      z-index: 1000;
+      color: #f8f8f2;
+      transition: transform 0.5s ease-in-out;
+      font-family: 'Pierson', serif;
+    }
+    .popup.active {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .popup button {
+      margin-top: 15px;
+      background: #e0b0ff;
+      border: none;
+      padding: 10px 20px;
+      color: #1f1b2e;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'Cocomat Pro', sans-serif;
+    }
+    .cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #e0b0ff;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.1s ease;
+    }
+  </style>
+</head>
+<body>
+  {{ content_for_layout }}
+  <div class="cursor" id="cursor"></div>
+  <header>
+    <h1>{{ shop.name }}</h1>
+    <nav>
+      <a href="#clothing">Clothing</a>
+      <a href="#makeup">Makeup</a>
+      <a href="#skincare">Skincare</a>
+      <a href="#footwear">Footwear</a>
+      <a href="#accessories">Accessories</a>
+      <a href="#haircare">Hair Care</a>
+      <a href="/cart">Cart</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div class="hero-content">
+      <h2>Craft Your Glow, Cast Your Spell</h2>
+      <p>Welcome to {{ shop.name }} — your destination for witchy vibes, bold looks, and irresistible magic.</p>
+    </div>
+  </div>
+
+  {% assign categories = "clothing,makeup,skincare,footwear,accessories,haircare" | split: "," %}
+  {% for category in categories %}
+  <section id="{{ category }}">
+    <h2 class="section-title">{{ category | capitalize }}</h2>
+    <div class="product-grid">
+      {% for product in collections[category].products %}
+      <div class="product-card">
+        <h3>{{ product.title }}</h3>
+        <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" style="width:100%; border-radius:10px;">
+        <p class="price">{{ product.price | money }}</p>
+        <form method="post" action="/cart/add">
+          <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+          <button type="submit">Add to Cart</button>
+        </form>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endfor %}
+
+  <footer>
+    &copy; {{ "now" | date: "%Y" }} {{ shop.name }}. All rights reserved.
+  </footer>
+
+  <div class="popup" id="popup">
+    <h3>Sign Up for {{ shop.name }} Spells!</h3>
+    <p>Subscribe to our newsletter for weekly magic, style tips, and exclusive shop deals.</p>
+    <button onclick="closePopup()">Cast Spell</button>
+  </div>
+
+  <script>
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.pageX + 'px';
+      cursor.style.top = e.pageY + 'px';
+    });
+
+    const popup = document.getElementById('popup');
+    setTimeout(() => {
+      popup.classList.add('active');
+    }, 3000);
+
+    function closePopup() {
+      popup.classList.remove('active');
+    }
+  </script>
+</body>
+</html>
