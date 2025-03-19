@@ -1,0 +1,263 @@
+local UserInputService = game:GetService("UserInputService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local transparencyValue = 0.5
+local increment = 0.1
+local expandedRadius = 20 -- Aumente esse valor para expandir o alcance
+local hitboxPart = nil
+local isScriptActive = false -- Variável para controlar se o script está ativado ou desativado
+local dragActive = false -- Controla se o ponto azul está sendo segurado para mover o script
+local guiOffset = Vector2.new(0, 0) -- Para rastrear a posição da interface
+
+local function sendNotification(title, text)
+    game.StarterGui:SetCore("SendNotification", {
+        Title = title,
+        Text = text,
+        Duration = 3
+    })
+end
+
+local function updateTransparency()
+    for _, part in pairs(LocalPlayer.Character:GetChildren()) do
+        if part:IsA("Part") and part.Name:match("_Expanded") then
+            part.Transparency = transparencyValue
+        end
+    end
+end
+
+local function increaseTransparency()
+    if transparencyValue < 1 then
+        transparencyValue = math.min(transparencyValue + increment, 1)
+        updateTransparency()
+        sendNotification("Transparência Atualizada", "Aumentada para: " .. transparencyValue)
+    else
+        sendNotification("Transparência Máxima", "Não pode aumentar mais.")
+    end
+end
+
+local function decreaseTransparency()
+    if transparencyValue > 0 then
+        transparencyValue = math.max(transparencyValue - increment, 0)
+        updateTransparency()
+        sendNotification("Transparência Atualizada", "Diminuída para: " .. transparencyValue)
+    else
+        sendNotification("Transparência Mínima", "Não pode diminuir mais.")
+    end
+end
+
+UserInputService.InputBegan:Connect(function(input)
+    if input.KeyCode == Enum.KeyCode.M then
+        increaseTransparency()
+    elseif input.KeyCode == Enum.KeyCode.N then
+        decreaseTransparency()
+    end
+end)
+
+-- Expandir a hitbox de interação sem expandir o personagem
+local function expandInteractionArea()
+    local character = LocalPlayer.Character
+    if character then
+        -- Criar uma hitbox de interação expandida, sem afetar o tamanho do personagem
+        if hitboxPart then
+            hitboxPart:Destroy()
+        end
+        local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+        if humanoidRootPart then
+            hitboxPart = Instance.new("Part")
+            hitboxPart.Size = Vector3.new(expandedRadius * 2, 1, expandedRadius * 2) -- Aumenta o tamanho da hitbox
+            hitboxPart.Position = humanoidRootPart.Position
+            hitboxPart.Anchored = true
+            hitboxPart.CanCollide = false
+            hitboxPart.Transparency = 0.5
+            hitboxPart.Parent = game.Workspace
+        end
+    end
+end
+
+local function createAndStabilizePart(part, size, name, transparency)
+    local existingClone = part.Parent:FindFirstChild(name)
+    if existingClone then
+        existingClone:Destroy()
+    end
+
+    local clone = Instance.new("Part")
+    clone.Size = size
+    clone.CanCollide = false
+    clone.Transparency = transparency
+    clone.Name = name
+    clone.Position = part.Position
+    clone.Anchored = false
+    clone.Parent = part.Parent
+
+    local originalAttachment = Instance.new("Attachment")
+    originalAttachment.Name = "OriginalAttachment"
+    originalAttachment.Parent = part
+
+    local cloneAttachment = Instance.new("Attachment")
+    cloneAttachment.Name = "CloneAttachment"
+    cloneAttachment.Parent = clone
+
+    local alignPosition = Instance.new("AlignPosition")
+    alignPosition.Attachment0 = cloneAttachment
+    alignPosition.Attachment1 = originalAttachment
+    alignPosition.RigidityEnabled = true
+    alignPosition.Parent = clone
+
+    local alignOrientation = Instance.new("AlignOrientation")
+    alignOrientation.Attachment0 = cloneAttachment
+    alignOrientation.Attachment1 = originalAttachment
+    alignOrientation.RigidityEnabled = true
+    alignOrientation.Parent = clone
+
+    return clone
+end
+
+local function expandParts()
+    local character = LocalPlayer.Character
+    if character then
+        -- Expandindo as partes do corpo visualmente (sem aumentar o alcance do personagem)
+        local lowerTorso = character:FindFirstChild("LowerTorso")
+        local upperTorso = character:FindFirstChild("UpperTorso")
+        local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+        local leftArm = character:FindFirstChild("Left Arm")
+        local rightArm = character:FindFirstChild("Right Arm")
+        local leftLeg = character:FindFirstChild("Left Leg")
+        local rightLeg = character:FindFirstChild("Right Leg")
+        local leftHand = character:FindFirstChild("LeftHand")
+        local rightHand = character:FindFirstChild("RightHand")
+        local leftFoot = character:FindFirstChild("LeftFoot")
+        local rightFoot = character:FindFirstChild("RightFoot")
+
+        -- Expansão visual das partes do corpo
+        if lowerTorso then
+            createAndStabilizePart(lowerTorso, Vector3.new(12, 12, 12), "LowerTorso_Expanded", 0.8)
+        end
+
+        if upperTorso then
+            createAndStabilizePart(upperTorso, Vector3.new(12, 12, 12), "UpperTorso_Expanded", 0.8)
+        end
+
+        if humanoidRootPart then
+            createAndStabilizePart(humanoidRootPart, Vector3.new(12, 12, 12), "HumanoidRootPart_Expanded", 0.8)
+        end
+
+        if leftArm then
+            createAndStabilizePart(leftArm, Vector3.new(12, 12, 12), "LeftArm_Expanded", 0.8)
+        end
+
+        if rightArm then
+            createAndStabilizePart(rightArm, Vector3.new(12, 12, 12), "RightArm_Expanded", 0.8)
+        end
+
+        if leftLeg then
+            createAndStabilizePart(leftLeg, Vector3.new(12, 12, 12), "LeftLeg_Expanded", 0.8)
+        end
+
+        if rightLeg then
+            createAndStabilizePart(rightLeg, Vector3.new(12, 12, 12), "RightLeg_Expanded", 0.8)
+        end
+
+        if leftHand then
+            createAndStabilizePart(leftHand, Vector3.new(12, 12, 12), "LeftHand_Expanded", 0.8)
+        end
+
+        if rightHand then
+            createAndStabilizePart(rightHand, Vector3.new(12, 12, 12), "RightHand_Expanded", 0.8)
+        end
+
+        if leftFoot then
+            createAndStabilizePart(leftFoot, Vector3.new(12, 12, 12), "LeftFoot_Expanded", 0.8)
+        end
+
+        if rightFoot then
+            createAndStabilizePart(rightFoot, Vector3.new(12, 12, 12), "RightFoot_Expanded", 0.8)
+        end
+    end
+end
+
+local function createCustomGUI()
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "ExpandPartsGui"
+    screenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+
+    local frame = Instance.new("Frame")
+    frame.Size = UDim2.new(0, 250, 0, 70)
+    frame.Position = UDim2.new(0, guiOffset.X, 0, guiOffset.Y)
+    frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    frame.BorderSizePixel = 0
+    frame.BackgroundTransparency = 0.2
+    frame.Parent = screenGui
+
+    local title = Instance.new("TextLabel")
+    title.Size = UDim2.new(1, 0, 0, 30)
+    title.Position = UDim2.new(0, 0, 0, 0)
+    title.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+    title.BorderSizePixel = 0
+    title.Text = "Expansor de Partes"
+    title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    title.Font = Enum.Font.Gotham
+    title.TextSize = 14
+    title.Parent = frame
+
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(0, 150, 0, 40)
+    button.Position = UDim2.new(0, 0, 0, 30)
+    button.BackgroundColor3 = Color3.fromRGB(255, 0, 0) -- Botão vermelho
+    button.BorderSizePixel = 0
+    button.Text = "Ativar Script"
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.Font = Enum.Font.Gotham
+    button.TextSize = 16
+    button.Parent = frame
+
+    local statusText = Instance.new("TextLabel")
+    statusText.Size = UDim2.new(0, 100, 0, 40)
+    statusText.Position = UDim2.new(0, 160, 0, 30)
+    statusText.Text = "Ativado"
+    statusText.TextColor3 = Color3.fromRGB(0, 255, 0)
+    statusText.Font = Enum.Font.Gotham
+    statusText.TextSize = 16
+    statusText.Parent = frame
+
+    local dragPoint = Instance.new("Frame")
+    dragPoint.Size = UDim2.new(0, 30, 0, 30) -- Aumentando o ponto azul
+    dragPoint.Position = UDim2.new(1, -40, 0, -15)
+    dragPoint.BackgroundColor3 = Color3.fromRGB(0, 0, 255) -- Ponto azul
+    dragPoint.BorderSizePixel = 0
+    dragPoint.Parent = frame
+
+    local function activateScript()
+        isScriptActive = true
+        button.Text = "Script Ativado"
+        statusText.Text = "Ativado"
+        statusText.TextColor3 = Color3.fromRGB(0, 255, 0)
+        expandParts()
+        expandInteractionArea()
+    end
+
+    button.MouseButton1Click:Connect(activateScript)
+
+    -- Função para mover o GUI
+    dragPoint.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragActive = true
+            local mouse = UserInputService:GetMouseLocation() - guiOffset
+            local startPos = guiOffset
+            UserInputService.InputChanged:Connect(function(inputChange)
+                if dragActive then
+                    guiOffset = inputChange.Position - mouse
+                    frame.Position = UDim2.new(0, guiOffset.X, 0, guiOffset.Y)
+                end
+            end)
+        end
+    end)
+
+    dragPoint.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragActive = false
+        end
+    end)
+end
+
+createCustomGUI() -- Chama a função para criar a GUI
