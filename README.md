@@ -1,4 +1,103 @@
 <header>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sécurité sur les réseaux sociaux</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #444;
+            padding: 0.5rem;
+        }
+        nav a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px 0;
+        }
+        a {
+            color: blue;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sécurité sur les réseaux sociaux</h1>
+    </header>
+    <nav>
+        <a href="#presentation">Présentation du sujet</a>
+        <a href="#nous">Qui sommes-nous ?</a>
+        <a href="#protection">Protection des données</a>
+        <a href="#cyberharcelement">Prévention du cyberharcèlement</a>
+        <a href="#proteger">Protéger son compte</a>
+        <a href="#naviguer">Naviguer en sécurité</a>
+        <a href="#sources">Bibliographie & Sitographie</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <div class="container" id="presentation">
+        <h2>Présentation du sujet</h2>
+        <p>Ce site a pour but de sensibiliser les utilisateurs aux dangers des réseaux sociaux et de proposer des solutions pour naviguer en toute sécurité.</p>
+        <p>Les réseaux sociaux sont omniprésents dans notre quotidien. Toutefois, ils exposent les utilisateurs à des risques tels que l'usurpation d'identité, la collecte abusive de données personnelles ou encore le cyberharcèlement. Nous vous proposons ici des conseils pratiques et des ressources pour utiliser ces plateformes en toute sécurité.</p>
+        <img src="https://via.placeholder.com/800x400" alt="Image de sensibilisation aux réseaux sociaux">
+    </div>
+    <div class="container" id="sources">
+        <h2>Bibliographie & Sitographie</h2>
+        <p>Nous avons utilisé plusieurs sources fiables pour construire ce site et vous fournir des informations précises sur la sécurité en ligne.</p>
+        <ul>
+            <li><a href="https://www.cnil.fr/">CNIL - Commission nationale de l'informatique et des libertés</a></li>
+            <li><a href="https://www.e-enfance.org/">E-Enfance - Protection des jeunes en ligne</a></li>
+            <li><a href="https://www.service-public.fr/">Service Public - Sécurité numérique</a></li>
+        </ul>
+    </div>
+    <div class="container" id="contact">
+        <h2>Contact</h2>
+        <p>Vous avez des questions ou souhaitez en savoir plus ? Contactez-nous :</p>
+        <form>
+            <label for="name">Nom :</label>
+            <input type="text" id="name" name="name" required>
+            <br>
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" required>
+            <br>
+            <label for="message">Message :</label>
+            <textarea id="message" name="message" required></textarea>
+            <br>
+            <button type="submit">Envoyer</button>
+        </form>
+    </div>
+</body>
+</html>
 
 <!--
   <<< Author notes: Course header >>>
