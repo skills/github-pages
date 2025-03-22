@@ -1,75 +1,34 @@
-<header>
+import React from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { motion } from 'framer-motion';
 
-<!--
-  <<< Author notes: Course header >>>
-  Include a 1280×640 image, course title in sentence case, and a concise description in emphasis.
-  In your repository settings: enable template repository, add your 1280×640 social image, auto delete head branches.
-  Add your open source license, GitHub uses MIT license.
--->
+const DougfordCoin = () => {
+    return (
+        <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
+            <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 2 }}>
+                <img src="/mnt/data/IMG_0011.jpeg" alt="Dougford Coin Logo" className="w-40 h-40 rounded-full shadow-lg" />
+            </motion.div>
 
-# GitHub Pages
+            <Card className="w-full max-w-3xl mt-8 bg-white p-6 rounded-2xl shadow-2xl">
+                <CardContent>
+                    <h1 className="text-3xl font-bold text-center mb-4">Dougford Coin: To The Moon! 🚀🌕</h1>
+                    <p className="text-gray-700 mb-6">Dougford Coin is the latest generational meme coin that turns chaos into fun and profit! Inspired by battles between powerful giants over tariffs and power struggles, Dougford Coin is a playful representation of how their fights impact everyone else. Now, you get to join the fight — in the trading arena!</p>
+                    <p className="text-gray-700 mb-6">The goal? To bring the battle into the real world where the smartest traders compete for glory and riches. This is not just another meme coin. It’s a trading revolution! Prove your skills, dominate the market, and make it to the moon!</p>
 
-_Create a site or blog from your GitHub repositories with GitHub Pages._
+                    <h2 className="text-xl font-bold mb-2">How to Trade:</h2>
+                    <p className="text-gray-700 mb-6">You can purchase and trade Dougford Coin on <strong>Dexscreener</strong> and other popular meme coin platforms. Play your cards right and see your investment soar to the moon! 🌕💸💪</p>
 
-</header>
+                    <div className="flex flex-col items-center mt-4">
+                        <a href="https://t.me/dougfordcoinsafe4u" target="_blank">
+                            <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white p-2 mt-4 rounded-xl">Contact our X</Button>
+                        </a>
+                        <a href="https://doughcoin.store" target="_blank" className="text-blue-600 mt-4">Visit our Official Website: doughcoin.store</a>
+                    </div>
+                </CardContent>
+            </Card>
+        </div>
+    );
+};
 
-<!--
-  <<< Author notes: Course start >>>
-  Include start button, a note about Actions minutes,
-  and tell the learner why they should take the course.
--->
-
-## Welcome
-
-With GitHub Pages, you can host project blogs, documentation, resumes, portfolios, or any other static content you'd like. Your GitHub repository can easily become its own website. In this course, we'll show you how to set up your own site or blog using GitHub Pages.
-
-- **Who is this for**: Beginners, students, project maintainers, small businesses.
-- **What you'll learn**: How to build a GitHub Pages site.
-- **What you'll build**: We'll build a simple GitHub Pages site with a blog. We'll use [Jekyll](https://jekyllrb.com), a static site generator.
-- **Prerequisites**: If you need to learn about branches, commits, and pull requests, take [Introduction to GitHub](https://github.com/skills/introduction-to-github) first.
-- **How long**: This course takes less than one hour to complete.
-
-In this course, you will:
-
-1. Enable GitHub Pages
-2. Configure your site
-3. Customize your home page
-4. Create a blog post
-5. Merge your pull request
-
-### How to start this course
-
-<!-- For start course, run in JavaScript:
-'https://github.com/new?' + new URLSearchParams({
-  template_owner: 'skills',
-  template_name: 'github-pages',
-  owner: '@me',
-  name: 'skills-github-pages',
-  description: 'My clone repository',
-  visibility: 'public',
-}).toString()
--->
-
-[![start-course](https://user-images.githubusercontent.com/1221423/235727646-4a590299-ffe5-480d-8cd5-8194ea184546.svg)](https://github.com/new?template_owner=skills&template_name=github-pages&owner=%40me&name=skills-github-pages&description=My+clone+repository&visibility=public)
-
-1. Right-click **Start course** and open the link in a new tab.
-2. In the new tab, most of the prompts will automatically fill in for you.
-   - For owner, choose your personal account or an organization to host the repository.
-   - We recommend creating a public repository, as private repositories will [use Actions minutes](https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions).
-   - Scroll down and click the **Create repository** button at the bottom of the form.
-3. After your new repository is created, wait about 20 seconds, then refresh the page. Follow the step-by-step instructions in the new repository's README.
-
-<footer>
-
-<!--
-  <<< Author notes: Footer >>>
-  Add a link to get support, GitHub status page, code of conduct, license link.
--->
-
----
-
-Get help: [Post in our discussion board](https://github.com/orgs/skills/discussions/categories/github-pages) &bull; [Review the GitHub status page](https://www.githubstatus.com/)
-
-&copy; 2023 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
-
-</footer>
+export default DougfordCoin;
