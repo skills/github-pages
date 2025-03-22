@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Site</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Bem-vindo ao Meu Site</h1>
+    <nav>
+      <ul>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="sobre">
+    <h2>Sobre o Site</h2>
+    <p>Este é um site de exemplo criado para mostrar como estruturar páginas simples.</p>
+  </section>
+
+  <section id="contato">
+    <h2>Contato</h2>
+    <form id="form-contato">
+      <label for="nome">Seu Nome:</label>
+      <input type="text" id="nome" name="nome" required>
+
+      <label for="email">Seu E-mail:</label>
+      <input type="email" id="email" name="email" required>
+
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Meu Site. Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
