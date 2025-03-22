@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Girasol Animado</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fdf6e3;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .message {
+            font-size: 33.6px; /* Aumento del 40% (24px * 1.4) */
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            margin-top: 28px; /* Aumento del 40% */
+            opacity: 0;
+            animation: fadeInMessage 1s 3s forwards; /* Aparece después de 3 segundos */
+            display: flex;
+            align-items: center;
+        }
+        .sunflower {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0; /* Comienza invisible */
+            animation: fadeInSunflower 2s forwards; /* Aparece en 2 segundos */
+        }
+        .stem {
+            width: 14px; /* Aumento del 40% (10px * 1.4) */
+            height: 168px; /* Aumento del 40% (120px * 1.4) */
+            background-color: green;
+        }
+        .flower {
+            position: relative;
+            width: 140px; /* Aumento del 40% (100px * 1.4) */
+            height: 140px; /* Aumento del 40% (100px * 1.4) */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: spin 5s linear infinite;
+        }
+        .petal {
+            width: 42px; /* Aumento del 40% (30px * 1.4) */
+            height: 84px; /* Aumento del 40% (60px * 1.4) */
+            background-color: yellow;
+            border-radius: 50%;
+            position: absolute;
+            z-index: 1; /* Los pétalos están por debajo */
+        }
+        .center {
+            width: 56px; /* Aumento del 40% (40px * 1.4) */
+            height: 56px; /* Aumento del 40% (40px * 1.4) */
+            background-color: brown;
+            border-radius: 50%;
+            position: absolute;
+            z-index: 2; /* El centro está por encima de los pétalos */
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes fadeInSunflower {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @keyframes fadeInMessage {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .batman-emoji {
+            font-size: 42px; /* Aumento del 40% (30px * 1.4) */
+            margin-left: 14px; /* Aumento del 40% (10px * 1.4) */
+        }
+    </style>
+</head>
+<body>
+    <div class="sunflower">
+        <div class="flower">
+            <div class="center"></div>
+            <script>
+                const flower = document.querySelector('.flower');
+                for(let i = 0; i < 8; i++) {
+                    let petal = document.createElement('div');
+                    petal.className = 'petal';
+                    petal.style.transform = `rotate(${i * 45}deg) translate(0, -28px)`; /* Aumento del 40% */
+                    flower.appendChild(petal);
+                }
+            </script>
+        </div>
+        <div class="stem"></div>
+    </div>
+    <p class="message">hola nat
+        <span class="batman-emoji">🦇</span>
+    </p>
+</body>
+</html>
