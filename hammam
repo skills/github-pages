@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Layout</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <h1>Our Menu</h1>
+
+    <div class="container">
+        <section class="box">
+            <div class="title">Chicken</div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor.</p>
+        </section>
+        <section class="box">
+            <div class="title">Beef</div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor.</p>
+        </section>
+        <section class="box">
+            <div class="title">Sushi</div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor.</p>
+        </section>
+    </div>
+</body>
+</html>
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2em;
+    margin: 20px 0;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.box {
+    border: 1px solid black;
+    background-color: #f4f4f4;
+    padding: 20px;
+    position: relative;
+}
+
+/* Section Title Styling */
+.title {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #ff5733;
+    color: white;
+    padding: 5px 10px;
+    font-weight: bold;
+    border: 1px solid black;
+}
+
+/* Desktop View (≥ 992px) */
+@media (min-width: 992px) {
+    .box {
+        float: left;
+        width: 32%;
+        margin: 1%;
+    }
+}
+
+/* Tablet View (768px - 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .box {
+        width: 48%;
+        float: left;
+        margin: 1%;
+    }
+    .box:nth-child(3) {
+        width: 98%;
+    }
+}
+
+/* Mobile View (≤ 767px) */
+@media (max-width: 767px) {
+    .box {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
