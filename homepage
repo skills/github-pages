@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>내 홈페이지</title>
+    <style>
+        body {
+            font-family: '맑은 고딕', sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+        }
+        nav {
+            margin: 20px 0;
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #333;
+        }
+        .content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>환영합니다!</h1>
+        </header>
+
+        <nav>
+            <a href="#home">홈</a>
+            <a href="#about">소개</a>
+            <a href="#contact">연락처</a>
+        </nav>
+
+        <div class="content">
+            <h2>안녕하세요</h2>
+            <p>이것은 제 홈페이지입니다.</p>
+            <p>여기에 원하는 내용을 추가하실 수 있습니다.</p>
+        </div>
+    </div>
+</body>
+</html>
