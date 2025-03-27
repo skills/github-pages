@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bundle & Save</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f8f8;
+        }
+        .container {
+            width: 350px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .option {
+            border: 2px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+            transition: 0.3s;
+        }
+        .option.selected {
+            border-color: green;
+            background-color: #e8f5e9;
+        }
+        .option input {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .option label {
+            display: block;
+            margin-left: 30px;
+        }
+        .discount {
+            font-size: 14px;
+            color: green;
+            font-weight: bold;
+            margin-left: 30px;
+        }
+        .content {
+            display: none;
+            margin-top: 10px;
+            padding-left: 30px;
+        }
+        select {
+            width: 100%;
+            padding: 5px;
+            margin: 5px 0;
+        }
+        .free-shipping {
+            text-align: center;
+            font-weight: bold;
+            color: green;
+            margin-top: 10px;
+        }
+        .summary {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        .add-to-cart {
+            width: 100%;
+            padding: 10px;
+            background: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="title">Bundle & Save</div>
+
+        <div class="option" onclick="selectOption(this, 195, 1)">
+            <input type="radio" name="bundle">
+            <label>1 Pair - DKK 195.00 <span class="discount">50% OFF</span></label>
+            <div class="content"></div>
+        </div>
+
+        <div class="option" onclick="selectOption(this, 345, 2)">
+            <input type="radio" name="bundle">
+            <label>2 Pairs - DKK 345.00 <span class="discount">40% OFF</span></label>
+            <div class="content"></div>
+        </div>
+
+        <div class="option" onclick="selectOption(this, 528, 3)">
+            <input type="radio" name="bundle">
+            <label>3 Pairs - DKK 528.00 <span class="discount">60% OFF</span></label>
+            <div class="content"></div>
+        </div>
+
+        <div class="free-shipping">Free 2 Day Shipping</div>
+        <div class="summary">Total: DKK <span id="total">0</span></div>
+        <button class="add-to-cart">+ Add to Cart</button>
+    </div>
+
+    <script>
+        function selectOption(element, price, pairs) {
+            let options = document.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.classList.remove('selected');
+                opt.querySelector('.content').innerHTML = "";
+                opt.querySelector('.content').style.display = 'none';
+            });
+
+            element.classList.add('selected');
+            let contentDiv = element.querySelector('.content');
+            contentDiv.innerHTML = generateDropdowns(pairs);
+            contentDiv.style.display = 'block';
+            document.getElementById('total').innerText = price;
+        }
+
+        function generateDropdowns(pairs) {
+            let html = "";
+            for (let i = 1; i <= pairs; i++) {
+                html += `
+                    <label>#${i} Size:</label>
+                    <select>
+                        <option>S</option>
+                        <option>M</option>
+                        <option>L</option>
+                    </select>
+                    <label>#${i} Color:</label>
+                    <select>
+                        <option>Red</option>
+                        <option>Blue</option>
+                        <option>Green</option>
+                    </select>
+                `;
+            }
+            return html;
+        }
+    </script>
+
+</body>
+</html>
