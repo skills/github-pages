@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кнопка с сохранением счётчика</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <p>Количество нажатий: <span id="counter">0</span></p>
+    <button onclick="increaseCounter()">Нажми меня</button>
+
+    <script>
+        let count = localStorage.getItem('clickCount') ? parseInt(localStorage.getItem('clickCount')) : 0;
+        document.getElementById('counter').textContent = count;
+
+        function increaseCounter() {
+            count++;
+            document.getElementById('counter').textContent = count;
+            localStorage.setItem('clickCount', count);
+        }
+    </script>
+</body>
+</html>
