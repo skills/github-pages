@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVENTO CLUB ATLETICO BELGRANO</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #009ada;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+        }
+        .container {
+            padding: 20px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px;
+            font-size: 18px;
+            color: white;
+            background-color: #009ada;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+        }
+        .button:hover {
+            background-color: #007bb5;
+        }
+        footer {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #000;
+            color: white;
+        }
+        p, h2 {
+            color: #000;
+        }
+    </style>
+    <script>
+        function showConfirmation() {
+            alert("¡Ya estás anotado, felicitaciones!");
+        }
+    </script>
+</head>
+<body>
+    <header>
+        🌟 EVENTO CLUB ATLETICO BELGRANO 🌟
+    </header>
+    <div class="container">
+        <h2>¡Vive una experiencia única!</h2>
+        <p>Conoce a tu celebridad favorita en un evento especial lleno de sorpresas.</p>
+        <p><strong>📅 Fecha:</strong> 15 de julio de 2025</p>
+        <p><strong>📍 Lugar:</strong> Hotel Grand Lux, Ciudad Ficticia</p>
+        <button class="button" onclick="showConfirmation()">Anotarse</button>
+    </div>
+    <footer>
+        &copy; 2025 EVENTO CLUB ATLETICO BELGRANO - Todos los derechos reservados.
+    </footer>
+</body>
+</html>
