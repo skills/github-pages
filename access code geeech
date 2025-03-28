@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>GEETECH code access</title>
+    <script>
+        function verifierCode() {
+            const codeSaisi = document.getElementById("code").value;
+            const codeCorrect = "ESDRGFGYY678";
+            const urlRedirection = "https://sitewebclubcopshell.my.canva.site/";
+
+            if (codeSaisi === codeCorrect) {
+                window.location.href = urlRedirection;
+            } else {
+                alert("Code incorrect. Veuillez réessayer.");
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css"
+</head>
+<body>
+    <h1>GEETECH Code access</h1>
+    <h2>Veuillez entrer votre code d'accès ici :</h2>
+    <a href=https://sitewebclubcopshell.my.canva.site/dagdhb-lw1c><p><h10>Retour à la page d'acueuil</h10></p></a>
+    <input type="text" id="code" placeholder="Saisissez le code ici" />
+    <button onclick="verifierCode()">Valider</button>
+    <br><img src="https://th.bing.com/th/id/OIP.dnJ6fn04WZsyB9UAPLYWtQHaH0?w=192&h=202&c=7&r=0&o=5&dpr=1.3&pid=1.7"></br>
+</body>
+</html>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+
