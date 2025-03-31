@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaudio Advocacia - Especialistas em Direito de Família</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+        
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', Arial, sans-serif;
+        }
+
+        body {
+            color: #2b2b2b;
+            line-height: 1.6;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo img {
+            height: 50px;
+        }
+
+        .teal-color {
+            color: #1D616A; /* Cor verde azulada do logo Gaudio */
+        }
+        
+        .burgundy-color {
+            color: #8A2432; /* Cor bordô do logo Gaudio */
+        }
+
+        /* Navegação */
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #2b2b2b;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #1D616A;
+        }
+
+        /* Banner principal */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/api/placeholder/1200/600') no-repeat center center;
+            background-size: cover;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 60px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: #fff;
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #1D616A;
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #164a51;
+            transform: translateY(-2px);
+        }
+
+        /* Sobre nós */
+        .about {
+            padding: 80px 0;
+            background-color: #f5f5f5;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: #1a1a1a;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #8A2432;
+        }
+
+        .about-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 1;
+            padding-right: 30px;
+        }
+
+        .about-text h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .about-image {
+            flex: 1;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Áreas de atuação */
+        .services {
+            padding: 80px 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border-bottom: 3px solid #1D616A;
+        }
+
+        .service-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .service-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: #8A2432;
+        }
+
+        .service-card p {
+            color: #666;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #222;
+            color: #fff;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 220px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: #8A2432;
+        }
+
+        .footer-column p, .footer-column a {
+            color: #ccc;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+
+        .footer-column a:hover {
+            color: #1D616A;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            color: #ccc;
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 20px;
+            }
+
+            nav ul li {
+                margin-left: 15px;
+                margin-right: 15px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .about-text {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoODAsIDUwKSI+DQogICAgPHBhdGggZD0iTTQgNzRjMi40LTguOCA3LTE2IDExLjYtMjMuMiA0LjgtNy40IDEwLjgtMTQgMTYuOC0yMC40IDYuMi02LjYgMTMtMTIuNiAyMC0xOC4yQzU4LjggNi40IDY1LjYgMS4yIDczIC0yLjRjNi44LTMuMiAxNC00LjYgMjEuNi02LjggNy44LTIuMiAxNi02LjQgMjMuOC04IDguMi0xLjYgMTYuNC0zIDI0LjgtMi44IDcuNCAwLjIgMTUgMCA4LjMgMTAuNCAtMS43IDIuOCAtNC4zIDUuMiAtNy4zIDYuOCAtNS4yIDIuOCAtMTEuMiAzLjggLTE3IDQuNiAtMTIuNiAxLjggLTI1LjIgMy40IC0zNy42IDYuNCAtMTIuNiAzLjIgLTI0LjggNy44IC0zNi40IDEzIC0xMSA0LjggLTIxLjYgMTAuMiAtMzEgMTcuNiAtMTAuMiA4LjIgLTE5IDIwIC0yNC40IDMyLjIgLTMuNiA4LjQgLTYuNiAyMSAtMi42IDI5LjggMyA2LjYgOCAxNS44IDQuOCAxLjYgMi4yIC0xNC40IDYuMiAtMjYuOCAxNiAtMzggOC42LTEwLjIgMTkuOC0xOC42IDMxLjgtMjQuOCAxMi42LTYuNCAyNi42LTEwLjIgNDAuNC0xMi44IDEzLjYtMi42IDI3LjQtMy44IDQxLjQtNC40IC02LjYgMCAtMTMuNiAxLjQgLTIwLjIgMi4yQzk4LjIgMTcgODkuOCAxOSA4MSAyMi40Yy03LjggMy4yIC0xNS40IDcuMiAtMjIuNiAxMS42IC04LjIgNSAtMTYgMTAuNiAtMjMuNiAxNi44IC02LjggNS44IC0xMy40IDEyLjIgLTE5IDE5LjIgLTQuOCA2LjQgLTkuOCAxNC44IC03LjQgMjMuMiAxLjYgNS44IDQuNiAxMS42IDEwLjIgMTQuNCA1LjggMy4yIDEyLjYgMy40IDE5LjIgMy40IDEwLjQgMCAyMC40IC0wLjYgMzAuNiAwLjQgLTExIDEuNCAtMjEuOCAyLjYgLTMyLjggMy40IC0xMSAwLjYgLTI2LjQgMC42IC0zMiAtNy4yIC00LTUuNCAtNS4yLTEyLjYgLTUuNiAtMTkuNCAtMC40LTcuMiAxLjYgLTE0LjQgNC44IC0yMC42WiIgZmlsbD0iIzFENjE2QSIvPg0KICAgIDx0ZXh0IHg9IjEwIiB5PSIxMDAiIGZvbnQtc2l6ZT0iMzAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZmlsbD0iIzhBMjQzMiIgZm9udC13ZWlnaHQ9ImJvbGQiPkEgRCBWIE8gQyBBIEMgSSBBPC90ZXh0Pg0KICAgIDxwb2x5Z29uIHBvaW50cz0iMTAsODUgMzAsOTUgMTAsOTUiIGZpbGw9IiM4QTI0MzIiLz4NCiAgPC9nPg0KPC9zdmc+" alt="Gaudio Advocacia" />
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="https://gaudio.adv.br/contato" class="btn">Contato</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Banner Principal -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Especialistas em Direito de Família</h1>
+                <p>Protegendo você e sua família em momentos difíceis com assessoria jurídica especializada e humanizada.</p>
+                <a href="https://gaudio.adv.br/contato" class="btn">Entre em Contato</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Nós -->
+    <section class="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Por Que Você Precisa de um Advogado Especializado</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3 style="position: relative; padding-bottom: 15px; margin-bottom: 20px;">Apoio Jurídico nos Momentos Mais Importantes</h3>
+                    <style>
+                        .about-text h3:after {
+                            content: '';
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            width: 50px;
+                            height: 2px;
+                            background-color: #8A2432;
+                        }
+                    </style>
+                    <p>Questões familiares são delicadas e envolvem não apenas aspectos legais, mas também emocionais. Contar com um profissional especializado em Direito de Família é fundamental para proteger seus direitos e os de seus filhos.</p>
+                    <p>Nossos advogados combinam expertise jurídica com um atendimento humanizado, compreendendo o momento delicado que você está passando e oferecendo o suporte necessário para superar desafios e construir um novo caminho.</p>
+                    <a href="https://gaudio.adv.br/contato" class="btn">Consulte um Especialista</a>
+                </div>
+                <div class="about-image">
+                    <img src="/api/placeholder/600/400" alt="Advogado de Família em Atendimento">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Áreas de Atuação -->
+    <section class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Como Podemos Ajudar Você</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Divórcio e Separação</h3>
+                    <p>Assessoria completa em processos de divórcio litigioso ou consensual, partilha de bens, pensão alimentícia e todos os aspectos legais envolvidos no fim de um relacionamento.</p>
+                    <img src="/api/placeholder/400/150" alt="Divórcio e Separação" style="width: 100%; height: 150px; object-fit: cover; margin-top: 15px; border-radius: 4px;">
+                </div>
+                <div class="service-card">
+                    <h3>Guarda e Visitas</h3>
+                    <p>Orientação e representação em processos de guarda compartilhada ou unilateral, regulamentação de visitas e convivência familiar, sempre priorizando o bem-estar dos filhos.</p>
+                    <img src="/api/placeholder/400/150" alt="Guarda e Visitas" style="width: 100%; height: 150px; object-fit: cover; margin-top: 15px; border-radius: 4px;">
+                </div>
+                <div class="service-card">
+                    <h3>Violência Doméstica</h3>
+                    <p>Suporte jurídico para vítimas de violência doméstica, incluindo obtenção de medidas protetivas, orientação sobre direitos e acompanhamento em todas as etapas do processo.</p>
+                    <img src="/api/placeholder/400/150" alt="Violência Doméstica" style="width: 100%; height: 150px; object-fit: cover; margin-top: 15px; border-radius: 4px;">
+                </div>
+                <div class="service-card">
+                    <h3>Pensão Alimentícia</h3>
+                    <p>Assessoria para estabelecimento, revisão ou execução de pensão alimentícia, garantindo que as necessidades dos filhos sejam devidamente atendidas.</p>
+                    <img src="/api/placeholder/400/150" alt="Pensão Alimentícia" style="width: 100%; height: 150px; object-fit: cover; margin-top: 15px; border-radius: 4px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Importância do Advogado -->
+    <section class="about" style="background-color: #fff;">
+        <div class="container">
+            <div class="section-title">
+                <h2>A Importância de um Advogado Especializado</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="/api/placeholder/600/400" alt="Advogado em reunião com cliente">
+                </div>
+                <div class="about-text">
+                    <h3 style="position: relative; padding-bottom: 15px; margin-bottom: 20px;">Por Que Contar com Nossa Assessoria</h3>
+                    <style>
+                        .about-text h3:after {
+                            content: '';
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            width: 50px;
+                            height: 2px;
+                            background-color: #bf9e4a;
+                        }
+                    </style>
+                    <p>Em situações que envolvem o direito de família, contar com um advogado especializado não é apenas recomendável, mas essencial para garantir seus direitos.</p>
+                    <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 20px;">
+                        <li>Conhecimento técnico especializado na área</li>
+                        <li>Orientação sobre todas as opções legais disponíveis</li>
+                        <li>Proteção dos seus interesses e dos seus filhos</li>
+                        <li>Suporte emocional e jurídico durante todo o processo</li>
+                        <li>Experiência em negociação para soluções mais rápidas</li>
+                        <li>Representação qualificada em audiências e nos tribunais</li>
+                    </ul>
+                    <a href="https://gaudio.adv.br/contato" class="btn">Agende uma Consulta</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Gaudio Advocacia</h3>
+                    <p>Compromisso com a proteção jurídica da sua família nos momentos mais importantes.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Rio de Janeiro</h3>
+                    <p>Av. Rio Branco, 151 – gr 603</p>
+                    <p>Rio de Janeiro / RJ</p>
+                    <p>+55 (21) 2224-9534</p>
+                </div>
+                <div class="footer-column">
+                    <h3>São Paulo</h3>
+                    <p>Avenida Arnolfo Azevedo, 43</p>
+                    <p>Pacaembú – São Paulo/SP</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Brasília</h3>
+                    <p>SAUS Quadra 5, Bloco K</p>
+                    <p>Salas 712-715 e 801-817</p>
+                    <p>Edifício OK Office Tower</p>
+                    <p>Asa Sul</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Gaudio Advocacia. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
