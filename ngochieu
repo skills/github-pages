@@ -1,0 +1,89 @@
+const express = require('express');
+const cors = require('cors');
+const { Pool } = require('pg');
+const passport = require('passport');
+const session = require('express-session');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+// Cấu hình database PostgreSQL
+const pool = new Pool({
+  user: 'your_user',
+  host: 'your_host',
+  database: 'your_db',
+  password: 'your_password',
+  port: 5432,
+});
+
+// Cấu hình Passport SSO
+passport.use(new GoogleStrategy({
+    clientID: 'YOUR_GOOGLE_CLIENT_ID',
+    clientSecret: 'YOUR_GOOGLE_CLIENT_SECRET',
+    callbackURL: '/auth/google/callback'
+  },
+  (accessToken, refreshToken, profile, done) => {
+    return done(null, profile);
+  }
+));
+
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
+
+app.use(session({ secret: 'secret', resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// API Đăng nhập Google SSO
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+app.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/' }), 
+  (req, res) => {
+    res.redirect('/dashboard');
+  }
+);
+
+// API Nhập điểm
+app.post('/submit-score', async (req, res) => {
+  const { userId, score, criteria } = req.body;
+  try {
+    await pool.query('INSERT INTO scores (user_id, score, criteria) VALUES ($1, $2, $3)', [userId, score, criteria]);
+    res.json({ message: 'Điểm đã được lưu' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// API Phê duyệt điểm
+app.post('/approve-score', async (req, res) => {
+  const { scoreId, approved } = req.body;
+  try {
+    await pool.query('UPDATE scores SET approved = $1 WHERE id = $2', [approved, scoreId]);
+    res.json({ message: 'Điểm đã được duyệt' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// API Xuất báo cáo
+app.get('/report', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM scores');
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server chạy trên cổng ${PORT}`);
+});
