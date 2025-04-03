@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brianna Brown - Agile Efficiency Architect</title>
+  <style>
+    body {
+      font-family: Verdana, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+      border-left: 3px solid #6d8eff;
+      border-right: 3px solid #6d8eff;
+    }
+    header {
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(to right, #6d8eff, #a5b4ff);
+      color: white;
+    }
+    nav {
+      text-align: center;
+      margin-top: 10px;
+      margin-bottom: 30px;
+    }
+    nav a {
+      margin: 0 15px;
+      color: #6d8eff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    h2 {
+      color: #6d8eff;
+      border-bottom: 2px dotted #ccc;
+      padding-bottom: 5px;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.85em;
+      color: #777;
+      margin-top: 40px;
+      padding-top: 10px;
+      border-top: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Brianna Brown</h1>
+    <p>Agile Efficiency Architect | Automation Strategist | Team Enablement Advocate</p>
+  </header>
+
+  <nav>
+    <a href="#work">Work</a>
+    <a href="#coaching">Coaching</a>
+    <a href="#achievements">Achievements</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="work">
+    <h2>🚀 Work</h2>
+    <p>I design and maintain robust intake systems and automation frameworks that:</p>
+    <ul>
+      <li>Reduce manual work by 40–70% per team</li>
+      <li>Scale across cross-functional teams with no-code/low-code tooling</li>
+      <li>Improve request turnaround time by up to 3x</li>
+      <li>Empower execs with real-time reporting and KPIs</li>
+    </ul>
+  </section>
+
+  <section id="coaching">
+    <h2>🤝 Coaching</h2>
+    <p>Through Agile coaching, I help teams work smarter:</p>
+    <ul>
+      <li>Created educational onboarding for non-technical teams</li>
+      <li>Developed intake and automation playbooks</li>
+      <li>Ran lightweight Agile workshops using SAFe principles</li>
+    </ul>
+    <blockquote><em>"The best automation is the one people actually use—so I teach while I build."</em></blockquote>
+  </section>
+
+  <section id="achievements">
+    <h2>🏆 Achievements</h2>
+    <ul>
+      <li>Launched Smartsheet-to-Salesforce connector MVP in Q1 2025</li>
+      <li>Built KPI dashboards with live Jira data for executive visibility</li>
+      <li>Filed a white paper and trade secret patent on system design</li>
+      <li>Unified 3+ intake systems to remove duplication</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>📬 Contact</h2>
+    <p>Email: <a href="mailto:brianna@email.com">brianna@email.com</a></p>
+    <p>LinkedIn: <a href="https://linkedin.com/in/brianna">linkedin.com/in/brianna</a></p>
+    <p>GitHub: <a href="https://github.com/brianna">github.com/brianna</a></p>
+    <p><a href="resume.pdf">Download My Resume (PDF)</a></p>
+  </section>
+
+  <footer>
+    <p>Thanks for visiting my digital card. Internet vibes, 2002-style 🌐✨</p>
+  </footer>
+</body>
+</html>
