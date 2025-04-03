@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora Avançada de Dividendos</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f5f7fa;
+      color: #333;
+    }
+    .container {
+      background-color: white;
+      border-radius: 10px;
+      padding: 25px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .acao-card {
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-left: 4px solid #3498db;
+    }
+    .acao-btn {
+      display: inline-block;
+      padding: 10px 15px;
+      margin: 5px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s;
+    }
+    .acao-btn:hover {
+      background-color: #2980b9;
+    }
+    .btn-danger {
+      background-color: #e74c3c;
+    }
+    .btn-danger:hover {
+      background-color: #c0392b;
+    }
+    .btn-success {
+      background-color: #2ecc71;
+    }
+    .btn-success:hover {
+      background-color: #27ae60;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    .highlight {
+      font-size: 20px;
+      color: #e74c3c;
+      font-weight: bold;
+    }
+    .chart-container {
+      position: relative;
+      height: 300px;
+      margin-top: 30px;
+    }
+    .comparison-results {
+      margin-top: 30px;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Calculadora Avançada de Dividendos</h1>
+    
+    <div class="grid">
+      <div>
+        <h2>Adicionar Novo Ativo</h2>
+        <div>
+          <input type="text" id="novo-ticker" placeholder="Código do ativo (ex: ITUB4)">
+          <input type="number" id="novo-dy" placeholder="Dividend Yield (ex: 5.5)" step="0.01" min="0">
+          <button class="acao-btn btn-success" onclick="adicionarAtivo()">Adicionar Ativo</button>
+        </div>
+        
+        <h2 style="margin-top: 30px;">Ativos Disponíveis</h2>
+        <div id="ativos-disponiveis">
+          <button class="acao-btn" onclick="selecionarAcao('WEGE3', 1.74)">WEGE3 (1.74%)</button>
+          <button class="acao-btn" onclick="selecionarAcao('VALE3', 8.35)">VALE3 (8.35%)</button>
+          <button class="acao-btn" onclick="selecionarAcao('PETR4', 20.9)">PETR4 (20.9%)</button>
+          <button class="acao-btn" onclick="selecionarAcao('BBAS3', 9.18)">BBAS3 (9.18%)</button>
+          <button class="acao-btn" onclick="selecionarAcao('TAEE11', 8.49)">TAEE11 (8.49%)</button>
+        </div>
+      </div>
+      
+      <div>
+        <h2>Ativos Selecionados</h2>
+        <div id="ativos-selecionados">
+          <p>Nenhum ativo selecionado ainda</p>
+        </div>
+        
+        <div id="div-valor" class="hidden">
+          <h3>Qual renda mensal deseja?</h3>
+          <input type="number" id="valor-desejado" placeholder="Ex: 1000" min="1">
+          <button class="acao-btn btn-success" onclick="calcularTodos()">Calcular Todos</button>
+        </div>
+      </div>
+    </div>
+    
+    <div id="resultados" class="hidden">
+      <h2>Resultados Comparativos</h2>
+      <div id="tabela-resultados"></div>
+      
+      <div class="chart-container">
+        <canvas id="comparisonChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Dados dos ativos
+    const ativos = {};
+    let comparisonChart = null;
+    
+    // Adicionar ativo manualmente
+    function adicionarAtivo() {
+      const ticker = document.getElementById('novo-ticker').value.trim().toUpperCase();
+      const dy = parseFloat(document.getElementById('novo-dy').value);
+      
+      if (!ticker || isNaN(dy)) {
+        alert("Preencha ambos os campos corretamente!");
+        return;
+      }
+      
+      // Adiciona ao pool de ativos disponíveis
+      const btn = document.createElement('button');
+      btn.className = 'acao-btn';
+      btn.textContent = `${ticker} (${dy.toFixed(2)}%)`;
+      btn.onclick = () => selecionarAcao(ticker, dy);
+      document.getElementById('ativos-disponiveis').appendChild(btn);
+      
+      // Limpa campos
+      document.getElementById('novo-ticker').value = '';
+      document.getElementById('novo-dy').value = '';
+    }
+    
+    // Selecionar ativo para análise
+    function selecionarAcao(ticker, dy) {
+      if (!ativos[ticker]) {
+        ativos[ticker] = {
+          dy: dy / 100, // Converte para decimal
+          rendaDesejada: 0,
+          investimentoNecessario: 0
+        };
+        
+        atualizarListaSelecionados();
+        document.getElementById('div-valor').classList.remove('hidden');
+      }
+    }
+    
+    // Remover ativo da seleção
+    function removerAtivo(ticker) {
+      delete ativos[ticker];
+      atualizarListaSelecionados();
+      
+      if (Object.keys(ativos).length === 0) {
+        document.getElementById('div-valor').classList.add('hidden');
+        document.getElementById('resultados').classList.add('hidden');
+      } else {
+        calcularTodos();
+      }
+    }
+    
+    // Atualiza a lista de ativos selecionados
+    function atualizarListaSelecionados() {
+      const container = document.getElementById('ativos-selecionados');
+      container.innerHTML = '';
+      
+      if (Object.keys(ativos).length === 0) {
+        container.innerHTML = '<p>Nenhum ativo selecionado ainda</p>';
+        return;
+      }
+      
+      for (const ticker in ativos) {
+        const card = document.createElement('div');
+        card.className = 'acao-card';
+        card.innerHTML = `
+          <h3>${ticker}</h3>
+          <p>DY: ${(ativos[ticker].dy * 100).toFixed(2)}%</p>
+          <button class="acao-btn btn-danger" onclick="removerAtivo('${ticker}')">Remover</button>
+        `;
+        container.appendChild(card);
+      }
+    }
+    
+    // Calcular para todos os ativos selecionados
+    function calcularTodos() {
+      const rendaDesejada = parseFloat(document.getElementById('valor-desejado').value);
+      
+      if (isNaN(rendaDesejada) || rendaDesejada <= 0) {
+        alert("Digite um valor válido para a renda mensal!");
+        return;
+      }
+      
+      // Calcula para cada ativo
+      for (const ticker in ativos) {
+        ativos[ticker].rendaDesejada = rendaDesejada;
+        ativos[ticker].investimentoNecessario = (rendaDesejada * 12) / ativos[ticker].dy;
+      }
+      
+      exibirResultados();
+    }
+    
+    // Exibir resultados comparativos
+    function exibirResultados() {
+      const resultadosDiv = document.getElementById('resultados');
+      const tabela = document.getElementById('tabela-resultados');
+      
+      // Cria tabela de resultados
+      tabela.innerHTML = `
+        <table border="1" style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr>
+              <th>Ativo</th>
+              <th>DY</th>
+              <th>Investimento Necessário</th>
+              <th>Renda Anual</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${Object.keys(ativos).map(ticker => `
+              <tr>
+                <td>${ticker}</td>
+                <td>${(ativos[ticker].dy * 100).toFixed(2)}%</td>
+                <td>R$ ${ativos[ticker].investimentoNecessario.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                <td>R$ ${(ativos[ticker].rendaDesejada * 12).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+      
+      // Prepara dados para o gráfico
+      const labels = Object.keys(ativos);
+      const data = labels.map(ticker => ativos[ticker].investimentoNecessario);
+      const backgroundColors = [
+        'rgba(52, 152, 219, 0.7)',
+        'rgba(46, 204, 113, 0.7)',
+        'rgba(155, 89, 182, 0.7)',
+        'rgba(241, 196, 15, 0.7)',
+        'rgba(230, 126, 34, 0.7)',
+        'rgba(231, 76, 60, 0.7)'
+      ];
+      
+      // Cria ou atualiza o gráfico
+      const ctx = document.getElementById('comparisonChart').getContext('2d');
+      
+      if (comparisonChart) {
+        comparisonChart.destroy();
+      }
+      
+      comparisonChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Investimento Necessário (R$)',
+            data: data,
+            backgroundColor: backgroundColors,
+            borderColor: backgroundColors.map(c => c.replace('0.7', '1')),
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Valor Investido (R$)'
+              }
+            }
+          },
+          plugins: {
+            title: {
+              display: true,
+              text: 'Comparação de Investimento Necessário para Renda Mensal Desejada'
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return `R$ ${context.raw.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                }
+              }
+            }
+          }
+        }
+      });
+      
+      resultadosDiv.classList.remove('hidden');
+      resultadosDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
