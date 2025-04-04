@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deadline Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="background">
+        <div class="container">
+            <h1>Deadline Tracker</h1>
+            <h3 class="quote">"The future depends on what you do today." - Mahatma Gandhi</h3>
+            <div class="reward">Rewards: <span id="rewardPoints">0</span> Points</div>
+            <div class="columns">
+                <div class="column" id="important">
+                    <h2>Important</h2>
+                    <ul></ul>
+                    <input type="text" placeholder="Add task" id="taskInputImportant">
+                    <input type="date" id="dateInputImportant">
+                    <button onclick="addTask('important')">Add</button>
+                </div>
+                <div class="column" id="notImportant">
+                    <h2>Not So Important</h2>
+                    <ul></ul>
+                    <input type="text" placeholder="Add task" id="taskInputNotImportant">
+                    <input type="date" id="dateInputNotImportant">
+                    <button onclick="addTask('notImportant')">Add</button>
+                </div>
+                <div class="column" id="canBeDoneLater">
+                    <h2>Can Be Done Later</h2>
+                    <ul></ul>
+                    <input type="text" placeholder="Add task" id="taskInputCanBeDoneLater">
+                    <input type="date" id="dateInputCanBeDoneLater">
+                    <button onclick="addTask('canBeDoneLater')">Add</button>
+                </div>
+            </div>
+            <div class="completed-tasks">
+                <h2>Completed Tasks</h2>
+                <ul id="completedTasksList"></ul>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
