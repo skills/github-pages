@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="foto-bacground" id="bg-foto"></div>
+   
+    <div class="up-container">
+        <div class="pc-container">
+            <dialog aria-labelledby="schoolModal" id="popupSchoolContainer" class="popup-school-container">
+                <div class="popup-school-up">
+                    <h2 class="popup-school-label">Обучиться навыкам</h2>
+                    <!-- <p>Ебал  я эту верстку</p> -->
+                    <button onclick="window.popupSchoolContainer.close()" type="button" class="popup-school-button">&#x2715</button>
+                </div>
+                <div class="popup-school-bottom">
+                    <div class="popup-school-menu">
+                        <ol class="school-menu">
+                            <li class="school-item" id="SI1">
+                                <img class="pop-img" src="foto/Education-Photoroom.png" alt="фото">
+                                <div class="item-container">
+                                    <p class="school-text">Монтаж</p>
+                                </div>
+                            </li>
+                            <li class="school-item" id="SI2">
+                                <img class="pop-img" src="foto/Education-Photoroom.png" alt="фото">
+                                <div class="item-container">
+                                    <p class="school-text">Маркетинг</p>
+                                </div>
+                            </li>
+                            <li class="school-item" id="SI3">
+                                <img class="pop-img" src="foto/Education-Photoroom.png" alt="фото">
+                                <div class="item-container">
+                                    <p class="school-text">Программирование</p>
+                                </div>
+                            </li>
+                            <li class="school-item" id="SI4">
+                                <img class="pop-img" src="foto/Education-Photoroom.png" alt="фото">
+                                <div class="item-container">
+                                    <p class="school-text">Дизайн</p>
+                                </div>
+                            </li>
+                            <li class="school-item" id="SI5">
+                                <img class="pop-img" src="foto/Education-Photoroom.png" alt="фото">
+                                <div class="item-container">
+                                    <p class="school-text">Настройка/сборка ПК</p>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="feature-school-container">
+                        <p>Цена: <span class="scost"></span></p>
+                        <p>Описание: <span class="fssp"></span> <br> <span class="tsc">_</span></p>
+                        <div class="pop-btn-container">
+                            <a id="schoolBtn">ОБУЧИТЬСЯ</a>
+                        </div>
+                    </div>
+                </div>
+            </dialog>
+
+            <dialog aria-labelledby="marketModal" id="popupMarketContainer" class="popup-school-container">
+                <div class="popup-school-up">
+                    <h2 class="popup-school-label">Купить предметы</h2>
+                    <button onclick="window.popupMarketContainer.close()" type="button" class="popup-school-button">&#x2715</button>
+                </div>
+                <div class="popup-school-bottom">
+                    <div class="popup-school-menu">
+                        <ol class="market-menu">
+                            <li class="market-item" id="MI1">
+                                <img class="pop-img" src="foto/material-icon.png" alt="фото">
+                                <div class="item-container">
+                                    <p class="market-text">Кодинг</p>
+                                </div>
+                            </li>
+                            <li class="market-item" id="MI2">
+                                <img class="pop-img" src="foto/material-icon.png" alt="фото">
+                                <div class="item-container">
+                                    <p class="market-text">Настройка/Сборка</p>
+                                </div>
+                            </li>
+                            <li class="market-item" id="MI3">
+                                <img class="pop-img" src="foto/material-icon.png" alt="фото">
+                                <div class="item-container">
+                                    <p class="market-text">Монтаж видео</p>
+                                </div>
+                            </li>
+                            <li class="market-item" id="MI4">
+                                <img class="pop-img" src="foto/material-icon.png" alt="фото">
+                                <div class="item-container">
+                                    <p class="market-text">Создание рекламы</p>
+                                </div>
+                            </li>
+                            <li class="market-item" id="MI5">
+                                <img class="pop-img" src="foto/material-icon.png" alt="фото">
+                                <div class="item-container">
+                                    <p class="market-text">Web-дизайн</p>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="feature-school-container">
+                        <p class="mcost">Цена: </p>
+                        <p class="popinf">Описание: 
+                            <br>
+                            <span class="pft sp">Прибыль с одного заказа: </span>
+                            <br>
+                            <span class="tw sp">Необходимый навык: </span>
+                        </p>
+                        <div class="pop-btn-container">
+                            <a id="marketBtn">КУПИТЬ</a>
+                        </div>
+                    </div>
+                </div>
+            </dialog>
+
+            <dialog aria-labelledby="JobModal" id="popupJobContainer" class="popup-school-container">
+                <div class="popup-school-up">
+                    <h2 class="popup-school-label">Найти работу</h2>
+                    <button onclick="window.popupJobContainer.close()" type="button" class="popup-school-button">&#x2715</button>
+                </div>
+                <div class="popup-school-bottom">
+                    <div class="popup-school-menu">
+                        <ol class="job-menu">
+                            <li class="job-item" id="JI1">
+                                <img class="pop-img" src="foto/job-search.png" alt="фото">
+                                <div class="item-container">
+                                    <p class="job-text"><span class="job-name">Стройка</span></p>
+                                </div>
+                            </li>
+                            <li class="job-item" id="JI2">
+                                <img class="pop-img" src="foto/job-search.png" alt="фото">
+                                <div class="item-container">
+                                    <p class="job-text"><span class="job-name">Уборка мусора</span></p>
+                                </div>
+                            </li>
+                            <li class="job-item" id="JI3">
+                                <img class="pop-img" src="foto/job-search.png" alt="фото">
+                                <div class="item-container">
+                                    <p class="job-text"><span class="job-name">Продавец</span></p>
+                                </div>
+                            </li>
+                            <li class="job-item" id="JI4">
+                                <img class="pop-img" src="foto/job-search.png" alt="фото">
+                                <div class="item-container">
+                                    <p class="job-text"><span class="job-name">Достващик</span></p>
+                                </div>
+                            </li>
+                            <li class="job-item" id="JI5">
+                                <img class="pop-img" src="foto/job-search.png" alt="фото">
+                                <div class="item-container">
+                                    <p class="job-text"><span class="job-name">Грузчик</span></p>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="feature-school-container">
+                        <p>Зарплата: <span class="job-cost">0</span> </p>
+                        <p>Описание труда: <span class="job-info"></span></p>
+                        <div class="pop-btn-container">
+                            <a id="jobBtn">УСТРОИТЬСЯ</a>
+                        </div>
+                    </div>
+                </div>
+            </dialog>
+            
+            <div class="pc-button-container">
+                <button onclick="window.popupSchoolContainer.showModal()" type="button" class="school-btn popup-btn"></button>
+                <button onclick="window.popupMarketContainer.showModal()" type="button" class="market-btn popup-btn"></button>
+                <button onclick="window.popupJobContainer.showModal()" type="button" class="job-search-btn popup-btn"></button>
+            </div>
+
+        </div>
+
+        <div class="sleep-container">
+            <a onclick="SSleep()" id="sleep-btn" class="sleep-btn popup-btn">Спать</a>
+            <div class="time-wrap">
+                <p class="time-text">Текущее время игры:</p>
+                <div class="time-container">
+                    <span id="days" class="time-item">00</span>
+                    <span class="separator">:</span>
+                    <span id="hours" class="time-item">00</span>
+                    <span class="separator">:</span>
+                    <span id="minutes" class="time-item">00</span>
+                    <span class="separator">:</span>
+                    <span id="second" class="time-item">00</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="next-button-container">
+            <div class="user-wrap">
+                <div class="money"><span class="money-info">Баланс: </span> <span class="money-info balance" id="userBalance">00000</span></div>
+            </div>
+            <a onclick="window.SearchForValueInPopup()" type="button" class="next-button">Дальше</a>
+        </div>
+        
+    </div>
+    <div class="door-container" onclick="Wwork()"></div>
+
+    <div class="down-container">
+        <div class="handmade-wrap">
+            <div class="handmade-container">
+                <h3 class="handmade-tittle">Список дел:</h3>
+                <ol class="handmade">
+                    <li class="handmade-cell">
+                        <p id="name-cell" class="hand-name">Мыло</p>
+                        <p id="time-cell" class="hand-time"><span id="hts"></span></p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="inventory" id="inventory">
+            <div class="inventory-button" id="inventoryBtn">
+                <!-- <div class="inventory-button-icon"></div> -->
+                 <hr>
+            </div>
+            <div class="inventory-contant">
+                <div class="inventory-wrap">
+                    <a class="inventory-wrap-btn" id="inventBankBtn">Банк</a>
+                    <a class="inventory-wrap-btn" id="inventItemBtn">Заказы</a>
+                    <a class="inventory-wrap-btn" id="inventJobBtn">Работа</a>
+                    <a class="inventory-wrap-btn" id="inventProdBtn">Завершено</a>
+                </div>
+
+                <div class="inventory-box inv-bank" id="inventoryBank">
+                    <p class="inv-box-tittle">Кредиты:</p>
+                    <ol class="inventory-bi-list credit-list">
+                        <li class="inventory-bi-item credit-lst-item">
+                            <div class="bi-item-container">
+                                <img src="foto/" alt="Фото" class="bi-img">
+                                <div class="bi-text-container">
+                                    <p class="bi-text">Процент: <span class="credit-procent">_</span></p>
+                                    <p class="bi-text">Сумма взятия: <span class="credit-sum">_</span></p>
+                                    <p class="bi-text">Плата: <span class="credit-cost">_</span></p>
+                                </div>
+                            </div>
+                        </li>
+                    </ol>
+                    <br>
+                    <hr>
+                    <p class="inv-box-tittle">Вклады:</p>
+                    <ol class="inventory-bi-list inv-list">
+                        <li class="inventory-bi-item invest-lst-item">
+                            <div class="bi-item-container">
+                                <img src="#" alt="Фото" class="bi-img">
+                                <div class="bi-text-container">
+                                    <p class="bi-text">Процент: <span class="inv-procent">_</span></p>
+                                    <p class="bi-text">Сумма вложения: <span class="inv-sum">_</span></p>
+                                    <p class="bi-text">Текущий счет: <span class="inv-cost">_</span></p>
+                                </div>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+                <div class="inventory-box inv-item" id="inventoryItem">
+                    <ul class="inventory-prod-list item-lst">
+                        <li class="inventory-prod-item item-point">
+                            <img class="prod-img" src="foto/material-icon.png" alt="foto">
+                            <div class="prod-textbox">
+                                <p class="prod-item-txt">
+                                    Название: <span class="prodInfo" id="pI">_</span>
+                                </p>
+                                <p class="prod-item-txt">
+                                    Цена продажи: <span class="prodCost">_</span>
+                                </p>
+                            </div>
+                            <div class="item-btnbox">
+                                <a class="prod-btn" id="itemSellBtn" onclick="Ddelit(pI)">ОТМЕНИТЬ</a>
+                                <a class="prod-btn" id="itemUseBtn" onclick="Uuse(pI)">ВЫПОЛНИТЬ</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="inventory-box inv-job" id="inventoryJob">
+                    <div class="inventory-bi-item job-cont">
+                        <div class="bi-item-container">
+                            <img src="foto/job-search-Photoroom.png" alt="Фото" class="bi-img">
+                            <div class="bi-text-container">
+                                <p class="bi-text">Наименование: <span class="jname">_</span></p>
+                                <p class="bi-text">Заработная плата: <span class="jcost">_</span>ман</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="inventory-box inv-prod" id="inventoryProd">
+                    <ul class="inventory-prod-list prod-lst">
+                        <li class="inventory-prod-item prod-item">
+                            <img class="prod-img" src="foto/job-search-Photoroom.png" alt="foto">
+                            <div class="prod-textbox">
+                                <p class="prod-item-txt">
+                                    Название: <span class="prodInfo" id="pIn">_</span>
+                                </p>
+                                <p class="prod-item-txt">
+                                    Цена: <span class="prodCost">_</span>
+                                </p>
+                            </div>
+                            <div class="item-btnbox">
+                                <a class="prod-btn" id="prodSellBtn" onclick="Ssell(pIn)">ЗАВЕРШИТЬ</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="bank" class="bank">
+            <div class="bank-text-container">
+                <p class="bank-text">Банк</p>
+            </div>
+
+            <div class="bank-header-container">
+                <div class="bank-wrap-container">
+                    <div class="bank-kredit-container bank-item bank-item1" id="bank-credit-button">
+                        <p class="bank-item-text">Кредиты</p>
+                    </div>
+                    <div class="bank-invest-container bank-item bank-item2" id="bank-invvest-button">
+                        <p class="bank-item-text">Вклады</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bank-main-container">
+                <div class="bank-credit-box">
+                    <ul class="bank-credit-list">
+                        <li class="bank-credit-item" id="item1">
+                            <p class="credit-tittle">Тариф 1</p>
+                            <div class="credit-terms-container">
+                                <p class="credit-text">Описание: Проценты выплачиваются вместе с телом</p>
+                                <p class="credit-text">Проценты: <span id="item1sp">15</span>%</p>
+                            </div>
+                        </li>
+                        <li class="bank-credit-item" id="item2">
+                            <p class="credit-tittle">Тариф 2</p>
+                            <div class="credit-terms-container">
+                                <p class="credit-text">Описание: Сначала выплачивается тело, после проценты</p>
+                                <p class="credit-text">Проценты: <span id="item2sp">21</span>%</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="credit-form">
+                        <label class="credit-label">На какую сумму возьмете кредит?</label>
+                        <input max="100" id="input-cost" class="credit-input" type="number" list="list-number">
+                        <datalist id="list-number">
+                            <option value="10"></option>
+                            <option value="20"></option>
+                            <option value="30"></option>
+                            <option value="40"></option>
+                            <option value="50"></option>
+                            <option value="60"></option>
+                            <option value="70"></option>
+                            <option value="80"></option>
+                            <option value="90"></option>
+                            <option value="100"></option>
+                        </datalist>
+                        <br>
+                        <a class="credit-button" id="credit-button">Получить!</a>
+                    </div>
+                </div>
+                <div class="bank-ivest-box">
+                    <ul class="bank-invest-list">
+                        <li class="bank-invest-item" id="invitem1">
+                            <p class="invest-tittle">Вклад 1</p>
+                            <div class="invest-terms-container">
+                                <p class="invest-text">Описание: Срок органичен. Нет возможности пополнения и снятия.</p>
+                                <p class="invest-text">Проценты: <span id="item1sp">20</span>%</p>
+                            </div>
+                        </li>
+                        <li class="bank-invest-item" id="invitem2">
+                            <p class="invest-tittle">Вклад 2</p>
+                            <div class="invest-terms-container">
+                                <p class="invest-text">Описание: Неограниченый срок. Есть возможность пополнения и снятия средств.</p>
+                                <p class="invest-text">Проценты: <span id="item2sp">12</span>%</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="invest-form">
+                        <label class="invest-label phr" id="phrInput">На какое количество игровых дней берете?</label> <br>
+                        <input id="input-phrase" class="invest-input phr" type="text" list="list-phrases">
+                        <datalist id="list-phrases">
+                            <option value="1"></option>
+                            <option value="2"></option>
+                            <option value="3"></option>
+                        </datalist>
+                        <br>
+                        <label class="invest-label">Какую сумму хотите вложить?</label>
+                        <input id="input-invcost" class="invest-input" type="number" list="list-invNumber">
+                        <datalist id="list-invNumber">
+                            <option value="10"></option>
+                            <option value="20"></option>
+                            <option value="30"></option>
+                            <option value="50"></option>
+                            <option value="80"></option>
+                            <option value="100"></option>
+                            <option value="120"></option>
+                            <option value="150"></option>
+                            <option value="180"></option>
+                            <option value="200"></option>
+                        </datalist>
+                        <br>
+                        <a class="invest-button" id="invest-button">Получить!</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <dialog id="popup_window" class="popup_window" aria-label="label">
+        <div class="popup_window-container">
+            <div class="text-up-container">
+                <p id="text-up-text" class="text-up">Seconds</p>
+            </div>
+            <div class="text-niz">
+                <span id="text-niz-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, iure?</span>
+                <br>
+                <a type="button" id="popup-button" class="pop-btn-container pop-button" onclick="window.popup_window.close()">ПРОПУСТИТЬ</a>
+            </div>
+        </div>
+    </dialog>
+    <script src="game.js"></script>
+    <script src="js/animate.js"></script>
+</body>
+</html>

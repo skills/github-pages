@@ -1,0 +1,157 @@
+body {
+    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+    background-color: #5a3ebe;
+}
+
+hr {
+    background-color: #efedf8;
+    height: 0.2vh;
+}
+
+header {
+    height: 13vh;
+}
+
+.nav-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+}
+
+.nav-img {
+    width: 8vw; height: 16vh;
+}
+
+.nav-tittle {
+    font-weight: 600;
+    color: black;
+    position: relative;
+    left: 1em;
+}
+
+.nav-link-box {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.nav_link {
+    width: 10vw; height: 5vh;
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight: 600;
+    color: white;
+    background-color: #451a94;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    
+    &:hover {
+    background-color: rgb(55, 7, 117);
+    color: #efedf8;
+    }
+}
+
+.nav_link> p {
+    margin-top: 0.3em;
+}
+
+.main-sec {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.text-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-box>h2 {
+    width: 30vw;
+    font-weight: 600;
+    color: rgba(208, 207, 209, 0.808);
+    position: relative;
+}
+
+.text-box>p {
+    width: 30vw;
+    color: rgba(208, 207, 209, 0.808);
+    font-weight: 500;
+    font-size: 1.5rem;
+}
+
+.img-box {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.main-img {
+    width: 90%; height: 40%;
+    box-shadow: 0rem 0rem 1rem rgb(180, 166, 199)
+}
+
+@media (max-width:1000px) {
+    h2 {
+        font-size: 1em;
+    }
+    p {
+        font-size: 0.5em;
+    }
+    .nav_link>p {
+        margin-top: 1em;
+    }
+}
+
+@media (max-width:800px) {
+    body {
+        overflow: auto;
+    }
+    h2 {
+        font-size: 1em;
+    }
+    p {
+        font-size: 0.5em;
+    }
+    a {
+        font-size: 0.2em;
+    }
+    .navbar {
+        padding: 0;
+    }
+    .nav-list {
+        position: relative;
+        top: 2em;
+        right: 2em;
+    }
+    .nav_link {
+        position: relative;
+        left: 7em;
+        width: 18vw;height: 4vh;
+    }
+    .nav-img{
+        display: none;
+    }
+    .main-sec {
+        display: block;
+    }
+    .text-box {
+        align-content: center;
+        text-align: center;
+    }
+
+    .nl1 {
+        display: none;
+    }
+
+    .main-img {
+        position: relative;
+        left: 1em;
+        bottom: 0.5em;
+    }
+}
