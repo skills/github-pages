@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ملخص النصوص</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(to right, #ff7e5f, #feb47b, #ff6a00, #f5a623, #42a5f5);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      background: linear-gradient(to left, #2563eb, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    #output {
+      border-left: 4px solid #3b82f6;
+    }
+
+    button:hover {
+      transform: scale(1.02);
+    }
+
+    textarea {
+      background-image: url('https://www.transparenttextures.com/patterns/white-wall-3.png');
+      background-repeat: repeat;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+  <div class="bg-white shadow-lg rounded-2xl p-6 w-full max-w-3xl">
+    <!-- Buttons to switch language -->
+    <div class="text-center mb-4">
+      <button onclick="setLanguage('ar')" class="text-lg font-semibold p-2">عربي</button>
+      <button onclick="setLanguage('en')" class="text-lg font-semibold p-2 ml-4">English</button>
+    </div>
+
+    <!-- Title -->
+    <h1 id="siteTitle" class="text-2xl font-bold mb-4 text-center text-gray-800">ملخص النصوص</h1>
+
+    <!-- Text area for input -->
+    <textarea id="inputText" rows="10" placeholder="الصق النص الطويل هنا..." class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+
+    <!-- Word count and summary percentage -->
+    <div class="flex justify-between text-sm text-gray-500 mt-2">
+      <span id="originalCount">كلمات النص: 0</span>
+      <span id="summaryPercent">نسبة التلخيص: 0%</span>
+    </div>
+
+    <!-- Summarize button -->
+    <button onclick="summarizeText()" class="mt-4 w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition">
+      تلخيص النص
+    </button>
+
+    <!-- Summary output -->
+    <h2 id="summaryTitle" class="text-xl font-semibold mt-6 text-gray-700">النص الملخص:</h2>
+    <div id="output" class="mt-2 p-4 bg-gray-50 border rounded-lg text-gray-800 whitespace-pre-line min-h-[100px]"></div>
+
+    <!-- Copy button -->
+    <div class="flex justify-end mt-2">
+      <button onclick="copySummary()" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition">
+        نسخ التلخيص
+      </button>
+    </div>
+
+    <div class="text-sm text-gray-400 text-center mt-4">
+      &copy; 2025 - مشروع مفتوح المصدر لتلخيص النصوص
+    </div>
+  </div>
+
+  <!-- JavaScript for functionality -->
+  <script>
+    let language = 'ar';
+
+    // Set language (Arabic or English)
+    function setLanguage(lang) {
+      language = lang;
+      if (language === 'ar') {
+        document.getElementById('siteTitle').textContent = 'ملخص النصوص';
+        document.querySelector('textarea').placeholder = 'الصق النص الطويل هنا...';
+        document.querySelector('button').textContent = 'تلخيص النص';
+        document.querySelector('#originalCount').textContent = 'كلمات النص: 0';
+        document.querySelector('#summaryPercent').textContent = 'نسبة التلخيص: 0%';
+        document.querySelector('#summaryTitle').textContent = 'النص الملخص:';
+        document.querySelector('button').innerText = 'نسخ التلخيص';
+      } else {
+        document.getElementById('siteTitle').textContent = 'Text Summarizer';
+        document.querySelector('textarea').placeholder = 'Paste the long text here...';
+        document.querySelector('button').textContent = 'Summarize Text';
+        document.querySelector('#originalCount').textContent = 'Original Text Words: 0';
+        document.querySelector('#summaryPercent').textContent = 'Summary Percentage: 0%';
+        document.querySelector('#summaryTitle').textContent = 'Summary Text:';
+        document.querySelector('button').innerText = 'Copy Summary';
+      }
+    }
+
+    // Function to summarize text
+    const inputText = document.getElementById("inputText");
+    const outputDiv = document.getElementById("output");
+    const originalCount = document.getElementById("originalCount");
+    const summaryPercent = document.getElementById("summaryPercent");
+
+    inputText.addEventListener("input", () => {
+      const count = inputText.value.trim().split(/\s+/).filter(Boolean).length;
+      originalCount.textContent = language === 'ar' ? `كلمات النص: ${count}` : `Original Text Words: ${count}`;
+    });
+
+    function summarizeText() {
+      const text = inputText.value;
+      if (!text.trim()) {
+        outputDiv.textContent = language === 'ar' ? 'الرجاء إدخال نص.' : 'Please enter text.';
+        summaryPercent.textContent = language === 'ar' ? 'نسبة التلخيص: 0%' : 'Summary Percentage: 0%';
+        return;
+      }
+
+      const sentences = text.match(/[^.!؟\n]+[.!؟]?/g) || [];
+      if (sentences.length <= 2) {
+        outputDiv.textContent = text;
+        summaryPercent.textContent = language === 'ar' ? 'نسبة التلخيص: 100%' : 'Summary Percentage: 100%';
+        return;
+      }
+
+      const wordFreq = {};
+      const words = text.toLowerCase().replace(/[^\\w\\sءاأإآ]/g, '').split(/\s+/);
+      words.forEach(word => {
+        if (word.length > 2) {
+          wordFreq[word] = (wordFreq[word] || 0) + 1;
+        }
+      });
+
+      const sentenceScores = sentences.map(sentence => {
+        const wordsInSentence = sentence.toLowerCase().split(/\s+/);
+        let score = 0;
+        wordsInSentence.forEach(word => {
+          if (wordFreq[word]) score += wordFreq[word];
+        });
+        return { sentence, score };
+      });
+
+      sentenceScores.sort((a, b) => b.score - a.score);
+      const summarySentences = sentenceScores.slice(0, Math.ceil(sentences.length / 3)).map(s => s.sentence.trim());
+      const finalSummary = sentences.filter(s => summarySentences.includes(s.trim())).join(" ");
+
+      outputDiv.textContent = finalSummary;
+
+      const originalWordCount = words.length;
+      const summaryWordCount = finalSummary.trim().split(/\s+/).filter(Boolean).length;
+      const percent = Math.round((summaryWordCount / originalWordCount) * 100);
+      summaryPercent.textContent = language === 'ar' ? `نسبة التلخيص: ${percent}%` : `Summary Percentage: ${percent}%`;
+    }
+
+    // Copy the summary text to clipboard
+    function copySummary() {
+      const summary = outputDiv.textContent;
+      navigator.clipboard.writeText(summary).then(() => {
+        alert(language === 'ar' ? "تم نسخ التلخيص ✅" : "Summary copied ✅");
+      });
+    }
+  </script>
+</body>
+</html>
