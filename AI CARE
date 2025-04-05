@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shadow AI | MediCare</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        .typing-indicator span {
+            animation: bounce 1.5s infinite ease-in-out;
+        }
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-64 bg-white shadow-md">
+            <div class="p-4 flex items-center">
+                <img src="https://storage.googleapis.com/a1aa/image/wAM6XrIhh5gElMPNFytM9MxZ7xEBClEH5ChHa4QHIiA.jpg" 
+                     alt="Logo" class="w-6 h-6 mr-2" width="24" height="24" />
+                <span class="text-xl font-semibold">MediCare</span>
+            </div>
+            <nav class="mt-6">
+                <a href="boards.html" class="flex items-center p-4 text-gray-600 hover:bg-gray-200">
+                    <i class="fas fa-columns mr-3"></i>
+                    <span>Boards</span>
+                </a>
+                <a href="ai-care.html" class="flex items-center p-4 text-white bg-blue-500">
+                    <i class="fas fa-robot mr-3"></i>
+                    <span>Shadow AI</span>
+                    <span class="ml-auto bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full">LIVE</span>
+                </a>
+                <a href="categories.html" class="flex items-center p-4 text-gray-600 hover:bg-gray-200">
+                    <i class="fas fa-th-large mr-3"></i>
+                    <span>Categories</span>
+                </a>
+                <a href="hospital.html" class="flex items-center p-4 text-gray-600 hover:bg-gray-200">
+                    <i class="fas fa-hospital mr-3"></i>
+                    <span>Hospitals</span>
+                </a>
+                <a href="healthy-status.html" class="flex items-center p-4 text-gray-600 hover:bg-gray-200">
+                    <i class="fas fa-heartbeat mr-3"></i>
+                    <span>Health Status</span>
+                </a>
+                <a href="pharmacy.html" class="flex items-center p-4 text-gray-600 hover:bg-gray-200">
+                    <i class="fas fa-pills mr-3"></i>
+                    <span>Pharmacy</span>
+                </a>
+                <a href="payments.html" class="flex items-center p-4 text-gray-600 hover:bg-gray-200">
+                    <i class="fas fa-credit-card mr-3"></i>
+                    <span>Payments</span>
+                </a>
+                <a href="emergency.html" class="flex items-center p-4 text-gray-600 hover:bg-gray-200">
+                    <i class="fas fa-plug mr-3"></i>
+                    <span>Emergency</span>
+                </a>
+                <a href="medicare iq test.html" class="flex items-center p-4 text-gray-600 hover:bg-gray-200">
+                    <i class="fas fa-brain mr-3"></i>
+                    <span>MediCare IQ Test</span>
+                </a>
+                <a href="physcial fitness.html" class="flex items-center p-4 text-gray-600 hover:bg-gray-200">
+                    <i class="fas fa-dumbbell mr-3"></i>
+                    <span>Physical fitness</span>
+                </a>
+                <a href="devices.html" class="flex items-center p-4 text-gray-600 hover:bg-gray-200">
+                    <i class="fas fa-desktop mr-3"></i>
+                    <span>Devices</span>
+                </a>
+                <a href="terms & condition.html" class="flex items-center p-4 text-gray-600 hover:bg-gray-200">
+                    <i class="fas fa-file-contract mr-3"></i>
+                    <span>Terms and Conditions</span>
+                </a>
+                <a href="legal.html" class="flex items-center p-4 text-gray-600 hover:bg-gray-200">
+                    <i class="fas fa-gavel mr-3"></i>
+                    <span>Legal</span>
+                </a>
+                <a href="setting.html" class="flex items-center p-4 text-gray-600 hover:bg-gray-200">
+                    <i class="fas fa-cog mr-3"></i>
+                    <span>Setting</span>
+                </a>
+                <a href="logout.html" class="flex items-center p-4 text-gray-600 hover:bg-gray-200">
+                    <i class="fas fa-sign-out-alt mr-3"></i>
+                    <span>Logout</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-2xl font-semibold">Shadow AI Assistant</h1>
+                <div class="flex items-center">
+                    <div class="relative mr-4">
+                        <input type="text" placeholder="Search ..." class="border rounded-lg p-2 pl-10">
+                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                    </div>
+                    <div class="relative mr-4">
+                        <i class="fas fa-bell text-gray-600"></i>
+                        <span class="absolute top-0 right-0 inline-block w-2 h-2 bg-red-500 rounded-full"></span>
+                    </div>
+                    <div class="flex items-center">
+                        <img src="https://storage.googleapis.com/a1aa/image/L-lJVDa7y1tKayo14iuotNTh6vPT7O6DpigdVyQprOY.jpg"
+                             alt="User Avatar" class="w-10 h-10 rounded-full mr-2">
+                        <div>
+                            <p class="font-semibold">Louis Ssenoga</p>
+                            <p class="text-gray-600">Director</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex flex-col lg:flex-row gap-6">
+                    <!-- AI Interaction Panel -->
+                    <div class="lg:w-1/2">
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white mr-3">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div>
+                                    <h2 class="text-lg font-semibold">Shadow AI</h2>
+                                    <p class="text-sm text-gray-600">Your intelligent health assistant</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <textarea id="ai-input" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500" 
+                                          rows="4" placeholder="Describe your symptoms or health concerns..."></textarea>
+                            </div>
+                            
+                            <div class="flex space-x-3">
+                                <button id="send-btn" class="flex-1 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md flex items-center justify-center">
+                                    <i class="fas fa-paper-plane mr-2"></i> Send
+                                </button>
+                                <button id="voice-btn" class="w-12 h-10 bg-gray-200 hover:bg-gray-300 rounded-md flex items-center justify-center">
+                                    <i class="fas fa-microphone"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <h3 class="font-medium mb-2">Quick Actions</h3>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <button class="quick-action text-left p-2 bg-gray-100 rounded hover:bg-gray-200 text-sm">
+                                        <i class="fas fa-head-side-cough mr-1"></i> Cold symptoms
+                                    </button>
+                                    <button class="quick-action text-left p-2 bg-gray-100 rounded hover:bg-gray-200 text-sm">
+                                        <i class="fas fa-heartbeat mr-1"></i> Blood pressure
+                                    </button>
+                                    <button class="quick-action text-left p-2 bg-gray-100 rounded hover:bg-gray-200 text-sm">
+                                        <i class="fas fa-pills mr-1"></i> Medication info
+                                    </button>
+                                    <button class="quick-action text-left p-2 bg-gray-100 rounded hover:bg-gray-200 text-sm">
+                                        <i class="fas fa-running mr-1"></i> Exercise advice
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AI Response Panel -->
+                    <div class="lg:w-1/2">
+                        <div class="bg-gray-50 p-6 rounded-lg h-full">
+                            <div class="flex items-center mb-4">
+                                <h2 class="text-lg font-semibold">AI Analysis</h2>
+                                <button id="read-aloud-btn" class="ml-auto p-2 text-gray-500 hover:text-blue-500">
+                                    <i class="fas fa-volume-up"></i> Read Aloud
+                                </button>
+                            </div>
+                            
+                            <div id="chat-container" class="bg-white p-4 rounded border border-gray-200 min-h-64 max-h-96 overflow-y-auto">
+                                <div class="ai-message flex mb-4">
+                                    <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white mr-3">
+                                        <i class="fas fa-robot"></i>
+                                    </div>
+                                    <div class="flex-1 bg-blue-50 rounded-lg p-3">
+                                        <p class="text-sm">Hello Louis! I'm your Shadow AI assistant. How can I help with your health today? You can ask me about symptoms, medications, or general health advice.</p>
+                                        <p class="text-xs text-gray-500 mt-1">Just now</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="typing-indicator" class="typing-indicator flex items-center mt-2 hidden">
+                                <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white mr-3">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div class="flex space-x-1">
+                                    <span class="w-2 h-2 rounded-full bg-gray-400"></span>
+                                    <span class="w-2 h-2 rounded-full bg-gray-400"></span>
+                                    <span class="w-2 h-2 rounded-full bg-gray-400"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check for speech support
+        const speechSupport = {
+            synthesis: 'speechSynthesis' in window,
+            recognition: 'webkitSpeechRecognition' in window || 'SpeechRecognition' in window
+        };
+        
+        // DOM elements
+        const aiInput = document.getElementById('ai-input');
+        const sendBtn = document.getElementById('send-btn');
+        const voiceBtn = document.getElementById('voice-btn');
+        const readAloudBtn = document.getElementById('read-aloud-btn');
+        const chatContainer = document.getElementById('chat-container');
+        const typingIndicator = document.getElementById('typing-indicator');
+        const quickActions = document.querySelectorAll('.quick-action');
+        
+        // Speech synthesis setup
+        const synth = window.speechSynthesis;
+        let voices = [];
+        let currentUtterance = null;
+        
+        // Load voices
+        function loadVoices() {
+            voices = synth.getVoices();
+            // Prefer a natural-sounding voice
+            const preferredVoices = voices.filter(voice => 
+                voice.name.includes('Natural') || 
+                voice.name.includes('Google') || 
+                voice.lang.includes('en-US')
+            );
+            return preferredVoices[0] || voices[0];
+        }
+        
+        // Initialize voices
+        if (speechSupport.synthesis) {
+            synth.onvoiceschanged = loadVoices;
+            loadVoices();
+        } else {
+            readAloudBtn.classList.add('hidden');
+        }
+        
+        // Speak text
+        function speak(text, interrupt = true) {
+            if (!speechSupport.synthesis) return;
+            
+            if (interrupt && currentUtterance) {
+                synth.cancel();
+            }
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.voice = loadVoices();
+            utterance.rate = 0.9;
+            utterance.pitch = 1;
+            utterance.volume = 1;
+            
+            utterance.onend = function() {
+                currentUtterance = null;
+                readAloudBtn.innerHTML = '<i class="fas fa-volume-up"></i> Read Aloud';
+            };
+            
+            currentUtterance = utterance;
+            readAloudBtn.innerHTML = '<i class="fas fa-stop"></i> Stop';
+            synth.speak(utterance);
+        }
+        
+        // Speech recognition setup
+        let recognition;
+        if (speechSupport.recognition) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+            
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                aiInput.value = transcript;
+                processUserInput(transcript);
+                voiceBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+            };
+            
+            recognition.onerror = function(event) {
+                addMessage("Sorry, I didn't catch that. Please try again.", 'ai');
+                voiceBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+            };
+        } else {
+            voiceBtn.classList.add('hidden');
+        }
+        
+        // Add message to chat
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `flex mb-4 ${sender === 'user' ? 'justify-end' : ''}`;
+            
+            if(sender === 'ai') {
+                messageDiv.innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white mr-3">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="flex-1 bg-blue-50 rounded-lg p-3">
+                        <p class="text-sm">${text}</p>
+                        <p class="text-xs text-gray-500 mt-1">Just now</p>
+                    </div>
+                `;
+            } else {
+                messageDiv.innerHTML = `
+                    <div class="flex-1 bg-gray-100 rounded-lg p-3">
+                        <p class="text-sm">${text}</p>
+                        <p class="text-xs text-gray-500 mt-1">Just now</p>
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-white ml-3">
+                        <i class="fas fa-user"></i>
+                    </div>
+                `;
+            }
+            
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+        
+        // Show typing indicator
+        function showTypingIndicator() {
+            typingIndicator.classList.remove('hidden');
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+        
+        // Hide typing indicator
+        function hideTypingIndicator() {
+            typingIndicator.classList.add('hidden');
+        }
+        
+        // Process user input
+        function processUserInput(message) {
+            if(!message.trim()) return;
+            
+            addMessage(message, 'user');
+            aiInput.value = '';
+            showTypingIndicator();
+            
+            // Simulate AI processing delay
+            setTimeout(() => {
+                hideTypingIndicator();
+                const response = generateAIResponse(message);
+                addMessage(response.text, 'ai');
+                
+                if(response.speak) {
+                    speak(response.text);
+                }
+            }, 1500);
+        }
+        
+        // Generate AI response
+        function generateAIResponse(userMessage) {
+            const lowerMsg = userMessage.toLowerCase();
+            
+            // Health analysis responses
+            if(lowerMsg.includes('headache') || lowerMsg.includes('migraine')) {
+                return {
+                    text: "Headaches can have various causes. Common remedies include:�n�n" �
+                          "��� Hydration (drink water)�n" �
+                          "��� Rest in a quiet, dark room�n" �
+                          "��� Over-the-counter pain relievers like acetaminophen�n�n" �
+                          "If headaches are severe, persistent, or accompanied by other symptoms like vision changes or nausea, please consult a doctor immediately.",
+                    speak: true
+                };
+            }
+            else if(lowerMsg.includes('blood pressure') || lowerMsg.includes('bp')) {
+                return {
+                    text: "Normal blood pressure is typically around 120/80 mmHg. You can monitor your blood pressure through:�n�n" �
+                          "1. Regular checks with a home monitor�n" �
+                          "2. Maintaining a healthy diet low in sodium�n" �
+                          "3. Regular exercise�n" �
+                          "4. Stress management techniques�n�n" �
+                          "Would you like me to show you how to log your blood pressure readings?",
+                    speak: true
+                };
+            }
+            else if(lowerMsg.includes('cold') || lowerMsg.includes('flu')) {
+                return {
+                    text: "For cold or flu symptoms, I recommend:�n�n" �
+                          "��� Rest and hydration�n" �
+       
