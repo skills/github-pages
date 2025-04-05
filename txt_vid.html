@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Text-to-Video Generator</title>
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4cc9f0;
+            --warning-color: #f72585;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fb;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+
+        .generator-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .generator-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .input-section, .output-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title svg {
+            margin-right: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        textarea, select, input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+
+        textarea:focus, select:focus, input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(72, 149, 239, 0.2);
+        }
+
+        .style-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .style-option {
+            position: relative;
+        }
+
+        .style-option input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .style-option label {
+            display: block;
+            padding: 0.5rem;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .style-option input:checked + label {
+            border-color: var(--primary-color);
+            background-color: rgba(67, 97, 238, 0.1);
+            font-weight: 500;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .output-placeholder {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            border: 2px dashed #ced4da;
+            color: #6c757d;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .output-video {
+            width: 100%;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .progress-container {
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: var(--success-color);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            color: #6c757d;
+            text-align: center;
+        }
+
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+
+        .feature-desc {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e9ecef;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        /* Tooltip styles */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            margin-left: 0.5rem;
+            cursor: help;
+        }
+
+        .tooltip-icon {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+        }
+
+        .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--dark-color);
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 0.5rem;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.8rem;
+            font-weight: normal;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI Text-to-Video Generator</h1>
+            <p class="subtitle">Transform your text into engaging videos with artificial intelligence</p>
+        </header>
+
+        <div class="generator-container">
+            <div class="input-section">
+                <h2 class="section-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 3V21M8 7L12 3L16 7M8 17L12 21L16 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Input Text
+                </h2>
+                
+                <div class="form-group">
+                    <label for="script">Your Script or Text</label>
+                    <textarea id="script" placeholder="Enter the text you want to convert to video..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tone">Video Tone</label>
+                    <select id="tone">
+                        <option value="professional">Professional</option>
+                        <option value="casual">Casual</option>
+                        <option value="educational">Educational</option>
+                        <option value="dramatic">Dramatic</option>
+                        <option value="fun">Fun/Playful</option>
+                        <option value="inspirational">Inspirational</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="style">Visual Style</label>
+                    <div class="style-options">
+                        <div class="style-option">
+                            <input type="radio" id="realistic" name="style" value="realistic" checked>
+                            <label for="realistic">Realistic</label>
+                        </div>
+                        <div class="style-option">
+                            <input type="radio" id="cartoon" name="style" value="cartoon">
+                            <label for="cartoon">Cartoon</label>
+                        </div>
+                        <div class="style-option">
+                            <input type="radio" id="minimal" name="style" value="minimal">
+                            <label for="minimal">Minimal</label>
+                        </div>
+                        <div class="style-option">
+                            <input type="radio" id="watercolor" name="style" value="watercolor">
+                            <label for="watercolor">Watercolor</label>
+                        </div>
+                        <div class="style-option">
+                            <input type="radio" id="cyberpunk" name="style" value="cyberpunk">
+                            <label for="cyberpunk">Cyberpunk</label>
+                        </div>
+                        <div class="style-option">
+                            <input type="radio" id="handdrawn" name="style" value="handdrawn">
+                            <label for="handdrawn">Hand Drawn</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="duration">Video Duration <span class="tooltip">ⓘ
+                        <span class="tooltip-text">Estimated duration based on text length. You can adjust this manually.</span>
+                    </span></label>
+                    <input type="range" id="duration" min="15" max="180" value="30" step="5">
+                    <div style="display: flex; justify-content: space-between; margin-top: 0.5rem;">
+                        <span>15 sec</span>
+                        <span id="duration-value">30 sec</span>
+                        <span>3 min</span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="voice">Voice Over</label>
+                    <select id="voice">
+                        <option value="male1">Male Voice 1</option>
+                        <option value="male2">Male Voice 2</option>
+                        <option value="female1" selected>Female Voice 1</option>
+                        <option value="female2">Female Voice 2</option>
+                        <option value="none">No Voice Over</option>
+                    </select>
+                </div>
+                
+                <button id="generate-btn" class="btn btn-block">Generate Video</button>
+                
+                <div class="progress-container" id="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress" id="progress-bar"></div>
+                    </div>
+                    <div class="progress-text" id="progress-text">Processing: Analyzing your text...</div>
+                </div>
+                
+                <div class="loading-spinner" id="loading-spinner">
+                    <div class="spinner"></div>
+                    <p>Generating your video. This may take a few moments...</p>
+                </div>
+            </div>
+            
+            <div class="output-section">
+                <h2 class="section-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M23 7L16 12L23 17V7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <rect x="1" y="5" width="15" height="14" rx="2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Generated Video
+                </h2>
+                
+                <div class="output-placeholder" id="output-placeholder">
+                    <div>
+                        <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23 7L16 12L23 17V7Z" stroke="#adb5bd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <rect x="1" y="5" width="15" height="14" rx="2" stroke="#adb5bd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <p>Your generated video will appear here</p>
+                    </div>
+                </div>
+                
+                <video controls class="output-video" id="output-video"></video>
+                
+                <div class="controls" id="video-controls" style="display: none;">
+                    <button class="btn btn-secondary" id="download-btn">Download Video</button>
+                    <button class="btn" id="regenerate-btn">Regenerate</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">✍️</div>
+                <h3 class="feature-title">Text Analysis</h3>
+                <p class="feature-desc">Our AI understands your text's context, emotions, and key elements to create relevant visuals.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3 class="feature-title">Multiple Styles</h3>
+                <p class="feature-desc">Choose from various visual styles to match your brand or personal preference.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎙️</div>
+                <h3 class="feature-title">Voice Options</h3>
+                <p class="feature-desc">Add professional voice-over with different voices and tones to match your content.</p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>AI Text-to-Video Generator &copy; 2023 | Powered by advanced AI technology</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM elements
+            const generateBtn = document.getElementById('generate-btn');
+            const regenerateBtn = document.getElementById('regenerate-btn');
+            const downloadBtn = document.getElementById('download-btn');
+            const scriptInput = document.getElementById('script');
+            const toneSelect = document.getElementById('tone');
+            const durationSlider = document.getElementById('duration');
+            const durationValue = document.getElementById('duration-value');
+            const outputPlaceholder = document.getElementById('output-placeholder');
+            const outputVideo = document.getElementById('output-video');
+            const videoControls = document.getElementById('video-controls');
+            const progressContainer = document.getElementById('progress-container');
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            const loadingSpinner = document.getElementById('loading-spinner');
+
+            // Update duration value display
+            durationSlider.addEventListener('input', function() {
+                durationValue.textContent = `${this.value} sec`;
+            });
+
+            // Generate video button click handler
+            generateBtn.addEventListener('click', generateVideo);
+            regenerateBtn.addEventListener('click', generateVideo);
+
+            // Download button click handler
+            downloadBtn.addEventListener('click', function() {
+                if (outputVideo.src) {
+                    const a = document.createElement('a');
+                    a.href = outputVideo.src;
+                    a.download = 'ai-generated-video.mp4';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                }
+            });
+
+            // Generate video function
+            function generateVideo() {
+                const script = scriptInput.value.trim();
+                if (!script) {
+                    alert('Please enter some text to generate a video');
+                    return;
+                }
+
+                // Show loading state
+                generateBtn.disabled = true;
+                progressContainer.style.display = 'block';
+                loadingSpinner.style.display = 'block';
+                outputPlaceholder.style.display = 'none';
+                outputVideo.style.display = 'none';
+                videoControls.style.display = 'none';
+
+                // Simulate progress (in a real app, this would be from actual API calls)
+                let progress = 0;
+                const progressInterval = setInterval(() => {
+                    progress += 5;
+                    if (progress <= 25) {
+                        progressText.textContent = "Processing: Analyzing your text...";
+                    } else if (progress <= 50) {
+                        progressText.textContent = "Processing: Generating visuals...";
+                    } else if (progress <= 75) {
+                        progressText.textContent = "Processing: Creating animations...";
+                    } else {
+                        progressText.textContent = "Processing: Finalizing video...";
+                    }
+                    
+                    progressBar.style.width = `${progress}%`;
+                    
+                    if (progress >= 100) {
+                        clearInterval(progressInterval);
+                        setTimeout(showGeneratedVideo, 500);
+                    }
+                }, 500);
+            }
+
+            // Show the generated video (simulated)
+            function showGeneratedVideo() {
+                // In a real implementation, this would be the actual video URL from your AI service
+                // For this demo, we'll use a placeholder video
+                const videoUrl = 'https://samplelib.com/lib/preview/mp4/sample-5s.mp4';
+                
+                outputVideo.src = videoUrl;
+                outputVideo.load();
+                
+                progressContainer.style.display = 'none';
+                loadingSpinner.style.display = 'none';
+                generateBtn.disabled = false;
+                
+                outputVideo.style.display = 'block';
+                videoControls.style.display = 'flex';
+                
+                outputVideo.onloadeddata = function() {
+                    outputVideo.play();
+                };
+            }
+
+            // Demo: Auto-generate video after 2 seconds if the script is empty (for demo purposes)
+            setTimeout(() => {
+                if (!scriptInput.value.trim()) {
+                    scriptInput.value = "Welcome to our AI video generator! This tool transforms your text into engaging video content automatically. Simply type or paste your text, choose your preferred style and tone, and let our artificial intelligence create a professional video for you in minutes. Perfect for marketing, education, social media, and more!";
+                    generateBtn.click();
+                }
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
