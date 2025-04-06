@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipur University</title>
+    <style>
+        .head{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            background-color:white;
+
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .image-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .background-image {
+      width: 100; /* Adjust as needed */
+      height: auto;
+    }
+
+    .overlay-image {
+      position: absolute;
+      top: 50px; /* Adjust position */
+      left: 30px;
+      width: 100px; /* Adjust size */
+      height: auto;
+      opacity: 0.6; /* Optional transparency */
+    }
+ 
+    .overlay-image1 {
+      position: absolute;
+      top: 50px; /* Adjust position */
+      right:40%;
+      width: 100px; /* Adjust size */
+      height: auto;
+      opacity: 0.6; /* Optional transparency */
+      color:black;
+      text-decoration:none;
+    }
+
+        .header {
+            background-color: red;
+            color: white;
+            text-align: center;
+            padding: 5px;
+            font-size: 14px;
+            display:flex;
+            justify-content:space-between;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 10px;
+            background-color: white;
+        }
+        .top-bar a {
+            text-decoration:none;
+            color: black;
+            font-weight: bold;
+        }
+        .logo {
+            display:flex;
+            align-items:center;
+        }
+        .logo img{
+            width:80px;
+            height:auto;
+            margin-right:10px;
+        }
+        .menu {
+            background-color: #0c4c81;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .banner {
+            text-align: center;
+            padding: 20px;
+            background-color: #f1f1f1;
+        }
+        .banner img {
+            width: 100%;
+            max-width: 700px;
+        }
+        
+        .notice {
+            padding: 10px;
+        }
+        .notice h2 {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .notice a {
+            text-decoration: none;
+            color: blue;
+            border-bottom: 1px dashed #999;
+        }
+
+
+          /* Badge Container */
+          .new-badge {
+            display: inline-block;
+            background: red;
+            color: yellow;
+            font-weight: bold;
+            font-size: 11px;
+            padding: 2px 5px;
+            position: relative;
+            text-transform: uppercase;
+            border-radius: 3px;
+            gap:4px;
+            margin-left:15px;
+            animation:moveBadge 1s infinite alternate ease-in-out; 
+        }
+        @keyframes moveBadge{
+            0%{left:0;}
+            100%{left:100px;}
+        }
+
+        /* Arrow Shape */
+        .new-badge::before {
+            content: "";
+            gap:9px;
+            position: absolute;
+            left: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-right:10px solid red;
+        }
+        .new-icon {
+            color: red;
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+        }
+        .university{
+            text-align:centre;
+            font-size:24px;
+            font-family:serif;
+            font-weight:bold;
+            color:#c84141;
+            text-shadow:1px 1px 2px #a0847f;
+            width:70%;
+        }
+        .input-box input {
+            width: 10px;
+            height: 10px;
+            text-align: center;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius:0;
+            margin:0;
+            padding:0;
+            border-right:none;
+        }
+        .search-btn {
+            background-color: red;
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            position: absolute;
+        }
+        .search-btn img {
+            width: 20px;
+            height: 20px;
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap:300px;
+        }
+
+        .input-box {
+            display: flex;
+        }
+
+        .input-box input {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-right: 1px solid #ccc; /* Removes space between inputs */
+            border-radius: 1px;
+        }
+
+        .input-box input:first-child {
+            border-top-left-radius:5px;
+            border-bottom-left-radius: 5px;
+        }
+
+        .input-box input:last-child {
+            border-right: 1px solid #ccc; /* Restore right border */
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            margin-left:10px;
+            border-left:1px solid #ccc;
+        }
+        .menu-container {
+            width: 80px;
+            height: 60px;
+            background-color: #001f3f; /* Dark blue */
+            display: flex;
+            justify-content: center;
+            border-radius: 5px;
+            position: absolute;
+            border-top:100px lightblue;
+            border-top:80px;
+            
+        }
+          /* Light Blue Background */
+          .navbar-wrapper {
+            background: #b3e0f2; /* Light Blue */
+            padding: 10px 0;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background: #001f3f;  /* Dark Blue */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            color: white;
+            font-size: 18px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+         /* Menu Text */
+         .menu-text {
+            font-weight: bold;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 100%;
+            height: 3px;
+            background: white;
+            border-radius: 5px;
+        }
+
+        .section {
+            background-color:blue;
+            color: white;
+            padding: 0px;
+            margin: 0px 0;
+        }
+        .section-content {
+            background-color: #f8f9fa;
+            padding: 2px;
+            margin: 0 0 10px 1;
+            border-bottom-right-radius :9px;
+            border-bottom-left-radius:9px; 
+            border-bottom-style:solid ;
+            border-right-style: solid ;
+            border-left-style:solid;
+
+        }
+        .section-content a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .death1{
+            position:relative;
+            width:20%;
+        }
+
+
+        .slider {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .slides {
+      display: flex;
+      width: calc(200%); /* Container double the width for looping effect */
+      animation: scroll 10s linear infinite; /* Infinite seamless scrolling */
+    }
+
+    .slide {
+      width: 40vw; /* Each image takes up full viewport width */
+      flex-shrink: 0; /* Prevents resizing */
+    }
+
+    .slide img {
+      width: 40%;
+      height: 40%;
+      object-fit:contain;
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0); /* Start position */
+      }
+      100% {
+        transform: translateX(-100%); /* Slide left by one full width */
+      }
+    }
+
+
+
+
+        
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        Scientist, Dept. of Life Science (Zoology), MU, has been a...
+    </div>
+
+    <div class="top-bar">
+       <table>
+        <tr>
+          <th><a href="#">Webmail</a> <span style="display:inline-block; width:200px;">
+           <a href="#">Telephone Directory</a></span>
+          </th>
+        </tr>
+       <tr>
+        <th><a href="#">Samarth e-Gov</a><span style="display:inline-block; width:200px">
+        <a href="#">Anti Ragging</a></span></th>
+       </tr> 
+      </table>
+    </div>
+
+
+
+
+      <div class="search-container">
+        <div class="input-box">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+        </div>
+
+
+        <img src="D:\mu2.jpg" alt="Search" id="searchIcon" style="width:50px;cursor:pointer;">
+<div id="inputContainer" style="display:none;">
+  <input type="text" id="searchBox" placeholder="Type here...">
+</div>
+
+          
+           <button class="search-btn">
+             <form action="https://www.google.com/search" method="GET"  target="_blank">
+                <input class="death1" type="text" name="q" placeholder="Search on Google" required >
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magnifying_glass_icon.svg/768px-Magnifying_glass_icon.svg.png" alt="Search">
+             </form>
+                </button> 
+    </div>
+
+
+
+
+
+
+    <div class="head" >  
+      <div class="logo">
+       <img src="D:\mu4.jpg" width="100" height="100" alt="Manipur University Logo">
+      </div>
+      <div class="university">
+        <p style="font-size:14px; font-style:italic;" ><p></p>  ꯃꯅꯤꯄꯨꯔ ꯇꯥꯏꯕꯪ ꯃꯍꯩꯀꯣꯜ
+        </p><p style="font-size:14px;">मणिपुर विश्वविद्यालय
+        </p>
+        <p>MANIPUR UNIVERSITY <span style="display:inline-block; font-size:14px;color:darkred">(A Central University)</span></span></p>
+      </div>
+        
+    </div>
+</div>
+
+
+ <!-- Light Blue Background for Navbar -->
+ <div class="navbar-wrapper">
+    <!-- Dark Blue Navigation Bar -->
+    <nav class="navbar">
+        <span class="menu-text">MENU</span>
+        <div class="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </nav>
+</div>
+  
+
+       
+
+
+
+   <div class="image-container">
+    <img src="D:\mu1.jpg" alt="Background Image" class="background-image">
+    <img src="D:\mu2.jpg" alt="Overlay Image" class="overlay-image">
+    <a href="https://death.com" class="overlay-image1"><i>Welcome to death</i></a>
+  </div> 
+
+
+    <div class="notice">
+        <h2>NOTICE | <a href="#">All Notice</a></h2>
+        <ul>
+            <li>
+                <a href="#">Forestry: Report on Academic Field Trip TO KEIBUL LAMJAO NATIONAL PARK on 8/3/2025</a>
+            </li>
+            <li>
+                <a href="#">Pre-PhD MIMS: Interview for PhD; QET qualified/QET exempted candidates list for the interview on 11/3/2025</a>
+                <span class="new-badge"><i>Death</i></span>
+            </li>
+            <li>
+                <a href="#">RIST: A brief report on Celebration of International Year of Quantum Science and Technology (IYQ-2025)</a>
+                <span class="new-badge"><i>Death</i></span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        &copy; 2025 Manipur University. All rights reserved.
+    </div>
+
+    <section style="text-align:center;">
+        <h2>Vice-Chancellor</h2>
+        <a href="https://maps.app.goo.gl/ZmUUoXjDZVwQyxm8A?g_st=ac" target="_blank" >
+           <img src="D:\mu11.jpg" alt="Vice-Chancellor">
+           </a>
+    </section>
+   <P><h1 >FOR STUDENTS</h1></P>
+    <UL style="COLOR:lightblue;">
+        <LI>DOWNLOAD STUDY MATERIAL: CLASS NOTE</LI>
+        <LI>EXAM FORM FILL UP for MU (New)</LI>
+        <LI>GENERAL NOTICE</LI>
+        <LI>EXAMINATION SCHEDULE</LI>
+        <LI>EXAMINATION RESULTS</LI>
+        <LI>Learning Outcome Based Curriculum Framework (LOCF)</LI>
+        <LI>Online Provisional Marksheet (BA/BSc/BCom)</LI>
+        <LI>Information About MU Feedback Forms </LI>
+        <LI>Academic Calendar for Academic Session 2023-24</LI>
+        
+    </UL>
+    <section>
+        <p><h2 style="background:blue;color:white;">ADMISSIONS</h2></p>
+        <ul style="color:blue;">
+            <li>ADMISSION 2025-26 * NEW *</li>
+            <li>ADMISSION 2024-25</li>
+            <li>Pre-PhD ADMISSION 2024 (July) * NEW *</li>
+            <li> Pre-PhD Admission(Jan) 24</li>        
+        </ul>
+    </section>
+    <section>
+        <p><h1 style="background:blue;color:bluecolor:white;;">SAMARTH STUDENT'S PORTAL</h1></p>
+        <ul style="color:blue;">
+            <li>SAMARTH STUDENT PORTAL</li>
+            <li>STUDENTS PROFILE CORRECTION FORM[pdf]</li>   
+        </ul>
+    </section>
+    <section>
+        <p ><h1 style="background:blue;color:white;">TRAINING AND PLACEMENT</h1></p>
+        <UL style="color:blue;">
+            <li>TRAINING AND PLACEMENT CELL</li>
+            <li>CLICK HERE TO REGISTER YOUR COMPANY</li>
+        </UL>
+
+
+        <div class="section">
+            <h2>ACADEMIC BANK OF CREDIT</h2>
+        </div>
+        <div class="section-content">
+            <ul>
+                <li><a href="#">ACADEMIC BANK OF CREDITS</a></li>
+                <li><a href="#">NAD CELL MU</a></li>
+            </ul>
+        </div>
+    
+        <div class="section">
+            <h2>ONLINE PAYMENT</h2>
+        </div>
+        <div class="section-content">
+            <ul>
+                <li><a href="#">MUET 1ST SEMESTER 2022-2023 ADMISSION</a <li><a href="#">CUET-PG 1ST SEMESTER 2022-2023 ADMISSION</a></li>
+                <li><a href="#">CUET-UG 1ST SEMESTER 2022-2023 ADMISSION</a></li>
+                <li><a href="#">FEE PAYMENT (EDUQFIX)</a></li>
+                <li><a href="#">ONLINE PAYMENT RECEIPT (MISC)</a></li>
+            </ul>
+        </div>
+    
+        <div class="section">
+            <h2>ALUMNI</h2>
+        </div>
+        <div class="section-content">
+            <ul>
+                <li><a href="#">MANIPUR UNIVERSITY ALUMNI [LINK]</a></li>
+                <li><a href="#">ALUMNI REGISTRATION FORM [LINK]</a></li>
+                <li><a href="#">MUAA(MANIPUR UNIVERSITY ALUMNI ASSOCIATION)</a></li>
+            </ul>
+        </div>
+    
+        <div class="section">
+            <h2>GUEST HOUSE</h2>
+        </div>
+        <div class="section-content">
+            <ul>
+                <li><a href="#">ABOUT GUEST HOUSE</a></li>
+                <li><a href="#">MU GUEST HOUSE INFORMATION SHEET (RATE) [PDF]</a></li>
+                <li><a href="#">MU GUEST HOUSE APPLICATION FORM (BOOKING FORM) [PDF]</a></li>
+            </ul>
+        </div>
+    
+        <div class="section">
+            <h2>FORMS AND BROCHURES</h2>
+        </div>
+        <div class="section-content">
+            <ul>
+                <li><a href="#">IT SERVICE DESK</a></li>
+                <li><a href="#">WI-FI/INTERNET FORM</a></li>
+                <li><a href="#">REQUEST ID-CARD FORM</a></li>
+                <li><a href="#">MU 15TH CONVOCATION</a></li>
+                <li><a href="#">OFF-LINE FORMS</a></li>
+            </ul>
+        </div>
+    
+        <div class="section">
+            <h2>IQAC</h2>
+        </div>
+        <div class="section-content">
+            <ul>
+                <li><a href="#">ABOUT IQAC</a></li>
+                <li><a href="#">DIRECTOR</a></li>
+                <li><a href="#">MEMBERS</a></li>
+                <li><a href="#">NAAC</a></li>
+                <li><a href="#">PUBLICATIONS</a></li>
+            </ul>
+        </div>
+    
+        <div class="section">
+            <h2>CONVOCATION</h2>
+        </div>
+        <div class="section-content">
+            <ul>
+                <li><a href="#">SAMARTH CONVOCATION</a></li>
+            </ul>
+        </div>
+
+        <div class="notice">
+            <h2>EVENTS | <a href="#" style="font-size:15px;color:lightgray;">All events</a></h2>
+            <ul>
+                <li>
+                    <a href="#">3rd National Conference on the Emerging Challenges in the Frontiers of Chemical Sciences (NC-ECFCS) on 27-28th March 2025, 27-28 Mar 2025</a>
+                </li>
+                <li>
+                    <a href="#">ONE WEEK HANDS-ON TRAINING PROGRAMME ON BASIC AND MODERN Tch 2025 18-24 Mar 2025</a>
+                    <span class="new-badge">NEW</span>
+                </li>
+                <li>
+                    <a href="#">RIST: A brief report on Celebration of International Year of Quantum Science and Technology (IYQ-2025)</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="notice">
+            <h2>NEWS UPDATES | <a href="#" style="font-size:15px; color:lightgray">All News</a></h2>
+            <ul>
+                <li>
+
+                    <div class="slider">
+                        <div class="slides">
+                          <!-- Add your images here -->
+                          <div class="slide"><img src="D:/mu12.jpg" alt="Image 1"></div>
+                          <div class="slide"><img src="D:/mu2.jpg" alt="Image 2"></div>
+                          <div class="slide"><img src="D:/mu3.jpg" alt="Image 3"></div>
+                          <div class="slide"><img src="D:/mu1.jpg" alt="Image 1 (repeated)"></div> <!-- Repeated first image for seamless effect -->
+                        </div>
+                      </div>
+
+
+                 
+                </li>
+                    <p>Mar 07,2025
+                    <span class="new-badge">NEW</span></p>
+                </li>
+            </ul>
+        </div>
+
+        <section>
+            <h1 style="color:black;">ABOUT MANIPUR UNIVERSITY</h1>
+            <p style="color:black;font-size:14px;">Manipur University was established on 5th June 1980 under the Manipur University Act. 1980 (Manipur Act 8 of 1980), as a teaching-cum-affiliating University at Imphal with territorial jurisdiction over the whole of the state of Manipur and it was converted into a central university w.e.f. 13/10/2005. The Manipur University Act No 54 of 2005 received the assent of the President on 28/12/2005.</p>
+        </section>
+
+        <section >
+            <input type="text" style="color:white; backgroung-color:red;"placeholder="read More" >
+        </section>
+
+        <section style="margin:50px;padding:15px; border:1px solid black;">
+            
+            <img style="height:auto; width:90%;"   src="D:\mu14.jpg" alt="image2">
+        </section>
+
+        <section style="background:darkblue;margin:0px;padding:10px; border:1px solid black;">
+         
+         
+            <section style="color:white;">  
+            <a 
+               href="https://maps.app.goo.gl/ZmUUoXjDZVwQyxm8A?g_st=ac" target="_blank">
+                 <img src="D:\mu13.jpg" alt="map locatipn"
+                 style="width:100; height:auto">
+            
+            </a>
+               
+
+
+            <p>  How to Reach |Campus Map</p>
+             <h1>Contact Us</h1>
+             <ul style="border-bottom:1px dashed whitesmoke;margin:5px;">
+                <li>Manipur University</li>
+                <li>Indo-Myanmar Road , Canchipur - 795003</li>
+                <li>Imphal, Manipur , India</li>
+                <li>Phone: +91 385 2435125 | +91 385 2435143</li>
+                <li>Fax: +91 385 2435145</li>
+                <li>email: info [AT] manipuruniv.ac.in</li>
+             </ul>
+           </section>
+
+           <div>
+            <div style="color:white;">
+                <h1 style="font-size:30px;">Opening Times</h1>
+                <p>SUMMER (9:00 AM to 5:00 PM)</p>
+                <p>WINTER (9:00 AM to 5:00 PM)</p>
+            </div>
+            <div  style="color:white;">
+                <p>National Anti-Ragging Helpline 24x7 Toll Free 1800-180-5522</p>
+                <p>helpline@antiragging.in | www.antiragging.in</p>
+                <p>Details link</p>
+            </div>
+
+            <h1 style="color:white;font-size:40px;">QUICK ACCESS </h1>
+            <div  style="color:white;display:flex">
+                <ul type="none" style="text-decoration: underline; text-decoration-color:darkgray;"">
+                    <li>ANNUAL REPORTS</li>
+                    <li>ANNUAL (FINANCE) ACCOUNT</li>
+                    <li>The MU Act 2005</li>
+                    <li>Library <span style="color: yellow;">NEW</span></li>
+                    <li>IQAC</li>
+                    <li>Parliament Digital Library</li>
+                    <li>National and International Days</li>
+                    <li>MU IT Policy 2022</li>
+                    <li>Academic Bank of Credits: ABC</li>
+                    <li>Online Recruitment Portal (Faculty)</li>
+                </ul>
+                <ul type="none" style="text-decoration: underline; text-underline-offset:5px ;text-decoration-color:darkgray;">
+                    <li>UGC-HRDC</li>
+                    <li>College Dev. Council</li>
+                    <li>Forms & Brochures</li>
+                    <li>Tenders</li>
+                    <li>Complaint Registration for Discrimination Prevention</li>
+                    <li>Anti-Ragging</li>
+                    <li>Internal Complaints Committee</li>
+                    <li>Grievance</li>
+                    <li>RTI</li>
+                    <li>OLD Online Recruitment Application (Non-Teaching)</li>
+                </ul>
+            </div>
+            <div class="footer">
+                <p>© 2024 Manipur University. All Rights Are Reserved.</p>
+                <p>Loading Timestamp: 03/04/2025 10:46:25pm</p>
+                <p>Visitors w.e.f 1-3-2024: <a href="https://dissertation-writingservice.com/">https://dissertation-writingservice.com/</a></p>
+                <p>2 7 5 9 7 1 9</p>
+            </div>
+        </div>
+
+        </section>
+
+
+
+
+        <?php
+         $conn=new mysqli("localhost","root","","testdb");
+
+         if ($ conn->connect_error){
+            die("Connection failed:" .
+            $conn->connect_error);
+         }
+         echo "Connected successfully";
+
+        ?>
+
+
+
+
+
+</body>
+</html>
