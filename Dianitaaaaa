@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mensaje Especial</title>
+  <style>
+    body {
+      background-color: #fff0f5;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      margin: 0;
+    }
+    h1 {
+      color: #e91e63;
+      font-size: 2.5rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>TE QUIEROOOOO MUCHOO MILLONES 💐🫶🏻</h1>
+</body>
+</html>
