@@ -1,0 +1,95 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and overall styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Header styles */
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    background-color: #333;
+    padding: 10px;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px;
+}
+
+/* Banner Styles */
+#welcome {
+    background-color: #00b4d8;
+    color: white;
+    padding: 100px 0;
+    text-align: center;
+}
+
+#welcome .btn {
+    background-color: #ff9f00;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+#welcome .btn:hover {
+    background-color: #ff5e00;
+}
+
+/* Section styles */
+section {
+    padding: 50px 0;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
+section h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+section p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style: none;
+}
+
+ul li {
+    font-size: 1rem;
+}
+
+/* Footer styles */
+footer {
+    text-align: center;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
