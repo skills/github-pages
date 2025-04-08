@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>График работы</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        .schedule-container {
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            width: 420px;
+            max-width: 90%;
+        }
+        h2 {
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 500;
+            font-size: 24px;
+        }
+        .timezone {
+            text-align: center;
+            color: #a0a0a0;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+        .contacts {
+            margin-top: 30px;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            color: #d0d0d0;
+        }
+        .contact-icon {
+            margin-right: 12px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .note {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #252525;
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #b0b0b0;
+        }
+        a {
+            color: #FFB8D1;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        a:hover {
+            color: #ff8fb4;
+            text-decoration: underline;
+        }
+        .logo {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="schedule-container">
+        <svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+            <!-- Заголовок -->
+            <text x="200" y="40" font-family="Helvetica" font-size="22" font-weight="500" text-anchor="middle" fill="#ffffff">График работы</text>
+            
+            <!-- График -->
+            <!-- Понедельник -->
+            <rect x="50" y="70" width="14" height="14" rx="2" fill="#8BC34A"/>
+            <text x="80" y="82" font-family="Helvetica" font-size="14" fill="#e0e0e0">ПН</text>
+            <text x="200" y="82" font-family="Helvetica" font-size="14" fill="#e0e0e0">9:00 – 18:00</text>
+            
+            <!-- Вторник -->
+            <rect x="50" y="100" width="14" height="14" rx="2" fill="#9CCC65"/>
+            <text x="80" y="112" font-family="Helvetica" font-size="14" fill="#e0e0e0">ВТ</text>
+            <text x="200" y="112" font-family="Helvetica" font-size="14" fill="#e0e0e0">9:00 – 18:00</text>
+            
+            <!-- Среда -->
+            <rect x="50" y="130" width="14" height="14" rx="2" fill="#AED581"/>
+            <text x="80" y="142" font-family="Helvetica" font-size="14" fill="#e0e0e0">СР</text>
+            <text x="200" y="142" font-family="Helvetica" font-size="14" fill="#e0e0e0">9:00 – 18:00</text>
+            
+            <!-- Четверг -->
+            <rect x="50" y="160" width="14" height="14" rx="2" fill="#C5E1A5"/>
+            <text x="80" y="172" font-family="Helvetica" font-size="14" fill="#e0e0e0">ЧТ</text>
+            <text x="200" y="172" font-family="Helvetica" font-size="14" fill="#e0e0e0">9:00 – 18:00</text>
+            
+            <!-- Пятница -->
+            <rect x="50" y="190" width="14" height="14" rx="2" fill="#DCEDC8"/>
+            <text x="80" y="202" font-family="Helvetica" font-size="14" fill="#e0e0e0">ПТ</text>
+            <text x="200" y="202" font-family="Helvetica" font-size="14" fill="#e0e0e0">9:00 – 18:00</text>
+            
+            <!-- Суббота -->
+            <circle cx="57" cy="222" r="7" fill="#EF5350"/>
+            <text x="80" y="227" font-family="Helvetica" font-size="14" fill="#e0e0e0">СБ</text>
+            <text x="200" y="227" font-family="Helvetica" font-size="14" fill="#a0a0a0" font-style="italic">Выходной</text>
+            
+            <!-- Воскресенье -->
+            <circle cx="57" cy="252" r="7" fill="#E57373"/>
+            <text x="80" y="257" font-family="Helvetica" font-size="14" fill="#e0e0e0">ВС</text>
+            <text x="200" y="257" font-family="Helvetica" font-size="14" fill="#a0a0a0" font-style="italic">Выходной</text>
+            
+            <!-- Часовой пояс -->
+            <text x="200" y="285" font-family="Helvetica" font-size="12" text-anchor="middle" fill="#a0a0a0">Часовой пояс: МСК (UTC+3)</text>
+        </svg>
+
+        <div class="contacts">
+            <div class="contact-item">
+                <div class="contact-icon">📞</div>
+                <div>Телефон: <a href="tel:+79018631496">+7 (901) 863-14-96</a></div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <svg class="logo" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+                        <circle fill="url(#tg-gradient)" cx="500" cy="500" r="500"/>
+                        <path d="M226.328,494.722C372.088,431.217 469.285,389.35 517.917,369.122C656.773,311.367 685.625,301.335 704.431,301.004C708.568,300.931 717.816,301.956 723.806,306.817C728.865,310.921 730.257,316.466 730.923,320.357C731.589,324.249 732.418,333.114 731.759,340.041C724.234,419.102 691.675,610.965 675.111,699.515C668.102,736.984 654.301,749.548 640.941,750.777C611.905,753.448 589.856,731.588 561.733,713.153C517.727,684.306 492.866,666.349 450.15,638.2C400.784,605.669 432.786,587.789 460.919,558.569C468.282,550.922 596.215,434.556 598.691,424C599.001,422.68 599.288,417.759 596.365,415.16C593.441,412.562 589.126,413.45 586.012,414.157C581.599,415.159 511.298,461.625 375.11,553.556C355.155,567.259 337.081,573.935 320.887,573.585C303.034,573.199 268.693,563.491 243.164,555.192C211.851,545.014 186.964,539.633 189.132,522.346C190.26,513.343 202.659,504.135 226.328,494.722Z" fill="#FFFFFF"/>
+                        <defs>
+                            <linearGradient id="tg-gradient" x1="50%" y1="0%" x2="50%" y2="99.258%">
+                                <stop stop-color="#2AABEE" offset="0%"/>
+                                <stop stop-color="#229ED9" offset="100%"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div>Telegram: <a href="https://t.me/AlbertGaripovie" target="_blank">@AlbertGaripovie</a></div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <svg class="logo" viewBox="0 0 101 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.5 48C0.5 25.373 0.5 14.059 7.529 7.029C14.559 0 25.873 0 48.5 0H52.5C75.127 0 86.441 0 93.471 7.029C100.5 14.059 100.5 25.373 100.5 48V52C100.5 74.627 100.5 85.941 93.471 92.971C86.441 100 75.127 100 52.5 100H48.5C25.873 100 14.559 100 7.529 92.971C0.5 85.941 0.5 74.627 0.5 52V48Z" fill="#0077FF"/>
+                        <path d="M53.708 72.042C30.917 72.042 17.917 56.417 17.375 30.417H28.792C29.167 49.5 37.583 57.583 44.25 59.25V30.417H55C55 46.875 61.584 46.167 68.5 38.667C70.833 30.417H81.583C79.792 40.584 72.292 48.084 66.958 51.167C72.292 53.667 80.834 60.209 84.084 72.042H72.25C69.708 64.125 63.375 58 55 57.167V72.042H53.708Z" fill="white"/>
+                    </svg>
+                </div>
+                <div>ВКонтакте: <a href="https://vk.com/albertgaripovie" target="_blank">vk.com/albertgaripovie</a></div>
+            </div>
+        </div>
+
+        <div class="note">
+            <strong>Обратите внимание:</strong> В рабочие дни (ПН-ПТ) мы доступны для звонков и сообщений с 9:00 до 18:00. В выходные (СБ-ВС) офис не работает, но вы можете оставить сообщение в Telegram или ВК — ответим в первый рабочий день.
+        </div>
+        <div class="note">
+            <strong>Форс-мажорные ситуации:</strong> В выходные дни, при форс-мажоре (например, если упал сайт и срочно нужно остановить рекламу), немедленно звоните по телефону <a href="tel:+79018631496">+7 (901) 863-14-96</a>.
+            Не ждите понедельника — звоните сразу, чтобы не тратить бюджет впустую.
+            
+            Это касается только кампаний, запущенных на выходных!
+        </div>
+    </div>
+</body>
+</html>
