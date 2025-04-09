@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ميفو - متجر عطور</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #111;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #000;
+      color: gold;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 2em;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #222;
+      padding: 10px;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+    }
+    .hero {
+      background-image: url('https://images.unsplash.com/photo-1600181954325-923d5017c2ff');
+      background-size: cover;
+      background-position: center;
+      text-align: center;
+      padding: 100px 20px;
+    }
+    .hero h2 {
+      font-size: 3em;
+      color: gold;
+    }
+    .section {
+      padding: 50px 20px;
+      text-align: center;
+    }
+    .products {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .product {
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+      width: 200px;
+    }
+    .product img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .footer {
+      background-color: #000;
+      color: #ccc;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    ميفو - عطور بروح أنثوية
+  </header>
+  <nav>
+    <a href="#about">من نحن</a>
+    <a href="#products">المنتجات</a>
+    <a href="#contact">تواصل معنا</a>
+  </nav>
+  <div class="hero">
+    <h2>عطر يعكس حضورك</h2>
+  </div>
+  <div class="section" id="about">
+    <h3>من نحن</h3>
+    <p>ميفو هو متجر إلكتروني أسسته وريف راشد، يجمع بين الفخامة والرقي في عالم العطور. نقدم مجموعة مختارة من العطور الشرقية والغربية الفاخرة.</p>
+  </div>
+  <div class="section" id="products">
+    <h3>منتجاتنا</h3>
+    <div class="products">
+      <div class="product">
+        <img src="https://images.unsplash.com/photo-1585386959984-a41552262de4" alt="عطر 1">
+        <h4>ميفو كلاسيك</h4>
+        <p>عطر فاخر بلمسة شرقية، حجم 100 مل - 179 ريال</p>
+      </div>
+      <div class="product">
+        <img src="https://images.unsplash.com/photo-1589533610925-42c9c5c0d391" alt="عطر 2">
+        <h4>ميفو بلاك</h4>
+        <p>عبير العود والمسك، ثابت وفخم - 189 ريال</p>
+      </div>
+    </div>
+  </div>
+  <div class="section" id="contact">
+    <h3>تواصل معنا</h3>
+    <p>للاستفسار أو الطلبات، راسلينا على واتساب: 0530719014</p>
+    <p>أو عبر الإيميل: kady80277@gmail.com</p>
+  </div>
+  <div class="footer">
+    &copy; 2025 متجر ميفو. جميع الحقوق محفوظة.
+  </div>
+</body>
+</html>
