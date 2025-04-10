@@ -1,0 +1,150 @@
+import java.util.ArrayList;
+
+public class binarysearchTree {
+    static class node {
+        int data;
+        node left, right;
+
+        node(int data) {
+            this.data = data;
+        }
+
+        public static node insert(int val, node root) {
+            if (root == null) {
+                root = new node(val);
+                return root;
+            }
+            if (root.data > val) {
+                root.left = insert(val, root.left);
+            } else {
+                root.right = insert(val, root.right);
+            }
+            return root;
+
+        }
+
+        public static void inorder(node root) {
+            if (root == null) {
+                return;
+            }
+            inorder(root.left);
+            System.out.println(root.data);
+            inorder(root.right);
+        }
+
+        public static boolean search(node root, int key) {
+            if (root == null) {
+                return false;
+            }
+            if (root.data > key) {
+                ///left subtree saerch
+                return search(root.left, key);
+            } else if (root.data < key) {
+                return search(root.right, key);
+
+            } else if (root.data == key) {
+                return true;
+            }
+
+            return false;
+        }
+
+        public static node delete(node root, int key) {
+            if (root.data > key) {
+                root.left = delete(root.left, key);
+            } else if (root.data < key) {
+                root.right = delete(root.right, key);
+                ///case 1 0 child
+            }
+            if (root.left == null && root.right == null) {
+                return null;
+            }
+            /// case 2 one vode delete
+            else if (root.left == null) {
+                return root.right;
+            } else if (root.right == null) {
+                return root.left;
+            }
+            node IS = inodersuccosser(root.right);
+            root.data = IS.data;
+            root.right = delete(root.right, IS.data);
+            return root;
+        }
+
+        public static node inodersuccosser(node root) {
+            while (root.left != null) {
+                root = root.left;
+            }
+            return root;
+
+        }
+
+        /// three case in this problem
+        public static void printINRange(node root, int x, int y) {
+            if (root == null) {
+                return;
+
+            }
+            if (root.data >= x && root.data <= y) {
+                printINRange(root.left, x, y);
+                System.out.println(root.data + " ");
+                printINRange(root.right, x, y);
+            } else if (root.data >= y) {
+                printINRange(root.left, x, y);
+            } else if (root.data <= y) {
+                printINRange(root.right, x, y);
+            } else {
+
+            }
+        }
+        public static void Printpath(ArrayList<Integer> path) {
+            for(int i = 0; i < path.size(); i++) {
+                System.out.print(path.get(i) +  " ->");
+            }
+            System.out.println();
+
+        }
+        public static void printRoot2leaf(node root , ArrayList<Integer> path) {
+            if (root == null) {
+                return;
+            }
+            path.add(root.data);
+            if(root.left ==null && root.right ==null){
+                Printpath(path);
+            }else{
+                printRoot2leaf(root.left, path);
+                printRoot2leaf(root.right, path);
+            }
+             path.remove(path.size()-1);
+           
+        }
+
+    }
+
+        public static void main(String[] args) {
+
+            int value[] = {8, 5, 3, 1, 4, 6, 10, 11, 14};
+            node root = null;
+
+            for (int i = 0; i < value.length; i++) {
+                root = node.insert(value[i], root);
+            }
+            node.inorder(root);
+            System.out.println();
+
+            //if (node.search(root, 7)) {
+//            System.out.println("found");
+//        } else {
+//            System.out.println("not found");
+//        }
+//            node.delete(root,key)
+//            node.inorder(root);
+
+//           node.printINRange(root, 8, 14);
+            node.printRoot2leaf(root ,new ArrayList<>());
+
+
+        }
+
+
+    }
