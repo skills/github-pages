@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Абубакар — Специалист по недвижимости</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Georgia', serif;
+      background: url('https://i.ibb.co/N1MFTRb/bg-abubakar.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+    .text-block {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 25px 20px;
+      border-radius: 12px;
+      max-width: 400px;
+      width: 100%;
+    }
+    .text-block p {
+      margin: 8px 0;
+      font-size: 16px;
+    }
+    .logo {
+      width: 120px;
+      height: 120px;
+      background-color: rgba(0,0,0,0.85);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px auto;
+    }
+    .logo span {
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .contact {
+      margin-top: 20px;
+      font-size: 16px;
+    }
+    .contact a {
+      color: #00ffcc;
+      text-decoration: none;
+      display: block;
+      margin-top: 6px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="text-block">
+    <p>• Покупка квартиры с использованием маткапитала</p>
+    <p>• Бесплатная консультация</p>
+    <p>• Подбор недвижимости</p>
+    <p>• Полное сопровождение сделки</p>
+    <p>• Гарантия юридической чистоты</p>
+    <p>• Рассрочка по нормам Ислама до 60 месяцев</p>
+
+    <div class="logo">
+      <span>EMPIRE</span>
+    </div>
+
+    <div class="contact">
+      WhatsApp:<br>
+      <a href="https://wa.me/79298930033" target="_blank">8929-893-00-33 Абубакар</a>
+      <a href="https://www.instagram.com/abubakar_realtor_17" target="_blank">Instagram</a>
+    </div>
+  </div>
+</body>
+</html>
