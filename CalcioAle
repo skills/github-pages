@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calcio & Tennis Blog</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+    header {
+      background-color: #007b3a;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav {
+      background-color: #004d26;
+      padding: 0.5rem;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: bold;
+    }
+    .container {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    article {
+      background-color: white;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #007b3a;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Calcio & Tennis Blog</h1>
+    <p>Analisi, commenti e notizie su calcio e tennis</p>
+  </header>
+
+  <nav>
+    <a href="#calcio">Calcio</a>
+    <a href="#tennis">Tennis</a>
+  </nav>
+
+  <div class="container">
+    <article id="calcio">
+      <h2>Calcio - Napoli vs Milan: Analisi tattica</h2>
+      <p>Una partita combattuta che ha visto due filosofie di gioco contrapposte. Il Milan ha puntato sul pressing alto, mentre il Napoli ha cercato il palleggio corto...</p>
+    </article>
+
+    <article id="tennis">
+      <h2>Tennis - Jannik Sinner vince a Monte Carlo</h2>
+      <p>Sinner domina la finale con un servizio solido e colpi da fondo precisi. Una vittoria che conferma la sua crescita costante e la solidità mentale...</p>
+    </article>
+  </div>
+</body>
+</html>
+
