@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillToken</title>
+    <style>
+        :root {
+            --primary-color: #F7B5CD; /* Pink (Inter Miami) */
+            --secondary-color: #00b894; /* Green (Eco-conscious) */
+            --text-color: #231F20; /* Black for text */
+            --background-color: #FFFFFF; /* White */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            padding: 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+
+        .hero {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero button {
+            background-color: var(--secondary-color);
+            color: #FFFFFF;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 5px;
+        }
+
+        .features {
+            display: flex;
+            justify-content: space-around;
+            padding: 2rem;
+            background-color: var(--background-color);
+        }
+
+        .feature {
+            text-align: center;
+            max-width: 30%;
+        }
+
+        .feature h3 {
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 600px) {
+            .features {
+                flex-direction: column;
+            }
+            .feature {
+                max-width: 100%;
+                margin-bottom: 1rem;
+            }
+        }
+
+        .signup {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--background-color);
+        }
+
+        .signup h2 {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+
+        .signup form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .signup input {
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            width: 200px;
+            border: 1px solid var(--primary-color);
+            border-radius: 5px;
+        }
+
+        .signup button {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 5px;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            text-align: center;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>SkillToken (SKT)</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Features</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <h2>Tokenize Your Skills with SkillToken</h2>
+            <p>Empower your skills and services with blockchain technology.</p>
+            <button>Learn More</button>
+        </section>
+        <section class="features">
+            <div class="feature">
+                <h3>Token Creation</h3>
+                <p>Mint tokens representing your skills or services.</p>
+            </div>
+            <div class="feature">
+                <h3>Marketplace</h3>
+                <p>Buy and sell tokenized skills easily.</p>
+            </div>
+            <div class="feature">
+                <h3>Staking & Rewards</h3>
+                <p>Earn rewards by staking your SKT tokens.</p>
+            </div>
+        </section>
+        <section class="signup">
+            <h2>Join SkillToken Today</h2>
+            <form>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit">Sign Up</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>© 2025 SkillToken. All rights reserved.</p>
+    </footer>
+</body>
+</html>
