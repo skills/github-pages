@@ -1,0 +1,385 @@
+<!DOCTYPE html><html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Xiomara</title>
+  <style>
+    body {
+      background: linear-gradient(to top right, #ffdde1, #ee9ca7);
+      font-family: 'Georgia', serif;
+      color: #4B2E2E;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      cursor: url('https://cur.cursors-4u.net/others/oth-2/oth172.cur'), auto;
+    }.poema {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 40px;
+  border-radius: 30px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  max-width: 700px;
+  font-size: 24px;
+  line-height: 2;
+  letter-spacing: 1.5px;
+  animation: fadeIn 2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0; transform: translateY(50px);}
+  100% {opacity: 1; transform: translateY(0);}
+}
+
+.poema p {
+  opacity: 0;
+  animation: reveal 1s forwards;
+  animation-delay: var(--delay);
+}
+
+@keyframes reveal {
+  to {
+    opacity: 1;
+  }
+}
+
+.firma {
+  margin-top: 40px;
+  font-size: 20px;
+  color: #7B3F00;
+  font-style: italic;
+  opacity: 0;
+  animation: reveal 1s forwards;
+  animation-delay: 5s;
+}
+
+.boton-abrazo {
+  margin-top: 30px;
+  padding: 12px 24px;
+  background: #ff69b4;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
+  transition: background 0.3s, transform 0.3s;
+}
+
+.boton-abrazo:hover {
+  background: #ff1493;
+  transform: scale(1.1);
+}
+
+.corazon {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: red;
+  transform: rotate(45deg);
+  animation: flotar 2s ease forwards;
+  opacity: 0;
+}
+
+.corazon::before, .corazon::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: red;
+  border-radius: 50%;
+}
+
+.corazon::before {
+  top: -10px;
+  left: 0;
+}
+
+.corazon::after {
+  left: -10px;
+  top: 0;
+}
+
+@keyframes flotar {
+  0% {transform: rotate(45deg) translateY(0); opacity: 1;}
+  100% {transform: rotate(45deg) translateY(-200px); opacity: 0;}
+}
+
+audio {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
+
+.sparkle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: gold;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: sparkle 0.8s linear;
+}
+
+@keyframes sparkle {
+  from {transform: scale(1); opacity: 1;}
+  to {transform: scale(3); opacity: 0;}
+}
+
+.aura {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  animation: auraAnimation 5s ease-in-out infinite;
+}
+
+@keyframes auraAnimation {
+  0% { transform: scale(1); opacity: 0.1; }
+  50% { transform: scale(1.1); opacity: 0.3; }
+  100% { transform: scale(1); opacity: 0.1; }
+}
+
+  </style>
+</head>
+<body><div class="aura"></div>
+<div class="poema">
+  <p style="--delay: 0s">En el jardín de tus ojos brillantes,<br>
+donde florecen mis sueños constantes,<br>
+tu risa es la melodía del viento,<br>
+y en tu abrazo encuentro el tiempo.</p>  <p style="--delay: 2s">Eres estrella que ilumina mis noches,<br>
+cada latido en tus labios se broche,<br>
+mi amor, en tus brazos el mundo es perfecto,<br>
+contigo a mi lado, todo es un sueño eterno.</p>  <p style="--delay: 4s">Tu esencia es un verso que nunca se apaga,<br>
+en cada palabra, el alma se embriaga,<br>
+siempre a tu lado, en este viaje sin fin,<br>
+mi amor por ti, un hermoso poema sin fin.</p>  <div class="firma">
+    Siempre tuyo,<br> Erick
+  </div>
+  <button class="boton-abrazo" onclick="crearCorazones()">Haz clic para un abrazo virtual</button>
+</div><audio autoplay loop controls>
+  <source src="https://www.bensound.com/bensound-music/bensound-tomorrow.mp3" type="audio/mp3">
+  Tu navegador no soporta audio HTML5.
+</audio><script>
+  function crearCorazones() {
+    for (let i = 0; i < 30; i++) {
+      const corazon = document.createElement('div');
+      corazon.className = 'corazon';
+      corazon.style.left = Math.random() * window.innerWidth + 'px';
+      corazon.style.top = Math.random() * window.innerHeight + 'px';
+      document.body.appendChild(corazon);
+      setTimeout(() => corazon.remove(), 2000);
+    }
+  }
+
+  document.addEventListener('mousemove', function(e) {
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    sparkle.style.top = (e.clientY - 5) + 'px';
+    sparkle.style.left = (e.clientX - 5) + 'px';
+    document.body.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 800);
+  });
+</script></body>
+</html><!DOCTYPE html><html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Xiomara</title>
+  <style>
+    body {
+      background: linear-gradient(to top right, #ffdde1, #ee9ca7);
+      font-family: 'Georgia', serif;
+      color: #4B2E2E;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      cursor: url('https://cur.cursors-4u.net/others/oth-2/oth172.cur'), auto;
+    }.poema {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 40px;
+  border-radius: 30px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  max-width: 700px;
+  font-size: 24px;
+  line-height: 2;
+  letter-spacing: 1.5px;
+  animation: fadeIn 2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0; transform: translateY(50px);}
+  100% {opacity: 1; transform: translateY(0);}
+}
+
+.poema p {
+  opacity: 0;
+  animation: reveal 1s forwards;
+  animation-delay: var(--delay);
+}
+
+@keyframes reveal {
+  to {
+    opacity: 1;
+  }
+}
+
+.firma {
+  margin-top: 40px;
+  font-size: 20px;
+  color: #7B3F00;
+  font-style: italic;
+  opacity: 0;
+  animation: reveal 1s forwards;
+  animation-delay: 5s;
+}
+
+.boton-abrazo {
+  margin-top: 30px;
+  padding: 12px 24px;
+  background: #ff69b4;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
+  transition: background 0.3s, transform 0.3s;
+}
+
+.boton-abrazo:hover {
+  background: #ff1493;
+  transform: scale(1.1);
+}
+
+.corazon {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: red;
+  transform: rotate(45deg);
+  animation: flotar 2s ease forwards;
+  opacity: 0;
+}
+
+.corazon::before, .corazon::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: red;
+  border-radius: 50%;
+}
+
+.corazon::before {
+  top: -10px;
+  left: 0;
+}
+
+.corazon::after {
+  left: -10px;
+  top: 0;
+}
+
+@keyframes flotar {
+  0% {transform: rotate(45deg) translateY(0); opacity: 1;}
+  100% {transform: rotate(45deg) translateY(-200px); opacity: 0;}
+}
+
+audio {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
+
+.sparkle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: gold;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: sparkle 0.8s linear;
+}
+
+@keyframes sparkle {
+  from {transform: scale(1); opacity: 1;}
+  to {transform: scale(3); opacity: 0;}
+}
+
+.aura {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  animation: auraAnimation 5s ease-in-out infinite;
+}
+
+@keyframes auraAnimation {
+  0% { transform: scale(1); opacity: 0.1; }
+  50% { transform: scale(1.1); opacity: 0.3; }
+  100% { transform: scale(1); opacity: 0.1; }
+}
+
+  </style>
+</head>
+<body><div class="aura"></div>
+<div class="poema">
+  <p style="--delay: 0s">En el jardín de tus ojos brillantes,<br>
+donde florecen mis sueños constantes,<br>
+tu risa es la melodía del viento,<br>
+y en tu abrazo encuentro el tiempo.</p>  <p style="--delay: 2s">Eres estrella que ilumina mis noches,<br>
+cada latido en tus labios se broche,<br>
+mi amor, en tus brazos el mundo es perfecto,<br>
+contigo a mi lado, todo es un sueño eterno.</p>  <p style="--delay: 4s">Tu esencia es un verso que nunca se apaga,<br>
+en cada palabra, el alma se embriaga,<br>
+siempre a tu lado, en este viaje sin fin,<br>
+mi amor por ti, un hermoso poema sin fin.</p>  <div class="firma">
+    Siempre tuyo,<br> Erick
+  </div>
+  <button class="boton-abrazo" onclick="crearCorazones()">Haz clic para un abrazo virtual</button>
+</div><audio autoplay loop controls>
+  <source src="https://www.bensound.com/bensound-music/bensound-tomorrow.mp3" type="audio/mp3">
+  Tu navegador no soporta audio HTML5.
+</audio><script>
+  function crearCorazones() {
+    for (let i = 0; i < 30; i++) {
+      const corazon = document.createElement('div');
+      corazon.className = 'corazon';
+      corazon.style.left = Math.random() * window.innerWidth + 'px';
+      corazon.style.top = Math.random() * window.innerHeight + 'px';
+      document.body.appendChild(corazon);
+      setTimeout(() => corazon.remove(), 2000);
+    }
+  }
+
+  document.addEventListener('mousemove', function(e) {
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    sparkle.style.top = (e.clientY - 5) + 'px';
+    sparkle.style.left = (e.clientX - 5) + 'px';
+    document.body.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 800);
+  });
+</script></body>
+</html>
