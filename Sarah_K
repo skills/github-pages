@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name | Lead Java Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: #282c34;
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.5rem;
+    }
+    header p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+    nav {
+      text-align: center;
+      background: #444;
+    }
+    nav a {
+      color: white;
+      padding: 15px;
+      display: inline-block;
+      text-decoration: none;
+    }
+    nav a:hover {
+      background: #333;
+    }
+    section {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .skills, .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    footer {
+      background: #282c34;
+      color: white;
+      text-align: center;
+      padding: 30px 10px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Your Name</h1>
+    <p>Lead Java Developer | Architecting Scalable Backend Systems</p>
+  </header>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I'm a passionate Lead Java Developer with over X years of experience building scalable, secure backend systems and mentoring development teams. I specialize in Java, Spring Boot, and distributed systems.
+    </p>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div class="card">Java / Java 17+</div>
+      <div class="card">Spring Boot / Microservices</div>
+      <div class="card">Docker / Kubernetes</div>
+      <div class="card">REST APIs / GraphQL</div>
+      <div class="card">SQL / NoSQL</div>
+      <div class="card">CI/CD / Jenkins / GitHub Actions</div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects">
+      <div class="card">
+        <h3>Inventory Management System</h3>
+        <p>Microservices-based backend for large-scale warehouse with real-time inventory updates, built with Spring Boot + Kafka + PostgreSQL.</p>
+      </div>
+      <div class="card">
+        <h3>DevOps Pipeline Automation</h3>
+        <p>CI/CD pipeline designed using Jenkins + Docker, improving deployment speed by 60% across multiple environments.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: your.email@example.com</p>
+    <p>LinkedIn: linkedin.com/in/yourname</p>
+    <p>GitHub: github.com/yourusername</p>
+  </section>
+
+  <footer>
+    <p>© 2025 Your Name. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>
