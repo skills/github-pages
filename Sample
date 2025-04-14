@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maa Bhavani Pooja Services - Trichy</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f4f0;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #c0392b;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    section {
+      padding: 20px;
+    }
+    .services, .contact, .form, .gallery {
+      background-color: white;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 800px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #b03a2e;
+    }
+    label, input, textarea {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+    }
+    input, textarea {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #c0392b;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    footer {
+      background-color: #c0392b;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+    .tamil {
+      font-family: 'Latha', sans-serif;
+      font-size: 18px;
+      color: #6e2c00;
+    }
+    .deity-image {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto 20px;
+      border-radius: 10px;
+    }
+    .gallery img {
+      width: 100%;
+      max-width: 240px;
+      height: auto;
+      border-radius: 10px;
+      margin: 10px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+    }
+    .gallery-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Maa Bhavani Pooja Services</h1>
+    <p>Trichy | திருச்சி</p>
+  </header>
+
+  <section>
+    <img src="https://tse1.mm.bing.net/th?id=OIP.54h1YqLwXX6jJdEHXV1hVgHaJQ&pid=Api" alt="Maa Bhavani" class="deity-image">
+  </section>
+
+  <section class="services">
+    <h2>Our Services / எங்கள் சேவைகள்</h2>
+    <ul>
+      <li>Naming Ceremony / பெயரிடும் விழா</li>
+      <li>Birthday Pooja / பிறந்த நாள் பூஜை</li>
+      <li>New Home Entrance – Grah Pravesh / புதுமனை புகு விழா</li>
+      <li>Bhoomi Pooja / பூமி பூஜை</li>
+      <li>Pooja for Pregnant Ladies / கர்ப்பிணிப் பெண்களுக்கு தெய்வீக ஆசீர்வாத பூஜை</li>
+      <li>Putra Shanti – Rituals for departed souls / முன்னோர்களுக்கு சாந்தி பூஜை</li>
+    </ul>
+  </section>
+
+  <section class="gallery">
+    <h2>Photo Gallery / புகைப்படத் தொகுப்பு</h2>
+    <div class="gallery-container">
+      <img src="Pooja(1).jpg" alt="Ritual" width="400" height="400">
+      <img src="Pooja(2).jpg" alt="Ritual" width="400" height="400">
+      <img src="Pooja(3).jpg" alt="Ritual" width="400" height="400">
+      <img src="Pooja(4).jpg" alt="Ritual" width="400" height="400">
+      <img src="Pooja(5).jpg" alt="Ritual" width="400" height="400">
+      <img src="https://tse3.mm.bing.net/th?id=OIP.Qg1RCEp-oqkDLDL3iZs6JgHaFj&pid=Api" alt="Pooja 3">
+      <img src="/mnt/data/Puja (2).jpg" alt="Pooja Ceremony Illustration">
+      <img src="/mnt/data/Puja (5).jpg" alt="Pooja Items Setup">
+    </div>
+  </section>
+
+  <section class="contact">
+    <h2>Contact Us / தொடர்புக்கு</h2>
+    <p><strong>Address:</strong> D-253, 2nd Cross, Anna Nagar, Tennur, Tiruchirappalli, Tamil Nadu 620017, India</p>
+    <p><strong>PHONE NUMBER </strong> <B>+91 9951555582</B> </p>
+  </section>
+
+  <section class="form">
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf_AOeZmXUiY6nv0CrdwMC4AGtRL8qWYrxvcUrrha7K7S7MSg/viewform?embedded=true" width="640" height="956" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Maa Bhavani Pooja Services, Trichy | Designed with devotion.</p>
+  </footer>
+</body>
+</html>
