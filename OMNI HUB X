@@ -1,0 +1,63 @@
+-- Solara Hub - OMNI HUB X
+-- Creado por: wzhot
+
+-- Variables
+local scripts = {
+    "https://pastebin.com/raw/NjSdG1xd",
+    "https://raw.githubusercontent.com/Deni210/murdersvssherrifsduels/main/rubyhub",
+    "https://rawscripts.net/raw/Murder-Mystery-2-ByteHub-10357",
+    "https://raw.githubusercontent.com/Au0yX/Community/main/XhubMM2",
+    "https://raw.githubusercontent.com/ItsJiDy/Personal-Script/refs/heads/main/mm2%20halloween.lua",
+    "https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring",
+    "https://gist.githubusercontent.com/Diamond2Top/7a4ecc50920deec741b2c29d35ee7a61/raw/b26ddad7ee109b49b30630f22167e5a2ac111e75/gistfile1.txt",
+    "https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua",
+    "https://raw.githubusercontent.com/LHking123456/ct4gFewpLxRHJ/refs/heads/main/BLRivals",
+    "https://raw.githubusercontent.com/Omgshit/Scripts/main/MainLoader.lua",
+    "https://raw.githubusercontent.com/cracklua/cracks/m/PitbullSource",
+    "https://raw.githubusercontent.com/7190000/Corolla-Hub/main/ch.lua",
+    "https://raw.githubusercontent.com/Alexisisback/Universall/refs/heads/main/Blade%20ball.lua",
+    "https://raw.githubusercontent.com/Fsploit/Frostware/refs/heads/main/F-R-O-S-T-W-A-R-E%20BY%20FSPLOIT-BLADE%20BALL.lua",
+}
+
+-- Interfaz de usuario
+local ScreenGui = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local OpenCloseButton = Instance.new("TextButton")
+
+-- Configuración de la GUI
+ScreenGui.Name = "OmniHubX"
+ScreenGui.Parent = game.CoreGui
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ScreenGui
+MainFrame.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+MainFrame.Size = UDim2.new(0, 400, 0, 300)
+MainFrame.Position = UDim2.new(0.5, -200, 0.5, -150)
+MainFrame.Visible = true
+
+OpenCloseButton.Name = "OpenCloseButton"
+OpenCloseButton.Parent = ScreenGui
+OpenCloseButton.Text = "Abrir/Cerrar Hub"
+OpenCloseButton.Size = UDim2.new(0, 150, 0, 50)
+OpenCloseButton.Position = UDim2.new(0, 20, 0, 20)
+OpenCloseButton.BackgroundColor3 = Color3.new(0.8, 0.2, 0.2)
+OpenCloseButton.TextColor3 = Color3.new(1, 1, 1)
+
+-- Mostrar mensajes iniciales
+print("by: wzhot")
+wait(2)
+print("OMNI HUB X")
+
+-- Función para abrir/cerrar el hub
+local hubVisible = true
+OpenCloseButton.MouseButton1Click:Connect(function()
+    hubVisible = not hubVisible
+    MainFrame.Visible = hubVisible
+end)
+
+-- Ejecutar los scripts
+for _, url in ipairs(scripts) do
+    pcall(function()
+        loadstring(game:HttpGet(url, true))()
+    end)
+end
