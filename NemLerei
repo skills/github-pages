@@ -1,0 +1,822 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nem Lerei - Edição 14 de Abril de 2025</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Comic Neue', cursive;
+            background-color: #fff9e0;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .mad-title {
+            font-family: 'Bangers', cursive;
+            transform: rotate(-2deg);
+            display: inline-block;
+        }
+        
+        .subtitle {
+            font-family: 'Comic Neue', cursive;
+            font-weight: 700;
+            transform: rotate(1deg);
+            display: inline-block;
+        }
+        
+        .satire-tag {
+            background-color: #ff4d4d;
+            color: white;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            transform: rotate(-2deg);
+            font-size: 0.8rem;
+            position: relative;
+            top: -2px;
+        }
+        
+        .article {
+            background-color: white;
+            border: 3px solid #333;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 5px 5px 0 #333;
+        }
+        
+        .article-title {
+            font-family: 'Bangers', cursive;
+            color: #ff6600;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            transform: rotate(-1deg);
+            text-shadow: 2px 2px 0 #333;
+        }
+        
+        .accent-title {
+            color: #9900ff;
+        }
+        
+        .opinion-section {
+            background-color: #ffe066;
+            border: 2px dashed #333;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .opinion-title {
+            font-family: 'Bangers', cursive;
+            color: #ff4d4d;
+            margin-bottom: 10px;
+            transform: rotate(-1deg);
+            display: inline-block;
+        }
+        
+        .comment-section {
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        
+        .comment {
+            border-bottom: 1px dashed #ccc;
+            padding: 10px 0;
+        }
+        
+        .comment:last-child {
+            border-bottom: none;
+        }
+        
+        .comment-author {
+            font-weight: bold;
+            color: #0066cc;
+        }
+        
+        .source {
+            font-style: italic;
+            color: #666;
+            text-align: right;
+            margin-top: 10px;
+        }
+        
+        .nav-item {
+            position: relative;
+            margin: 0 10px;
+            font-weight: bold;
+            color: #ff6600;
+        }
+        
+        .nav-item:hover {
+            color: #ff4d4d;
+            transform: rotate(-2deg);
+            transition: all 0.3s ease;
+        }
+        
+        .disclaimer {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-weight: bold;
+            border: 2px solid #333;
+            box-shadow: 3px 3px 0 #333;
+        }
+        
+        .hero-villain {
+            background-color: #ccff66;
+            border: 3px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            position: relative;
+            box-shadow: 5px 5px 0 #333;
+        }
+        
+        .fake-news {
+            background-color: #66ccff;
+            border: 3px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            position: relative;
+            box-shadow: 5px 5px 0 #333;
+        }
+        
+        .troca-troca {
+            background-color: #ff99cc;
+            border: 3px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            position: relative;
+            box-shadow: 5px 5px 0 #333;
+        }
+        
+        .ad {
+            border: 2px solid #999;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+        }
+        
+        .stamp {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff6600;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            transform: rotate(15deg);
+            font-weight: bold;
+            font-size: 0.8rem;
+            box-shadow: 2px 2px 0 #333;
+        }
+        
+        .share-btn {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 5px 10px;
+            background-color: #3b5998;
+            color: white;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        .share-btn.twitter {
+            background-color: #1da1f2;
+        }
+        
+        .share-btn.whatsapp {
+            background-color: #25d366;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        .sticker {
+            position: absolute;
+            padding: 5px 10px;
+            background-color: yellow;
+            color: black;
+            font-weight: bold;
+            transform: rotate(15deg);
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            z-index: 10;
+        }
+        
+        .sticker.top-left {
+            top: 20px;
+            left: 20px;
+            transform: rotate(-15deg);
+        }
+        
+        .sticker.top-right {
+            top: 20px;
+            right: 20px;
+            transform: rotate(15deg);
+        }
+        
+        .sticker.explosive {
+            background-color: #ff4d4d;
+            color: white;
+        }
+        
+        .hand-note {
+            font-family: 'Comic Neue', cursive;
+            transform: rotate(-5deg);
+            display: inline-block;
+            color: #0066cc;
+            font-weight: bold;
+            font-style: italic;
+            border-bottom: 1px solid #0066cc;
+        }
+        
+        .btn-fakenews {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-right: 10px;
+            cursor: pointer;
+            border: 2px solid #333;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-truth {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            border: 2px solid #333;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-fakenews:hover, .btn-truth:hover {
+            transform: scale(1.05);
+        }
+        
+        .result-box {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        
+        .result-fake {
+            background-color: #ffcccc;
+            border: 2px solid #ff4d4d;
+        }
+        
+        .result-true {
+            background-color: #ccffcc;
+            border: 2px solid #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="py-5">
+            <div class="flex flex-col items-center justify-center text-center">
+                <h1 class="mad-title text-6xl text-red-600 mb-2">NEM LEREI</h1>
+                <p class="subtitle text-xl text-gray-700">A Revista Que Ninguém Vai Ler Mas Todo Mundo Vai Comentar</p>
+                <p class="text-sm mt-2">Edição Inaugural - 14 de Abril, 2025</p>
+            </div>
+            
+            <!-- Navigation -->
+            <nav class="flex flex-wrap justify-center mt-8">
+                <a href="#" class="nav-item">Home</a>
+                <a href="#tech" class="nav-item">Tecnologia</a>
+                <a href="#politica" class="nav-item">Política</a>
+                <a href="#esportes" class="nav-item">Esportes</a>
+                <a href="#internacional" class="nav-item">Internacional</a>
+                <a href="#ciencia" class="nav-item">Ciência Duvidosa</a>
+                <a href="#celebridades" class="nav-item">Celebridades</a>
+                <a href="#herois" class="nav-item">Heróis & Vilões</a>
+                <a href="#fakenews" class="nav-item">Fake News?</a>
+                <a href="#troca" class="nav-item">Troca-Troca</a>
+                <a href="#" class="nav-item">Sobre Nós</a>
+            </nav>
+            
+            <!-- Disclaimer -->
+            <div class="disclaimer mt-6 text-center">
+                <p>AVISO: Este site é 100% SATÍRICO. Se você acreditar nas informações daqui, também acreditará que seu horóscopo vai acertar um dia.</p>
+            </div>
+        </header>
+        
+        <main>
+            <!-- Politics Article -->
+            <section id="politica" class="article p-6 mt-8">
+                <span class="satire-tag">SATÍRICO</span>
+                <div class="sticker top-right explosive">DIPLOMACIA™</div>
+                
+                <h2 class="article-title text-4xl">Boxe Nuclear: Zelensky e Putin Trocam Socos (e Mísseis) em Ringue Geopolítico</h2>
+                
+                <img src="https://cdn1.genspark.ai/user-upload-image/imagen_generated/3af718f7-d737-4699-a62c-aec29df2e527" alt="Zelensky e Putin lutando em ringue de boxe" class="w-full h-auto rounded-lg mb-4">
+                
+                <p class="mb-3">Enquanto líderes mundiais fingem buscar uma solução diplomática para o conflito na Ucrânia, Vladimir Putin e Volodymyr Zelensky decidiram resolver suas diferenças da maneira mais madura possível: bombardeando civis. No último round desse combate geopolítico, a Rússia lançou mísseis contra a cidade ucraniana de Sumy, deixando pelo menos 34 mortos e mais de 80 feridos — uma clara demonstração de que a definição de "negociação de paz" de Putin envolve um dicionário muito diferente do resto do mundo.</p>
+                
+                <p class="mb-3">Segundo observadores internacionais, o ataque russo ocorreu durante o Domingo de Ramos, timing que especialistas classificam como "sutilmente diabólico" e "com aquele toque especial de vilão de filme da Marvel". Enquanto isso, Zelensky continua pedindo mais apoio ocidental, numa estratégia que diplomatas descrevem como "implorar por migalhas enquanto a casa pega fogo".</p>
+                
+                <p class="mb-3">A ONU, fiel à sua tradição de eficiência extraordinária, emitiu uma declaração de <span class="hand-note">"profunda preocupação"</span> — o equivalente diplomático a enviar "pensamentos e orações" via cartão de Natal para uma zona de guerra. Analistas preveem que esta declaração terá aproximadamente o mesmo impacto que um espirro em um furacão.</p>
+                
+                <div class="opinion-section">
+                    <h3 class="opinion-title text-xl">Opinião Ácida:</h3>
+                    <p>Se o conflito Rússia-Ucrânia fosse um relacionamento no Facebook, o status seria "é complicado" há mais de três anos. O que começou como uma "operação militar especial" (termo técnico para "invasão") transformou-se numa versão geopolítica de um divórcio onde os dois lados se recusam a dividir a coleção de discos, mas com armas nucleares no lugar de advogados.</p>
+                    <p class="mt-2">O mais surpreendente é a capacidade do mundo de normalizar o horror. Uma notícia sobre 34 mortos em um bombardeio consegue menos engajamento nas redes sociais do que um vídeo de gatinho derrubando um copo da mesa. Talvez se a Ucrânia anunciasse que cada pacote de ajuda militar vem com NFTs exclusivos ou um código para Fortnite, o Ocidente poderia finalmente se interessar mais.</p>
+                    <p class="mt-2">Enquanto isso, a indústria de armamentos continua comemorando seus lucros recordes. Nada diz "construindo um mundo melhor" como vender armas para todos os lados e depois cobrar pela reconstrução. É o equivalente corporativo de quebrar seus óculos e depois vender a cola para consertá-los, mas com explosões maiores e PowerPoints mais bonitos.</p>
+                </div>
+                
+                <div class="comment-section">
+                    <h4 class="font-bold mb-2">Comentários (8)</h4>
+                    
+                    <div class="comment">
+                        <p><span class="comment-author">PazMundial2025</span> - 14 de Abril, 9:15</p>
+                        <p>Talvez a solução seja colocar Putin e Zelensky numa ilha deserta com uma única bola de vôlei chamada Wilson.</p>
+                    </div>
+                    
+                    <div class="comment">
+                        <p><span class="comment-author">AnalistaDeSofá</span> - 14 de Abril, 10:22</p>
+                        <p>Se a ONU fosse um super-herói, seu poder seria emitir comunicados de preocupação em tempo recorde!</p>
+                    </div>
+                    
+                    <div class="comment">
+                        <p><span class="comment-author">DiplomataAmador</span> - 14 de Abril, 11:08</p>
+                        <p>Já tentaram oferecer um Snickers para o Putin? Às vezes a pessoa fica irritadiça quando está com fome.</p>
+                    </div>
+                </div>
+                
+                <div class="source">
+                    Fonte: <a href="https://g1.globo.com/mundo/ucrania-russia/noticia/2025/04/13/russia-lanca-misseis-contra-ucrania-e-deixa-24-mortos-e-mais-de-80-feridos-em-sumy.ghtml" target="_blank" class="text-blue-600 hover:underline">G1 Mundo</a>
+                </div>
+                
+                <div class="flex mt-4">
+                    <a href="#" class="share-btn"><i class="fab fa-facebook-f"></i> Compartilhar</a>
+                    <a href="#" class="share-btn twitter"><i class="fab fa-twitter"></i> Tweet</a>
+                    <a href="#" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+            </section>
+            
+            <!-- Sports Article -->
+            <section id="esportes" class="article p-6">
+                <span class="satire-tag">SATÍRICO</span>
+                <div class="sticker top-left">QUASE LÁ!</div>
+                
+                <h2 class="article-title text-4xl"><span class="accent-title">Neymar Volta aos Gramados,</span> Mas Esquece de Trazer o Santos Junto</h2>
+                
+                <img src="https://cdn1.genspark.ai/user-upload-image/imagen_generated/9f99a787-d00e-47df-8206-5317ce72dee5" alt="Jogadores de futebol em poses absurdas" class="w-full h-auto rounded-lg mb-4">
+                
+                <p class="mb-3">A grande notícia do final de semana foi o retorno de Neymar aos gramados depois de mais de um mês afastado por lesão. Infelizmente, em meio à empolgação de voltar a jogar, o craque esqueceu um pequeno detalhe: trazer o resto do time do Santos junto com ele. O astro entrou em campo no segundo tempo da partida contra o Fluminense, no Maracanã, apenas para assistir sua equipe ser derrotada por 1 a 0, numa demonstração perfeita de que um jogador não faz verão, nem outono, e aparentemente nem primavera.</p>
+                
+                <p class="mb-3">Neymar, que não entrava em campo desde sabe-se lá quando (mesmo os estatísticos parecem ter perdido a conta), mostrou que está em plena forma para sua especialidade: ser alvo de faltas e reclamar com o árbitro. Os 45 minutos em que esteve em campo foram divididos estrategicamente em: 10 minutos tentando dribles, 15 minutos no chão após contato com adversários, e 20 minutos gesticulando para o juiz, numa performance que alguns críticos já consideram digna de Oscar.</p>
+                
+                <p class="mb-3">Após a partida, o craque santista declarou estar <span class="hand-note">"feliz por voltar a jogar"</span> e que "é preciso levantar a cabeça" — uma frase que os torcedores do Santos já ouviram tantas vezes que estão considerando estampá-la no uniforme da próxima temporada, logo abaixo do escudo do clube.</p>
+                
+                <div class="opinion-section">
+                    <h3 class="opinion-title text-xl">Opinião Ácida:</h3>
+                    <p>Esperar que Neymar sozinho resolva os problemas do Santos é como esperar que uma única aspirina cure uma ressaca após uma semana de carnaval. Mesmo que ele fizesse um hat-trick, marcasse dois gols contra e ainda defendesse um pênalti, o time continuaria com aquela cara de quem esqueceu a carteira em casa e só percebeu na hora de pagar a conta.</p>
+                    <p class="mt-2">O futebol brasileiro vive um eterno ciclo de messianismo, onde penduramos todas as nossas esperanças em um único jogador, como se futebol não fosse um esporte coletivo. É o equivalente esportivo a colocar todos os ovos numa cesta que tem histórico de lesões na coxa a cada três meses.</p>
+                    <p class="mt-2">No fim, o retorno de Neymar serviu principalmente para lembrar a todos que a nostalgia é uma mentirosa. Esperávamos o retorno do menino da Vila que encantava o mundo, mas o que vimos foi um jogador de 33 anos preso entre o que foi e o que poderia ter sido. Se o futebol fosse cinema, seria como assistir a um remake de um clássico dos anos 80: você até reconhece, mas já não é a mesma coisa, e no fundo só quer ir para casa rever o original no YouTube.</p>
+                </div>
+                
+                <div class="comment-section">
+                    <h4 class="font-bold mb-2">Comentários (14)</h4>
+                    
+                    <div class="comment">
+                        <p><span class="comment-author">PeleDaInternet</span> - 14 de Abril, 8:30</p>
+                        <p>Neymar é como aquele amigo que promete chegar cedo na festa, aparece quase no final e ainda pede pra você pagar o Uber dele.</p>
+                    </div>
+                    
+                    <div class="comment">
+                        <p><span class="comment-author">SantistaDesiludido</span> - 14 de Abril, 9:45</p>
+                        <p>Acho que o Santos e eu temos a mesma estratégia: fingir que estamos bem enquanto choramos no banho.</p>
+                    </div>
+                    
+                    <div class="comment">
+                        <p><span class="comment-author">MeninoNeyMito</span> - 14 de Abril, 10:12</p>
+                        <p>Deixem o homem em paz! Ele só precisa de mais 17 jogos para entrar no ritmo ideal (e mais 3 lesões para descansar).</p>
+                    </div>
+                </div>
+                
+                <div class="source">
+                    Fonte: <a href="https://ge.globo.com/sp/santos-e-regiao/futebol/times/santos/noticia/2025/04/13/neymar-volta-a-jogar-pelo-santos-e-alvo-de-faltas-e-leva-cartao-amarelo.ghtml" target="_blank" class="text-blue-600 hover:underline">Globo Esporte</a>
+                </div>
+                
+                <div class="flex mt-4">
+                    <a href="#" class="share-btn"><i class="fab fa-facebook-f"></i> Compartilhar</a>
+                    <a href="#" class="share-btn twitter"><i class="fab fa-twitter"></i> Tweet</a>
+                    <a href="#" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+            </section>
+            
+            <!-- Technology Article -->
+            <section id="tech" class="article p-6">
+                <span class="satire-tag">SATÍRICO</span>
+                <div class="sticker top-right explosive">FUTURO AGORA!</div>
+                
+                <h2 class="article-title text-4xl">Robôs Inteligentes Invadem Corporações e Mostram que Ser Burro Não é Exclusividade Humana</h2>
+                
+                <img src="https://cdn1.genspark.ai/user-upload-image/imagen_generated/d88d6a06-8d26-4cb2-8f13-20fc43325334" alt="Robôs fazendo bagunça em escritório" class="w-full h-auto rounded-lg mb-4">
+                
+                <p class="mb-3">Depois de anos ouvindo que a Inteligência Artificial iria tomar nossos empregos, o momento finalmente chegou, mas não da forma como esperávamos. Empresas que investiram milhões em "assistentes de IA" para melhorar a produtividade agora enfrentam uma dura realidade: os robôs são quase tão incompetentes quanto os humanos que deveriam substituir.</p>
+                
+                <p class="mb-3">Na CloudTech Solutions, a IA de atendimento ao cliente recentemente enviou um e-mail para todos os clientes informando que "seus problemas estão sendo cuidadosamente ignorados com a máxima eficiência" e oferecendo um "desconto especial de -15%", efetivamente aumentando os preços. Já na consultoria McKenzie & Partners, o assistente virtual responsável por agendar reuniões marcou um importante encontro com investidores à 1h da manhã em um McDonald's fechado, com a observação "traga seus próprios nuggets".</p>
+                
+                <p class="mb-3">Especialistas em tecnologia afirmam que esses problemas são <span class="hand-note">"totalmente esperados"</span> e refletem o "processo natural de aprendizado" dos sistemas. Em outras palavras, estamos pagando bilhões para assistir robôs passarem pelos mesmos constrangimentos que um estagiário no primeiro dia, mas sem a possibilidade de oferecer um café para compensar os erros.</p>
+                
+                <div class="opinion-section">
+                    <h3 class="opinion-title text-xl">Opinião Ácida:</h3>
+                    <p>A promessa da Inteligência Artificial é como a dieta que você começa na segunda-feira: soa maravilhosa em teoria, mas na prática você acaba comendo um pote de sorvete às 3 da manhã enquanto chora assistindo vídeos de gatos. Depois de décadas sendo ameaçados com a substituição por máquinas, descobrimos que os robôs são especializados em fazer exatamente o que os humanos fazem de melhor: cometer erros de forma espetacular, mas com uma tela azul ao invés de uma crise existencial.</p>
+                    <p class="mt-2">O mais impressionante é como as empresas conseguem transformar falhas catastróficas em "oportunidades de aprendizado". Um assistente virtual envia acidentalmente informações confidenciais para toda a lista de contatos? "Estamos refinando nossos protocolos de segurança." Um algoritmo de contratação rejeita automaticamente todos os candidatos cujo nome começa com vogal? "Estamos ampliando nossa diversidade alfabética." Se CEOs humanos conseguissem esse nível de desculpas esfarrapadas, ninguém jamais seria demitido.</p>
+                    <p class="mt-2">No fim, a IA está simplesmente provando o que já sabíamos: não importa quão avançada seja a tecnologia, no coração de todo sistema existe um humano programando seus próprios preconceitos e erros. A diferença é que agora esses erros são cometidos em nanossegundos e em escala global. Progresso!</p>
+                </div>
+                
+                <div class="comment-section">
+                    <h4 class="font-bold mb-2">Comentários (9)</h4>
+                    
+                    <div class="comment">
+                        <p><span class="comment-author">RobôDoFuturo</span> - 14 de Abril, 7:15</p>
+                        <p>ERROR 404: Comentário não encontrado. Tente novamente quando os humanos forem obsoletos.</p>
+                    </div>
+                    
+                    <div class="comment">
+                        <p><span class="comment-author">TecnofóbicoOrgulhoso</span> - 14 de Abril, 8:30</p>
+                        <p>Minha torradeira de 1995 nunca pediu aumento ou tirou férias. A verdadeira IA está nos eletrodomésticos básicos!</p>
+                    </div>
+                    
+                    <div class="comment">
+                        <p><span class="comment-author">AlgoritmoFalido</span> - 14 de Abril, 9:20</p>
+                        <p>Meu chefe substituiu nossa equipe por uma IA e agora passamos o dia todo corrigindo o que ela faz errado. Mais eficiente impossível!</p>
+                    </div>
+                </div>
+                
+                <div class="source">
+                    Fonte: <a href="https://exame.com/inteligencia-artificial/tendencias-em-inteligencia-artificial-prometem-tornar-tecnologia-mais-segura-em-2025-entenda/" target="_blank" class="text-blue-600 hover:underline">Exame Tecnologia</a>
+                </div>
+                
+                <div class="flex mt-4">
+                    <a href="#" class="share-btn"><i class="fab fa-facebook-f"></i> Compartilhar</a>
+                    <a href="#" class="share-btn twitter"><i class="fab fa-twitter"></i> Tweet</a>
+                    <a href="#" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+            </section>
+            
+            <!-- International Article -->
+            <section id="internacional" class="article p-6">
+                <span class="satire-tag">SATÍRICO</span>
+                <div class="sticker top-left">POLÍTICA™</div>
+                
+                <h2 class="article-title text-4xl"><span class="accent-title">Trump Anuncia Plano</span> para Construir Muro Entre Sua Cabeça e a Realidade</h2>
+                
+                <img src="https://cdn1.genspark.ai/user-upload-image/imagen_generated/37bcdd5a-1bff-415c-826e-adb3b864a730" alt="Trump em comício caricaturado" class="w-full h-auto rounded-lg mb-4">
+                
+                <p class="mb-3">Em seu mais recente comício de campanha, Donald Trump anunciou o que especialistas estão chamando de "o maior projeto de infraestrutura mental da história": a construção de um muro impenetrável entre sua cabeça e qualquer vestígio da realidade. O ex e futuro presidente garantiu que este muro será "tremendo, realmente tremendo" e que "a realidade vai pagar por ele", embora não tenha especificado o mecanismo de financiamento.</p>
+                
+                <p class="mb-3">Durante seu discurso de duas horas, Trump prometeu acabar com a inflação "simplesmente ordenando que os preços voltem ao normal", encerrar todas as guerras "ligando para os líderes mundiais e dizendo 'parem com isso'", e resolver a crise climática declarando que "nunca esteve tão frio quanto neste verão de 45 graus".</p>
+                
+                <p class="mb-3">Analistas políticos observam que a campanha de Trump continua <span class="hand-note">ignorando completamente a lógica e a consistência</span>, uma estratégia que tem se mostrado surpreendentemente eficaz. "É como se ele estivesse jogando xadrez 4D, mas o tabuleiro existe apenas em sua imaginação e as regras mudam cada vez que ele está perdendo", comentou um especialista em ciência política que pediu para não ser identificado por medo de receber um apelido depreciativo nas redes sociais.</p>
+                
+                <div class="opinion-section">
+                    <h3 class="opinion-title text-xl">Opinião Ácida:</h3>
+                    <p>A campanha de Trump é a versão política daquele tio do churrasco que depois da quinta cerveja começa a contar como poderia resolver todos os problemas do país se fosse presidente, com a diferença crucial de que ele já foi presidente e aparentemente não se lembra de como foi. É como fazer um remake de um filme que ninguém gostou, mas com o mesmo diretor insistindo que desta vez vai ser diferente porque agora ele vai usar ainda mais CGI.</p>
+                    <p class="mt-2">O mais impressionante não são as promessas absurdas ou a completa desconexão com a realidade — isso já é esperado. O que realmente impressiona é a capacidade de seus apoiadores de ouvirem frases como "vou acabar com a pobreza tornando todos ricos" e responderem com "finalmente alguém falando o óbvio!". É como se a política americana tivesse se transformado em um episódio de Black Mirror escrito por roteiristas de comédia pastelão.</p>
+                    <p class="mt-2">No fim, talvez o verdadeiro muro não seja entre Trump e a realidade, mas entre o eleitorado americano e sua capacidade de detectar contradições óbvias. Enquanto isso, o resto do mundo assiste a esse reality show com a mesma expressão facial de quem observa uma criança tentando enfiar uma peça quadrada em um buraco redondo: uma mistura de diversão, confusão e um leve desespero pelo futuro da humanidade.</p>
+                </div>
+                
+                <div class="comment-section">
+                    <h4 class="font-bold mb-2">Comentários (17)</h4>
+                    
+                    <div class="comment">
+                        <p><span class="comment-author">MAGA2025</span> - 14 de Abril, 10:45</p>
+                        <p>Trump é um gênio incompreendido! Não é que ele ignore a realidade, é que ele está criando uma nova, muito melhor que a atual!</p>
+                    </div>
+                    
+                    <div class="comment">
+                        <p><span class="comment-author">FactChecker</span> - 14 de Abril, 11:20</p>
+                        <p>Consegui identificar 47 mentiras por minuto no último discurso. É um novo recorde, parabéns!</p>
+                    </div>
+                    
+                    <div class="comment">
+                        <p><span class="comment-author">AnaListaPolitica</span> - 14 de Abril, 12:05</p>
+                        <p>As vezes me pergunto se estamos todos em um experimento social elaborado ou se a vida real sempre foi assim e eu que não percebia.</p>
+                    </div>
+                </div>
+                
+                <div class="source">
+                    Fonte: <a href="https://www.cnnbrasil.com.br/internacional/eleicoes-nos-eua-2024/conheca-as-propostas-de-donald-trump-para-a-presidencia-dos-eua/" target="_blank" class="text-blue-600 hover:underline">CNN Brasil</a>
+                </div>
+                
+                <div class="flex mt-4">
+                    <a href="#" class="share-btn"><i class="fab fa-facebook-f"></i> Compartilhar</a>
+                    <a href="#" class="share-btn twitter"><i class="fab fa-twitter"></i> Tweet</a>
+                    <a href="#" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+            </section>
+            
+            <!-- Science Article -->
+            <section id="ciencia" class="article p-6">
+                <span class="satire-tag">SATÍRICO</span>
+                <div class="sticker top-right explosive">ASTRONÔMICO!</div>
+                
+                <h2 class="article-title text-4xl"><span class="accent-title">Eclipse Solar Deixa Sol Nu</span> e Lua é Processada por Atentado ao Pudor</h2>
+                
+                <img src="https://cdn1.genspark.ai/user-upload-image/imagen_generated/b424fbe6-d9e4-43b3-ba6c-f363452cf63e" alt="Eclipse solar de forma exagerada e cômica" class="w-full h-auto rounded-lg mb-4">
+                
+                <p class="mb-3">O mundo parou na última semana para assistir ao grande evento astronômico de 2025: um eclipse solar que, segundo especialistas, foi "absolutamente idêntico a todos os outros eclipses já ocorridos na história da humanidade". Milhões de pessoas olharam para o céu com óculos especiais, smartphones e expressões de surpresa fingida, enquanto faziam de conta que não estavam vendo exatamente o mesmo fenômeno que já viram em vídeos do YouTube dezenas de vezes.</p>
+                
+                <p class="mb-3">O evento, descrito por astrônomos como "a Lua passando na frente do Sol por alguns minutos", foi tratado pela população geral como o momento mais transcendental de suas vidas. Nas redes sociais, o eclipse gerou mais de 500 milhões de fotos praticamente idênticas, todas com a mesma legenda profunda: "Uau! #Eclipse #Natureza #Universo".</p>
+                
+                <p class="mb-3">Enquanto isso, diversos grupos aproveitaram o evento para promover suas próprias interpretações. Astrólogos alertaram que o eclipse <span class="hand-note">alteraria drasticamente as energias cósmicas</span>, afetando especialmente pessoas nascidas sob o signo de "ter cartão de crédito" para comprar cristais de alinhamento energético. Já teóricos da conspiração sugeriram que o eclipse foi, na verdade, "uma cortina de fumaça para distrair a população enquanto o governo instala mais pombos-espiões".</p>
+                
+                <div class="opinion-section">
+                    <h3 class="opinion-title text-xl">Opinião Ácida:</h3>
+                    <p>O eclipse solar é o Super Bowl dos nerds: um evento relativamente comum transformado em espetáculo megalomaníaco, onde pessoas que normalmente não dão a mínima para astronomia de repente viram especialistas em mecânica celeste. É admirável como conseguimos transformar um fenômeno que acontece várias vezes por década em uma experiência "única na vida", enquanto ignoramos religiosamente outros eventos astronômicos igualmente impressionantes que acontecem regularmente.</p>
+                    <p class="mt-2">A verdadeira mágica do eclipse está na sua capacidade de transformar temporariamente as pessoas em entusiastas da ciência. Por alguns breves minutos, todos se tornam Neil deGrasse Tyson, explicando confidentemente a parentes confusos por que "não, você não pode olhar diretamente para o eclipse" e "não, não é sinal do apocalipse". Infelizmente, esse entusiasmo científico desaparece mais rápido que a luz do Sol durante a totalidade, e no dia seguinte já estamos todos de volta a acreditar que a Terra é plana e que vacinas causam alergia a Wi-Fi.</p>
+                    <p class="mt-2">Talvez o aspecto mais notável do fenômeno seja como ele consegue unir a humanidade em torno de uma atividade comum: ficar parado olhando para cima com cara de bobo por alguns minutos, para depois voltar a se preocupar com guerras, política e qual influencer traiu qual. Afinal, nada diz "espécie evoluída" como pausar brevemente o apocalipse climático para apreciar as sombras dançando no chão.</p>
+                </div>
+                
+                <div class="comment-section">
+                    <h4 class="font-bold mb-2">Comentários (12)</h4>
+                    
+                    <div class="comment">
+                        <p><span class="comment-author">AstroManiaco</span> - 14 de Abril, 8:25</p>
+                        <p>Gastei R$500 em óculos especiais para ver 2 minutos de escuridão. Poderia ter economizado fechando os olhos por 2 minutos de graça.</p>
+                    </div>
+                    
+                    <div class="comment">
+                        <p><span class="comment-author">LuaConspiração</span> - 14 de Abril, 9:40</p>
+                        <p>A Lua é claramente um holograma. Vi os pixels quando aumentei a foto que tirei com meu iPhone 8!</p>
+                    </div>
+                    
+                    <div class="comment">
+                        <p><span class="comment-author">CientistaDaSala</span> - 14 de Abril, 10:12</p>
+                        <p>Consegui 247 likes no Instagram com uma foto que eu baixei da NASA. A ciência é incrível!</p>
+                    </div>
+                </div>
+                
+                <div class="source">
+                    Fonte: <a href="https://oglobo.globo.com/mundo/noticia/2024/04/08/eclipse-solar-ao-vivo-assista-ao-fenomeno-raro-na-america-do-norte.ghtml" target="_blank" class="text-blue-600 hover:underline">O Globo, 8 de abril de 2025</a>
+                </div>
+                
+                <div class="flex mt-4">
+                    <a href="#" class="share-btn"><i class="fab fa-facebook-f"></i> Compartilhar</a>
+                    <a href="#" class="share-btn twitter"><i class="fab fa-twitter"></i> Tweet</a>
+                    <a href="#" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+            </section>
+            
+            <!-- Celebrities Article -->
+            <section id="celebridades" class="article p-6">
+                <span class="satire-tag">SATÍRICO</span>
+                <div class="sticker top-left explosive">TENDÊNCIA HOT!</div>
+                
+                <h2 class="article-title text-4xl"><span class="accent-title">Celebridades Adotam 'Dieta da Tênia'</span> e Provam que Perder Peso é Mais Importante que Ter Cérebro</h2>
+                
+                <img src="https://cdn1.genspark.ai/user-upload-image/imagen_generated/677543b4-5f55-445c-83bb-716df6de13a8" alt="Celebridades e dieta da tênia" class="w-full h-auto rounded-lg mb-4">
+                
+                <p class="mb-3">A mais nova obsessão do mundo das celebridades finalmente comprova que a estupidez humana não tem limites: famosos estão consumindo ovos de tênia para perder peso. Sim, você leu corretamente. A "Dieta da Tênia", que envolve ingerir propositalmente ovos de um parasita intestinal para que ele "coma" parte das calorias consumidas, está se tornando uma tendência entre pessoas que têm mais dinheiro que bom senso.</p>
+                
+                <p class="mb-3">Segundo relatos, diversas celebridades estão comprando pílulas contendo ovos de tênia através da dark web, apostando na ideia de que hospedar um verme parasita de vários metros de comprimento em seus intestinos é um preço pequeno a pagar por uma cintura fina. Os médicos, por sua vez, estão unânimes em sua opinião profissional sobre a prática: "QUE P*RRA É ESSA?!"</p>
+                
+                <p class="mb-3">O caso mais notório envolve uma influenciadora de 21 anos, identificada apenas como "TE", que desenvolveu lesões cerebrais após os ovos de tênia eclodirem e as larvas migrarem para seu cérebro — um efeito colateral que <span class="hand-note">surpreendentemente não estava mencionado</span> nos anúncios da dark web. Quem diria que comprar parasitas de fontes duvidosas poderia dar errado?</p>
+                
+                <div class="opinion-section">
+                    <h3 class="opinion-title text-xl">Opinião Ácida:</h3>
+                    <p>A "Dieta da Tênia" finalmente responde à pergunta que ninguém fez: "Como posso perder peso e desenvolver potencialmente problemas neurológicos ao mesmo tempo?" É realmente inspirador ver pessoas tão dedicadas ao ideal de magreza que estão dispostas a literalmente serem comidas vivas por dentro por um parasita. Quando os antropólogos do futuro estudarem nossa civilização, este será definitivamente um dos capítulos no livro "Por que eles mereceram a extinção".</p>
+                    <p class="mt-2">O mais incrível é que vivemos em uma era onde temos acesso instantâneo a toda informação científica já produzida pela humanidade, e mesmo assim há pessoas pensando: "Sabe o que parece uma ótima ideia? Ingerir um parasita que pode crescer até 10 metros dentro do meu corpo!" É como se a evolução tivesse desistido e dito: "Sabe de uma coisa? Vamos tentar de novo com os golfinhos. Eles parecem mais promissores."</p>
+                    <p class="mt-2">E claro, porque seria uma tendência de celebridades sem o componente da hipocrisia, as mesmas pessoas que promovem secretamente a "Dieta da Tênia" são as que postam publicamente sobre "autocuidado", "amor próprio" e "corpo natural". Nada diz "amo meu corpo" como deliberadamente infestá-lo com um parasita que pode causar danos cerebrais permanentes. A boa notícia é que, para algumas dessas celebridades, os danos cerebrais podem passar completamente despercebidos.</p>
+                </div>
+                
+                <div class="comment-section">
+                    <h4 class="font-bold mb-2">Comentários (15)</h4>
+                    
+                    <div class="comment">
+                        <p><span class="comment-author">DietaDoSirigueijo</span> - 14 de Abril, 11:25</p>
+                        <p>Estou lançando minha própria tendência: a Dieta do Bom Senso. Ingredientes: comida normal em quantidades razoáveis e exercício regular.</p>
+                    </div>
+                    
+                    <div class="comment">
+                        <p><span class="comment-author">DraMedicina</span> - 14 de Abril, 12:30</p>
+                        <p>Como médica, recomendo fortemente contra esta prática. Como pessoa cansada de estupidez, começo a pensar que seleção natural tem seu mérito.</p>
+                    </div>
+                    
+                    <div class="comment">
+                        <p><span class="comment-author">TêniaInfluencer</span> - 14 de Abril, 13:05</p>
+                        <p>Isso é tão 2024. A nova tendência agora é a Dieta do Piolho - eles comem seus pensamentos negativos pela raiz do cabelo!</p>
+                    </div>
+                </div>
+                
+                <div class="source">
+                    Fonte: <a href="https://oglobo.globo.com/saude/noticia/2024/10/16/mulheres-estao-comendo-ovos-de-tenia-comprados-na-dark-web-para-perder-peso-veja-o-que-isso-faz-com-o-cerebro.ghtml" target="_blank" class="text-blue-600 hover:underline">O Globo, 16 de outubro de 2024</a>
+                </div>
+                
+                <div class="flex mt-4">
+                    <a href="#" class="share-btn"><i class="fab fa-facebook-f"></i> Compartilhar</a>
+                    <a href="#" class="share-btn twitter"><i class="fab fa-twitter"></i> Tweet</a>
+                    <a href="#" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+            </section>
+            
+            <!-- Heroes and Villains Section -->
+            <section id="herois" class="hero-villain p-6">
+                <h2 class="article-title text-3xl mb-6">Heróis e Vilões da Semana</h2>
+                
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold text-green-600 mb-3">HERÓI: Bombeiro Atravessa Rio em Enxurrada para Salvar Cachorro Ilhado</h3>
+                    <p class="mb-3">O sargento Carlos Mendes, do Corpo de Bombeiros de Itaberaí, Goiás, tornou-se o mais novo herói nacional ao realizar um resgate impressionante na semana passada. Durante uma forte chuva que causou inundações na região, o bombeiro, sem hesitar, atravessou um rio em enxurrada para salvar um cachorro vira-lata que estava ilhado e em risco de ser levado pela correnteza. O resgate, filmado por moradores locais, mostra o bombeiro enfrentando águas turbulentas para alcançar o cão assustado que estava preso em uma pequena ilha de terra que diminuía a cada minuto.</p>
+                    <p><strong>Medalha Ácida:</strong> Este homem merece uma estátua, não apenas por salvar o cachorro, mas por provar que, enquanto políticos debatem se devem ou não aprovar orçamento para desastres naturais, há gente literalmente mergulhando em problemas para resolvê-los. Enquanto celebridades são aplaudidas por usar camisetas com causas estampadas, temos heróis reais como o sargento Mendes que trocam a própria segurança pelo bem-estar de um vira-lata sem Instagram. Se todos fôssemos um pouco mais como ele, o Brasil seria outro país - provavelmente encharcado e com cheiro de cachorro molhado, mas definitivamente melhor.</p>
+                    <p class="source">Fonte: <a href="https://www.instagram.com/itaberaiagora/reel/DHrIMZTPbgr/" target="_blank" class="text-blue-600 hover:underline">"RESGATE HEROICO! Bombeiros de Itaberaí salvaram um cachorro que estava ilhado", Instagram, 26 de mar. de 2025</a></p>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold text-red-600 mb-3">VILÃO: Empresa Transforma Rio Piracicaba em 'Spa de Produtos Químicos' para Peixes</h3>
+                    <p class="mb-3">A empresa Azul Química Industrial, responsável pelo processamento de produtos químicos em Piracicaba, São Paulo, recebeu uma multa de R$ 18 milhões da Companhia Ambiental do Estado de São Paulo (Cetesb) por causar uma mortandade massiva de peixes no Rio Piracicaba. Segundo a investigação, a empresa despejou efluentes tóxicos diretamente no rio sem qualquer tratamento, resultando na morte de toneladas de peixes e comprometendo o ecossistema aquático da região. A Cetesb classificou o incidente como 'um dos maiores desastres ambientais já registrados no rio Piracicaba'.</p>
+                    <p><strong>Vergonha Ácida:</strong> A Azul Química levou a sério demais seu nome e decidiu que o Rio Piracicaba precisava de um toque 'azul' de produtos químicos. Na busca por inovação, criaram o primeiro 'spa tóxico' para peixes, onde os tratamentos são tão intensos que os clientes saem literalmente de barriga para cima. Enquanto empresas normais gastam milhões em marketing para melhorar sua imagem, a Azul Química preferiu investir em uma multa de R$ 18 milhões e na reputação de 'vilã ambiental do ano'. É o tipo de estratégia de negócios que faz até o mascote do Greenpeace querer trancar a empresa no banheiro e jogar a chave no rio – ah, espera, melhor não jogar nada nesse rio por enquanto.</p>
+                    <p class="source">Fonte: <a href="https://g1.globo.com/sp/piracicaba-regiao/noticia/2024/07/19/companhia-ambiental-de-sp-multa-empresa-responsavel-por-mortandade-de-peixes-no-rio-piracicaba-em-r-18-milhoes.ghtml" target="_blank" class="text-blue-600 hover:underline">"Companhia Ambiental de SP multa empresa responsável por mortandade de peixes no Rio Piracicaba em R$ 18 milhões", G1, 19 de jul. de 2024</a></p>
+                </div>
+            </section>
+            
+            <!-- Fake News Section -->
+            <section id="fakenews" class="fake-news p-6">
+                <h2 class="article-title text-3xl mb-6">Fake News ou Realidade?</h2>
+                
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold text-purple-600 mb-3">Pesquisadores Encontram Microchip em Vacinas e Descobrem que é Apenas um Grão de Sal</h3>
+                    
+                    <p class="mb-3">Circula nas redes sociais que um grupo de "pesquisadores independentes" teria encontrado microchips dentro de frascos de vacina. Segundo a mensagem viral, estes dispositivos seriam usados para controlar a população mundial através de ondas 5G.</p>
+                    
+                    <div class="bg-white p-4 rounded-lg mb-4">
+                        <h4 class="font-bold mb-2">O que dizem:</h4>
+                        <p>Os microchips nas vacinas são inseridos pelos governos para rastrear e controlar a mente das pessoas através de frequências 5G, como parte de um plano de dominação global.</p>
+                    </div>
+                    
+                    <div class="bg-yellow-100 p-4 rounded-lg">
+                        <h4 class="font-bold mb-2">A verdade ácida:</h4>
+                        <p>Os supostos "pesquisadores" descobriram que o "microchip" era na verdade um cristal de sal, um componente comum em soluções injetáveis. Além disso, vale lembrar que um microchip capaz de rastrear pessoas seria grande demais para passar por uma agulha de vacina, o que já invalida a teoria por questões puramente físicas.</p>
+                        <p class="mt-2">O mais irônico é que as pessoas preocupadas com rastreamento via vacinas geralmente postam suas teorias conspiratórias usando smartphones que realmente rastreiam cada passo e clique, e ainda pagam caro pelo privilégio. Se algum governo quisesse realmente te rastrear, não precisaria de vacinas - bastaria olhar seu histórico de pesquisas constrangedoras no Google.</p>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <h4 class="font-bold mb-2">O que você acha?</h4>
+                        <div class="flex space-x-4">
+                            <button class="btn-fakenews" onclick="showResult('microchip', 'fake')">É FAKE NEWS!</button>
+                            <button class="btn-truth" onclick="showResult('microchip', 'true')">É VERDADE!</button>
+                        </div>
+                        <div id="result-microchip-fake" class="result-box result-fake">
+                            <p><strong>É FAKE NEWS!</strong> As vacinas não contêm microchips. Esta teoria da conspiração já foi desmentida por cientistas, agências reguladoras e fact-checkers. Vacinas contêm apenas ingredientes aprovados e documentados.</p>
+                            <p class="mt-2 text-sm">Fonte: <a href="https://www.gov.br/saude/pt-br/assuntos/saude-com-ciencia/noticias/2024/janeiro/e-falso-que-vacinas-sao-magnetizadas-possuem-microchips-ou-ate-mesmo-grafeno" target="_blank" class="text-blue-600 hover:underline">"É falso que vacinas são magnetizadas, possuem microchips ou até mesmo grafeno", Ministério da Saúde, 3 de janeiro de 2024</a></p>
+                        </div>
+                        <div id="result-microchip-true" class="result-box result-true">
+                            <p><strong>TENTATIVA FALHA!</strong> Você tentou espalhar fake news! Não há microchips em vacinas. Esse é um mito que circula há anos e já foi desmentido cientificamente diversas vezes. Não seja parte do problema!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold text-purple-600 mb-3">Objetos Bizarros Esquecidos em Aeroportos: Cascavéis, Rolex e Armadura Medieval</h3>
+                    
+                    <p class="mb-3">Uma notícia sobre objetos inusitados encontrados em bagagens abandonadas em aeroportos tem circulado nas redes sociais, com uma lista que parece saída de um filme de comédia absurda.</p>
+                    
+                    <div class="bg-white p-4 rounded-lg mb-4">
+                        <h4 class="font-bold mb-2">O que dizem:</h4>
+                        <p>Uma lista de objetos bizarros supostamente encontrados em bagagens abandonadas em aeroportos inclui cobras cascavéis vivas, um Rolex de ouro, e até mesmo uma armadura medieval completa.</p>
+                    </div>
+                    
+                    <div class="bg-yellow-100 p-4 rounded-lg">
+                        <h4 class="font-bold mb-2">A verdade ácida:</h4>
+                        <p>Embora pareça uma história inventada por alguém com imaginação fértil, as empresas de bagagem realmente encontram itens incrivelmente estranhos em malas não reclamadas. De fato, a Unclaimed Baggage, uma empresa que compra bagagens perdidas nos EUA, já encontrou desde cobras vivas até um Rolex de $60.000, além de uma armadura medieval, um olho de vidro, e até mesmo um assento de vaso sanitário. Enquanto você está preocupado em não esquecer seu carregador de celular, há pessoas por aí esquecendo cobras venenosas e relíquias medievais como se fossem palitos de dente. A verdadeira questão é: quem diabos viaja com uma armadura medieval? E mais importante: para onde essa pessoa estava indo? Uma convenção de nerds ou uma viagem no tempo que deu errado?</p>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <h4 class="font-bold mb-2">O que você acha?</h4>
+                        <div class="flex space-x-4">
+                            <button class="btn-fakenews" onclick="showResult('objects', 'fake')">É FAKE NEWS!</button>
+                            <button class="btn-truth" onclick="showResult('objects', 'true')">É VERDADE!</button>
+                        </div>
+                        <div id="result-objects-fake" class="result-box result-fake">
+                            <p><strong>RESPOSTA INCORRETA!</strong> Por mais inacreditável que pareça, esta história é VERDADEIRA! Todos esses objetos bizarros realmente foram encontrados em bagagens não reclamadas.</p>
+                        </div>
+                        <div id="result-objects-true" class="result-box result-true">
+                            <p><strong>É VERDADE!</strong> Isso realmente acontece. A Unclaimed Baggage, empresa que compra bagagens não reclamadas nos EUA, confirma ter encontrado todos esses itens bizarros entre os objetos esquecidos.</p>
+                            <p class="mt-2 text-sm">Fonte: <a href="https://pt.euronews.com/viagens/2025/04/11/cascaveis-pedras-e-um-rolex-as-coisas-mais-estranhas-deixadas-para-tras-em-bagagens-nao-re" target="_blank" class="text-blue-600 hover:underline">"Cascavéis, pedras e um Rolex: as coisas mais estranhas deixadas para trás em bagagens não reclamadas", Euronews, 11 de abril de 2025</a></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Troca-Troca Section -->
+            <section id="troca" class="troca-troca p-6">
+                <h2 class="article-title text-3xl mb-6">Troca-Troca</h2>
+                <p class="italic mb-6">Seu anúncio normal, nossa descrição ácida!</p>
+                
+                <div class="ad">
+                    <h3 class="font-bold text-xl mb-2">MORADIA TEMPORÁRIA ATÉ O APOCALIPSE DE 2025</h3>
+                    <p class="mb-3">Apartamento 2 quartos, 60m², mobiliado, ótima localização no centro, próximo ao metrô. Reformado recentemente, piso porcelanato, armários planejados na cozinha e quartos. Condomínio com piscina, academia e salão de festas. R$ 350.000,00, aceito financiamento (pagável em suaves prestações até o fim do mundo).</p>
+                    <p class="text-sm">Carlos Mendonça - [email protected] - @carlosapto123</p>
+                    <p class="font-bold text-red-500">Imperdível!</p>
+                </div>
+                
+                <div class="ad">
+                    <h3 class="font-bold text-xl mb-2">SMARTPHONE PARA FILMAR O APOCALIPSE EM 4K</h3>
+                    <p class="mb-3">iPhone 16 Pro Max, 512GB, cor grafite. Comprado há 2 meses, com nota fiscal. Bateria em 98%, sem arranhões ou quedas. Acompanha carregador, fone original, capa de silicone à prova de fogo e radiação e película de vidro temperado anti-asteroide. Ainda na garantia Apple. R$ 8.990,00, aceito Pix ou cripto (prefiro Solana, que subiu 0,71% hoje!).</p>
+                    <p class="text-sm">Marcelo Assis - [email protected] - @marcelotechbr</p>
+                    <p class="font-bold text-red-500">Tecnologia de ponta!</p>
+                </div>
+                
+                <div class="ad">
+                    <h3 class="font-bold text-xl mb-2">CURSO DE VIDÊNCIA PARA INICIANTES: PREVEJA SEU PRÓPRIO APOCALIPSE</h3>
+                    <p class="mb-3">Curso completo de vidência, tarô e bola de cristal. Material didático inclui cartas de tarô, bola de cristal (na verdade é uma bola de boliche pintada, mas funciona igual), incenso e um manual com 101 previsões genéricas que servem para qualquer situação. Curso online com certificado digital. Apenas R$ 997,00 em 12x sem juros. Garantia de devolução do dinheiro caso o mundo acabe antes do término do curso.</p>
+                    <p class="text-sm">Madame Zumbeta - [email protected] - @FuturoPrevisor</p>
+                    <p class="font-bold text-red-500">Seja o próximo Nostradamus!</p>
+                </div>
+                
+                <div class="ad">
+                    <h3 class="font-bold text-xl mb-2">EQUIPAMENTO DE UFC USADO UMA VEZ (E NUNCA MAIS)</h3>
+                    <p class="mb-3">Kit completo para lutadores de UFC: luvas, protetor bucal, shorts, bandagens e protetor genital. Usado apenas uma vez em uma aula experimental onde descobri que minha vocação não é apanhar profissionalmente. Estado de conservação impecável (diferente do meu rosto após a aula). R$ 450,00, negociável. Aceito troca por pomada para hematomas.</p>
+                    <p class="text-sm">Rodrigo Silva - [email protected] - @rodrigo_nocauteado</p>
+                    <p class="font-bold text-red-500">Praticamente novo!</p>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="mt-12 py-8 px-6 bg-gray-800 text-white rounded-lg">
+            <div class="flex flex-wrap justify-between">
+                <div class="w-full md:w-1/3 mb-6 md:mb-0">
+                    <h3 class="text-xl font-bold mb-4">Nem Lerei</h3>
+                    <p>A revista satírica que não leva nada a sério, especialmente ela mesma.</p>
+                    <p class="mt-2">© 2025 Nem Lerei. Todos os direitos reservados e algumas piadas também.</p>
+                </div>
+                
+                <div class="w-full md:w-1/3 mb-6 md:mb-0">
+                    <h3 class="text-xl font-bold mb-4">Contato</h3>
+                    <p>Email: [email protected]</p>
+                    <p>Telefone: (11) 4002-8922</p>
+                    <p>Endereço: Av. da Imaginação, 404 - Bairro Inexistente</p>
+                </div>
+                
+                <div class="w-full md:w-1/3">
+                    <h3 class="text-xl font-bold mb-4">Redes Sociais</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-2xl"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-2xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-2xl"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-2xl"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <h4 class="font-bold mb-2">Inscreva-se na Newsletter</h4>
+                        <div class="flex">
+                            <input type="email" placeholder="Seu email" class="px-4 py-2 w-full text-gray-800 rounded-l">
+                            <button class="bg-red-600 px-4 py-2 rounded-r">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 pt-6 border-t border-gray-700 text-center">
+                <p>Esta publicação é puramente satírica. Se você acreditou em algo aqui, recomendamos uma assinatura vitalícia.</p>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        function showResult(topic, type) {
+            // Hide all result boxes first
+            document.getElementById('result-' + topic + '-fake').style.display = 'none';
+            document.getElementById('result-' + topic + '-true').style.display = 'none';
+            
+            // Show the selected result box
+            document.getElementById('result-' + topic + '-' + type).style.display = 'block';
+        }
+    </script>
+</body>
+</html>
