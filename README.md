@@ -1,4 +1,90 @@
-<header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shahzeb Zia | Resume</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #fdfdfd;
+      color: #333;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem;
+    }
+    .header {
+      text-align: center;
+      padding-bottom: 2rem;
+    }
+    .header img {
+      width: 150px;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      margin: 0.2rem 0;
+    }
+    .section {
+      margin: 2rem 0;
+    }
+    .section h2 {
+      border-bottom: 2px solid #eee;
+      padding-bottom: 0.5rem;
+    }
+    ul {
+      list-style-type: disc;
+      padding-left: 1.2rem;
+    }
+    .contact p {
+      margin: 0.2rem 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="DSC_8655 copy.jpg" alt="Shahzeb Zia">
+      <h1>Shahzeb Zia</h1>
+      <p>Student | IIM Bangalore</p>
+    </div>
+
+    <div class="section about">
+      <h2>About Me</h2>
+      <p>I’m Shahzeb Zia from Rourkela, Odisha. I have completed my schooling (10th & 12th) from Deepika English Medium School and am currently pursuing both BBA (Digital Business & Entrepreneurship) from IIM Bangalore and B.Com from Government Autonomous College, Rourkela.</p>
+    </div>
+
+    <div class="section education">
+      <h2>Education</h2>
+      <ul>
+        <li><strong>BBA (Digital Business & Entrepreneurship)</strong> – IIM Bangalore (Currently Pursuing)</li>
+        <li><strong>B.Com</strong> – Government Autonomous College, Rourkela (Currently Pursuing)</li>
+        <li><strong>10th & 12th</strong> – Deepika English Medium School (Completed)</li>
+      </ul>
+    </div>
+
+    <div class="section skills">
+      <h2>Skills</h2>
+      <ul>
+        <li>Canva</li>
+        <li>Generative AI</li>
+        <li>Computer Knowledge</li>
+        <li>Business Idea Development</li>
+        <li>Leadership</li>
+      </ul>
+    </div>
+
+    <div class="section contact">
+      <h2>Contact</h2>
+      <p><strong>Email:</strong> <a href="mailto:shahzeb.zia24@iimb.ac.in">shahzeb.zia24@iimb.ac.in</a></p>
+    </div>
+  </div>
+</body>
+</html>
+
 
 <!--
   <<< Author notes: Course header >>>
