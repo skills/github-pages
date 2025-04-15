@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Occhiali Intelligenti</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #f9f9f9;
+      color: #222;
+    }
+    header {
+      background-color: #2a2a2a;
+      color: white;
+      padding: 1em 2em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+    .cart {
+      cursor: pointer;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2em;
+      padding: 2em;
+    }
+    .product {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      padding: 1em;
+      text-align: center;
+    }
+    .product img {
+      width: 100%;
+      height: auto;
+      max-height: 200px;
+      object-fit: contain;
+    }
+    .product h3 {
+      margin: 0.5em 0;
+    }
+    .product button {
+      background-color: #2a2a2a;
+      color: white;
+      border: none;
+      padding: 0.5em 1em;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .cart-sidebar {
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: 300px;
+      height: 100%;
+      background: white;
+      box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+      padding: 1em;
+      display: none;
+      flex-direction: column;
+      z-index: 100;
+    }
+    .cart-sidebar h2 {
+      margin-top: 0;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1em;
+    }
+    .close-cart {
+      background: none;
+      border: none;
+      color: #555;
+      cursor: pointer;
+      font-size: 1.2em;
+      align-self: flex-end;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">occhialiinteliggenti.com</div>
+  <div class="cart" onclick="toggleCart()">🛒 Carrello (<span id="cart-count">0</span>)</div>
+</header>
+
+<main class="products">
+  <div class="product">
+    <img src="https://via.placeholder.com/250x150?text=Occhiali+Smart" alt="Occhiali Smart">
+    <h3>Occhiali Smart</h3>
+    <p>€149.00</p>
+    <button onclick="addToCart('Occhiali Smart', 149)">Aggiungi al carrello</button>
+  </div>
+  <div class="product">
+    <img src="https://via.placeholder.com/250x150?text=Occhiali+da+Sole" alt="Occhiali da Sole">
+    <h3>Occhiali da Sole</h3>
+    <p>€79.00</p>
+    <button onclick="addToCart('Occhiali da Sole', 79)">Aggiungi al carrello</button>
+  </div>
+</main>
+
+<div class="cart-sidebar" id="cart-sidebar">
+  <button class="close-cart" onclick="toggleCart()">✖</button>
+  <h2>Il tuo carrello</h2>
+  <div id="cart-items"></div>
+  <hr>
+  <strong>Totale: €<span id="cart-total">0</span></strong>
+</div>
+
+<script>
+  let cart = [];
+
+  function toggleCart() {
+    const sidebar = document.getElementById('cart-sidebar');
+    sidebar.style.display = sidebar.style.display === 'flex' ? 'none' : 'flex';
+  }
+
+  function addToCart(name, price) {
+    cart.push({ name, price });
+    updateCart();
+  }
+
+  function updateCart() {
+    const items = document.getElementById('cart-items');
+    const total = document.getElementById('cart-total');
+    const count = document.getElementById('cart-count');
+
+    items.innerHTML = '';
+    let totalPrice = 0;
+
+    cart.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'cart-item';
+      div.innerHTML = `<span>${item.name}</span><span>€${item.price}</span>`;
+      items.appendChild(div);
+      totalPrice += item.price;
+    });
+
+    total.textContent = totalPrice.toFixed(2);
+    count.textContent = cart.length;
+  }
+</script>
+
+</body>
+</html>
