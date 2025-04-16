@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Jeu de Pâques éducatif</title>
+  <style>
+    body {
+      font-family: "Comic Sans MS", cursive;
+      background-color: #fce4ec;
+      text-align: center;
+    }
+    .egg {
+      width: 80px;
+      height: 100px;
+      background: radial-gradient(circle at 30% 30%, #f06292, #ec407a);
+      border-radius: 50% 50% 45% 45%;
+      display: inline-block;
+      margin: 20px;
+      cursor: pointer;
+      border: 3px solid white;
+    }
+    .hidden {
+      visibility: hidden;
+    }
+    #question {
+      margin: 20px auto;
+      padding: 10px;
+      font-size: 18px;
+    }
+    .btn {
+      padding: 8px 16px;
+      margin: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #ab47bc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🐰 Jeu de Pâques éducatif 🥚</h1>
+  <p>Clique sur un œuf pour répondre à une question ! Trouve l’œuf magique !</p>
+
+  <div id="eggs-container"></div>
+
+  <div id="question" class="hidden"></div>
+  <div id="answers" class="hidden"></div>
+  <div id="result" style="font-weight:bold; font-size: 20px;"></div>
+
+  <script>
+    const eggsContainer = document.getElementById("eggs-container");
+    const questionBox = document.getElementById("question");
+    const answersBox = document.getElementById("answers");
+    const resultBox = document.getElementById("result");
+
+    const questions = [
+      {
+        question: "Quel animal pond les œufs ?",
+        options: ["Le lapin", "La poule", "Le chat"],
+        answer: "La poule"
+      },
+      {
+        question: "Combien y a-t-il de jours dans une semaine ?",
+        options: ["5", "7", "10"],
+        answer: "7"
+      },
+      {
+        question: "Quelle est la couleur du ciel quand il fait beau ?",
+        options: ["Bleu", "Vert", "Rouge"],
+        answer: "Bleu"
+      }
+    ];
+
+    let magicEggIndex = Math.floor(Math.random() * 6);
+
+    function createEggs() {
+      for (let i = 0; i < 6; i++) {
+        const egg = document.createElement("div");
+        egg.className = "egg";
+        egg.addEventListener("click", () => askQuestion(i));
+        eggsContainer.appendChild(egg);
+      }
+    }
+
+    function askQuestion(index) {
+      const q = questions[Math.floor(Math.random() * questions.length)];
+      questionBox.textContent = q.question;
+      questionBox.classList.remove("hidden");
+      answersBox.innerHTML = "";
+      answersBox.classList.remove("hidden");
+
+      q.options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.textContent = opt;
+        btn.className = "btn";
+        btn.onclick = () => {
+          if (opt === q.answer) {
+            if (index === magicEggIndex) {
+              resultBox.textContent = "🎉 Bravo ! Tu as trouvé l'œuf magique !";
+            } else {
+              resultBox.textContent = "Bonne réponse, mais ce n'était pas l'œuf magique. Essaie encore !";
+            }
+          } else {
+            resultBox.textContent = "Oups ! Mauvaise réponse, essaie encore.";
+          }
+        };
+        answersBox.appendChild(btn);
+      });
+    }
+
+    createEggs();
+  </script>
+</body>
+</html>
