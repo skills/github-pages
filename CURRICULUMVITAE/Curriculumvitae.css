@@ -1,0 +1,62 @@
+h1{
+    text-align: left;
+    font-size: 400%;
+    font-family: Verdana;
+    margin-left: 0px;
+    color: rgb(0, 0, 0);
+}
+
+body{
+    background-color: rgb(50, 255, 159);
+}
+
+p {
+    font-family: Arial;
+    color: black;
+    font-size: 25px;
+    text-align: center;
+    background-color: azure;
+    
+}
+
+div{
+    display:inline;
+    background-color: beige;
+    font-family:'Segoe UI';
+    align-items: center;
+}
+
+div a{
+    color:rgb(0, 0, 0);
+    text-decoration: none;
+    padding: 10px;
+}
+
+div a:hover{
+    color: rgb(0, 183, 255);
+}
+
+h2 {
+    background-color: aqua;
+    text-align: center;
+    margin-top: 56px;
+}
+
+h3 {
+    background-color: rgb(176, 255, 255);
+    font-family: Arial;
+    color: black;
+    font-size: 25px;
+    text-align: center;
+}
+
+h4 {
+    font-family: Arial;
+    font-size: 25px;
+    text-align: center;
+    background-color: aliceblue;
+}
+
+footer {
+    margin-top: fixed;
+}
