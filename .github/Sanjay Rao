@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanjay Rao</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background-color: #000000;
+            color: white;
+            padding: 20px 0;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .main-image img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            margin: 20px auto;
+            border-radius: 15px;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .gallery img {
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+        }
+        .links a {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: white;
+            background-color: #0077b5;
+            border-radius: 5px;
+        }
+        footer {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #222;
+            color: #fff;
+        }
+    </style>
+</head>
+<body><header>
+    <h1>Sanjay Rao</h1>
+</header><div class="main-image">
+    <img src="images/main.jpg" alt="Main Photo">
+</div><div class="links">
+    <a href="https://open.spotify.com/artist/3q1x2J90TyAJUQvaF1ggg6" target="_blank">Spotify</a>
+    <a href="https://music.apple.com/in/artist/sanjay-rao/1804577762?ls" target="_blank">Apple Music</a>
+    <a href="https://www.instagram.com/sanju_choudhary.23" target="_blank">Instagram</a>
+    <a href="https://whatsapp.com/channel/0029Vb6HGK0J93wPVLujCP3U" target="_blank">WhatsApp Channel</a>
+</div><section class="gallery">
+    <img src="images/photo1.jpg" alt="Gallery Photo 1">
+    <img src="images/photo2.jpg" alt="Gallery Photo 2">
+    <img src="images/photo3.jpg" alt="Gallery Photo 3">
+</section><footer>
+    <p>Contact: sanjay50605922@gmail.com</p>
+</footer></body>
+</html>
