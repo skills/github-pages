@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neu lernen – Deutsch Firmenkurse für Fremdsprachige</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+  <!-- Header -->
+  <header class="bg-white shadow-md py-4">
+    <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+      <h1 class="text-xl font-bold text-blue-700">Neu lernen – Armin Arpagaus</h1>
+      <nav class="space-x-4">
+        <a href="#kurse" class="text-gray-600 hover:text-blue-700">Kursangebot</a>
+        <a href="#about" class="text-gray-600 hover:text-blue-700">Über uns</a>
+        <a href="#kontakt" class="text-gray-600 hover:text-blue-700">Kontakt</a>
+        <a href="#kontakt" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Anfragen</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-blue-100 py-20 text-center">
+    <h2 class="text-3xl font-bold text-blue-800">Firmenkurse Deutsch für internationale Fachkräfte</h2>
+    <p class="mt-4 text-lg text-blue-700">Effektive Sprachtrainings für den Berufsalltag – maßgeschneidert für Ihr Unternehmen</p>
+    <a href="#kontakt" class="mt-6 inline-block bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700">Firmenkurs anfragen</a>
+  </section>
+
+  <!-- Über uns -->
+  <section id="about" class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h3 class="text-2xl font-bold text-gray-800 mb-4">Dienstleistungen Armin Arpagaus</h3>
+      <p class="text-gray-700">"Neu lernen" steht für praxisorientierte Deutschkurse im Unternehmenskontext. Armin Arpagaus bringt langjährige Erfahrung als Sprachtrainer mit und bietet fundiertes Sprachcoaching für Fach- und Führungskräfte sowie Teams verschiedenster Branchen.</p>
+      <div class="mt-6 space-x-4">
+        <a href="https://www.linkedin.com/in/arminarpagaus" class="text-blue-600 underline" target="_blank">LinkedIn-Profil</a>
+        <a href="https://www.tutor24.ch/de/tutor/armin-a" class="text-blue-600 underline" target="_blank">Tutor24-Profil</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kursangebot -->
+  <section id="kurse" class="py-16 bg-gray-100">
+    <div class="max-w-6xl mx-auto px-4">
+      <h3 class="text-2xl font-bold text-gray-800 text-center mb-10">Unsere Firmenkurse</h3>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white p-6 rounded shadow">
+          <h4 class="text-xl font-semibold text-blue-700 mb-2">Deutsch im Beruf</h4>
+          <p>Kommunikation im Arbeitsalltag: Telefonieren, E-Mails schreiben, Meetings vorbereiten und führen.</p>
+        </div>
+        <div class="bg-white p-6 rounded shadow">
+          <h4 class="text-xl font-semibold text-blue-700 mb-2">Fachsprache & Branchenspezifika</h4>
+          <p>Individuelle Inhalte für Branchen wie Bau, Pflege, Logistik, IT und mehr.</p>
+        </div>
+        <div class="bg-white p-6 rounded shadow">
+          <h4 class="text-xl font-semibold text-blue-700 mb-2">Gruppen- und Einzeltrainings</h4>
+          <p>Flexible Formate: Online oder vor Ort, für Teams oder Einzelpersonen.</p>
+        </div>
+        <div class="bg-white p-6 rounded shadow">
+          <h4 class="text-xl font-semibold text-blue-700 mb-2">Integration & Soft Skills</h4>
+          <p>Interkulturelle Kompetenz, Small Talk, sprachliches Selbstvertrauen fördern.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kontaktformular -->
+  <section id="kontakt" class="py-16 bg-white">
+    <div class="max-w-3xl mx-auto px-4">
+      <h3 class="text-2xl font-bold text-center text-gray-800 mb-8">Kontakt</h3>
+      <p class="text-center text-gray-700 mb-6">
+        Armin Arpagaus<br>
+        Hölli 1<br>
+        5504 Othmarsingen<br>
+        Tel: <a href="tel:+41796524580" class="text-blue-600">079 652 45 80</a><br>
+        E-Mail: <a href="mailto:a.arpagaus@bluewin.ch" class="text-blue-600">a.arpagaus@bluewin.ch</a>
+      </p>
+      <form class="space-y-6">
+        <input type="text" placeholder="Name" class="w-full px-4 py-2 border rounded" required>
+        <input type="email" placeholder="E-Mail" class="w-full px-4 py-2 border rounded" required>
+        <input type="text" placeholder="Firma (optional)" class="w-full px-4 py-2 border rounded">
+        <textarea placeholder="Ihre Nachricht" rows="5" class="w-full px-4 py-2 border rounded" required></textarea>
+        <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Senden</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-100 text-center text-sm text-gray-500 py-4">
+    <p>&copy; 2025 Neu lernen – Armin Arpagaus. Alle Rechte vorbehalten. | <a href="#" class="underline">Impressum</a> | <a href="#" class="underline">Datenschutz</a></p>
+  </footer>
+</body>
+</html>
