@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FMT Atacado - Baterias Moura</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .banner {
+      background: linear-gradient(to right, #0051a8, #007bff);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .slider img {
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .slider img:hover {
+      transform: scale(1.05);
+    }
+
+    .produto, .promocao {
+      animation: slideUp 0.8s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>FMT Atacado</h1>
+    <nav>
+      <ul>
+        <li><a href="#home">Início</a></li>
+        <li><a href="#produtos">Produtos</a></li>
+        <li><a href="#promocoes-dia">Promoções do Dia</a></li>
+        <li><a href="#promocoes-semana">Promoções da Semana</a></li>
+        <li><a href="#contato">Contato</a></li>
+        <li><a href="https://www.mercadolivre.com.br/perfil/FMT+ATACADO" target="_blank">Loja Mercado Livre</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="banner">
+    <h2>Super Ofertas em Baterias Moura</h2>
+    <p>Entrega rápida, produtos originais e atendimento especializado para o seu negócio!</p>
+  </section>
+
+  <section id="home">
+    <h2>Bem-vindo à FMT Atacado</h2>
+    <p>Especializada em baterias Moura Nobreak VRLA de alta qualidade. Veja nosso catálogo e aproveite os melhores preços!</p>
+    <div class="slider">
+      <img src="logo-moura.png" alt="Logo Moura">
+      <img src="bateria-vrla1.jpg" alt="Bateria VRLA 1">
+      <img src="bateria-vrla2.jpg" alt="Bateria VRLA 2">
+    </div>
+  </section>
+
+  <section id="produtos">
+    <h2>Nossos Produtos</h2>
+    <div class="produto">
+      <h3>Bateria Moura VRLA 12V 7Ah</h3>
+      <p>R$ 169,90</p>
+      <input type="number" placeholder="Quantidade">
+      <input type="text" placeholder="CEP para calcular frete">
+      <input type="text" placeholder="Cupom de desconto (opcional)">
+      <button onclick="window.open('https://wa.me/5547996966606?text=Olá! Tenho interesse na Bateria Moura VRLA 12V 7Ah.')">Comprar pelo WhatsApp</button>
+    </div>
+    <div class="produto">
+      <h3>Bateria Moura VRLA 12V 12Ah</h3>
+      <p>R$ 239,90</p>
+      <input type="number" placeholder="Quantidade">
+      <input type="text" placeholder="CEP para calcular frete">
+      <input type="text" placeholder="Cupom de desconto (opcional)">
+      <button onclick="window.open('https://wa.me/5547996966606?text=Olá! Tenho interesse na Bateria Moura VRLA 12V 12Ah.')">Comprar pelo WhatsApp</button>
+    </div>
+  </section>
+
+  <section id="promocoes-dia">
+    <h2>Promoções do Dia</h2>
+    <p>Confira as ofertas exclusivas disponíveis somente hoje!</p>
+    <div class="promocao">
+      <strong>Bateria VRLA 7Ah - R$149,90</strong>
+      <button onclick="window.open('https://wa.me/5547996966606?text=Olá! Gostaria de aproveitar a promoção da Bateria VRLA 7Ah.')">Comprar pelo WhatsApp</button>
+    </div>
+  </section>
+
+  <section id="promocoes-semana">
+    <h2>Promoções da Semana</h2>
+    <ul>
+      <li>Bateria VRLA 12Ah com 10% de desconto</li>
+      <li>Frete grátis para pedidos acima de R$ 500</li>
+    </ul>
+  </section>
+
+  <section id="contato">
+    <h2>Contato</h2>
+    <p>Email: fmtatacado@gmail.com</p>
+    <p>Telefone: <a href="https://wa.me/5547996966606" target="_blank">(47) 99696-6606 (WhatsApp)</a></p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 FMT Atacado - Todos os direitos reservados</p>
+  </footer>
+</body>
+</html>
