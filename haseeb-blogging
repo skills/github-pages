@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guest Posting Services | Haseeb Blogging</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem;
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2 {
+      color: #2c3e50;
+    }
+    .cta {
+      background-color: #27ae60;
+      color: #ffffff;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.2rem;
+      border-radius: 5px;
+      margin-top: 2rem;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .contact {
+      margin-top: 2rem;
+    }
+    .contact a {
+      color: #2980b9;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to Haseeb Blogging &ndash; Guest Posting Services</h1>
+    <p>Hello! I'm <strong>Haseeb ul Rehman</strong>, and I help businesses and bloggers boost their online presence through high-quality guest posts on authoritative websites.</p>
+
+    <h2>What I Offer:</h2>
+    <ul>
+      <li>Do-follow backlinks from real, high DA websites</li>
+      <li>Niche-relevant placements (Tech, Health, Business, etc.)</li>
+      <li>Fast turnaround and professional communication</li>
+    </ul>
+
+    <h2>Sample Guest Post Sites:</h2>
+    <p>You can view my full guest post inventory with domain authority and pricing here:</p>
+    <a class="cta" href="https://docs.google.com/spreadsheets/d/1S884C2bQo8B1YIlxsSm6Egzn0S1KU9taXvy6qgL5Lck/edit?usp=sharing" target="_blank">View Guest Post Sites</a>
+
+    <div class="contact">
+      <h2>Get in Touch</h2>
+      <p>Email: <a href="mailto:haseebulrehman457@gmail.com">haseebulrehman457@gmail.com</a></p>
+      <p>Facebook: <a href="https://facebook.com/haseebsaeed" target="_blank">Haseeb Saeed</a></p>
+    </div>
+
+    <div class="cta">
+      Ready to boost your SEO with quality backlinks? Contact me now!
+    </div>
+  </div>
+</body>
+</html>
