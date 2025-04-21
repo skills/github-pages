@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PannenProfis Abschleppservice & Werkstatt</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #222;
+      color: #fff;
+      padding: 30px 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+    header p {
+      margin-top: 5px;
+      font-style: italic;
+      color: #ccc;
+    }
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
+    }
+    h2 {
+      background-color: #ffcc00;
+      color: #111;
+      padding: 10px;
+      margin-top: 40px;
+      border-radius: 5px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      margin-bottom: 30px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #eee;
+    }
+    footer {
+      background-color: #111;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 50px;
+    }
+    a {
+      color: #ffcc00;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>PannenProfis Abschleppservice & Werkstatt</h1>
+    <p>"Schnell vor Ort – Stark in der Werkstatt!"</p>
+  </header>
+
+  <div class="container">
+    <section>
+      <h2>📦 Ersatzteile & Standardservice</h2>
+      <table>
+        <tr><th>Leistung/Ersatzteil</th><th>Beschreibung</th><th>Preis (€)</th></tr>
+        <tr><td>Ölfilter</td><td>Für alle gängigen Modelle</td><td>ab 15 €</td></tr>
+        <tr><td>Luftfilter</td><td>Austausch inkl. Einbau</td><td>ab 20 €</td></tr>
+        <tr><td>Zündkerzen (4er Set)</td><td>Standard-Benzinmotor</td><td>ab 35 €</td></tr>
+        <tr><td>Batterie (60Ah)</td><td>Markenqualität, inkl. Test & Einbau</td><td>ab 110 €</td></tr>
+        <tr><td>Bremsbeläge (Vorderachse)</td><td>Austausch + Sichtprüfung Bremsscheiben</td><td>ab 89 €</td></tr>
+        <tr><td>Zahnriemen-Kit</td><td>Inkl. Spannrollen und Wasserpumpe</td><td>ab 350 €</td></tr>
+        <tr><td>Kupplungssatz</td><td>Komplettaustausch</td><td>ab 480 €</td></tr>
+        <tr><td>Lichtmaschine (generalüberholt)</td><td>Inkl. Einbau & Test</td><td>ab 230 €</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>🔧 Reparaturleistungen</h2>
+      <table>
+        <tr><th>Reparaturleistung</th><th>Beschreibung</th><th>Preis (€)</th></tr>
+        <tr><td>Fehlerdiagnose (OBD)</td><td>inkl. Ausdruck Fehlercodeanalyse</td><td>29 €</td></tr>
+        <tr><td>Klimaanlagen-Check</td><td>inkl. Desinfektion & Nachfüllung</td><td>ab 59 €</td></tr>
+        <tr><td>Bremsflüssigkeitswechsel</td><td>Inkl. Prüfung auf Undichtigkeit</td><td>ab 49 €</td></tr>
+        <tr><td>Ölwechsel-Service (bis 5L)</td><td>Inkl. Filter und Servicehefteintrag</td><td>ab 79 €</td></tr>
+        <tr><td>Stoßdämpferwechsel (VA)</td><td>Pro Achse, inkl. Einbau</td><td>ab 170 €</td></tr>
+        <tr><td>Spureinstellung</td><td>Achsvermessung & Nachjustierung</td><td>ab 69 €</td></tr>
+        <tr><td>Windschutzscheibe</td><td>inkl. Dichtungen und Arbeitszeit</td><td>ab 280 €</td></tr>
+        <tr><td>Getriebeölwechsel</td><td>inkl. Spülung & Neubefüllung</td><td>ab 190 €</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>🛞 Tuning & Styling</h2>
+      <table>
+        <tr><th>Tuning-Leistung</th><th>Beschreibung</th><th>Preis (€)</th></tr>
+        <tr><td>Tieferlegung (Federn)</td><td>Inkl. TÜV-Eintrag</td><td>ab 299 €</td></tr>
+        <tr><td>Sportfahrwerk</td><td>Inkl. Einbau & Achsvermessung</td><td>ab 699 €</td></tr>
+        <tr><td>Chiptuning</td><td>Für Turbo-Benziner & Diesel</td><td>ab 399 €</td></tr>
+        <tr><td>Auspuffanlage</td><td>Edelstahl – inkl. Soundabstimmung</td><td>ab 499 €</td></tr>
+        <tr><td>Felgenmontage</td><td>Alufelgen bis 21 Zoll + TÜV-Service</td><td>ab 120 €</td></tr>
+        <tr><td>Scheibentönung</td><td>TÜV-konform, UV-Schutz</td><td>ab 180 €</td></tr>
+        <tr><td>Lackschutzfolie (Front)</td><td>Schutz vor Steinschlag</td><td>ab 290 €</td></tr>
+        <tr><td>Unterbodenbeleuchtung</td><td>LED inkl. Fernbedienung</td><td>ab 220 €</td></tr>
+        <tr><td>Innenraum-Umbau</td><td>RGB Ambient Light</td><td>ab 160 €</td></tr>
+      </table>
+    </section>
+  </div>
+
+  <footer>
+    <p><strong>📞 Termin & Notfallnummer:</strong> 0208 / 123 456</p>
+    <p><strong>🌐 Webseite:</strong> <a href="#">www.pannenprofis.de</a></p>
+    <p><strong>📍 Standort:</strong> Mülheim an der Ruhr – Direkt am Kreisel hinterm Dönerladen</p>
+    <p>© 2025 PannenProfis Abschleppservice & Werkstatt</p>
+  </footer>
+</body>
+</html>
