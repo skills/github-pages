@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMART on FHIR Medication Viewer - App Documentation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #2c3e50;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    p, li {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>SMART on FHIR Medication Viewer</h1>
+  <p>This application enables healthcare professionals to view a patient’s active medications by securely integrating with EPIC EHR using the SMART on FHIR standard.</p>
+
+  <h2>Contact</h2>
+  <p><strong>Developer:</strong> Your Name or Company</p>
+  <p><strong>Email:</strong> your.email@example.com</p>
+
+  <h2>OAuth 2.0 Configuration</h2>
+  <ul>
+    <li><strong>Client ID:</strong> YOUR_CLIENT_ID_HERE</li>
+    <li><strong>Redirect URI:</strong> https://your-ngrok-url.ngrok.io/callback</li>
+    <li><strong>Launch Type:</strong> Standalone or EHR Launch</li>
+    <li><strong>FHIR Version:</strong> R4</li>
+    <li><strong>Scopes Requested:</strong> launch openid fhirUser patient/MedicationRequest.read</li>
+  </ul>
+
+  <h2>Security Statement</h2>
+  <p>The application does not store any patient data. All communication occurs over secure HTTPS. The app complies with industry best practices to protect user privacy and data security.</p>
+
+  <h2>Version</h2>
+  <p>v1.0.0 - April 2025</p>
+</body>
+</html>
