@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ethermin</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/js/all.min.js"></script>
+  <style>
+    :root {
+      --primary: #1f2937;
+      --secondary: #111827;
+      --accent: #10b981;
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+      --knob-size: 60px;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--secondary);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .app-container {
+      max-width: 1000px;
+      background-color: var(--primary);
+      border-radius: 1rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .effect-panel {
+      background-color: rgba(0, 0, 0, 0.2);
+      border-radius: 0.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .effect-panel:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .effect-header {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .knob-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 10px;
+    }
+
+    .knob {
+      position: relative;
+      width: var(--knob-size);
+      height: var(--knob-size);
+      border-radius: 50%;
+      background: linear-gradient(145deg, #1a1f2a, #2d3748);
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3),
+                  -5px -5px 10px rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      margin-bottom: 5px;
+    }
+
+    .knob::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      height: 15px;
+      background-color: var(--accent);
+      border-radius: 2px;
+      top: 5px;
+      transform-origin: center calc(100% - 5px);
+    }
+
+    .knob-label {
+      font-size: 12px;
+      text-align: center;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .knob-value {
+      font-size: 10px;
+      color: var(--accent);
+    }
+
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 20px;
+    }
+
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #374151;
+      transition: .4s;
+      border-radius: 34px;
+    }
+
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 2px;
+      bottom: 2px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .toggle-slider {
+      background-color: var(--accent);
+    }
+
+    input:checked + .toggle-slider:before {
+      transform: translateX(20px);
+    }
+
+    canvas {
+      background-color: #1a1a1a;
+      border-radius: 0.5rem;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .start-button {
+      background: linear-gradient(145deg, #0e9f6e, #047857);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .start-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .start-button:active {
+      transform: translateY(1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .hidden-video {
+      width: 1px;
+      height: 1px;
+      opacity: 0.01;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .record-button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #1f2937;
+      border: none;
+      color: white;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .record-button:hover:not(:disabled) { /* Don't change background if disabled */
+      background: #374151;
+    }
+
+    .record-button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Custom oscilloscope styling */
+    .oscilloscope {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    /* Style for playback video */
+    .playback-video {
+        width: 100%;
+        border-radius: 0.5rem; /* Match canvas radius */
+        aspect-ratio: 640 / 480; /* Maintain aspect ratio */
+        margin-bottom: 1rem; /* Add some space below */
+    }
+
+  </style>
+</head>
+<body class="py-8 px-4">
+  <div class="app-container mx-auto p-6">
+    <!-- Header - will be hidden after start -->
+    <div id="header" class="flex items-center justify-center mb-6">
+      <svg id="initial-logo" viewBox="0 0 182 182" width="80" height="80" class="mr-4">
+        <defs>
+          <style>
+            .cls-1 { stroke-width: 2px; }
+            .cls-1, .cls-2 { fill: none; stroke: white; }
+            .cls-2 { stroke-linecap: round; stroke-width: 4px; }
+          </style>
+        </defs>
+        <g>
+          <line class="cls-2" x1="61" y1="31" x2="61" y2="151"/>
+          <line class="cls-2" x1="121" y1="31" x2="121" y2="151"/>
+          <path class="cls-2" d="M41,91c20-20,40,20,60,0s40,20,60,0"/>
+          <circle class="cls-1" cx="91" cy="91" r="90"/>
+        </g>
+      </svg>
+      <h1 class="text-2xl font-bold">Ethermin – Sine of the Times</h1>
+    </div>
+
+    <!-- Instructions - TEXT REMAINS UNCHANGED -->
+    <div id="instructions" class="bg-gray-800 rounded-lg p-4 mb-6">
+      <h2 class="text-lg font-semibold mb-2">Instructions:</h2>
+      <ul class="list-disc pl-6 space-y-1 text-sm">
+        <li>Right index finger: pitch & volume.</li>
+        <li>Left index finger: filter sweep (if enabled).</li>
+        <li>Middle finger: add major third.</li>
+        <li>Ring finger: add perfect fifth.</li>
+        <li>Combine gestures for harmonies.</li>
+        <li>Ensure good lighting.</li>
+        <li>Tip: sawtooth/square for bold tones.</li>
+      </ul>
+    </div>
+
+    <!-- Start Button - now below instructions -->
+    <button id="startButton" class="start-button text-white font-medium py-3 px-6 rounded-lg mx-auto block">
+      Click to Start
+    </button>
+
+    <!-- Canvas Container (will also hold playback video) -->
+    <div id="canvasContainer" class="relative">
+      <canvas id="canvas" width="640" height="480" class="w-full hidden"></canvas>
+      <!-- HTML Logo overlay REMOVED -->
+    </div>
+
+    <!-- Recording Controls - SHARE BUTTON REMOVED -->
+    <div id="recordingControls" class="flex justify-center mt-4 space-x-4 hidden mb-6">
+      <button id="recordButton" class="record-button" title="Record Performance">
+        <i class="fas fa-circle text-red-500"></i>
+        <span class="text-xs mt-1">Rec</span>
+      </button>
+      <button id="stopButton" class="record-button" title="Stop Recording" disabled>
+        <i class="fas fa-stop"></i>
+        <span class="text-xs mt-1">Stop</span>
+      </button>
+      <button id="playButton" class="record-button" title="Play Recording" disabled>
+        <i class="fas fa-play"></i>
+        <span class="text-xs mt-1">Play</span>
+      </button>
+      <button id="downloadButton" class="record-button" title="Download Recording" disabled>
+        <i class="fas fa-download"></i>
+        <span class="text-xs mt-1">Save</span>
+      </button>
+      <!-- Share Button Removed -->
+    </div>
+
+    <!-- Filter Controls -->
+    <div id="filterControls" class="effect-panel p-4 mb-6 hidden">
+      <div class="effect-header flex justify-between items-center mb-3">
+        <h3 class="font-medium">Filter</h3>
+        <label class="toggle-switch">
+          <input type="checkbox" id="filterToggle">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="flex flex-col">
+          <label class="text-xs text-gray-400">Min Cutoff: <span id="cutoffMinDisplay">80</span> Hz</label>
+          <input type="range" id="cutoffMinSlider" min="20" max="500" value="80" step="1" class="w-full">
+        </div>
+        <div class="flex flex-col">
+          <label class="text-xs text-gray-400">Max Cutoff: <span id="cutoffMaxDisplay">8000</span> Hz</label>
+          <input type="range" id="cutoffMaxSlider" min="1000" max="20000" value="8000" step="1" class="w-full">
+        </div>
+        <div class="flex flex-col">
+          <label class="text-xs text-gray-400">Min Q: <span id="qMinDisplay">1</span></label>
+          <input type="range" id="qMinSlider" min="0.1" max="5" value="1" step="0.1" class="w-full">
+        </div>
+        <div class="flex flex-col">
+          <label class="text-xs text-gray-400">Max Q: <span id="qMaxDisplay">25</span></label>
+          <input type="range" id="qMaxSlider" min="5" max="50" value="25" step="1" class="w-full">
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Controls -->
+    <div id="controls" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 hidden">
+      <!-- Main Oscillator Controls -->
+      <div class="effect-panel p-4">
+        <div class="effect-header flex justify-between items-center mb-3">
+          <h3 class="font-medium">Oscillator</h3>
+        </div>
+        <div class="flex flex-wrap justify-center">
+          <div class="w-1/2 p-2">
+            <label class="block text-sm mb-1 text-gray-400">Waveform</label>
+            <select id="waveformSelect" class="w-full bg-gray-800 text-white rounded p-2 border border-gray-700">
+              <option value="sine">Sine</option>
+              <option value="square">Square</option>
+              <option value="sawtooth">Sawtooth</option>
+              <option value="triangle">Triangle</option>
+            </select>
+          </div>
+          <div class="w-1/2 p-2">
+            <label class="block text-sm mb-1 text-gray-400">Scale</label>
+            <select id="scaleSelect" class="w-full bg-gray-800 text-white rounded p-2 border border-gray-700">
+              <option value="major">Major</option>
+              <option value="minor">Minor</option>
+              <option value="harmonicMinor">Harmonic Minor</option>
+              <option value="melodicMinor">Melodic Minor</option>
+              <option value="mixolydian">Mixolydian (Custom)</option>
+              <option value="pentatonic">Pentatonic</option>
+              <option value="chromatic">Chromatic</option>
+            </select>
+          </div>
+          <div class="w-1/2 p-2">
+            <label class="block text-sm mb-1 text-gray-400">Starting Note</label>
+            <select id="baseNoteSelect" class="w-full bg-gray-800 text-white rounded p-2 border border-gray-700">
+              <option value="261.63">C (261.63 Hz)</option>
+              <option value="277.18">C# (277.18 Hz)</option>
+              <option value="293.66">D (293.66 Hz)</option>
+              <option value="311.13">D# (311.13 Hz)</option>
+              <option value="329.63">E (329.63 Hz)</option>
+              <option value="349.23">F (349.23 Hz)</option>
+              <option value="369.99">F# (369.99 Hz)</option>
+              <option value="392.00">G (392.00 Hz)</option>
+              <option value="415.30">G# (415.30 Hz)</option>
+              <option value="440.00">A (440.00 Hz)</option>
+              <option value="466.16">A# (466.16 Hz)</option>
+              <option value="493.88">B (493.88 Hz)</option>
+              <option value="custom">Custom</option>
+            </select>
+            <input type="number" id="customBaseFreqInput" placeholder="Enter custom frequency" style="display:none;" class="w-full mt-2 bg-gray-800 text-white rounded p-2 border border-gray-700" min="20" max="2000" step="0.01">
+          </div>
+          <div class="w-1/2 p-2">
+            <label class="block text-sm mb-1 text-gray-400">Octaves</label>
+            <input type="number" id="octavesInput" value="3" min="1" max="6" step="1" class="w-full bg-gray-800 text-white rounded p-2 border border-gray-700">
+          </div>
+        </div>
+      </div>
+
+      <!-- Dual Oscillator Controls -->
+      <div class="effect-panel p-4">
+        <div class="effect-header flex justify-between items-center mb-3">
+          <h3 class="font-medium">Dual Oscillator</h3>
+          <label class="toggle-switch">
+            <input type="checkbox" id="dualOscillatorToggle" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="flex justify-around">
+          <div class="knob-container">
+            <div class="knob" id="detuneKnob" data-min="-20" data-max="20" data-value="5" data-step="1">
+              <span class="knob-value">5</span>
+            </div>
+            <div class="knob-label">Detune</div>
+          </div>
+          <div class="knob-container">
+            <div class="knob" id="oscMixKnob" data-min="0" data-max="100" data-value="50" data-step="1">
+              <span class="knob-value">50%</span>
+            </div>
+            <div class="knob-label">Mix</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Effects Rack -->
+    <div id="effectsRack" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 hidden">
+      <!-- Distortion Effect -->
+      <div class="effect-panel p-4">
+        <div class="effect-header flex justify-between items-center mb-3">
+          <h3 class="font-medium">Distortion</h3>
+          <label class="toggle-switch">
+            <input type="checkbox" id="distortionToggle">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="flex justify-around">
+          <div class="knob-container">
+            <div class="knob" id="distortionAmountKnob" data-min="0" data-max="100" data-value="20" data-step="1">
+              <span class="knob-value">20%</span>
+            </div>
+            <div class="knob-label">Amount</div>
+          </div>
+          <div class="knob-container">
+            <div class="knob" id="distortionToneKnob" data-min="0" data-max="100" data-value="50" data-step="1">
+              <span class="knob-value">50%</span>
+            </div>
+            <div class="knob-label">Tone</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delay Effect -->
+      <div class="effect-panel p-4">
+        <div class="effect-header flex justify-between items-center mb-3">
+          <h3 class="font-medium">Delay</h3>
+          <label class="toggle-switch">
+            <input type="checkbox" id="delayToggle">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="flex justify-around">
+          <div class="knob-container">
+            <div class="knob" id="delayTimeKnob" data-min="0.05" data-max="1" data-value="0.3" data-step="0.01">
+              <span class="knob-value">0.3s</span>
+            </div>
+            <div class="knob-label">Time</div>
+          </div>
+          <div class="knob-container">
+            <div class="knob" id="delayFeedbackKnob" data-min="0" data-max="0.9" data-value="0.4" data-step="0.01">
+              <span class="knob-value">40%</span>
+            </div>
+            <div class="knob-label">Feedback</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reverb Effect -->
+      <div class="effect-panel p-4">
+        <div class="effect-header flex justify-between items-center mb-3">
+          <h3 class="font-medium">Reverb</h3>
+          <label class="toggle-switch">
+            <input type="checkbox" id="reverbToggle">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="flex justify-around">
+          <div class="knob-container">
+            <div class="knob" id="reverbSizeKnob" data-min="0.1" data-max="0.9" data-value="0.5" data-step="0.01">
+              <span class="knob-value">50%</span>
+            </div>
+            <div class="knob-label">Size</div>
+          </div>
+          <div class="knob-container">
+            <div class="knob" id="reverbDecayKnob" data-min="0.1" data-max="10" data-value="2" data-step="0.1">
+              <span class="knob-value">2.0s</span>
+            </div>
+            <div class="knob-label">Decay</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden video for camera input -->
+  <video id="hiddenVideo" class="hidden-video" autoplay playsinline muted></video>
+
+  <script>
+    // Global variables
+    let handResults = null;
+    let audioCtx, mainGainNode, analyser;
+    let mainOscillator, secondOscillator;
+    let thereminPaused = false;
+
+    // Oscillator variables
+    let oscillatorMix, detuneAmount;
+    let mainOscGain, secondOscGain;
+
+    // Harmony oscillators
+    let oscillatorThird, oscillatorFifth;
+    let thirdGain, fifthGain;
+
+    // Effect nodes
+    let distortionNode, delayNode, reverbNode, filterNode;
+    let distortionPreGain, distortionPostGain;
+    let delayGain, reverbGain;
+    let dryGain, wetGain;
+
+    // Recording Variables
+    let mediaRecorder;
+    let recordedChunks = [];
+    let recordedBlob = null;
+    let recordingNode;
+    let canvasStream;
+    let combinedStream;
+    let activePlaybackVideo = null;
+
+    // Tracking variables
+    let smoothedFreq = null;
+    let smoothedPitchVolX = null, smoothedPitchVolY = null; // Tracks PHYSICAL LEFT hand (Visually RIGHT)
+    let smoothedFilterX = null, smoothedFilterY = null;     // Tracks PHYSICAL RIGHT hand (Visually LEFT)
+    const pitchVolSmoothingAlpha = 0.2;
+    const filterSmoothingAlpha = 0.1;
+
+    // DOM Elements
+    const startButton = document.getElementById('startButton');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const hiddenVideo = document.getElementById('hiddenVideo');
+    const header = document.getElementById('header');
+    const instructions = document.getElementById('instructions');
+    const canvasContainer = document.getElementById('canvasContainer');
+
+    // Control elements
+    const controls = document.getElementById('controls');
+    const effectsRack = document.getElementById('effectsRack');
+    const filterControls = document.getElementById('filterControls');
+    const recordingControls = document.getElementById('recordingControls');
+
+    // Effect toggle controls
+    const dualOscillatorToggle = document.getElementById('dualOscillatorToggle');
+    const distortionToggle = document.getElementById('distortionToggle');
+    const delayToggle = document.getElementById('delayToggle');
+    const reverbToggle = document.getElementById('reverbToggle');
+    const filterToggle = document.getElementById('filterToggle');
+
+    // Recording Control Elements
+    const recordButton = document.getElementById('recordButton');
+    const stopButton = document.getElementById('stopButton');
+    const playButton = document.getElementById('playButton');
+    const downloadButton = document.getElementById('downloadButton');
+
+    // Filter sliders
+    const cutoffMinSlider = document.getElementById('cutoffMinSlider');
+    const cutoffMaxSlider = document.getElementById('cutoffMaxSlider');
+    const qMinSlider = document.getElementById('qMinSlider');
+    const qMaxSlider = document.getElementById('qMaxSlider');
+
+    // Scale and waveform selectors
+    const waveformSelect = document.getElementById('waveformSelect');
+    const scaleSelect = document.getElementById('scaleSelect');
+    const baseNoteSelect = document.getElementById('baseNoteSelect');
+    const customBaseFreqInput = document.getElementById('customBaseFreqInput');
+    const octavesInput = document.getElementById('octavesInput');
+
+    baseNoteSelect.addEventListener('change', function() {
+      customBaseFreqInput.style.display = this.value === 'custom' ? 'block' : 'none';
+    });
+
+    // Initialize MediaPipe Hands
+    const hands = new Hands({ locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}` });
+    hands.setOptions({ modelComplexity: 1, maxNumHands: 2, minDetectionConfidence: 0.7, minTrackingConfidence: 0.7 });
+    hands.onResults((results) => { handResults = results; });
+
+    // Helper functions (minified for brevity - unchanged logic)
+    function getScaleIntervals(scale){switch(scale){case"major":return[0,2,4,5,7,9,11];case"minor":return[0,2,3,5,7,8,10];case"harmonicMinor":return[0,2,3,5,7,8,11];case"melodicMinor":return[0,2,3,5,7,9,11];case"mixolydian":return[0,4,7,5,10];case"pentatonic":return[0,2,4,7,9];case"chromatic":return[0,1,2,3,4,5,6,7,8,9,10,11];default:return[0,2,4,5,7,9,11]}}
+    function getScaleNotes(root,scale){const chromatic=["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"];const rootIndex=chromatic.indexOf(root);if(rootIndex<0)return["C","D","E","F","G","A","B"];const intervals=getScaleIntervals(scale);return intervals.map(interval=>{return chromatic[(rootIndex+interval)%12]})}
+    function quantizeFrequency(targetFreq,baseFreq,octaves,scale){const intervals=getScaleIntervals(scale);const candidates=[];for(let i=0;i<=octaves;i++){intervals.forEach(interval=>{candidates.push(baseFreq*Math.pow(2,(interval+12*i)/12))})} let quantizedFreq=candidates[0];let bestIndex=0;let minDiff=Math.abs(Math.log(candidates[0]/targetFreq));for(let j=1;j<candidates.length;j++){const diff=Math.abs(Math.log(candidates[j]/targetFreq));if(diff<minDiff){minDiff=diff;quantizedFreq=candidates[j];bestIndex=j}} return{frequency:quantizedFreq,candidateIndex:bestIndex,intervals:intervals}}
+    function getHarmonyFrequency(candidateIndex,increment,baseFreq,intervals){const n=intervals.length;const mainOctave=Math.floor(candidateIndex/n);const mainDegree=candidateIndex%n;const newDegree=mainDegree+increment;const addOctave=Math.floor(newDegree/n);const newIndex=newDegree%n;return baseFreq*Math.pow(2,(intervals[newIndex]+12*(mainOctave+addOctave))/12)}
+    function getHandPosition(handType){if(!handResults||!handResults.multiHandLandmarks||!handResults.multiHandLandmarks.length)return null;for(let i=0;i<handResults.multiHandLandmarks.length;i++){const classification=handResults.multiHandedness[i].label;if(classification===handType){const landmarks=handResults.multiHandLandmarks[i];return{physicalHand:handType,x:(1-landmarks[8].x)*canvas.width,y:landmarks[8].y*canvas.height,landmarks:landmarks}}} return null}
+    function makeDistortionCurve(amount){const k=typeof amount==='number'?amount:50;const n_samples=44100;const curve=new Float32Array(n_samples);const deg=Math.PI/180;for(let i=0;i<n_samples;++i){const x=i*2/n_samples-1;curve[i]=(3+k)*x*20*deg/(Math.PI+k*Math.abs(x))} return curve}
+    function createReverb(duration){if(!audioCtx)return;const sampleRate=audioCtx.sampleRate;const length=sampleRate*duration;const impulse=audioCtx.createBuffer(2,length,sampleRate);const impulseL=impulse.getChannelData(0);const impulseR=impulse.getChannelData(1);for(let i=0;i<length;i++){const n=i/length;impulseL[i]=(Math.random()*2-1)*Math.pow(1-n,2);impulseR[i]=(Math.random()*2-1)*Math.pow(1-n,2)} if(reverbNode)reverbNode.buffer=impulse}
+
+    // Setup audio context and nodes (unchanged)
+    function setupAudio() { audioCtx=new(window.AudioContext||window.webkitAudioContext)();analyser=audioCtx.createAnalyser();analyser.fftSize=2048;mainGainNode=audioCtx.createGain();mainGainNode.gain.value=0;mainOscillator=audioCtx.createOscillator();mainOscillator.type=document.getElementById('waveformSelect').value;mainOscillator.frequency.value=440;secondOscillator=audioCtx.createOscillator();secondOscillator.type=mainOscillator.type;secondOscillator.frequency.value=440;mainOscGain=audioCtx.createGain();secondOscGain=audioCtx.createGain();mainOscGain.gain.value=0.5;secondOscGain.gain.value=0.5;oscillatorThird=audioCtx.createOscillator();oscillatorThird.type=mainOscillator.type;oscillatorThird.frequency.value=440*Math.pow(2,4/12);oscillatorFifth=audioCtx.createOscillator();oscillatorFifth.type=mainOscillator.type;oscillatorFifth.frequency.value=440*Math.pow(2,7/12);thirdGain=audioCtx.createGain();fifthGain=audioCtx.createGain();thirdGain.gain.value=0;fifthGain.gain.value=0;oscillatorThird.connect(thirdGain);oscillatorFifth.connect(fifthGain);filterNode=audioCtx.createBiquadFilter();filterNode.type="lowpass";filterNode.frequency.value=20000;filterNode.Q.value=1;dryGain=audioCtx.createGain();wetGain=audioCtx.createGain();distortionPreGain=audioCtx.createGain();distortionNode=audioCtx.createWaveShaper();distortionPostGain=audioCtx.createGain();delayNode=audioCtx.createDelay(5.0);delayNode.delayTime.value=0.3;delayGain=audioCtx.createGain();delayGain.gain.value=0.4;reverbNode=audioCtx.createConvolver();reverbGain=audioCtx.createGain();createReverb(2);mainOscillator.start();secondOscillator.start();oscillatorThird.start();oscillatorFifth.start();updateAudioRouting();waveformSelect.addEventListener('change',updateWaveform);scaleSelect.addEventListener('change',()=>updateOscillatorFrequencyUsingPosition(smoothedPitchVolX));baseNoteSelect.addEventListener('change',()=>updateOscillatorFrequencyUsingPosition(smoothedPitchVolX));customBaseFreqInput.addEventListener('input',()=>updateOscillatorFrequencyUsingPosition(smoothedPitchVolX));octavesInput.addEventListener('change',()=>updateOscillatorFrequencyUsingPosition(smoothedPitchVolX));setupRecording()}
+    function updateWaveform() { const waveform=waveformSelect.value;if(mainOscillator)mainOscillator.type=waveform;if(secondOscillator)secondOscillator.type=waveform;if(oscillatorThird)oscillatorThird.type=waveform;if(oscillatorFifth)oscillatorFifth.type=waveform}
+
+    // --- Setup recording functionality - MODIFIED ---
+    function setupRecording() {
+        if (!audioCtx || !canvas) {
+            console.error("Audio context or canvas not ready for recording setup.");
+            return;
+        }
+        try {
+            recordingNode = audioCtx.createMediaStreamDestination();
+
+            if (typeof canvas.captureStream !== 'function') {
+                 throw new Error("canvas.captureStream() not supported by this browser.");
+            }
+            canvasStream = canvas.captureStream(30); // 30 FPS
+
+            combinedStream = new MediaStream();
+            canvasStream.getVideoTracks().forEach(track => { if (track) combinedStream.addTrack(track); });
+            recordingNode.stream.getAudioTracks().forEach(track => { if (track) combinedStream.addTrack(track); });
+
+            if (combinedStream.getTracks().length === 0) {
+                throw new Error("Combined stream has no tracks.");
+            }
+
+            // --- MIME Type Selection ---
+            let preferredMimeType = '';
+            const mp4Options = [
+                'video/mp4; codecs="avc1.42E01E, mp4a.40.2"', // H.264 High profile + AAC LC
+                'video/mp4; codecs="avc1.4D401E, mp4a.40.2"', // H.264 Main profile + AAC LC
+                'video/mp4; codecs="avc1.42001E, mp4a.40.2"', // H.264 Baseline profile + AAC LC
+                'video/mp4; codecs="avc1, mp4a"',             // Generic H.264 + AAC
+                'video/mp4'                                   // MP4 container only (codec decided by browser)
+            ];
+            const webmOptions = [
+                'video/webm; codecs="vp9, opus"', // Prefer VP9 if available
+                'video/webm; codecs="vp8, opus"',
+                'video/webm'                      // WebM container only
+            ];
+
+            // Prioritize MP4
+            for (const mime of mp4Options) {
+                if (MediaRecorder.isTypeSupported(mime)) {
+                    preferredMimeType = mime;
+                    console.log("Attempting to use MP4 MIME type:", preferredMimeType);
+                    break;
+                }
+            }
+
+            // Fallback to WebM if no MP4 support
+            if (!preferredMimeType) {
+                for (const mime of webmOptions) {
+                    if (MediaRecorder.isTypeSupported(mime)) {
+                        preferredMimeType = mime;
+                        console.log("MP4 not supported, falling back to WebM MIME type:", preferredMimeType);
+                        break;
+                    }
+                }
+            }
+
+            // If still no type, let browser decide (likely WebM)
+            if (!preferredMimeType) {
+                console.warn("Could not find supported MP4 or WebM MIME type. Letting browser decide (likely WebM).");
+            }
+            // --- End MIME Type Selection ---
+
+            const options = { mimeType: preferredMimeType }; // Use the determined type (or '' for default)
+            mediaRecorder = new MediaRecorder(combinedStream, options);
+            console.log("MediaRecorder initialized with actual MIME type:", mediaRecorder.mimeType); // Log what browser actually used
+
+            mediaRecorder.ondataavailable = function(e) { /* ... */ if (e.data && e.data.size > 0) recordedChunks.push(e.data); };
+            mediaRecorder.onstop = function() { /* ... */
+                console.log("Recording stopped.");
+                if (recordedChunks.length > 0) {
+                    // Use the ACTUAL mimeType reported by the recorder
+                    recordedBlob = new Blob(recordedChunks, { type: mediaRecorder.mimeType || 'video/webm' }); // Fallback type just in case
+                    console.log(`Blob created, size: ${recordedBlob.size}, type: ${recordedBlob.type}`);
+                    playButton.disabled = false;
+                    downloadButton.disabled = false;
+                } else { /* ... */ recordedBlob = null; playButton.disabled = true; downloadButton.disabled = true; }
+                recordButton.disabled = false; stopButton.disabled = true;
+             };
+            mediaRecorder.onerror = function(event) { /* ... */ console.error("MediaRecorder error:",event.error); alert(`Recording error: ${event.error.name}`); recordButton.disabled=false; stopButton.disabled=true; playButton.disabled=true; downloadButton.disabled=true };
+
+            mainGainNode.connect(recordingNode);
+            console.log("Recording setup complete.");
+
+        } catch (err) { /* ... Error handling ... */ console.error("Recording setup failed:",err);recordButton.disabled=true;stopButton.disabled=true;playButton.disabled=true;downloadButton.disabled=true;recordButton.title="Recording disabled: "+err.message;recordingControls.style.opacity="0.5";recordingControls.style.pointerEvents="none";alert("Could not initialize recording: "+err.message)}
+    }
+
+    // Audio routing (unchanged)
+    function updateAudioRouting() { if(!audioCtx)return;mainOscGain.disconnect();secondOscGain.disconnect();thirdGain.disconnect();fifthGain.disconnect();if(distortionPostGain)distortionPostGain.disconnect();if(dryGain)dryGain.disconnect();if(wetGain)wetGain.disconnect();if(filterNode)filterNode.disconnect();if(delayNode)delayNode.disconnect();if(reverbGain)reverbGain.disconnect();if(distortionPreGain)distortionPreGain.disconnect();if(reverbNode)reverbNode.disconnect();mainOscillator.connect(mainOscGain);secondOscillator.connect(secondOscGain);let sourceMix=audioCtx.createGain();mainOscGain.connect(sourceMix);if(dualOscillatorToggle.checked){secondOscGain.connect(sourceMix)}thirdGain.connect(sourceMix);fifthGain.connect(sourceMix);let currentOutput=sourceMix;if(distortionToggle.checked&&distortionPreGain&&distortionNode&&distortionPostGain){currentOutput.connect(distortionPreGain);distortionPreGain.connect(distortionNode);distortionNode.connect(distortionPostGain);currentOutput=distortionPostGain}if(filterToggle.checked&&dryGain&&filterNode&&wetGain){let filterInput=currentOutput;let filterOutputMix=audioCtx.createGain();filterInput.connect(dryGain);dryGain.connect(filterOutputMix);filterInput.connect(filterNode);filterNode.connect(wetGain);wetGain.connect(filterOutputMix);dryGain.gain.value=0.0;wetGain.gain.value=1.0;currentOutput=filterOutputMix}if(delayToggle.checked&&delayNode&&delayGain){let delayInput=currentOutput;let delayOutputMix=audioCtx.createGain();delayInput.connect(delayOutputMix);let feedbackGain=audioCtx.createGain();feedbackGain.gain.value=delayGain.gain.value;delayInput.connect(delayNode);delayNode.connect(feedbackGain);feedbackGain.connect(delayNode);delayNode.connect(delayOutputMix);currentOutput=delayOutputMix}if(reverbToggle.checked&&reverbNode&&reverbGain){let reverbInput=currentOutput;let reverbOutputMix=audioCtx.createGain();reverbInput.connect(reverbOutputMix);reverbInput.connect(reverbNode);reverbNode.connect(reverbGain);reverbGain.connect(reverbOutputMix);currentOutput=reverbOutputMix}currentOutput.connect(mainGainNode);mainGainNode.connect(audioCtx.destination);mainGainNode.connect(analyser);if(recordingNode){mainGainNode.connect(recordingNode)}}
+
+    // Frequency update (unchanged)
+    function updateOscillatorFrequencyUsingPosition(xPosition){if(thereminPaused||!audioCtx||!mainOscillator||!secondOscillator||!oscillatorThird||!oscillatorFifth||xPosition===null)return;const octaves=parseInt(octavesInput.value,10)||3;let baseFreq;if(baseNoteSelect.value==='custom'){baseFreq=parseFloat(customBaseFreqInput.value)||440}else{baseFreq=parseFloat(baseNoteSelect.value)||440}const scale=scaleSelect.value;const pitchPosition=Math.max(0,Math.min(1,xPosition/canvas.width));const continuousSemitones=pitchPosition*(12*octaves);const targetFreq=baseFreq*Math.pow(2,continuousSemitones/12);const quantized=quantizeFrequency(targetFreq,baseFreq,octaves,scale);if(smoothedFreq===null){smoothedFreq=quantized.frequency}else{smoothedFreq+=0.1*(quantized.frequency-smoothedFreq)}const now=audioCtx.currentTime;const rampTime=0.01;mainOscillator.frequency.setTargetAtTime(smoothedFreq,now,rampTime);const detune=parseFloat(document.getElementById('detuneKnob').dataset.value);const detunedFreq=smoothedFreq*Math.pow(2,detune/1200);secondOscillator.frequency.setTargetAtTime(detunedFreq,now,rampTime);const thirdFreq=getHarmonyFrequency(quantized.candidateIndex,2,baseFreq,quantized.intervals);oscillatorThird.frequency.setTargetAtTime(thirdFreq,now,rampTime);const fifthFreq=getHarmonyFrequency(quantized.candidateIndex,4,baseFreq,quantized.intervals);oscillatorFifth.frequency.setTargetAtTime(fifthFreq,now,rampTime)}
+    function drawNoteMarkers(){const octaves=parseInt(octavesInput.value,10)||3;let baseFreq,rootText;if(baseNoteSelect.value==='custom'){baseFreq=parseFloat(customBaseFreqInput.value)||440;rootText='Custom'}else{baseFreq=parseFloat(baseNoteSelect.value)||440;rootText=baseNoteSelect.options[baseNoteSelect.selectedIndex].text.split(" ")[0]}const scale=scaleSelect.value;const scaleNotes=getScaleNotes(rootText,scale);const intervals=getScaleIntervals(scale);ctx.strokeStyle="rgba(255, 255, 255, 0.2)";ctx.fillStyle="rgba(255, 255, 255, 0.5)";ctx.lineWidth=1;ctx.font="12px Montserrat";ctx.textAlign="center";ctx.textBaseline="bottom";const totalSemitones=12*octaves;if(totalSemitones<=0)return;for(let o=0;o<=octaves;o++){for(let i=0;i<intervals.length;i++){const semitonesFromBase=intervals[i]+12*o;const ratio=semitonesFromBase/totalSemitones;const x=canvas.width*ratio;if(x>=0&&x<=canvas.width){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,canvas.height);ctx.stroke();ctx.fillText(scaleNotes[i%scaleNotes.length],x,canvas.height-5)}}}}
+    function drawOscilloscope(){if(!analyser)return;const bufferLength=analyser.fftSize;const dataArray=new Float32Array(bufferLength);analyser.getFloatTimeDomainData(dataArray);const height=60;const width=canvas.width;const yOffset=canvas.height-height;ctx.fillStyle="rgba(0, 0, 0, 0.3)";ctx.fillRect(0,yOffset,width,height);ctx.lineWidth=2;ctx.strokeStyle="#10b981";ctx.beginPath();const sliceWidth=width*1.0/bufferLength;let x=0;for(let i=0;i<bufferLength;i++){const v=dataArray[i]*height/2;const y=yOffset+height/2+v;if(i===0){ctx.moveTo(x,y)}else{ctx.lineTo(x,y)}x+=sliceWidth}ctx.lineTo(width,yOffset+height/2);ctx.stroke()}
+    function updateKnob(knob,angle){angle=Math.max(30,Math.min(330,angle));const min=parseFloat(knob.dataset.min);const max=parseFloat(knob.dataset.max);const range=max-min;const normalized=(angle-30)/300;let value=min+normalized*range;const step=parseFloat(knob.dataset.step)||1;value=Math.round(value/step)*step;value=Math.max(min,Math.min(max,value));const precision=String(step).includes('.')?String(step).split('.')[1].length:0;value=parseFloat(value.toFixed(precision));knob.style.transform=`rotate(${angle}deg)`;knob.dataset.value=value;const valueDisplay=knob.querySelector('.knob-value');if(valueDisplay){let displayText=value.toString();if(knob.id==='detuneKnob'){displayText=value>0?`+${value}`:value.toString()}else if(knob.id.includes('Mix')||knob.id.includes('Amount')||knob.id.includes('Tone')||knob.id.includes('Feedback')||knob.id.includes('Size')){let percentageValue=value;if(knob.id==='delayFeedbackKnob'||knob.id==='reverbSizeKnob'){percentageValue=value*100}displayText=`${Math.round(percentageValue)}%`}else if(knob.id.includes('Time')||knob.id.includes('Decay')){displayText=`${value.toFixed(1)}s`}valueDisplay.textContent=displayText}applyKnobEffect(knob.id,value)}
+    function applyKnobEffect(knobId,value){if(!audioCtx)return;const now=audioCtx.currentTime;const rampTime=0.01;switch(knobId){case'detuneKnob':if(secondOscillator&&mainOscillator?.frequency){const mainFreq=mainOscillator.frequency.value;const detunedFreq=mainFreq*Math.pow(2,value/1200);secondOscillator.frequency.setTargetAtTime(detunedFreq,now,rampTime)}break;case'oscMixKnob':if(mainOscGain&&secondOscGain){const normalizedValue=value/100;const angle=normalizedValue*Math.PI/2;mainOscGain.gain.setTargetAtTime(Math.cos(angle),now,rampTime);secondOscGain.gain.setTargetAtTime(Math.sin(angle),now,rampTime)}break;case'distortionAmountKnob':if(distortionNode&&distortionPreGain&&distortionPostGain){distortionNode.curve=makeDistortionCurve(value*2);distortionPreGain.gain.setTargetAtTime(1.0+value*0.001,now,rampTime);distortionPostGain.gain.setTargetAtTime(1.0/(1.0+value*0.005),now,rampTime)}break;case'distortionToneKnob':break;case'delayTimeKnob':if(delayNode)delayNode.delayTime.setTargetAtTime(value,now,rampTime);break;case'delayFeedbackKnob':if(delayGain){delayGain.gain.value=value;updateAudioRouting()}break;case'reverbSizeKnob':if(reverbGain)reverbGain.gain.setTargetAtTime(value,now,rampTime);break;case'reverbDecayKnob':break;}}
+    function setupKnobs(){const knobs=document.querySelectorAll('.knob');knobs.forEach(knob=>{const min=parseFloat(knob.dataset.min);const max=parseFloat(knob.dataset.max);const initialValue=parseFloat(knob.dataset.value);const initialAngle=30+((initialValue-min)/(max-min))*300;knob.style.transform=`rotate(${initialAngle}deg)`;if(audioCtx)applyKnobEffect(knob.id,initialValue);let isDragging=false;let startY,startAngle;const startDrag=(e)=>{isDragging=true;startY=e.clientY;startAngle=parseFloat(knob.style.transform.replace('rotate(','').replace('deg)',''))||initialAngle;document.body.style.userSelect='none';document.addEventListener('mousemove',drag);document.addEventListener('touchmove',touchDrag,{passive:false});document.addEventListener('mouseup',stopDrag);document.addEventListener('touchend',stopDrag)};const touchDrag=(e)=>{e.preventDefault();if(e.touches.length>0)drag(e.touches[0])};const drag=(e)=>{if(!isDragging)return;const currentY=e.clientY;const deltaY=startY-currentY;const sensitivity=0.5;const deltaAngle=deltaY*sensitivity;let newAngle=startAngle+deltaAngle;updateKnob(knob,newAngle)};const stopDrag=()=>{if(!isDragging)return;isDragging=false;document.body.style.userSelect='';document.removeEventListener('mousemove',drag);document.removeEventListener('touchmove',touchDrag);document.removeEventListener('mouseup',stopDrag);document.removeEventListener('touchend',stopDrag)};knob.addEventListener('mousedown',startDrag);knob.addEventListener('touchstart',(e)=>{if(e.touches.length>0)startDrag(e.touches[0])})})}
+    function stopPlayback(){if(activePlaybackVideo){activePlaybackVideo.pause();if(activePlaybackVideo.src)URL.revokeObjectURL(activePlaybackVideo.src);if(activePlaybackVideo.parentNode)activePlaybackVideo.parentNode.removeChild(activePlaybackVideo);activePlaybackVideo=null;canvas.style.display='block';thereminPaused=false}}
+    function drawLogoOnCanvas(ctx,canvasWidth,canvasHeight){const logoSize=30;const padding=10;const textPadding=8;const text="ethermin.com";const textFontSize=12;const logoX=canvasWidth-logoSize-padding;const logoY=padding;const textX=logoX-textPadding;ctx.save();ctx.translate(logoX,logoY);const scaleFactor=logoSize/182;ctx.scale(scaleFactor,scaleFactor);ctx.strokeStyle='white';ctx.fillStyle='none';ctx.lineWidth=2/scaleFactor;ctx.beginPath();ctx.arc(91,91,90,0,Math.PI*2);ctx.stroke();ctx.lineWidth=4/scaleFactor;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(61,31);ctx.lineTo(61,151);ctx.moveTo(121,31);ctx.lineTo(121,151);ctx.stroke();ctx.beginPath();ctx.moveTo(41,91);let cp1x_c=41+20,cp1y_c=91-20;let cp2x_c=41+40,cp2y_c=91+20;let end1x=41+60,end1y=91+0;ctx.bezierCurveTo(cp1x_c,cp1y_c,cp2x_c,cp2y_c,end1x,end1y);let cp1x_s=2*end1x-cp2x_c,cp1y_s=2*end1y-cp2y_c;let cp2x_s=end1x+40,cp2y_s=end1y+20;let end2x=end1x+60,end2y=end1y+0;ctx.bezierCurveTo(cp1x_s,cp1y_s,cp2x_s,cp2y_s,end2x,end2y);ctx.stroke();ctx.restore();ctx.fillStyle='white';ctx.font=`500 ${textFontSize}px Montserrat`;ctx.textAlign='right';ctx.textBaseline='middle';ctx.fillText(text,textX,logoY+logoSize/2)}
+
+    // Start button functionality (unchanged)
+    startButton.addEventListener('click', function() { /* ... */ startButton.style.display='none';canvas.classList.remove('hidden');controls.classList.remove('hidden');effectsRack.classList.remove('hidden');filterControls.classList.remove('hidden');recordingControls.classList.remove('hidden');header.style.display='none';instructions.style.display='none';setupAudio();if(audioCtx)setupKnobs();navigator.mediaDevices.getUserMedia({video:{width:640,height:480}}).then(function(stream){hiddenVideo.srcObject=stream;hiddenVideo.onloadedmetadata=()=>{hiddenVideo.play().then(()=>{console.log("Camera stream playing.");const camera=new Camera(hiddenVideo,{onFrame:async()=>{if(hiddenVideo.videoWidth>0)await hands.send({image:hiddenVideo})},width:640,height:480});camera.start();requestAnimationFrame(draw)}).catch(err=>console.error("Error playing video stream:",err))}}).catch(err=>console.error("Error accessing camera:",err));dualOscillatorToggle.addEventListener('change',updateAudioRouting);distortionToggle.addEventListener('change',updateAudioRouting);delayToggle.addEventListener('change',updateAudioRouting);reverbToggle.addEventListener('change',updateAudioRouting);filterToggle.addEventListener('change',updateAudioRouting);cutoffMinSlider.addEventListener('input',function(){document.getElementById('cutoffMinDisplay').textContent=this.value});cutoffMaxSlider.addEventListener('input',function(){document.getElementById('cutoffMaxDisplay').textContent=this.value});qMinSlider.addEventListener('input',function(){document.getElementById('qMinDisplay').textContent=this.value});qMaxSlider.addEventListener('input',function(){document.getElementById('qMaxDisplay').textContent=this.value});recordButton.addEventListener('click',function(){if(!mediaRecorder||mediaRecorder.state==="recording")return;stopPlayback();recordedChunks=[];recordedBlob=null;playButton.disabled=true;downloadButton.disabled=true;try{mediaRecorder.start();recordButton.disabled=true;stopButton.disabled=false}catch(err){console.error("Error starting MediaRecorder:",err);recordButton.disabled=false;stopButton.disabled=true}});stopButton.addEventListener('click',function(){if(mediaRecorder?.state==="recording")mediaRecorder.stop()});playButton.addEventListener('click',function(){if(!recordedBlob||mediaRecorder?.state==="recording")return;stopPlayback();thereminPaused=true;if(audioCtx)mainGainNode.gain.setTargetAtTime(0,audioCtx.currentTime,0.01);activePlaybackVideo=document.createElement('video');activePlaybackVideo.controls=true;activePlaybackVideo.classList.add('playback-video');const videoUrl=URL.createObjectURL(recordedBlob);activePlaybackVideo.src=videoUrl;const cleanupPlayback=()=>{if(activePlaybackVideo?.parentNode)activePlaybackVideo.parentNode.removeChild(activePlaybackVideo);if(videoUrl)URL.revokeObjectURL(videoUrl);activePlaybackVideo=null;canvas.style.display='block';thereminPaused=false};activePlaybackVideo.onended=cleanupPlayback;activePlaybackVideo.onerror=cleanupPlayback;canvas.style.display='none';canvasContainer.insertBefore(activePlaybackVideo,canvasContainer.firstChild);activePlaybackVideo.play().catch(cleanupPlayback)});downloadButton.addEventListener('click',function(){if(!recordedBlob)return;const url=URL.createObjectURL(recordedBlob);const a=document.createElement('a');document.body.appendChild(a);a.style='display: none';a.href=url;const blobType=recordedBlob.type;let extension='webm';if(blobType.startsWith('video/mp4')){extension='mp4'}else if(blobType.startsWith('video/webm')){extension='webm'}a.download=`ethermin-performance-${new Date().toISOString().slice(0,10)}.${extension}`;a.click();window.URL.revokeObjectURL(url);document.body.removeChild(a)})});
+
+    // Main draw loop (unchanged)
+    function draw() { /* ... same as before ... */ ctx.clearRect(0,0,canvas.width,canvas.height);if(hiddenVideo.readyState>=hiddenVideo.HAVE_CURRENT_DATA){ctx.save();ctx.scale(-1,1);ctx.translate(-canvas.width,0);ctx.drawImage(hiddenVideo,0,0,canvas.width,canvas.height);ctx.restore()}else{ctx.fillStyle='#1a1a1a';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#ccc';ctx.textAlign='center';ctx.font='12px Montserrat';ctx.fillText('Waiting for camera...',canvas.width/2,canvas.height/2)}drawLogoOnCanvas(ctx,canvas.width,canvas.height);drawNoteMarkers();drawOscilloscope();if(!thereminPaused&&audioCtx&&mainOscillator&&mainGainNode){let currentVolume=0;const physicalLeftHand=getHandPosition('Left');const physicalRightHand=getHandPosition('Right');if(physicalLeftHand){if(smoothedPitchVolX===null){smoothedPitchVolX=physicalLeftHand.x;smoothedPitchVolY=physicalLeftHand.y}else{smoothedPitchVolX+=pitchVolSmoothingAlpha*(physicalLeftHand.x-smoothedPitchVolX);smoothedPitchVolY+=pitchVolSmoothingAlpha*(physicalLeftHand.y-smoothedPitchVolY)}ctx.beginPath();ctx.arc(smoothedPitchVolX,smoothedPitchVolY,15,0,2*Math.PI);ctx.strokeStyle="#10b981";ctx.lineWidth=3;ctx.stroke();updateOscillatorFrequencyUsingPosition(smoothedPitchVolX);const volume=Math.max(0,Math.min(1,1-(smoothedPitchVolY/canvas.height)));currentVolume=Math.pow(volume,1.5)*0.5;if(physicalLeftHand.landmarks){const middleExtended=physicalLeftHand.landmarks[12].y<physicalLeftHand.landmarks[9].y;const ringExtended=physicalLeftHand.landmarks[16].y<physicalLeftHand.landmarks[13].y;const targetThirdGain=middleExtended?0.3:0;const targetFifthGain=ringExtended?0.3:0;if(thirdGain)thirdGain.gain.setTargetAtTime(targetThirdGain,audioCtx.currentTime,0.05);if(fifthGain)fifthGain.gain.setTargetAtTime(targetFifthGain,audioCtx.currentTime,0.05)}else{if(thirdGain)thirdGain.gain.setTargetAtTime(0,audioCtx.currentTime,0.05);if(fifthGain)fifthGain.gain.setTargetAtTime(0,audioCtx.currentTime,0.05)}}else{currentVolume=0;if(thirdGain)thirdGain.gain.setTargetAtTime(0,audioCtx.currentTime,0.1);if(fifthGain)fifthGain.gain.setTargetAtTime(0,audioCtx.currentTime,0.1)}mainGainNode.gain.setTargetAtTime(currentVolume,audioCtx.currentTime,0.02);if(filterToggle.checked&&filterNode){if(physicalRightHand){if(smoothedFilterX===null){smoothedFilterX=physicalRightHand.x;smoothedFilterY=physicalRightHand.y}else{smoothedFilterX+=filterSmoothingAlpha*(physicalRightHand.x-smoothedFilterX);smoothedFilterY+=filterSmoothingAlpha*(physicalRightHand.y-smoothedFilterY)}ctx.beginPath();ctx.arc(smoothedFilterX,smoothedFilterY,15,0,2*Math.PI);ctx.strokeStyle="#3b82f6";ctx.lineWidth=3;ctx.stroke();const cutoffMin=parseFloat(cutoffMinSlider.value);const cutoffMax=parseFloat(cutoffMaxSlider.value);const verticalPosition=Math.max(0,Math.min(1,1-(smoothedFilterY/canvas.height)));const cutoff=cutoffMin*Math.pow(cutoffMax/cutoffMin,verticalPosition);const qMin=parseFloat(qMinSlider.value);const qMax=parseFloat(qMaxSlider.value);const horizontalPosition=Math.max(0,Math.min(1,smoothedFilterX/canvas.width));const qVal=qMin+horizontalPosition*(qMax-qMin);filterNode.frequency.setTargetAtTime(cutoff,audioCtx.currentTime,0.02);filterNode.Q.setTargetAtTime(qVal,audioCtx.currentTime,0.02)}else{}}}else{if(mainGainNode)mainGainNode.gain.setTargetAtTime(0,audioCtx.currentTime,0.05);if(thirdGain)thirdGain.gain.setTargetAtTime(0,audioCtx.currentTime,0.05);if(fifthGain)fifthGain.gain.setTargetAtTime(0,audioCtx.currentTime,0.05)}if(mediaRecorder?.state==="recording"){ctx.fillStyle=(Math.floor(Date.now()/500)%2===0)?"#ef4444":"#dc2626";ctx.beginPath();ctx.arc(30,30,10,0,2*Math.PI);ctx.fill();ctx.fillStyle='white';ctx.font='10px Montserrat';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('REC',30,31)}requestAnimationFrame(draw)}
+
+  </script>
+</body>
+</html>
