@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>موقع النقاط</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            padding-top: 50px;
+        }
+        .container {
+            width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .player {
+            margin: 20px 0;
+        }
+        .player span {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .buttons {
+            margin: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input {
+            padding: 5px;
+            margin: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>إدارة النقاط للاعبين</h1>
+        
+        <div class="player">
+            <label for="player1-name">اسم اللاعب 1:</label>
+            <input type="text" id="player1-name" value="اللاعب 1">
+            <p id="player1-name-display">اللاعب 1: <span id="player1-score">0</span></p>
+            <div class="buttons">
+                <button onclick="adjustPoints('player1', 1)">زيادة 1 نقطة</button>
+                <button onclick="adjustPoints('player1', -1)">نقصان 1 نقطة</button>
+                <button onclick="adjustPoints('player1', 3)">زيادة 3 نقاط</button>
+                <button onclick="adjustPoints('player1', -3)">نقصان 3 نقاط</button>
+            </div>
+        </div>
+
+        <div class="player">
+            <label for="player2-name">اسم اللاعب 2:</label>
+            <input type="text" id="player2-name" value="اللاعب 2">
+            <p id="player2-name-display">اللاعب 2: <span id="player2-score">0</span></p>
+            <div class="buttons">
+                <button onclick="adjustPoints('player2', 1)">زيادة 1 نقطة</button>
+                <button onclick="adjustPoints('player2', -1)">نقصان 1 نقطة</button>
+                <button onclick="adjustPoints('player2', 3)">زيادة 3 نقاط</button>
+                <button onclick="adjustPoints('player2', -3)">نقصان 3 نقاط</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // تعديل النقاط
+        function adjustPoints(player, points) {
+            let playerScore = document.getElementById(player + '-score');
+            let currentScore = parseInt(playerScore.textContent);
+            currentScore += points;
+            playerScore.textContent = currentScore;
+        }
+
+        // تحديث اسم اللاعب
+        document.getElementById('player1-name').addEventListener('input', function() {
+            let player1Name = document.getElementById('player1-name').value;
+            document.getElementById('player1-name-display').innerHTML = player1Name + ': <span id="player1-score">0</span>';
+        });
+
+        document.getElementById('player2-name').addEventListener('input', function() {
+            let player2Name = document.getElementById('player2-name').value;
+            document.getElementById('player2-name-display').innerHTML = player2Name + ': <span id="player2-score">0</span>';
+        });
+    </script>
+
+</body>
+</html>
