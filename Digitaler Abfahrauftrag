@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zp9 WebApp</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #121212;
+      color: white;
+    }
+
+    nav {
+      display: flex;
+      background-color: #222;
+    }
+
+    nav button {
+      flex: 1;
+      padding: 1rem;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    nav button.active {
+      background-color: #444;
+    }
+
+    section {
+      display: none;
+      padding: 2rem;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    .swipe-button {
+      width: 100%;
+      max-width: 300px;
+      height: 60px;
+      border-radius: 30px;
+      background-color: #00c853;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s;
+    }
+
+    .swipe-button:active {
+      background-color: #00e676;
+    }
+
+    .circle {
+      width: 250px;
+      height: 250px;
+      position: relative;
+      margin: 2rem auto;
+    }
+
+    .dot {
+      width: 20px;
+      height: 20px;
+      background-color: #333;
+      border-radius: 50%;
+      position: absolute;
+      transition: background-color 0.3s;
+    }
+
+    .dot.active {
+      background-color: #00ff00;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <button onclick="switchTab('zugfuehrer')" class="active">Zugführer</button>
+  <button onclick="switchTab('tf')">Triebfahrzeugführer</button>
+</nav>
+
+<section id="zugfuehrer" class="active">
+  <h2>Zugführer – Zp9 senden</h2>
+  <div class="swipe-button" onclick="sendZp9()">Zp9 senden</div>
+  <br>
+  <div class="swipe-button" style="background-color: #c62828;" onclick="resetSignal()">Zurücksetzen</div>
+</section>
+
+<section id="tf">
+  <h2>Triebfahrzeugführer – Zp9 Anzeige</h2>
+  <div class="circle" id="signalCircle"></div>
+</section>
+
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+<script>
+  // 👉 Firebase Config (ersetzen mit deinen echten Werten!)
+  const firebaseConfig = {
+    apiKey: "DEINE_API_KEY",
+    authDomain: "DEIN_PROJEKT.firebaseapp.com",
+    databaseURL: "https://DEIN_PROJEKT.firebaseio.com",
+    projectId: "DEIN_PROJEKT",
+    storageBucket: "DEIN_PROJEKT.appspot.com",
+    messagingSenderId: "DEINE_ID",
+    appId: "DEINE_APP_ID"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  function switchTab(tab) {
+    document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+    document.querySelector(`nav button[onclick*="${tab}"]`).classList.add('active');
+    document.getElementById(tab).classList.add('active');
+  }
+
+  function sendZp9() {
+    db.ref("signal").set({ zp9: true });
+  }
+
+  function resetSignal() {
+    db.ref("signal").set({ zp9: false });
+  }
+
+  // Zeichne Punkte im Kreis
+  const circle = document.getElementById("signalCircle");
+  const dotCount = 20;
+  const radius = 100;
+  const centerX = 125;
+  const centerY = 125;
+  const dots = [];
+
+  for (let i = 0; i < dotCount; i++) {
+    const angle = (i / dotCount) * 2 * Math.PI;
+    const x = centerX + radius * Math.cos(angle) - 10;
+    const y = centerY + radius * Math.sin(angle) - 10;
+    const dot = document.createElement("div");
+    dot.classList.add("dot");
+    dot.style.left = `${x}px`;
+    dot.style.top = `${y}px`;
+    circle.appendChild(dot);
+    dots.push(dot);
+  }
+
+  // Echtzeit-Signalüberwachung
+  db.ref("signal").on("value", (snapshot) => {
+    const data = snapshot.val();
+    const active = data && data.zp9;
+    dots.forEach(dot => {
+      if (active) {
+        dot.classList.add("active");
+      } else {
+        dot.classList.remove("active");
+      }
+    });
+  });
+</script>
+</body>
+</html>
