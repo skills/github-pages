@@ -1,75 +1,115 @@
-<header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Plagimeds Solutions</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #ffffff;
+      color: #333;
+    }
+    header {
+      background-color: #004b87;
+      color: white;
+      padding: 20px 40px;
+      text-align: center;
+    }
+    .hero {
+      background-color: #e8f0fc;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .hero h2 {
+      margin: 0;
+      font-size: 2em;
+    }
+    .hero p {
+      font-size: 1.1em;
+    }
+    section {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    footer {
+      background-color: #004b87;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
 
-<!--
-  <<< Author notes: Course header >>>
-  Include a 1280×640 image, course title in sentence case, and a concise description in emphasis.
-  In your repository settings: enable template repository, add your 1280×640 social image, auto delete head branches.
-  Add your open source license, GitHub uses MIT license.
--->
+  <header>
+    <h1>Plagimeds Solutions</h1>
+    <p>Reliable. Professional. Scientific.</p>
+  </header>
 
-# GitHub Pages
+  <div class="hero">
+    <h2>Your Partner in Healthcare & Research Support</h2>
+    <p>Empowering pharma companies, students, and researchers with trusted services.</p>
+  </div>
 
-_Create a site or blog from your GitHub repositories with GitHub Pages._
+  <section>
+    <h2>About Us</h2>
+    <p>Plagimeds Solutions is committed to providing top-tier scientific support services such as plagiarism detection using Turnitin, MedDRA coding, manuscript writing, drug price suggestions, and more. With a passion for precision and compliance, we help researchers and companies achieve their goals.</p>
+  </section>
 
-</header>
+  <section>
+    <h2>Our Services</h2>
+    <div class="services">
+      <div class="card">
+        <h3>Plagiarism Testing</h3>
+        <p>Turnitin reports with detailed analysis for students, researchers, and professionals.</p>
+      </div>
+      <div class="card">
+        <h3>MedDRA Coding</h3>
+        <p>Standardized coding for regulatory submissions and clinical data.</p>
+      </div>
+      <div class="card">
+        <h3>Manuscript Writing</h3>
+        <p>Professional writing & editing of scientific articles, reviews, and case studies.</p>
+      </div>
+      <div class="card">
+        <h3>Regulatory Support</h3>
+        <p>Guidance for documentation, submissions, and pharma compliance needs.</p>
+      </div>
+      <div class="card">
+        <h3>Social Media Support</h3>
+        <p>Helping healthcare brands build a credible digital presence.</p>
+      </div>
+      <div class="card">
+        <h3>Drug Price Suggestion</h3>
+        <p>Competitive and data-driven pricing strategies for new product launches.</p>
+      </div>
+    </div>
+  </section>
 
-<!--
-  <<< Author notes: Course start >>>
-  Include start button, a note about Actions minutes,
-  and tell the learner why they should take the course.
--->
+  <section>
+    <h2>Contact Us</h2>
+    <p>Email: <a href="mailto:info@plagimeds.com">info@plagimeds.com</a></p>
+    <p>Phone: +91-XXXXXXXXXX</p>
+  </section>
 
-## Welcome
+  <footer>
+    <p>© 2025 Plagimeds Solutions. All rights reserved.</p>
+  </footer>
 
-With GitHub Pages, you can host project blogs, documentation, resumes, portfolios, or any other static content you'd like. Your GitHub repository can easily become its own website. In this course, we'll show you how to set up your own site or blog using GitHub Pages.
-
-- **Who is this for**: Beginners, students, project maintainers, small businesses.
-- **What you'll learn**: How to build a GitHub Pages site.
-- **What you'll build**: We'll build a simple GitHub Pages site with a blog. We'll use [Jekyll](https://jekyllrb.com), a static site generator.
-- **Prerequisites**: If you need to learn about branches, commits, and pull requests, take [Introduction to GitHub](https://github.com/skills/introduction-to-github) first.
-- **How long**: This course takes less than one hour to complete.
-
-In this course, you will:
-
-1. Enable GitHub Pages
-2. Configure your site
-3. Customize your home page
-4. Create a blog post
-5. Merge your pull request
-
-### How to start this course
-
-<!-- For start course, run in JavaScript:
-'https://github.com/new?' + new URLSearchParams({
-  template_owner: 'skills',
-  template_name: 'github-pages',
-  owner: '@me',
-  name: 'skills-github-pages',
-  description: 'My clone repository',
-  visibility: 'public',
-}).toString()
--->
-
-[![start-course](https://user-images.githubusercontent.com/1221423/235727646-4a590299-ffe5-480d-8cd5-8194ea184546.svg)](https://github.com/new?template_owner=skills&template_name=github-pages&owner=%40me&name=skills-github-pages&description=My+clone+repository&visibility=public)
-
-1. Right-click **Start course** and open the link in a new tab.
-2. In the new tab, most of the prompts will automatically fill in for you.
-   - For owner, choose your personal account or an organization to host the repository.
-   - We recommend creating a public repository, as private repositories will [use Actions minutes](https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions).
-   - Scroll down and click the **Create repository** button at the bottom of the form.
-3. After your new repository is created, wait about 20 seconds, then refresh the page. Follow the step-by-step instructions in the new repository's README.
-
-<footer>
-
-<!--
-  <<< Author notes: Footer >>>
-  Add a link to get support, GitHub status page, code of conduct, license link.
--->
-
----
-
-Get help: [Post in our discussion board](https://github.com/orgs/skills/discussions/categories/github-pages) &bull; [Review the GitHub status page](https://www.githubstatus.com/)
-
-&copy; 2023 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
-
-</footer>
+</body>
+</html>
