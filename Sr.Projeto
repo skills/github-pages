@@ -1,0 +1,406 @@
+<!-- Sr. Projeto – Landing Page 2025  -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sr. Projeto | Gestão de Projetos Descomplicada</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Feather Icons -->
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <style>
+    :root {
+      /* Core palette */
+      --blue-700: #0056b3;
+      --blue-500: #007bff;
+      --blue-50: #f0f8ff;
+      --white: #ffffff;
+      --radius: 12px;
+      /* Opposite‑hue icons (orange) */
+      --icon: #ff8c00;
+      /* Gray scale */
+      --gray-900: #222;
+      --gray-700: #444;
+      --gray-100: #f6f8fa;
+      /* Motion */
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* RESET */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: "Open Sans", sans-serif;
+      background: var(--gray-100);
+      color: var(--gray-700);
+      line-height: 1.6;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    button {
+      font: inherit;
+      cursor: pointer;
+      border: none;
+      border-radius: var(--radius);
+      transition: background 0.3s var(--ease), transform 0.3s var(--ease);
+    }
+    button:active {
+      transform: scale(0.97);
+    }
+
+    /* GLOBAL COMPONENTS */
+    .section {
+      padding: clamp(3rem, 5vw, 5rem) 1.25rem;
+    }
+    .section-title {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--blue-700);
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.9rem 2rem;
+      font-weight: 700;
+      border-radius: var(--radius);
+    }
+    .btn--primary {
+      background: var(--blue-700);
+      color: var(--white);
+    }
+    .btn--primary:hover {
+      background: var(--blue-500);
+    }
+    .btn--white {
+      background: var(--white);
+      color: var(--blue-700);
+    }
+    .btn--white:hover {
+      background: #e9eef7;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--white);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.5rem;
+    }
+    .logo {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--blue-700);
+      position: relative;
+      display: inline-block;
+      animation: slideX 6s infinite alternate var(--ease);
+    }
+    @keyframes slideX {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(12px);
+      }
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: clamp(0.75rem, 2vw, 1.5rem);
+      font-weight: 600;
+    }
+    nav a:hover,
+    nav a:focus {
+      color: var(--blue-500);
+    }
+
+    /* SEARCH */
+    .search {
+      position: relative;
+      max-width: 220px;
+    }
+    .search input {
+      width: 100%;
+      padding: 0.4rem 2.2rem 0.4rem 0.75rem;
+      border: 1px solid var(--blue-500);
+      border-radius: var(--radius);
+    }
+    .search svg {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      stroke: var(--icon);
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      height: 60vh;
+      min-height: 360px;
+      overflow: hidden;
+    }
+    .hero-track {
+      display: flex;
+      width: 400%;
+      height: 100%;
+      animation: heroSlide 20s infinite var(--ease);
+    }
+    .hero-track img {
+      width: 100%;
+      height: 100%;
+      flex: 0 0 25%;
+      object-fit: cover;
+    }
+    @keyframes heroSlide {
+      0%, 20% { transform: translateX(0); }
+      25%, 45% { transform: translateX(-25%); }
+      50%, 70% { transform: translateX(-50%); }
+      75%, 100% { transform: translateX(-75%); }
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0, 86, 179, 0.8), rgba(0, 123, 255, 0.6));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--white);
+      padding: 0 1rem;
+    }
+    .hero-overlay h1 {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 1rem;
+    }
+    .hero-overlay p {
+      max-width: 680px;
+      margin: 0 auto 1.5rem;
+      font-size: 1.125rem;
+    }
+
+    /* CARDS GRID */
+    .grid {
+      display: grid;
+      gap: 1.75rem;
+      max-width: 1100px;
+      margin-inline: auto;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    .card {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: var(--radius);
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+    }
+    .card h3 {
+      font-family: "Montserrat", sans-serif;
+      color: var(--blue-700);
+      margin-bottom: 0.5rem;
+    }
+
+    /* WHATSAPP FLOATING */
+    .whatsapp {
+      position: fixed;
+      bottom: 18px;
+      right: 18px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #25d366;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      z-index: 1500;
+    }
+    .whatsapp svg {
+      stroke: var(--white);
+    }
+
+    /* SOCIAL */
+    .social {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+    .social a svg {
+      stroke: var(--icon);
+      transition: transform 0.3s var(--ease);
+    }
+    .social a:hover svg {
+      transform: scale(1.15);
+    }
+
+    /* VISITOR COUNTER */
+    .counter {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.875rem;
+      color: var(--blue-700);
+    }
+    .counter svg {
+      stroke: var(--icon);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--gray-900);
+      color: #ccc;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.875rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <span class="logo">Sr.&nbsp;Projeto</span>
+
+    <nav aria-label="Menu principal">
+      <ul>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#como-funciona">Funcionalidades</a></li>
+        <li><a href="#planos">Planos</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+
+    <!-- SEARCH -->
+    <div class="search" role="search">
+      <input type="search" placeholder="Pesquisar…" aria-label="Pesquisar" />
+      <i data-feather="search"></i>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Hero banner">
+    <div class="hero-track">
+      <img src="https://images.unsplash.com/photo-1604147706288-ef6616e2cd15?auto=format&fit=crop&w=1600&q=60" alt="Mesa de trabalho clean com notebook" />
+      <img src="https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=1600&q=60" alt="Ambiente home office moderno" />
+      <img src="https://images.unsplash.com/photo-1587614382346-ac9910e98ab3?auto=format&fit=crop&w=1600&q=60" alt="Espaço corporativo minimalista" />
+      <img src="https://images.unsplash.com/photo-1590650046871-24105c27bec0?auto=format&fit=crop&w=1600&q=60" alt="Detalhes de projeto em prancheta" />
+    </div>
+
+    <div class="hero-overlay">
+      <h1>Transformo ideias em impacto real</h1>
+      <p>Planejo, gero e apresento projetos sociais, culturais ou esportivos – da concepção à prestação de contas.</p>
+      <a href="#planos" class="btn btn--white">Conheça os Planos</a>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre" class="section">
+    <h2 class="section-title">Sobre o&nbsp;Sr.&nbsp;Projeto</h2>
+    <p style="text-align:center;margin-bottom:2rem;font-style:italic">“Do primeiro rascunho à grande entrega, tenho ao lado de quem sonha grande – agora quero caminhar com você.”</p>
+
+    <div class="grid">
+      <article class="card">
+        <h3>História</h3>
+        <p>O Sr. Projeto nasceu com o propósito de analisar, compreender e facilitar a explicação de editais — dos mais simples aos mais complexos — e, em parceria com você, elaborar o projeto ideal para conectar seu talento às melhores oportunidades.</p>
+      </article>
+      <article class="card">
+        <h3>Missão</h3>
+        <p>Facilitar a vida de quem trabalha com projetos, tornando cada etapa mais simples e eficiente.</p>
+      </article>
+      <article class="card">
+        <h3>Visão</h3>
+        <p>Ser referência em gestão de projetos, impulsionando resultados com qualidade e escala.</p>
+      </article>
+      <article class="card">
+        <h3>Valores</h3>
+        <p>Transparência, organização, impacto social e tecnologia acessível orientam cada solução que criamos.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section id="como-funciona" class="section">
+    <h2 class="section-title">Como funciona</h2>
+    <div class="grid">
+      <article class="card"><h3>1.&nbsp;Crio</h3><p>Seleciono modelos adequados ou elaboro propostas do zero.</p></article>
+      <article class="card"><h3>2.&nbsp;Organizo</h3><p>Estruturo tarefas, metas e prazos para aprovação da equipe.</p></article>
+      <article class="card"><h3>3.&nbsp;Acompanho</h3><p>Monitoro progresso em tempo real com dashboards intuitivos.</p></article>
+      <article class="card"><h3>4.&nbsp;Entrego</h3><p>Garanto documentação e relatórios prontos para apresentação.</p></article>
+    </div>
+  </section>
+
+  <!-- PLANOS -->
+  <section id="planos" class="section" style="background:var(--blue-50)">
+    <h2 class="section-title">Planos &amp; Modelos</h2>
+    <div class="grid">
+      <article class="card"><h3>Social</h3><p>Projetos de impacto comunitário, ONGs e responsabilidade social.</p></article>
+      <article class="card"><h3>Esportivo</h3><p>Projetos e eventos esportivos.</p></article>
+      <article class="card"><h3>Cultural</h3><p>Editais de arte, música, cinema e patrimônio cultural.</p></article>
+      <article class="card"><h3>Personalizado</h3><p>Soluções sob medida para demandas exclusivas.</p></article>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="section" style="background:var(--blue-700);color:var(--white);text-align:center">
+    <h2 class="section-title" style="color:var(--white)">Pronto para levar seus projetos a outro nível?</h2>
+    <a href="#contato" class="btn btn--white">Falar com um especialista</a>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato" class="section">
+    <h2 class="section-title">Entre em contato</h2>
+    <form action="https://formspree.io/f/SEU_ID" method="POST" style="max-width:700px;margin-inline:auto" class="grid">
+      <input aria-label="Nome" type="text" name="nome" placeholder="Nome*" required />
+      <input aria-label="Email" type="email" name="email" placeholder="E‑mail*" required />
+      <input aria-label="Telefone" type="tel" name="telefone" placeholder="Telefone" />
+      <textarea aria-label="Mensagem" name="mensagem" placeholder="Mensagem*" rows="5" required></textarea>
+      <button class="btn btn--primary" type="submit">Enviar mensagem</button>
+    </form>
+
+    <!-- Social Icons -->
+    <div class="social" aria-label="Redes sociais">
+      <a href="mailto:contato@srprojeto.com.br" aria-label="E‑mail"><i data-feather="mail"></i></a>
+      <a href="https://instagram.com/srprojeto" aria-label="Instagram" target="_blank" rel="noopener"><i data-feather="instagram"></i></a>
+      <a href="https://facebook.com/srprojeto" aria-label="Facebook" target="_blank" rel="noopener"><i data-feather="facebook"></i></a>
+      <a href="https://wa.me/5588999999999" aria-label="WhatsApp" target="_blank" rel="noopener"><i data-feather="phone"></i></a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025&nbsp;Sr.&nbsp;Projeto – Todos os direitos reservados.</p>
+    <p class="counter"><i data-feather="eye"></i> <span id="visits">0</span> visitas</p>
+  </footer>
+
+  <!-- WHATSAPP FLOATING BUTTON -->
+  <a href="https://wa.me/5588999999999" class="whatsapp" aria-label="Converse no WhatsApp" target="_blank" rel="noopener"><i data-feather="message-circle"></i></a>
+
+  <script>
+    /* Feather Icons Init */
+    feather.replace();
+
+    /* Visitor Counter – simple localStorage demo */
+    const visitsEl = document.getElementById("visits");
+    const visits = Number(localStorage.getItem("srp_visits")) + 1 || 1;
+    visitsEl.textContent = visits.toLocaleString("pt-BR");
+    localStorage.setItem("srp_visits", visits);
+  </script>
+</body>
+</html>
