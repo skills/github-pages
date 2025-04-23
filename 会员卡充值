@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <title>会员卡充值消费明细表</title>
+</head>
+
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto p-4">
+        <h1 class="text-3xl font-bold text-center mb-8">会员卡充值消费明细表</h1>
+        <div class="flex justify-between mb-4">
+            <div>
+                <label for="start-date" class="mr-2">开始日期:</label>
+                <input type="date" id="start-date" class="border border-gray-300 rounded p-1">
+            </div>
+            <div>
+                <label for="end-date" class="mr-2">结束日期:</label>
+                <input type="date" id="end-date" class="border border-gray-300 rounded p-1">
+            </div>
+            <button id="filter-btn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">筛选</button>
+            <button id="add-member-btn" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">新增会员</button>
+        </div>
+        <table class="min-w-full bg-white border border-gray-300">
+            <thead>
+                <tr>
+                    <th class="py-2 px-4 border-b">序号</th>
+                    <th class="py-2 px-4 border-b">日期</th>
+                    <th class="py-2 px-4 border-b">会员卡编号</th>
+                    <th class="py-2 px-4 border-b">会员姓名</th>
+                    <th class="py-2 px-4 border-b">操作类型</th>
+                    <th class="py-2 px-4 border-b">操作金额</th>
+                    <th class="py-2 px-4 border-b">余额</th>
+                    <th class="py-2 px-4 border-b">备注</th>
+                    <th class="py-2 px-4 border-b">操作</th>
+                </tr>
+            </thead>
+            <tbody id="statement-body">
+                <tr>
+                    <td class="py-2 px-4 border-b">1</td>
+                    <td class="py-2 px-4 border-b">2025-01-01</td>
+                    <td class="py-2 px-4 border-b">00001</td>
+                    <td class="py-2 px-4 border-b">张三</td>
+                    <td class="py-2 px-4 border-b">充值</td>
+                    <td class="py-2 px-4 border-b">500</td>
+                    <td class="py-2 px-4 border-b">500</td>
+                    <td class="py-2 px-4 border-b">线上充值</td>
+                    <td class="py-2 px-4 border-b">
+                        <button class="edit-btn bg-yellow-400 text-white px-2 py-1 rounded hover:bg-yellow-500">编辑</button>
+                        <button class="save-btn bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600 hidden">保存</button>
+                        <button class="cancel-btn bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 hidden">取消</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="py-2 px-4 border-b">2</td>
+                    <td class="py-2 px-4 border-b">2025-01-05</td>
+                    <td class="py-2 px-4 border-b">00001</td>
+                    <td class="py-2 px-4 border-b">张三</td>
+                    <td class="py-2 px-4 border-b">消费</td>
+                    <td class="py-2 px-4 border-b">200</td>
+                    <td class="py-2 px-4 border-b"></td>
+                    <td class="py-2 px-4 border-b">购买商品</td>
+                    <td class="py-2 px-4 border-b">
+                        <button class="edit-btn bg-yellow-400 text-white px-2 py-1 rounded hover:bg-yellow-500">编辑</button>
+                        <button class="save-btn bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600 hidden">保存</button>
+                        <button class="cancel-btn bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 hidden">取消</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="py-2 px-4 border-b">3</td>
+                    <td class="py-2 px-4 border-b">2025-01-10</td>
+                    <td class="py-2 px-4 border-b">00001</td>
+                    <td class="py-2 px-4 border-b">张三</td>
+                    <td class="py-2 px-4 border-b">充值</td>
+                    <td class="py-2 px-4 border-b">300</td>
+                    <td class="py-2 px-4 border-b"></td>
+                    <td class="py-2 px-4 border-b">线下现金充值</td>
+                    <td class="py-2 px-4 border-b">
+                        <button class="edit-btn bg-yellow-400 text-white px-2 py-1 rounded hover:bg-yellow-500">编辑</button>
+                        <button class="save-btn bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600 hidden">保存</button>
+                        <button class="cancel-btn bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 hidden">取消</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        function calculateBalance() {
+            const rows = document.querySelectorAll('#statement-body tr');
+            const memberBalances = {};
+            rows.forEach((row, index) => {
+                const cardNumber = row.cells[2].textContent;
+                const operationType = row.cells[4].textContent;
+                const amount = parseFloat(row.cells[5].textContent);
+                if (!memberBalances[cardNumber]) {
+                    if (index === 0 || rows[index - 1].cells[2].textContent!== cardNumber) {
+                        memberBalances[cardNumber] = amount;
+                    }
+                } else {
+                    if (operationType === '充值') {
+                        memberBalances[cardNumber] += amount;
+                    } else if (operationType === '消费') {
+                        memberBalances[cardNumber] -= amount;
+                    }
+                }
+                row.cells[6].textContent = memberBalances[cardNumber];
+            });
+        }
+
+        function getNextCardNumber() {
+            const rows = document.querySelectorAll('#statement-body tr');
+            let maxNumber = 0;
+            rows.forEach(row => {
+                const cardNumber = parseInt(row.cells[2].textContent.replace(/\D/g, ''));
+                if (!isNaN(cardNumber) && cardNumber > maxNumber) {
+                    maxNumber = cardNumber;
+                }
+            });
+            return `0000${maxNumber + 1}`.slice(-5);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            calculateBalance();
+
+            document.getElementById('filter-btn').addEventListener('click', function () {
+                const startDate = document.getElementById('start-date').value;
+                const endDate = document.getElementById('end-date').value;
+                const rows = document.querySelectorAll('#statement-body tr');
+                rows.forEach(row => {
+                    const date = row.cells[1].textContent;
+                    if ((!startDate || date >= startDate) && (!endDate || date <= endDate)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+
+            document.getElementById('add-member-btn').addEventListener('click', function () {
+                const tableBody = document.getElementById('statement-body');
+                const newRow = tableBody.insertRow();
+                const rowCount = tableBody.rows.length;
+                newRow.innerHTML = `
+                    <td class="py-2 px-4 border-b">${rowCount}</td>
+                    <td class="py-2 px-4 border-b"><input type="date" class="border border-gray-300 rounded p-1"></td>
+                    <td class="py-2 px-4 border-b">${getNextCardNumber()}</td>
+                    <td class="py-2 px-4 border-b"><input type="text" class="border border-gray-300 rounded p-1"></td>
+                    <td class="py-2 px-4 border-b">
+                        <select class="border border-gray-300 rounded p-1">
+                            <option value="充值">充值</option>
+                            <option value="消费">消费</option>
+                        </select>
+                    </td>
+                    <td class="py-2 px-4 border-b"><input type="number" class="border border-gray-300 rounded p-1"></td>
+                    <td class="py-2 px-4 border-b"></td>
+                    <td class="py-2 px-4 border-b"><input type="text" class="border border-gray-300 rounded p-1"></td>
+                    <td class="py-2 px-4 border-b">
+                        <button class="save-new-btn bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600">保存</button>
+                        <button class="cancel-new-btn bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600">取消</button>
+                    </td>
+                `;
+            });
+
+            const editButtons = document.querySelectorAll('.edit-btn');
+            editButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const row = this.closest('tr');
+                    const cells = row.querySelectorAll('td:not(:first-child):not(:nth-child(7)):not(:last-child)');
+                    cells.forEach(cell => {
+                        const value = cell.textContent;
+                        if (cell.querySelector('select')) {
+                            return;
+                        }
+                        cell.innerHTML = `<input type="text" value="${value}" class="border border-gray-300 rounded p-1">`;
+                    });
+                    this.style.display = 'none';
+                    row.querySelector('.save-btn').style.display = 'inline-block';
+                    row.querySelector('.cancel-btn').style.display = 'inline-block';
+                });
+            });
+
+            const saveButtons = document.querySelectorAll('.save-btn');
+            saveButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const row = this.closest('tr');
+                    const cells = row.querySelectorAll('td:not(:first-child):not(:nth-child(7)):not(:last-child)');
+                    cells.forEach(cell => {
+                        const input = cell.querySelector('input') || cell.querySelector('select');
+                        cell.textContent = input.value;
+                    });
+                    this.style.display = 'none';
+                    row.querySelector('.cancel-btn').style.display = 'none';
+                    row.querySelector('.edit-btn').style.display = 'inline-block';
+                    calculateBalance();
+                });
+            });
+
+            const cancelButtons = document.querySelectorAll('.cancel-btn');
+            cancelButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const row = this.closest('tr');
+                    const cells = row.querySelectorAll('td:not(:first-child):not(:nth-child(7)):not(:last-child)');
+                    cells.forEach(cell => {
+                        const input = cell.querySelector('input') || cell.querySelector('select');
+                        cell.textContent = input.dataset.originalValue;
+                    });
+                    this.style.display = 'none';
+                    row.querySelector('.save-btn').style.display = 'none';
+                    row.querySelector('.edit-btn').style.display = 'inline-block';
+                });
+            });
+
+            document.addEventListener('click', function (event) {
+                if (event.target.classList.contains('save-new-btn')) {
+                    const row = event.target.closest('tr');
+                    const cells = row.querySelectorAll('td:not(:first-child):not(:nth-child(7)):not(:last-child)');
+                    cells.forEach(cell => {
+                        const input = cell.querySelector('input') || cell.querySelector('select');
+                        cell.textContent = input.value;
+                    });
+                    row.querySelector('.save-new-btn').remove();
+                    row.querySelector('.cancel-new-btn').remove();
+                    row.insertAdjacentHTML('beforeend', `
+                        <button class="edit-btn bg-yellow-400 text-white px-2 py-1 rounded hover:bg-yellow-500">编辑</button>
+                        <button class="save-btn bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600 hidden">保存</button>
+                        <button class="cancel-btn bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 hidden">取消</button>
+                    `);
+                    calculateBalance();
+                } else if (event.target.classList.contains('cancel-new-btn')) {
+                    const row = event.target.closest('tr');
+                    row.remove();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
+    
