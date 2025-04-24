@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بوابة التحويل الرقمي</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #007b8f;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .file-upload {
+      margin-top: 15px;
+    }
+
+    button {
+      background-color: #007b8f;
+      color: white;
+      padding: 12px;
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #005f6a;
+    }
+
+    .success-message {
+      background-color: #e7f7e7;
+      border: 1px solid #b2e0b2;
+      color: #2e7d32;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 20px;
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>بوابة التحويل الرقمي - مستشفى دار الشفاء</h2>
+
+    <form id="referralForm">
+      <label>الاسم</label>
+      <input type="text" name="patient_name" required>
+
+      <label>رقم الجوال</label>
+      <input type="tel" name="patient_phone" required>
+
+      <label>رقم الهوية</label>
+      <input type="text" name="patient_id" required>
+
+      <label>سبب التحويل</label>
+      <textarea name="referral_reason" rows="3" required></textarea>
+
+      <label>اسم الطبيب</label>
+      <input type="text" name="doctor_name" required>
+
+      <label>التخصص</label>
+      <input type="text" name="specialty" required>
+
+      <label>رقم الجوال للمجمع الطبي</label>
+      <input type="tel" name="clinic_phone" required>
+
+      <label>ملاحظات</label>
+      <textarea name="notes" rows="3"></textarea>
+
+      <div class="file-upload">
+        <label>إرفاق وثيقة</label>
+        <input type="file" name="documents" accept="image/*,.pdf,.doc,.docx">
+      </div>
+
+      <button type="submit">إرسال</button>
+    </form>
+
+    <div class="success-message" id="successMessage">
+      ✅ تم إرسال البيانات بنجاح!
+      <div id="fileLink"></div>
+    </div>
+
+    <script>
+      document.getElementById('referralForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const form = this;
+        const fileInput = form.documents;
+        let fileData = {};
+
+        if (fileInput.files.length > 0) {
+          const file = fileInput.files[0];
+          const reader = new FileReader();
+
+          fileData = await new Promise(resolve => {
+            reader.onload = e => {
+              const base64 = e.target.result.split(',')[1];
+              resolve({
+                fileName: file.name,
+                fileContent: base64,
+                contentType: file.type
+              });
+            };
+            reader.readAsDataURL(file);
+          });
+        }
+
+        const data = {
+          patient_name: form.patient_name.value,
+          patient_phone: form.patient_phone.value,
+          patient_id: form.patient_id.value,
+          referral_reason: form.referral_reason.value,
+          doctor_name: form.doctor_name.value,
+          specialty: form.specialty.value,
+          clinic_phone: form.clinic_phone.value,
+          notes: form.notes.value,
+          ...fileData
+        };
+
+        fetch('https://script.google.com/macros/s/AKfycbyk0IUppIRczWYScjY5GwdjqeOzDyheO1ev_FAGgFSlLJEm8KATYcmm_rhJsZvIKfBlRw/exec', {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(res => res.text())
+        .then(msg => {
+          form.reset();
+          document.getElementById('successMessage').style.display = 'block';
+          if (msg.includes("https://")) {
+            document.getElementById('fileLink').innerHTML = `<a href="${msg}" target="_blank">📎 فتح الوثيقة المرفقة</a>`;
+          } else {
+            document.getElementById('fileLink').textContent = msg;
+          }
+        })
+        .catch(err => {
+          alert('فشل في الإرسال: ' + err.message);
+        });
+      });
+    </script>
+  </div>
+</body>
+</html>
