@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maison Ryen</title>
+    <link rel="stylesheet" href="style.css"> <!-- رابط ملف CSS -->
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Maison Ryen</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#products">المنتجات</a></li>
+                <li><a href="#about">عن المتجر</a></li>
+                <li><a href="#contact">التواصل</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home">
+        <h2>مرحبا بك في Maison Ryen</h2>
+        <p>متجرنا يقدم مجموعة رائعة من المنتجات الرياضية المميزة.</p>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products">
+        <h2>منتجاتنا</h2>
+        <div class="product">
+            <img src="shirt.jpg" alt="قميص رياضي">
+            <h3>قميص رياضي</h3>
+            <p>وصف قصير للمنتج هنا.</p>
+            <p>السعر: 30$</p>
+            <button>إضافة إلى السلة</button>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>عن المتجر</h2>
+        <p>Maison Ryen هو متجر مخصص لبيع الملابس الرياضية المميزة التي تعكس روح الرياضة والأناقة.</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>تواصل معنا</h2>
+        <p>للتواصل معنا، يمكنك إرسال رسالة عبر واتساب على الرقم: <a href="https://wa.me/26310249">26310249</a></p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Maison Ryen - جميع الحقوق محفوظة</p>
+    </footer>
+
+</body>
+</html>
