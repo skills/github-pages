@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ビデオ通話サービス</title>
+  <style>
+    body { font-family: sans-serif; margin: 0; padding: 20px; }
+    #call-container { max-width: 800px; margin: 0 auto; }
+    #start-call-btn {
+      background-color: #4CAF50; color: white; border: none;
+      padding: 15px 30px; font-size: 18px; cursor: pointer;
+      border-radius: 5px; margin: 20px 0;
+    }
+    #qrcode-container { margin: 20px 0; }
+    #whereby-container { height: 500px; width: 100%; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div id="call-container">
+    <h1>オンラインビデオ通話</h1>
+    <p>ボタンをクリックして通話を開始してください。</p>
+    
+    <button id="start-call-btn">ビデオ通話を開始する</button>
+    
+    <div id="qrcode-container">
+      <h3>またはQRコードをスキャン</h3>
+      <div id="qrcode"></div>
+      <p>※スマートフォンのカメラでQRコードを読み取ると通話が始まります</p>
+    </div>
+    
+    <div id="whereby-container"></div>
+  </div>
+
+  <!-- QRコードライブラリ -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+  
+  <script>
+    document.getElementById('start-call-btn').addEventListener('click', createRoom);
+
+    async function createRoom() {
+      try {
+        // 通話ルーム作成（サーバーレス実装の場合）
+        const response = await fetch('https://api.whereby.dev/v1/meetings', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmFwcGVhci5pbiIsImF1ZCI6Imh0dHBzOi8vYXBpLmFwcGVhci5pbi92MSIsImV4cCI6OTAwNzE5OTI1NDc0MDk5MSwiaWF0IjoxNzQ1NjE4Mjg3LCJvcmdhbml6YXRpb25JZCI6MzE0ODQ2LCJqdGkiOiJjZjhlNmFmMi1iYTViLTQ3NzgtODZjYS1mNTlmNzlmZDA4YWUifQ.v3OU-ynzq7-CoNIkMo_g0zpzRNJ5h3PCZIrsbV_lwe4`, // 実際のキーに置き換え
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            roomNamePrefix: 'customer-service',
+            endDate: new Date(Date.now() + 60 * 60 * 1000).toISOString() // 1時間有効
+          })
+        });
+        
+        const data = await response.json();
+        const { roomUrl } = data;
+        
+        // QRコード生成
+        const qr = qrcode(0, 'M');
+        qr.addData(roomUrl);
+        qr.make();
+        document.getElementById('qrcode').innerHTML = qr.createImgTag(5);
+        
+        // Whereby埋め込み
+        const container = document.getElementById('whereby-container');
+        container.innerHTML = `
+          <whereby-embed
+            room="${roomUrl}"
+            height="500px"
+            width="100%"
+            audio="on"
+            video="on"
+            displayName="お客様"
+          ></whereby-embed>
+        `;
+        
+        // Wherebyスクリプト読み込み（最初の1回のみ）
+        if (!window.wherebyScriptLoaded) {
+          const script = document.createElement('script');
+          script.src = 'https://cdn.whereby.com/embed';
+          script.async = true;
+          document.body.appendChild(script);
+          window.wherebyScriptLoaded = true;
+        }
+      } catch (error) {
+        console.error('ルーム作成エラー:', error);
+        alert('通話ルームの作成に失敗しました。もう一度お試しください。');
+      }
+    }
+  </script>
+</body>
+</html>
