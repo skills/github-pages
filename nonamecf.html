@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>کارلین کافێ - قاوەخانەی کارلین</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ڕێکخستنە گشتییەکان */
+        :root {
+            --primary-color: #6F4E37;
+            --secondary-color: #D2B48C;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --text-color: #495057;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+        
+        /* سەرپەڕ */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-left: 10px;
+            color: var(--secondary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            bottom: 0;
+            right: 0;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+            right: auto;
+            left: 0;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* بەشی سەرەکی */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1445116572660-236099ec97a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            animation: fadeInDown 1s ease;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--secondary-color);
+            animation: fadeIn 1.5s ease;
+        }
+        
+        .btn:hover {
+            background-color: transparent;
+            color: var(--secondary-color);
+        }
+        
+        /* بەشی مێنوو */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: var(--secondary-color);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            background: none;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            margin: 0 0.5rem 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 50px;
+        }
+        
+        .category-btn.active, .category-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .menu-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .menu-item-img {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .menu-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .menu-item:hover .menu-item-img img {
+            transform: scale(1.1);
+        }
+        
+        .menu-item-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .menu-item-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .menu-item-description {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+        
+        .menu-item-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .add-to-cart {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .add-to-cart:hover {
+            background-color: var(--primary-color);
+            transform: rotate(90deg);
+        }
+        
+        /* بەشی دەربارە */
+        .about {
+            background-color: white;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .about-img {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .feature i {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-left: 1rem;
+            margin-top: 0.3rem;
+        }
+        
+        /* بەشی پەیوەندی */
+        .contact {
+            background-color: #f5f5f5;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        
+        .contact-info {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+        
+        .info-item i {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+            margin-left: 1rem;
+            margin-top: 0.3rem;
+        }
+        
+        .contact-form {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .contact-form h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        /* کاتەکانی کارکردن */
+        .hours {
+            margin-top: 2rem;
+        }
+        
+        .hours-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .hours-table tr {
+            border-bottom: 1px solid #eee;
+        }
+        
+        .hours-table tr:last-child {
+            border-bottom: none;
+        }
+        
+        .hours-table th, .hours-table td {
+            padding: 0.8rem 0;
+            text-align: right;
+        }
+        
+        .hours-table th {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        /* پەڕەو */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem 1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .social-links {
+            margin-bottom: 2rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+            border-radius: 50%;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+        }
+        
+        /* کاریگەری جوڵان */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* بۆ ئامێرە بچووکەکان */
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-img {
+                order: -1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 1rem;
+            }
+            
+            .logo {
+                font-size: 1.8rem;
+            }
+            
+            nav {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 80%;
+                height: calc(100vh - 80px);
+                background-color: var(--primary-color);
+                transition: all 0.5s ease;
+                padding: 2rem;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            }
+            
+            nav.active {
+                right: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 0 0 1.5rem 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 4rem 1rem;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- سەرپەڕ -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                کارلین کافێ <i class="fas fa-mug-hot"></i>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="navMenu">
+                <ul>
+                    <li><a href="#home">سەرەتا</a></li>
+                    <li><a href="#menu">مێنوو</a></li>
+                    <li><a href="#about">دەربارە</a></li>
+                    <li><a href="#contact">پەیوەندی</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- بەشی سەرەکی -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>بەخێربێن بۆ کارلین کافێ</h1>
+            <p>باشترین قاوە و نانەوەکان لە شوێنێکی ئارام و خۆشدا</p>
+            <a href="#menu" class="btn">مێنوومان ببینە</a>
+        </div>
+    </section>
+
+    <!-- بەشی مێنوو -->
+    <section class="section" id="menu">
+        <h2 class="section-title">مێنووی قاوەخانە</h2>
+        
+        <div class="menu-categories">
+            <button class="category-btn active" data-category="all">هەموو</button>
+            <button class="category-btn" data-category="coffee">قاوە</button>
+            <button class="category-btn" data-category="tea">چای</button>
+            <button class="category-btn" data-category="breakfast">بەیانی</button>
+            <button class="category-btn" data-category="dessert">نەقلەیی</button>
+        </div>
+        
+        <div class="menu-items">
+            <!-- ئایتمی ١ -->
+            <div class="menu-item" data-category="coffee">
+                <div class="menu-item-img">
+                    <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="ئیسپرێسۆ">
+                </div>
+                <div class="menu-item-content">
+                    <h3 class="menu-item-title">ئیسپرێسۆ</h3>
+                    <p class="menu-item-description">قاوەیەکی بەهێز و تامدار بە خوێی تازە</p>
+                    <div class="menu-item-price">
+                        <span>2.50$</span>
+                        <button class="add-to-cart">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ئایتمی ٢ -->
+            <div class="menu-item" data-category="coffee">
+                <div class="menu-item-img">
+                    <img src="https://images.unsplash.com/photo-1568649929103-28ffbefaca1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="لاتێ">
+                </div>
+                <div class="menu-item-content">
+                    <h3 class="menu-item-title">لاتێ</h3>
+                    <p class="menu-item-description">ئیسپرێسۆ و شیر بە هاوڕێیەتی شیرەوە</p>
+                    <div class="menu-item-price">
+                        <span>3.50$</span>
+                        <button class="add-to-cart">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ئایتمی ٣ -->
+            <div class="menu-item" data-category="coffee">
+                <div class="menu-item-img">
+                    <img src="https://images.unsplash.com/photo-1534778101976-62847782c213?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="کاپوچینۆ">
+                </div>
+                <div class="menu-item-content">
+                    <h3 class="menu-item-title">کاپوچینۆ</h3>
+                    <p class="menu-item-description">ئیسپرێسۆ و شیر و فۆمێکی شیر</p>
+                    <div class="menu-item-price">
+                        <span>3.75$</span>
+                        <button class="add-to-cart">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ئایتمی ٤ -->
+            <div class="menu-item" data-category="tea">
+                <div class="menu-item-img">
+                    <img src="https://images.unsplash.com/photo-1558160074-4d7d8bdf4256?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="چای">
+                </div>
+                <div class="menu-item-content">
+                    <h3 class="menu-item-title">چای</h3>
+                    <p class="menu-item-description">چایەکانی جیهان بە هەڵبژاردنی خۆت</p>
+                    <div class="menu-item-price">
+                        <span>2.00$</span>
+                        <button class="add-to-cart">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ئایتمی ٥ -->
+            <div class="menu-item" data-category="breakfast">
+                <div class="menu-item-img">
+                    <img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="بەیانی">
+                </div>
+                <div class="menu-item-content">
+                    <h3 class="menu-item-title">بەیانی</h3>
+                    <p class="menu-item-description">هەڵبژاردنی تازە بۆ بەیانی</p>
+                    <div class="menu-item-price">
+                        <span>7.50$</span>
+                        <button class="add-to-cart">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ئایتمی ٦ -->
+            <div class="menu-item" data-category="dessert">
+                <div class="menu-item-img">
+                    <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="کێک">
+                </div>
+                <div class="menu-item-content">
+                    <h3 class="menu-item-title">کێکی چاکلیت</h3>
+                    <p class="menu-item-description">کێکێکی تامدار بە چاکلیت</p>
+                    <div class="menu-item-price">
+                        <span>4.50$</span>
+                        <button class="add-to-cart">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ئایتمی ٧ -->
+            <div class="menu-item" data-category="dessert">
+                <div class="menu-item-img">
+                    <img src="https://images.unsplash.com/photo-1562440499-64c9a111f713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="کۆکی">
+                </div>
+                <div class="menu-item-content">
+                    <h3 class="menu-item-title">کۆکی</h3>
+                    <p class="menu-item-description">کۆکی تازە بە چاکلیت</p>
+                    <div class="menu-item-price">
+                        <span>3.00$</span>
+                        <button class="add-to-cart">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ئایتمی ٨ -->
+            <div class="menu-item" data-category="coffee">
+                <div class="menu-item-img">
+                    <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="ئەمریکانۆ">
+                </div>
+                <div class="menu-item-content">
+                    <h3 class="menu-item-title">ئەمریکانۆ</h3>
+                    <p class="menu-item-description">ئیسپرێسۆ بە ئاو</p>
+                    <div class="menu-item-price">
+                        <span>3.00$</span>
+                        <button class="add-to-cart">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- بەشی دەربارە -->
+    <section class="section about" id="about">
+        <h2 class="section-title">دەربارەی ئێمە</h2>
+        
+        <div class="about-content">
+            <div class="about-text">
+                <h3>چیرۆکی کارلین کافێ</h3>
+                <p>لە ساڵی ٢٠١٠دا، کارلین کافێ وەک خەونێکی سادە دەستی پێکرد. ئێمە خەونمان بینی کە شوێنێک دروست بکەین کە خەڵک بتوانن لە ژینگەیەکی ئارامدا قاوە و نانەوەی تامدار تامی بکەن.</p>
+                <p>ئێستا، دوای زیاتر لە ١٠ ساڵ، ئێمە بووینە یەکێک لە خۆشەویستترین قاوەخانەکانی ناوچەکە. ئێمە هەموو ڕۆژێک خەریکین باشترین خزمەتگوزاری پێشکەش بکەین بە کڕیارە خۆشەویستەکانمان.</p>
+                
+                <div class="features">
+                    <div class="feature">
+                        <i class="fas fa-coffee"></i>
+                        <div>
+                            <h4>قاوەی تایبەت</h4>
+                            <p>قاوەی تایبەتی خۆمان لە چەندین وڵاتەوە</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature">
+                        <i class="fas fa-heart"></i>
+                        <div>
+                            <h4>خزمەتگوزاری باش</h4>
+                            <p>کەسێکی گەرم و میهرەبان بۆ هەموو کڕیارێک</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature">
+                        <i class="fas fa-leaf"></i>
+                        <div>
+                            <h4>ماددەی سروشتی</h4>
+                            <p>هەموو ماددەکان سروشتی و بێ کیمیایی</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature">
+                        <i class="fas fa-award"></i>
+                        <div>
+                            <h4>کوالیتی</h4>
+                            <p>کوالیتی بەرز لە هەموو بەشەکاندا</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="قاوەخانەی کارلین کافێ">
+            </div>
+        </div>
+    </section>
+
+    <!-- بەشی پەیوەندی -->
+    <section class="section contact" id="contact">
+        <h2 class="section-title">پەیوەندی</h2>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>پەیوەندی بگەینە</h3>
+                
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h4>ناونیشان</h4>
+                        <p>ڕێگای سەرەکی، هەولێر، هەرێمی کوردستان</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <div>
+                        <h4>تەلەفۆن</h4>
+                        <p>+964 750 123 4567</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h4>ئیمەیل</h4>
+                        <p>info@karlincafe.com</p>
+                    </div>
+                </div>
+                
+                <div class="hours">
+                    <h3>کاتەکانی کارکردن</h3>
+                    <table class="hours-table">
+                        <tr>
+                            <th>یەکشەممە - پێنجشەممە</th>
+                            <td>7:00 بەیانی - 10:00 ئێوارە</td>
+                        </tr>
+                        <tr>
+                            <th>هەینی - شەممە</th>
+                            <td>8:00 بەیانی - 11:00 ئێوارە</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <h3>نامە بنێرە</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="ناو" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="ئیمەیل" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="بابەت">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="نامە" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">ناردن</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- پەڕەو -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">کارلین کافێ</div>
+            
+            <div class="footer-links">
+                <a href="#home">سەرەتا</a>
+                <a href="#menu">مێنوو</a>
+                <a href="#about">دەربارە</a>
+                <a href="#contact">پەیوەندی</a>
+                <a href="#">سیاسەتی پاراستن</a>
+                <a href="#">مەرجەکان</a>
+            </div>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            
+            <div class="copyright">
+                &copy; ٢
