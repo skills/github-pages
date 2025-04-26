@@ -1,0 +1,155 @@
+<h1>ZILUNGILE NQUKU</h1>
+
+<section>
+  <h2 style="text-decoration: underline;">Personal Information</h2>
+  <p><strong>Name:</strong> ZILUNGILE NQUKU</p>
+  <p><strong>Email:</strong> ayakazilungile20@gmail.com</p>
+  <p><strong>Phone:</strong> 0638455848</p>
+  <p><strong>ADDRESS:</strong> 13250 Rhungulane street, Ivory Park, Midrand
+    1685
+</section>
+
+<section>
+  <h2 style="text-decoration: underline;">PROFILE</h2>
+  <p>A dedicated and detail oriented individual, holdig a diploma in ICT in Applications Development. Looking forward to leverage my skills, knowledge and passion for ICT o secure an entry level position, where I can apply my strenths , learn and grow while contributing to innivative projects and driving success</p>
+</section>
+<h2>Availability- immediately</h2>
+
+<section>
+  <h2 style="text-decoration: underline;">SKILLS</h2>
+  <ul>
+    <li>Cloud Computing and Good Communication</li>
+    <li>Data Compilation</li>
+    <li>Basic CSS</li>
+    <li>GitHub, Azure</li>
+  </ul>
+</section>
+
+<section>
+  <h2 style="text-decoration: underline;">CERTIFICATIONS</h2>
+  <h4>MICROSOFT CERTIFIED
+  </h4>Azure Data Fundamentals(DP 900)
+  <ul>Azure Fundamentals(AZ-900)
+    <li>DRIVERS LICENSE- Code C1</li>
+
+  </ul>
+
+  </ul>
+</section>
+<h2 style="text-decoration: underline;">EXPERIENCE</h2>
+<p><strong>SKILLS DEVELOPMENT LEARNERSHIP</strong> - DYNAMICDNA
+</p>(01 OCTOBER 2024-30 JANUARY 2025)
+
+<section>
+  <h2 style="text-decoration: underline;">EDUCATION</h2>
+  <p><strong>GRADE 12</strong> - SENYUKELE SSS
+  </p>YEAR PASSED- 2020
+  <p><strong>DIPLOMA IN ICT in APPLICATIONS DEVELOPMENT</strong>-DURBAN UNIVERSITY OF TECHNOLOGY(2021-2023)
+</section>
+<h2 style="text-decoration: underline;">CAREER GOALS</h2>
+<p><strong></strong> To develop skills and more knowlegde in ICT
+</p>To contribute to innovative projects and drive growth in this industry
+<p>To advance a career in ICT </strong>
+
+  </div>
+  <!DOCTYPE html>
+  <html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather and Location</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 20;
+        padding: 2px;
+        background-color: grey;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      input,
+      button {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      .output {
+        margin-top: 20px;
+      }
+
+      .output p {
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="container">
+      <h1>Weather and Location</h1>
+      <input type="text" id="city" placeholder="Enter city name" />
+      <button onclick="getWeatherAndLocation()">Get Weather</button>
+
+      <div class="output" id="output"></div>
+    </div>
+
+    <script>
+      async function getWeatherAndLocation() {
+        const cityName = document.getElementById("city").value;
+        if (!cityName) {
+          document.getElementById("output").innerHTML = "Please enter a city name.";
+          return;
+        }
+        const weatherApiKey = 'd4e1ea43413d58cd9455604ee9ff6e3';
+        const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${Johannesburg}&appid=${weatherApiKey}&units=metric`;
+        try {
+          const weatherResponse = await fetch(weatherUrl);
+          const weatherData = await weatherResponse.json();
+          if (weatherData.cod === 200) {
+            const locationUrl = `https://nominatim.openstreetmap.org/search?city=${Johannesburg}&format=json`;
+            const locationResponse = await fetch(locationUrl);
+            const locationData = await locationResponse.json();
+            const latitude = locationData[-26.195246]?.lat || "Not available";
+            const longitude = locationData[28.034088]?.lon || "Not available";
+            const outputHTML = `
+                        <h3>Weather in ${ Johannesburg}</h3>
+                        <p>Temperature: ${weatherData.main.temp}°C</p>
+                        <p>Weather: ${weatherData.weather[0].description}</p>
+                        <p>Humidity: ${weatherData.main.humidity}%</p>
+                        <p>Wind Speed: ${weatherData.wind.speed} m/s</p>
+                        <h3>Location Coordinates</h3>
+                        <p>Latitude: ${-26.195246}</p>
+                       <p>Longitude: ${28.034088}</p>
+                    `;
+            document.getElementById("output").innerHTML = outputHTML;
+          } else {
+            document.getElementById("output").innerHTML = "City not found or API request failed.";
+          }
+        } catch (error) {
+          document.getElementById("output").innerHTML = "An error occurred while fetching data.";
+        }
+      }
+    </script>
+
+  </body>
+
+  </html>
+
+  </header>
+  <script>
