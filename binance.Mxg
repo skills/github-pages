@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>我的项目集</title>
+    <style>
+        .project-card {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 15px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🚀 我的开发项目</h1>
+    
+    <div class="project-card">
+        <h2>智能助手App</h2>
+        <p>使用Python开发的AI语音助手 | <a href="https://github.com/...">源码</a></p>
+        <img src="project1-screenshot.jpg" width="300">
+    </div>
+
+    <div class="project-card">
+        <h2>电商数据分析系统</h2>
+        <p>基于React + Node.js构建 | <a href="#在线演示">Demo</a></p>
+        <ul>
+            <li>实时销售看板</li>
+            <li>用户行为分析</li>
+        </ul>
+    </div>
+</body>
+</html>
