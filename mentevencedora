@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OFERTA RELÂMPAGO - EBOOK MENTEMILIONÁRIA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            color: #d35400;
+            text-align: center;
+        }
+        .price {
+            font-size: 24px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .old-price {
+            text-decoration: line-through;
+            color: #999;
+        }
+        .new-price {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        .promo {
+            background-color: #f39c12;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .whatsapp-btn {
+            display: block;
+            background-color: #25D366;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>OFERTA RELÂMPAGO</h1>
+    
+    <h2>EBOOK MENTEMILIONÁRIA</h2>
+    <p><em>O método definitivo para transformar sua vida financeira</em></p>
+    
+    <div class="price">
+        <span class="new-price">R$19,90</span><br>
+        <span class="old-price">de R$97,00</span>
+    </div>
+    
+    <div class="promo">
+        Promoção válida apenas para os primeiros 50 compradores!
+    </div>
+    
+    <p>Método passo a passo para iniciantes, 100% comprovado.</p>
+    
+    <a href="https://wa.me/99991827466?text=Quero%20comprar%20o%20Ebook%20MenteMilionária!" class="whatsapp-btn">
+        COMPRAR VIA WHATSAPP AGORA
+    </a>
+</body>
+</html>
