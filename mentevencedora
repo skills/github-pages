@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OFERTA RELÂMPAGO - EBOOK MILIONÁRIA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .oferta {
+            background: rgba(0,0,0,0.7);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        .preco {
+            font-size: 28px;
+            color: #f9ca24;
+            font-weight: bold;
+        }
+        .riscado {
+            text-decoration: line-through;
+            color: #ccc;
+        }
+        .botao {
+            background: #f39c12;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            display: inline-block;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="oferta">
+        <h1>OFERTA RELÂMPAGO</h1>
+        <h2>EBOOK MILIONÁRIA</h2>
+        <p>O segredo para mudar sua vida financeira</p>
+        
+        <div class="preco">
+            <span>R$19,90</span><br>
+            <span class="riscado">De: R$97,00</span>
+        </div>
+        
+        <p>Promoção válida apenas para os primeiros 50 compradores!</p>
+        <p>Método passo-a-passo para iniciantes</p>
+        
+        <a href="https://wa.me/99991827466?text=Quero%20comprar%20o%20Ebook!" class="botao">
+            COMPRAR AGORA
+        </a>
+    </div>
+</body>
+</html>
