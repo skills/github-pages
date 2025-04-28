@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محمود ومحمد عشري</title>
+    <!-- إضافة مكتبة Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            background-color: #d0e8ff;
+            font-family: 'Cairo', sans-serif;
+            text-align: center;
+            padding: 50px;
+            direction: rtl;
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 3em;
+        }
+        p {
+            color: #34495e;
+            font-size: 1.5em;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            margin: auto;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border-radius: 15px;
+        }
+        .social-links {
+            margin-top: 20px;
+        }
+        .social-links a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #2c3e50;
+            font-size: 2em;
+        }
+        .social-links a:hover {
+            color: #3498db;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>محمود محمد عشري</h1>
+        <p>‏﷽ 
+﴿ إنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلى النَّبِيِّ يَا أَيُّهَا الَّذِينَ آَمَنُوا صَلُّوا عَلَيْهِ وسَلِّمُوا تَسْليمًا ۝ </p>
+        <p>تابعونا قريبًا لمزيد من المعلومات والمشاريع المميزة.</p>
+
+        <div class="social-links">
+            <a href="https://www.facebook.com/profile.php?id=100045271893182" target="_blank" title="فيسبوك">
+                <i class="fab fa-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com/mahmoudmohammedashry?igsh=MTBwbXplb25lbmdyNg==" target="_blank" title="انستجرام">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/+201093709349" target="_blank" title="واتساب">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://youtube.com/@ma7hmoud19?si=Utq5FwhV0g0tGJnB" target="_blank" title="يوتيوب">
+                <i class="fab fa-youtube"></i>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
