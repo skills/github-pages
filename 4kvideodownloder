@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asura HD - 4K/8K Video Downloader & Enhancer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4078051717971122" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --primary: #6C5CE7;
+            --secondary: #A29BFE;
+            --dark: #2D3436;
+            --light: #F5F6FA;
+            --accent: #FD79A8;
+            --success: #00B894;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+        
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            background: url('https://images.unsplash.com/photo-1579389083078-4e7018379f7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            position: relative;
+            color: white;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .search-box {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 15px 25px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+        }
+        
+        .search-box button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box button:hover {
+            background: #e84393;
+        }
+        
+        .features {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 50px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+        
+        .feature-card p {
+            color: #666;
+        }
+        
+        .tools {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+        
+        .tools-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .tool-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tool-header i {
+            font-size: 30px;
+            margin-right: 15px;
+        }
+        
+        .tool-header h3 {
+            font-size: 22px;
+        }
+        
+        .tool-body {
+            padding: 30px;
+        }
+        
+        .upload-area {
+            border: 2px dashed #ddd;
+            border-radius: 5px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-area:hover {
+            border-color: var(--primary);
+        }
+        
+        .upload-area i {
+            font-size: 50px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .upload-area p {
+            color: #666;
+        }
+        
+        .quality-options {
+            margin-bottom: 20px;
+        }
+        
+        .quality-options h4 {
+            margin-bottom: 10px;
+        }
+        
+        .quality-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .quality-btn {
+            background: #eee;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quality-btn:hover, .quality-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .process-btn {
+            background: var(--success);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .process-btn:hover {
+            background: #00997b;
+        }
+        
+        .ad-banner {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: white;
+            background: #333;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #bbb;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .search-box {
+                flex-direction: column;
+                border-radius: 10px;
+            }
+            
+            .search-box input {
+                border-radius: 10px 10px 0 0;
+            }
+            
+            .search-box button {
+                padding: 15px;
+                border-radius: 0 0 10px 10px;
+            }
+            
+            .tools-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-video"></i>
+                <span>Asura HD</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#video-downloader">Video Downloader</a></li>
+                    <li><a href="#video-enhancer">Video Enhancer</a></li>
+                    <li><a href="#photo-enhancer">Photo Enhancer</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Download & Enhance Videos in 4K/8K Quality</h1>
+            <p>The most powerful online tool to download high quality videos from any platform and enhance them to crystal clear perfection.</p>
+            <div class="search-box">
+                <input type="text" placeholder="Paste video URL here...">
+                <button>Download <i class="fas fa-download"></i></button>
+            </div>
+        </div>
+    </section>
+    
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose Asura HD?</h2>
+                <p>Our platform offers the most advanced tools for downloading and enhancing your media content with unmatched quality.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cloud-download-alt"></i>
+                    </div>
+                    <h3>Fast Downloads</h3>
+                    <p>Download videos at blazing fast speeds from all major platforms including YouTube, Facebook, Instagram and more.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-expand"></i>
+                    </div>
+                    <h3>4K/8K Quality</h3>
+                    <p>Get the highest possible resolution for your videos with our advanced upscaling technology.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3>AI Enhancement</h3>
+                    <p>Our AI-powered tools can enhance both videos and photos to remove noise and improve clarity.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="container">
+        <div class="ad-banner">
+            <!-- AdMob Banner Ad Unit -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-4078051717971122"
+                 data-ad-slot="1745570745"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+    
+    <section class="tools" id="video-downloader">
+        <div class="container">
+            <div class="section-title">
+                <h2>Video Downloader</h2>
+                <p>Download videos from any website in multiple quality options including HD, Full HD, 4K and 8K resolutions.</p>
+            </div>
+            <div class="tools-container">
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <i class="fas fa-download"></i>
+                        <h3>Download Videos</h3>
+                    </div>
+                    <div class="tool-body">
+                        <div class="search-box" style="max-width: 100%; border-radius: 5px;">
+                            <input type="text" placeholder="Paste video URL here...">
+                            <button>Analyze <i class="fas fa-search"></i></button>
+                        </div>
+                        <div class="quality-options" style="margin-top: 20px;">
+                            <h4>Available Qualities:</h4>
+                            <div class="quality-buttons">
+                                <button class="quality-btn">144p</button>
+                                <button class="quality-btn">240p</button>
+                                <button class="quality-btn">360p</button>
+                                <button class="quality-btn active">480p</button>
+                                <button class="quality-btn">720p HD</button>
+                                <button class="quality-btn">1080p Full HD</button>
+                                <button class="quality-btn">4K Ultra HD</button>
+                                <button class="quality-btn">8K Ultra HD</button>
+                            </div>
+                        </div>
+                        <button class="process-btn">Download Now <i class="fas fa-download"></i></button>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <i class="fas fa-music"></i>
+                        <h3>Extract Audio</h3>
+                    </div>
+                    <div class="tool-body">
+                        <div class="search-box" style="max-width: 100%; border-radius: 5px;">
+                            <input type="text" placeholder="Paste video URL here...">
+                            <button>Analyze <i class="fas fa-search"></i></button>
+                        </div>
+                        <div class="quality-options" style="margin-top: 20px;">
+                            <h4>Audio Formats:</h4>
+                            <div class="quality-buttons">
+                                <button class="quality-btn">MP3</button>
+                                <button class="quality-btn active">AAC</button>
+                                <button class="quality-btn">WAV</button>
+                                <button class="quality-btn">FLAC</button>
+                                <button class="quality-btn">OGG</button>
+                            </div>
+                        </div>
+                        <button class="process-btn">Extract Audio <i class="fas fa-file-audio"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="tools" id="video-enhancer">
+        <div class="container">
+            <div class="section-title">
+                <h2>Video Enhancer</h2>
+                <p>Enhance your low-quality videos to 4K/8K resolution using our advanced AI technology.</p>
+            </div>
+            <div class="tools-container">
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <i class="fas fa-film"></i>
+                        <h3>Enhance Video Quality</h3>
+                    </div>
+                    <div class="tool-body">
+                        <div class="upload-area">
+                            <i class="fas fa-upload"></i>
+                            <h4>Upload Your Video</h4>
+                            <p>Drag & drop your video file here or click to browse</p>
+                            <input type="file" accept="video/*" style="display: none;">
+                        </div>
+                        <div class="quality-options">
+                            <h4>Enhancement Options:</h4>
+                            <div class="quality-buttons">
+                                <button class="quality-btn">Remove Noise</button>
+                                <button class="quality-btn active">Upscale to HD</button>
+                                <button class="quality-btn">Stabilize Video</button>
+                                <button class="quality-btn">Color Correction</button>
+                                <button class="quality-btn">All Enhancements</button>
+                            </div>
+                        </div>
+                        <div class="quality-options">
+                            <h4>Output Quality:</h4>
+                            <div class="quality-buttons">
+                                <button class="quality-btn">720p HD</button>
+                                <button class="quality-btn active">1080p Full HD</button>
+                                <button class="quality-btn">4K Ultra HD</button>
+                                <button class="quality-btn">8K Ultra HD</buton>
+                            </div>
+                        </div>
+                        <button class="process-btn">Enhance Video <i class="fas fa-magic"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="container">
+        <div class="ad-banner">
+            <!-- AdMob Reward Ad Unit -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-4078051717971122"
+                 data-ad-slot="5496888157"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+    
+    <section class="tools" id="photo-enhancer">
+        <div class="container">
+            <div class="section-title">
+                <h2>Photo Enhancer</h2>
+                <p>Transform your blurry, low-resolution photos into sharp, high-quality images with our AI technology.</p>
+            </div>
+            <div class="tools-container">
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <i class="fas fa-image"></i>
+                        <h3>Enhance Photo Quality</h3>
+                    </div>
+                    <div class="tool-body">
+                        <div class="upload-area">
+                            <i class="fas fa-upload"></i>
+                            <h4>Upload Your Photo</h4>
+                            <p>Drag & drop your photo here or click to browse</p>
+                            <input type="file" accept="image/*" style="display: none;">
+                        </div>
+                        <div class="quality-options">
+                            <h4>Enhancement Options:</h4>
+                            <div class="quality-buttons">
+                                <button class="quality-btn active">Auto Enhance</button>
+                                <button class="quality-btn">Remove Blur</button>
+                                <button class="quality-btn">Color Correction</button>
+                                <button class="quality-btn">Face Enhancement</button>
+                                <button class="quality-btn">Old Photo Repair</button>
+                            </div>
+                        </div>
+                        <div class="quality-options">
+                            <h4>Output Quality:</h4>
+                            <div class="quality-buttons">
+                                <button class="quality-btn">2x Resolution</button>
+                                <button class="quality-btn active">4x Resolution</button>
+                                <button class="quality-btn">8x Resolution</button>
+                                <button class="quality-btn">16x Resolution</button>
+                            </div>
+                        </div>
+                        <button class="process-btn">Enhance Photo <i class="fas fa-magic"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Asura HD</h3>
+                    <p>The most advanced online tool for downloading and enhancing videos and photos in ultra HD quality.</p>
+                    <div class="social-links" style="margin-top: 20px;">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#video-downloader">Video Downloader</a></li>
+                        <li><a href="#video-enhancer">Video Enhancer</a></li>
+                        <li><a href="#photo-enhancer">Photo Enhancer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> support@asurahq.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (123) 456-7890</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Tech Street, Silicon Valley, CA</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Asura HD. All Rights Reserved. Created by Asura</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Simple script for demonstration purposes
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle quality button selection
+            const qualityBtns = document.querySelectorAll('.quality-btn');
+            qualityBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons in this group
+                    this.parentElement.querySelectorAll('.quality-btn').forEach(b => {
+                        b.classList.remove('active');
+                    });
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                });
+            });
+            
+            // Handle file upload area click
+            const uploadAreas = document.querySelectorAll('.upload-area');
+            uploadAreas.forEach(area => {
+                const fileInput = area.querySelector('input[type="file"]');
+                area.addEventListener('click', function() {
+                    fileInput.click();
+                });
+                
+                fileInput.addEventListener('change', function() {
+                    if (this.files && this.files[0]) {
+                        area.querySelector('h4').textContent = this.files[0].name;
+                        area.querySelector('p').textContent = `${(this.files[0].size / 1024 / 1024).toFixed(2)} MB`;
+                    }
+                });
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
