@@ -1,0 +1,169 @@
+import { useState } from 'react';
+import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
+export default function FinancialDashboard() {
+  const [showDetails, setShowDetails] = useState(false);
+
+  // Dados principais
+  const investimentosData = [
+    { name: 'Investimentos SMJ', value: 128664.37, color: '#8884d8' },
+    { name: 'Investimentos Recife', value: 4648.03, color: '#82ca9d' },
+    { name: 'Caixa Mínimo', value: 30000.00, color: '#ffc658' },
+    { name: 'Reserva Emergencial', value: 250951.03, color: '#ff8042' },
+  ];
+
+  // Detalhes dos investimentos SMJ
+  const smjDetails = [
+    { name: 'Caixa BNF', value: 104358.90 },
+    { name: 'Caixa Cais Agro Projetos', value: 2370.93 },
+    { name: 'Caixa Cais', value: 12728.57 },
+    { name: 'Caixa Consórcio', value: 9205.97 },
+  ];
+
+  // Detalhes dos investimentos Recife
+  const recifeDetails = [
+    { name: 'Caixa Cais', value: 803.49 },
+    { name: 'Caixa Orbis', value: 227.73 },
+    { name: 'Caixa Consórcio', value: 3616.81 },
+  ];
+
+  // Função para formatar valores em Reais
+  const formatCurrency = (value) => {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    }).format(value);
+  };
+
+  // Cálculo do total geral
+  const totalGeral = investimentosData.reduce((sum, item) => sum + item.value, 0);
+
+  return (
+    <div className="p-6 max-w-6xl mx-auto bg-white rounded-lg shadow-lg">
+      <h1 className="text-2xl font-bold mb-6 text-center">Dashboard Financeiro</h1>
+      
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div className="bg-gray-50 p-4 rounded-lg shadow">
+          <h2 className="text-xl font-semibold mb-4 text-center">Distribuição de Investimentos</h2>
+          <ResponsiveContainer width="100%" height={300}>
+            <PieChart>
+              <Pie
+                data={investimentosData}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                outerRadius={100}
+                fill="#8884d8"
+                dataKey="value"
+                label={({ name, percent }) => `${name} ${(percent * 100).toFixed(1)}%`}
+              >
+                {investimentosData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.color} />
+                ))}
+              </Pie>
+              <Tooltip formatter={(value) => formatCurrency(value)} />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+        
+        <div className="bg-gray-50 p-4 rounded-lg shadow">
+          <h2 className="text-xl font-semibold mb-4 text-center">Comparativo de Valores</h2>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={investimentosData}>
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip formatter={(value) => formatCurrency(value)} />
+              <Bar dataKey="value" fill="#8884d8">
+                {investimentosData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.color} />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+      
+      <div className="bg-blue-50 p-4 rounded-lg shadow mb-6">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-semibold">Resumo Financeiro</h2>
+          <button 
+            onClick={() => setShowDetails(!showDetails)}
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          >
+            {showDetails ? 'Ocultar Detalhes' : 'Mostrar Detalhes'}
+          </button>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+          {investimentosData.map((item, index) => (
+            <div key={index} className="bg-white p-3 rounded shadow" style={{borderLeft: `4px solid ${item.color}`}}>
+              <h3 className="font-medium text-gray-700">{item.name}</h3>
+              <p className="text-xl font-bold mt-2">{formatCurrency(item.value)}</p>
+            </div>
+          ))}
+        </div>
+        
+        <div className="bg-white p-4 rounded shadow">
+          <h3 className="font-medium text-gray-700">Total Consolidado</h3>
+          <p className="text-2xl font-bold text-purple-600">{formatCurrency(totalGeral)}</p>
+        </div>
+      </div>
+      
+      {showDetails && (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="bg-indigo-50 p-4 rounded-lg shadow">
+            <h2 className="text-xl font-semibold mb-4">Detalhes Investimentos SMJ</h2>
+            <div className="overflow-auto">
+              <table className="w-full">
+                <thead className="bg-indigo-100">
+                  <tr>
+                    <th className="p-2 text-left">Descrição</th>
+                    <th className="p-2 text-right">Valor</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {smjDetails.map((item, index) => (
+                    <tr key={index} className="border-t">
+                      <td className="p-2">{item.name}</td>
+                      <td className="p-2 text-right">{formatCurrency(item.value)}</td>
+                    </tr>
+                  ))}
+                  <tr className="border-t font-bold bg-indigo-100">
+                    <td className="p-2">Total SMJ</td>
+                    <td className="p-2 text-right">{formatCurrency(128664.37)}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <div className="bg-green-50 p-4 rounded-lg shadow">
+            <h2 className="text-xl font-semibold mb-4">Detalhes Investimentos Recife</h2>
+            <div className="overflow-auto">
+              <table className="w-full">
+                <thead className="bg-green-100">
+                  <tr>
+                    <th className="p-2 text-left">Descrição</th>
+                    <th className="p-2 text-right">Valor</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {recifeDetails.map((item, index) => (
+                    <tr key={index} className="border-t">
+                      <td className="p-2">{item.name}</td>
+                      <td className="p-2 text-right">{formatCurrency(item.value)}</td>
+                    </tr>
+                  ))}
+                  <tr className="border-t font-bold bg-green-100">
+                    <td className="p-2">Total Recife</td>
+                    <td className="p-2 text-right">{formatCurrency(4648.03)}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
