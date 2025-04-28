@@ -1,4 +1,4 @@
-<header>
+Welcome To My Blog<header>
 
 <!--
   <<< Author notes: Course header >>>
@@ -7,10 +7,9 @@
   Add your open source license, GitHub uses MIT license.
 -->
 
-# GitHub Pages
+# Who am I?
 
-_Create a site or blog from your GitHub repositories with GitHub Pages._
-
+_Hello World, You are Kelly, a mother to Kaleb and Maia Nelson, currently living at 30 Dunlop Avenue, Ascot Vale, 3032, VIC, Australia. You were born on August 7th, 1983, making you a NZ Maori. You have a keen interest in app development, budgeting, organizational structures, task management, and the coordination of transport for products globally. Your favorite industry to learn from is Technology & Communication, and you dream of providing your children with ample online resources so they never have to work and can always feel your love. You also have a desire to assist people with resources for better living, healthier lifestyles, addiction and recovery programs, and housing support. You mentioned being single and ready to mingle, with potential plans to move away from Melbourne.-
 </header>
 
 <!--
