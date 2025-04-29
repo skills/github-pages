@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <title>Obtenir IP pública</title>
+  <script>
+    async function obtenirIP() {
+      try {
+        const resposta = await fetch("https://api.ipify.org?format=json");
+        const dades = await resposta.json();
+        document.getElementById("ip").innerText = dades.ip;
+        document.getElementById("ip_oculta").value = dades.ip;
+      } catch (error) {
+        document.getElementById("ip").innerText = "Error obtenint la IP.";
+        console.error(error);
+      }
+    }
+
+    window.onload = obtenirIP;
+  </script>
+</head>
+<body style="font-family: Arial; text-align: center; padding: 2em;">
+  <h2>Adreça IP pública</h2>
+  <p>La teva IP pública és:</p>
+  <p id="ip" style="font-size: 1.5em; font-weight: bold;">Carregant...</p>
+
+  <!-- Formulari per enviar la IP a PowerApps o un endpoint propi -->
+  <form method="POST" action="https://EL_TEUS_ENDPOINT" target="_blank">
+    <input type="hidden" name="ip" id="ip_oculta" />
+    <input type="submit" value="Enviar IP" />
+  </form>
+</body>
+</html>
