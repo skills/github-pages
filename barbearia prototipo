@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbearia Clássica | Corte Premium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1585747860715-ebba7bca9d4c?ixlib=rb-4.0.3');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .booking-form {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.85);
+        }
+        
+        .barber-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .haircut-card {
+            transition: all 0.3s ease;
+        }
+        
+        .haircut-card:hover {
+            transform: scale(1.03);
+        }
+        
+        #calendar {
+            height: 400px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Header/Navigation -->
+    <header class="bg-stone-800 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-scissors text-amber-500 text-2xl"></i>
+                <h1 class="text-2xl font-bold">Barbearia <span class="text-amber-500">Clássica</span></h1>
+            </div>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#home" class="hover:text-amber-400 transition">Início</a>
+                <a href="#services" class="hover:text-amber-400 transition">Serviços</a>
+                <a href="#barbers" class="hover:text-amber-400 transition">Barbeiros</a>
+                <a href="#gallery" class="hover:text-amber-400 transition">Galeria</a>
+                <a href="#booking" class="hover:text-amber-400 transition">Agendamento</a>
+            </nav>
+            <button class="md:hidden text-2xl" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-stone-700 w-full py-4" id="mobile-menu">
+            <div class="container mx-auto px-4 flex flex-col space-y-4">
+                <a href="#home" class="hover:text-amber-400 transition">Início</a>
+                <a href="#services" class="hover:text-amber-400 transition">Serviços</a>
+                <a href="#barbers" class="hover:text-amber-400 transition">Barbeiros</a>
+                <a href="#gallery" class="hover:text-amber-400 transition">Galeria</a>
+                <a href="#booking" class="hover:text-amber-400 transition">Agendamento</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg text-white py-20 md:py-32">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">A arte do corte masculino</h2>
+                <p class="text-lg mb-6">Na Barbearia Clássica, combinamos técnicas tradicionais com estilo contemporâneo para oferecer a melhor experiência em cuidados masculinos.</p>
+                <a href="#booking" class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 inline-block">Agendar Horário</a>
+            </div>
+            <div class="md:w-1/2 booking-form p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold text-stone-800 mb-4">Agende seu horário</h3>
+                <form id="quick-booking" class="space-y-4">
+                    <div>
+                        <label for="service" class="block text-stone-700 mb-2">Serviço</label>
+                        <select id="service" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                            <option value="haircut">Corte de Cabelo</option>
+                            <option value="beard">Barba</option>
+                            <option value="combo">Corte + Barba</option>
+                            <option value="hair-treatment">Tratamento Capilar</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="barber" class="block text-stone-700 mb-2">Barbeiro</label>
+                        <select id="barber" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                            <option value="any">Qualquer Barbeiro</option>
+                            <option value="marcos">Marcos Silva</option>
+                            <option value="rafael">Rafael Costa</option>
+                            <option value="lucas">Lucas Oliveira</option>
+                            <option value="thiago">Thiago Santos</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="date" class="block text-stone-700 mb-2">Data</label>
+                        <input type="date" id="date" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                    </div>
+                    <button type="submit" class="w-full bg-stone-800 hover:bg-stone-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">Ver Horários Disponíveis</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-stone-800">Nossos Serviços</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-stone-100 p-6 rounded-lg shadow-md text-center hover:shadow-lg transition">
+                    <div class="text-4xl text-amber-500 mb-4">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-stone-800">Corte de Cabelo</h3>
+                    <p class="text-stone-600 mb-4">Técnicas modernas e tradicionais para o visual perfeito.</p>
+                    <p class="font-bold text-amber-600">R$ 60,00</p>
+                </div>
+                <div class="bg-stone-100 p-6 rounded-lg shadow-md text-center hover:shadow-lg transition">
+                    <div class="text-4xl text-amber-500 mb-4">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-stone-800">Barba</h3>
+                    <p class="text-stone-600 mb-4">Modelagem e tratamento completo para sua barba.</p>
+                    <p class="font-bold text-amber-600">R$ 40,00</p>
+                </div>
+                <div class="bg-stone-100 p-6 rounded-lg shadow-md text-center hover:shadow-lg transition">
+                    <div class="text-4xl text-amber-500 mb-4">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-stone-800">Combo Completo</h3>
+                    <p class="text-stone-600 mb-4">Corte + barba + tratamento capilar com produtos premium.</p>
+                    <p class="font-bold text-amber-600">R$ 120,00</p>
+                </div>
+                <div class="bg-stone-100 p-6 rounded-lg shadow-md text-center hover:shadow-lg transition">
+                    <div class="text-4xl text-amber-500 mb-4">
+                        <i class="fas fa-air-freshener"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-stone-800">Tratamentos</h3>
+                    <p class="text-stone-600 mb-4">Hidratação, reconstrução e cuidados especiais.</p>
+                    <p class="font-bold text-amber-600">A partir de R$ 45,00</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Barbers Section -->
+    <section id="barbers" class="py-16 bg-stone-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-stone-800">Nossos Barbeiros</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Barber 1 -->
+                <div class="barber-card bg-white p-6 rounded-lg shadow-md text-center transition duration-300">
+                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-amber-500">
+                        <img src="https://images.unsplash.com/photo-1583864697781-a9e6b061d41c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Marcos Silva" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold mb-1 text-stone-800">Marcos Silva</h3>
+                    <p class="text-amber-600 font-medium mb-3">Especialista em cortes clássicos</p>
+                    <p class="text-stone-600 mb-4">12 anos de experiência transformando visuais com técnicas tradicionais.</p>
+                    <div class="flex justify-center space-x-2">
+                        <span class="bg-stone-200 px-3 py-1 rounded-full text-sm text-stone-700">Undercut</span>
+                        <span class="bg-stone-200 px-3 py-1 rounded-full text-sm text-stone-700">Pompadour</span>
+                    </div>
+                </div>
+                
+                <!-- Barber 2 -->
+                <div class="barber-card bg-white p-6 rounded-lg shadow-md text-center transition duration-300">
+                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-amber-500">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=761&q=80" alt="Rafael Costa" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold mb-1 text-stone-800">Rafael Costa</h3>
+                    <p class="text-amber-600 font-medium mb-3">Mestre em barbas</p>
+                    <p class="text-stone-600 mb-4">Especializado em modelagem e cuidados com barbas de todos os tipos.</p>
+                    <div class="flex justify-center space-x-2">
+                        <span class="bg-stone-200 px-3 py-1 rounded-full text-sm text-stone-700">Barba</span>
+                        <span class="bg-stone-200 px-3 py-1 rounded-full text-sm text-stone-700">Tratamentos</span>
+                    </div>
+                </div>
+                
+                <!-- Barber 3 -->
+                <div class="barber-card bg-white p-6 rounded-lg shadow-md text-center transition duration-300">
+                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-amber-500">
+                        <img src="https://images.unsplash.com/photo-1595152452543-e5fc28eb8c50?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" alt="Lucas Oliveira" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold mb-1 text-stone-800">Lucas Oliveira</h3>
+                    <p class="text-amber-600 font-medium mb-3">Estilista moderno</p>
+                    <p class="text-stone-600 mb-4">Cortes modernos e tendências internacionais para quem busca inovação.</p>
+                    <div class="flex justify-center space-x-2">
+                        <span class="bg-stone-200 px-3 py-1 rounded-full text-sm text-stone-700">Fade</span>
+                        <span class="bg-stone-200 px-3 py-1 rounded-full text-sm text-stone-700">Texturizado</span>
+                    </div>
+                </div>
+                
+                <!-- Barber 4 -->
+                <div class="barber-card bg-white p-6 rounded-lg shadow-md text-center transition duration-300">
+                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-amber-500">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Thiago Santos" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold mb-1 text-stone-800">Thiago Santos</h3>
+                    <p class="text-amber-600 font-medium mb-3">Especialista em tratamentos</p>
+                    <p class="text-stone-600 mb-4">Cuidados especiais para cabelos e barbas, com produtos naturais e orgânicos.</p>
+                    <div class="flex justify-center space-x-2">
+                        <span class="bg-stone-200 px-3 py-1 rounded-full text-sm text-stone-700">Hidratação</span>
+                        <span class="bg-stone-200 px-3 py-1 rounded-full text-sm text-stone-700">Reconstrução</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-stone-800">Nossos Trabalhos</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="haircut-card overflow-hidden rounded-lg shadow-md">
+                    <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" alt="Corte Fade" class="w-full h-64 object-cover">
+                    <div class="p-4 bg-stone-50">
+                        <h3 class="font-bold text-stone-800">Fade Moderno</h3>
+                        <p class="text-sm text-stone-600">Por Lucas Oliveira</p>
+                    </div>
+                </div>
+                <div class="haircut-card overflow-hidden rounded-lg shadow-md">
+                    <img src="https://images.unsplash.com/photo-1521146764739-1c8908e2d0e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Barba Modelada" class="w-full h-64 object-cover">
+                    <div class="p-4 bg-stone-50">
+                        <h3 class="font-bold text-stone-800">Barba Modelada</h3>
+                        <p class="text-sm text-stone-600">Por Rafael Costa</p>
+                    </div>
+                </div>
+                <div class="haircut-card overflow-hidden rounded-lg shadow-md">
+                    <img src="https://images.unsplash.com/photo-1596703262835-4c326621d7a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Corte Pompadour" class="w-full h-64 object-cover">
+                    <div class="p-4 bg-stone-50">
+                        <h3 class="font-bold text-stone-800">Pompadour Clássico</h3>
+                        <p class="text-sm text-stone-600">Por Marcos Silva</p>
+                    </div>
+                </div>
+                <div class="haircut-card overflow-hidden rounded-lg shadow-md">
+                    <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Tratamento Capilar" class="w-full h-64 object-cover">
+                    <div class="p-4 bg-stone-50">
+                        <h3 class="font-bold text-stone-800">Tratamento Completo</h3>
+                        <p class="text-sm text-stone-600">Por Thiago Santos</p>
+                    </div>
+                </div>
+                <div class="haircut-card overflow-hidden rounded-lg shadow-md">
+                    <img src="https://images.unsplash.com/photo-1621607460587-8e5e6b9e7a1b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Corte Texturizado" class="w-full h-64 object-cover">
+                    <div class="p-4 bg-stone-50">
+                        <h3 class="font-bold text-stone-800">Texturizado Moderno</h3>
+                        <p class="text-sm text-stone-600">Por Lucas Oliveira</p>
+                    </div>
+                </div>
+                <div class="haircut-card overflow-hidden rounded-lg shadow-md">
+                    <img src="https://images.unsplash.com/photo-1621607460587-8e5e6b9e7a1b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Combo Completo" class="w-full h-64 object-cover">
+                    <div class="p-4 bg-stone-50">
+                        <h3 class="font-bold text-stone-800">Combo Premium</h3>
+                        <p class="text-sm text-stone-600">Por Marcos Silva</p>
+                    </div>
+                </div>
+                <div class="haircut-card overflow-hidden rounded-lg shadow-md">
+                    <img src="https://images.unsplash.com/photo-1585747860715-ebba7bca9d4c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" alt="Corte Undercut" class="w-full h-64 object-cover">
+                    <div class="p-4 bg-stone-50">
+                        <h3 class="font-bold text-stone-800">Undercut</h3>
+                        <p class="text-sm text-stone-600">Por Lucas Oliveira</p>
+                    </div>
+                </div>
+                <div class="haircut-card overflow-hidden rounded-lg shadow-md">
+                    <img src="https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Barba + Corte" class="w-full h-64 object-cover">
+                    <div class="p-4 bg-stone-50">
+                        <h3 class="font-bold text-stone-800">Estilo Vintage</h3>
+                        <p class="text-sm text-stone-600">Por Rafael Costa</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="py-16 bg-stone-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-stone-800">Agende Seu Horário</h2>
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden">
+                <div class="md:flex">
+                    <div class="md:w-1/2 p-8">
+                        <h3 class="text-2xl font-bold mb-6 text-stone-800">Escolha seu serviço e barbeiro</h3>
+                        <form id="booking-form" class="space-y-6">
+                            <div>
+                                <label for="full-service" class="block text-stone-700 mb-2 font-medium">Serviço</label>
+                                <select id="full-service" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                                    <option value="">Selecione um serviço</option>
+                                    <option value="haircut">Corte de Cabelo - R$ 60,00</option>
+                                    <option value="beard">Barba - R$ 40,00</option>
+                                    <option value="combo">Combo Completo - R$ 120,00</option>
+                                    <option value="treatment">Tratamento Capilar - R$ 45,00</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="full-barber" class="block text-stone-700 mb-2 font-medium">Barbeiro</label>
+                                <select id="full-barber" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                                    <option value="">Qualquer barbeiro disponível</option>
+                                    <option value="marcos">Marcos Silva - Especialista em cortes clássicos</option>
+                                    <option value="rafael">Rafael Costa - Mestre em barbas</option>
+                                    <option value="lucas">Lucas Oliveira - Estilista moderno</option>
+                                    <option value="thiago">Thiago Santos - Especialista em tratamentos</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="booking-date" class="block text-stone-700 mb-2 font-medium">Data</label>
+                                <input type="date" id="booking-date" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                            </div>
+                            <button type="button" id="check-availability" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300">Verificar Disponibilidade</button>
+                        </form>
+                    </div>
+                    <div class="md:w-1/2 bg-stone-800 text-white p-8">
+                        <h3 class="text-2xl font-bold mb-6">Horários Disponíveis</h3>
+                        <div id="calendar" class="mb-6"></div>
+                        <div id="time-slots" class="grid grid-cols-3 gap-2 mb-6 hidden">
+                            <!-- Time slots will be inserted here by JavaScript -->
+                        </div>
+                        <div id="booking-details" class="hidden">
+                            <div class="bg-stone-700 p-4 rounded-lg mb-4">
+                                <h4 class="font-bold mb-2">Detalhes do Agendamento</h4>
+                                <p id="detail-service" class="text-amber-400"></p>
+                                <p id="detail-barber"></p>
+                                <p id="detail-date"></p>
+                                <p id="detail-time" class="font-bold"></p>
+                            </div>
+                            <div>
+                                <label for="client-name" class="block mb-2">Seu Nome</label>
+                                <input type="text" id="client-name" class="w-full p-3 bg-stone-700 border border-stone-600 rounded-lg mb-4" placeholder="Nome completo">
+                                <label for="client-phone" class="block mb-2">Telefone</label>
+                                <input type="tel" id="client-phone" class="w-full p-3 bg-stone-700 border border-stone-600 rounded-lg mb-4" placeholder="(00) 00000-0000">
+                                <button id="confirm-booking" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300">Confirmar Agendamento</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-stone-800">O Que Nossos Clientes Dizem</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-stone-100 p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="text-amber-500 text-2xl mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-stone-600 mb-4">"O melhor corte que já fiz na vida! O Marcos entendeu exatamente o que eu queria e fez um trabalho impecável."</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full overflow-hidden mr-3">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Carlos" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-stone-800">Carlos Eduardo</h4>
+                            <p class="text-sm text-stone-500">Cliente há 3 anos</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-stone-100 p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="text-amber-500 text-2xl mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-stone-600 mb-4">"A barbearia tem um ambiente incrível e os barbeiros são verdadeiros artistas. Minha barba nunca esteve tão bem cuidada!"</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full overflow-hidden mr-3">
+                            <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="Ricardo" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-stone-800">Ricardo Almeida</h4>
+                            <p class="text-sm text-stone-500">Cliente há 1 ano</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-stone-100 p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="text-amber-500 text-2xl mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="text-stone-600 mb-4">"Adoro os cortes modernos que o Lucas faz. Sempre estou na moda quando saio daqui. O atendimento é excelente também."</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full overflow-hidden mr-3">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Fernando" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-stone-800">Fernando Gomes</h4>
+                            <p class="text-sm text-stone-500">Cliente há 6 meses</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact/Footer -->
+    <footer class="bg-stone-800 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-scissors text-amber-500 mr-2"></i>
+                        Barbearia Clássica
+                    </h3>
+                    <p class="text-stone-300">A arte do corte masculino em um ambiente premium com profissionais altamente qualificados.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Horário de Funcionamento</h3>
+                    <ul class="space-y-2 text-stone-300">
+                        <li class="flex justify-between">
+                            <span>Segunda - Sexta</span>
+                            <span>09:00 - 19:00</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Sábado</span>
+                            <span>09:00 - 17:00</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Domingo</span>
+                            <span>Fechado</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contato</h3>
+                    <ul class="space-y-2 text-stone-300">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-amber-500 mr-2"></i>
+                            Rua das Barbearias, 123 - Centro
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone text-amber-500 mr-2"></i>
+                            (11) 98765-4321
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-amber-500 mr-2"></i>
+                            contato@barbeariaclassica.com
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Redes Sociais</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-stone-700 flex items-center justify-center hover:bg-amber-500 transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-stone-700 flex items-center justify-center hover:bg-amber-500 transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-stone-700 flex items-center justify-center hover:bg-amber-500 transition">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                    <h4 class="text-lg font-bold mt-6 mb-2">Newsletter</h4>
+                    <div class="flex">
+                        <input type="email" placeholder="Seu e-mail" class="bg-stone-700 text-white p-2 rounded-l-lg focus:outline-none focus:ring-1 focus:ring-amber-500 w-full">
+                        <button class="bg-amber-500 hover:bg-amber-600 px-4 rounded-r-lg transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-stone-700 pt-6 text-center text-stone-400">
+                <p>&copy; 2023 Barbearia Clássica. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <i class="fas fa-check-circle text-5xl text-green-500 mb-4"></i>
+                <h3 class="text-2xl font-bold text-stone-800 mb-2">Agendamento Confirmado!</h3>
+                <p id="booking-success-message" class="text-stone-600">Seu horário foi reservado com sucesso.</p>
+            </div>
+            <div class="bg-stone-100 p-4 rounded-lg mb-6">
+                <p id="modal-service" class="font-bold text-stone-800"></p>
+                <p id="modal-barber"></p>
+                <p id="modal-date"></p>
+                <p id="modal-time" class="font-bold text-amber-600"></p>
+            </div>
+            <button id="close-modal" class="w-full bg-stone-800 hover:bg-stone-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">Fechar</button>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Generate time slots for booking
+        function generateTimeSlots() {
+            const timeSlotsContainer = document.getElementById('time-slots');
+            timeSlotsContainer.innerHTML = '';
+            
+            // Generate time slots from 9AM to 7PM with 30 minute intervals
+            for (let hour = 9; hour <= 19; hour++) {
+                for (let minute = 0; minute < 60; minute += 30) {
+                    if (hour === 19 && minute === 30) break; // Stop at 7PM
+                    
+                    const timeString = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+                    const timeButton = document.createElement('button');
+                    timeButton.className = 'bg-stone-700 hover:bg-amber-500 text-white py-2 px-3 rounded transition';
+                    timeButton.textContent = timeString;
+                    
+                    timeButton.addEventListener('click', function() {
+                        // Remove active class from all buttons
+                        document.querySelectorAll('#time-slots button').forEach(btn => {
+                            btn.classList.remove('bg-amber-500');
+                            btn.classList.add('bg-stone-700');
+                        });
+                        
+                        // Add active class to clicked button
+                        this.classList.remove('bg-stone-700');
+                        this.classList.add('bg-amber-500');
+                        
+                        // Show booking details
+                        const service = document.getElementById('full-service').value;
+                        const barber = document.getElementById('full-barber').value;
+                        const date = document.getElementById('booking-date').value;
+                        
+                        document.getElementById('detail-service').textContent = 'Serviço: ' + document.getElementById('full-service').options[document.getElementById('full-service').selectedIndex].text;
+                        document.getElementById('detail-barber').textContent = 'Barbeiro: ' + (barber ? document.getElementById('full-barber').options[document.getElementById('full-barber').selectedIndex].text : 'Qualquer barbeiro disponível');
+                        document.getElementById('detail-date').textContent = 'Data: ' + new Date(date).toLocaleDateString('pt-BR');
+                        document.getElementById('detail-time').textContent = 'Horário: ' + timeString;
+                        
+                        document.getElementById('booking-details').classList.remove('hidden');
+                    });
+                    
+                    timeSlotsContainer.appendChild(timeButton);
+                }
+            }
+            
+            timeSlotsContainer.classList.remove('hidden');
+        }
+
+        // Check availability button
+        document.getElementById('check-availability').addEventListener('click', function() {
+            const date = document.getElementById('booking-date').value;
+            const service = document.getElementById('full-service').value;
+            
+            if (!date) {
+                alert('Por favor, selecione uma data');
+                return;
+            }
+            
+            if (!service) {
+                alert('Por favor, selecione um serviço');
+                return;
+            }
+            
+            generateTimeSlots();
+        });
+
+        // Confirm booking button
+        document.getElementById('confirm-booking').addEventListener('click', function() {
+            const name = document.getElementById('client-name').value;
+            const phone = document.getElementById('client-phone').value;
+            
+            if (!name || !phone) {
+                alert('Por favor, preencha seu nome e telefone');
+                return;
+            }
+            
+            // Show success modal
+            document.getElementById('modal-service').textContent = document.getElementById('detail-service').textContent;
+            document.getElementById('modal-barber').textContent = document.getElementById('detail-barber').textContent;
+            document.getElementById('modal-date').textContent = document.getElementById('detail-date').textContent;
+            document.getElementById('modal-time').textContent = document.getElementById('detail-time').textContent;
+            
+            document.getElementById('booking-modal').classList.remove('hidden');
+        });
+
+        // Close modal button
+        document.getElementById('close-modal').addEventListener('click', function() {
+            document.getElementById('booking-modal').classList.add('hidden');
+            
+            // Reset form
+            document.getElementById('booking-form').reset();
+            document.getElementById('time-slots').classList.add('hidden');
+            document.getElementById('booking-details').classList.add('hidden');
+            document.getElementById('client-name').value = '';
+            document.getElementById('client-phone').value = '';
+        });
+
+        // Initialize calendar (conceptual - in a real app you would use a library like FullCalendar)
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            const calendarEl = document.getElementById('calendar');
+            
+            // This is just a visual representation - a real calendar would be more complex
+            calendarEl.innerHTML = `
+                <div class="text-center mb-4 font-bold">${today.toLocaleString('pt-BR', { month: 'long', year: 'numeric' })}</div>
+                <div class="grid grid-cols-7 gap-1 text-center">
+                    <div class="font-bold text-sm py-2">Dom</div>
+                    <div class="font-bold text-sm py-2">Seg</div>
+                    <div class="font-bold text-sm py-2">Ter</div>
+                    <div class="font-bold text-sm py-2">Qua</div>
+                    <div class="font-bold text-sm py-2">Qui</div>
+                    <div class="font-bold text-sm py-2">Sex</div>
+                    <div class="font-bold text-sm py-2">Sáb</div>
+                    
+                    ${Array.from({ length: 35 }, (_, i) => {
+                        const date = new Date(today);
+                        date.setDate(1);
+                        date.setDate(date.getDate() - date.getDay() + i);
+                        
+                        const isCurrentMonth = date.getMonth() === today.getMonth();
+                        const isToday = date.toDateString() === new Date().toDateString();
+                        const isAvailable = date.getDay() !== 0 && date >= new Date();
+                        
+                        return `
+                            <div class="py-2 text-sm 
+                                ${isCurrentMonth ? 'text-stone-300' : 'text-stone-500'} 
+                                ${isToday ? 'bg-amber-500 text-white rounded-full' : ''}
+                                ${isAvailable ? 'cursor-pointer hover:bg-stone-700' : ''}"
+                                onclick="${isAvailable ? `document.getElementById('booking-date').valueAsDate = new Date('${date.toISOString()}')` : ''}">
+                                ${date.getDate()}
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>
