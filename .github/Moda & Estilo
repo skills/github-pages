@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Moda & Estilo - Roupas para Todos os Gostos</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Moda & Estilo</h1>
+    <nav>
+      <ul>
+        <li><a href="#">Início</a></li>
+        <li><a href="#">Novidades</a></li>
+        <li><a href="#">Coleções</a></li>
+        <li><a href="#" id="carrinho">Carrinho (0)</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="produtos">
+      <h2>Roupas Femininas</h2>
+      <div class="produto">
+        <img src="https://via.placeholder.com/200x200?text=Vestido" alt="Vestido Feminino" />
+        <h3>Vestido Floral</h3>
+        <p>R$ 129,90</p>
+        <button onclick="adicionarCarrinho('Vestido Floral')">Adicionar ao carrinho</button>
+      </div>
+
+      <div class="produto">
+        <img src="https://via.placeholder.com/200x200?text=Blusa" alt="Blusa Feminina" />
+        <h3>Blusa de Manga Longa</h3>
+        <p>R$ 79,90</p>
+        <button onclick="adicionarCarrinho('Blusa de Manga Longa')">Adicionar ao carrinho</button>
+      </div>
+
+      <h2>Roupas Masculinas</h2>
+      <div class="produto">
+        <img src="https://via.placeholder.com/200x200?text=Camiseta" alt="Camiseta Masculina" />
+        <h3>Camiseta Básica</h3>
+        <p>R$ 49,90</p>
+        <button onclick="adicionarCarrinho('Camiseta Básica')">Adicionar ao carrinho</button>
+      </div>
+
+      <div class="produto">
+        <img src="https://via.placeholder.com/200x200?text=Jaqueta" alt="Jaqueta Masculina" />
+        <h3>Jaqueta de Couro</h3>
+        <p>R$ 249,90</p>
+        <button onclick="adicionarCarrinho('Jaqueta de Couro')">Adicionar ao carrinho</button>
+      </div>
+
+      <h2>Roupas Casuais</h2>
+      <div class="produto">
+        <img src="https://via.placeholder.com/200x200?text=Calca" alt="Calça Jeans Casual" />
+        <h3>Calça Jeans Relax</h3>
+        <p>R$ 99,90</p>
+        <button onclick="adicionarCarrinho('Calça Jeans Relax')">Adicionar ao carrinho</button>
+      </div>
+
+      <div class="produto">
+        <img src="https://via.placeholder.com/200x200?text=Short" alt="Short Casual" />
+        <h3>Short de Verão</h3>
+        <p>R$ 69,90</p>
+        <button onclick="adicionarCarrinho('Short de Verão')">Adicionar ao carrinho</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Moda & Estilo. Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #3498db;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.produtos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 30px;
+}
+
+.produto {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin: 10px;
+  text-align: center;
+  width: 200px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.produto img {
+  max-width: 100%;
+}
+
+button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+footer {
+  background-color: #f2f2f2;
+  text-align: center;
+  padding: 15px;
+  margin-top: 40px;
+}
+let carrinhoContador = 0;
+
+function adicionarCarrinho(produto) {
+  carrinhoContador++;
+  alert(produto + " adicionado ao carrinho!");
+  document.getElementById("carrinho").textContent = `Carrinho (${carrinhoContador})`;
+}
