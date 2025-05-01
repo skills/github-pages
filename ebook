@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finanças Pessoais e Investimentos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        header h1 {
+            margin: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 30px auto;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .content img {
+            width: 100%;
+            max-width: 400px;
+        }
+        .info {
+            flex: 1;
+            padding: 20px;
+            max-width: 500px;
+            margin-left: 30px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .info h3 {
+            color: #4CAF50;
+        }
+        .cta {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .cta a {
+            text-decoration: none;
+        }
+        .cta button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .cta button:hover {
+            background-color: #45a049;
+        }
+        .testimonials {
+            margin-top: 50px;
+            background-color: #e7e7e7;
+            padding: 30px;
+        }
+        .testimonials h3 {
+            text-align: center;
+            color: #333;
+        }
+        .testimonial {
+            margin-top: 20px;
+            text-align: center;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Finanças Pessoais e Investimentos</h1>
+    <p>Transforme sua vida financeira com nosso e-book prático e acessível</p>
+</header>
+
+<div class="container">
+    <h2>O que você vai aprender:</h2>
+    <div class="content">
+        <img src="https://via.placeholder.com/400x300.png" alt="Capa do E-book">
+        <div class="info">
+            <h3>O conteúdo do e-book inclui:</h3>
+            <ul>
+                <li>Diagnóstico financeiro completo</li>
+                <li>Planejamento de metas e orçamento</li>
+                <li>Estratégias para sair das dívidas</li>
+                <li>Como montar uma reserva de emergência</li>
+                <li>Fundamentos dos investimentos (Renda Fixa e Variável)</li>
+                <li>E muito mais!</li>
+            </ul>
+            <p><strong>Este é o guia ideal para quem quer começar a controlar sua vida financeira e investir de forma segura.</strong></p>
+            <div class="cta">
+                <a href="https://pay.kiwify.com.br/EkMCJsQ" target="_blank">
+                    <button>Comprar Agora - Apenas R$ 29,90</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <h2>Por que comprar este e-book?</h2>
+    <p>Este e-book é perfeito para quem quer começar sua jornada financeira com o pé direito. Não importa se você é iniciante ou já tem algum conhecimento, o conteúdo é acessível e cheio de dicas práticas que você pode aplicar imediatamente!</p>
+</div>
+
+<div class="testimonials">
+    <h3>O que os leitores estão dizendo:</h3>
+    <div class="testimonial">
+        <p>“Finalmente entendi como montar um orçamento sem complicação. Já estou aplicando tudo!”</p>
+        <cite>- Carla M., São Paulo</cite>
+    </div>
+    <div class="testimonial">
+        <p>“O melhor guia que já li sobre finanças pessoais. Simples, direto e motivador.”</p>
+        <cite>- Lucas F., Belo Horizonte</cite>
+    </div>
+    <div class="testimonial">
+        <p>“Comecei com R$ 100 e hoje já tenho uma reserva. Obrigado por este material incrível!”</p>
+        <cite>- Débora T., Salvador</cite>
+    </div>
+</div>
+
+</body>
+</html>
