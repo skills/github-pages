@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:media="http://search.yahoo.com/mrss/" version="2.0">
+    <channel>
+        <title>My Vimeo Video Feed</title>
+        <description>Feed for videos hosted on Vimeo</description>
+        <language>en-us</language>
+        <pubDate>Wed, 11 Nov 2025 20:30:54 GMT</pubDate>
+
+        <!-- Video Item 1 -->
+        <item>
+            <title>Sample Vimeo Video 1</title>
+            <link>http://192.168.12.244/videos/the_calling.mp4</link>
+            <description>This is a sample video hosted on Vimeo.</description>
+            <pubDate>Thu, 11 Jun 2025 16:51:07 GMT</pubDate>
+            <guid isPermaLink="false">the_calling</guid>
+            <media:content url="http://192.168.12.244/videos/the_calling.mp4" type="video/mp4" duration="120">
+                <media:title>overunder</media:title>
+                <media:description>This is a sample video hosted on Vimeo.</media:description>
+                <media:thumbnail url="http://192.168.12.244/images/buggy.jpg"/>
+            </media:content>
+            <media:type>movie</media:type>
+        </item>
+
+        <!-- Video Item 2 -->
+        <item>
+            <title>Sample Vimeo Video 2</title>
+            <link>http://192.168.12.244/videos/the_experience_-_2nd_annual.mp4</link>
+            <description>2nd Annual experience.</description>
+            <pubDate>Fri, 12 Jun 2025 10:30:00 GMT</pubDate>
+            <guid isPermaLink="false">the_experience_-_2nd_annual</guid>
+            <media:content url="http://192.168.12.244/videos/the_experience_-_2nd_annual.mp4" type="video/mp4" duration="180">
+                <media:title>ou2</media:title>
+                <media:description>This is another sample video hosted on Qnap</media:description>
+                <media:thumbnail url="https://i.vimeocdn.com/video/987654321_640.jpg"/>
+            </media:content>
+            <media:type>movie</media:type>
+        </item>
+
+        <!-- Video Item 3 -->
+        <item>
+            <title>Sample Vimeo Video 3</title>
+            <link>https://vimeo.com/1122334455</link>
+            <description>This is yet another sample video hosted on Vimeo.</description> 
+            <pubDate>Sat, 13 Jun 2025 14:45:00 GMT</pubDate>
+            <guid isPermaLink="false">vimeo_1122334455</guid>
+            <media:content url="http://192.168.12.244/videos/the_calling.mp4" type="video/mp4" duration="240">
+                <media:title>Sample Vimeo Video 3</media:title>
+                <media:description>This is yet another sample video hosted on Vimeo.</media:description>
+                <media:thumbnail url="https://i.vimeocdn.com/video/1122334455_640.jpg"/>
+            </media:content>
+            <media:type>movie</media:type>
+        </item>
+
+        <!-- Video Item 4 -->
+        <item>
+            <title>Sample Vimeo Video 4</title>
+            <link>https://vimeo.com/5566778899</link>
+            <description>This is a different sample video hosted on Vimeo.</description>   
+            <pubDate>Sun, 14 Jun 2025 09:00:00 GMT</pubDate>
+            <guid isPermaLink="false">vimeo_5566778899</guid>
+            <media:content url="http://192.168.12.244/videos/the_calling.mp4" type="video/mp4" duration="300">
+                <media:title>Sample Vimeo Video 4</media:title>
+                <media:description>This is a different sample video hosted on Vimeo.</media:description>
+                <media:thumbnail url="https://i.vimeocdn.com/video/5566778899_640.jpg"/>
+            </media:content>    
+            <media:type>movie</media:type>
+        </item> 
+
+        <!-- Video Item 5 -->       
+        <item>
+            <title>Sample Vimeo Video 5</title>
+            <link>https://vimeo.com/9988776655</link>
+            <description>This is a unique sample video hosted on Vimeo.</description>
+            <pubDate>Mon, 15 Jun 2025 11:30:00 GMT</pubDate>
+            <guid isPermaLink="false">vimeo_9988776655</guid>
+            <media:content url="http://192.168.12.244/videos/the_calling.mp4" type="video/mp4" duration="360">
+                <media:title>Sample Vimeo Video 5</media:title>
+                <media:description>This is a unique sample video hosted on Vimeo.</media:description>
+                <media:thumbnail url="https://i.vimeocdn.com/video/9988776655_640.jpg"/>
+            </media:content>
+            <media:type>movie</media:type>
+        </item>
+
+
+    </channel>
+</rss>
