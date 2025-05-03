@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>球面三角定位 (十進位 DD)</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 650px; margin: 20px auto; line-height: 1.45; }
+    label { display: block; margin-top: 10px; }
+    input { width: 100%; padding: 6px; margin-top: 4px; box-sizing: border-box; }
+    button { margin-top: 18px; padding: 10px 22px; font-size: 16px; cursor: pointer; }
+    .result { margin-top: 24px; font-weight: bold; }
+    .error { color: #c00; }
+  </style>
+</head>
+<body>
+  <h1>球面三角定位</h1>
+  <p>請輸入三個已知點的經緯度 (十進位度 DD) 以及它們到目標點 <em>T</em> 的球面弧長距離 (公里)，程式將回傳 <strong>T</strong> 的經緯度 (DD)。</p>
+
+  <!-- 參考點 X -->
+  <fieldset>
+    <legend><strong>點 X</strong></legend>
+    <label>緯度 (DD) <input id="latX" type="number" step="any" placeholder="25.0330"></label>
+    <label>經度 (DD) <input id="lonX" type="number" step="any" placeholder="121.5654"></label>
+    <label>距離 X→T (km) <input id="dX" type="number" step="any"></label>
+  </fieldset>
+
+  <!-- 參考點 Y -->
+  <fieldset>
+    <legend><strong>點 Y</strong></legend>
+    <label>緯度 (DD) <input id="latY" type="number" step="any" placeholder="24.1500"></label>
+    <label>經度 (DD) <input id="lonY" type="number" step="any" placeholder="120.6836"></label>
+    <label>距離 Y→T (km) <input id="dY" type="number" step="any"></label>
+  </fieldset>
+
+  <!-- 參考點 Z -->
+  <fieldset>
+    <legend><strong>點 Z</strong></legend>
+    <label>緯度 (DD) <input id="latZ" type="number" step="any" placeholder="23.0000"></label>
+    <label>經度 (DD) <input id="lonZ" type="number" step="any" placeholder="120.2000"></label>
+    <label>距離 Z→T (km) <input id="dZ" type="number" step="any"></label>
+  </fieldset>
+
+  <label>地球半徑 R (km) <input id="radius" type="number" value="6371" step="any"></label>
+
+  <button onclick="compute()">計算 T 的經緯度</button>
+  <div id="output" class="result"></div>
+
+  <script>
+    /* -------------------------------------------------------------
+       線性代數輔助函式
+    ------------------------------------------------------------- */
+    function toVec(latDeg, lonDeg) {
+      const lat = latDeg * Math.PI / 180;
+      const lon = lonDeg * Math.PI / 180;
+      return [
+        Math.cos(lat) * Math.cos(lon),
+        Math.cos(lat) * Math.sin(lon),
+        Math.sin(lat)
+      ];
+    }
+
+    // 3×3 矩陣轉置
+    function transpose(m) {
+      return [
+        [m[0][0], m[1][0], m[2][0]],
+        [m[0][1], m[1][1], m[2][1]],
+        [m[0][2], m[1][2], m[2][2]]
+      ];
+    }
+
+    // 3×3 與 3×3 相乘
+    function matMul(A, B) {
+      const res = Array.from({ length: 3 }, () => Array(3).fill(0));
+      for (let i = 0; i < 3; ++i) {
+        for (let j = 0; j < 3; ++j) {
+          for (let k = 0; k < 3; ++k) res[i][j] += A[i][k] * B[k][j];
+        }
+      }
+      return res;
+    }
+
+    // 3×3 與向量相乘
+    function matVec(A, v) {
+      return [
+        A[0][0] * v[0] + A[0][1] * v[1] + A[0][2] * v[2],
+        A[1][0] * v[0] + A[1][1] * v[1] + A[1][2] * v[2],
+        A[2][0] * v[0] + A[2][1] * v[1] + A[2][2] * v[2]
+      ];
+    }
+
+    // 3×3 伴隨/行列式反矩陣（若可逆）
+    function invert3(M) {
+      const [[a, b, c], [d, e, f], [g, h, i]] = M;
+      const det = a * (e * i - f * h) - b * (d * i - f * g) + c * (d * h - e * g);
+      if (Math.abs(det) < 1e-12) throw new Error('3 個參考點幾乎共線／共面，矩陣不可逆');
+      const invDet = 1 / det;
+      return [
+        [(e * i - f * h) * invDet, (c * h - b * i) * invDet, (b * f - c * e) * invDet],
+        [(f * g - d * i) * invDet, (a * i - c * g) * invDet, (c * d - a * f) * invDet],
+        [(d * h - e * g) * invDet, (b * g - a * h) * invDet, (a * e - b * d) * invDet]
+      ];
+    }
+
+    // 正規化向量
+    function normalize(v) {
+      const n = Math.hypot(...v);
+      if (n === 0) throw new Error('零向量無法正規化');
+      return v.map(x => x / n);
+    }
+
+    // 若 A 不可逆，使用 Tikhonov 正則化 (λ I)
+    function solveRegularized(A, b, lambda = 1e-8) {
+      const At = transpose(A);
+      let G = matMul(At, A);
+      // 加 λ I
+      for (let i = 0; i < 3; ++i) G[i][i] += lambda;
+      const Ginv = invert3(G);
+      const Atb = matVec(At, b);
+      return matVec(Ginv, Atb);
+    }
+
+    /* -------------------------------------------------------------
+       主計算流程
+    ------------------------------------------------------------- */
+    function compute() {
+      const out = document.getElementById('output');
+      out.className = 'result';
+      try {
+        // 讀取輸入
+        const latX = Number(document.getElementById('latX').value);
+        const lonX = Number(document.getElementById('lonX').value);
+        const latY = Number(document.getElementById('latY').value);
+        const lonY = Number(document.getElementById('lonY').value);
+        const latZ = Number(document.getElementById('latZ').value);
+        const lonZ = Number(document.getElementById('lonZ').value);
+        const dX = Number(document.getElementById('dX').value);
+        const dY = Number(document.getElementById('dY').value);
+        const dZ = Number(document.getElementById('dZ').value);
+        const R = Number(document.getElementById('radius').value);
+
+        if (isNaN(latX) || isNaN(lonX) || isNaN(latY) || isNaN(lonY) || isNaN(latZ) || isNaN(lonZ))
+          throw new Error('請填入完整的經緯度 (十進位)');
+        if (isNaN(dX) || isNaN(dY) || isNaN(dZ))
+          throw new Error('請填入三個距離 (公里)');
+
+        // 轉成單位向量
+        const X = toVec(latX, lonX);
+        const Y = toVec(latY, lonY);
+        const Z = toVec(latZ, lonZ);
+
+        // 球心角 (弧度)
+        const aX = dX / R;
+        const aY = dY / R;
+        const aZ = dZ / R;
+        const b = [Math.cos(aX), Math.cos(aY), Math.cos(aZ)];
+
+        // 建立矩陣 A
+        const A = [X, Y, Z];
+        let tLin;
+        try {
+          // 儘量用精確反矩陣 (快)
+          const Ainv = invert3(A);
+          tLin = matVec(Ainv, b);
+        } catch (e) {
+          // 不可逆時使用正則化解
+          tLin = solveRegularized(A, b);
+        }
+
+        const t = normalize(tLin);
+
+        let latT = Math.asin(t[2]) * 180 / Math.PI;
+        let lonT = Math.atan2(t[1], t[0]) * 180 / Math.PI;
+        // 將經度正規化至 (-180, 180]
+        if (lonT > 180) lonT -= 360;
+        if (lonT <= -180) lonT += 360;
+
+        out.textContent = `目標點 T → 緯度 ${latT.toFixed(6)}°  經度 ${lonT.toFixed(6)}°`;
+      } catch (err) {
+        out.className = 'result error';
+        out.textContent = '錯誤: ' + err.message;
+      }
+    }
+  </script>
+</body>
+</html>
