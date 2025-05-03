@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Địa Danh Việt Nam Nổi Tiếng</title>
+    <style>
+        :root {
+            --primary-color: #2c5f2d;
+            --secondary-color: #97bc62;
+            --bg-color: #f0f8ff;
+            --text-color: #333;
+            --card-bg: white;
+            --header-bg: linear-gradient(45deg, #2c5f2d, #1e3d1f);
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #4CAF50;
+            --secondary-color: #81C784;
+            --bg-color: #1a1a1a;
+            --text-color: #e0e0e0;
+            --card-bg: #2d2d2d;
+            --header-bg: linear-gradient(45deg, #1a3d1b, #0d2d0e);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: var(--header-bg);
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .video-section {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .places-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .place-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .place-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 4px solid var(--primary-color);
+        }
+
+        .card-title {
+            padding: 1.5rem;
+            text-align: center;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            width: 90%;
+            max-width: 800px;
+            margin: 2rem auto;
+            border-radius: 15px;
+            padding: 2rem;
+            position: relative;
+            animation: modalOpen 0.5s ease;
+        }
+
+        @keyframes modalOpen {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 1.5rem;
+            top: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        .modal-body {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .modal-info {
+            line-height: 1.8;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            right: 2rem;
+            bottom: 2rem;
+            padding: 1rem;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .modal-body {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="theme-toggle" onclick="toggleTheme()">🌓</div>
+
+    <header class="header">
+        <h1>10 Địa Danh Nổi Tiếng Việt Nam</h1>
+        <p>Từ Bắc chí Nam - Hành trình khám phá diệu kỳ</p>
+    </header>
+
+    <div class="video-section">
+    <div class="video-container">
+        <iframe 
+            src="https://www.youtube.com/embed/YHBqLih80uw?si=jMcDmLDfeQZSMK2B" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen>
+        </iframe>
+    </div>
+</div>
+
+    <div class="container">
+        <div class="places-grid"></div>
+    </div>
+
+    <footer>
+        <p>Dự án được thực hiện bởi:</p>
+        <p>Nguyễn Thị Ngọc Hà & Nguyễn Đan Giang</p>
+        <p>Lớp 12T3 - Trường THPT Hà Huy Tập</p>
+        <p>Năm học 2023-2024</p>
+    </footer>
+
+    <script>
+        const placesData = [
+            {
+                id: 1,
+                name: "Vịnh Hạ Long",
+                image: "https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2023/3/9/1155741/Du-Lich-Vinh-Ha-Long-01.jpg",
+                description: "Di sản thiên nhiên thế giới với hơn 1.600 hòn đảo đá vôi kỳ vĩ, điểm đến không thể bỏ qua khi đến miền Bắc Việt Nam.",
+                highlights: [
+                    "Diện tích: 1.553 km²",
+                    "Năm UNESCO công nhận: 1994",
+                    "Hoạt động: Du thuyền, chèo kayak, khám phá hang động"
+                ],
+                location: "Quảng Ninh",
+                map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59539.411823911!2d107.04804279533657!3d20.910452446171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314a5845b818b7c5%3A0x6a6395055c86c6e0!2zVmluaCBI4bqgIExvbmc!5e0!3m2!1svi!2s!4v1718736755419!5m2!1svi!2s"
+            },
+            {
+                id: 2,
+                name: "Sa Pa",
+                image: "https://holivntravel.com/wp-content/uploads/2024/09/Sapa-Vietnam-04-1067x800.webp",
+                description: "Thị trấn sương mù với những thửa ruộng bậc thang vàng óng và văn hóa độc đáo của các dân tộc thiểu số.",
+                highlights: [
+                    "Độ cao: 1.600m so với mực nước biển",
+                    "Nhiệt độ trung bình: 15-18°C",
+                    "Địa điểm nổi bật: Đỉnh Fansipan, Bản Cát Cát"
+                ],
+                location: "Lào Cai",
+                map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29734.8164066521!2d103.81671770561106!3d22.33649562695606!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x36cb97e0a14533c5%3A0x7e46f1c2e5c7bdc0!2zU2EgUGEsIFNhIFBhLCBMw6BvIENhaQ!5e0!3m2!1svi!2s!4v1718736844555!5m2!1svi!2s"
+            },
+            {
+                id: 3,
+                name: "Tràng An",
+                image: "https://images.vietnamtourism.gov.vn/vn//images/2021/trang_an.jpg",
+                description: "Quần thể danh thắng hội tụ núi non, sông nước và di tích lịch sử, 'Vịnh Hạ Long trên cạn' của miền Bắc.",
+                highlights: [
+                    "Diện tích: 12.000 ha",
+                    "Năm UNESCO công nhận: 2014",
+                    "Đặc trưng: Hệ thống hang động, thung lũng"
+                ],
+                location: "Ninh Bình",
+                map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3727.023519029287!2d105.91397281540299!3d20.94034269584368!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac3d5d5f33b5%3A0x6a46f6c2a1d1b839!2zVHLhuqduIEFu!5e0!3m2!1svi!2s!4v1719308926150!5m2!1svi!2s"
+            },
+            {
+                id: 4,
+                name: "Phong Nha - Kẻ Bàng",
+                image: "https://cms.junglebosstours.com/assets/78ecd446-85f1-417f-a0ef-4045fc245f43?width=1920&height=1280",
+                description: "Vườn quốc gia có hệ thống hang động lớn nhất thế giới với hang Sơn Đoòng kỳ vĩ.",
+                highlights: [
+                    "Diện tích: 885 km²",
+                    "Năm UNESCO công nhận: 2003",
+                    "Độ dài hang Sơn Đoòng: ~9km"
+                ],
+                location: "Quảng Bình",
+                map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15320.7005178477!2d106.2849693!3d16.5721074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3140c6928f41baf3%3A0x5b62d1c3e1a01a3d!2zUGhvbmcgTmhhIC0gS2XhuqFuZyBCw6BuZw!5e0!3m2!1svi!2s!4v1718736994326!5m2!1svi!2s"
+            },
+            {
+                id: 5,
+                name: "Cố Đô Huế",
+                image: "https://lh7-us.googleusercontent.com/uuZXIssTAzsFr7Oz0uicYufgIVS7kkOQ9RWGrOW4D9rRzJtYqIpcw0eAffxpFK6aYgbBi-td3oznZH6L_qi07j_VsP_NQgb_ZrBARitaJBhITslpxMI5JemZ1UJcV2vTUE5NZDoNY6w-fp6aUM7vc8A",
+                description: "Di sản văn hóa thế giới với hệ thống lăng tẩm, đền đài và ẩm thực cung đình độc đáo.",
+                highlights: [
+                    "Diện tích: 520 ha",
+                    "Năm UNESCO công nhận: 1993",
+                    "Công trình tiêu biểu: Đại Nội, Lăng Khải Định"
+                ],
+                location: "Thừa Thiên Huế",
+                map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61344.49863117367!2d107.5393244!3d16.4637138!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3141f1239aab5d09%3A0x3d375fff12454f5a!2zxJDDoCBIdSDEkA!5e0!3m2!1svi!2s!4v1719309131395!5m2!1svi!2s"
+            },
+            {
+                id: 6,
+                name: "Hội An",
+                image: "https://images.unsplash.com/photo-1566378246598-5b11a0d486cc",
+                description: "Phố cổ UNESCO với kiến trúc giao thoa Á-Âu, những chiếc đèn lồng rực rỡ và ẩm thực đặc sắc.",
+                highlights: [
+                    "Diện tích: 60 km²",
+                    "Năm UNESCO công nhận: 1999",
+                    "Đặc sản: Cao lầu, bánh mỳ Phượng"
+                ],
+                location: "Quảng Nam",
+                map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61349.65898878522!2d108.3080403!3d15.8800583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420dd4e13551c3%3A0x5949b8b74b0dda63!2zSOG7kyBBbiwgUW3huqFuZyBOYW0!5e0!3m2!1svi!2s!4v1718737076247!5m2!1svi!2s"
+            },
+            {
+                id: 7,
+                name: "Đà Lạt",
+                image: "https://hoanghamobile.com/tin-tuc/wp-content/uploads/2024/07/anh-da-lat.jpg",
+                description: "Thành phố ngàn hoa với khí hậu mát mẻ quanh năm, kiến trúc Pháp cổ và cảnh quan thiên nhiên tươi đẹp.",
+                highlights: [
+                    "Độ cao: 1.500m so với mực nước biển",
+                    "Nhiệt độ trung bình: 15-24°C",
+                    "Địa điểm nổi tiếng: Hồ Xuân Hương, Thung lũng Tình Yêu"
+                ],
+                location: "Lâm Đồng",
+                map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50120.56014798447!2d108.4222747!3d11.9403253!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317113111a8855c9%3A0x317a7d4c950d334!2zxJDDoCBM4bqhYw!5e0!3m2!1svi!2s!4v1719309261731!5m2!1svi!2s"
+            },
+            {
+                id: 8,
+                name: "Mũi Né",
+                image: "https://static.vinwonders.com/production/du-lich-mui-ne-1.webp",
+                description: "Bãi biển nổi tiếng với những đồi cát đỏ hùng vĩ và là thiên đường của các môn thể thao biển.",
+                highlights: [
+                    "Chiều dài bãi biển: 15km",
+                    "Hoạt động: Lướt ván, trượt cát",
+                    "Đặc sản: Hải sản tươi sống"
+                ],
+                location: "Bình Thuận",
+                map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3890.231156396122!2d108.2711973154061!3d10.9637549922218!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31767a6b64b4c605%3A0x4f4aee6c3a4a6c6a!2zTcO5aSBOw6o!5e0!3m2!1svi!2s!4v1719309375602!5m2!1svi!2s"
+            },
+            {
+                id: 9,
+                name: "Phú Quốc",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR00Frrso3srLuHpeu2Uv6pUURYWGXNXo9ihA&s",
+                description: "Đảo Ngọc với những bãi biển hoang sơ, rừng nguyên sinh và làng chài nước mắm truyền thống.",
+                highlights: [
+                    "Diện tích: 574 km²",
+                    "Năm UNESCO công nhận: 2006",
+                    "Đặc sản: Nước mắm, hồ tiêu, ngọc trai"
+                ],
+                location: "Kiên Giang",
+                map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31372.37551444048!2d103.9632977!3d10.2383518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a780182e9a2e51%3A0x5c1b57175df9b6e8!2zUGjDuiBRdSBNYWk!5e0!3m2!1svi!2s!4v1718737158067!5m2!1svi!2s"
+            },
+            {
+                id: 10,
+                name: "Cần Thơ",
+                image: "https://ik.imagekit.io/tvlk/blog/2021/11/dia-diem-du-lich-can-tho-cover.jpg",
+                description: "Trung tâm đồng bằng sông Cửu Long với chợ nổi Cái Răng và vườn trái cây trù phú.",
+                highlights: [
+                    "Diện tích: 1.409 km²",
+                    "Dân số: ~1.5 triệu người",
+                    "Đặc sản: Lẩu mắm, bánh xèo, trái cây nhiệt đới"
+                ],
+                location: "Cần Thơ",
+                map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.7156709160733!2d105.7725804153936!3d10.045646092834703!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a0883e0d0eec75%3A0x5099a7273356a80!2zxJDDoCBOaMahIEPhuqFuIFRo4buL!5e0!3m2!1svi!2s!4v1719309488366!5m2!1svi!2s"
+            }
+        ];
+
+        // Render places
+        const grid = document.querySelector('.places-grid');
+        placesData.forEach(place => {
+            grid.innerHTML += `
+                <div class="place-card" onclick="openModal(${place.id})">
+                    <img class="card-image" src="${place.image}" alt="${place.name}">
+                    <div class="card-title">${place.name}</div>
+                </div>
+            `;
+        });
+
+        // Create modals
+        placesData.forEach(place => {
+            document.body.innerHTML += `
+                <div class="modal" id="modal-${place.id}">
+                    <div class="modal-content">
+                        <span class="close-btn" onclick="closeModal()">&times;</span>
+                        <h2>${place.name}</h2>
+                        <div class="modal-body">
+                            <div class="modal-info">
+                                <p>${place.description}</p>
+                                <h3>Đặc điểm nổi bật</h3>
+                                <ul>${place.highlights.map(h => `<li>${h}</li>`).join('')}</ul>
+                                <h3>Vị trí</h3>
+                                <p>📍 ${place.location}</p>
+                            </div>
+                            <div>
+                                <h3>Bản đồ</h3>
+                                <iframe 
+                                    src="${place.map}"
+                                    width="100%" 
+                                    height="300" 
+                                    style="border:0;"
+                                    loading="lazy">
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        function openModal(id) {
+            document.getElementById(`modal-${id}`).style.display = "block";
+        }
+
+        function closeModal() {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.style.display = "none";
+            });
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if(currentTheme === 'dark') {
+                body.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Đóng modal khi click bên ngoài
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                closeModal();
+            }
+        }
+
+        // Load theme khi khởi động
+        window.onload = function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if(savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+            }
+        }
+    </script>
+</body>
+</html>
