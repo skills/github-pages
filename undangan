@@ -1,0 +1,84 @@
+/yantichrist-site
+├── index.html
+├── style.css
+└── /images
+    └── background.jpg (kamu bisa ganti nanti)
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yantichrist</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <section class="hero">
+    <div class="overlay">
+      <h1>Yantichrist</h1>
+      <p>Perjalanan jiwa dalam gelap dan cahaya</p>
+    </div>
+  </section>
+
+  <section class="story">
+    <h2>Awal Cerita</h2>
+    <p>Kegelapan tak selalu jahat. Dalam sunyi, ia berbicara. Dalam gelap, ia membentuk kita...</p>
+  </section>
+
+  <section class="story alt">
+    <h2>Transformasi</h2>
+    <p>Ketika cahaya menyinari luka terdalam, lahirlah sesuatu yang baru. Bukan manusia biasa...</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Yantichrist Story</p>
+  </footer>
+</body>
+</html>
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  color: white;
+  background-color: #000;
+}
+
+.hero {
+  height: 100vh;
+  background: url('images/background.jpg') no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 40px;
+}
+
+.overlay h1 {
+  font-size: 4em;
+  margin: 0;
+}
+
+.overlay p {
+  font-size: 1.5em;
+}
+
+.story {
+  padding: 100px 40px;
+  background-color: #111;
+  text-align: center;
+}
+
+.story.alt {
+  background-color: #222;
+}
+
+footer {
+  background-color: #000;
+  text-align: center;
+  padding: 30px;
+  font-size: 0.9em;
+}
