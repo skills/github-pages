@@ -1,0 +1,3 @@
+console.log('Bienvenue sur XamsaMbeur');
+body { font-family: Arial, sans-serif; background-color: #fff; color: #000; }
+<!DOCTYPE html><html><head><title>XamsaMbeur</title></head><body><h1>Bienvenue sur XamsaMbeur</h1></body></html>
