@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mohammad Saeed Rad - Contact Info</title>
+</head>
+<body style="font-family: sans-serif; line-height: 1.6; padding: 20px;">
+    <h1>Mohammad Saeed Rad</h1>
+    <p><strong>Chairman of the Board</strong></p>
+
+    <h2>📍 Address</h2>
+    <p>
+        Eastern Third Unit, No. 2, Jamal Alley<br>
+        South Kheradmand St.,<br>
+        Karim Khan Zand St., Tehran, IRAN
+    </p>
+
+    <p>
+        📍 <strong>View location on Google Maps:</strong><br>
+        <code>https%3A%2F%2Fmaps.app.goo.gl%2FVF9GwPyKnQFzxXeu5%3Fg_st%3Dcom.google.maps.preview.copy</code>
+    </p>
+
+    <h2>📞 Phone Numbers</h2>
+    <p>Office: +98 (21) 8830 8010</p>
+    <p>Mobile: +98 (912) 0644 964</p>
+
+    <h2>✉️ Email</h2>
+    <p>Saeed.rad@radin-tejarat.ir</p>
+</body>
+</html>
