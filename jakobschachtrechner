@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Jakob Schacht Strategie Tools</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #f1c40f;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #f1c40f;
+      text-align: center;
+    }
+
+    .rechner {
+      background-color: #1b263b;
+      border: 2px solid #f1c40f;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 30px auto;
+      max-width: 500px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #f1c40f;
+      border-radius: 5px;
+      background-color: #415a77;
+      color: #f1c40f;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 15px;
+      background-color: #f1c40f;
+      color: #0d1b2a;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #e1b70d;
+    }
+
+    .result {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Jakob Schacht Strategie Tools</h1>
+
+  <!-- Rechner 1: Anfangsinvestition -->
+  <div class="rechner">
+    <h2>1. Start-Investitionsrechner</h2>
+    <label for="capital">Gesamtkapital (€):</label>
+    <input type="number" id="capital">
+
+    <label for="months">Anlagedauer (Monate):</label>
+    <input type="number" id="months">
+
+    <button onclick="calculateInitialInvestment()">Berechne Start-Investition</button>
+    <div class="result" id="initialResult"></div>
+  </div>
+
+  <!-- Rechner 2: Jakob-Schacht-Rechner -->
+  <div class="rechner">
+    <h2>2. Monatlicher Investitionsrechner</h2>
+    <label for="lastPrice">Kurs letzter Monat:</label>
+    <input type="number" id="lastPrice">
+
+    <label for="currentPrice">Aktueller Kurs:</label>
+    <input type="number" id="currentPrice">
+
+    <label for="initialInvestment">Letzte Investition (€):</label>
+    <input type="number" id="initialInvestment">
+
+    <button onclick="calculateNextInvestment()">Berechne nächste Investition</button>
+    <div class="result" id="investmentResult"></div>
+  </div>
+
+  <!-- Rechner 3: Crash-Simulator -->
+  <div class="rechner">
+    <h2>3. Crash-Simulator</h2>
+    <label for="portfolioValue">Portfoliowert aktuell (€):</label>
+    <input type="number" id="portfolioValue">
+
+    <label for="performance">Performance (% z.B. -20 für Verlust):</label>
+    <input type="number" id="performance">
+
+    <label for="crash">Geplanter Crash in %:</label>
+    <input type="number" id="crash">
+
+    <button onclick="simulateCrash()">Simuliere Crash</button>
+    <div class="result" id="crashResult"></div>
+  </div>
+
+  <script>
+    function calculateInitialInvestment() {
+      const capital = parseFloat(document.getElementById('capital').value);
+      const months = parseInt(document.getElementById('months').value);
+      if (isNaN(capital) || isNaN(months) || months < 1) {
+        document.getElementById('initialResult').textContent = "Bitte gültige Werte eingeben.";
+        return;
+      }
+      const startInvest = capital * 0.10;
+      const monthly = (capital * 0.90) / months;
+      document.getElementById('initialResult').textContent =
+        `Start-Investition: €${startInvest.toFixed(2)} | Monatliche Investition: €${monthly.toFixed(2)}`;
+    }
+
+    function calculateNextInvestment() {
+      const lastPrice = parseFloat(document.getElementById('lastPrice').value);
+      const currentPrice = parseFloat(document.getElementById('currentPrice').value);
+      const lastInvestment = parseFloat(document.getElementById('initialInvestment').value);
+      if (isNaN(lastPrice) || isNaN(currentPrice) || isNaN(lastInvestment) || lastPrice <= 0) {
+        document.getElementById('investmentResult').textContent = "Bitte gültige Werte eingeben.";
+        return;
+      }
+      const ratio = lastPrice / currentPrice;
+      const newInvestment = lastInvestment * ratio;
+      document.getElementById('investmentResult').textContent =
+        `Nächste Investition: €${newInvestment.toFixed(2)}`;
+    }
+
+    function simulateCrash() {
+      const portfolioValue = parseFloat(document.getElementById('portfolioValue').value);
+      const performance = parseFloat(document.getElementById('performance').value);
+      const crash = parseFloat(document.getElementById('crash').value);
+      if (isNaN(portfolioValue) || isNaN(performance) || isNaN(crash)) {
+        document.getElementById('crashResult').textContent = "Bitte gültige Werte eingeben.";
+        return;
+      }
+      const currentValue = portfolioValue * (1 + performance / 100);
+      const crashedValue = currentValue * (1 - crash / 100);
+      document.getElementById('crashResult').textContent =
+        `Nach dem Crash ist dein Portfolio: €${crashedValue.toFixed(2)} wert.`;
+    }
+  </script>
+
+</body>
+</html>
