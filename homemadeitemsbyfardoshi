@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Homemade Food and Spices by Fardoshi - Authentic, Natural, Delicious">
+    <title>Fardoshi Homemade Items</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Open+Sans&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Open Sans', sans-serif;
+            background: #fffaf0;
+            color: #333;
+        }
+
+        header {
+            background: #8b4513;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        nav {
+            background-color: #a0522d;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .hero {
+            background-image: url('https://images.unsplash.com/photo-1512058564366-c9e3ff2e2f30');
+            background-size: cover;
+            background-position: center;
+            padding: 5rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            padding: 4rem 2rem;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .product {
+            border: 1px solid #d2691e;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #fff8dc;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .product img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product h3 {
+            margin: 1rem 0 0.5rem;
+        }
+
+        .product p {
+            padding: 0 1rem;
+        }
+
+        .product button {
+            background-color: #8b4513;
+            color: white;
+            border: none;
+            padding: 1rem;
+            width: 100%;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        footer {
+            background-color: #8b4513;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Fardoshi Homemade Items</h1>
+        <p>Natural Spices and Homemade Food Delivered with Love</p>
+    </header>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#products">Products</a>
+        <a href="#order">Order</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <section class="hero">
+        <h2>Flavorful. Fresh. Authentic.</h2>
+        <p>Discover our range of handcrafted spices and homemade delicacies</p>
+    </section>
+
+    <section class="section" id="products">
+        <h2>Our Products</h2>
+        <div class="products">
+            <div class="product">
+                <img src="https://images.unsplash.com/photo-1604909052877-cb22b24fdee6" alt="Spices">
+                <h3>Mixed Spices Pack</h3>
+                <p>Blend of traditional spices for everyday cooking.</p>
+                <button>Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://images.unsplash.com/photo-1601050690140-bebc99f42874" alt="Chutney">
+                <h3>Mango Chutney</h3>
+                <p>Sweet and spicy homemade mango chutney.</p>
+                <button>Add to Cart</button>
+            </div>
+            <!-- More products can be added here -->
+        </div>
+    </section>
+
+    <section class="section" id="order">
+        <h2>Place Your Order</h2>
+        <p>Customize your order, select quantity and pay securely.</p>
+        <p>To integrate order and payment, consider using platforms like <a href="https://www.shopify.com/" target="_blank">Shopify</a>, <a href="https://woocommerce.com/" target="_blank">WooCommerce</a>, or <a href="https://stripe.com/payments" target="_blank">Stripe</a>.</p>
+    </section>
+
+    <section class="section" id="contact">
+        <h2>Contact Us</h2>
+        <p>Email: fardoshi@homemade.com | Phone: +123 456 7890</p>
+        <p>Follow us on Facebook and Instagram for latest updates!</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Fardoshi Homemade Items. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
