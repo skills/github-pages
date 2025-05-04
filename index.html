@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مصطفى أحمد سيد - صفحة احترافية</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      animation: fadeIn 2s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 60px;
+      background: linear-gradient(90deg, #ff6a00, #ee0979);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+      margin-bottom: 30px;
+      animation: slideIn 1.5s ease;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .info {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 25px 35px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      text-align: center;
+      backdrop-filter: blur(6px);
+      transition: transform 0.3s;
+    }
+
+    .info:hover {
+      transform: scale(1.03);
+    }
+
+    .info span {
+      display: block;
+      margin: 10px 0;
+      font-size: 22px;
+    }
+
+    .links {
+      margin-top: 25px;
+    }
+
+    .links a {
+      text-decoration: none;
+      color: white;
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      padding: 12px 20px;
+      margin: 10px;
+      border-radius: 30px;
+      display: inline-block;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: 0.3s;
+    }
+
+    .links a:hover {
+      background: linear-gradient(90deg, #0072ff, #00c6ff);
+      transform: scale(1.05);
+    }
+
+    .links i {
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>My Professional Page</h1>
+
+  <div class="info">
+    <span><strong>Name:</strong> Mostafa Ahmed Sayed</span>
+    <span><strong>Code:</strong> 20231328</span>
+    <span><strong>Group:</strong> B</span>
+    <span><strong>Phone:</strong> 01150336760</span>
+  </div>
+
+  <div class="links">
+    <a href="https://wa.me/201150336760" target="_blank">
+      <i class="fab fa-whatsapp"></i> WhatsApp
+    </a>
+    <a href="https://www.facebook.com/share/19hvEnyEoR/?mibextid=qi2Omg" target="_blank">
+      <i class="fab fa-facebook"></i> Facebook
+    </a>
+  </div>
+
+</body>
+</html>
