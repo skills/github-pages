@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OLDTOWN WRECKERS - Cash for Cars Melbourne</title>
+  <meta name="description" content="OLDTOWN WRECKERS offers fast cash for cars and free car removals across Melbourne. Sell your car today!">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background: #111;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    header p {
+      margin: 5px 0;
+    }
+    section {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .services ul {
+      list-style: none;
+      padding: 0;
+    }
+    .services li {
+      background: #fff;
+      margin: 10px 0;
+      padding: 15px;
+      border-left: 5px solid #007bff;
+    }
+    .contact form {
+      display: flex;
+      flex-direction: column;
+    }
+    .contact input, .contact textarea {
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+    }
+    .contact button {
+      padding: 10px;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    .map {
+      margin-top: 20px;
+    }
+    footer {
+      background: #222;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>OLDTOWN WRECKERS</h1>
+  <p>Call Us: <strong>0420 714 660</strong></p>
+</header>
+
+<section class="about">
+  <h2>About OLDTOWN WRECKERS</h2>
+  <p>OLDTOWN WRECKERS is Melbourne’s reliable choice for fast cash for cars and hassle-free car removals. We buy all vehicles — any condition — and offer free towing across all suburbs. Eco-friendly, fast, and honest service every time.</p>
+</section>
+
+<section class="services">
+  <h2>Our Services</h2>
+  <ul>
+    <li>Cash for Cars Melbourne</li>
+    <li>Free Car Removals</li>
+    <li>Wrecking All Makes and Models</li>
+    <li>Servicing All Melbourne Suburbs</li>
+  </ul>
+</section>
+
+<section class="contact">
+  <h2>Contact Us</h2>
+  <form action="https://formsubmit.co/YOUR_EMAIL@example.com" method="POST">
+    <input type="text" name="name" placeholder="Your Name" required />
+    <input type="email" name="email" placeholder="Your Email" required />
+    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+  <div class="map">
+    <iframe src="https://maps.google.com/maps?q=Melbourne&t=&z=13&ie=UTF8&iwloc=&output=embed"
+            width="100%" height="300" style="border:0;" allowfullscreen loading="lazy"></iframe>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 OLDTOWN WRECKERS. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
