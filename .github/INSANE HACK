@@ -1,0 +1,164 @@
+-- Insane Hack Universal v6.0
+-- Compatible with most games
+-- Mobile/PC optimized
+
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local Camera = workspace.CurrentCamera
+
+-- Configuration
+local Settings = {
+    Aimbot = {
+        Enabled = false,
+        FOV = 60,
+        Smoothness = 0.25,
+        TeamCheck = true,
+        Keybind = Enum.KeyCode.Q
+    },
+    ESP = {
+        Enabled = false,
+        Boxes = true,
+        Names = true,
+        Distance = true,
+        TeamColor = Color3.new(0, 1, 0),
+        EnemyColor = Color3.new(1, 0, 0)
+    },
+    Player = {
+        GodMode = false,
+        Speed = 16,
+        JumpPower = 50,
+        Noclip = false,
+        Fly = false,
+        FlySpeed = 50
+    },
+    Combat = {
+        Triggerbot = false,
+        AutoClicker = false,
+        ClickSpeed = 10
+    }
+}
+
+-- UI Library
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI/main/Library.lua"))()
+local Window = Library.CreateLib("INSANE HACK", "DarkTheme")
+
+-- Tabs
+local MainTab = Window:NewTab("Main")
+local VisualTab = Window:NewTab("Visuals")
+local CombatTab = Window:NewTab("Combat")
+local PlayerTab = Window:NewTab("Player")
+
+-- Sections
+local AimbotSection = CombatTab:NewSection("Aimbot")
+local ESPSection = VisualTab:NewSection("ESP")
+local PlayerSection = PlayerTab:NewSection("Modifications")
+local CombatSection = CombatTab:NewSection("Combat")
+
+-- Aimbot
+AimbotSection:NewToggle("Enabled", "Toggles aimbot", function(state)
+    Settings.Aimbot.Enabled = state
+end)
+
+AimbotSection:NewSlider("FOV", "Aimbot field of view", 500, 20, function(value)
+    Settings.Aimbot.FOV = value
+end)
+
+-- ESP
+ESPSection:NewToggle("Enabled", "Toggles ESP", function(state)
+    Settings.ESP.Enabled = state
+    if not state then
+        ClearESP()
+    end
+end)
+
+ESPSection:NewToggle("Boxes", "Draw boxes around players", function(state)
+    Settings.ESP.Boxes = state
+end)
+
+-- Player
+PlayerSection:NewToggle("God Mode", "Makes you invincible", function(state)
+    Settings.Player.GodMode = state
+end)
+
+PlayerSection:NewSlider("Walk Speed", "Modify movement speed", 200, 16, function(value)
+    Settings.Player.Speed = value
+end)
+
+-- Combat
+CombatSection:NewToggle("Triggerbot", "Auto fires when aiming", function(state)
+    Settings.Combat.Triggerbot = state
+end)
+
+-- Functions
+local function GetClosestPlayer()
+    local closestPlayer = nil
+    local shortestDistance = Settings.Aimbot.FOV
+    
+    for _, player in pairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer and player.Character then
+            local humanoidRootPart = player.Character:FindFirstChild("HumanoidRootPart")
+            if humanoidRootPart then
+                local screenPoint, onScreen = Camera:WorldToViewportPoint(humanoidRootPart.Position)
+                if onScreen then
+                    local mousePos = UserInputService:GetMouseLocation()
+                    local distance = (Vector2.new(screenPoint.X, screenPoint.Y) - mousePos).Magnitude
+                    
+                    if distance < shortestDistance then
+                        if Settings.Aimbot.TeamCheck then
+                            if player.Team ~= LocalPlayer.Team then
+                                closestPlayer = player
+                                shortestDistance = distance
+                            end
+                        else
+                            closestPlayer = player
+                            shortestDistance = distance
+                        end
+                    end
+                end
+            end
+        end
+    end
+    
+    return closestPlayer
+end
+
+local function UpdateESP()
+    for _, player in pairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer and player.Character then
+            -- ESP drawing logic here
+        end
+    end
+end
+
+-- Main loop
+RunService.Heartbeat:Connect(function()
+    -- God mode
+    if Settings.Player.GodMode and LocalPlayer.Character then
+        LocalPlayer.Character:FindFirstChildOfClass("Humanoid").Health = 100
+    end
+    
+    -- Speed
+    if LocalPlayer.Character then
+        local humanoid = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+        if humanoid then
+            humanoid.WalkSpeed = Settings.Player.Speed
+            humanoid.JumpPower = Settings.Player.JumpPower
+        end
+    end
+    
+    -- Aimbot
+    if Settings.Aimbot.Enabled then
+        local target = GetClosestPlayer()
+        -- Aimbot logic
+    end
+    
+    -- ESP
+    if Settings.ESP.Enabled then
+        UpdateESP()
+    end
+end)
+
+-- Init
+Library:Init()
