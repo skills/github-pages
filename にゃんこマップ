@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>にゃんこマップ in 磯子区</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map { height: 500px; margin-bottom: 10px; }
+    .cat-list { margin-top: 10px; }
+    .cat-item { border: 1px solid #ccc; padding: 5px; margin-bottom: 5px; }
+    .color-box { display: inline-block; width: 10px; height: 10px; margin-right: 5px; }
+    #catDetails, #addCatForm { margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+<h1>にゃんこマップ（磯子区）</h1>
+<input type="text" id="searchBox" placeholder="名前で検索" oninput="renderCatList()" />
+<div id="map"></div>
+
+<h2>猫リスト</h2>
+<div class="cat-list" id="catList"></div>
+
+<!-- 猫の特徴編集 -->
+<div id="catDetails" style="display:none;">
+  <h3 id="detailName"></h3>
+  <label>特徴:<br>
+    <textarea id="catDescription" rows="3" cols="40"></textarea>
+  </label><br>
+  <button onclick="saveDescription()">保存</button>
+</div>
+
+<!-- 猫追加フォーム -->
+<div id="addCatForm" style="display:none;">
+  <h3>猫を追加</h3>
+  <label>名前: <input type="text" id="newName"></label><br>
+  <label>色: <input type="color" id="newColor" value="#ff6600"></label><br>
+  <label>写真アップロード: <input type="file" id="newPhotoFile" accept="image/*"></label><br>
+  <img id="previewImg" style="width:100px; display:none; margin-top:5px;"><br>
+  <button onclick="confirmAddCat()">追加する</button>
+</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+  const map = L.map('map', {
+    zoomControl: true,
+    maxZoom: 22
+  }).setView([35.4036, 139.6025], 16); // 磯子区周辺
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors',
+    maxZoom: 22
+  }).addTo(map);
+
+  let cats = [];
+  let currentCat = null;
+  let tempLatLng = null;
+  let uploadedImage = "";
+
+  // 地図クリックで猫追加フォームを表示
+  map.on('click', function(e) {
+    tempLatLng = e.latlng;
+    document.getElementById('addCatForm').style.display = 'block';
+    document.getElementById('previewImg').style.display = 'none';
+    uploadedImage = "";
+  });
+
+  document.getElementById('newPhotoFile').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file && file.type.startsWith("image/")) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        uploadedImage = e.target.result;
+        const img = document.getElementById('previewImg');
+        img.src = uploadedImage;
+        img.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  function confirmAddCat() {
+    const name = document.getElementById('newName').value;
+    const color = document.getElementById('newColor').value;
+    const photoUrl = uploadedImage;
+    if (!name || !photoUrl) return alert("名前と写真を入力してください");
+    addCat(name, tempLatLng.lat, tempLatLng.lng, color, photoUrl);
+    document.getElementById('addCatForm').style.display = 'none';
+    document.getElementById('newName').value = '';
+    document.getElementById('newPhotoFile').value = '';
+    document.getElementById('previewImg').style.display = 'none';
+    saveCats();
+  }
+
+  function addCat(name, lat, lng, color, photoUrl, description = "") {
+    const marker = L.circleMarker([lat, lng], {
+      radius: 8,
+      color: color,
+      fillColor: color,
+      fillOpacity: 0.8
+    }).addTo(map);
+
+    marker.on('click', () => {
+      document.getElementById('detailName').textContent = name;
+      document.getElementById('catDescription').value = description;
+      document.getElementById('catDetails').style.display = 'block';
+      currentCat = cat;
+    });
+
+    const cat = { name, lat, lng, color, photoUrl, description, marker };
+    cats.push(cat);
+    renderCatList();
+  }
+
+  function renderCatList() {
+    const list = document.getElementById('catList');
+    const keyword = document.getElementById('searchBox').value.toLowerCase();
+    list.innerHTML = '';
+
+    cats.forEach((cat, index) => {
+      if (!cat.name.toLowerCase().includes(keyword)) return;
+
+      const div = document.createElement('div');
+      div.className = 'cat-item';
+      div.innerHTML = `
+        <div><span class="color-box" style="background:${cat.color}"></span>${cat.name}</div>
+        <img src="${cat.photoUrl}" alt="${cat.name}" width="100"><br>
+        <button onclick="removeCat(${index})">削除</button>
+      `;
+      list.appendChild(div);
+    });
+  }
+
+  function removeCat(index) {
+    map.removeLayer(cats[index].marker);
+    cats.splice(index, 1);
+    renderCatList();
+    document.getElementById('catDetails').style.display = 'none';
+    saveCats();
+  }
+
+  function saveDescription() {
+    if (currentCat) {
+      currentCat.description = document.getElementById('catDescription').value;
+      alert('特徴を保存しました');
+      saveCats();
+    }
+  }
+
+  function saveCats() {
+    const data = cats.map(cat => ({
+      name: cat.name,
+      lat: cat.lat,
+      lng: cat.lng,
+      color: cat.color,
+      photoUrl: cat.photoUrl,
+      description: cat.description
+    }));
+    localStorage.setItem('cats', JSON.stringify(data));
+  }
+
+  function loadCats() {
+    const data = JSON.parse(localStorage.getItem('cats') || "[]");
+    data.forEach(cat => {
+      addCat(cat.name, cat.lat, cat.lng, cat.color, cat.photoUrl, cat.description);
+    });
+  }
+
+  loadCats();
+</script>
+</body>
+</html>
