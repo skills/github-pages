@@ -1,0 +1,127 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+<meta charset="UTF-8" />  
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
+<title>Trade App</title>  
+
+<!-- React, ReactDOM, Babel CDN -->  
+<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>  
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>  
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>  
+
+<!-- Style -->  
+<style>  
+  body {  
+    background-color: #f0f2f5;  
+    font-family: 'Helvetica Neue', sans-serif;  
+    margin: 0;  
+    padding: 20px;  
+  }  
+  .container {  
+    max-width: 400px;  
+    margin: auto;  
+    background-color: #fff;  
+    border-radius: 10px;  
+    padding: 30px;  
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);  
+  }  
+  .title {  
+    text-align: center;  
+    color: #333;  
+    margin-bottom: 20px;  
+  }  
+  .field {  
+    margin-bottom: 15px;  
+    display: flex;  
+    flex-direction: column;  
+  }  
+  label {  
+    margin-bottom: 8px;  
+    font-weight: 600;  
+    color: #555;  
+  }  
+  input {  
+    padding: 10px 12px;  
+    border: 1px solid #ccc;  
+    border-radius: 6px;  
+    font-size: 16px;  
+  }  
+  .buttonContainer {  
+    margin-top: 20px;  
+    display: flex;  
+    justify-content: center;  
+  }  
+  button {  
+    padding: 12px 30px;  
+    font-size: 16px;  
+    border: none;  
+    border-radius: 8px;  
+    cursor: pointer;  
+    transition: background-color 0.2s, transform 0.1s;  
+  }  
+  .startBtn {  
+    background-color: #28a745;  
+    color: white;  
+  }  
+  .startBtn:hover {  
+    background-color: #218838;  
+    transform: translateY(-2px);  
+  }  
+  .stopBtn {  
+    background-color: #dc3545;  
+    color: white;  
+  }  
+  .stopBtn:hover {  
+    background-color: #c82333;  
+    transform: translateY(-2px);  
+  }  
+</style>  
+</head>  
+<body>  
+
+<div id="root"></div>  
+
+<script type="text/babel">  
+  const { useState } = React;  
+
+  function App() {  
+    const [speed, setSpeed] = useState(1);  
+    const [percentage, setPercentage] = useState(10);  
+    const [isRunning, setIsRunning] = useState(false);  
+
+    const startTrading = async () => {  
+      await fetch('http://localhost:3000/start', {  
+        method: 'POST',  
+        headers: { 'Content-Type': 'application/json' },  
+        body: JSON.stringify({ speed, percentage })  
+      });  
+      setIsRunning(true);  
+    };  
+
+    const stopTrading = async () => {  
+      await fetch('http://localhost:3000/stop', {  
+        method: 'POST'  
+      });  
+      setIsRunning(false);  
+    };  
+
+    return (  
+      <div className="container">  
+        <h1 className="title">HE AI Trading App</h1>  
+        <div className="field">  
+          <label>Trade Speed (0-10 sec):</label>  
+          <input  
+            type="number"  
+            value={speed}  
+            min={0}  
+            max={10}  
+            onChange={(e) => setSpeed(Number(e.target.value))}  
+          />  
+        </div>  
+        <div className="field">  
+          <label>Percentage of Balance to Use (0-100%):</label>  
+          <input  
+            type="number"  
+            value={percentage}  
+            min={0
