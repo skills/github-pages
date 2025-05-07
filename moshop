@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MO Barbershop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            /* إضافة تدرج لوني أزرق وأبيض */
+            background: linear-gradient(135deg, #bbdefb, #ffffff); /* تدرج أزرق فاتح إلى أبيض */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            width: 80%;
+            max-width: 960px;
+            margin: 20px;
+            overflow: hidden;
+        }
+
+        .left-section {
+            width: 30%;
+            background-color: #ddd;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .left-section img {
+            width: 80%;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .left-section img:hover {
+            transform: scale(1.05);
+        }
+
+        .right-section {
+            width: 70%;
+            padding: 30px;
+            text-align: right;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            max-width: 150px;
+            height: auto;
+        }
+
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .service-item:last-child {
+            border-bottom: none;
+        }
+
+        .service-name {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .service-price {
+            color: #555;
+        }
+
+        .contact-info {
+            margin-top: 30px;
+            text-align: center;
+            color: #777;
+        }
+
+        /* تأثيرات إضافية للصور (يمكنك تخصيصها) */
+        .image-effect-1 { filter: grayscale(50%); }
+        .image-effect-2 { filter: sepia(30%); }
+        .image-effect-3 { filter: brightness(1.1); }
+        .image-effect-4 { filter: contrast(1.2); }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <div class="logo">
+                <img src="c:\Users\DELL\Desktop\WhatsApp Image 2025-05-07 at 20.03.04_45336ad0.jpg" alt="شعار MO Barbershop">
+            </div>
+            <img src="c:\Users\DELL\Desktop\WhatsApp Image 2025-03-23 at 14.07.07_2de9b88a.jpg" alt="صورة 1" class="image-effect-1">
+            <img src="c:\Users\DELL\Desktop\WhatsApp Image 2025-03-23 at 14.31.35_91de3979.jpg" alt="صورة 3" class="image-effect-3">
+        </div>
+        <div class="right-section">
+            <h2>قائمة الخدمات والأسعار</h2>
+            <div class="service-item">
+                <span class="service-name">شعر</span>
+                <span class="service-price">80</span>
+            </div>
+            <div class="service-item">
+                <span class="service-name">دقن</span>
+                <span class="service-price">60</span>
+            </div>
+            <div class="service-item">
+                <span class="service-name">استشوار</span>
+                <span class="service-price">50</span>
+            </div>
+            <div class="service-item">
+                <span class="service-name">شعر و دقن</span>
+                <span class="service-price">120</span>
+            </div>
+            <div class="service-item">
+                <span class="service-name">شعر و دقن واستشوار</span>
+                <span class="service-price">150</span>
+            </div>
+            <div class="service-item">
+                <span class="service-name">تنظيف بشره كمراحل</span>
+                <span class="service-price">80</span>
+            </div>
+            <div class="service-item">
+                <span class="service-name">تنظيف بشره 8 مراحل</span>
+                <span class="service-price">120</span>
+            </div>
+            <div class="service-item">
+                <span class="service-name">شمع</span>
+                <span class="service-price">50</span>
+            </div>
+            <div class="service-item">
+                <span class="service-name">صبغه سوده</span>
+                <span class="service-price">60</span>
+            </div>
+            <div class="service-item">
+                <span class="service-name">حمام زيت</span>
+                <span class="service-price">60</span>
+            </div>
+            <div class="service-item">
+                <span class="service-name">بروتين</span>
+                <span class="service-price">250</span>
+            </div>
+            <div class="service-item">
+                <span class="service-name">بروتين وحلاقه</span>
+                <span class="service-price">350</span>
+            </div>
+            <div class="service-item">
+                <span class="service-name">صبغه سيلفر</span>
+                <span class="service-price">350</span>
+            </div>
+            <div class="contact-info">
+                <p>للحجز والاستفسار:</p>
+                <p>📞 <a href="tel:01090259528">01090259528</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
