@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gus Toys - Mesa Modular Infantil</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-yellow-50 font-sans leading-relaxed tracking-wide text-gray-800">
+  <!-- Encabezado con logo -->
+  <header class="bg-yellow-300 p-6 shadow-md flex flex-col items-center">
+    <img src="gus marca.jpg" alt="Logo de Gus Toys" class="w-48 mb-4">
+    <h1 class="text-3xl font-bold text-center">Gus Toys</h1>
+    <p class="text-center text-lg italic">"Aprende, siente y juega con Gus"</p>
+  </header>
+
+  <!-- Presentación de la marca -->
+  <section class="max-w-5xl mx-auto mt-10 px-4">
+    <h2 class="text-2xl font-semibold mb-4">Nuestra Historia</h2>
+    <p class="mb-4">
+      Gus Toys nace de la pasión de Andreina Baños Gutiérrez y Sebastián Mora Herrera por crear juguetes que ayuden a los niños a desarrollarse sin depender de la tecnología. Nos inspiramos en el castor, un animal creativo, constructivo y lleno de imaginación, para ser el embajador de nuestra marca. Usamos colores primarios para facilitar el reconocimiento visual de nuestra marca y fortalecer la conexión con el aprendizaje infantil.
+    </p>
+  </section>
+
+  <!-- Producto -->
+  <section class="max-w-5xl mx-auto mt-10 px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+    <div>
+      <img src="ytg.jpg" alt="Mesa modular para niños" class="rounded-xl shadow-lg">
+    </div>
+    <div>
+      <h2 class="text-2xl font-semibold mb-4">Mesa Modular Infantil</h2>
+      <p class="mb-4">
+        Nuestra mesa modular está diseñada para que los niños entre 2 y 6 años desarrollen habilidades motrices mientras juegan. Incluye rampas, juegos sensoriales, encajes, letras y estructuras didácticas.
+      </p>
+      <ul class="list-disc list-inside mb-4">
+        <li>Desarrolla motricidad fina y gruesa</li>
+        <li>Fomenta el aprendizaje a través del juego</li>
+        <li>Evita el uso de tecnología a temprana edad</li>
+        <li>Puede usarse en interiores y exteriores</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Galería -->
+  <section class="max-w-5xl mx-auto mt-10 px-4">
+    <h2 class="text-2xl font-semibold mb-4">Galería del Producto</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <img src="ytg.jpg" alt="Vista lateral de la mesa modular" class="rounded-lg shadow">
+      <img src="yts.jpg" alt="Vista frontal de la mesa modular" class="rounded-lg shadow">
+      <img src="gus marca.jpg" alt="Logo Gus Toys color" class="rounded-lg shadow">
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section class="bg-yellow-100 mt-10 p-6 text-center">
+    <h2 class="text-xl font-semibold mb-2">¡Contáctanos!</h2>
+    <p class="mb-2">Si quieres más información o deseas adquirir la mesa modular:</p>
+    <p class="font-bold text-lg">📱 WhatsApp: <a href="https://wa.me/573142056526" class="text-green-700 underline">+57 314 2056526</a></p>
+  </section>
+
+  <!-- Pie de página -->
+  <footer class="bg-yellow-200 text-center p-4 mt-10 text-sm">
+    &copy; 2025 Gus Toys. Todos los derechos reservados.
+  </footer>
+</body>
+</html>
