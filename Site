@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evermond Co.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(to bottom right, #0a1a1f, #132f3d);
+      color: #f0f0f0;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    header {
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at center, #0f2b36, #0a1a1f);
+      padding: 80px 20px 60px;
+      text-align: center;
+      position: relative;
+    }
+    h1 {
+      font-size: 4.5rem;
+      margin: 0;
+      color: #1dd1a1;
+      text-shadow: 0 0 15px rgba(29, 209, 161, 0.6);
+      animation: glow 2s infinite alternate ease-in-out;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #1dd1a1; }
+      to { text-shadow: 0 0 20px #1dd1a1, 0 0 30px #1dd1a1; }
+    }
+    .tagline {
+      font-size: 1.4rem;
+      color: #a0d8ef;
+      margin-top: 10px;
+      font-style: italic;
+    }
+    nav {
+      display: flex;
+      gap: 25px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .nav-button {
+      padding: 14px 32px;
+      background: transparent;
+      border: 2px solid #1dd1a1;
+      border-radius: 50px;
+      color: #1dd1a1;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .nav-button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(29, 209, 161, 0.3), transparent);
+      transform: skewX(-20deg);
+      transition: left 0.5s;
+    }
+    .nav-button:hover::before {
+      left: 100%;
+    }
+    .nav-button:hover {
+      background: #1dd1a1;
+      color: #0a1a1f;
+      box-shadow: 0 0 20px rgba(29, 209, 161, 0.5);
+    }
+    .nav-button:active {
+      transform: scale(0.98);
+    }
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+    main h2 {
+      text-align: center;
+      font-size: 2.7rem;
+      color: #ffffff;
+      margin-bottom: 30px;
+    }
+    main p {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #c0c0c0;
+      max-width: 850px;
+      margin: 0 auto 60px;
+      line-height: 1.6;
+    }
+    .gallery {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+    .gallery img {
+      width: 320px;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+      transition: transform 0.4s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.07);
+    }
+    .highlight {
+      text-align: center;
+      margin: 80px auto;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 40px;
+      border-radius: 16px;
+      max-width: 900px;
+      box-shadow: 0 0 20px rgba(29, 209, 161, 0.1);
+    }
+    .highlight h3 {
+      color: #1dd1a1;
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+    .highlight p {
+      color: #cccccc;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+    .highlight ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+    .highlight ul li {
+      padding: 10px 0;
+      font-size: 1.05rem;
+      color: #aef8e2;
+      position: relative;
+    }
+    .highlight ul li::before {
+      content: "★";
+      color: #1dd1a1;
+      position: absolute;
+      left: -20px;
+    }
+    section {
+      margin-top: 100px;
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+    section h2 {
+      color: #ffffff;
+      font-size: 2.2rem;
+      margin-bottom: 15px;
+    }
+    section p {
+      color: #bbbbbb;
+      font-size: 1.1rem;
+      max-width: 750px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+    footer {
+      background-color: #0f2b36;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 0.95rem;
+      color: #888;
+      margin-top: 80px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>EVERMOND CO.</h1>
+    <p class="tagline">Books, AI & Learning. Built for the Future.</p>
+    <nav>
+      <a href="https://codepen.io/heehehh/pen/qEBzJBY" target="_blank"><button class="nav-button">Shop</button></a>
+      <a href="#about"><button class="nav-button">About</button></a>
+      <a href="#contact"><button class="nav-button">Contact</button></a>
+    $1
+      <a href="https://codepen.io/heehehh/pen/xbbzegQ" target="_blank"><button class="nav-button">Donate</button></a>
+  </header>
+  <main>
+    <h2>Welcome to Evermond Co.</h2>
+    <p>We create and curate cutting-edge books and AI solutions to empower the thinkers, learners, and creators of tomorrow. Whether you're diving into deep learning or curling up with a compelling read — Evermond delivers innovation through knowledge.</p>
+
+    <div class="gallery">
+      <img src="https://source.unsplash.com/featured/?books" alt="Books">
+      <img src="https://th.bing.com/th/id/OIP.NA_yxVIvbNuqHm2mzBAXigHaEo?w=287&h=180&c=7&r=0&o=5&pid=1.7" alt="Artificial Intelligence">
+      <img src="https://images.pexels.com/photos/207662/pexels-photo-207662.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Reading">
+    </div>
+
+    <div class="highlight">
+      <h3>🔥 Why Choose Evermond?</h3>
+      <p>We bridge the gap between learning and innovation — combining the joy of reading with the power of AI. Our platform supports curious minds and future leaders.</p>
+      <ul>
+        <li>Expert-curated content for all learning levels</li>
+        <li>Interactive tools to support AI-based learning</li>
+        <li>Engaging design for better focus and exploration</li>
+        <li>Trusted by educators and tech professionals</li>
+        <li>Built for the thinkers and dreamers of tomorrow</li>
+        <li>Constantly updated with future-focused content</li>
+        <li>Designed to feel both advanced and welcoming</li>
+      </ul>
+    </div>
+
+    <section id="about">
+      <h2>About Us</h2>
+      <p>Evermond Co. is more than a company — we're a movement. We aim to revolutionize how people learn by combining the emotional depth of storytelling with the limitless power of artificial intelligence. From eBooks to AI tutoring tools, our mission is to make future-ready education accessible, enjoyable, and transformative. Join us as we reshape learning for a smarter world.</p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p>Want to connect, collaborate, or ask a question? Reach us anytime at <strong>arthurhermidasoave@gmail.com</strong></p>
+    </section>
+  </main>
+  <footer>
+    &copy; 2025 Evermond Co. All rights reserved.
+  </footer>
+</body>
+</html>
