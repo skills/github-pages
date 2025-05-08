@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>3D Home Designer - Asian Paints Colors</title>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    canvas { display: block; }
+    #ui {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px;
+      border-radius: 5px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .color-btn {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      margin: 2px;
+      border: 2px solid #333;
+      cursor: pointer;
+    }
+    .color-label {
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+    button { display: block; margin: 5px 0; }
+  </style>
+</head>
+<body>
+  <div id="ui">
+    <div id="colors"></div>
+    <button id="deleteModeBtn">Delete Mode: OFF</button>
+    <button id="saveBtn">Save Design</button>
+    <button id="loadBtn">Load Design</button>
+    <button id="clearBtn">Clear Design</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r148/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.148.0/examples/js/controls/OrbitControls.js"></script>
+  <script>
+    const asianPaintsColors = [
+      { name: 'Dawn Dew-N (L190)', hex: '#F0F8FF' },
+      { name: 'Milk Chocolate (8537)', hex: '#d1b498' },
+      { name: 'Phantom Lake (7372)', hex: '#d8e5e6' },
+      { name: 'Betel Leaf (SA34)', hex: '#3E5E3E' },
+      { name: 'Cheer Up (8710)', hex: '#93666c' }
+    ];
+
+    let selectedColor = asianPaintsColors[0].hex;
+    const colorsDiv = document.getElementById('colors');
+    asianPaintsColors.forEach(color => {
+      const label = document.createElement('div');
+      label.className = 'color-label';
+      label.innerText = color.name;
+      const btn = document.createElement('div');
+      btn.className = 'color-btn';
+      btn.style.backgroundColor = color.hex;
+      btn.title = color.name;
+      btn.onclick = () => { selectedColor = color.hex; };
+      colorsDiv.appendChild(label);
+      colorsDiv.appendChild(btn);
+    });
+
+    let scene = new THREE.Scene();
+    let camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+    let renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+    let planeGeometry = new THREE.PlaneGeometry(100, 100);
+    let planeMaterial = new THREE.MeshBasicMaterial({ color: 0x999999, side: THREE.DoubleSide });
+    let plane = new THREE.Mesh(planeGeometry, planeMaterial);
+    plane.rotation.x = -Math.PI / 2;
+    scene.add(plane);
+
+    let objects = [];
+    let deleteMode = false;
+    const deleteModeBtn = document.getElementById('deleteModeBtn');
+    deleteModeBtn.onclick = () => {
+      deleteMode = !deleteMode;
+      deleteModeBtn.textContent = deleteMode ? 'Delete Mode: ON' : 'Delete Mode: OFF';
+    };
+
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+
+    function onClick(event) {
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(deleteMode ? objects : [plane]);
+
+      if (intersects.length > 0) {
+        if (deleteMode) {
+          const obj = intersects[0].object;
+          scene.remove(obj);
+          objects = objects.filter(o => o !== obj);
+        } else {
+          const cube = new THREE.Mesh(
+            new THREE.BoxGeometry(5, 5, 5),
+            new THREE.MeshBasicMaterial({ color: selectedColor })
+          );
+          cube.position.copy(intersects[0].point).add(new THREE.Vector3(0, 2.5, 0));
+          scene.add(cube);
+          objects.push(cube);
+        }
+      }
+    }
+
+    window.addEventListener('click', onClick);
+
+    document.getElementById('saveBtn').onclick = () => {
+      const design = objects.map(obj => ({
+        x: obj.position.x,
+        y: obj.position.y,
+        z: obj.position.z,
+        color: '#' + obj.material.color.getHexString()
+      }));
+      localStorage.setItem('homeDesign', JSON.stringify(design));
+    };
+
+    document.getElementById('loadBtn').onclick = () => {
+      const data = JSON.parse(localStorage.getItem('homeDesign')) || [];
+      clearDesign();
+      data.forEach(item => {
+        const cube = new THREE.Mesh(
+          new THREE.BoxGeometry(5, 5, 5),
+          new THREE.MeshBasicMaterial({ color: item.color })
+        );
+        cube.position.set(item.x, item.y, item.z);
+        scene.add(cube);
+        objects.push(cube);
+      });
+    };
+
+    function clearDesign() {
+      objects.forEach(obj => scene.remove(obj));
+      objects = [];
+    }
+    document.getElementById('clearBtn').onclick = clearDesign;
+
+    camera.position.set(30, 30, 30);
+    camera.lookAt(0, 0, 0);
+
+    function animate() {
+      requestAnimationFrame(animate);
+      renderer.render(scene, camera);
+    }
+
+    animate();
+  </script>
+</body>
+</html>
