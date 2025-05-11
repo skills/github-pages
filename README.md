@@ -73,3 +73,187 @@ Get help: [Post in our discussion board](https://github.com/orgs/skills/discussi
 &copy; 2023 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
 
 </footer>
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Llar d'Infants El Petit Príncep</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Pàgina d'inici -->
+    <header>
+        <h1>Llar d'Infants El Petit Príncep</h1>
+        <p>Benvinguts a la nostra llar d'infants, on els somriures creixen i els nens aprenen jugant!</p>
+        <img src="https://via.placeholder.com/400x200.png?text=Imatge+de+Benvinguda" alt="Llar d'Infants" />
+    </header>
+
+    <!-- Menú de navegació -->
+    <nav>
+        <ul>
+            <li><a href="#qui-som">Qui Som</a></li>
+            <li><a href="#projecte-educatiu">Projecte Educatiu</a></li>
+            <li><a href="#aules">Aules</a></li>
+            <li><a href="#activitats">Activitats</a></li>
+            <li><a href="#contacte">Contacte</a></li>
+        </ul>
+    </nav>
+
+    <!-- Qui Som -->
+    <section id="qui-som">
+        <h2>Qui Som</h2>
+        <p>L'equip educatiu de la nostra llar està format per professionals apassionats de l'educació infantil. Ens dediquem a fomentar l'aprenentatge i el creixement personal de cada nen i nena.</p>
+        <p>Valors i línia pedagògica: Respecte, creativitat, autonomia i aprenentatge basat en el joc.</p>
+    </section>
+
+    <!-- Projecte Educatiu -->
+    <section id="projecte-educatiu">
+        <h2>Projecte Educatiu</h2>
+        <p>Les nostres activitats estan dissenyades per afavorir el desenvolupament global dels infants. Treballem amb una metodologia activa i participativa.</p>
+        <h3>Etapes i metodologia de treball</h3>
+        <p>Treballant en tres etapes: infants de 0-3 anys, 3-4 anys, i 4-6 anys. Cada etapa té una metodologia adaptada al seu desenvolupament cognitiu i emocional.</p>
+    </section>
+
+    <!-- Aules -->
+    <section id="aules">
+        <h2>Aules</h2>
+        <div class="aula">
+            <h3>Aula de Petits (0-3 anys)</h3>
+            <p>Els més petits exploren el món a través del joc sensorial i les primeres relacions socials.</p>
+            <img src="https://via.placeholder.com/300x200.png?text=Aula+Petits" alt="Aula Petits">
+        </div>
+        <div class="aula">
+            <h3>Aula Mitjana (3-4 anys)</h3>
+            <p>Desenvolupen la seva creativitat i habilitats comunicatives mitjançant activitats artístiques i lingüístiques.</p>
+            <img src="https://via.placeholder.com/300x200.png?text=Aula+Mitjana" alt="Aula Mitjana">
+        </div>
+        <div class="aula">
+            <h3>Aula de Grans (4-6 anys)</h3>
+            <p>Comencen a aprendre conceptes més abstractes i a desenvolupar la seva autonomia en tasques individuals i en grup.</p>
+            <img src="https://via.placeholder.com/300x200.png?text=Aula+Grans" alt="Aula Grans">
+        </div>
+    </section>
+
+    <!-- Activitats -->
+    <section id="activitats">
+        <h2>Activitats</h2>
+
+        <!-- Entrada d'activitat per a una UF -->
+        <article class="activitat">
+            <h3>Explorant els colors a través de la pintura</h3>
+            <p>Aquesta activitat va permetre als infants de l'aula mitjana explorar els colors primaris amb pintura i mànegues de colors per crear les seves pròpies obres d'art.</p>
+            <p><strong>Objectius:</strong> Fomentar la creativitat, reconèixer els colors i desenvolupar la coordinació motriu fina.</p>
+            <p><strong>Materials:</strong> Pintures de colors, pinzells, papers grans.</p>
+            <p><strong>Metodologia:</strong> Activitat en grups petits on els infants poden experimentar lliurement amb els colors.</p>
+            <img src="https://via.placeholder.com/400x300.png?text=Activitat+Pintura" alt="Activitat de pintura">
+        </article>
+
+    </section>
+
+    <!-- Contacte -->
+    <section id="contacte">
+        <h2>Contacte</h2>
+        <p>Si tens alguna pregunta, no dubtis a posar-te en contacte amb nosaltres a través del correu electrònic: <a href="mailto:info@petitprincep.com">info@petitprincep.com</a>.</p>
+        <p><strong>Adreça:</strong> Carrer del Petit Príncep, 12, 08022 Barcelona</p>
+        <p><strong>Telèfon:</strong> +34 123 456 789</p>
+        <p><strong>Segueix-nos a les nostres xarxes socials:</strong></p>
+        <ul>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Twitter</a></li>
+        </ul>
+    </section>
+
+    <!-- Peu de pàgina -->
+    <footer>
+        <p>&copy; 2025 Llar d'Infants El Petit Príncep</p>
+    </footer>
+</body>
+</html>
+/* Estils generals */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #ffcc00;
+    text-align: center;
+    padding: 30px;
+    color: #fff;
+}
+
+h1 {
+    font-size: 3em;
+}
+
+nav {
+    background-color: #333;
+    padding: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    text-align: center;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+section {
+    padding: 30px;
+    margin: 20px;
+}
+
+h2 {
+    color: #333;
+}
+
+.aula {
+    margin-bottom: 30px;
+}
+
+.aula img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.activitat {
+    margin-bottom: 30px;
+}
+
+.activitat img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+footer {
+    background-color: #333;
+    text-align: center;
+    color: #fff;
+    padding: 10px;
+}
+
+/* Enllaços de contacte i xarxes socials */
+a {
+    color: #ffcc00;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
