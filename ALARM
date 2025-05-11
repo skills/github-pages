@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+  <title>Özel Sayaç & YouTube Çalar</title>
+  <style>
+    /* Reset */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      background: rgba(0,0,0,0.5);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 350px;
+      padding: 25px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      user-select: none;
+      height: 560px;
+      justify-content: space-between;
+    }
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      text-align: center;
+      text-shadow: 0 0 8px rgba(255 255 255 / 0.3);
+    }
+    label {
+      font-weight: 600;
+      margin-top: 15px;
+      display: block;
+      font-size: 1rem;
+      user-select: text;
+    }
+    input[type=number], select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1.2rem;
+      text-align: center;
+      box-shadow: inset 0 0 5px rgba(255,255,255,0.2);
+      background: rgba(255 255 255 / 0.1);
+      color: #fff;
+      -webkit-appearance: none;
+      -moz-appearance: textfield;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    select:hover, select:focus,
+    input[type=number]:hover, input[type=number]:focus {
+      background: rgba(255 255 255 / 0.2);
+      outline: none;
+    }
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+      margin: 0; 
+    }
+    .timer-display {
+      font-size: 4rem;
+      margin: 30px 0 15px 0;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-align: center;
+      user-select: none;
+      text-shadow: 0 0 15px rgba(0,0,0,0.5);
+      min-height: 48px;
+    }
+    button {
+      width: 100%;
+      padding: 15px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      background: #ff416c;
+      background: linear-gradient(45deg, #ff416c, #ff4b2b);
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(255,65,108,0.6);
+      user-select: none;
+      transition: background 0.4s ease;
+    }
+    button:disabled {
+      background: #999;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    button:hover:not(:disabled) {
+      background: linear-gradient(45deg, #ff4b2b, #ff416c);
+    }
+    #player {
+      border-radius: 12px;
+      margin-top: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      width: 100%;
+      height: 195px;
+      user-select: none;
+    }
+    /* Responsive tweaks */
+    @media (max-width: 380px) {
+      .container {
+        padding: 15px;
+        height: 560px;
+      }
+      .timer-display {
+        font-size: 3.2rem;
+        margin: 25px 0 10px 0;
+      }
+      button {
+        font-size: 1.1rem;
+        padding: 12px;
+      }
+      #player {
+        height: 160px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" role="main" aria-label="SAYAÇ">
+    <h1>Özel Sayaç & YouTube Çalar</h1>
+    <form id="timerForm" onsubmit="return false;" aria-describedby="desc">
+      <label for="minutesInput">Dakika</label>
+      <input id="minutesInput" type="number" min="0" max="59" step="1" value="0" aria-label="Dakika girin" required />
+      <label for="secondsInput">Saniye</label>
+      <input id="secondsInput" type="number" min="0" max="59" step="1" value="10" aria-label="Saniye girin" required />
+      <label for="audioSelect">YouTube Videosunu Seçin</label>
+      <select id="audioSelect" aria-label="SES SEÇİN">
+        <option value="8bFYgT9fHoA">YOK</option>
+        <option value="wuoDP1k4yyo">REPİN PAVYONUNDA OLURUM ÇUBUKLU YAŞAR</option>
+        <option value="caqdIVY9eL0">SERDAR YETER YETER AĞH ÖYLE VURMA NOLURSUN ANAM ANAM</option>
+        <option value="htv0UmHf5N0">İYİ Kİ DOĞDUN MUZAFFER</option>
+        <option value="ALrw_fz72a8">İÇTİM ŞARABI</option>
+        <option value="fQ01uL5bGmA">LİNGGANGULİGULİ</option>
+        <option value="novd_vjOSns">KARGOLAR ŞEFFAFS 59.90 SAN SAN</option>
+        <option value="AB20k1CBg5M">KASKIMI GERİ VER</option>
+        <option value="HsdGovRarpg">OOH NO LA POLİCİA!!!</option>
+        <option value="u2Noc_gEZGk">Saçı pembe</option>
+        <option value="iccQ6OIrAmI">YARRA</option>
+        <option value="yf-SKbbQJHY">DÖŞEYELİM ABİ JAPONCA</option>
+        <option value="6jAqItMgQSY">DÖŞEYELİM ABİ BASS BOOSTED</option>
+        <option value="mBjim0Vxhm4">SOSİS VE SALAM PERİPELLA</option>
+      </select>
+      <button id="startBtn" aria-live="polite" aria-pressed="false">Başlat</button>
+      <button id="stopBtn" style="margin-top: 10px; background: #444; box-shadow: none;" disabled>Duraklat/Kapat</button>
+    </form>
+    <div role="timer" aria-live="assertive" aria-atomic="true" class="timer-display" id="timerDisplay">00:10</div>
+    <div id="player" aria-label="YouTube video player"></div>
+    <footer>
+      <p>Mobil uyumlu ve modern tasarım | Size özel sesler</p>
+    </footer>
+  </div>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script>
+    (function(){
+      const minutesInput = document.getElementById('minutesInput');
+      const secondsInput = document.getElementById('secondsInput');
+      const audioSelect = document.getElementById('audioSelect');
+      const startBtn = document.getElementById('startBtn');
+      const stopBtn = document.getElementById('stopBtn');
+      const timerDisplay = document.getElementById('timerDisplay');
+      let timer = null;
+      let timeLeftSec = 0;
+      let isRunning = false;
+      let player;
+      let isPlayerReady = false;
+      let currentVideoId = null;
+
+      window.onYouTubeIframeAPIReady = function() {
+        player = new YT.Player('player', {
+          height: '195',
+          width: '350',
+          videoId: '',
+          playerVars: { 'autoplay': 0, 'controls': 1, 'rel': 0, 'showinfo': 0, 'iv_load_policy': 3 },
+          events: {
+            'onReady': () => {
+              isPlayerReady = true;
+            },
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      };
+
+      function onPlayerStateChange(event) {
+        // Add any state change logic if needed
+      }
+
+      function updateTimerDisplay(seconds) {
+        const m = Math.floor(seconds / 60);
+        const s = seconds % 60;
+        timerDisplay.textContent = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2,'0')}`;
+      }
+
+      function countDown() {
+        if (timeLeftSec > 0) {
+          timeLeftSec--;
+          updateTimerDisplay(timeLeftSec);
+        } else {
+          clearInterval(timer);
+          timer = null;
+          isRunning = false;
+          startBtn.disabled = false;
+          stopBtn.disabled = true;
+          stopBtn.textContent = 'Duraklat/Kapat';
+          startBtn.setAttribute('aria-pressed', 'false');
+          playSelectedVideo();
+        }
+      }
+
+      function playSelectedVideo() {
+        const selectedVideoId = audioSelect.value;
+        if (isPlayerReady) {
+          if (selectedVideoId === currentVideoId) {
+            player.seekTo(0);
+            player.playVideo();
+          } else {
+            currentVideoId = selectedVideoId;
+            player.loadVideoById(currentVideoId);
+          }
+        }
+      }
+
+      function stopVideo() {
+        if (player && isPlayerReady) {
+          player.stopVideo();
+        }
+      }
+
+      startBtn.addEventListener('click', () => {
+        let min = parseInt(minutesInput.value, 10);
+        let sec = parseInt(secondsInput.value, 10);
+        if (isNaN(min) || min < 0) min = 0;
+        if (isNaN(sec) || sec < 0) sec = 0;
+        if (sec > 59) sec = 59;
+        if (min > 59) min = 59;
+
+        const total = min * 60 + sec;
+        if (total <= 0) {
+          alert('Lütfen geçerli bir süre girin (en az 1 saniye).');
+          return;
+        }
+
+        timeLeftSec = total;
+        updateTimerDisplay(timeLeftSec);
+
+        startBtn.disabled = true;
+        stopBtn.disabled = false;
+        stopBtn.textContent = 'Duraklat/Kapat';
+        startBtn.setAttribute('aria-pressed', 'true');
+
+        stopVideo();
+
+        if (timer) clearInterval(timer);
+        timer = setInterval(countDown, 1000);
+        isRunning = true;
+      });
+
+      stopBtn.addEventListener('click', () => {
+        if (isRunning) {
+          if (timer) {
+            clearInterval(timer);
+            timer = null;
+          }
+          isRunning = false;
+          startBtn.disabled = false;
+          stopBtn.disabled = true;
+          stopBtn.textContent = 'Duraklat/Kapat';
+          startBtn.setAttribute('aria-pressed', 'false');
+        }
+        stopVideo();
+      });
+
+      updateTimerDisplay(parseInt(secondsInput.value, 10) || 10);
+    })();
+  </script>
+</body>
+</html>
