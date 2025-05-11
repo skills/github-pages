@@ -1,0 +1,16 @@
+mport React from 'react';
+import Dashboard from './components/Dashboard';
+import AppliedLoans from './components/AppliedLoans';
+import LoanCharts from './components/LoanCharts';
+
+function CreditApp() {
+  return (
+    <div className="credit-app">
+      <Dashboard />
+      <AppliedLoans />
+      <LoanCharts />
+    </div>
+  );
+}
+
+export default CreditApp;
