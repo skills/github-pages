@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wist – Webdesign Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --text-dark: #111;
+      --blue-gradient: linear-gradient(to bottom, #cce0ff, #ffffff);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: var(--blue-gradient);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .logo span {
+      font-size: 2rem;
+      margin-right: 0.4rem;
+      transform: rotate(-20deg);
+    }
+
+    .icons {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .search-bar {
+      margin: 2rem auto;
+      max-width: 500px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 1rem;
+      border-radius: 30px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    main {
+      text-align: center;
+      padding: 2rem;
+      flex-grow: 1;
+    }
+
+    main h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.7rem;
+      margin-bottom: 1rem;
+      color: #000;
+    }
+
+    main p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      color: #444;
+    }
+
+    .button-link {
+      text-decoration: none;
+      color: white;
+      background-color: black;
+      font-weight: bold;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 30px;
+      transition: background 0.3s;
+      cursor: pointer;
+      display: inline-block;
+      font-size: 1rem;
+    }
+
+    .button-link:hover {
+      background-color: #333;
+    }
+
+    .back-arrow {
+      display: inline-block;
+      margin: 1rem 0;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .back-arrow:hover {
+      text-decoration: underline;
+    }
+
+    .produits {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .produit {
+      background-color: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s;
+    }
+
+    .produit:hover {
+      transform: translateY(-5px);
+    }
+
+    .produit h3 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+    }
+
+    .produit p {
+      font-size: 0.95rem;
+      color: #666;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    /* Animation CSS */
+    .page {
+      display: none;
+      opacity: 0;
+      transform: translateY(20px);
+      visibility: hidden;
+      transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s 0.5s; /* L'effet de visibilité est retardé */
+    }
+
+    .page.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+      visibility: visible;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    a.link {
+      color: #000;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+
+    a.link:hover {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo" onclick="showPage('accueil')">
+      <span>~</span> Wist
+    </div>
+    <div class="icons">
+      <span class="button-link" onclick="showPage('contact')">Contact</span>
+    </div>
+  </header>
+
+  <div class="search-bar">
+    <input type="text" placeholder="Rechercher un service..." onkeydown="if(event.key==='Enter'){showPage('services')}">
+  </div>
+
+  <main>
+    <!-- Accueil -->
+    <div id="accueil" class="page active">
+      <h1>Wist – Studio de Webdesign</h1>
+      <p>Explorez des créations digitales élégantes et sur mesure.</p>
+      <span class="button-link" onclick="showPage('services')">Voir nos services</span>
+    </div>
+
+    <!-- Services -->
+    <div id="services" class="page">
+      <span class="back-arrow" onclick="showPage('accueil')">&larr; Retour à l'accueil</span>
+      <h1>Nos services</h1>
+      <div class="produits">
+        <div class="produit">
+          <h3>Site Vitrine Moderne</h3>
+          <p>Un site professionnel et responsive pour mettre en valeur votre activité.</p>
+        </div>
+        <div class="produit">
+          <h3>UX/UI Design</h3>
+          <p>Des interfaces pensées pour vos utilisateurs et vos objectifs.</p>
+        </div>
+        <div class="produit">
+          <h3>Identité Visuelle</h3>
+          <p>Logo, typographie, palette... tout pour une marque forte.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div id="contact" class="page">
+      <span class="back-arrow" onclick="showPage('accueil')">&larr; Retour à l'accueil</span>
+      <h1>Discutons ensemble</h1>
+      <p>Écrivez-nous à <strong>contact@wist.fr</strong></p>
+      <p>Ou retrouvez-nous sur Instagram :
+        <a href="https://instagram.com/wist.design" target="_blank" class="link">@wist.design</a>
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Wist – Tous droits réservés.
+  </footer>
+
+  <script>
+    function showPage(pageId) {
+      // Cacher toutes les pages
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+      });
+      // Afficher la page correspondante
+      document.getElementById(pageId).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
