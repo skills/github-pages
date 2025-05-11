@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>حساب الضريبة من المبلغ الإجمالي</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      direction: rtl;
+      text-align: center;
+      background-color: #f5f5f5;
+      padding: 50px;
+    }
+    .container {
+      background-color: white;
+      border-radius: 15px;
+      padding: 30px;
+      max-width: 400px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px 0;
+      width: 100%;
+      font-size: 16px;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <img src="logo.png" alt="شعار الوزارة" style="width: 120px; margin-bottom: 20px;">
+
+
+    <h2>حساب الضريبة من المبلغ الإجمالي</h2>
+    <label>قيمة الفاتورة (شاملة الضريبة 5%):</label>
+    <input type="number" id="totalWithVAT" placeholder="أدخل المبلغ الإجمالي">
+    <button onclick="calculateOriginalAmount()">احسب</button>
+
+    <div class="result" id="output"></div>
+  </div>
+
+  <script>
+    function calculateOriginalAmount() {
+      let total = parseFloat(document.getElementById("totalWithVAT").value);
+      if (isNaN(total) || total <= 0) {
+        document.getElementById("output").innerText = "يرجى إدخال قيمة صحيحة.";
+        return;
+      }
+
+      let amountWithoutVAT = total / 1.05;
+      let vat = total - amountWithoutVAT;
+
+      document.getElementById("output").innerHTML = `
+        <p>قيمة الفاتورة بدون الضريبة: ${amountWithoutVAT.toFixed(3)} ريال</p>
+        <p>قيمة الضريبة (5%): ${vat.toFixed(3)} ريال</p>
+      `;
+    }
+  </script>
+
+</body>
+</html>
