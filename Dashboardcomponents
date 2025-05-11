@@ -1,0 +1,34 @@
+import React from 'react';
+
+function Dashboard() {
+  return (
+    <div className="dashboard">
+      <div className="dashboard-item">
+        Loans
+        50
+      </div>
+      <div className="dashboard-item">
+        Borrowers
+        100
+      </div>
+      <div className="dashboard-item">
+        Cash Disbursed
+        550,000
+      </div>
+       <div className="dashboard-item">
+        Savings
+        450,000
+      </div>
+      <div className="dashboard-item">
+        Repaid Loans
+        30
+      </div>
+      <div className="dashboard-item">
+        Cash Received
+        1,000,000
+      </div>
+     </div>
+  );
+}
+
+export default Dashboard;
