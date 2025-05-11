@@ -1,4 +1,84 @@
-<header>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MORA - Le Village de la Terreur</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0a0a0a;
+      color: #eaeaea;
+    }
+    header {
+      background: #1a1a1a;
+      padding: 2rem;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      color: #ff1e1e;
+    }
+    header p {
+      font-style: italic;
+      color: #ccc;
+    }
+    main {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    .cover {
+      width: 100%;
+      max-width: 400px;
+      display: block;
+      margin: 1rem auto;
+    }
+    .section {
+      margin-bottom: 2rem;
+    }
+    .button {
+      display: inline-block;
+      background: #ff1e1e;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    footer {
+      background: #111;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MORA</h1>
+    <p>Le Village de la Terreur</p>
+  </header>
+  <main>
+    <img src="cover.jpg" alt="Couverture du roman Mora" class="cover">
+    <div class="section">
+      <h2>Synopsis</h2>
+      <p>Mora est un village effacé des cartes, noyé dans une brume éternelle. Quatre garçons s'y aventurent, curieux... mais un à un, ils disparaissent. Ce qu'ils vont découvrir dépasse l'horreur. Entre mystère, créatures et souvenirs mutilés, le danger n'est pas ce que l'on croit...</p>
+    </div>
+    <div class="section">
+      <a href="#chapitres" class="button">Lire les chapitres</a>
+    </div>
+    <div class="section">
+      <h2>À propos de l’auteur</h2>
+      <p>Écrivain passionné par les histoires sombres et les mystères, l’auteur de MORA vous plonge dans un univers où la peur est plus réelle que jamais. Ce roman est son hommage aux légendes oubliées et à la terreur psychologique.</p>
+    </div>
+  </main>
+  <footer>
+    &copy; 2025 MORA - Tous droits réservés
+  </footer>
+</body>
+</html>
 
 <!--
   <<< Author notes: Course header >>>
