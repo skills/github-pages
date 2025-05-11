@@ -1,0 +1,13 @@
+import React from 'react';
+import './App.css';
+import CreditApp from './components/CreditApp';
+
+function App() {
+  return (
+    <div className="App">
+      <CreditApp />
+    </div>
+  );
+}
+
+export default App;
