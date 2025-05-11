@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Викторина: Флаги стран мира</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+        }
+        
+        #app {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+            min-height: 80vh;
+        }
+        
+        .screen {
+            padding: 20px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            min-height: 80vh;
+        }
+        
+        .screen.active {
+            display: flex;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #6e8efb 0%, #a777e3 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 0;
+            width: 80%;
+            max-width: 300px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .level-btn {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            width: 90%;
+            margin: 8px 0;
+        }
+        
+        .option-btn {
+            background: white;
+            color: #333;
+            border: 2px solid #ddd;
+            width: 100%;
+            text-align: left;
+            padding: 12px 20px;
+            margin: 5px 0;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        
+        .option-btn:hover {
+            border-color: #6e8efb;
+            background: #f8f9fa;
+        }
+        
+        .option-btn.correct {
+            background: linear-gradient(135deg, #a1ffce 0%, #faffd1 100%);
+            border-color: #4CAF50;
+            color: #2e7d32;
+        }
+        
+        .option-btn.incorrect {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            border-color: #f44336;
+            color: #c62828;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .score, .lives {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+        }
+        
+        .heart {
+            color: #ff5252;
+            margin: 0 2px;
+            font-size: 20px;
+        }
+        
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+        }
+        
+        .options {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .result-screen {
+            text-align: center;
+        }
+        
+        .final-score {
+            font-size: 24px;
+            margin: 20px 0;
+            color: #6e8efb;
+            font-weight: bold;
+        }
+        
+        .level-select {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #eee;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(135deg, #6e8efb 0%, #a777e3 100%);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        
+        .flag-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        
+        .shake {
+            animation: shake 0.5s;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            border-radius: 50%;
+            animation: fall 3s linear forwards;
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .level-complete {
+            color: #4CAF50;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- Главный экран -->
+        <div class="screen main-screen active">
+            <h1>Флаги стран мира</h1>
+            <button class="btn start-btn">Начать игру</button>
+            <div class="level-select">
+                <h2>Выберите уровень:</h2>
+                <button class="btn level-btn" data-level="europe">Европа</button>
+                <button class="btn level-btn" data-level="asia">Азия</button>
+                <button class="btn level-btn" data-level="north-america">Северная Америка</button>
+                <button class="btn level-btn" data-level="south-america">Южная Америка</button>
+                <button class="btn level-btn" data-level="africa">Африка</button>
+                <button class="btn level-btn" data-level="australia">Австралия и Океания</button>
+            </div>
+        </div>
+        
+        <!-- Экран игры -->
+        <div class="screen game-screen">
+            <div class="header">
+                <div class="score">Очки: <span class="score-value">0</span></div>
+                <div class="lives">
+                    Жизни: 
+                    <span class="heart">❤️</span>
+                    <span class="heart">❤️</span>
+                    <span class="heart">❤️</span>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <div class="question"></div>
+            <div class="options"></div>
+        </div>
+        
+        <!-- Экран проигрыша -->
+        <div class="screen lose-screen result-screen">
+            <h1>Игра окончена!</h1>
+            <div class="final-score">Ваш счет: <span class="score-value">0</span></div>
+            <button class="btn restart-btn">Начать сначала</button>
+        </div>
+        
+        <!-- Экран победы -->
+        <div class="screen win-screen result-screen">
+            <h1 class="level-complete">Уровень пройден!</h1>
+            <div class="final-score">Ваш счет: <span class="score-value">0</span></div>
+            <button class="btn next-level-btn">Следующий уровень</button>
+            <button class="btn main-menu-btn">Главное меню</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Элементы интерфейса
+            const screens = {
+                main: document.querySelector('.main-screen'),
+                game: document.querySelector('.game-screen'),
+                lose: document.querySelector('.lose-screen'),
+                win: document.querySelector('.win-screen')
+            };
+            
+            const startBtn = document.querySelector('.start-btn');
+            const levelBtns = document.querySelectorAll('.level-btn');
+            const restartBtn = document.querySelector('.restart-btn');
+            const nextLevelBtn = document.querySelector('.next-level-btn');
+            const mainMenuBtn = document.querySelector('.main-menu-btn');
+            
+            const questionElement = document.querySelector('.question');
+            const optionsElement = document.querySelector('.options');
+            const scoreElement = document.querySelector('.score-value');
+            const livesElements = document.querySelectorAll('.heart');
+            const progressBar = document.querySelector('.progress');
+            const finalScoreElements = document.querySelectorAll('.score-value');
+            const levelCompleteText = document.querySelector('.level-complete');
+            
+            // Данные игры
+            let currentLevel = '';
+            let currentQuestionIndex = 0;
+            let score = 0;
+            let lives = 3;
+            let questions = [];
+            
+            // Вопросы для каждого уровня
+            const questionsByLevel = {
+                'europe': [
+                    {
+                        question: 'Какого цвета крест на флаге Финляндии?',
+                        options: ['Красный', 'Белый', 'Синий', 'Желтый'],
+                        answer: 'Синий'
+                    },
+                    {
+                        question: 'Сколько полос на флаге Франции?',
+                        options: ['2', '3', '4', '5'],
+                        answer: '3'
+                    },
+                    {
+                        question: 'Какой символ изображен на флаге Германии в центре?',
+                        options: ['Орел', 'Крест', 'Звезда', 'Ничего'],
+                        answer: 'Ничего'
+                    },
+                    {
+                        question: 'Какие цвета на флаге Италии?',
+                        options: ['Красный, белый, зеленый', 'Зеленый, белый, красный', 'Красный, желтый, зеленый', 'Зеленый, белый, синий'],
+                        answer: 'Зеленый, белый, красный'
+                    },
+                    {
+                        question: 'Какой формы звезды на флаге ЕС?',
+                        options: ['Пятиконечные', 'Шестиконечные', 'Восьмиконечные', 'Четырехконечные'],
+                        answer: 'Пятиконечные'
+                    },
+                    {
+                        question: 'Сколько звезд на флаге Великобритании?',
+                        options: ['0', '3', '5', '12'],
+                        answer: '0'
+                    },
+                    {
+                        question: 'Какого цвета фон флага Швейцарии?',
+                        options: ['Красный', 'Белый', 'Синий', 'Желтый'],
+                        answer: 'Красный'
+                    },
+                    {
+                        question: 'Какой символ изображен на флаге Испании?',
+                        options: ['Герб', 'Крест', 'Звезда', 'Полумесяц'],
+                        answer: 'Герб'
+                    },
+                    {
+                        question: 'Какие цвета на флаге Греции?',
+                        options: ['Синий и белый', 'Красный и белый', 'Синий и желтый', 'Зеленый и белый'],
+                        answer: 'Синий и белый'
+                    },
+                    {
+                        question: 'Какой формы флаг Швейцарии?',
+                        options: ['Прямоугольный', 'Квадратный', 'Треугольный', 'Круглый'],
+                        answer: 'Квадратный'
+                    },
+                    {
+                        question: 'Сколько полос на флаге России?',
+                        options: ['2', '3', '4', '5'],
+                        answer: '3'
+                    },
+                    {
+                        question: 'Какой цвет внизу флага Нидерландов?',
+                        options: ['Красный', 'Синий', 'Белый', 'Оранжевый'],
+                        answer: 'Синий'
+                    },
+                    {
+                        question: 'Какой символ изображен на флаге Швеции?',
+                        options: ['Крест', 'Полумесяц', 'Звезда', 'Орел'],
+                        answer: 'Крест'
+                    },
+                    {
+                        question: 'Какие цвета на флаге Бельгии?',
+                        options: ['Черный, желтый, красный', 'Красный, белый, синий', 'Зеленый, белый, красный', 'Синий, белый, оранжевый'],
+                        answer: 'Черный, желтый, красный'
+                    }
+                ],
+                'asia': [
+                    {
+                        question: 'Какой цвет фона у флага Японии?',
+                        options: ['Белый', 'Красный', 'Синий', 'Желтый'],
+                        answer: 'Белый'
+                    },
+                    {
+                        question: 'Сколько звезд на флаге Китая?',
+                        options: ['1', '3', '5', '7'],
+                        answer: '5'
+                    },
+                    {
+                        question: 'Какой символ изображен на флаге Индии?',
+                        options: ['Колесо', 'Звезда', 'Полумесяц', 'Крест'],
+                        answer: 'Колесо'
+                    },
+                    {
+                        question: 'Какие основные цвета флага Южной Кореи?',
+                        options: ['Белый, красный, синий, черный', 'Красный, желтый, синий', 'Зеленый, белый, черный', 'Синий, белый, красный'],
+                        answer: 'Белый, красный, синий, черный'
+                    },
+                    {
+                        question: 'Какой формы флаг Непала?',
+                        options: ['Прямоугольный', 'Квадратный', 'Два треугольника', 'Круглый'],
+                        answer: 'Два треугольника'
+                    },
+                    {
+                        question: 'Сколько полос на флаге Таиланда?',
+                        options: ['3', '4', '5', '6'],
+                        answer: '5'
+                    },
+                    {
+                        question: 'Какой цвет преобладает на флаге Саудовской Аравии?',
+                        options: ['Зеленый', 'Красный', 'Белый', 'Черный'],
+                        answer: 'Зеленый'
+                    },
+                    {
+                        question: 'Какой символ изображен на флаге Израиля?',
+                        options: ['Звезда Давида', 'Полумесяц', 'Крест', 'Орел'],
+                        answer: 'Звезда Давида'
+                    },
+                    {
+                        question: 'Какие цвета на флаге Вьетнама?',
+                        options: ['Красный и желтый', 'Зеленый и белый', 'Синий и белый', 'Красный и синий'],
+                        answer: 'Красный и желтый'
+                    },
+                    {
+                        question: 'Какой символ на флаге Турции?',
+                        options: ['Звезда и полумесяц', 'Крест', 'Орел', 'Солнце'],
+                        answer: 'Звезда и полумесяц'
+                    },
+                    {
+                        question: 'Сколько полос на флаге ОАЭ?',
+                        options: ['3', '4', '5', '6'],
+                        answer: '4'
+                    },
+                    {
+                        question: 'Какой цвет внизу флага Ливана?',
+                        options: ['Синий', 'Зеленый', 'Красный', 'Желтый'],
+                        answer: 'Красный'
+                    },
+                    {
+                        question: 'Какой символ изображен на флаге Ирана?',
+                        options: ['Меч и аллах', 'Звезда', 'Полумесяц', 'Орел'],
+                        answer: 'Меч и аллах'
+                    },
+                    {
+                        question: 'Какие цвета на флаге Пакистана?',
+                        options: ['Зеленый и белый', 'Красный и белый', 'Синий и белый', 'Черный и белый'],
+                        answer: 'Зеленый и белый'
+                    }
+                ],
+                'north-america': [
+                    {
+                        question: 'Сколько полос на флаге США?',
+                        options: ['11', '13', '15', '17'],
+                        answer: '13'
+                    },
+                    {
+                        question: 'Сколько звезд на флаге США?',
+                        options: ['48', '50', '52', '54'],
+                        answer: '50'
+                    },
+                    {
+                        question: 'Какой символ изображен на флаге Мексики?',
+                        options: ['Орел и змея', 'Крест', 'Звезда', 'Солнце'],
+                        answer: 'Орел и змея'
+                    },
+                    {
+                        question: 'Какие цвета на флаге Канады?',
+                        options: ['Красный и белый', 'Красный, белый и синий', 'Красный и желтый', 'Синий и белый'],
+                        answer: 'Красный и белый'
+                    },
+                    {
+                        question: 'Какой символ изображен в центре флага Канады?',
+                        options: ['Кленовый лист', 'Звезда', 'Крест', 'Орел'],
+                        answer: 'Кленовый лист'
+                    },
+                    {
+                        question: 'Сколько полос на флаге Кубы?',
+                        options: ['3', '4', '5', '6'],
+                        answer: '5'
+                    },
+                    {
+                        question: 'Какой символ изображен на флаге Доминиканской Республики?',
+                        options: ['Герб', 'Крест', 'Звезда', 'Полумесяц'],
+                        answer: 'Герб'
+                    },
+                    {
+                        question: 'Какие цвета на флаге Ямайки?',
+                        options: ['Зеленый, желтый, черный', 'Красный, белый, синий', 'Синий, желтый, зеленый', 'Черный, зеленый, золотой'],
+                        answer: 'Зеленый, желтый, черный'
+                    },
+                    {
+                        question: 'Какой символ изображен на флаге Гаити?',
+                        options: ['Герб', 'Крест', 'Звезда', 'Полумесяц'],
+                        answer: 'Герб'
+                    },
+                    {
+                        question: 'Сколько звезд на флаге Пуэрто-Рико?',
+                        options: ['1', '3', '5', '7'],
+                        answer: '1'
+                    },
+                    {
+                        question: 'Какой цвет находится сверху на флаге Коста-Рики?',
+                        options: ['Синий', 'Красный', 'Белый', 'Зеленый'],
+                        answer: 'Синий'
+                    },
+                    {
+                        question: 'Какой символ изображен на флаге Гватемалы?',
+                        options: ['Птица кетцаль', 'Звезда', 'Крест', 'Орел'],
+                        answer: 'Птица кетцаль'
+                    },
+                    {
+                        question: 'Какие цвета на флаге Гондураса?',
+                        options: ['Синий и белый', 'Красный и белый', 'Зеленый и белый', 'Желтый и синий'],
+                        answer: 'Синий и белый'
+                    },
+                    {
+                        question: 'Сколько звезд на флаге Доминики?',
+                        options: ['10', '7', '9', '11'],
+                        answer: '10'
+                    }
+                ],
+                'south-america': [
+                    {
+                        question: 'Сколько звезд на флаге Бразилии?',
+                        options: ['23', '25', '27', '29'],
+                        answer: '27'
+                    },
+                    {
+                        question: 'Какой символ изображен в центре флага Аргентины?',
+                        options: ['Солнце', 'Звезда', 'Крест', 'Орел'],
+                        answer: 'Солнце'
+                    },
+                    {
+                        question: 'Какие цвета на флаге Колумбии?',
+                        options: ['Желтый, синий, красный', 'Красный, белый, синий', 'Зеленый, белый, красный', 'Синий, белый, желтый'],
+                        answer: 'Желтый, синий, красный'
+                    },
+                    {
+                        question: 'Какой символ изображен на флаге Перу?',
+                        options: ['Герб', 'Крест', 'Звезда', 'Полумесяц'],
+                        answer: 'Герб'
+                    },
+                    {
+                        question: 'Сколько звезд на флаге Венесуэлы?',
+                        options: ['8', '4', '5', '6'],
+                        answer: '8'
+                    },
+                    {
+                        question: 'Какого цвета звезда на флаге Чили?',
+                        options: ['Красный', 'Синий', 'Белый', 'Зеленый'],
+                        answer: 'Белый'
+                    },
+                    {
+                        question: 'Какое животное изображено на флаге Эквадора?',
+                        options: ['Кондор', 'Орёл', 'Казуар', 'Беркут'],
+                        answer: 'Кондор'
+                    },
+                    {
+                        question: 'Какие цвета на флаге Боливии?',
+                        options: ['Красный, желтый, зеленый', 'Синий, белый, красный', 'Зеленый, белый, красный', 'Желтый, синий, красный'],
+                        answer: 'Красный, желтый, зеленый'
+                    },
+                    {
+                        question: 'Что изображено на флаге Уругвая?',
+                        options: ['Луна', 'Тополь чёрный', 'Солнце', 'Таксодиум'],
+                        answer: 'Солнце'
+                    },
+                    {
+                        question: 'Какого цвета звезда на флаге Парагвая?',
+                        options: ['Желтый', 'Белый', 'Красный', 'Зелёный'],
+                        answer: 'Жёлтый'
+                    },
+                    {
+                        question: 'Какие цвета на флаге Гайаны?',
+                        options: ['Зеленый, желтый, красный, белый, черный', 'Синий, белый, красный', 'Зеленый, белый, красный', 'Желтый, синий, красный'],
+                        answer: 'Зеленый, желтый, красный, белый, черный'
+                    },
+                    {
+                        question: 'Какой символ изображен на флаге Суринама?',
+                        options: ['Звезда', 'Крест', 'Солнце', 'Полумесяц'],
+                        answer: 'Звезда'
+                    },
+                    {
+                        question: 'Флаг какой страны изображен на флаге Фолклендских островов?',
+                        options: ['Великобритания', 'Франция', 'США', 'Португалия'],
+                        answer: 'Великобритания'
+                    },
+                    {
+                        question: 'Какой цвет преобладает на флаге Тринидад и тобаго?',
+                        options: ['Синий', 'Красный', 'Белый', 'Зеленый'],
+                        answer: 'Красный'
+                    }
+                ],
+                'africa': [
+                    {
+                        question: 'Какие цвета на флаге ЮАР?',
+                        options: ['Красный, белый, синий, зеленый, желтый, черный', 'Зеленый, желтый, красный', 'Синий, белый, красный', 'Черный, зеленый, желтый'],
+                        answer: 'Красный, белый, синий, зеленый, желтый, черный'
+                    },
+                    {
+                        question: 'Какой символ изображен на флаге Египта?',
+                        options: ['Орел', 'Звезда', 'Полумесяц', 'Солнце'],
+                        answer: 'Орел'
+                    },
+                    {
+                        question: 'Сколько звезд на флаге Марокко?',
+                        options: ['1', '3', '5', '7'],
+                        answer: '1'
+                    },
+                    {
+                        question: 'Какой цвет преобладает на флаге Нигерии?',
+                        options: ['Зеленый', 'Белый', 'Красный', 'Черный'],
+                        answer: 'Зеленый'
+                    },
+                    {
+                        question: 'Какой символ изображен на флаге Кении?',
+                        options: ['Щит и копья', 'Филлантус', 'Фагаропсис', 'Орел'],
+                        answer: 'Щит и копья'
+                    },
+                    {
+                        question: 'Какие цвета на флаге Ганы?',
+                        options: ['Красный, желтый, зеленый, черный', 'Зеленый, белый, красный', 'Синий, белый, красный', 'Черный, зеленый, желтый'],
+                        answer: 'Красный, желтый, зеленый, черный'
+                    },
+                    {
+                        question: 'Сколько полос на флаге Эфиопии?',
+                        options: ['3', '4', '5', '6'],
+                        answer: '3'
+                    },
+                    {
+                        question: 'Какой символ изображен на флаге Алжира?',
+                        options: ['Полумесяц и звезда', 'Крест', 'Орел', 'Солнце'],
+                        answer: 'Полумесяц и звезда'
+                    },
+                    {
+                        question: 'Какие цвета на флаге Анголы?',
+                        options: ['Красный, жёлтый и черный', 'Зеленый, белый, красный', 'Синий, белый, красный', 'Желтый, синий, красный'],
+                        answer: 'Красный, жёлтый и черный'
+                    },
+                    {
+                        question: 'Какой символ изображен на флаге Ливии?',
+                        options: ['Полумесяц и звезда', 'Звезда', 'Крест', 'Орел'],
+                        answer: 'Полумесяц и звезда'
+                    },
+                    {
+                        question: 'Сколько полос на флаге Зимбабве?',
+                        options: ['5', '6', '7', '8'],
+                        answer: '7'
+                    },
+                    {
+                        question: 'Какой цвет находится по середине флага Мали?',
+                        options: ['Зеленый', 'Желтый', 'Красный', 'Белый'],
+                        answer: 'Желтый'
+                    },
+                    {
+                        question: 'Какой символ изображен на флаге Сенегала?',
+                        options: ['Звезда', 'Крест', 'Полумесяц', 'Орел'],
+                        answer: 'Звезда'
+                    },
+                    {
+                        question: 'Какие цвета на флаге Танзании?',
+                        options: ['Зеленый, желтый, черный, синий', 'Красный, белый, синий', 'Зеленый, белый, красный', 'Желтый, синий, красный'],
+                        answer: 'Зеленый, желтый, черный, синий'
+                    }
+                ],
+                'australia': [
+                    {
+                        question: 'Какой символ изображен на флаге Австралии?',
+                        options: ['Юнион Джек и звезды', 'Крест', 'Полумесяц', 'Орел'],
+                        answer: 'Юнион Джек и звезды'
+                    },
+                    {
+                        question: 'Сколько звезд на флаге Новой Зеландии?',
+                        options: ['4', '5', '6', '7'],
+                        answer: '4'
+                    },
+                    {
+                        question: 'Какой символ изображен на флаге Фиджи?',
+                        options: ['Герб', 'Крест', 'Звезда', 'Полумесяц'],
+                        answer: 'Герб'
+                    },
+                    {
+                        question: 'Какие цвета на флаге Папуа-Новой Гвинеи?',
+                        options: ['Красный, черный, желтый, белый', 'Синий, белый, красный, зелёный', 'Зеленый, белый, красный', 'Желтый, синий, красный'],
+                        answer: 'Красный, черный, желтый, белый'
+                    },
+                    {
+                        question: 'Какой символ изображен на флаге Самоа?',
+                        options: ['Южный Крест', 'Звезда', 'Полумесяц', 'Орел'],
+                        answer: 'Южный Крест'
+                    },
+                    {
+                        question: 'Сколько звезд на флаге Вануату?',
+                        options: ['2', '0', '4', '5'],
+                        answer: '0'
+                    },
+                    {
+                        question: 'Какой цвет преобладает на флаге Тонга?',
+                        options: ['Красный', 'Белый', 'Синий', 'Желтый'],
+                        answer: 'Красный'
+                    },
+                    {
+                        question: 'Какой символ изображен на флаге Кирибати?',
+                        options: ['Солнце и птица', 'Звезда', 'Полумесяц', 'Орел'],
+                        answer: 'Солнце и птица'
+                    },
+                    {
+                        question: 'Какие цвета на флаге Микронезии?',
+                        options: ['Синий и белый', 'Красный и белый', 'Зеленый и белый', 'Желтый и синий'],
+                        answer: 'Синий и белый'
+                    },
+                    {
+                        question: 'Сколько звезд на флаге Маршалловых Островов?',
+                        options: ['1', '3', '5', '7'],
+                        answer: '1'
+                    },
+                    {
+                        question: 'Какой символ изображен на флаге Палау?',
+                        options: ['Желтый круг', 'Зелёный круг', 'Полумесяц', 'Синий круг'],
+                        answer: 'Желтый круг'
+                    },
+                    {
+                        question: 'Какие цвета на флаге Науру?',
+                        options: ['Синий, желтый, белый', 'Красный, белый, синий', 'Зеленый, белый, красный', 'Желтый, синий, красный'],
+                        answer: 'Синий, желтый, белый'
+                    },
+                    {
+                        question: 'Какой символ изображен на флаге Тувалу?',
+                        options: ['Юнион Джек и звезды', 'Крест', 'Полумесяц', 'Орел'],
+                        answer: 'Юнион Джек и звезды'
+                    },
+                    {
+                        question: 'Сколько звёзд на флаге Соломоновых Островов?',
+                        options: ['2', '3', '4', '5'],
+                        answer: '5'
+                    }
+                ]
+            };
+            
+            // Названия уровней для отображения
+            const levelNames = {
+                'europe': 'Европа',
+                'asia': 'Азия',
+                'north-america': 'Северная Америка',
+                'south-america': 'Южная Америка',
+                'africa': 'Африка',
+                'australia': 'Австралия и Океания'
+            };
+            
+            // Обработчики событий
+            startBtn.addEventListener('click', startRandomGame);
+            
+            levelBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const level = btn.getAttribute('data-level');
+                    startGame(level);
+                });
+            });
+            
+            restartBtn.addEventListener('click', resetGame);
+            nextLevelBtn.addEventListener('click', goToNextLevel);
+            mainMenuBtn.addEventListener('click', goToMainMenu);
+            
+            // Функции игры
+            function startRandomGame() {
+                const levels = Object.keys(questionsByLevel);
+                const randomLevel = levels[Math.floor(Math.random() * levels.length)];
+                startGame(randomLevel);
+            }
+            
+            function startGame(level) {
+                currentLevel = level;
+                currentQuestionIndex = 0;
+                score = 0;
+                lives = 3;
+                questions = [...questionsByLevel[level]];
+                
+                // Перемешиваем вопросы
+                shuffleArray(questions);
+                
+                updateScore();
+                updateLives();
+                showScreen('game');
+                showQuestion();
+            }
+            
+            function showQuestion() {
+                if (currentQuestionIndex >= questions.length) {
+                    levelComplete();
+                    return;
+                }
+                
+                const question = questions[currentQuestionIndex];
+                questionElement.textContent = question.question;
+                
+                // Очищаем варианты ответов
+                optionsElement.innerHTML = '';
+                
+                // Перемешиваем варианты ответов
+                const shuffledOptions = [...question.options];
+                shuffleArray(shuffledOptions);
+                
+                // Создаем кнопки для каждого варианта ответа
+                shuffledOptions.forEach(option => {
+                    const button = document.createElement('button');
+                    button.className = 'option-btn';
+                    button.textContent = option;
+                    button.addEventListener('click', () => checkAnswer(option, question.answer));
+                    optionsElement.appendChild(button);
+                });
+                
+                // Обновляем прогресс бар
+                progressBar.style.width = `${(currentQuestionIndex / questions.length) * 100}%`;
+            }
+            
+            function checkAnswer(selectedOption, correctAnswer) {
+                const optionButtons = document.querySelectorAll('.option-btn');
+                
+                // Отключаем все кнопки после выбора ответа
+                optionButtons.forEach(button => {
+                    button.disabled = true;
+                    
+                    // Подсвечиваем правильные и неправильные ответы
+                    if (button.textContent === correctAnswer) {
+                        button.classList.add('correct');
+                    } else if (button.textContent === selectedOption && selectedOption !== correctAnswer) {
+                        button.classList.add('incorrect');
+                    }
+                });
+                
+                // Проверяем ответ
+                if (selectedOption === correctAnswer) {
+                    // Правильный ответ
+                    score += 10;
+                    updateScore();
+                    
+                    // Анимация для правильного ответа
+                    questionElement.classList.add('correct');
+                    setTimeout(() => {
+                        questionElement.classList.remove('correct');
+                        currentQuestionIndex++;
+                        showQuestion();
+                    }, 1000);
+                } else {
+                    // Неправильный ответ
+                    lives--;
+                    updateLives();
+                    
+                    // Анимация для неправильного ответа
+                    questionElement.classList.add('shake');
+                    setTimeout(() => {
+                        questionElement.classList.remove('shake');
+                        
+                        if (lives <= 0) {
+                            gameOver();
+                        } else {
+                            currentQuestionIndex++;
+                            setTimeout(() => showQuestion(), 1000);
+                        }
+                    }, 500);
+                }
+            }
+            
+            function levelComplete() {
+                levelCompleteText.textContent = `Уровень "${levelNames[currentLevel]}" пройден!`;
+                finalScoreElements[1].textContent = score;
+                showScreen('win');
+                createConfetti();
+            }
+            
+            function gameOver() {
+                finalScoreElements[0].textContent = score;
+                showScreen('lose');
+            }
+            
+            function resetGame() {
+                startGame(currentLevel);
+            }
+            
+            function goToNextLevel() {
+                const levels = Object.keys(questionsByLevel);
+                const currentIndex = levels.indexOf(currentLevel);
+                
+                if (currentIndex < levels.length - 1) {
+                    startGame(levels[currentIndex + 1]);
+                } else {
+                    // Если это последний уровень, возвращаем в главное меню
+                    goToMainMenu();
+                }
+            }
+            
+            function goToMainMenu() {
+                showScreen('main');
+            }
+            
+            function updateScore() {
+                scoreElement.textContent = score;
+                finalScoreElements.forEach(el => el.textContent = score);
+            }
+            
+            function updateLives() {
+                livesElements.forEach((heart, index) => {
+                    if (index < lives) {
+                        heart.style.visibility = 'visible';
+                    } else {
+                        heart.style.visibility = 'hidden';
+                    }
+                });
+            }
+            
+            function showScreen(screenName) {
+                Object.values(screens).forEach(screen => {
+                    screen.classList.remove('active');
+                });
+                
+                screens[screenName].classList.add('active');
+            }
+            
+            // Вспомогательные функции
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+            
+            function createConfetti() {
+                const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4CAF50', '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800', '#FF5722'];
+                
+                for (let i = 0; i < 100; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.left = `${Math.random() * 100}%`;
+                    confetti.style.top = '-10px';
+                    confetti.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                    confetti.style.animationDelay = `${Math.random() * 0.5}s`;
+                    confetti.style.width = `${Math.random() * 10 + 5}px`;
+                    confetti.style.height = `${Math.random() * 10 + 5}px`;
+                    
+                    document.querySelector('.win-screen').appendChild(confetti);
+                    
+                    // Удаляем конфетти после анимации
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 5000);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
