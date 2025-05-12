@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stack Emission Calculator</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1000px;
+      margin: 30px auto;
+      background-color: #eef6fb;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .grid-container {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .column {
+      flex: 1;
+      padding: 15px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    label {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 12px;
+      box-sizing: border-box;
+    }
+
+    .result-box {
+      background-color: #f4fbf4;
+      font-weight: bold;
+      padding: 8px;
+      margin-bottom: 12px;
+    }
+
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 12px 24px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 30px;
+      border-collapse: collapse;
+      background: #fff;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #d4ebff;
+    }
+
+  </style>
+</head>
+<body>
+
+<h2>Stack Emission Calculator (g/day)</h2>
+
+<div class="grid-container">
+  <!-- Input Section -->
+  <div class="column">
+    <h3>Input Values</h3>
+    <label for="pm">Particulate Matter (mg/Nm³):</label>
+    <input type="number" id="pm" step="any">
+
+    <label for="sox">SOx (mg/Nm³):</label>
+    <input type="number" id="sox" step="any">
+
+    <label for="nox">NOx (mg/Nm³):</label>
+    <input type="number" id="nox" step="any">
+
+    <label for="flow">Flow Rate (Nm³/hr):</label>
+    <input type="number" id="flow" step="any">
+  </div>
+
+  <!-- Output Section -->
+  <div class="column">
+    <h3>Calculated Emission (g/day)</h3>
+    <label>PM Emission:</label>
+    <div id="pmResult" class="result-box">—</div>
+
+    <label>SOx Emission:</label>
+    <div id="soxResult" class="result-box">—</div>
+
+    <label>NOx Emission:</label>
+    <div id="noxResult" class="result-box">—</div>
+  </div>
+</div>
+
+<!-- Buttons -->
+<button onclick="calculate()">Calculate</button>
+<button onclick="downloadExcel()">Download Excel</button>
+
+<!-- Previous Results Table -->
+<h3>Previous Results</h3>
+<table id="resultsTable">
+  <thead>
+    <tr>
+      <th>S.No</th>
+      <th>PM (mg/Nm³)</th>
+      <th>SOx (mg/Nm³)</th>
+      <th>NOx (mg/Nm³)</th>
+      <th>Flow (Nm³/hr)</th>
+      <th>PM Emission (g/day)</th>
+      <th>SOx Emission (g/day)</th>
+      <th>NOx Emission (g/day)</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+<script>
+  let resultsData = [];
+  let count = 0;
+
+  function calculate() {
+    const pm = parseFloat(document.getElementById("pm").value);
+    const sox = parseFloat(document.getElementById("sox").value);
+    const nox = parseFloat(document.getElementById("nox").value);
+    const flow = parseFloat(document.getElementById("flow").value);
+
+    if (isNaN(pm) || isNaN(sox) || isNaN(nox) || isNaN(flow) || flow <= 0) {
+      alert("Please enter valid numbers in all fields.");
+      return;
+    }
+
+    const factor = flow * 24 / 1_000_000;
+    const pmEmission = (pm * factor).toFixed(2);
+    const soxEmission = (sox * factor).toFixed(2);
+    const noxEmission = (nox * factor).toFixed(2);
+
+    // Display result
+    document.getElementById("pmResult").innerText = `${pmEmission} g/day`;
+    document.getElementById("soxResult").innerText = `${soxEmission} g/day`;
+    document.getElementById("noxResult").innerText = `${noxEmission} g/day`;
+
+    // Store in table
+    count++;
+    const row = document.getElementById("resultsTable").getElementsByTagName("tbody")[0].insertRow();
+    row.insertCell(0).innerText = count;
+    row.insertCell(1).innerText = pm;
+    row.insertCell(2).innerText = sox;
+    row.insertCell(3).innerText = nox;
+    row.insertCell(4).innerText = flow;
+    row.insertCell(5).innerText = pmEmission;
+    row.insertCell(6).innerText = soxEmission;
+    row.insertCell(7).innerText = noxEmission;
+
+    // Save to data array
+    resultsData.push({
+      "S.No": count,
+      "PM (mg/Nm³)": pm,
+      "SOx (mg/Nm³)": sox,
+      "NOx (mg/Nm³)": nox,
+      "Flow (Nm³/hr)": flow,
+      "PM Emission (g/day)": pmEmission,
+      "SOx Emission (g/day)": soxEmission,
+      "NOx Emission (g/day)": noxEmission
+    });
+  }
+
+  function downloadExcel() {
+    if (resultsData.length === 0) {
+      alert("No data to export!");
+      return;
+    }
+    const ws = XLSX.utils.json_to_sheet(resultsData);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Emission Results");
+    XLSX.writeFile(wb, "Emission_Results.xlsx");
+  }
+</script>
+
+</body>
+</html>
