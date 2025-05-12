@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbearia Profissional</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-style: italic;
+        }
+
+        section {
+            background-color: #fff;
+            padding: 30px;
+            margin: 20px auto;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        section#destaque {
+            background: #c79c60;
+            color: #fff;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        section h2 {
+            margin-bottom: 15px;
+            color: #c79c60;
+        }
+
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        button {
+            background-color: #c79c60;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #a37742;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+        .botao-whatsapp {
+         display: inline-block;
+         margin-top: 30px;
+         padding: 12px 20px;
+         background-color: #25D366;
+         color: white;
+         text-decoration: none;
+         border-radius: 5px;
+         font-weight: bold;
+         font-size: 16px;
+         transition: background-color 0.3s;
+       }
+
+       .botao-whatsapp i {
+        margin-right: 8px;
+       font-size: 18px;
+      }
+
+      .botao-whatsapp:hover {
+      background-color: #1ebe5d;
+     }
+     .whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25D366;
+  color: white;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  font-size: 30px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  background-color: #1ebe5d;
+
+}
+
+.decor-esquerda, .decor-direita {
+  position: fixed;
+  top: 0;
+  height: 100%;
+  z-index: -1; /* Fica atrás do conteúdo */
+  opacity: 0.2;  /* Transparência para não atrapalhar leitura */
+  pointer-events: none; /* Não interfere nos cliques */
+}
+
+.decor-esquerda {
+  left: 0;
+}
+
+.decor-direita {
+  right: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </style>
+</head>
+
+
+
+
+<body>
+    <img src="https://img.freepik.com/fotos-gratis/ferramentas-para-a-profissao-de-cabeleireiro_23-2150668471.jpg?uid=R199562217&ga=GA1.1.2003840132.1746842783&semt=ais_hybrid&w=740"
+        alt="Decoração esquerda" class="decor-esquerda">
+    <img src="https://img.freepik.com/vetores-premium/barber-pack_106606-79.jpg?uid=R199562217&ga=GA1.1.2003840132.1746842783&semt=ais_hybrid&w=740"
+        alt="Decoração direita" class="decor-direita">
+
+    
+    
+
+    
+
+    <header>
+        <h1>Barbearia Rios</h1>
+        <p><strong>Estilo e tradição em cada detalhe.</strong></p>
+        <p>
+            <a href="https://www.google.com/maps/place/R.+L%C3%ADdia+Ferraz+Ara%C3%BAjo,+115+-+Jardim+Sao+Fernando,+Ferraz+de+Vasconcelos+-+SP,+08541-350/@-23.5185474,-46.3760394,17z/data=!3m1!4b1!4m6!3m5!1s0x94ce64c66c7f3987:0xe64ba5d6e67cae50!8m2!3d-23.5185523!4d-46.3734645!16s%2Fg%2F11g0tlxxsd?entry=ttu&g_ep=EgoyMDI1MDUwNy4wIKXMDSoASAFQAw%3D%3D" target="_blank">
+                📍 Rua Lídia Ferraz de Araújo, 115 - Cep - 08541350 - Jardim São fernando, Ferraz de Vaconvelos -Sp
+            </a>
+        </p>
+          
+
+        
+
+    </header>
+
+    <section id="destaque">
+        <h2>Estilo que transforma. Atendimento que conquista.</h2>
+    </section>
+
+    <section id="sobre">
+        <h2>Sobre Nós</h2>
+        <p>Unimos técnica, tradição e modernidade para valorizar o seu estilo.</p>
+    </section>
+
+    <section id="servicos">
+        <h2>Serviços</h2>
+        <ul>
+            <li>Cortes clássicos e modernos com acabamento impecável.</li>
+            <li>Barba desenhada, aparada ou completa: do jeito que você gosta.</li>
+            <li>Tratamentos especiais para cabelo, barba e pele.</li>
+        </ul>
+    </section>
+
+    <section id="agendamento">
+        <h2>Agende seu Horário</h2>
+        <p>Garanta seu estilo com quem entende do assunto. Marque agora!</p>
+        <button>Agendar</button>
+        <a href="https://wa.me/5511989358783" target="_blank" class="botao-whatsapp">
+            <i class="fab fa-whatsapp"></i> Fale conosco no WhatsApp
+        </a>
+        <a href="https://wa.me/5511989358783" target="_blank" class="whatsapp-float" title="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        
+
+          
+          
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Barbearia Profissional. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+
+</html>
