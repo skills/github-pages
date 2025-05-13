@@ -1,0 +1,26 @@
+ <html>
+<title>my name</title>
+ <body>
+   <center id="hello">
+    <head> 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Playwrite+DK+Loopet:wght@100..400&display=swap" rel="stylesheet">
+  </head>
+  
+  <style> 
+    
+#hello
+  font-family: "Playwrite DK Loopet", cursive;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+    </style>
+  
+ <h1>Hello my name is luqman</h1>                   <p> hello m name is liqman and i am from 9 standered </p>                
+  </center>
+   </body> 
+    </html>
