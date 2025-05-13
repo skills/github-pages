@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>BIBLIOTECA VIRTUAL</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f1f1f1;
+        }
+        header {
+            background: #004080;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        header img {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            height: 100px;
+        }
+        h1, h2, h3 {
+            margin: 5px;
+        }
+        .contenedor {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+            gap: 20px;
+        }
+        .materia {
+            background: white;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 15px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .materia img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .materia h4 {
+            margin: 10px 0;
+        }
+        .botones {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .botones a {
+            text-decoration: none;
+            background: #004080;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        footer {
+            background: #ddd;
+            text-align: center;
+            padding: 15px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="imagenes/universidad.png" alt="Logo Universidad">
+        <h1>UNIVERSIDAD NACIONAL DE LOJA</h1>
+        <h2>Carrera de Pedagogía de las Ciencias Experimentales Informática</h2>
+        <h3>Programación Web</h3>
+        <h2>BIBLIOTECA VIRTUAL</h2>
+    </header>
+
+    <div class="contenedor">
+        <!-- Programación Web -->
+        <div class="materia">
+            <img src="imagenes/programacion_web.jpg" alt="Programación Web">
+            <h4>Programación Web</h4>
+            <div class="botones">
+                <a href="https://docs.google.com/document/d/1xXlA6l-e1sZwtKM4L1IiO-WRFgPK2ikMKaksEsPnojg/edit?usp=sharing" target="_self">Sílabo</a>
+                <a href="https://docs.google.com/document/d/13XCkLLImZzxDuPhzkokazFBc_xcchW5KQHsDMUSNRl8/edit?usp=sharing" target="_self">Texto base</a>
+                <a href="https://docs.google.com/document/d/1p4uTZFw_7yGToEy_SIlcsTwbBT8UoK-FT8Sf8Fh7fpk/edit?usp=sharing" target="_self">Guía de estudio</a>
+            </div>
+        </div>
+
+        <!-- Inclusión Educativa -->
+        <div class="materia">
+            <img src="imagenes/inclusion_educativa.jpg" alt="Inclusión Educativa">
+            <h4>Inclusión Educativa</h4>
+            <div class="botones">
+                <a href="https://docs.google.com/document/d/1_OgWkSvzbnX1TpArjRwlk0RSqW98Fkjm2KApDj3lEvQ/edit?usp=sharing" target="_self">Sílabo</a>
+                <a href="https://docs.google.com/document/d/1snvfiyqoYWOP4EMpyd2_qLDcRnbuOed2ROgVSFuiuQs/edit?usp=sharing" target="_self">Texto base</a>
+                <a href="https://docs.google.com/document/d/1DFvZ8phgKZbafFqBC3aAHU4Y2ediYSX1uSqlRnWo7Mk/edit?usp=sharing" target="_self">Guía de estudio</a>
+            </div>
+        </div>
+
+        <!-- Evaluación Curricular -->
+        <div class="materia">
+            <img src="imagenes/evaluacion_curricular.jpg" alt="Evaluación Curricular">
+            <h4>Evaluación Curricular</h4>
+            <div class="botones">
+                <a href="https://docs.google.com/document/d/1nH-FxKj9eBIaWw125xaCDQs6ESphsvK5oDh_k4wSs0s/edit?usp=sharing" target="_self">Sílabo</a>
+                <a href="https://docs.google.com/document/d/1Cs60MY4_JEMyq9v_ebR_mZsXRD9XATt-8Tdygxdy2YY/edit?usp=sharing" target="_self">Texto base</a>
+                <a href="https://docs.google.com/document/d/1uzEna-ZOEIRQLJ0oM-8RE7kLwv61gr8eMFEuDBs6ZfQ/edit?usp=sharing" target="_self">Guía de estudio</a>
+            </div>
+        </div>
+
+        <!-- Gestión de Tecnología Educativa -->
+        <div class="materia">
+            <img src="imagenes/gestion_tecnologia.jpg" alt="Gestión de Tecnología Educativa">
+            <h4>Gestión de Tecnología Educativa</h4>
+            <div class="botones">
+                <a href="https://docs.google.com/document/d/1yN21P1XvQSyHlELeeCq-TEP6pcEeAyYP/edit" target="_self">Sílabo</a>
+                <a href="https://docs.google.com/document/d/1L1GxTxYQksGNTi5fCxhswosE-mkkrKT9BSQRaawwP_Q/edit?usp=sharing" target="_self">Texto base</a>
+                <a href="https://docs.google.com/document/d/18V7juyyiv0EThZ4oAMwjqT-EGPQivsYY/edit" target="_self">Guía de estudio</a>
+            </div>
+        </div>
+
+        <!-- Mantenimiento de Computadoras -->
+        <div class="materia">
+           <img src="imagenes/mantenimiento.jpg" alt="Mantenimiento de Computadoras">
+            <h4>Mantenimiento de Computadoras</h4>
+            <div class="botones">
+                <a href="https://docs.google.com/document/d/1H_zDwQvXNvBqb8xZnisE-c90jG2OtVsP_nbWLV2LfFI/edit?usp=sharing" target="_self">Sílabo</a>
+                <a href="https://docs.google.com/document/d/1YMHvgYe7BQAP8noWSWHxep2Vbl-87wGF-gFR9pgJO_I/edit?usp=sharing" target="_self">Texto base</a>
+                <a href="https://docs.google.com/document/d/17bpX0BuXMrRQ6r_zNcN-C3YH6zL4DmY7Z7sXMVnp6G0/edit?usp=sharing" target="_self">Guía de estudio</a>
+            </div>
+        </div>
+
+        <!-- Redes Informáticas -->
+        <div class="materia">
+            <img src="imagenes/redes.jpg" alt="Redes Informáticas">
+            <h4>Redes Informáticas</h4>
+            <div class="botones">
+                <a href="https://docs.google.com/document/d/1Sid-BbGLvpkEMhesN9PutHWGsFsQVsHLs3quM5gW7cQ/edit?usp=sharing" target="_self">Sílabo</a>
+                <a href="https://docs.google.com/document/d/1N5cmzG_sEnyo0U68Dt2DEOM_yvh0RVbvzYMyxq3L9vo/edit?usp=sharing" target="_self">Texto base</a>
+                <a href="https://docs.google.com/document/d/1xqYSHbb6unbQtBHssvvCPxxaWzTafcC-HCQkJ-bxv-8/edit?usp=sharing" target="_self">Guía de estudio</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>PERIODO ACADÉMICO MARZO - AGOSTO 2025</p>
+        <p>Copyright © 2025 José Luis Villa Peña</p>
+        <p>Versión Definitiva</p>
+    </footer>
+</body>
+</html>
