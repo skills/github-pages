@@ -1,0 +1,126 @@
+import React from 'react'; import { motion } from 'framer-motion'; import { Card, CardContent } from '@/components/ui/card'; import { Button } from '@/components/ui/button';
+
+const HomePage = () => { return ( <div className="bg-white text-gray-900"> {/* Banner - Imagem principal de destaque com botão CTA */} <div className="relative w-full h-screen bg-center bg-cover bg-[url('/banner.jpg')]"> <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center"> <div className="text-center text-white p-6 bg-opacity-80 bg-black rounded-2xl"> <h1 className="text-4xl md:text-6xl font-bold mb-4">Bem-vindo ao Nosso Clube</h1> <Button className="bg-yellow-600 text-white text-lg px-8 py-3 rounded-2xl mt-4 hover:bg-yellow-700 transition">Conheça Mais</Button> </div> </div> </div>
+
+{/* Sobre o Clube - História, missão e conquistas */}
+  <section className="p-8 md:p-16">
+    <h2 className="text-3xl md:text-5xl font-serif text-yellow-600 mb-8">Sobre o Clube</h2>
+    <p className="text-lg md:text-xl leading-relaxed mb-6">Nosso clube tem uma rica história de conquistas e superação. Fundado com a missão de inspirar novas gerações e promover o verdadeiro espírito esportivo, buscamos sempre a vitória com humildade e determinação.</p>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <Card>
+        <CardContent>
+          <h3 className="text-2xl font-serif text-yellow-600">Fundação</h3>
+          <p>Fundado em 1923, nosso time tem décadas de tradição e paixão pelo futebol.</p>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardContent>
+          <h3 className="text-2xl font-serif text-yellow-600">Conquistas</h3>
+          <p>Vencedor de inúmeros campeonatos regionais e nacionais ao longo dos anos.</p>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardContent>
+          <h3 className="text-2xl font-serif text-yellow-600">Missão</h3>
+          <p>Formar atletas e promover o desenvolvimento pessoal e social através do esporte.</p>
+        </CardContent>
+      </Card>
+    </div>
+  </section>
+
+  {/* Elenco - Jogadores com fotos e detalhes */}
+  <section className="p-8 md:p-16 bg-gray-100">
+    <h2 className="text-3xl md:text-5xl font-serif text-yellow-600 mb-8">Elenco</h2>
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      {Array.from({ length: 12 }).map((_, index) => (
+        <Card key={index} className="hover:shadow-lg transition">
+          <CardContent className="text-center">
+            <img src="/player.jpg" alt="Jogador" className="rounded-2xl w-full mb-4" />
+            <h3 className="text-xl font-bold">Jogador {index + 1}</h3>
+            <p className="text-gray-600">Atacante</p>
+            <Button className="bg-yellow-600 text-white mt-4 w-full">Ver Detalhes</Button>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  </section>
+
+  {/* Próximo e Último Jogo - Informações sobre jogos recentes e futuros */}
+  <section className="p-8 md:p-16">
+    <h2 className="text-3xl md:text-5xl font-serif text-yellow-600 mb-8">Próximo e Último Jogo</h2>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <Card className="hover:shadow-lg transition">
+        <CardContent>
+          <h3 className="text-2xl font-serif text-yellow-600 mb-4">Próximo Jogo</h3>
+          <p className="text-lg">Data: 20/05/2025</p>
+          <p className="text-lg">Adversário: Time B</p>
+          <p className="text-lg">Local: Estádio Central</p>
+          <Button className="bg-yellow-600 text-white mt-4 w-full">Ver Detalhes</Button>
+        </CardContent>
+      </Card>
+      <Card className="hover:shadow-lg transition">
+        <CardContent>
+          <h3 className="text-2xl font-serif text-yellow-600 mb-4">Último Jogo</h3>
+          <p className="text-lg">Data: 10/05/2025</p>
+          <p className="text-lg">Placar: 3 - 1</p>
+          <Button className="bg-yellow-600 text-white mt-4 w-full">Ver Melhores Momentos</Button>
+        </CardContent>
+      </Card>
+    </div>
+  </section>
+
+  {/* Notícias do Jogo - Cards de notícias e destaques */}
+  <section className="p-8 md:p-16 bg-gray-100">
+    <h2 className="text-3xl md:text-5xl font-serif text-yellow-600 mb-8">Notícias do Jogo</h2>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {Array.from({ length: 3 }).map((_, index) => (
+        <Card key={index} className="hover:shadow-lg transition">
+          <CardContent>
+            <img src="/news.jpg" alt="Notícia" className="rounded-2xl w-full mb-4" />
+            <h3 className="text-xl font-bold">Notícia {index + 1}</h3>
+            <p className="text-gray-600">Resumo da notícia do jogo {index + 1}...</p>
+            <Button className="bg-yellow-600 text-white mt-4 w-full">Leia Mais</Button>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  </section>
+
+  {/* Tabela de Classificação - Posições e pontuações dos times */}
+  <section className="p-8 md:p-16">
+    <h2 className="text-3xl md:text-5xl font-serif text-yellow-600 mb-8">Tabela de Classificação</h2>
+    <table className="w-full text-left border-collapse">
+      <thead>
+        <tr>
+          <th className="border-b-2 border-yellow-600 py-2">Posição</th>
+          <th className="border-b-2 border-yellow-600 py-2">Time</th>
+          <th className="border-b-2 border-yellow-600 py-2">Pontos</th>
+        </tr>
+      </thead>
+      <tbody>
+        {Array.from({ length: 10 }).map((_, index) => (
+          <tr key={index} className="hover:bg-gray-100">
+            <td className="py-2">{index + 1}</td>
+            <td className="py-2">Time {index + 1}</td>
+            <td className="py-2">{Math.floor(Math.random() * 100)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </section>
+
+  {/* Patrocinadores - Logos dos patrocinadores com efeito hover */}
+  <section className="p-8 md:p-16 bg-gray-100">
+    <h2 className="text-3xl md:text-5xl font-serif text-yellow-600 mb-8">Patrocinadores</h2>
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      {Array.from({ length: 8 }).map((_, index) => (
+        <img key={index} src="/sponsor.jpg" alt="Patrocinador" className="rounded-2xl w-full hover:opacity-80 transition" />
+      ))}
+    </div>
+  </section>
+</div>
+
+); };
+
+export default HomePage;
+
