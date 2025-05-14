@@ -1,5 +1,90 @@
 <header>
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TheoryNet: The People's Theory Hub</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #eee;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #222;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2em;
+      color: #f0b;
+    }
+    main {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 10px;
+    }
+    .post {
+      background: #1b1b1b;
+      margin-bottom: 20px;
+      padding: 15px;
+      border-left: 4px solid #f0b;
+    }
+    textarea, input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      background: #222;
+      color: #fff;
+      border: 1px solid #444;
+    }
+    button {
+      background-color: #f0b;
+      border: none;
+      padding: 10px 20px;
+      color: #000;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #c09;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>TheoryNet</h1>
+    <p>Share your conspiracy theories, deep thoughts, and alternative realities.</p>
+  </header>
+  <main>
+    <section id="submit">
+      <h2>Post Your Theory</h2>
+      <input type="text" id="title" placeholder="Theory Title">
+      <textarea id="content" rows="6" placeholder="Write your theory here..."></textarea>
+      <button onclick="postTheory()">Submit</button>
+    </section>
+    <section id="theories">
+      <h2>Latest Theories</h2>
+    </section>
+  </main>  <script>
+    function postTheory() {
+      const title = document.getElementById('title').value;
+      const content = document.getElementById('content').value;
+      if (!title || !content) return;
 
+      const post = document.createElement('div');
+      post.className = 'post';
+      post.innerHTML = `<h3>${title}</h3><p>${content}</p>`;
+      document.getElementById('theories').prepend(post);
+
+      document.getElementById('title').value = '';
+      document.getElementById('content').value = '';
+    }
+  </script></body>
+</html>
 <!--
   <<< Author notes: Course header >>>
   Include a 1280×640 image, course title in sentence case, and a concise description in emphasis.
