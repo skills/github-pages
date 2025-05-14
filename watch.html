@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="15;url=https://example.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كلمة السر</title>
+    <style>
+        body {
+            font-family: 'Tahoma', sans-serif;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+        .box {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 50px;
+        }
+        .password {
+            font-size: 28px;
+            font-weight: bold;
+            background-color: #fff;
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .countdown {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .copied {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #ff0;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>شكرًا لمشاهدتك الإعلان</h2>
+        <p>كلمة سر البوت الخاصة بك:</p>
+        <div class="password" onclick="copyPassword()">123456</div>
+        <div id="copiedMsg" class="copied" style="display: none;">تم نسخ كلمة السر!</div>
+        <div class="countdown">سيتم تحويلك خلال <span id="timer">15</span> ثانية...</div>
+    </div>
+
+    <script>
+        let seconds = 15;
+        let timer = document.getElementById('timer');
+        setInterval(() => {
+            seconds--;
+            if (seconds >= 0) {
+                timer.innerText = seconds;
+            }
+        }, 1000);
+
+        function copyPassword() {
+            const password = "123456";
+            navigator.clipboard.writeText(password).then(() => {
+                document.getElementById('copiedMsg').style.display = "block";
+                setTimeout(() => {
+                    document.getElementById('copiedMsg').style.display = "none";
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
