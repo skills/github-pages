@@ -56,14 +56,3 @@ jobs:
           gh workflow enable "Step 2"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  print_github_context:
-    # TODO: Remove this after testing page_build event
-    name: Print GitHub Context
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print GitHub Context
-        run: |
-          echo "$CONTEXT"
-        env:
-          CONTEXT: ${{ toJson(github) }}

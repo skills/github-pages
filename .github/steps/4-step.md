@@ -12,13 +12,13 @@ Frontmatter is a section at the top of your file that looks like this:
 ```yaml
 ---
 title: "Welcome to my blog"
-date: 2019-01-20
+date: 2025-05-15
 ---
 ```
 
 ### ⌨️ Activity: Create a blog post
 
-1. Browse to the `my-pages` branch.
+1. Browse to the `main` branch.
 1. Click the `Add file` dropdown menu and then on `Create new file`.
 1. Name the file `_posts/YYYY-MM-DD-title.md`.
 1. Replace the `YYYY-MM-DD` with today's date, and change the `title` of your first blog post if you'd like.
@@ -31,11 +31,11 @@ date: 2019-01-20
    date: YYYY-MM-DD
    ---
    ```
-1. Replace `YOUR-TITLE` with the title for your blog post.
-1. Replace `YYYY-MM-DD` with today's date.
+   1. Replace `YOUR-TITLE` with the title for your blog post.
+   1. Replace `YYYY-MM-DD` with today's date.
 1. Type a quick draft of your blog post. Remember, you can always edit it later.
-1. Commit your changes to your branch.
-1. Wait about 20 seconds then refresh this page. [GitHub Actions](https://docs.github.com/en/actions) will automatically update to the next step.
+1. Commit your changes to the `main` branch.
+1. As you commit your changes Mona will prepare the next step in this exercise!
 
 <details>
 <summary>Having trouble? 🤷</summary><br/>

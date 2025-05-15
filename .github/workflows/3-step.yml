@@ -1,7 +1,11 @@
 name: Step 3
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - _config.yml
 
 permissions:
   contents: read
