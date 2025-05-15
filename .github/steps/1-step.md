@@ -1,27 +1,27 @@
-## Step 1: (replace-me: STEP-NAME)
+## Step 1: Enable GitHub Pages
 
-(replace-me: OPTIONAL Brief story or scenario to introduce the step)
+Welcome to GitHub Pages and Jekyll :tada:!
 
-### 📖 Theory: (replace-me: Theory title)
+### 📖 Theory: What is GitHub Pages?
 
-<!-- GitHub-styled notifications can be used outside of ordered lists. Available options are: NOTE, IMPORTANT, WARNING, TIP, CAUTION -->
-<!--
 > [!NOTE]
-> (Important note or additional information relevant to this section)
- -->
+> When you enable GitHub Pages on a repository, GitHub takes the content that's on the main branch and publishes a website based on its contents. Learn more in the [GitHub Pages documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages).
 
-(replace-me: Optional theory or background information relevant to this step)
+GitHub Pages lets you turn your repository into a website. This is a great way to share your project, documentation, or even a blog with the world.
 
-### ⌨️ Activity: (replace-me: Activity title)
+### ⌨️ Activity: Enable GitHub Pages
 
-1. (replace-me: First instruction)
-1. (replace-me: Second instruction)
-1. (replace-me: Additional instructions as needed)
+1. Open a new browser tab, and work on the steps in your second tab while you read the instructions in this tab.
+1. Under your repository name, click **Settings**.
+1. Click **Pages** in the **Code and automation** section.
+1. Ensure "Deploy from a branch" is selected from the **Source** drop-down menu, and then select `main` from the **Branch** drop-down menu.
+1. Click the **Save** button.
+1. Wait about _one minute_ then refresh this page. [GitHub Actions](https://docs.github.com/en/actions) will automatically update to the next step.
 
 <details>
 <summary>Having trouble? 🤷</summary><br/>
 
-- (replace-me: Troubleshooting tip or hint)
-- (replace-me: Additional troubleshooting tips as needed)
+- Turning on GitHub Pages creates a deployment of your repository. GitHub Actions may take up to a minute to respond while waiting for the deployment. Future steps will be about 20 seconds; this step is slower.
+- In the **Pages** of **Settings**, the **Visit site** button will appear at the top. Click the button to see your GitHub Pages site.
 
 </details>

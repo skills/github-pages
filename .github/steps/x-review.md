@@ -1,16 +1,20 @@
 ## Review
 
-_Congratulations, you've completed this exercise and learned a lot about (replace-me: feature/product that was taught in this exercise)
+_Congratulations, you've completed this exercise and learned a lot about GitHub Pages and Jekyll!_
 
-<img src="https://octodex.github.com/images/jetpacktocat.png" alt="celebrate" width=200 align=right>
+<img src="https://octodex.github.com/images/constructocat2.jpg" alt="celebrate" width=300 align=right>
 
 Here's a recap of your accomplishments:
 
-- (replace-me: Accomplishment #1)
-- (replace-me: Accomplishment #N)
+- You enabled GitHub Pages.
+- You selected a theme using the config file.
+- You learned about proper directory format and file naming conventions in Jekyll.
+- You created your first blog post with Jekyll!
 
 ### What's next?
 
-- (replace-me: Natural follow up Skills exercise - if there is one)
-- (replace-me: Documentation link to learn more about the feature)
-- (replace-me: Other resources or calls to action)
+- Keep working on your GitHub Pages site... we love seeing what you come up with!
+- We'd love to hear what you thought of this course [in our discussion board](https://github.com/orgs/skills/discussions/categories/github-pages).
+- [Take another GitHub Skills course](https://github.com/skills).
+- [Read the GitHub Getting Started docs](https://docs.github.com/en/get-started).
+- To find projects to contribute to, check out [GitHub Explore](https://github.com/explore).
