@@ -53,7 +53,6 @@ jobs:
           with:
             text-file: _config.yml
             keyphrase: "theme: minima"
-            case-sensitive: true
 
         - name: Build message - step results
           id: build-message-step-results
