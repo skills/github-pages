@@ -1,5 +1,7 @@
-# Welcome to your GitHub Pages site!
+---
+title: Welcome!
+---
 
 You are seeing this page because you have an `index.md` file in your repository.
 
-When you commit your changes, refresh your GitHub Pages site to see your updates.
+When you commit your changes, wait a while and refresh your GitHub Pages site to see your updates.
