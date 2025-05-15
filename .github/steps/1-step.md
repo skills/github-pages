@@ -11,7 +11,9 @@ When you enable GitHub Pages on a repository, GitHub takes the content that's on
 
 ### ⌨️ Activity: Enable GitHub Pages
 
-1. Open a new browser tab and navigate to your newly made repository (your copy of this exercise). Then, work on the steps in your second tab while you read the instructions in this tab.
+
+
+1. Open this repository in a new browser tab so you can work on the steps while you read the instructions in this tab.
 1. Under your repository name, click **Settings**.
 1. Click **Pages** in the **Code and automation** section.
 1. Ensure **Deploy from a branch** is selected from the **Source** drop-down menu, and then select `main` from the **Branch** drop-down menu.
