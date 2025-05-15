@@ -63,7 +63,7 @@ jobs:
               step_number: 3
               passed: ${{ !contains(steps.*.outcome, 'failure') }}
               results_table:
-                - description: "Check `_config.yml` file for `theme: minima`"
+                - description: "Looked for minima theme added to the configuration file"
                   passed: ${{ steps.check-theme-minima.outcome == 'success' }}
 
         - name: Create comment - step results

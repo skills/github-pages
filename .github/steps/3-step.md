@@ -1,6 +1,8 @@
 ## Step 3: Configure your site
 
-Nice work setting the theme! :sparkles:
+Nice work updating your home page :sparkles:
+
+It's time we give it a little bit of **configuration** so it looks nice!
 
 ### 📖 Theory: Jekyll and \_config.yml
 
@@ -19,7 +21,19 @@ For this activity, we will use a blog-ready theme named "minima".
    ```
 
 1. (optional) You can modify the other configuration variables such as `title:`, `author:`, and `description:` to further customize your site.
-<!-- TODO: Add details with example -->
+
+   <details>
+   <summary>Example </summary><br/>
+
+   ```yml
+   theme: minima
+   title: {{ login }}'s personal blog
+   description: This is where I share cool stuff about my life
+   author: {{ login }}
+   ```
+
+   </details>
+
 1. Commit your changes to the `main` branch.
 1. As you commit your changes Mona will prepare the next step in this exercise!
 

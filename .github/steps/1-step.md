@@ -19,20 +19,8 @@ When you enable GitHub Pages on a repository, GitHub takes the content that's on
 1. Ensure **Deploy from a branch** is selected from the **Source** drop-down menu, and then select `main` from the **Branch** drop-down menu.
 1. Click the **Save** button.
 
-   That's it! You've enabled GitHub Pages for your repository! :tada:
-
-   Isn't it simple?
-
-1. Your blog is buing built right now in a moment a **Visit site** button will appear at the top of the **Pages** settings view.
-
-   Click the button to see your GitHub Pages site.
-
 1. With GitHub Pages enabled Mona will be preparing the next step in this exercise!
 
-> [!TIP]
-> Keep your GitHub Pages website open in a separate browser tab and keep it handy!
->
-> As you progress through this exercise, you'll see your changes reflected on your live site.
 
 <details>
 <summary>Having trouble? 🤷</summary><br/>

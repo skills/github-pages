@@ -35,13 +35,23 @@ jobs:
           path: exercise-toolkit
           ref: v0.4.0
 
+      - name: Build comment - add step content
+        id: build-comment
+        uses: skills/action-text-variables@v2
+        with:
+          template-file: ${{ env.STEP_2_FILE }}
+          template-vars: |
+            login: ${{ github.actor }}
+            full_repo_name: ${{ github.repository }}
+            repo_name: ${{ github.event.repository.name }}
 
       - name: Create comment - add step content
         run: |
           gh issue comment "$ISSUE_URL" \
-            --body-file "$STEP_2_FILE"
+            --body "$ISSUE_BODY"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_BODY: ${{ steps.build-comment.outputs.updated-text }}
 
       - name: Create comment - watching for progress
         run: |
