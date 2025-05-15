@@ -22,7 +22,7 @@ jobs:
 
   post_next_step_content:
     name: Post next step content
-    needs: [find_exercise]
+    needs: find_exercise
     runs-on: ubuntu-latest
     env:
       ISSUE_URL: ${{ needs.find_exercise.outputs.issue-url }}
@@ -31,10 +31,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Get response templates
+        uses: actions/checkout@v4
+        with:
+          repository: skills/exercise-toolkit
+          path: exercise-toolkit
+          ref: v0.4.0
+
       - name: Create comment - add step content
         run: |
           gh issue comment "$ISSUE_URL" \
             --body-file "$STEP_4_FILE"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create comment - watching for progress
+        run: |
+          gh issue comment "$ISSUE_URL" \
+            --body-file exercise-toolkit/markdown-templates/step-feedback/watching-for-progress.md
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

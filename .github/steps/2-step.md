@@ -1,10 +1,10 @@
 ## Step 2: Customize your homepage
 
-You turned on GitHub Pages! :tada:
+Good job! You turned on GitHub Pages! :tada:
 
 ### 📖 Theory: Customizing your homepage
 
-You can customize your homepage by adding content to  `index.md` file so we can update it to include your personalized content!
+You can customize your homepage by adding content to  `index.md` file. As you commit it to the `main` branch your website will be updated to display your personalized content!
 
 ### ⌨️ Activity: Create your homepage
 
