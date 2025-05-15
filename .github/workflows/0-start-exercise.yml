@@ -22,8 +22,8 @@ jobs:
     name: Start Exercise
     uses: skills/exercise-toolkit/.github/workflows/start-exercise.yml@v0.4.0
     with:
-      exercise-title: "(replace-me: Exercise title)"
-      intro-message: "(replace-me: Brief one line introduction message for the exercise)"
+      exercise-title: "GitHub Pages"
+      intro-message: "Create a site or blog from your GitHub repositories with GitHub Pages."
 
   post_next_step_content:
     name: Post next step content
