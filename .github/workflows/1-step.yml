@@ -2,12 +2,7 @@ name: Step 1
 
 on:
   workflow_dispatch:
-  # Common event triggers: pull_request, push, issues, issue_comment (feel free to experiment)
-  # Docs: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
-  # Example:
-  # pull_request:
-  #   branches:
-  #     - main
+  page_build:
 
 permissions:
   contents: read
@@ -40,6 +35,7 @@ jobs:
           path: exercise-toolkit
           ref: v0.4.0
 
+
       - name: Create comment - add step content
         run: |
           gh issue comment "$ISSUE_URL" \
@@ -60,3 +56,14 @@ jobs:
           gh workflow enable "Step 2"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  print_github_context:
+    # TODO: Remove this after testing page_build event
+    name: Print GitHub Context
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print GitHub Context
+        run: |
+          echo "$CONTEXT"
+        env:
+          CONTEXT: ${{ toJson(github) }}

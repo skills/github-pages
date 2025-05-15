@@ -12,12 +12,11 @@ on:
   #     - closed
 
 permissions:
-  contents: write
+  contents: read
   actions: write
   issues: write
 
 env:
-  REVIEW_FILE: ".github/steps/x-review.md"
   STEP_3_FILE: ".github/steps/3-step.md"
 
 jobs:
@@ -25,8 +24,9 @@ jobs:
     name: Find Exercise Issue
     uses: skills/exercise-toolkit/.github/workflows/find-exercise-issue.yml@v0.4.0
 
-  post_review_content:
-    name: Post review content
+
+  post_next_step_content:
+    name: Post next step content
     needs: [find_exercise]
     runs-on: ubuntu-latest
     env:
@@ -36,6 +36,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Get response templates
+        uses: actions/checkout@v4
+        with:
+          repository: skills/exercise-toolkit
+          path: exercise-toolkit
+          ref: v0.4.0
+
       - name: Create comment - add step content
         run: |
           gh issue comment "$ISSUE_URL" \
@@ -43,24 +50,17 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  # The last workflow in the chain of steps should also finish the exercise.
-  finish_exercise:
-    name: Finish Exercise
-    needs: [find_exercise, post_review_content]
-    uses: skills/exercise-toolkit/.github/workflows/finish-exercise.yml@v0.4.0
-    with:
-      issue-url: ${{ needs.find_exercise.outputs.issue-url }}
-
-  disable_workflow:
-    name: Disable this workflow
-    needs: [find_exercise, post_review_content]
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Disable current workflow
-        run: gh workflow disable "${{github.workflow}}"
+      - name: Create comment - watching for progress
+        run: |
+          gh issue comment "$ISSUE_URL" \
+            --body-file exercise-toolkit/markdown-templates/step-feedback/watching-for-progress.md
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Disable current workflow and enable next one
+        run: |
+          gh workflow disable "${{github.workflow}}"
+          gh workflow enable "Step 3"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

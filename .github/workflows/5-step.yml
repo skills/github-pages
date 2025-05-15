@@ -18,7 +18,7 @@ jobs:
 
   post_review_content:
     name: Post review content
-    needs: [find_exercise]
+    needs: [find_exercise, check_step_work]
     runs-on: ubuntu-latest
     env:
       ISSUE_URL: ${{ needs.find_exercise.outputs.issue-url }}
@@ -27,15 +27,32 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Create comment - add review content
+      - name: Create comment - add step content
         run: |
           gh issue comment "$ISSUE_URL" \
             --body-file "$REVIEW_FILE"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  # The last workflow in the chain of steps should also finish the exercise.
+  finish_exercise:
+    name: Finish Exercise
+    needs: [find_exercise, post_review_content]
+    uses: skills/exercise-toolkit/.github/workflows/finish-exercise.yml@v0.4.0
+    with:
+      issue-url: ${{ needs.find_exercise.outputs.issue-url }}
+
+  disable_workflow:
+    name: Disable this workflow
+    needs: [find_exercise, post_review_content]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Disable current workflow
-        run: |
-          gh workflow disable "${{github.workflow}}"
+        run: gh workflow disable "${{github.workflow}}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
