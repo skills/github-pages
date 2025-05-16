@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mapa Conceptual - Valor del Dinero en el Tiempo</title>
+    <style>
+        body {
+            font-family: "Courier New", monospace;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 30px;
+        }
+        .container {
+            background-color: #ffffff;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 25px;
+            max-width: 900px;
+            margin: auto;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            white-space: pre-wrap;
+        }
+        h1 {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MAPA CONCEPTUAL - EL VALOR DEL DINERO EN EL TIEMPO</h1>
+<pre>
+EL VALOR DEL DINERO EN EL TIEMPO
+│
+├── Valor Futuro (VF)
+│   ├── Concepto
+│   │   └─ Valor que alcanzará una suma actual invertida hoy al final de un período determinado, acumulando intereses.
+│   ├── Fórmulas clave
+│   │   ├─ VF = VP × (1 + r)^n
+│   │   └─ VF con interés compuesto periódico
+│   └── Aplicaciones prácticas
+│       ├─ Evaluación de inversiones
+│       └─ Proyección financiera
+│
+├── Valor Presente (VP)
+│   ├── Concepto
+│   │   └─ Valor actual de flujos futuros descontados a una tasa de interés específica.
+│   ├── Fórmulas clave
+│   │   ├─ VP = VF / (1 + r)^n
+│   │   └─ VP flujos múltiples: VP = Σ [Flujo futuro / (1 + r)^t]
+│   └── Aplicaciones prácticas
+│       ├─ Valoración de bonos y acciones
+│       └─ Evaluación de proyectos de inversión (VAN)
+│
+└── Matemática Financiera
+    ├── Conceptos básicos
+    │   ├─ Tasa de interés (simple y compuesta)
+    │   ├─ Periodos de capitalización
+    │   └─ Tasa efectiva anual (TEA)
+    ├── Herramientas
+    │   ├─ Tablas financieras
+    │   ├─ Calculadora financiera
+    │   └─ Software especializado (Excel)
+    └── Principales usos
+        ├─ Cálculo de cuotas de préstamos
+        ├─ Evaluación del rendimiento (TIR)
+        └─ Decisiones de financiamiento e inversión
+</pre>
+    </div>
+</body>
+</html>
