@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HIGH STORE - متجر الأجهزة الذكية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(-45deg, #1a1a1a, #2a2200, #1a1a1a, #463e00);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+      color: #f3d76e;
+      scroll-behavior: smooth;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    header {
+      background: linear-gradient(to right, #bfa647, #7a5b00);
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      font-size: 26px;
+      font-weight: bold;
+      box-shadow: 0 0 20px #f3d76eaa;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+    .banner {
+      background: #f3d76e;
+      color: #121212;
+      text-align: center;
+      padding: 8px;
+      font-weight: bold;
+      font-size: 14px;
+      box-shadow: 0 0 10px #ffd70099;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px;
+      background: #1a1a1a;
+      position: sticky;
+      top: 72px;
+      z-index: 998;
+    }
+    nav a {
+      text-decoration: none;
+      color: #f3d76e;
+      background: #2a2a2a;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      background: #f3d76e;
+      color: #121212;
+    }
+    .search-filter {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px;
+    }
+    .search-filter input, .search-filter select {
+      padding: 10px 15px;
+      border-radius: 25px;
+      border: none;
+      background: #2a2a2a;
+      color: #f3d76e;
+      font-size: 15px;
+    }
+    section {
+      padding: 20px;
+    }
+    h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      border-bottom: 2px solid #bfa647;
+      padding-bottom: 5px;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 15px;
+    }
+    .product-card {
+      background: #1e1e1e;
+      border-radius: 10px;
+      padding: 12px;
+      text-align: center;
+      box-shadow: 0 0 10px #bfa64788;
+      transition: transform 0.3s;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+    .product-card img {
+      width: 100%;
+      max-width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+    .product-name {
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    .product-desc {
+      font-size: 12px;
+      color: #e2d584;
+      min-height: 30px;
+    }
+    .product-price {
+      font-size: 14px;
+      font-weight: bold;
+      color: #ffe082;
+      margin: 6px 0;
+    }
+    .btn-add-cart {
+      background: linear-gradient(135deg, #f3d76e, #bfa647);
+      color: #121212;
+      border: none;
+      border-radius: 30px;
+      padding: 6px 14px;
+      font-weight: bold;
+      font-size: 13px;
+      cursor: pointer;
+      box-shadow: 0 0 8px #f3d76e88;
+    }
+    .btn-add-cart:hover {
+      transform: scale(1.05);
+      background: #ffe082;
+    }
+  </style>
+</head>
+<body>
+
+<!-- 🔔 تنبيه الدفع -->
+<div class="banner">💳 الدفع عبر فودافون كاش فقط على الرقم: <strong>+201055815900</strong></div>
+
+<header>📱 HIGH STORE - الأجهزة الذكية الأصلية والهاي كوبي</header>
+
+<!-- 🔗 تنقل الأقسام -->
+<nav>
+  <a href="#apple">🍏 أيفون أصلي</a>
+  <a href="#copy">🔄 أيفون كوبي</a>
+  <a href="#samsung">📱 سامسونج</a>
+  <a href="#huawei">🔋 هواوي</a>
+  <a href="#oppo">📸 أوبو</a>
+  <a href="#other">✨ أخرى</a>
+</nav>
+
+<!-- 🔍 بحث وفلاتر -->
+<div class="search-filter">
+  <input type="text" id="searchInput" placeholder="🔍 ابحث عن منتج...">
+  <select id="categoryFilter">
+    <option value="">📂 كل الأقسام</option>
+    <option value="apple">أيفون أصلي</option>
+    <option value="copy">أيفون كوبي</option>
+    <option value="samsung">سامسونج</option>
+    <option value="huawei">هواوي</option>
+    <option value="oppo">أوبو</option>
+    <option value="other">أخرى</option>
+  </select>
+  <select id="priceSort">
+    <option value="">⬇️ الترتيب حسب السعر</option>
+    <option value="low">الأقل أولاً</option>
+    <option value="high">الأعلى أولاً</option>
+  </select>
+</div>
+
+<!-- 📱 قسم أيفون أصلي -->
+<section id="apple" data-category="apple">
+  <h2>🍏 أيفون أصلي</h2>
+  <div class="products">
+
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/61s5wa7w0yL._AC_SX679_.jpg" alt="iPhone 6">
+      <div class="product-name">iPhone 6</div>
+      <div class="product-desc">مساحة 64 جيجا</div>
+      <div class="product-price">1200 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111952_SP726-iphone6s-gray-select-2015.png" alt="iPhone 6s">
+      <div class="product-name">iPhone 6s</div>
+      <div class="product-desc">مساحة 64 جيجا</div>
+      <div class="product-price">1350 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://wefix.co.za/cdn/shop/products/iPhone-8-Black_1024x1024_e5ef9aab-913e-4494-99ec-d6c1589f51ae.png?v=1719500588&width=580" alt="iPhone 7">
+      <div class="product-name">iPhone 7</div>
+      <div class="product-desc">مساحة 128 جيجا</div>
+      <div class="product-price">2000 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://cdn.shortpixel.ai/spai/q_glossy+ret_img+to_webp/mobizil.com/wp-content/uploads/2017/01/product-800x800.jpg" alt="iPhone 7 Plus">
+      <div class="product-name">iPhone 7 Plus</div>
+      <div class="product-desc">مساحة 128 جيجا</div>
+      <div class="product-price">2300 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://cdn.shortpixel.ai/spai/q_glossy+ret_img+to_webp/mobizil.com/wp-content/uploads/2017/09/iphone8-800x800.jpg" alt="iPhone 8">
+      <div class="product-name">iPhone 8</div>
+      <div class="product-desc">مساحة 64 جيجا</div>
+      <div class="product-price">3100 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/61eZiKhOlsL.jpg" alt="iPhone 8 Plus">
+      <div class="product-name">iPhone 8 Plus</div>
+      <div class="product-desc">مساحة 64 جيجا</div>
+      <div class="product-price">3800 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://cdn.shortpixel.ai/spai/q_glossy+ret_img+to_webp/mobizil.com/wp-content/uploads/2020/10/iPhone-XR.jpg" alt="iPhone XR">
+      <div class="product-name">iPhone XR</div>
+      <div class="product-desc">مساحة 64 جيجا</div>
+      <div class="product-price">4700 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://mobizil.com/wp-content/uploads/2019/09/iPhone-11-2.jpg" alt="iPhone 11">
+      <div class="product-name">iPhone 11</div>
+      <div class="product-desc">مساحة 128 جيجا</div>
+      <div class="product-price">6100 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/61l9ppRIiqL._AC_SX679_.jpg" alt="iPhone 11 Pro">
+      <div class="product-name">iPhone 11 Pro</div>
+      <div class="product-desc">مساحة 128 جيجا</div>
+      <div class="product-price">7300 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://cdn1.smartprix.com/rx-iTMBT4epj-w1200-h1200/TMBT4epj.jpg" alt="iPhone 12">
+      <div class="product-name">iPhone 12</div>
+      <div class="product-desc">مساحة 128 جيجا</div>
+      <div class="product-price">8500 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/61gK2dJ-cmL._AC_SX679_.jpg" alt="iPhone 12 Pro">
+      <div class="product-name">iPhone 12 Pro</div>
+      <div class="product-desc">مساحة 128 جيجا</div>
+      <div class="product-price">9800 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+  <div class="product-card">
+    <img src="https://cdn1.smartprix.com/rx-iK9UlIfp6-w1200-h1200/K9UlIfp6.jpg" alt="iPhone 13">
+    <div class="product-name">iPhone 13</div>
+    <div class="product-desc">مساحة 128 جيجا</div>
+    <div class="product-price">11800 جنيه</div>
+    <button class="btn-add-cart">🛒 أضف للسلة</button>
+  </div>
+
+  <div class="product-card">
+    <img src="https://images.macrumors.com/t/QI4M-vGuPHpmzr6yY8Sw1k2EFCs=/2500x/article-new/2021/09/iphone-13-pro-max-blue.jpg" alt="iPhone 13 Pro Max">
+    <div class="product-name">iPhone 13 Pro Max</div>
+    <div class="product-desc">مساحة 256 جيجا</div>
+    <div class="product-price">16500 جنيه</div>
+    <button class="btn-add-cart">🛒 أضف للسلة</button>
+  </div>
+
+  <div class="product-card">
+    <img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-pro-max-purple-select?wid=940&hei=1112&fmt=png-alpha&.v=1660744509403" alt="iPhone 14 Pro Max">
+    <div class="product-name">iPhone 14 Pro Max</div>
+    <div class="product-desc">مساحة 256 جيجا</div>
+    <div class="product-price">25900 جنيه</div>
+    <button class="btn-add-cart">🛒 أضف للسلة</button>
+  </div>
+
+  <div class="product-card">
+    <img src="https://mobizil.com/wp-content/uploads/2023/09/iPhone-15-Pro-Max.jpg" alt="iPhone 15 Pro Max">
+    <div class="product-name">iPhone 15 Pro Max</div>
+    <div class="product-desc">مساحة 256 جيجا</div>
+    <div class="product-price">37800 جنيه</div>
+    <button class="btn-add-cart">🛒 أضف للسلة</button>
+  </div>
+
+  <div class="product-card">
+    <img src="https://cdn.mos.cms.futurecdn.net/wqRmtUXplcTkM4KkLoPB3H-1200-80.jpg" alt="iPhone 16 Pro Max">
+    <div class="product-name">iPhone 16 Pro Max</div>
+    <div class="product-desc">مساحة 512 جيجا</div>
+    <div class="product-price">51200 جنيه</div>
+    <button class="btn-add-cart">🛒 أضف للسلة</button>
+  </div>
+
+  <div class="product-card">
+    <img src="https://fdn2.mobgsm.com/vv/bigpic/apple-iphone-14.jpg" alt="iPhone 14">
+    <div class="product-name">iPhone 14</div>
+    <div class="product-desc">128 جيجا - جديد</div>
+    <div class="product-price">21300جنيه</div>
+    <button class="btn-add-cart">🛒 أضف للسلة</button>
+  </div>
+
+  <div class="product-card">
+    <img src="https://mobizil.com/wp-content/uploads/2022/09/iPhone-14-Plus.jpg" alt="iPhone 14 Plus">
+    <div class="product-name">iPhone 14 Plus</div>
+    <div class="product-desc">128 جيجا - بطارية قوية</div>
+    <div class="product-price">23600 جنيه</div>
+    <button class="btn-add-cart">🛒 أضف للسلة</button>
+  </div>
+
+  <div class="product-card">
+    <img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-finish-select-202309-6-1inch-blue_AV1?wid=5120&hei=2880&fmt=jpeg&qlt=80&.v=1692923770492" alt="iPhone 15">
+    <div class="product-name">iPhone 15</div>
+    <div class="product-desc">128 جيجا - Dynamic Island</div>
+    <div class="product-price">30200 جنيه</div>
+    <button class="btn-add-cart">🛒 أضف للسلة</button>
+  </div>
+
+  <div class="product-card">
+    <img src="https://mobizil.com/wp-content/uploads/2023/09/iPhone-15-Plus.jpg" alt="iPhone 15 Plus">
+    <div class="product-name">iPhone 15 Plus</div>
+    <div class="product-desc">128 جيجا - بطارية أكبر</div>
+    <div class="product-price">33500 جنيه</div>
+    <button class="btn-add-cart">🛒 أضف للسلة</button>
+  </div>
+
+  <div class="product-card">
+    <img src="https://fdn2.mobgsm.com/vv/bigpic/apple-iphone-15-pro.jpg" alt="iPhone 15 Pro">
+    <div class="product-name">iPhone 15 Pro</div>
+    <div class="product-desc">128 جيجا - Titanium</div>
+    <div class="product-price">35100 جنيه</div>
+    <button class="btn-add-cart">🛒 أضف للسلة</button>
+  </div>
+
+  <div class="product-card">
+    <img src="https://fdn2.mobgsm.com/vv/bigpic/apple-iphone-xs.jpg" alt="iPhone XS">
+    <div class="product-name">iPhone XS</div>
+    <div class="product-desc">مساحة 64 جيجا</div>
+    <div class="product-price">4200 جنيه</div>
+    <button class="btn-add-cart">🛒 أضف للسلة</button>
+  </div>
+
+  <div class="product-card">
+    <img src="https://fdn2.mobgsm.com/vv/bigpic/apple-iphone-xs-max.jpg" alt="iPhone XS Max">
+    <div class="product-name">iPhone XS Max</div>
+    <div class="product-desc">مساحة 256 جيجا</div>
+    <div class="product-price">5000 جنيه</div>
+    <button class="btn-add-cart">🛒 أضف للسلة</button>
+  </div>
+
+  <div class="product-card">
+    <img src="https://fdn2.mobgsm.com/vv/bigpic/apple-iphone-se-2020.jpg" alt="iPhone SE 2020">
+    <div class="product-name">iPhone SE 2020</div>
+    <div class="product-desc">صغير الحجم، أداء عالي</div>
+    <div class="product-price">3600 جنيه</div>
+    <button class="btn-add-cart">🛒 أضف للسلة</button>
+  </div>
+
+  <div class="product-card">
+    <img src="https://fdn2.mobgsm.com/vv/bigpic/apple-iphone-se-2022.jpg" alt="iPhone SE 2022">
+    <div class="product-name">iPhone SE 2022</div>
+    <div class="product-desc">أداء A15، حجم صغير</div>
+    <div class="product-price">4200 جنيه</div>
+    <button class="btn-add-cart">🛒 أضف للسلة</button>
+  </div>
+
+  <div class="product-card">
+    <img src="https://fdn2.mobgsm.com/vv/bigpic/apple-iphone-x.jpg" alt="iPhone X">
+    <div class="product-name">iPhone X</div>
+    <div class="product-desc">شاشة OLED، Face ID</div>
+    <div class="product-price">3900 جنيه</div>
+    <button class="btn-add-cart">🛒 أضف للسلة</button>
+  </div>
+
+  <div class="product-card">
+    <img src="https://fdn2.mobgsm.com/vv/bigpic/apple-iphone-11-pro-max.jpg" alt="iPhone 11 Pro Max">
+    <div class="product-name">iPhone 11 Pro Max</div>
+    <div class="product-desc">بطارية قوية، شاشة كبيرة</div>
+    <div class="product-price">7900 جنيه</div>
+    <button class="btn-add-cart">🛒 أضف للسلة</button>
+  </div>
+
+  <div class="product-card">
+    <img src="https://fdn2.mobgsm.com/vv/bigpic/apple-iphone-12-mini.jpg" alt="iPhone 12 Mini">
+    <div class="product-name">iPhone 12 Mini</div>
+    <div class="product-desc">صغير الحجم، شاشة Super Retina</div>
+    <div class="product-price">6800 جنيه</div>
+    <button class="btn-add-cart">🛒 أضف للسلة</button>
+  </div>
+
+  <div class="product-card">
+    <img src="https://fdn2.mobgsm.com/vv/bigpic/apple-iphone-13-mini.jpg" alt="iPhone 13 Mini">
+    <div class="product-name">iPhone 13 Mini</div>
+    <div class="product-desc">128 جيجا، شاشة صغيرة</div>
+    <div class="product-price">9200 جنيه</div>
+    <button class="btn-add-cart">🛒 أضف للسلة</button>
+  </div>
+
+  <div class="product-card">
+    <img src="https://fdn2.mobgsm.com/vv/bigpic/apple-iphone-14-pro.jpg" alt="iPhone 14 Pro">
+    <div class="product-name">iPhone 14 Pro</div>
+    <div class="product-desc">Dynamic Island، شاشة 120Hz</div>
+    <div class="product-price">24200 جنيه</div>
+    <button class="btn-add-cart">🛒 أضف للسلة</button>
+  </div>
+
+
+
+  </div>
+</section>
+
+
+
+<!-- 📱 قسم أيفون كوبي -->
+<section id="copy" data-category="copy">
+  <h2>📱 أيفون هاي كوبي - First High Copy</h2>
+  <div class="products">
+
+    <div class="product-card">
+      <img src="https://i5.walmartimages.com/seo/Pre-Owned-Apple-iPhone-11-Pro-Max-256GB-Midnight-Green-Fully-Unlocked-Smartphone-Refurbished-Good_903e01ca-2271-40fa-bac3-62deae75a0ca.df01706b06717434601e0e4f62ec1235.jpeg" />
+      <div class="product-name">iPhone 11 Pro Max هاي كوبي</div>
+      <div class="product-desc">فرست هاي كوبي - أعلى نسخة بعد الأصلي</div>
+      <div class="product-price">1400 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://i.ebayimg.com/images/g/2F0AAOSwAmJmQxA0/s-l1200.jpg" />
+      <div class="product-name">iPhone 12 Pro Max هاي كوبي</div>
+      <div class="product-desc">فرست هاي كوبي - تصميم مطابق للأصلي</div>
+      <div class="product-price">1600 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://cdn.salla.sa/NvEgD/rIRGvHhhpXlmZlxdAi93WIXKhSmRvALyi83mDZ2L.jpg" />
+      <div class="product-name">iPhone 13 Pro Max هاي كوبي</div>
+      <div class="product-desc">أعلى نسخة بعد الأصلي</div>
+      <div class="product-price">1800 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://cdn.salla.sa/yjwQR/FuIJUfxWILSg2tXtdihzys5vM4uQ5Mj167VmWZU7.jpg" />
+      <div class="product-name">iPhone 14 Pro Max هاي كوبي</div>
+      <div class="product-desc">أداء ممتاز وتصميم مطابق</div>
+      <div class="product-price">2000 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://settings-ae.com/cdn/shop/files/IMG-1448.jpg?v=1720024271" />
+      <div class="product-name">iPhone 15 Pro Max هاي كوبي</div>
+      <div class="product-desc">فرست هاي كوبي بجودة فاخرة</div>
+      <div class="product-price">2000 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://static.labeb.com/test/images/articles/674/lj3rfvtlfm1-w960.jpg" />
+      <div class="product-name">iPhone 16 Pro Max هاي كوبي</div>
+      <div class="product-desc">نسخة طبق الأصل - فرست هاي كوبي</div>
+      <div class="product-price">2100 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- 🔊 صوت الإضافة -->
+<audio id="addSound" src="https://www.soundjay.com/buttons/button-3.mp3" preload="auto"></audio>
+<!-- 🟦 قسم سامسونج -->
+<section id="samsung" data-category="samsung">
+  <h2>📱 سامسونج - أصلي</h2>
+  <div class="products">
+
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/61uBI7QD6mL._AC_UF350,350_QL50_.jpg" />
+      <div class="product-name">Samsung Galaxy S25 Ultra</div>
+      <div class="product-desc">أحدث معالج، كاميرا رباعية، بطارية 5200mAh، دعم الشحن السريع</div>
+      <div class="product-price">26000 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://alsheikhstores.com/wp-content/uploads/2024/06/s24-ultra-violet.webp" />
+      <div class="product-name">Samsung Galaxy S24 Ultra</div>
+      <div class="product-desc">كاميرا 200MP، شاشة AMOLED، بطارية 5000mAh</div>
+      <div class="product-price">23000 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/71EYdOx09+L.jpg" />
+      <div class="product-name">Samsung Galaxy S23 Ultra</div>
+      <div class="product-desc">Snapdragon 8 Gen 2، كاميرا 200MP، دعم S Pen</div>
+      <div class="product-price">19500 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.samsung.com/eg/smartphones/galaxy-s22-ultra/buy/S22_Ultra_Carousel_GroupKV_MO.jpg" />
+      <div class="product-name">Samsung Galaxy S22 Ultra</div>
+      <div class="product-desc">Exynos 2200، كاميرا 108MP، شاشة Dynamic AMOLED</div>
+      <div class="product-price">17000 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://i5.walmartimages.com/seo/Restored-Samsung-Galaxy-S21-Ultra-5G-G998U-128GB-Black-Unlocked-Smartphone-Used_f7eb5ce7-6720-44ce-acde-224b983b2f39.ca9c2ff86584537bbe43fafbe4892602.jpeg" />
+      <div class="product-name">Samsung Galaxy S21 Ultra</div>
+      <div class="product-desc">Exynos 2100، كاميرا 108MP، دعم S Pen</div>
+      <div class="product-price">15000 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://i5.walmartimages.com/seo/Like-New-Samsung-Galaxy-S21-5G-128GB-G996U-Unlocked_f0f2c7a0-98ac-46b2-89cf-dd1d1fafa23f.b6c68016f133a95c38cddaa82e2dab20.jpeg" />
+      <div class="product-name">Samsung Galaxy S21 Plus</div>
+      <div class="product-desc">كاميرا خلفية ثلاثية، بطارية 4800mAh</div>
+      <div class="product-price">11000 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://i5.walmartimages.com/seo/Samsung-Galaxy-Note-20-Ultra-128GB-Black-Unlocked_bb763bf7-6e2d-4f1f-a90f-2641e3d1900a.900d1bd76cad5587629c065bf4b907ad.jpeg" />
+      <div class="product-name">Samsung Galaxy Note 20 Ultra</div>
+      <div class="product-desc">Snapdragon 865 Plus، كاميرا 108MP، قلم S Pen</div>
+      <div class="product-price">14000 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/81JjMLt6xwL._AC_SL1500_.jpg" />
+      <div class="product-name">Samsung Galaxy S20 FE</div>
+      <div class="product-desc">Snapdragon 865، كاميرا ثلاثية، بطارية 4500mAh</div>
+      <div class="product-price">9000 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcT7Oi9gbKr5-BcGwbe6Zv4C2xyHoejCO4ew&s" />
+      <div class="product-name">Samsung Galaxy A72</div>
+      <div class="product-desc">Snapdragon 720G، كاميرا رباعية، بطارية 5000mAh</div>
+      <div class="product-price">6500 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.samsung.com/is/image/samsung/assets/eg/galaxy-a52/buy/A52_AwesomeBlue_ProductKV_MO_img.jpg" />
+      <div class="product-name">Samsung Galaxy A52</div>
+      <div class="product-desc">كاميرا 64MP، بطارية 4500mAh، دعم 5G</div>
+      <div class="product-price">6000 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.samsung.com/is/image/samsung/p6pim/sa/feature/164698394/sa-feature-galaxy-z-fold5-f946-537756859?$FB_TYPE_A_MO_JPG$" />
+      <div class="product-name">Samsung Galaxy Z Fold 5</div>
+      <div class="product-desc">قابل للطي، شاشة ضخمة، كاميرا 50MP، بطارية 4400mAh</div>
+      <div class="product-price">32000 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0syX-G1Xg1MW1-67gqO7y0MkzC-MFx1JfZg&s" />
+      <div class="product-name">Samsung Galaxy Z Flip 5</div>
+      <div class="product-desc">قابل للطي، تصميم أنيق، كاميرا مزدوجة، بطارية 3700mAh</div>
+      <div class="product-price">21000 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+  </div>
+</section>
+
+
+<section id="samsung-copy" data-category="سامسونج - كوبي">
+  <h2>📱 سامسونج - كوبي</h2>
+  <div class="products">
+
+    <div class="product-card">
+      <img src="https://alsheikhstores.com/wp-content/uploads/2025/01/Samsung-S25-Ultra-5G-Titanium-Silver-Blue.webp" />
+      <div class="product-name">Samsung Galaxy S25 Ultra كوبي</div>
+      <div class="product-desc">نسخة كوبي عالية الجودة مع تصميم مشابه، كاميرا رباعية، بطارية 5200mAh</div>
+      <div class="product-price">4500 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/71WkqFssobL._AC_UF1000,1000_QL80_.jpg" />
+      <div class="product-name">Samsung Galaxy S24 Ultra كوبي</div>
+      <div class="product-desc">نسخة كوبي مع شاشة AMOLED، كاميرا رباعية، بطارية 5000mAh</div>
+      <div class="product-price">4000 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/71EYdOx09+L.jpg" />
+      <div class="product-name">Samsung Galaxy S23 Ultra كوبي</div>
+      <div class="product-desc">نسخة كوبي بتصميم مميز، كاميرا 200MP، بطارية 5000mAh</div>
+      <div class="product-price">3500 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/81eJPRqZCfL._AC_UF1000,1000_QL80_.jpg" />
+      <div class="product-name">Samsung Galaxy S22 Ultra كوبي</div>
+      <div class="product-desc">نسخة كوبي بتصميم مشابه، كاميرا 108MP، بطارية 5000mAh</div>
+      <div class="product-price">3200 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images-na.ssl-images-amazon.com/images/I/31zPTPAyfLL._SL500_._AC_SL500_.jpg" />
+      <div class="product-name">Samsung Galaxy S21 Ultra كوبي</div>
+      <div class="product-desc">نسخة كوبي مع كاميرا عالية، بطارية 5000mAh، تصميم أنيق</div>
+      <div class="product-price">3000 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSrmV12W_ZRb5EB7JjOskED4xABtgov1cXxQ&s" />
+      <div class="product-name">Samsung Galaxy S21 Plus كوبي</div>
+      <div class="product-desc">نسخة كوبي مع كاميرا ثلاثية، بطارية 4800mAh</div>
+      <div class="product-price">2100 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://mobizil.com/wp-content/uploads/2020/08/Samsung-Galaxy-Note-20-Ultra.jpg" />
+      <div class="product-name">Samsung Galaxy Note 20 Ultra كوبي</div>
+      <div class="product-desc">نسخة كوبي مع قلم S Pen، كاميرا عالية، بطارية 4500mAh</div>
+      <div class="product-price">2300 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://mobizil.com/wp-content/uploads/2020/10/Samsung-Galaxy-S20-FE-1.jpg" />
+      <div class="product-name">Samsung Galaxy S20 FE كوبي</div>
+      <div class="product-desc">نسخة كوبي مع دعم 5G، كاميرا ثلاثية، بطارية 4500mAh</div>
+      <div class="product-price">1500 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://img.myipadbox.com/upload/store/product_l/MPD4713L.jpg" />
+      <div class="product-name">Samsung Galaxy A72 كوبي</div>
+      <div class="product-desc">نسخة كوبي مع كاميرا رباعية 64MP، بطارية 5000mAh</div>
+      <div class="product-price">1300 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- 🔋 قسم هواوي -->
+<section id="huawei" data-category="huawei">
+  
+  <h2>📱 هواوي - أصلي</h2>
+  <div class="products">
+
+    <div class="product-card">
+      <img src="https://btech.com/media/catalog/product/cache/4709f4e5925590e2003d78a7a1e77edb/h/u/huawei-p50-pro-snapdragon-888-4g-8gb-512gb-golden-black_6_.jpg" />
+      <div class="product-name">Huawei P50 Pro</div>
+      <div class="product-desc">Kirin 9000، كاميرا رباعية 50MP + 13MP، شاشة OLED</div>
+      <div class="product-price">5200 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://2b.com.eg/media/catalog/product/cache/661473ab953cdcdf4c3b607144109b90/m/i/mi777-13.jpg" />
+      <div class="product-name">Huawei P50</div>
+      <div class="product-desc">Snapdragon 888، كاميرا ثلاثية 50MP + 13MP</div>
+      <div class="product-price">4500 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://www.dhresource.com/webp/m/0x0/f2/albu/g10/M00/B7/68/rBVaWV6gT0CAYscrAAFc544j74Q069.jpg" />
+      <div class="product-name">Huawei P40 Pro</div>
+      <div class="product-desc">Kirin 990، كاميرا رباعية 50MP</div>
+      <div class="product-price">3900 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://mobizil.com/wp-content/uploads/2020/01/Huawei-Mate-30-Pro.jpg" />
+      <div class="product-name">Huawei Mate 30 Pro</div>
+      <div class="product-desc">Kirin 990، كاميرا رباعية 40MP، بطارية 4500mAh</div>
+      <div class="product-price">3600 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/412YhK9lvJS.jpg" />
+      <div class="product-name">Huawei Mate 40 Pro</div>
+      <div class="product-desc">Kirin 9000، شاشة OLED، كاميرا 50MP + 20MP</div>
+      <div class="product-price">4800 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://mobizil.com/wp-content/uploads/2020/10/Huawei-Mate-40-Pro.jpg" />
+      <div class="product-name">Huawei Mate 40</div>
+      <div class="product-desc">Kirin 9000E، كاميرا ثلاثية 50MP، بطارية 4200mAh</div>
+      <div class="product-price">4300 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://api-rayashop.freetls.fastly.net/media/catalog/product/cache/4e49ac3a70c0b98a165f3fa6633ffee1/b/l/black-11.png" />
+      <div class="product-name">Huawei Nova 9</div>
+      <div class="product-desc">Snapdragon 778G، كاميرا رباعية 50MP</div>
+      <div class="product-price">3500 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://mobizil.com/wp-content/uploads/2021/11/Huawei-Nova-8-1.jpg" />
+      <div class="product-name">Huawei Nova 8</div>
+      <div class="product-desc">Dimensity 800U، كاميرا رباعية 64MP</div>
+      <div class="product-price">2800 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/51DGCesAe+S._AC_UF1000,1000_QL80_.jpg" />
+      <div class="product-name">Huawei Y9a</div>
+      <div class="product-desc">Helio G80، كاميرا رباعية 64MP</div>
+      <div class="product-price">2100 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://mobizil.com/wp-content/uploads/2020/10/Huawei-Y7a.jpg" />
+      <div class="product-name">Huawei Y7a</div>
+      <div class="product-desc">Helio G80، كاميرا 48MP، بطارية 5000mAh</div>
+      <div class="product-price">1800 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- 📸 قسم أوبو -->
+<section id="oppo" data-category="oppo">
+  <h2>📱 أوبو - أصلي</h2>
+  <div class="products">
+
+    <div class="product-card">
+      <img src="https://fdn2.gsmarena.com/vv/pics/oppo/oppo-find-x5-pro-1.jpg" alt="Oppo Find X5 Pro" />
+      <div class="product-name">Oppo Find X5 Pro</div>
+      <div class="product-desc">Snapdragon 8 Gen 1، كاميرا ثلاثية 50MP، بطارية 5000mAh</div>
+      <div class="product-price">5800 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://mobizil.com/wp-content/uploads/2023/07/oppo-reno-10-pro-plus.jpg" />
+      <div class="product-name">Oppo Reno10 Pro</div>
+      <div class="product-desc">Snapdragon 778G، كاميرا ثلاثية 50MP، بطارية 4600mAh</div>
+      <div class="product-price">4700 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://fdn2.gsmarena.com/vv/pics/oppo/oppo-reno8-1.jpg" alt="Oppo Reno8" />
+      <div class="product-name">Oppo Reno8</div>
+      <div class="product-desc">MediaTek Dimensity 1300، كاميرا 50MP، بطارية 4500mAh</div>
+      <div class="product-price">3900 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://fdn2.gsmarena.com/vv/pics/oppo/oppo-reno7-1.jpg" alt="Oppo Reno7" />
+      <div class="product-name">Oppo Reno7</div>
+      <div class="product-desc">Snapdragon 680، كاميرا 64MP، بطارية 4500mAh</div>
+      <div class="product-price">3100 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/71-YK5h9kML._AC_UF1000,1000_QL80_.jpg" />
+      <div class="product-name">Oppo A98</div>
+      <div class="product-desc">Snapdragon 695، كاميرا 64MP، شاشة 120Hz</div>
+      <div class="product-price">3700 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://fdn2.gsmarena.com/vv/pics/oppo/oppo-a77s-1.jpg" />
+      <div class="product-name">Oppo A77s</div>
+      <div class="product-desc">Snapdragon 680، كاميرا 50MP، بطارية 5000mAh</div>
+      <div class="product-price">3300 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://mobizil.com/wp-content/uploads/2022/03/Oppo-A76.jpg" />
+      <div class="product-name">Oppo A76</div>
+      <div class="product-desc">Snapdragon 680، شاشة 90Hz، كاميرا 13MP</div>
+      <div class="product-price">2700 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://fdn2.gsmarena.com/vv/pics/oppo/oppo-a57-4g-1.jpg" alt="Oppo A57" />
+      <div class="product-name">Oppo A57</div>
+      <div class="product-desc">Helio G35، كاميرا 13MP، بطارية 5000mAh</div>
+      <div class="product-price">2200 جنيه</div>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ✨ قسم شركات أخرى -->
+<section id="other" data-category="other">
+  <h2>📱 شركات أخرى - أجهزة أصلية</h2>
+  <div class="products">
+
+    <!-- المنتجات الأصلية من ملفك -->
+    <div class="product-card">
+      <img src="https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-note-13-pro-5g-1.jpg" />
+      <div class="product-name">Redmi Note 13 Pro</div>
+      <div class="product-desc">Snapdragon 7s Gen 2، كاميرا 200MP، بطارية 5100mAh</div>
+      <div class="product-price">4200 جنيه</div>
+      <a href="https://wa.me/201055815900?text=أريد طلب Redmi Note 13 Pro" class="btn-whatsapp" target="_blank">اطلب واتساب</a>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHRfNtx_NFOTaQIjRgCBjsb2RBpl_AQEWNWA&s" />
+      <div class="product-name">Infinix Zero 30</div>
+      <div class="product-desc">Dimensity 8020، كاميرا 108MP، بطارية 5000mAh</div>
+      <div class="product-price">3900 جنيه</div>
+      <a href="https://wa.me/201055815900?text=أريد طلب Infinix Zero 30" class="btn-whatsapp" target="_blank">اطلب واتساب</a>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://fdn2.gsmarena.com/vv/pics/realme/realme-11-pro-plus-1.jpg" />
+      <div class="product-name">Realme 11 Pro+</div>
+      <div class="product-desc">Dimensity 7050، كاميرا 200MP، بطارية 5000mAh</div>
+      <div class="product-price">4500 جنيه</div>
+      <a href="https://wa.me/201055815900?text=أريد طلب Realme 11 Pro+" class="btn-whatsapp" target="_blank">اطلب واتساب</a>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <!-- منتجات إضافية -->
+    <div class="product-card">
+      <img src="https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-14-ultra-1.jpg" />
+      <div class="product-name">Xiaomi 14 Ultra</div>
+      <div class="product-desc">Snapdragon 8 Gen 3، شاشة LTPO OLED، كاميرا Leica</div>
+      <div class="product-price">28000 جنيه</div>
+      <a href="https://wa.me/201055815900?text=أريد طلب Xiaomi 14 Ultra" class="btn-whatsapp" target="_blank">اطلب واتساب</a>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://fdn2.gsmarena.com/vv/pics/tecno/tecno-phantom-x2-pro-5g-1.jpg" />
+      <div class="product-name">Tecno Phantom X2 Pro</div>
+      <div class="product-desc">Dimensity 9000، كاميرا منبثقة، شاشة AMOLED</div>
+      <div class="product-price">7800 جنيه</div>
+      <a href="https://wa.me/201055815900?text=أريد طلب Tecno Phantom X2 Pro" class="btn-whatsapp" target="_blank">اطلب واتساب</a>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://fdn2.gsmarena.com/vv/pics/vivo/vivo-x100-pro-1.jpg" />
+      <div class="product-name">Vivo X100 Pro</div>
+      <div class="product-desc">Dimensity 9300، كاميرا Zeiss، شاشة 120Hz</div>
+      <div class="product-price">24500 جنيه</div>
+      <a href="https://wa.me/201055815900?text=أريد طلب Vivo X100 Pro" class="btn-whatsapp" target="_blank">اطلب واتساب</a>
+      <button class="btn-add-cart">🛒 أضف للسلة</button>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- 🛒 زر السلة العائم -->
+<button id="cart-btn" style="position: fixed; top: 15px; right: 15px; background: #f3d76e; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 22px; cursor: pointer; z-index: 1001; box-shadow: 0 0 10px #bfa647;">
+  🛍️ <span id="cart-count" style="position: absolute; top: -6px; right: -6px; background: red; color: white; font-size: 12px; padding: 2px 6px; border-radius: 50%;">0</span>
+</button>
+
+<!-- 🔝 زر الرجوع لأعلى -->
+<button onclick="window.scrollTo({top:0, behavior:'smooth'})" id="topBtn" style="position: fixed; bottom: 20px; left: 20px; background: #f3d76e; color: #121212; border: none; border-radius: 50%; font-size: 22px; width: 50px; height: 50px; cursor: pointer; box-shadow: 0 0 10px #bfa647aa; z-index: 1000;">🔝</button>
+
+<!-- 💬 زر واتساب عائم -->
+<a href="https://wa.me/201055815900" target="_blank" style="position: fixed; bottom: 90px; left: 20px; background: #25D366; color: #fff; padding: 10px 20px; border-radius: 30px; font-weight: bold; text-decoration: none; box-shadow: 0 0 10px #25D366aa; z-index: 1000;">
+  💬 تواصل معنا
+</a>
+
+<!-- 📝 نموذج تأكيد الطلب -->
+<div id="order-confirmation" style="display:none; position:fixed; top:10%; left:50%; transform:translateX(-50%); background:#121212; color:#f3d76e; padding:20px; border-radius:10px; width:90%; max-width:400px; z-index:1003; box-shadow:0 0 20px #bfa647;">
+  <form id="order-form">
+    <h3>📦 تأكيد الطلب</h3>
+    <input type="text" name="customer-name" placeholder="🧑 اسمك" required style="width:100%; margin:10px 0; padding:10px; border-radius:10px; border:none;">
+    <textarea name="customer-address" placeholder="📍 عنوانك بالتفصيل" required style="width:100%; margin:10px 0; padding:10px; border-radius:10px; border:none;"></textarea>
+    <input type="tel" name="customer-phone1" placeholder="📞 رقم الهاتف" required style="width:100%; margin:10px 0; padding:10px; border-radius:10px; border:none;">
+    <button type="submit" style="width:100%; padding:10px; background:#f3d76e; color:#121212; border:none; border-radius:10px; font-weight:bold;">📤 إرسال الطلب عبر واتساب</button>
+    <button type="button" id="cancel-order" style="width:100%; padding:10px; margin-top:10px; background:#444; color:white; border:none; border-radius:10px;">❌ إلغاء</button>
+  </form>
+</div>
+<!-- ✅ سلة المشتريات -->
+<div id="cart-drawer" style="display:none; position:fixed; top:0; right:0; width:100%; max-width:400px; height:100%; background:#1a1a1a; color:#f3d76e; padding:20px; z-index:1002; overflow-y:auto; box-shadow: -4px 0 12px #000;">
+  <h2>🛒 سلة المشتريات</h2>
+  <div id="cart-items"></div>
+  <div style="margin: 15px 0;">الإجمالي: <span id="cart-total">0</span> جنيه</div>
+  <button id="checkout-btn" style="background:#f3d76e; color:#121212; padding:10px; border:none; border-radius:10px; margin-bottom:10px;">✅ تأكيد الطلب</button>
+  <button id="close-cart" style="background:#444; color:white; padding:10px; border:none; border-radius:10px;">❌ إغلاق</button>
+</div>
+
+<!-- ✅ إشعار عائم -->
+<div id="toast" style="display:none; position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: #f3d76e; color: #121212; padding: 10px 20px; border-radius: 30px; font-weight: bold; z-index: 9999;">تمت الإضافة للسلة ✅</div>
+
+<script>
+let cart = [];
+
+function showToast(msg) {
+  const toast = document.getElementById("toast");
+  toast.textContent = msg;
+  toast.style.display = "block";
+  setTimeout(() => { toast.style.display = "none"; }, 3000);
+}
+
+function addToCart(product) {
+  cart.push(product);
+  document.getElementById("cart-count").textContent = cart.length;
+  document.getElementById("addSound").play();
+  showToast(`✅ تمت إضافة ${product.name} للسلة`);
+  renderCart();
+}
+
+function renderCart() {
+  const container = document.getElementById("cart-items");
+  container.innerHTML = '';
+  let total = 0;
+  cart.forEach((item, index) => {
+    total += item.price;
+    const div = document.createElement("div");
+    div.innerHTML = `<strong>${item.name}</strong> - ${item.price} جنيه <button onclick="removeItem(${index})">❌</button>`;
+    container.appendChild(div);
+  });
+  document.getElementById("cart-total").textContent = total;
+}
+
+function removeItem(index) {
+  cart.splice(index, 1);
+  document.getElementById("cart-count").textContent = cart.length;
+  renderCart();
+}
+
+document.querySelectorAll(".btn-add-cart").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const card = btn.closest(".product-card");
+    const name = card.querySelector(".product-name").textContent;
+    const desc = card.querySelector(".product-desc").textContent;
+    const price = parseInt(card.querySelector(".product-price").textContent);
+    addToCart({ name, desc, price });
+  });
+});
+
+document.getElementById("cart-btn").onclick = () => {
+  document.getElementById("cart-drawer").style.display = "block";
+  renderCart();
+};
+document.getElementById("close-cart").onclick = () => {
+  document.getElementById("cart-drawer").style.display = "none";
+};
+
+document.getElementById("checkout-btn").onclick = () => {
+  document.getElementById("order-confirmation").style.display = "block";
+};
+document.getElementById("cancel-order").onclick = () => {
+  document.getElementById("order-confirmation").style.display = "none";
+};
+
+document.getElementById("order-form").onsubmit = function (e) {
+  e.preventDefault();
+  const name = this['customer-name'].value;
+  const address = this['customer-address'].value;
+  const phone = this['customer-phone1'].value;
+
+  let message = `📦 طلب جديد من HIGH STORE:\n\n👤 الاسم: ${name}\n📍 العنوان: ${address}\n📞 رقم الهاتف: ${phone}\n\n🛍️ المنتجات المطلوبة:\n`;
+  let total = 0;
+  cart.forEach((item, i) => {
+    message += `${i + 1}. ${item.name} - ${item.desc} - السعر: ${item.price} جنيه\n`;
+    total += item.price;
+  });
+  message += `\n💰 الإجمالي: ${total} جنيه\n\n— HIGH STORE | شكراً لتسوقك معنا 🤍`;
+
+  const url = `https://wa.me/201055815900?text=${encodeURIComponent(message)}`;
+  window.open(url, '_blank');
+  cart = [];
+  document.getElementById("cart-count").textContent = 0;
+  renderCart();
+  document.getElementById("order-confirmation").style.display = "none";
+  document.getElementById("cart-drawer").style.display = "none";
+};
+
+document.getElementById("searchInput").addEventListener("input", filter);
+document.getElementById("categoryFilter").addEventListener("change", filter);
+
+function filter() {
+  const term = document.getElementById("searchInput").value.toLowerCase();
+  const category = document.getElementById("categoryFilter").value;
+  document.querySelectorAll("section[data-category]").forEach(sec => {
+    const secCat = sec.getAttribute("data-category");
+    let show = false;
+    sec.querySelectorAll(".product-card").forEach(card => {
+      const text = card.textContent.toLowerCase();
+      const match = text.includes(term) && (!category || secCat === category);
+      card.style.display = match ? "block" : "none";
+      if (match) show = true;
+    });
+    sec.style.display = show ? "block" : "none";
+  });
+}
+
+document.getElementById("priceSort").addEventListener("change", () => {
+  const sortType = document.getElementById("priceSort").value;
+  document.querySelectorAll(".products").forEach(grid => {
+    const items = Array.from(grid.children);
+    items.sort((a, b) => {
+      const priceA = parseFloat(a.querySelector(".product-price").textContent);
+      const priceB = parseFloat(b.querySelector(".product-price").textContent);
+      return sortType === "low" ? priceA - priceB : priceB - priceA;
+    });
+    grid.innerHTML = "";
+    items.forEach(item => grid.appendChild(item));
+  });
+});
+</script>
+
+<!-- 🏢 من نحن -->
+<section style="background:#1c1c1c; color:#f3d76e; padding: 30px;">
+  <h2>🏢 من نحن</h2>
+  <p>هاي ستور تأسست سنة 2023 💼، متخصصة في بيع الأجهزة الذكية الأصلية والهاي كوبي بأفضل جودة وسعر في السوق المصري 🇪🇬.</p>
+  <p>نلتزم بالشفافية وخدمة عملاء مميزة، ونسعى دايمًا لتقديم الأفضل لعملائنا. 💯</p>
+</section>
+
+<!-- 📞 الفوتر -->
+<footer style="background:#111; color:#f3d76e; text-align:center; padding:20px;">
+  <p>📞 رقم الدعم الرسمي: +201055815900</p>
+  <p>جميع الحقوق محفوظة © HIGH STORE 2025</p>
+</footer>
+
+</body>
+</html>
