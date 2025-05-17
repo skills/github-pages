@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bean Cafe</title>
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      background: #fff8f0;
+      color: #3e2f1c;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: #a97c50;
+      color: #fbe8c1;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    header h1 {
+      font-size: 2.5rem;
+      letter-spacing: 3px;
+      font-weight: 900;
+      text-shadow: 1px 1px 2px #613d0c;
+    }
+    header p {
+      font-style: italic;
+      margin-top: 0.3rem;
+      letter-spacing: 1.2px;
+    }
+
+    nav {
+      background: #f2d492;
+      display: flex;
+      justify-content: center;
+      padding: 0.7rem 1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      color: #3e2f1c;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+      letter-spacing: 0.9px;
+    }
+    nav a:hover {
+      color: #6a4f34;
+    }
+
+    main {
+      flex-grow: 1;
+      padding: 2rem 1rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+    h2 {
+      color: #6a4f34;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      border-bottom: 3px solid #a97c50;
+      display: inline-block;
+      padding-bottom: 0.3rem;
+      letter-spacing: 1.2px;
+    }
+
+    #about p {
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+      color: #4a3a1a;
+    }
+
+    #menu .menu-item {
+      background: #f8f2e8;
+      padding: 1rem 1.5rem;
+      margin: 1rem 0;
+      border-radius: 10px;
+      box-shadow: 2px 2px 6px #c9bfa5;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #menu .menu-item .item-name {
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    #menu .menu-item .item-price {
+      font-weight: 700;
+      color: #7a5c24;
+      font-size: 1.1rem;
+    }
+
+    #gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(160px, 1fr));
+      gap: 1rem;
+    }
+    #gallery img {
+      width: 100%;
+      border-radius: 12px;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.15));
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    #gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    #contact form {
+      max-width: 400px;
+      margin: 0 auto;
+      background: #f8f2e8;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 1px 1px 6px #c9bfa5;
+    }
+    #contact label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+      color: #6a4f34;
+    }
+    #contact input, 
+    #contact textarea {
+      width: 100%;
+      padding: 0.6rem;
+      margin-bottom: 1.2rem;
+      border: 2px solid #a97c50;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+    #contact button {
+      background: #a97c50;
+      color: #fbe8c1;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    #contact button:hover {
+      background: #7a5c24;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem 0.5rem;
+      background: #a97c50;
+      color: #fbe8c1;
+      font-size: 0.9rem;
+      margin-top: auto;
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.75rem;
+      }
+      nav {
+        flex-wrap: wrap;
+      }
+      nav a {
+        margin: 0.4rem 0.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Bean Cafe</h1>
+  <p>Brewing comfort, one cup at a time</p>
+</header>
+
+<nav>
+  <a href="#about">About</a>
+  <a href="#menu">Menu</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<main>
+  <section id="about">
+    <h2>About Us</h2>
+    <p>Welcome to Bean Cafe! We specialize in hand-crafted beverages, warm pastries, and creating a relaxing atmosphere where people can connect, work, or unwind. Our commitment to quality and community makes us the perfect spot to start your day or wind down your evening.</p>
+  </section>
+
+  <section id="menu">
+    <h2>Our Menu</h2>
+    <div class="menu-item"><span class="item-name">Espresso</span><span class="item-price">₹100</span></div>
+    <div class="menu-item"><span class="item-name">Cappuccino</span><span class="item-price">₹150</span></div>
+    <div class="menu-item"><span class="item-name">Cafe Latte</span><span class="item-price">₹150</span></div>
+    <div class="menu-item"><span class="item-name">Masala Chai</span><span class="item-price">₹80</span></div>
+    <div class="menu-item"><span class="item-name">Croissant</span><span class="item-price">₹120</span></div>
+    <div class="menu-item"><span class="item-name">Blueberry Muffin</span><span class="item-price">₹130</span></div>
+    <div class="menu-item"><span class="item-name">Chocolate Chip Cookie</span><span class="item-price">₹90</span></div>
+  </section>
+
+<section>
+     <div style="text-align:center; margin-top:1.5rem; color:#6a4f34; font-size:1.05rem;">
+      <p><strong>Address:</strong> Guntur</p>
+      <p><strong>Phone:</strong> +91 93982 87512</p>
+      <p><strong>Email:</strong> <a href="mailto:satya9705reddy@gmail.com" style="color:#6a4f34;">satya9705reddy@gmail.com</a></p>
+      <p><strong>Opening Hours:</strong> 9:00 AM – 10:00 PM</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  &copy; 2024 Bean Cafe. All Rights Reserved.
+</footer>
+
+
+</body>
+</html>
