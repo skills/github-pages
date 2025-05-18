@@ -1,0 +1,108 @@
+<html>
+
+<head>
+<title>Informacion de: Barayan L' Promo</title>
+</head>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Registrate</title>
+  <style>
+    :root {
+      --bg: #111;
+      --text: #fff;
+      --card: #222;
+      --neon: #0ff;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .register-box {
+      background-color: var(--card);
+      padding: 80px 60px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px var(--neon);
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 50px;
+      font-size: 36px;
+      color: var(--neon);
+      text-shadow: 0 0 10px var(--neon);
+    }
+
+    input {
+      width: 100%;
+      padding: 18px;
+      margin: 20px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 20px;
+      background-color: #333;
+      color: #fff;
+    }
+
+    button {
+      width: 100%;
+      padding: 18px;
+      background-color: var(--neon);
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #00e6e6;
+    }
+  </style>
+</head>
+<body>
+  <div class="register-box">
+    <h2>Registro</h2>
+    <form id="registerForm">
+      <input type="text" placeholder="Usuario" name="username" required />
+      <input type="email" placeholder="Correo electrónico" name="email" required />
+      <input type="password" placeholder="Contraseña" name="password" required />
+      <button type="submit">Registrarse</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("registerForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const user = Object.fromEntries(formData.entries());
+      console.log("Datos del usuario:", user);
+
+      // Redirige después del "registro"
+      window.location.href = "https://moonforce-apiofc.vercel.app/docs";
+    });
+<body style="background-color:powderblue;"></body>
+<h1>INFORMACION PERSONAL</h1>
+<input type="radio" id="male" name="gender" value="male"> <label for="male">Sakura</label>
+<input type="radio" id="male" name="gender" value="male"> <label for="male">Naruto</label>
+<textarea id="nombre" nombre="name" rows="5" cols="50"></textarea>
+<p style="color:green">Hola! esta pagina es para el administrador Brayan L' Promo aprenda a crear pagias web</p> 
+<p style = "font-family:georgia,garamond,serif;font-size:16px;font-style:italic;">Hola familia</p>
+
+
+<body>
+</html>
