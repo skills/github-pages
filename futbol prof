@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>FutbolProb - Maç Olasılıkları</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f3f3;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    .match {
+      background-color: white;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #0077cc;
+    }
+  </style>
+</head>
+<body>
+  <h1>FutbolProb ⚽</h1>
+  <p>Bugünün maçları ve kazanma olasılıkları:</p>
+
+  <div id="matches">Yükleniyor...</div>
+
+  <script>
+    const apiKey = "BURAYA_API_KEY_YAPIŞTIR";  // ← Buraya kendi API key'ini koy
+
+    async function getMatches() {
+      const response = await fetch("https://v3.football.api-sports.io/fixtures?date=2025-05-19", {
+        method: "GET",
+        headers: {
+          "x-apisports-key": apiKey
+        }
+      });
+
+      const data = await response.json();
+      const matchesDiv = document.getElementById("matches");
+      matchesDiv.innerHTML = "";
+
+      data.response.forEach(match => {
+        const home = match.teams.home.name;
+        const away = match.teams.away.name;
+        const league = match.league.name;
+
+        const matchDiv = document.createElement("div");
+        matchDiv.className = "match";
+        matchDiv.innerHTML = `<strong>${league}</strong><br>${home} vs ${away}`;
+        matchesDiv.appendChild(matchDiv);
+      });
+    }
+
+    getMatches();
+  </script>
+</body>
+</html>
