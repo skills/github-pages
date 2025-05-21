@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glanzpunkt Gebäudereinigung Hagen</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Glanzpunkt Gebäudereinigung</h1>
+    <p>Ihr zuverlässiger Partner in Hagen</p>
+    <nav>
+      <ul>
+        <li><a href="#leistungen">Leistungen</a></li>
+        <li><a href="#ueber-uns">Über uns</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="hero">
+    <h2>Sauberkeit mit System – in Hagen und Umgebung</h2>
+    <p>Winterdienst, Entrümpelung und Treppenhausreinigung aus einer Hand.</p>
+  </section>
+
+  <section id="leistungen">
+    <h2>Unsere Leistungen</h2>
+    <div class="leistung">
+      <h3>🧹 Treppenhausreinigung</h3>
+      <p>Gründliche Reinigung von Mehrfamilienhäusern, inklusive Geländer, Fenster und Böden.</p>
+    </div>
+    <div class="leistung">
+      <h3>❄️ Winterdienst</h3>
+      <p>Schnee räumen, Streuen und Absichern Ihrer Gehwege – zuverlässig bei jedem Wetter.</p>
+    </div>
+    <div class="leistung">
+      <h3>🧺 Entrümpelung</h3>
+      <p>Keller, Dachboden oder komplette Haushalte – wir schaffen Platz und entsorgen fachgerecht.</p>
+    </div>
+  </section>
+
+  <section id="ueber-uns">
+    <h2>Über uns</h2>
+    <p>Wir sind ein familiengeführtes Unternehmen mit Sitz in Hagen. Seit über 10 Jahren bieten wir professionelle Gebäudereinigung mit persönlichem Service.</p>
+  </section>
+
+  <section id="kontakt">
+    <h2>Kontakt</h2>
+    <p>📞 Telefon: 02331 123456<br>
+       📧 E-Mail: info@glanzpunkt-hagen.de<br>
+       📍 Adresse: Musterstraße 12, 58095 Hagen</p>
+    <form>
+      <input type="text" placeholder="Ihr Name" required>
+      <input type="email" placeholder="Ihre E-Mail" required>
+      <textarea placeholder="Ihre Nachricht" required></textarea>
+      <button type="submit">Nachricht senden</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Glanzpunkt Gebäudereinigung – Alle Rechte vorbehalten</p>
+  </footer>
+
+</body>
+</html>
