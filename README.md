@@ -1,4 +1,4 @@
-<header>
+<How to Beat Writer’s Block with Simple Tricks>
 
 <!--
   <<< Author notes: Course header >>>
