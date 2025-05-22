@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Ayesha!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background: url('/mnt/data/steptodown.com389510.jpg') no-repeat center center fixed;
+      background-size: cover;
+      overflow-x: hidden;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(135deg, #f06292, #ba68c8);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      font-size: 2.5rem;
+      font-family: 'Great Vibes', cursive;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      background-color: #ffffff;
+      padding: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    nav a {
+      color: #ba68c8;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #f06292;
+    }
+    section {
+      padding: 60px 20px;
+      text-align: center;
+      animation: fadeIn 1s ease-in;
+    }
+    h2 {
+      font-size: 2.2rem;
+      color: #7b1fa2;
+      margin-bottom: 25px;
+    }
+    .image {
+      width: 100%;
+      max-width: 480px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .image:hover {
+      transform: scale(1.04);
+    }
+    .message, .memories, .fun-facts {
+      background-color: #ffffffdd;
+      padding: 40px;
+      border-radius: 16px;
+      margin: 30px auto;
+      max-width: 850px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+    .fun-facts ul {
+      list-style: none;
+      padding: 0;
+    }
+    .fun-facts li {
+      margin: 10px 0;
+      font-weight: 500;
+    }
+    .decor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .decor img {
+      position: absolute;
+      animation: float 12s infinite ease-in-out;
+    }
+    .balloon1 { top: 20%; left: 10%; width: 80px; }
+    .balloon2 { top: 10%; right: 15%; width: 90px; }
+    .balloon3 { bottom: 20%; left: 5%; width: 100px; }
+    .balloon4 { bottom: 25%; right: 10%; width: 70px; }
+    .cake { bottom: 0; left: 50%; transform: translateX(-50%); width: 180px; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    audio {
+      margin-top: 40px;
+    }
+    .footer {
+      margin-top: 60px;
+      padding: 20px;
+      background-color: #fafafa;
+      color: #8e24aa;
+      font-size: 1rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="decor">
+    <img src="https://i.imgur.com/MKp3VqT.png" class="balloon1" />
+    <img src="https://i.imgur.com/0qF43Pv.png" class="balloon2" />
+    <img src="https://i.imgur.com/ACfZvGR.png" class="balloon3" />
+    <img src="https://i.imgur.com/6P2VmGp.png" class="balloon4" />
+    <img src="https://i.imgur.com/qQhz6kS.png" class="cake" />
+  </div>
+  <header>Happy Birthday Ayesha!</header>
+  <nav>
+    <a href="#message">Message</a>
+    <a href="#memories">Memories</a>
+    <a href="#fun-facts">Fun Facts</a>
+  </nav>
+
+  <section id="message">
+    <h2>You're 21 and Shining ✨</h2>
+    <img src="/mnt/data/A_digital_birthday_greeting_image_features_a_young.png" alt="Ayesha Birthday" class="image" />
+    <div class="message">
+      <p>Dear Ayesha,<br><br>
+      You’ve turned 21, a magical age full of dreams, possibilities, and unforgettable moments. Your light shines brighter every day, and I feel lucky to celebrate this journey with you. 💖<br><br>
+      May your year be full of love, laughter, spontaneous adventures, and dreams come true. Never stop being the warm, vibrant soul you are.<br><br>
+      With all my heart — your forever friend. 💝
+      </p>
+    </div>
+  </section>
+
+  <section id="memories">
+    <h2>Golden Memories</h2>
+    <div class="memories">
+      <p>Whether it was our silly selfies, dancing in the rain, or cheering each other on in tough times — these memories are etched in my heart. Let’s create many more together. 🎉</p>
+    </div>
+  </section>
+
+  <section id="fun-facts">
+    <h2>Fun Facts About Ayesha</h2>
+    <div class="fun-facts">
+      <ul>
+        <li>🎂 She can eat cake for breakfast, lunch, and dinner.</li>
+        <li>🎧 Her playlist is 80% Bollywood love songs.</li>
+        <li>🕺 Once danced for 3 hours straight at a party!</li>
+        <li>📸 Takes the cutest candid selfies ever.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div style="text-align: center;">
+    <audio controls autoplay loop>
+      <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <div class="footer">💌 Designed with love for Ayesha's 21st Birthday Celebration 💌</div>
+</body>
+</html>
