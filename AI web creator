@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Creator Hub - Platform Terdepan untuk Content Creator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 25%, #2d1b69 50%, #4338ca 75%, #6366f1 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .tech-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            z-index: -1;
+            background-image: 
+                radial-gradient(circle at 20% 50%, #00f5ff 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, #ff0080 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, #8000ff 0%, transparent 50%);
+            animation: techPulse 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes techPulse {
+            0% { opacity: 0.1; }
+            100% { opacity: 0.2; }
+        }
+
+        .header {
+            background: rgba(15, 15, 35, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.3);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6, #ec4899);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: logoGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes logoGlow {
+            0% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.5); }
+            100% { box-shadow: 0 0 30px rgba(139, 92, 246, 0.8); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: rgba(99, 102, 241, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #ffffff, #6366f1, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: heroGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroGlow {
+            0% { filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.5)); }
+            100% { filter: drop-shadow(0 0 20px rgba(236, 72, 153, 0.8)); }
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #cbd5e1;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6, #ec4899);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.4);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #6366f1;
+            margin-bottom: 0.5rem;
+        }
+
+        .ai-tools-section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #ffffff, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-tab.active, .filter-tab:hover {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            transform: translateY(-2px);
+        }
+
+        .ai-tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .ai-tool-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .ai-tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(99, 102, 241, 0.3);
+            border-color: rgba(99, 102, 241, 0.6);
+        }
+
+        .tool-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1rem;
+        }
+
+        .tool-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #6366f1, #ec4899);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .tool-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .tool-category {
+            background: rgba(99, 102, 241, 0.3);
+            color: #ffffff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-left: auto;
+        }
+
+        .tool-description {
+            color: #cbd5e1;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .tool-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-tag {
+            background: rgba(139, 92, 246, 0.3);
+            color: #ffffff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        .tool-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stars {
+            color: #fbbf24;
+        }
+
+        .learn-more-btn {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .learn-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .tutorial-section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 6rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .tutorial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tutorial-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .tutorial-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .ai-tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tech-bg"></div>
+    
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">
+                <div class="logo-icon">🤖</div>
+                <span>AI Creator Hub</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#tools">AI Tools</a></li>
+                <li><a href="#tutorial">Tutorial</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#community">Community</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Revolusi Content Creation dengan AI</h1>
+        <p>Temukan 100+ AI Tools terbaik untuk YouTube, Instagram, dan TikTok. Dari video editing hingga thumbnail generation, semua ada di sini!</p>
+        <a href="#tools" class="cta-button">
+            🚀 Mulai Sekarang
+        </a>
+    </section>
+
+    <section class="stats">
+        <div class="stat-item">
+            <div class="stat-number">100+</div>
+            <div>AI Tools Premium</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">50K+</div>
+            <div>Content Creators</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">1M+</div>
+            <div>Content Generated</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">24/7</div>
+            <div>Support & Tutorial</div>
+        </div>
+    </section>
+
+    <section class="ai-tools-section" id="tools">
+        <h2 class="section-title">AI Tools untuk Content Creator</h2>
+        
+        <div class="filter-tabs">
+            <button class="filter-tab active" data-category="all">Semua Tools</button>
+            <button class="filter-tab" data-category="video">Video Editing</button>
+            <button class="filter-tab" data-category="image">Image Generation</button>
+            <button class="filter-tab" data-category="text">Text & Script</button>
+            <button class="filter-tab" data-category="audio">Audio & Music</button>
+            <button class="filter-tab" data-category="social">Social Media</button>
+        </div>
+
+        <div class="ai-tools-grid" id="toolsGrid">
+            <!-- Video Editing Tools -->
+            <div class="ai-tool-card" data-category="video">
+                <div class="tool-header">
+                    <div class="tool-icon">🎬</div>
+                    <div class="tool-name">RunwayML</div>
+                    <div class="tool-category">Video AI</div>
+                </div>
+                <div class="tool-description">
+                    AI video generation dan editing yang revolusioner. Buat video dari teks, hapus background real-time, dan edit dengan AI magic tools.
+                </div>
+                <div class="tool-features">
+                    <span class="feature-tag">Text-to-Video</span>
+                    <span class="feature-tag">Green Screen</span>
+                    <span class="feature-tag">Motion Tracking</span>
+                </div>
+                <div class="tool-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span>4.8/5</span>
+                </div>
+                <button class="learn-more-btn">Pelajari Cara Pakai</button>
+            </div>
+
+            <div class="ai-tool-card" data-category="video">
+                <div class="tool-header">
+                    <div class="tool-icon">✂️</div>
+                    <div class="tool-name">Descript</div>
+                    <div class="tool-category">Video AI</div>
+                </div>
+                <div class="tool-description">
+                    Edit video seperti edit dokumen. Hapus "um", "ah", clone voice, dan transcribe otomatis. Perfect untuk podcast dan YouTube.
+                </div>
+                <div class="tool-features">
+                    <span class="feature-tag">Voice Clone</span>
+                    <span class="feature-tag">Auto Transcribe</span>
+                    <span class="feature-tag">Filler Removal</span>
+                </div>
+                <div class="tool-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span>4.7/5</span>
+                </div>
+                <button class="learn-more-btn">Pelajari Cara Pakai</button>
+            </div>
+
+            <!-- Image Generation Tools -->
+            <div class="ai-tool-card" data-category="image">
+                <div class="tool-header">
+                    <div class="tool-icon">🎨</div>
+                    <div class="tool-name">Midjourney</div>
+                    <div class="tool-category">Image AI</div>
+                </div>
+                <div class="tool-description">
+                    AI art generator terbaik untuk thumbnail YouTube, Instagram post, dan visual content yang stunning dan eye-catching.
+                </div>
+                <div class="tool-features">
+                    <span class="feature-tag">High Quality</span>
+                    <span class="feature-tag">Style Transfer</span>
+                    <span class="feature-tag">Commercial Use</span>
+                </div>
+                <div class="tool-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span>4.9/5</span>
+                </div>
+                <button class="learn-more-btn">Pelajari Cara Pakai</button>
+            </div>
+
+            <div class="ai-tool-card" data-category="image">
+                <div class="tool-header">
+                    <div class="tool-icon">🖼️</div>
+                    <div class="tool-name">DALL-E 3</div>
+                    <div class="tool-category">Image AI</div>
+                </div>
+                <div class="tool-description">
+                    Generate gambar dari teks description. Perfect untuk thumbnail, ilustrasi blog, dan visual content yang unik dan original.
+                </div>
+                <div class="tool-features">
+                    <span class="feature-tag">Text-to-Image</span>
+                    <span class="feature-tag">High Resolution</span>
+                    <span class="feature-tag">Creative Control</span>
+                </div>
+                <div class="tool-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span>4.8/5</span>
+                </div>
+                <button class="learn-more-btn">Pelajari Cara Pakai</button>
+            </div>
+
+            <!-- Text & Script Tools -->
+            <div class="ai-tool-card" data-category="text">
+                <div class="tool-header">
+                    <div class="tool-icon">✍️</div>
+                    <div class="tool-name">ChatGPT</div>
+                    <div class="tool-category">Text AI</div>
+                </div>
+                <div class="tool-description">
+                    AI assistant untuk script YouTube, caption Instagram, ide konten, dan copywriting. Bantu brainstorm dan research topik viral.
+                </div>
+                <div class="tool-features">
+                    <span class="feature-tag">Script Writing</span>
+                    <span class="feature-tag">SEO Optimization</span>
+                    <span class="feature-tag">Trend Analysis</span>
+                </div>
+                <div class="tool-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span>4.9/5</span>
+                </div>
+                <button class="learn-more-btn">Pelajari Cara Pakai</button>
+            </div>
+
+            <div class="ai-tool-card" data-category="text">
+                <div class="tool-header">
+                    <div class="tool-icon">📝</div>
+                    <div class="tool-name">Jasper AI</div>
+                    <div class="tool-category">Text AI</div>
+                </div>
+                <div class="tool-description">
+                    AI copywriting khusus untuk marketing. Buat ads copy, email marketing, dan content yang convert tinggi untuk semua platform.
+                </div>
+                <div class="tool-features">
+                    <span class="feature-tag">Marketing Copy</span>
+                    <span class="feature-tag">Brand Voice</span>
+                    <span class="feature-tag">A/B Testing</span>
+                </div>
+                <div class="tool-rating">
+                    <span class="stars">⭐⭐⭐⭐</span>
+                    <span>4.6/5</span>
+                </div>
+                <button class="learn-more-btn">Pelajari Cara Pakai</button>
+            </div>
+
+            <!-- Audio & Music Tools -->
+            <div class="ai-tool-card" data-category="audio">
+                <div class="tool-header">
+                    <div class="tool-icon">🎵</div>
+                    <div class="tool-name">Mubert</div>
+                    <div class="tool-category">Audio AI</div>
+                </div>
+                <div class="tool-description">
+                    Generate background music unlimited untuk YouTube, Instagram Reels, dan TikTok. Royalty-free dan sesuai mood konten Anda.
+                </div>
+                <div class="tool-features">
+                    <span class="feature-tag">Royalty Free</span>
+                    <span class="feature-tag">Custom Length</span>
+                    <span class="feature-tag">Genre Selection</span>
+                </div>
+                <div class="tool-rating">
+                    <span class="stars">⭐⭐⭐⭐</span>
+                    <span>4.5/5</span>
+                </div>
+                <button class="learn-more-btn">Pelajari Cara Pakai</button>
+            </div>
+
+            <!-- Social Media Tools -->
+            <div class="ai-tool-card" data-category="social">
+                <div class="tool-header">
+                    <div class="tool-icon">📱</div>
+                    <div class="tool-name">Hootsuite AI</di
