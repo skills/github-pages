@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>فروشگاه گیاهان دارویی خوزستان</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Vazirmatn', sans-serif;
+      background: linear-gradient(to bottom, #f0fdf4, #e6fffa);
+      color: #333;
+    }
+    header {
+      background-color: #2f855a;
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: 700;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      position: relative;
+    }
+    .contact-btn {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background-color: #276749;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .contact-btn:hover {
+      background-color: #22543d;
+    }
+/* استایل دکمه سبد خرید */
+.cart-btn-header {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: #2c7a7b;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 0 3px 8px rgba(44, 122, 123, 0.6);
+  transition: background-color 0.3s ease;
+  font-family: 'Vazirmatn', sans-serif;
+}
+.cart-btn-header:hover {
+  background-color: #285e61;
+}
+
+/* مودال سبد خرید (کد موجود رو می‌تونی بهبود بدی اگر خواستی) */
+.cart-modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  padding: 2rem 2.5rem;
+  width: 320px;
+  z-index: 2000;
+  text-align: center;
+  font-family: 'Vazirmatn', sans-serif;
+}
+}
+    .contact-info {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #f7fafc;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      padding: 2rem;
+      text-align: center;
+      z-index: 1000;
+      width: 300px;
+    }
+    .contact-info h2 {
+      color: #2f855a;
+      margin-bottom: 1rem;
+    }
+    .contact-info p {
+      margin: 0.5rem 0;
+      font-size: 1.1rem;
+    }
+    .close-btn {
+      margin-top: 1rem;
+      background-color: #e53e3e;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .close-btn:hover {
+      background-color: #c53030;
+    }
+    footer {
+      background-color: #1a202c;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+      font-size: 1rem;
+    }
+    .container {
+      padding: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .product {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      width: 260px;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .product:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+    }
+    .product img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+    .product h3 {
+      margin-top: 1rem;
+      font-size: 1.3rem;
+      color: #2f855a;
+      font-weight: 700;
+    }
+    .price {
+      font-size: 1.1rem;
+      margin: 0.5rem 0;
+      color: #1a202c;
+    }
+    .price del {
+      color: #a0aec0;
+      margin-right: 0.5rem;
+    }
+    .buy-btn {
+      margin-top: auto;
+      background: linear-gradient(90deg, #48bb78, #2f855a);
+      color: white;
+      border: none;
+      padding: 0.8rem 0;
+      width: 100%;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-family: 'Vazirmatn', sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .buy-btn:hover {
+      background: linear-gradient(90deg, #2f855a, #276749);
+      transform: scale(1.03);
+    }
+
+    /* Modal سبد خرید */
+    .cart-modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      padding: 2rem 2.5rem;
+      width: 320px;
+      z-index: 2000;
+      text-align: center;
+      font-family: 'Vazirmatn', sans-serif;
+    }
+    .cart-modal h2 {
+      color: #2f855a;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    .cart-modal label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+      color: #333;
+      text-align: right;
+    }
+    .cart-modal input[type="number"] {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 2px solid #2f855a;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      text-align: center;
+      -moz-appearance: textfield; /* hide arrows on Firefox */
+    }
+    .cart-modal input[type="number"]::-webkit-inner-spin-button, 
+    .cart-modal input[type="number"]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; /* hide arrows on Chrome */
+      margin: 0; 
+    }
+    .total-price {
+      font-size: 1.2rem;
+      color: #1a202c;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+    }
+    .cart-btn {
+      width: 100%;
+      padding: 0.8rem 0;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      border: none;
+      font-family: 'Vazirmatn', sans-serif;
+      transition: background 0.3s ease;
+      margin-bottom: 0.8rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .confirm-btn {
+      background: linear-gradient(90deg, #48bb78, #2f855a);
+      color: white;
+    }
+    .confirm-btn:hover {
+      background: linear-gradient(90deg, #2f855a, #276749);
+    }
+    .cancel-btn {
+      background: #e53e3e;
+      color: white;
+    }
+    .cancel-btn:hover {
+      background: #c53030;
+    }
+
+    /* Overlay برای مودال */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1500;
+    }
+  </style>
+</head>
+<body>
+<div id="paymentModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); 
+  justify-content:center; align-items:center; z-index:1000;">
+
+  <div style="background:#fff; border-radius:15px; padding:30px; width:360px; position:relative; font-family: Vazir, sans-serif; direction: rtl;">
+    <h2 style="text-align:center; margin-bottom:20px;">پرداخت نهایی</h2>
+
+    <form id="paymentForm">
+      <label for="cardNumber">شماره کارت</label>
+      <input type="text" id="cardNumber" maxlength="16" placeholder="1234 5678 9012 3456" required pattern="\d{16}" style="width:100%; padding:10px; margin-bottom:15px; border-radius:8px; border:1.5px solid #ddd;">
+
+      <label for="pin">رمز خرید اینترنتی</label>
+      <input type="password" id="pin" maxlength="6" placeholder="رمز خرید اینترنتی" required pattern="\d{4,6}" style="width:100%; padding:10px; margin-bottom:15px; border-radius:8px; border:1.5px solid #ddd;">
+
+      <label for="expiryDate">تاریخ انقضا (ماه/سال)</label>
+      <input type="text" id="expiryDate" placeholder="مثلاً 05/26" required pattern="(0[1-9]|1[0-2])\/?([0-9]{2})" style="width:100%; padding:10px; margin-bottom:15px; border-radius:8px; border:1.5px solid #ddd;">
+
+      <label for="cvv">رمز دوم (CVV2)</label>
+      <input type="password" id="cvv" maxlength="4" placeholder="رمز دوم" required pattern="\d{3,4}" style="width:100%; padding:10px; margin-bottom:20px; border-radius:8px; border:1.5px solid #ddd;">
+
+      <button type="submit" style="width:100%; background:#3a86ff; color:#fff; padding:12px; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">تایید پرداخت</button>
+    </form>
+
+    <button id="closeModal" style="position:absolute; top:15px; right:15px; background:none; border:none; font-size:22px; cursor:pointer;">×</button>
+
+    <div id="successMsg" style="display:none; color:green; text-align:center; margin-top:15px; font-weight:bold;">پرداخت نهایی انجام شد. متشکریم!</div>
+  </div>
+</div>
+
+
+  <header>
+    فروشگاه گیاهان دارویی خوزستان <br />
+    <span style="font-size: 1.1rem; font-weight: normal;">مالک: سرکار خانم خدیجه باوی</span>
+    <button class="contact-btn" onclick="document.getElementById('contactBox').style.display='block'">اطلاعات تماس فروشگاه</button>
+	<button class="cart-btn-header">سبد خرید</button>
+  </header>
+
+  <div class="contact-info" id="contactBox">
+    <h2>اطلاعات تماس</h2>
+    <p>📞 شماره تماس: 09140819431</p>
+    <p>📧 ایمیل: novansanat@gmail.com</p>
+    <p>👩‍💼 مدیریت فروشگاه: خانم باوی</p>
+    <button class="close-btn" onclick="document.getElementById('contactBox').style.display='none'">بستن</button>
+  </div>
+
+  <div class="container">
+    <div class="product" data-price="880000">
+<a href="https://uupload.ir/" target="_blank"><img src="https://s6.uupload.ir/files/adviyeh_jmh3.jpg" border="0" alt="آپلود عکس" /></a>      <h3>پک ادویه</h3>
+      <p class="price">۸۸۰,۰۰۰ تومان</p>
+      <button class="buy-btn">خرید</button>
+    </div>
+    <div class="product" data-price="162680">
+<a href="https://uupload.ir/" target="_blank"><img src="https://s6.uupload.ir/files/aragnana_dlw7.jpg" border="0" alt="آپلود عکس" /></a>      <h3>عرق نعنا</h3>
+      <p class="price"><del>۱۶۶,۰۰۰</del> ۱۶۲,۶۸۰ تومان</p>
+      <button class="buy-btn">خرید</button>
+    </div>
+    <div class="product" data-price="466000">
+<a href="https://uupload.ir/" target="_blank"><img src="https://s6.uupload.ir/files/gavzaban_v0gy.jpg" border="0" alt="آپلود عکس" /></a>      <h3>دمنوش گل گاو زبان</h3>
+      <p class="price">۴۶۶,۰۰۰ تومان</p>
+      <button class="buy-btn">خرید</button>
+    </div>
+    <div class="product" data-price="198900">
+<a href="https://uupload.ir/" target="_blank"><img src="https://s6.uupload.ir/files/hel_ger.jpg" border="0" alt="آپلود عکس" /></a>      <h3>هل</h3>
+      <p class="price"><del>۲۲۱,۰۰۰</del> ۱۹۸,۹۰۰ تومان</p>
+      <button class="buy-btn">خرید</button>
+    </div>
+    <div class="product" data-price="99000">
+<a href="https://uupload.ir/" target="_blank"><img src="https://s6.uupload.ir/files/marzeh_twbc.jpg" border="0" alt="آپلود عکس" /></a>      <h3>مرزه</h3>
+      <p class="price">۹۹,۰۰۰ تومان</p>
+      <button class="buy-btn">خرید</button>
+    </div>
+    <div class="product" data-price="179760">
+<a href="https://uupload.ir/" target="_blank"><img src="https://s6.uupload.ir/files/tosian_6gz.png" border="0" alt="آپلود عکس" /></a>      <h3>شربت توسیان</h3>
+      <p class="price"><del>۲۱۴,۰۰۰</del> ۱۷۹,۷۶۰ تومان</p>
+      <button class="buy-btn">خرید</button>
+    </div>
+    <div class="product" data-price="200000">
+<a href="https://uupload.ir/" target="_blank"><img src="https://s6.uupload.ir/files/zaferan_ta16.jpeg" border="0" alt="آپلود عکس" /></a>      <h3>زعفران</h3>
+      <p class="price">۲۰۰,۰۰۰ تومان</p>
+      <button class="buy-btn">خرید</button>
+    </div>
+  </div>
+
+  <footer>
+    آدرس فروشگاه: اهواز - کانتکس - کوثر۸
+    <p style="font-family: 'Vazirmatn', sans-serif; font-size: 1rem; margin-top: 0.5rem; color: #9ae6b4; font-weight: 700;">
+        Program by: Khadije Bavi
+    </p>
+</footer>
+
+  <!-- مودال سبد خرید -->
+  <div class="overlay" id="overlay"></div>
+  <div class="cart-modal" id="cartModal">
+    <h2>خرید محصول</h2>
+    <p id="productName" style="font-weight: 700; margin-bottom: 1rem;"></p>
+    <label for="quantity">تعداد (عدد):</label>
+    <input type="number" id="quantity" min="1" value="1" />
+    <p class="total-price">مبلغ کل: <span id="totalPrice">0</span> تومان</p>
+	<button id="finalPayBtn" class="cart-btn confirm-btn">پرداخت نهایی</button>
+    <button class="cart-btn confirm-btn" id="confirmBtn">تأیید پرداخت و ثبت سفارش</button>
+    <button class="cart-btn cancel-btn" id="cancelBtn">کنسل</button>
+	<!-- داخل div.cart-modal -->
+<button class="cart-btn cancel-btn" id="clearCartBtn" style="background:#d53f3f; margin-top:0.5rem;">
+  انصراف از خرید
+</button>
+
+  </div>
+
+  <script>
+const cartItems = [];
+const buyButtons = document.querySelectorAll('.buy-btn');
+const cartModal = document.getElementById('cartModal');
+const overlay = document.getElementById('overlay');
+const productNameElem = document.getElementById('productName');
+const quantityInput = document.getElementById('quantity');
+const totalPriceElem = document.getElementById('totalPrice');
+const confirmBtn = document.getElementById('confirmBtn');
+const cancelBtn = document.getElementById('cancelBtn');
+const clearCartBtn = document.getElementById('clearCartBtn');
+const cartHeaderBtn = document.querySelector('.cart-btn-header');
+
+let currentPrice = 0;
+let currentProduct = '';
+
+function openModal(product, price) {
+  quantityInput.style.display = 'block';
+  confirmBtn.style.display = 'inline-block';
+  currentPrice = price;
+  currentProduct = product;
+  productNameElem.textContent = product;
+  quantityInput.value = 1;
+  totalPriceElem.textContent = price.toLocaleString();
+  cartModal.style.display = 'block';
+  overlay.style.display = 'block';
+}
+
+function closeModal() {
+  cartModal.style.display = 'none';
+  overlay.style.display = 'none';
+}
+
+quantityInput.addEventListener('input', () => {
+  let qty = parseInt(quantityInput.value);
+  if (isNaN(qty) || qty < 1) {
+    qty = 1;
+    quantityInput.value = qty;
+  }
+  const total = qty * currentPrice;
+  totalPriceElem.textContent = total.toLocaleString();
+});
+
+buyButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const productDiv = btn.closest('.product');
+    const name = productDiv.querySelector('h3').textContent;
+    const price = parseInt(productDiv.getAttribute('data-price'));
+    openModal(name, price);
+  });
+});
+
+cancelBtn.addEventListener('click', closeModal);
+
+cartHeaderBtn.addEventListener('click', () => {
+  if (cartItems.length === 0) {
+    productNameElem.textContent = 'سبد خرید شما خالی است';
+    quantityInput.style.display = 'none';
+    totalPriceElem.textContent = '0';
+    confirmBtn.style.display = 'none';
+  } else {
+    let message = '';
+    let total = 0;
+    cartItems.forEach(item => {
+      message += `• ${item.name} - تعداد: ${item.quantity} - مبلغ: ${item.totalPrice.toLocaleString()} تومان\n`;
+      total += item.totalPrice;
+    });
+    productNameElem.textContent = message;
+    quantityInput.style.display = 'none';
+    totalPriceElem.textContent = total.toLocaleString();
+    confirmBtn.style.display = 'none';
+  }
+  cartModal.style.display = 'block';
+  overlay.style.display = 'block';
+});
+
+clearCartBtn.addEventListener('click', () => {
+  if (cartItems.length === 0) {
+    alert('سبد خرید شما خالی است.');
+    return;
+  }
+  if (confirm('آیا مطمئن هستید که می‌خواهید سبد خرید را خالی کنید؟')) {
+    cartItems.length = 0;
+    closeModal();
+    alert('سبد خرید خالی شد.');
+  }
+});
+
+confirmBtn.addEventListener('click', () => {
+  const qty = parseInt(quantityInput.value);
+  const total = qty * currentPrice;
+  cartItems.push({
+    name: currentProduct,
+    quantity: qty,
+    totalPrice: total
+  });
+  alert(`ثبت سفارش: ${currentProduct} - تعداد: ${qty} - مبلغ کل: ${total.toLocaleString()} تومان\n\nممنون از خرید شما!`);
+  closeModal();
+});
+
+overlay.addEventListener('click', closeModal);
+
+const modal = document.getElementById('paymentModal');
+const openBtn = document.getElementById('finalPayBtn');
+const closeBtn = document.getElementById('closeModal');
+const form = document.getElementById('paymentForm');
+const successMsg = document.getElementById('successMsg');
+
+openBtn.addEventListener('click', () => {
+  modal.style.display = 'flex';
+  successMsg.style.display = 'none';   // هر بار که باز میشه پیام قبلی پاک شه
+  form.style.display = 'block';        // فرم رو نمایش بده
+});
+
+closeBtn.addEventListener('click', () => {
+  modal.style.display = 'none';
+});
+
+// بستن مودال با کلیک روی خارج از فرم
+window.addEventListener('click', e => {
+  if (e.target === modal) {
+    modal.style.display = 'none';
+  }
+});
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  form.style.display = 'none';
+  successMsg.style.display = 'block';
+});
+
+
+
+
+
+  </script>
+
+</body>
+</html>
