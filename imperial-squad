@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canisa Imperial Squad</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #fffaf5;
+      color: #333;
+    }
+    header {
+      background-color: #f7e9dc;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+      color: #8a4b2c;
+    }
+    nav {
+      background-color: #ffe8cc;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      padding: 10px;
+    }
+    nav a {
+      text-decoration: none;
+      color: #5e3d2c;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #d17a22;
+    }
+    .hero {
+      background: url('poza-ta-principala.jpg') center/cover no-repeat;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-shadow: 1px 1px 4px #000;
+    }
+    .hero h2 {
+      font-size: 2em;
+      background-color: rgba(0,0,0,0.4);
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+    .section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    footer {
+      background-color: #f7e9dc;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #5e3d2c;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Canisa Imperial Squad</h1>
+  </header>
+
+  <nav>
+    <a href="#despre">Despre</a>
+    <a href="#masculi">Masculi</a>
+    <a href="#femele">Femele</a>
+    <a href="#pui">Pui</a>
+    <a href="#galerie">Galerie</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="hero">
+    <h2>Eleganță, Forță și Devotament – Bull Terrier de elită</h2>
+  </div>
+
+  <div class="section" id="despre">
+    <h2>Despre rasa Bull Terrier</h2>
+    <p>Rasa Bull Terrier este cunoscută pentru temperamentul său prietenos, energia debordantă și loialitatea față de familie. Sunt câini de companie inteligenți și expresivi.</p>
+  </div>
+
+  <div class="section" id="galerie">
+    <h2>Galerie Foto</h2>
+    <div class="gallery">
+      <img src="poza1.jpg" alt="Bull Terrier 1">
+      <img src="poza2.jpg" alt="Bull Terrier 2">
+      <img src="poza3.jpg" alt="Bull Terrier 3">
+      <!-- Adaugă mai multe imagini aici -->
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Canisa Imperial Squad | Contact: imperial.squad@email.com
+  </footer>
+</body>
+</html>
