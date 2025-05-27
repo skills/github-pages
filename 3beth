@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3beth - Cassino Online</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">3beth</div>
+    <nav>
+      <ul>
+        <li><a href="#cassino">Cassino</a></li>
+        <li><a href="#bonus">Bônus</a></li>
+        <li><a href="#suporte">Suporte</a></li>
+      </ul>
+    </nav>
+    <div class="auth">
+      <a href="#">Entrar</a> | <a href="#">Cadastrar</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Bem-vindo à 3beth</h1>
+    <p>Jogue os melhores jogos de cassino online, com segurança e bônus incríveis!</p>
+    <a href="#" class="btn">Comece Agora</a>
+  </section>
+
+  <section id="cassino" class="games">
+    <h2>Jogos Populares</h2>
+    <div class="game-grid">
+      <div class="game-card">Roleta</div>
+      <div class="game-card">Poker</div>
+      <div class="game-card">Blackjack</div>
+      <div class="game-card">Caça-Níqueis</div>
+    </div>
+  </section>
+
+  <section id="bonus" class="bonus">
+    <h2>Bônus de Boas-Vindas</h2>
+    <p>Ganhe até R$500 no seu primeiro depósito!</p>
+    <a href="#" class="btn">Aproveitar Bônus</a>
+  </section>
+
+  <section id="suporte" class="support">
+    <h2>Suporte ao Jogador</h2>
+    <p>Precisa de ajuda? Nossa equipe está disponível 24h por dia no chat.</p>
+  </section>
+
+  <footer>
+    <p>© 2025 3beth - Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>
