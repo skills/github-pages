@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌐 Making Your Blog Official with a Custom URL - Tech & AI Blog</title>
+    <meta name="description" content="A blog about technology, artificial intelligence, and penetration testing. Sharing insights, tutorials, and thoughts on the latest tech trends.">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    
+    <!-- SEO -->
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>🌐 Making Your Blog Official with a Custom URL | Tech &amp; AI Blog</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="🌐 Making Your Blog Official with a Custom URL" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A blog about technology, artificial intelligence, and penetration testing. Sharing insights, tutorials, and thoughts on the latest tech trends." />
+<meta property="og:description" content="A blog about technology, artificial intelligence, and penetration testing. Sharing insights, tutorials, and thoughts on the latest tech trends." />
+<link rel="canonical" href="http://0.0.0.0:4000/docs/url-setup.html" />
+<meta property="og:url" content="http://0.0.0.0:4000/docs/url-setup.html" />
+<meta property="og:site_name" content="Tech &amp; AI Blog" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="🌐 Making Your Blog Official with a Custom URL" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"A blog about technology, artificial intelligence, and penetration testing. Sharing insights, tutorials, and thoughts on the latest tech trends.","headline":"🌐 Making Your Blog Official with a Custom URL","url":"http://0.0.0.0:4000/docs/url-setup.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    
+    <!-- Feed -->
+    <link type="application/atom+xml" rel="alternate" href="http://0.0.0.0:4000/feed.xml" title="Tech &amp; AI Blog" />
+    
+    <!-- Custom JavaScript -->
+    <script src="/assets/js/main.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <nav class="main-nav">
+          <a href="/" class="site-title">Tech & AI Blog</a>
+          <ul class="nav-links">
+            
+              <li><a href="/" >Home</a></li>
+            
+              <li><a href="/about/" >About</a></li>
+            
+              <li><a href="/categories/" >Categories</a></li>
+            
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="site-content">
+      <div class="container">
+  <header class="page-header">
+    <h1 class="page-title">🌐 Making Your Blog Official with a Custom URL</h1>
+  </header>
+
+  <div class="page-content">
+    <h1 id="-making-your-blog-official-with-a-custom-url">🌐 Making Your Blog Official with a Custom URL</h1>
+
+<h2 id="why-get-a-custom-domain">Why Get a Custom Domain?</h2>
+
+<p><strong>Benefits:</strong></p>
+<ul>
+  <li><strong>Professional credibility</strong> (<code class="language-plaintext highlighter-rouge">yourname.com</code> vs <code class="language-plaintext highlighter-rouge">username.github.io</code>)</li>
+  <li><strong>Better SEO</strong> and memorability</li>
+  <li><strong>Brand building</strong> for your personal/professional brand</li>
+  <li><strong>LinkedIn sharing</strong> looks more professional</li>
+</ul>
+
+<h2 id="option-1-custom-domain-setup">Option 1: Custom Domain Setup</h2>
+
+<h3 id="step-1-choose-and-buy-a-domain">Step 1: Choose and Buy a Domain</h3>
+
+<p><strong>Recommended Domain Registrars:</strong></p>
+<ul>
+  <li><strong>Namecheap</strong> (budget-friendly, good support)</li>
+  <li><strong>GoDaddy</strong> (popular, many features)</li>
+  <li><strong>Cloudflare</strong> (excellent security features)</li>
+  <li><strong>Google Domains</strong> (simple, reliable)</li>
+</ul>
+
+<p><strong>Domain Ideas:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">yourname.com</code> (personal brand)</li>
+  <li><code class="language-plaintext highlighter-rouge">yourname-security.com</code> (security focus)</li>
+  <li><code class="language-plaintext highlighter-rouge">pentestai.com</code> (niche specific)</li>
+  <li><code class="language-plaintext highlighter-rouge">cyberinsights.io</code> (professional)</li>
+  <li><code class="language-plaintext highlighter-rouge">ethicalhacker.dev</code> (developer-focused)</li>
+</ul>
+
+<p><strong>Cost:</strong> Usually $10-15/year for <code class="language-plaintext highlighter-rouge">.com</code> domains</p>
+
+<h3 id="step-2-configure-domain-for-github-pages">Step 2: Configure Domain for GitHub Pages</h3>
+
+<h4 id="in-your-github-repository">In Your GitHub Repository:</h4>
+<ol>
+  <li><strong>Go to repository Settings</strong></li>
+  <li><strong>Click “Pages” in sidebar</strong></li>
+  <li><strong>In “Custom domain” field</strong>, enter your domain: <code class="language-plaintext highlighter-rouge">yourdomain.com</code></li>
+  <li><strong>Check “Enforce HTTPS”</strong> (recommended)</li>
+  <li><strong>Save settings</strong></li>
+</ol>
+
+<h4 id="create-cname-file">Create CNAME File:</h4>
+<ol>
+  <li><strong>In your repository root</strong>, create a file named <code class="language-plaintext highlighter-rouge">CNAME</code></li>
+  <li><strong>Add only your domain</strong> (no http/https):
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>yourdomain.com
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="step-3-configure-dns-at-your-domain-registrar">Step 3: Configure DNS at Your Domain Registrar</h3>
+
+<p><strong>Add these DNS records at your domain registrar:</strong></p>
+
+<p><strong>For Root Domain (yourdomain.com):</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre>Type: A
+Name: @
+Value: 185.199.108.153
+
+Type: A  
+Name: @
+Value: 185.199.109.153
+
+Type: A
+Name: @  
+Value: 185.199.110.153
+
+Type: A
+Name: @
+Value: 185.199.111.153
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><strong>For WWW Subdomain (optional):</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>Type: CNAME
+Name: www
+Value: yourusername.github.io
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="step-4-wait-for-dns-propagation">Step 4: Wait for DNS Propagation</h3>
+<ul>
+  <li><strong>Typical wait time</strong>: 24-48 hours</li>
+  <li><strong>Check status</strong>: Use tools like <code class="language-plaintext highlighter-rouge">whatsmydns.net</code></li>
+  <li><strong>Test periodically</strong>: Your domain should start working</li>
+</ul>
+
+<h2 id="option-2-professional-subdomain-free">Option 2: Professional Subdomain (Free)</h2>
+
+<p>If you don’t want to buy a domain immediately, you can create a more professional-looking free setup:</p>
+
+<h3 id="rename-your-repository">Rename Your Repository</h3>
+<ol>
+  <li><strong>Go to repository Settings</strong></li>
+  <li><strong>Scroll to “Repository name”</strong></li>
+  <li><strong>Rename to something professional</strong>:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">pentesting-ai-blog</code></li>
+      <li><code class="language-plaintext highlighter-rouge">cybersecurity-insights</code></li>
+      <li><code class="language-plaintext highlighter-rouge">security-and-ai</code></li>
+    </ul>
+  </li>
+</ol>
+
+<p>Your URL becomes:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>https://yourusername.github.io/pentesting-ai-blog
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>This looks more professional than a generic repository name.</p>
+
+<h2 id="step-5-update-your-blog-configuration">Step 5: Update Your Blog Configuration</h2>
+
+<h3 id="update-_configyml">Update _config.yml</h3>
+<p>Once your custom domain is working:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="c1"># Site settings</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Your</span><span class="nv"> </span><span class="s">Blog</span><span class="nv"> </span><span class="s">Name"</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Your</span><span class="nv"> </span><span class="s">blog</span><span class="nv"> </span><span class="s">description"</span>
+<span class="na">url</span><span class="pi">:</span> <span class="s2">"</span><span class="s">https://yourdomain.com"</span>  <span class="c1"># Your custom domain</span>
+<span class="na">baseurl</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>  <span class="c1"># Leave empty for custom domain</span>
+
+<span class="c1"># Social sharing</span>
+<span class="na">og_image</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/assets/images/og-image.jpg"</span>  <span class="c1"># For social media previews</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="test-your-setup">Test Your Setup</h3>
+<ol>
+  <li><strong>Visit your custom domain</strong></li>
+  <li><strong>Check HTTPS is working</strong> (green lock icon)</li>
+  <li><strong>Test all pages and links</strong></li>
+  <li><strong>Verify social media previews</strong></li>
+</ol>
+
+<h2 id="linkedin-integration">LinkedIn Integration</h2>
+
+<h3 id="update-linkedin-profile">Update LinkedIn Profile</h3>
+<p>Once your domain is live:</p>
+
+<ol>
+  <li><strong>Go to LinkedIn profile</strong></li>
+  <li><strong>Edit “Contact Info”</strong></li>
+  <li><strong>Add your blog URL</strong> in “Website” field</li>
+  <li><strong>Choose “Blog” as website type</strong></li>
+</ol>
+
+<h3 id="linkedin-articlepost-template">LinkedIn Article/Post Template</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre>🚀 Excited to announce my new cybersecurity blog!
+
+After [X] years in penetration testing and AI security, I'm sharing my insights at:
+
+🔗 [YourDomain.com]
+
+Topics I'll cover:
+🛡️ Advanced penetration testing techniques
+🤖 AI-powered security solutions  
+🔍 Vulnerability research and analysis
+📊 Industry trends and emerging threats
+
+Follow for regular updates on the intersection of cybersecurity and artificial intelligence!
+
+#Cybersecurity #PenetrationTesting #AI #MachineLearning #InfoSec #EthicalHacking #TechBlog
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="seo-and-social-media-optimization">SEO and Social Media Optimization</h2>
+
+<h3 id="add-social-media-meta-tags">Add Social Media Meta Tags</h3>
+<p>Ensure your <code class="language-plaintext highlighter-rouge">_layouts/default.html</code> includes:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="c">&lt;!-- Open Graph for social media --&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">"og:title"</span> <span class="na">content=</span><span class="s">"🌐 Making Your Blog Official with a Custom URL"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">"og:description"</span> <span class="na">content=</span><span class="s">"A blog about technology, artificial intelligence, and penetration testing. Sharing insights, tutorials, and thoughts on the latest tech trends."</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">"og:url"</span> <span class="na">content=</span><span class="s">"http://0.0.0.0:4000/docs/url-setup.html"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">"og:site_name"</span> <span class="na">content=</span><span class="s">"Tech &amp; AI Blog"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">"og:type"</span> <span class="na">content=</span><span class="s">"website"</span><span class="nt">&gt;</span>
+
+<span class="c">&lt;!-- Twitter Cards --&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"twitter:card"</span> <span class="na">content=</span><span class="s">"summary_large_image"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"twitter:title"</span> <span class="na">content=</span><span class="s">"🌐 Making Your Blog Official with a Custom URL"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"twitter:description"</span> <span class="na">content=</span><span class="s">"A blog about technology, artificial intelligence, and penetration testing. Sharing insights, tutorials, and thoughts on the latest tech trends."</span><span class="nt">&gt;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="create-featured-images">Create Featured Images</h3>
+<p>For better social sharing:</p>
+<ol>
+  <li><strong>Create <code class="language-plaintext highlighter-rouge">assets/images/</code> folder</strong></li>
+  <li><strong>Add featured images</strong> for your posts (1200x630px recommended)</li>
+  <li><strong>Reference in post front matter</strong>:
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="nn">---</span>
+<span class="na">image</span><span class="pi">:</span> <span class="s">/assets/images/post-featured-image.jpg</span>
+<span class="nn">---</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="email-setup-optional">Email Setup (Optional)</h2>
+
+<h3 id="professional-email-with-custom-domain">Professional Email with Custom Domain</h3>
+<p>Many domain registrars offer email hosting:</p>
+
+<p><strong>Options:</strong></p>
+<ul>
+  <li><strong>Google Workspace</strong> ($6/month) - Professional Gmail with your domain</li>
+  <li><strong>Microsoft 365</strong> ($5/month) - Outlook with your domain</li>
+  <li><strong>Zoho Mail</strong> (Free plan available) - Budget option</li>
+</ul>
+
+<p><strong>Setup:</strong></p>
+<ol>
+  <li><strong>Purchase email hosting</strong> with your domain</li>
+  <li><strong>Update email in _config.yml</strong>:
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="na">email</span><span class="pi">:</span> <span class="s">hello@yourdomain.com</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="analytics-and-monitoring">Analytics and Monitoring</h2>
+
+<h3 id="google-analytics-free">Google Analytics (Free)</h3>
+<ol>
+  <li><strong>Create Google Analytics account</strong></li>
+  <li><strong>Add tracking code</strong> to <code class="language-plaintext highlighter-rouge">_config.yml</code>:
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="na">google_analytics</span><span class="pi">:</span> <span class="s">G-XXXXXXXXXX</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="google-search-console-free">Google Search Console (Free)</h3>
+<ol>
+  <li><strong>Verify your domain</strong> ownership</li>
+  <li><strong>Submit sitemap</strong>: <code class="language-plaintext highlighter-rouge">yourdomain.com/sitemap.xml</code></li>
+  <li><strong>Monitor search performance</strong></li>
+</ol>
+
+<h2 id="security-best-practices">Security Best Practices</h2>
+
+<h3 id="https-enforcement">HTTPS Enforcement</h3>
+<ul>
+  <li>✅ Always check “Enforce HTTPS” in GitHub Pages settings</li>
+  <li>✅ Update all internal links to use HTTPS</li>
+  <li>✅ Test SSL certificate validity</li>
+</ul>
+
+<h3 id="domain-security">Domain Security</h3>
+<ul>
+  <li><strong>Use strong passwords</strong> for domain registrar account</li>
+  <li><strong>Enable two-factor authentication</strong></li>
+  <li><strong>Keep contact information updated</strong></li>
+  <li><strong>Consider domain privacy protection</strong></li>
+</ul>
+
+<h2 id="-url-setup-checklist">✅ URL Setup Checklist</h2>
+
+<p><strong>Custom Domain Setup:</strong></p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Domain purchased and registered</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />DNS records configured correctly</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />CNAME file created in repository</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />GitHub Pages custom domain configured</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />HTTPS enforced and working</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />All pages load correctly</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Social media meta tags working</li>
+</ul>
+
+<p><strong>Professional Branding:</strong></p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />LinkedIn profile updated with blog URL</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Professional email configured (optional)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Google Analytics installed</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Search Console verified</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Featured images created for social sharing</li>
+</ul>
+
+<h2 id="-troubleshooting">🚨 Troubleshooting</h2>
+
+<h3 id="domain-not-working">Domain Not Working?</h3>
+<ol>
+  <li><strong>Check DNS propagation</strong>: Use <code class="language-plaintext highlighter-rouge">nslookup yourdomain.com</code></li>
+  <li><strong>Verify CNAME file</strong>: Must contain only your domain</li>
+  <li><strong>Wait longer</strong>: DNS can take up to 48 hours</li>
+  <li><strong>Clear browser cache</strong>: Try incognito/private mode</li>
+</ol>
+
+<h3 id="https-issues">HTTPS Issues?</h3>
+<ol>
+  <li><strong>Disable and re-enable</strong> “Enforce HTTPS” in GitHub settings</li>
+  <li><strong>Wait 24 hours</strong> for certificate generation</li>
+  <li><strong>Check CNAME file</strong> format (no protocols, just domain)</li>
+</ol>
+
+<h3 id="build-failures">Build Failures?</h3>
+<ol>
+  <li><strong>Check repository Actions tab</strong> for build errors</li>
+  <li><strong>Verify _config.yml syntax</strong> (YAML is sensitive to indentation)</li>
+  <li><strong>Remove any invalid characters</strong> from CNAME file</li>
+</ol>
+
+<hr />
+
+<p><strong>Congratulations!</strong> 🎉 Your blog is now officially live with a professional URL. Time to start sharing your expertise with the world!</p>
+
+  </div>
+</div>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>Tech & AI Blog</h3>
+            <p>A blog about technology, artificial intelligence, and penetration testing. Sharing insights, tutorials, and thoughts on the latest tech trends.</p>
+          </div>
+          <div class="footer-section">
+            <h3>Connect</h3>
+            <div class="social-links">
+              
+                <a href="https://github.com/your_github_username" target="_blank">GitHub</a>
+              
+              
+                <a href="https://twitter.com/your_twitter_handle" target="_blank">Twitter</a>
+              
+              
+                <a href="mailto:your-email@example.com">Email</a>
+              
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Tech & AI Blog. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
