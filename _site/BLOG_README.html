@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech &amp; AI Blog - Tech & AI Blog</title>
+    <meta name="description" content="A blog about technology, artificial intelligence, and penetration testing. Sharing insights, tutorials, and thoughts on the latest tech trends.">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    
+    <!-- SEO -->
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Tech &amp; AI Blog | A blog about technology, artificial intelligence, and penetration testing. Sharing insights, tutorials, and thoughts on the latest tech trends.</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Tech &amp; AI Blog" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A blog about technology, artificial intelligence, and penetration testing. Sharing insights, tutorials, and thoughts on the latest tech trends." />
+<meta property="og:description" content="A blog about technology, artificial intelligence, and penetration testing. Sharing insights, tutorials, and thoughts on the latest tech trends." />
+<link rel="canonical" href="http://0.0.0.0:4000/BLOG_README.html" />
+<meta property="og:url" content="http://0.0.0.0:4000/BLOG_README.html" />
+<meta property="og:site_name" content="Tech &amp; AI Blog" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Tech &amp; AI Blog" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"A blog about technology, artificial intelligence, and penetration testing. Sharing insights, tutorials, and thoughts on the latest tech trends.","headline":"Tech &amp; AI Blog","url":"http://0.0.0.0:4000/BLOG_README.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    
+    <!-- Feed -->
+    <link type="application/atom+xml" rel="alternate" href="http://0.0.0.0:4000/feed.xml" title="Tech &amp; AI Blog" />
+    
+    <!-- Custom JavaScript -->
+    <script src="/assets/js/main.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <nav class="main-nav">
+          <a href="/" class="site-title">Tech & AI Blog</a>
+          <ul class="nav-links">
+            
+              <li><a href="/" >Home</a></li>
+            
+              <li><a href="/about/" >About</a></li>
+            
+              <li><a href="/categories/" >Categories</a></li>
+            
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="site-content">
+      <div class="container">
+  <header class="page-header">
+    <h1 class="page-title">Tech &amp; AI Blog</h1>
+  </header>
+
+  <div class="page-content">
+    <h1 id="tech--ai-blog">Tech &amp; AI Blog</h1>
+
+<p>A simple, professional blog built with Jekyll and GitHub Pages for sharing articles about technology, artificial intelligence, and penetration testing.</p>
+
+<h2 id="-features">🚀 Features</h2>
+
+<ul>
+  <li><strong>Simple &amp; Clean</strong>: Just Home, About, and Categories pages</li>
+  <li><strong>Responsive Design</strong>: Mobile-friendly layout that looks great on all devices</li>
+  <li><strong>SEO Optimized</strong>: Built-in SEO tags and meta descriptions</li>
+  <li><strong>Easy Content Management</strong>: Simple blog post creation</li>
+  <li><strong>Professional Design</strong>: Perfect for LinkedIn sharing</li>
+  <li><strong>Fast Loading</strong>: Optimized for performance</li>
+  <li><strong>Syntax Highlighting</strong>: Beautiful code blocks for technical content</li>
+</ul>
+
+<h2 id="-how-to-add-new-blog-posts">📝 How to Add New Blog Posts</h2>
+
+<h3 id="method-1-github-web-interface-easiest">Method 1: GitHub Web Interface (Easiest)</h3>
+
+<ol>
+  <li>Go to your repository on GitHub</li>
+  <li>Navigate to the <code class="language-plaintext highlighter-rouge">_posts</code> folder</li>
+  <li>Click “Add file” → “Create new file”</li>
+  <li>Name your file using this format: <code class="language-plaintext highlighter-rouge">YYYY-MM-DD-your-post-title.md</code></li>
+  <li>Add the front matter and content (see template below)</li>
+  <li>Commit the file</li>
+</ol>
+
+<h3 id="method-2-local-development">Method 2: Local Development</h3>
+
+<ol>
+  <li>Clone the repository</li>
+  <li>Create a new file in <code class="language-plaintext highlighter-rouge">_posts/</code> folder</li>
+  <li>Follow the naming convention: <code class="language-plaintext highlighter-rouge">YYYY-MM-DD-your-post-title.md</code></li>
+  <li>Add content and commit/push changes</li>
+</ol>
+
+<h3 id="blog-post-template">Blog Post Template</h3>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre></td><td class="rouge-code"><pre><span class="nn">---</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">post</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Your</span><span class="nv"> </span><span class="s">Amazing</span><span class="nv"> </span><span class="s">Blog</span><span class="nv"> </span><span class="s">Post</span><span class="nv"> </span><span class="s">Title"</span>
+<span class="na">date</span><span class="pi">:</span> <span class="s">2025-05-29 10:00:00 +0000</span>
+<span class="na">categories</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">tech</span><span class="pi">,</span> <span class="nv">ai</span><span class="pi">,</span> <span class="nv">security</span><span class="pi">]</span>  <span class="c1"># Choose relevant categories</span>
+<span class="na">tags</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">javascript</span><span class="pi">,</span> <span class="nv">machine-learning</span><span class="pi">,</span> <span class="nv">cybersecurity</span><span class="pi">]</span>  <span class="c1"># Add relevant tags</span>
+<span class="na">author</span><span class="pi">:</span> <span class="s">Your Name</span>
+<span class="na">excerpt</span><span class="pi">:</span> <span class="s2">"</span><span class="s">A</span><span class="nv"> </span><span class="s">brief</span><span class="nv"> </span><span class="s">description</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">your</span><span class="nv"> </span><span class="s">post</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">appears</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">previews"</span>
+<span class="nn">---</span>
+
+<span class="gh"># Your Blog Post Content</span>
+
+Write your content here using Markdown syntax.
+
+<span class="gu">## Subheadings</span>
+
+Use ## for subheadings.
+
+<span class="gu">### Code Examples</span>
+
+<span class="p">```</span><span class="nl">python
+</span><span class="k">def</span> <span class="nf">hello_world</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Hello, World!"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="lists">Lists</h3>
+
+<ul>
+  <li>Bullet point 1</li>
+  <li>Bullet point 2</li>
+  <li>Bullet point 3</li>
+</ul>
+
+<h3 id="links">Links</h3>
+
+<p><a href="https://example.com">Link text</a></p>
+
+<h3 id="images">Images</h3>
+
+<p><img src="path/to/image.jpg" alt="Alt text" /></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="rouge-code"><pre>
+## 🛠️ Deployment
+
+### Automatic Deployment (Recommended)
+
+Your blog automatically deploys when you:
+
+1. Push changes to the `main` branch
+2. GitHub Pages builds and publishes your site
+3. Site is available at: `https://yourusername.github.io/repository-name`
+
+### Setting Up GitHub Pages
+
+1. Go to your repository settings
+2. Scroll to "Pages" section
+3. Select "Deploy from a branch"
+4. Choose "main" branch and "/ (root)" folder
+5. Save settings
+
+## 📁 Project Structure
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>├── _config.yml          # Site configuration
+├── _data/
+│   └── navigation.yml   # Navigation menu items
+├── _includes/           # Reusable template parts
+├── _layouts/            # Page templates
+│   ├── default.html     # Base template
+│   ├── home.html        # Homepage template
+│   ├── page.html        # Static page template
+│   └── post.html        # Blog post template
+├── _posts/              # Blog posts go here
+├── assets/
+│   ├── css/
+│   │   └── style.scss   # Custom styles
+│   └── js/
+│       └── main.js      # Custom JavaScript
+├── index.md             # Homepage content
+├── about.md             # About page
+├── categories.md        # Categories page
+├── tags.md              # Tags page
+└── archive.md           # Archive page</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+</pre></td><td class="rouge-code"><pre>
+## ⚙️ Configuration
+
+### Customize Site Settings
+
+Edit `_config.yml` to update:
+
+- Site title and description
+- Your email and social media handles
+- SEO settings
+- Navigation menu
+
+### Update Personal Information
+
+1. **About Page**: Edit `about.md`
+2. **Social Links**: Update `_config.yml`
+3. **Author Name**: Update in `_config.yml` defaults section
+
+## 🎨 Customization
+
+### Adding New Pages
+
+1. Create a new `.md` file in the root directory
+2. Add front matter with `layout: page`
+3. Add to navigation in `_data/navigation.yml`
+
+### Styling Changes
+
+- Edit `assets/css/style.scss` for custom styles
+- Colors, fonts, and layouts can be modified
+- Responsive design built-in
+
+### Adding New Categories
+
+1. Use categories in your post front matter
+2. They automatically appear on the categories page
+3. No additional setup required
+
+## 📱 Content Ideas
+
+### Tech Articles
+- Programming tutorials
+- Framework comparisons
+- Development best practices
+- Tool reviews
+
+### AI Content
+- Machine learning explanations
+- AI tool reviews
+- Industry trends
+- Project showcases
+
+### Penetration Testing
+- Security methodologies
+- Tool tutorials
+- Vulnerability analyses
+- Ethical hacking guides
+
+## 🔧 Local Development
+
+### Prerequisites
+
+- Ruby (2.7+)
+- Bundler gem
+
+### Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/your-repo-name.git
+cd your-repo-name
+
+# Install dependencies
+bundle install
+
+# Run local server
+bundle exec jekyll serve
+
+# Visit http://localhost:4000
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="making-changes">Making Changes</h3>
+
+<ol>
+  <li>Edit files locally</li>
+  <li>Preview changes at <code class="language-plaintext highlighter-rouge">http://localhost:4000</code></li>
+  <li>Commit and push when satisfied</li>
+</ol>
+
+<h2 id="-seo-tips">📈 SEO Tips</h2>
+
+<ul>
+  <li>Use descriptive titles and excerpts</li>
+  <li>Add relevant tags and categories</li>
+  <li>Include internal links between posts</li>
+  <li>Optimize images with alt text</li>
+  <li>Write engaging meta descriptions</li>
+</ul>
+
+<h2 id="-contributing">🤝 Contributing</h2>
+
+<p>Feel free to:</p>
+<ul>
+  <li>Submit issues for bugs or suggestions</li>
+  <li>Create pull requests for improvements</li>
+  <li>Share feedback on design or functionality</li>
+</ul>
+
+<h2 id="-license">📄 License</h2>
+
+<p>This project is open source and available under the <a href="/LICENSE">MIT License</a>.</p>
+
+<hr />
+
+<p><strong>Ready to start blogging?</strong> Just create your first post in the <code class="language-plaintext highlighter-rouge">_posts</code> folder and push to GitHub!</p>
+
+<p>For questions or support, feel free to open an issue in the repository.</p>
+
+  </div>
+</div>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>Tech & AI Blog</h3>
+            <p>A blog about technology, artificial intelligence, and penetration testing. Sharing insights, tutorials, and thoughts on the latest tech trends.</p>
+          </div>
+          <div class="footer-section">
+            <h3>Connect</h3>
+            <div class="social-links">
+              
+                <a href="https://github.com/your_github_username" target="_blank">GitHub</a>
+              
+              
+                <a href="https://twitter.com/your_twitter_handle" target="_blank">Twitter</a>
+              
+              
+                <a href="mailto:your-email@example.com">Email</a>
+              
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Tech & AI Blog. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+---
+layout: default
+---
+
+<div class="container">
+  <div class="home-header">
+    <h1 class="page-title">{{ page.title | default: site.title }}</h1>
+    {% if page.content != "" %}
+      <div class="page-content">
+        {{ content }}
+      </div>
+    {% endif %}
+  </div>
+
+  <section class="recent-posts">
+    {% if site.posts.size > 0 %}
+      <h2>Recent Posts</h2>
+      <div class="posts-grid">
+        {% for post in site.posts limit: 6 %}
+          <article class="post-card">
+            <div class="post-meta">
+              <time>{{ post.date | date: "%B %d, %Y" }}</time>
+              {% if post.categories.size > 0 %}
+                <span class="post-category">{{ post.categories | first | capitalize }}</span>
+              {% endif %}
+            </div>
+            <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+            {% if post.excerpt %}
+              <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</p>
+            {% endif %}
+            <div class="post-tags">
+              {% for tag in post.tags limit: 3 %}
+                <span class="tag">{{ tag }}</span>
+              {% endfor %}
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+      
+      {% if site.posts.size > 6 %}
+        <div class="view-all">
+          <a href="{{ '/categories/' | relative_url }}" class="btn btn-primary">View All Posts</a>
+        </div>
+      {% endif %}
+    {% else %}
+      <div class="no-posts">
+        <h2>Ready to Start Blogging!</h2>
+        <p>No posts yet. Add your first blog post to the <code>_posts</code> folder to get started.</p>
+        <p>Check out the <a href="/about/">About page</a> to learn more about this blog.</p>
+      </div>
+    {% endif %}
+  </section>
+</div>

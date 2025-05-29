@@ -2,12 +2,13 @@
 title: Tech & AI Blog
 email: your-email@example.com
 description: >-
-  A blog about technology, artificial intelligence, and software development.
+  A blog about technology, artificial intelligence, and penetration testing.
   Sharing insights, tutorials, and thoughts on the latest tech trends.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: your_twitter_handle
 github_username: your_github_username
+linkedin_username: your_linkedin_username
 
 # Build settings
 markdown: kramdown
@@ -16,6 +17,10 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
+
+# Pagination
+paginate: 5
+paginate_path: "/page:num/"
 
 # Exclude from processing
 exclude:

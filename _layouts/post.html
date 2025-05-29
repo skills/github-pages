@@ -1,0 +1,54 @@
+---
+layout: default
+---
+
+<div class="container">
+  <article class="post">
+    <header class="post-header">
+      <div class="post-meta">
+        <time>{{ page.date | date: "%B %d, %Y" }}</time>
+        {% if page.categories.size > 0 %}
+          <span class="post-category">{{ page.categories | first | capitalize }}</span>
+        {% endif %}
+      </div>
+      <h1 class="post-title">{{ page.title }}</h1>
+      {% if page.excerpt %}
+        <p class="post-excerpt">{{ page.excerpt | strip_html }}</p>
+      {% endif %}
+      {% if page.tags.size > 0 %}
+        <div class="post-tags">
+          {% for tag in page.tags %}
+            <a href="{{ '/tags/#' | append: tag | relative_url }}" class="tag">{{ tag }}</a>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </header>
+
+    <div class="post-content">
+      {{ content }}
+    </div>
+
+    <footer class="post-footer">
+      {% if page.author %}
+        <div class="post-author">
+          <p>Written by <strong>{{ page.author }}</strong></p>
+        </div>
+      {% endif %}
+      
+      <div class="post-navigation">
+        {% if page.previous.url %}
+          <a href="{{ page.previous.url | relative_url }}" class="nav-prev">
+            <span>← Previous</span>
+            <span>{{ page.previous.title }}</span>
+          </a>
+        {% endif %}
+        {% if page.next.url %}
+          <a href="{{ page.next.url | relative_url }}" class="nav-next">
+            <span>Next →</span>
+            <span>{{ page.next.title }}</span>
+          </a>
+        {% endif %}
+      </div>
+    </footer>
+  </article>
+</div>
