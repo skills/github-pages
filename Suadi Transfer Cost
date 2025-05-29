@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive SPA: Saudi Local Transfer Costs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Visualization & Content Choices:
+        - Overview: Text highlights (HTML), key metric cards (HTML/CSS) - Goal: Inform, set context - Interaction: None - Justification: Quick high-level summary and key figures.
+        - SAMA Tariff: Interactive HTML Table with filtering/sorting - Goal: Detail, explore regulation - Interaction: Table interaction - Justification: Clear, searchable regulatory data.
+        - SARIE System: Text & HTML/CSS diagram-like feature list - Goal: Explain, inform - Interaction: None - Justification: Clear system explanation of SARIE's benefits.
+        - Cost Explorer: Dropdowns (HTML), Dynamic Text (JS), Bar Chart (Chart.js) - Goal: Compare/Explore - Interaction: User selection updates chart/text, LLM explanation button - Justification: Core interactive analysis tool for costs with AI-powered clarification.
+        - Bank Insights: HTML Cards for each major bank - Goal: Compare/Inform - Interaction: None - Justification: Bank-specific fee summary.
+        - Market Dynamics: Text (HTML), LLM insight button - Goal: Summarize, provide additional context - Interaction: LLM insight generation - Justification: Report conclusions and future outlook with AI-powered cross-border context.
+        - Confirmed NO SVG/Mermaid. All visualizations use HTML/CSS or Chart.js Canvas. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px; /* Adjusted for better readability */
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px; /* Base height */
+            max-height: 450px; /* Max height */
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        /* Tab styles */
+        .tab-button {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .tab-button.active {
+            border-color: #10B981; /* Emerald 500 */
+            color: #059669; /* Emerald 600 */
+            font-weight: 600;
+        }
+        .section-content {
+            display: none;
+        }
+        .section-content.active {
+            display: block;
+        }
+        /* Scrollbar styling for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9; /* stone-100 */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8; /* stone-400 */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b; /* stone-500 */
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #059669;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="mb-8 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-emerald-700">Saudi Arabia Local Bank Transfer Costs</h1>
+            <p class="text-stone-600 mt-2">An Interactive Exploration of the Retail Banking Landscape</p>
+        </header>
+
+        <nav class="mb-8 bg-white shadow-md rounded-lg p-2 flex flex-wrap justify-center gap-2">
+            <button class="tab-button py-2 px-3 md:px-4 border-b-2 border-transparent hover:bg-emerald-100 hover:text-emerald-700 rounded-md text-sm md:text-base" data-tab="overview">📊 Overview</button>
+            <button class="tab-button py-2 px-3 md:px-4 border-b-2 border-transparent hover:bg-emerald-100 hover:text-emerald-700 rounded-md text-sm md:text-base" data-tab="sama-tariff">📜 SAMA Tariff</button>
+            <button class="tab-button py-2 px-3 md:px-4 border-b-2 border-transparent hover:bg-emerald-100 hover:text-emerald-700 rounded-md text-sm md:text-base" data-tab="sarie-system">🚀 SARIE System</button>
+            <button class="tab-button py-2 px-3 md:px-4 border-b-2 border-transparent hover:bg-emerald-100 hover:text-emerald-700 rounded-md text-sm md:text-base" data-tab="cost-explorer">🔍 Cost Explorer</button>
+            <button class="tab-button py-2 px-3 md:px-4 border-b-2 border-transparent hover:bg-emerald-100 hover:text-emerald-700 rounded-md text-sm md:text-base" data-tab="bank-insights">🏦 Bank Insights</button>
+            <button class="tab-button py-2 px-3 md:px-4 border-b-2 border-transparent hover:bg-emerald-100 hover:text-emerald-700 rounded-md text-sm md:text-base" data-tab="market-dynamics">📈 Market Dynamics</button>
+        </nav>
+
+        <main>
+            <section id="overview" class="section-content bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-semibold text-emerald-600 mb-4">Overview of Saudi Local Transfer Costs</h2>
+                <p class="mb-6 text-stone-700">This section provides a high-level summary of the local bank transfer landscape in Saudi Arabia, highlighting key trends and figures. The market is characterized by strong regulatory oversight from the Saudi Central Bank (SAMA) and rapid adoption of digital payment methods, aligning with the nation's Vision 2030 goals for a cashless economy.</p>
+                
+                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-emerald-50 p-4 rounded-lg shadow">
+                        <h3 class="text-lg font-semibold text-emerald-700">E-Payment Adoption</h3>
+                        <p class="text-3xl font-bold text-emerald-600">79%</p>
+                        <p class="text-sm text-stone-600">of retail transactions in 2024 were electronic.</p>
+                    </div>
+                    <div class="bg-teal-50 p-4 rounded-lg shadow">
+                        <h3 class="text-lg font-semibold text-teal-700">Intra-Bank Transfers</h3>
+                        <p class="text-3xl font-bold text-teal-600">Free</p>
+                        <p class="text-sm text-stone-600">Generally, across major banks for retail customers.</p>
+                    </div>
+                    <div class="bg-amber-50 p-4 rounded-lg shadow">
+                        <h3 class="text-lg font-semibold text-amber-700">SARIE Instant (Low Value)</h3>
+                        <p class="text-3xl font-bold text-amber-600">SAR 0.50</p>
+                        <p class="text-sm text-stone-600">Fee for transfers up to SAR 500 via SARIE.</p>
+                    </div>
+                </div>
+                <p class="text-stone-700">The low cost of electronic transfers, particularly via the SARIE system, strongly incentivizes digital adoption. SAMA's Banking Tariff ensures transparency and affordability, fostering a competitive yet standardized environment for essential banking services.</p>
+            </section>
+
+            <section id="sama-tariff" class="section-content bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-semibold text-emerald-600 mb-4">SAMA Banking Tariff for Local Transfers</h2>
+                <p class="mb-6 text-stone-700">The Saudi Central Bank (SAMA) plays a crucial role in regulating banking fees through its "Banking Tariff for Basic Individual Banking Services." This ensures transparency and affordability. Below is a summary of the maximum permissible charges for local transfers. Note: All fees are typically subject to 15% VAT.</p>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50">
+                            <tr>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Transfer Type</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Channel</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Max Fee (SAR)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-stone-200" id="samaTariffTableBody">
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="sarie-system" class="section-content bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-semibold text-emerald-600 mb-4">SARIE System: Backbone of Saudi Payments</h2>
+                <p class="mb-6 text-stone-700">The SARIE (Saudi Real-Time Interbank Settlement System), operated by SAMA, is pivotal for domestic inter-bank transfers. It offers instant, 24/7, year-round execution of low-value fund transfers between all local banks, significantly enhancing payment efficiency.</p>
+                <div class="space-y-4">
+                    <div class="flex items-start p-4 bg-emerald-50 rounded-lg">
+                        <span class="text-2xl mr-3">⏱️</span>
+                        <div>
+                            <h3 class="font-semibold text-emerald-700">Instant & 24/7</h3>
+                            <p class="text-sm text-stone-600">Transfers are processed in real-time, any time of day, any day of the year.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start p-4 bg-emerald-50 rounded-lg">
+                        <span class="text-2xl mr-3">🆔</span>
+                        <div>
+                            <h3 class="font-semibold text-emerald-700">Alias Transfers</h3>
+                            <p class="text-sm text-stone-600">Use mobile number, National ID/Iqama, or email for transfers up to SAR 2,500 without adding a beneficiary.</p>
+                        </div>
+                    </div>
+                     <div class="flex items-start p-4 bg-emerald-50 rounded-lg">
+                        <span class="text-2xl mr-3">💰</span>
+                        <div>
+                            <h3 class="font-semibold text-emerald-700">Tiered Low Fees</h3>
+                            <p class="text-sm text-stone-600">SAR 0.50 for transfers up to SAR 500, and SAR 1.00 for SAR 500 to SAR 20,000.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start p-4 bg-emerald-50 rounded-lg">
+                        <span class="text-2xl mr-3">🌐</span>
+                        <div>
+                            <h3 class="font-semibold text-emerald-700">Nationwide Coverage</h3>
+                            <p class="text-sm text-stone-600">Connects all local banks within Saudi Arabia, ensuring seamless inter-bank transactions.</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="mt-6 text-stone-700">SARIE's design significantly lowers barriers for digital payments, promoting financial inclusion and supporting the shift towards a cashless economy.</p>
+            </section>
+
+            <section id="cost-explorer" class="section-content bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-semibold text-emerald-600 mb-4">Interactive Transfer Cost Explorer</h2>
+                <p class="mb-6 text-stone-700">Use the options below to explore and compare typical costs for different local bank transfer scenarios in Saudi Arabia. The chart will dynamically update based on your selections. All fees are indicative and typically subject to 15% VAT.</p>
+                
+                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                    <div>
+                        <label for="transferType" class="block text-sm font-medium text-stone-700 mb-1">Transfer Type</label>
+                        <select id="transferType" class="w-full p-2 border border-stone-300 rounded-md shadow-sm focus:ring-emerald-500 focus:border-emerald-500">
+                            <option value="intra-bank">Intra-bank</option>
+                            <option value="sarie-instant-low">SARIE Instant (&lt;= SAR 500)</option>
+                            <option value="sarie-instant-high">SARIE Instant (SAR 500-20k)</option>
+                            <option value="sarie-same-day">SARIE Same Day</option>
+                            <option value="sarie-next-day">SARIE Next Business Day</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="transferChannel" class="block text-sm font-medium text-stone-700 mb-1">Channel</label>
+                        <select id="transferChannel" class="w-full p-2 border border-stone-300 rounded-md shadow-sm focus:ring-emerald-500 focus:border-emerald-500">
+                            <option value="electronic">Electronic / Digital</option>
+                            <option value="branch">Branch</option>
+                        </select>
+                    </div>
+                     <div>
+                        <label for="bankSelect" class="block text-sm font-medium text-stone-700 mb-1">Bank (Illustrative)</label>
+                        <select id="bankSelect" class="w-full p-2 border border-stone-300 rounded-md shadow-sm focus:ring-emerald-500 focus:border-emerald-500">
+                            <option value="typical">Typical Market Rate (SAMA Tariff)</option>
+                            <option value="alrajhi">Al Rajhi Bank</option>
+                            <option value="snb">Saudi National Bank (SNB)</option>
+                            <option value="riyad">Riyad Bank</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="costResult" class="mb-6 p-4 bg-emerald-50 rounded-md text-center flex items-center justify-center flex-wrap">
+                    <p class="text-lg text-emerald-700 mr-2">Selected Transfer Cost: <span id="calculatedFee" class="font-bold">SAR 0.00</span></p>
+                    <button id="explainFeeBtn" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-full text-sm flex items-center">
+                        ✨ Explain Fee Details ✨
+                    </button>
+                    <p class="text-xs text-stone-500 w-full mt-1">(Excluding 15% VAT)</p>
+                </div>
+
+                <div class="chart-container mb-4">
+                    <canvas id="costComparisonChart"></canvas>
+                </div>
+                 <p class="text-sm text-stone-600 text-center mt-4">The chart above compares the selected scenario (dark green) with other common transfer types for context.</p>
+            </section>
+
+            <section id="bank-insights" class="section-content bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-semibold text-emerald-600 mb-4">Bank-Specific Fee Insights</h2>
+                <p class="mb-6 text-stone-700">This section provides a snapshot of typical local transfer fees for some major retail banks in Saudi Arabia, based on available information. Fees generally align with SAMA's tariff, especially for electronic SARIE transfers. All fees are indicative and typically subject to 15% VAT.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="bankInsightsContainer">
+                    </div>
+            </section>
+
+            <section id="market-dynamics" class="section-content bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-semibold text-emerald-600 mb-4">Market Dynamics & Conclusion</h2>
+                <p class="mb-4 text-stone-700">The Saudi Arabian local bank transfer market is undergoing a significant transformation, heavily influenced by SAMA's regulatory guidance and the national Vision 2030. The key dynamics include:</p>
+                <ul class="list-disc list-inside space-y-2 mb-4 text-stone-700">
+                    <li><strong>Strong Push for Digitalization:</strong> The stark cost difference between electronic and branch-initiated transfers actively steers consumers towards digital channels.</li>
+                    <li><strong>Standardization of Basic Fees:</strong> For common services like SARIE transfers, fees are largely uniform and low, reflecting SAMA's tariff.</li>
+                    <li><strong>Competition Beyond Price:</strong> With basic transfer fees minimized, banks are increasingly competing on user experience, digital platform quality, and value-added services.</li>
+                    <li><strong>Strategic Role of SAMA:</strong> SAMA acts not just as a regulator but also as an enabler and infrastructure provider (e.g., SARIE), actively shaping an efficient and modern payment landscape.</li>
+                </ul>
+                <div class="text-center mt-6 mb-8">
+                    <button id="crossBorderInsightsBtn" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-full text-lg flex items-center justify-center mx-auto">
+                        ✨ Get Cross-Border Insights ✨
+                    </button>
+                </div>
+                <h3 class="text-xl font-semibold text-emerald-600 mt-6 mb-2">Conclusion</h3>
+                <p class="text-stone-700">Local bank transfers in Saudi Arabia are highly affordable, especially via digital channels. The regulatory framework and advanced payment infrastructure like SARIE support a transparent, efficient, and increasingly cashless economy. This benefits consumers with low costs and convenience, while fostering a competitive banking sector focused on innovation and service quality.</p>
+            </section>
+        </main>
+
+        <footer class="mt-12 text-center text-sm text-stone-500">
+            <p>&copy; 2025 Saudi Financial Insights. Data based on publicly available information as of early 2025.</p>
+            <p>This application is for informational purposes only.</p>
+        </footer>
+    </div>
+
+    <div id="llmModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3 id="modalTitle" class="text-xl font-semibold text-emerald-700 mb-4"></h3>
+            <div id="modalContent" class="text-stone-700">
+                <div class="spinner"></div> Loading...
+            </div>
+        </div>
+    </div>
+
+<script>
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const sections = document.querySelectorAll('.section-content');
+
+    const samaTariffData = [
+        { type: 'Transfer Between Accounts in the Same Bank', channel: 'Electronic/Digital', fee: 'Free' },
+        { type: 'Transfer Between Accounts in the Same Bank', channel: 'Branch', fee: 'Free' },
+        { type: 'Transfer Between Banks via SARIE (Instant, up to SAR 500)', channel: 'Electronic/Digital', fee: '0.50' },
+        { type: 'Transfer Between Banks via SARIE (Instant, up to SAR 500)', channel: 'Branch', fee: '0.50' },
+        { type: 'Transfer Between Banks via SARIE (Instant, over SAR 500)', channel: 'Electronic/Digital', fee: '1.00' },
+        { type: 'Transfer Between Banks via SARIE (Instant, over SAR 500)', channel: 'Branch', fee: '1.00' },
+        { type: 'Transfer Between Banks via SARIE (Same Day)', channel: 'Electronic/Digital', fee: '7.00' },
+        { type: 'Transfer Between Banks via SARIE (Same Day)', channel: 'Branch', fee: '25.00' },
+        { type: 'Transfer Between Banks via SARIE (Deferred/Next Business Day)', channel: 'Electronic/Digital', fee: '5.00' },
+        { type: 'Transfer Between Banks via SARIE (Deferred/Next Business Day)', channel: 'Branch', fee: '15.00' }
+    ];
+
+    const bankFeeData = {
+        "typical": { name: "Typical Market Rate (SAMA Tariff)", fees: {} }, // Populated by SAMA Tariff
+        "alrajhi": {
+            name: "Al Rajhi Bank",
+            fees: {
+                "intra-bank-electronic": 0, "intra-bank-branch": 0,
+                "sarie-instant-low-electronic": 0.50, "sarie-instant-low-branch": 0.50,
+                "sarie-instant-high-electronic": 1.00, "sarie-instant-high-branch": 1.00,
+                "sarie-same-day-electronic": 7.00, "sarie-same-day-branch": 25.00,
+                "sarie-next-day-electronic": 5.00, "sarie-next-day-branch": 15.00
+            },
+            highlights: [
+                "Intra-bank: Free (Electronic & Branch)",
+                "SARIE Same Day (Electronic): SAR 7.00",
+                "SARIE Same Day (Branch): SAR 25.00"
+            ]
+        },
+        "snb": {
+            name: "Saudi National Bank (SNB)",
+            fees: { // Assuming SNB aligns with SAMA for SARIE instant, and has specified same/next day. Branch data often not prominent for digital-first.
+                "intra-bank-electronic": 0,
+                "sarie-instant-low-electronic": 0.50, // Assumed SAMA Tariff
+                "sarie-instant-high-electronic": 1.00, // Assumed SAMA Tariff
+                "sarie-same-day-electronic": 7.00,
+                "sarie-next-day-electronic": 5.00,
+                 // Branch fees less emphasized for SNB NEO, assume typical high if needed for comparison
+                "intra-bank-branch": 0, // SAMA Tariff
+                "sarie-instant-low-branch": 0.50, // SAMA Tariff
+                "sarie-instant-high-branch": 1.00, // SAMA Tariff
+                "sarie-same-day-branch": 25.00, // Typical high branch fee
+                "sarie-next-day-branch": 15.00  // Typical high branch fee
+            },
+            highlights: [
+                "Intra-bank (NEO/SNB): Free",
+                "SARIE Same Day (NEO Mobile): SAR 7.00",
+                "SARIE Next Day (NEO Mobile): SAR 5.00"
+            ]
+        },
+        "riyad": {
+            name: "Riyad Bank",
+            fees: {
+                "intra-bank-electronic": 0,
+                "sarie-instant-low-electronic": 0.50,
+                "sarie-instant-high-electronic": 1.00,
+                 // Assuming same/next day electronic align with typical, branch fees less prominent
+                "sarie-same-day-electronic": 7.00, // Typical electronic fee
+                "sarie-next-day-electronic": 5.00, // Typical electronic fee
+                "intra-bank-branch": 0, // SAMA Tariff
+                "sarie-instant-low-branch": 0.50, // SAMA Tariff
+                "sarie-instant-high-branch": 1.00, // SAMA Tariff
+                "sarie-same-day-branch": 25.00, // Typical high branch fee
+                "sarie-next-day-branch": 15.00  // Typical high branch fee
+            },
+            highlights: [
+                "Intra-bank: Free",
+                "SARIE Instant (Electronic, <SAR 500): SAR 0.50",
+                "SARIE Instant (Electronic, SAR 500-20k): SAR 1.00",
+                "Payroll Solution Local Transfer: SAR 5.00 (specialized)"
+            ]
+        }
+    };
+    
+    // Populate typical fees from SAMA Tariff for bankFeeData.typical
+    bankFeeData.typical.fees = {
+        "intra-bank-electronic": 0, "intra-bank-branch": 0,
+        "sarie-instant-low-electronic": 0.50, "sarie-instant-low-branch": 0.50,
+        "sarie-instant-high-electronic": 1.00, "sarie-instant-high-branch": 1.00,
+        "sarie-same-day-electronic": 7.00, "sarie-same-day-branch": 25.00,
+        "sarie-next-day-electronic": 5.00, "sarie-next-day-branch": 15.00
+    };
+
+
+    function populateSamaTariffTable() {
+        const tableBody = document.getElementById('samaTariffTableBody');
+        tableBody.innerHTML = ''; // Clear existing rows
+        samaTariffData.forEach(item => {
+            const row = `<tr>
+                <td class="px-4 py-3 whitespace-nowrap text-sm text-stone-700">${item.type}</td>
+                <td class="px-4 py-3 whitespace-nowrap text-sm text-stone-700">${item.channel}</td>
+                <td class="px-4 py-3 whitespace-nowrap text-sm text-stone-700 font-medium">${item.fee}</td>
+            </tr>`;
+            tableBody.innerHTML += row;
+        });
+    }
+
+    function populateBankInsights() {
+        const container = document.getElementById('bankInsightsContainer');
+        container.innerHTML = '';
+        Object.values(bankFeeData).filter(b => b.name !== "Typical Market Rate (SAMA Tariff)").forEach(bank => { // Exclude typical here
+            if (bank.highlights) { // Ensure bank has highlights defined
+                 const card = `
+                    <div class="bg-stone-50 p-5 rounded-lg shadow hover:shadow-xl transition-shadow">
+                        <h3 class="text-xl font-semibold text-emerald-700 mb-2">${bank.name}</h3>
+                        <ul class="list-disc list-inside space-y-1 text-sm text-stone-600">
+                            ${bank.highlights.map(h => `<li>${h}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+                container.innerHTML += card;
+            }
+        });
+    }
+    
+    const transferTypeSelect = document.getElementById('transferType');
+    const transferChannelSelect = document.getElementById('transferChannel');
+    const bankSelectElement = document.getElementById('bankSelect');
+    const calculatedFeeElement = document.getElementById('calculatedFee');
+    const explainFeeBtn = document.getElementById('explainFeeBtn');
+    const crossBorderInsightsBtn = document.getElementById('crossBorderInsightsBtn');
+    const llmModal = document.getElementById('llmModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalContent = document.getElementById('modalContent');
+    const closeButton = document.querySelector('.close-button');
+
+    let costChart = null;
+
+    function getFee(type, channel, bankKey) {
+        const bank = bankFeeData[bankKey];
+        if (!bank || !bank.fees) return 'N/A';
+
+        const key = `${type}-${channel}`;
+        const fee = bank.fees[key];
+        return fee !== undefined ? fee : (bankKey === 'typical' ? getFee(type, channel, 'alrajhi') : 'N/A'); // Fallback for typical or if specific bank fee undefined
+    }
+    
+    function updateCost() {
+        const type = transferTypeSelect.value;
+        const channel = transferChannelSelect.value;
+        const bankKey = bankSelectElement.value;
+        
+        let fee = getFee(type, channel, bankKey);
+
+        if (fee === 'N/A' || (channel === 'branch' && (bankKey === 'snb' || bankKey === 'riyad') && !type.startsWith('intra-bank') && !type.startsWith('sarie-instant'))) {
+            // For SNB/Riyad, if branch is selected and not intra-bank/SARIE instant (where SAMA tariff is clear),
+            // and no specific branch fee is listed for same/next day, assume typical high branch fee.
+             if (type === 'sarie-same-day' && channel === 'branch') fee = bankFeeData['typical'].fees['sarie-same-day-branch'];
+             else if (type === 'sarie-next-day' && channel === 'branch') fee = bankFeeData['typical'].fees['sarie-next-day-branch'];
+             else if (fee === 'N/A') calculatedFeeElement.textContent = 'N/A (Not specified for this bank/channel)';
+        }
+
+
+        if (typeof fee === 'number') {
+            calculatedFeeElement.textContent = `SAR ${fee.toFixed(2)}`;
+        } else if (fee === 'N/A') {
+             calculatedFeeElement.textContent = 'N/A (Not specified for this bank/channel)';
+        } else {
+            calculatedFeeElement.textContent = fee; // Should be "N/A..."
+        }
+        updateChart(type, channel, bankKey, typeof fee === 'number' ? fee : null);
+    }
+
+    function updateChart(selectedType, selectedChannel, selectedBankKey, currentFee) {
+        const ctx = document.getElementById('costComparisonChart').getContext('2d');
+        
+        const labels = ['Intra-bank (Elec.)', 'SARIE Inst. Low (Elec.)', 'SARIE Same Day (Elec.)', 'SARIE Same Day (Branch)'];
+        const dataPoints = [
+            getFee('intra-bank', 'electronic', selectedBankKey),
+            getFee('sarie-instant-low', 'electronic', selectedBankKey),
+            getFee('sarie-same-day', 'electronic', selectedBankKey),
+            getFee('sarie-same-day', 'branch', selectedBankKey === 'typical' ? 'typical' : 'alrajhi') // AlRajhi as representative for branch if not typical
+        ];
+
+        const currentSelectionLabel = `${selectedType.replace(/-/g, ' ')} (${selectedChannel.substring(0,4)}.)`;
+        
+        let chartLabels = [...labels];
+        let chartData = [...dataPoints.map(f => (typeof f === 'number' ? f : 0))]; // Use 0 for N/A in chart
+        
+        const currentFeeNumeric = typeof currentFee === 'number' ? currentFee : null;
+
+        if (currentFeeNumeric !== null && !labels.some(l => l.toLowerCase().includes(selectedType.split('-')[1]))) { // Simple check
+            chartLabels.push(currentSelectionLabel);
+            chartData.push(currentFeeNumeric);
+        } else { // Highlight existing bar if it matches current selection
+            const matchIndex = labels.findIndex(l => l.toLowerCase().includes(selectedType.split('-')[1]) && l.toLowerCase().includes(selectedChannel.substring(0,4)));
+            if (matchIndex !== -1 && currentFeeNumeric !== null) {
+                 // It's already there or similar enough.
+            }
+        }
+        
+        const backgroundColors = chartLabels.map(label => {
+             // Check if the label closely matches the current selection criteria
+            const typePart = selectedType.split('-').slice(0, 2).join(' '); // e.g., "sarie instant"
+            const channelPart = selectedChannel.substring(0, 4); // "elec" or "bran"
+            if (label.toLowerCase().includes(typePart) && label.toLowerCase().includes(channelPart)) {
+                return 'rgba(5, 150, 105, 0.8)'; // Emerald 600 (darker for selected)
+            }
+            return 'rgba(16, 185, 129, 0.6)'; // Emerald 500 (lighter for others)
+        });
+
+
+        if (costChart) {
+            costChart.destroy();
+        }
+        costChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: chartLabels,
+                datasets: [{
+                    label: 'Transfer Cost (SAR, excl. VAT)',
+                    data: chartData,
+                    backgroundColor: backgroundColors,
+                    borderColor: backgroundColors.map(color => color.replace('0.6', '1').replace('0.8', '1')),
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Cost (SAR)'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                             callback: function(value, index, values) {
+                                const label = this.getLabelForValue(value);
+                                if (label.length > 16) { // Character limit for wrapping
+                                    return label.match(/.{1,16}/g); // Split into lines of 16 chars
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false // Or true if you want a legend
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += `SAR ${context.parsed.y.toFixed(2)}`;
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    function setActiveTab(tabId) {
+        sections.forEach(section => {
+            section.classList.remove('active');
+            if (section.id === tabId) {
+                section.classList.add('active');
+            }
+        });
+        tabButtons.forEach(button => {
+            button.classList.remove('active');
+            if (button.dataset.tab === tabId) {
+                button.classList.add('active');
+            }
+        });
+        if (tabId === 'cost-explorer') { // Initialize chart when tab is active
+             setTimeout(updateCost, 0); // Ensure DOM is ready for chart
+        }
+    }
+
+    async function callGeminiAPI(prompt, title) {
+        llmModal.style.display = 'flex';
+        modalTitle.textContent = title;
+        modalContent.innerHTML = '<div class="spinner"></div> Loading...';
+
+        let chatHistory = [];
+        chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+        const payload = { contents: chatHistory };
+        const apiKey = ""; // Leave as-is for Canvas environment
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const result = await response.json();
+            if (result.candidates && result.candidates.length > 0 &&
+                result.candidates[0].content && result.candidates[0].content.parts &&
+                result.candidates[0].content.parts.length > 0) {
+                const text = result.candidates[0].content.parts[0].text;
+                modalContent.innerHTML = text;
+            } else {
+                modalContent.innerHTML = 'Error: Could not retrieve a response from the LLM. Please try again.';
+                console.error('LLM response structure unexpected:', result);
+            }
+        } catch (error) {
+            modalContent.innerHTML = 'Error: Failed to connect to the LLM. Please check your network connection or try again later.';
+            console.error('Error calling Gemini API:', error);
+        }
+    }
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            setActiveTab(button.dataset.tab);
+        });
+    });
+
+    transferTypeSelect.addEventListener('change', updateCost);
+    transferChannelSelect.addEventListener('change', updateCost);
+    bankSelectElement.addEventListener('change', updateCost);
+
+    explainFeeBtn.addEventListener('click', () => {
+        const type = transferTypeSelect.options[transferTypeSelect.selectedIndex].text;
+        const channel = transferChannelSelect.options[transferChannelSelect.selectedIndex].text;
+        const bankName = bankSelectElement.options[bankSelectElement.selectedIndex].text;
+        const fee = calculatedFeeElement.textContent;
+
+        const prompt = `Explain the typical fee of ${fee} for a "${type}" transfer via "${channel}" channel, specific to ${bankName} or the general Saudi Arabian banking market. Include reasons for this fee and relevant regulations from SAMA if applicable. Keep it concise and easy to understand.`;
+        callGeminiAPI(prompt, `Explanation for ${type} Transfer`);
+    });
+
+    crossBorderInsightsBtn.addEventListener('click', () => {
+        const prompt = `Provide a brief overview of typical fees and factors affecting cross-border money transfers to Saudi Arabia (SAR) from outside the country. Mention common methods and what influences the cost.`;
+        callGeminiAPI(prompt, 'Cross-Border Transfer Insights');
+    });
+
+    closeButton.addEventListener('click', () => {
+        llmModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target === llmModal) {
+            llmModal.style.display = 'none';
+        }
+    });
+    
+    // Initial setup
+    document.addEventListener('DOMContentLoaded', () => {
+        populateSamaTariffTable();
+        populateBankInsights();
+        setActiveTab('overview'); // Set overview as default active tab
+    });
+
+</script>
+</body>
+</html>
