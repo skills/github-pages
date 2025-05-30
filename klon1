@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Moja Pierwsza Strona</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: darkblue;
+        }
+        p {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Witaj na mojej stronie!</h1>
+    <p>To jest moja pierwsza strona napisana w Notatniku.</p>
+
+    <button onclick="powitanie()">Kliknij mnie</button>
+
+    <script>
+        function powitanie() {
+            alert("Dziękuję za odwiedzenie strony!");
+        }
+    </script>
+</body>
+</html>
