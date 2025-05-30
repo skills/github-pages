@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My GitHub Page</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: #f9f9f9;
+      color: #333;
+      text-align: center;
+    }
+
+    header {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    #url {
+      font-weight: bold;
+      color: #1a73e8;
+      word-wrap: break-word;
+    }
+
+    main {
+      margin-top: 2rem;
+    }
+
+    footer {
+      margin-top: 4rem;
+      font-size: 0.875rem;
+      color: #777;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #111;
+        color: #ddd;
+      }
+
+      #url {
+        color: #66aaff;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>🌐 Welcome to My GitHub Page</header>
+  <div>Your current path is:</div>
+  <div id="url"></div>
+
+  <main>
+    <p>This page is hosted with <a href="https://pages.github.com" target="_blank">GitHub Pages</a>.</p>
+    <p>Use it as a landing page or link hub for your projects, PWAs, and more.</p>
+  </main>
+
+  <footer>
+    &copy; <span id="year"></span> Your Name — All rights reserved.
+  </footer>
+
+  <script>
+    // Show full URL
+    document.getElementById("url").textContent = window.location.href;
+
+    // Set current year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Register service worker if available
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(reg => console.log('Service Worker registered:', reg.scope))
+        .catch(err => console.warn('Service Worker registration failed:', err));
+    }
+  </script>
+</body>
+</html>
