@@ -15,7 +15,7 @@ env:
 jobs:
   find_exercise:
     name: Find Exercise Issue
-    uses: skills/exercise-toolkit/.github/workflows/find-exercise-issue.yml@v0.4.0
+    uses: skills/exercise-toolkit/.github/workflows/find-exercise-issue.yml@v0.5.0
 
   post_next_step_content:
     name: Post next step content
