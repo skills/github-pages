@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepSite - Testeur Numérique Intelligent</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .sidebar {
+            transition: all 0.3s ease;
+        }
+        .chart-container {
+            height: 300px;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                position: absolute;
+                left: -100%;
+                z-index: 50;
+            }
+            .sidebar.active {
+                left: 0;
+            }
+        }
+        .blink-warning {
+            animation: blink 1.5s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Login Page (Default Visible) -->
+    <div id="loginPage" class="min-h-screen flex items-center justify-center bg-gray-900">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
+            <div class="text-center mb-8">
+                <img src="https://via.placeholder.com/80" alt="DeepSite Logo" class="mx-auto mb-4 rounded-lg">
+                <h1 class="text-3xl font-bold text-gray-800">DeepSite</h1>
+                <p class="text-gray-600">Testeur Numérique Intelligent</p>
+            </div>
+            <form id="loginForm" class="space-y-4">
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Nom d'utilisateur</label>
+                    <input type="text" id="username" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Mot de passe</label>
+                    <input type="password" id="password" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="remember" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                        <label for="remember" class="ml-2 block text-sm text-gray-700">Se souvenir de moi</label>
+                    </div>
+                    <a href="#" class="text-sm text-blue-600 hover:underline">Mot de passe oublié?</a>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200 flex items-center justify-center">
+                    <i class="fas fa-sign-in-alt mr-2"></i> Connexion
+                </button>
+            </form>
+            <div class="mt-6 text-center">
+                <p class="text-sm text-gray-600">Version 1.0.0 - © 2023 COFAT</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App (Hidden by Default) -->
+    <div id="appContainer" class="hidden min-h-screen">
+        <!-- Sidebar -->
+        <div class="sidebar bg-gray-800 text-white w-64 fixed h-full overflow-y-auto">
+            <div class="p-4 flex items-center space-x-3 border-b border-gray-700">
+                <img src="https://via.placeholder.com/40" alt="User" class="rounded-full">
+                <div>
+                    <p class="font-medium" id="usernameDisplay">Technicien</p>
+                    <p class="text-xs text-gray-400" id="userRoleDisplay">Maintenance</p>
+                </div>
+            </div>
+            <nav class="p-4">
+                <div class="mb-6">
+                    <p class="text-xs uppercase text-gray-400 mb-2">Principal</p>
+                    <a href="#" class="flex items-center space-x-2 py-2 px-3 rounded-lg bg-gray-700 text-white">
+                        <i class="fas fa-tachometer-alt w-5"></i>
+                        <span>Tableau de bord</span>
+                    </a>
+                </div>
+                <div class="mb-6">
+                    <p class="text-xs uppercase text-gray-400 mb-2">Tests</p>
+                    <a href="#" class="flex items-center space-x-2 py-2 px-3 rounded-lg hover:bg-gray-700 text-gray-300 hover:text-white">
+                        <i class="fas fa-bolt w-5"></i>
+                        <span>Résultats des tests</span>
+                    </a>
+                    <a href="#" class="flex items-center space-x-2 py-2 px-3 rounded-lg hover:bg-gray-700 text-gray-300 hover:text-white">
+                        <i class="fas fa-chart-line w-5"></i>
+                        <span>Statistiques</span>
+                    </a>
+                    <a href="#" class="flex items-center space-x-2 py-2 px-3 rounded-lg hover:bg-gray-700 text-gray-300 hover:text-white">
+                        <i class="fas fa-history w-5"></i>
+                        <span>Historique</span>
+                    </a>
+                </div>
+                <div class="mb-6">
+                    <p class="text-xs uppercase text-gray-400 mb-2">Gestion</p>
+                    <a href="#" class="flex items-center space-x-2 py-2 px-3 rounded-lg hover:bg-gray-700 text-gray-300 hover:text-white">
+                        <i class="fas fa-cog w-5"></i>
+                        <span>Paramètres</span>
+                    </a>
+                    <a href="#" class="flex items-center space-x-2 py-2 px-3 rounded-lg hover:bg-gray-700 text-gray-300 hover:text-white">
+                        <i class="fas fa-users w-5"></i>
+                        <span>Utilisateurs</span>
+                    </a>
+                </div>
+            </nav>
+            <div class="p-4 border-t border-gray-700 absolute bottom-0 w-full">
+                <button id="logoutBtn" class="flex items-center space-x-2 text-gray-300 hover:text-white w-full">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Déconnexion</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Header -->
+        <div class="md:hidden bg-gray-800 text-white p-4 flex justify-between items-center">
+            <button id="sidebarToggle" class="text-white focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+            <h1 class="text-xl font-bold">DeepSite</h1>
+            <div class="w-8"></div> <!-- Spacer for alignment -->
+        </div>
+
+        <!-- Main Content -->
+        <div class="md:ml-64">
+            <!-- Header -->
+            <header class="bg-white shadow-sm hidden md:block">
+                <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+                    <h1 class="text-2xl font-semibold text-gray-900">Tableau de bord</h1>
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <button id="notificationsBtn" class="text-gray-500 hover:text-gray-700 focus:outline-none relative">
+                                <i class="fas fa-bell text-xl"></i>
+                                <span class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"></span>
+                            </button>
+                            <div id="notificationsDropdown" class="hidden absolute right-0 mt-2 w-72 bg-white rounded-md shadow-lg z-10">
+                                <div class="p-4 border-b">
+                                    <p class="font-medium">Notifications</p>
+                                </div>
+                                <div class="max-h-60 overflow-y-auto">
+                                    <a href="#" class="block px-4 py-3 border-b hover:bg-gray-50">
+                                        <p class="text-sm font-medium">Nouveau défaut critique détecté</p>
+                                        <p class="text-xs text-gray-500">Broche #12 - Court-circuit</p>
+                                    </a>
+                                    <a href="#" class="block px-4 py-3 border-b hover:bg-gray-50">
+                                        <p class="text-sm font-medium">Test terminé avec succès</p>
+                                        <p class="text-xs text-gray-500">Boîtier #B-2456</p>
+                                    </a>
+                                </div>
+                                <div class="p-2 text-center bg-gray-50">
+                                    <a href="#" class="text-sm text-blue-600 hover:underline">Voir toutes</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <button id="userMenuBtn" class="flex items-center space-x-2 focus:outline-none">
+                                <img src="https://via.placeholder.com/32" alt="User" class="rounded-full">
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </button>
+                            <div id="userMenuDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profil</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Paramètres</a>
+                                <div class="border-t">
+                                    <a href="#" id="logoutBtnMobile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Déconnexion</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+                <!-- Critical Alerts -->
+                <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded-r flex justify-between items-center blink-warning">
+                    <div>
+                        <p class="font-bold">Alerte Critique</p>
+                        <p>Défaut détecté sur broche #12 - Court-circuit</p>
+                    </div>
+                    <button class="text-red-700 hover:text-red-900">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white shadow rounded-lg p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Tests aujourd'hui</p>
+                                <p class="text-2xl font-semibold text-gray-900">24</p>
+                            </div>
+                            <div class="p-3 rounded-full bg-blue-100 text-blue-600">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white shadow rounded-lg p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Défauts détectés</p>
+                                <p class="text-2xl font-semibold text-gray-900">3</p>
+                            </div>
+                            <div class="p-3 rounded-full bg-red-100 text-red-600">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white shadow rounded-lg p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Taux de réussite</p>
+                                <p class="text-2xl font-semibold text-gray-900">87.5%</p>
+                            </div>
+                            <div class="p-3 rounded-full bg-green-100 text-green-600">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white shadow rounded-lg p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Boîtiers testés</p>
+                                <p class="text-2xl font-semibold text-gray-900">156</p>
+                            </div>
+                            <div class="p-3 rounded-full bg-purple-100 text-purple-600">
+                                <i class="fas fa-cube"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Tests and Charts -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                    <!-- Recent Tests -->
+                    <div class="bg-white shadow rounded-lg lg:col-span-2">
+                        <div class="p-6 border-b">
+                            <h2 class="text-lg font-medium text-gray-900">Tests récents</h2>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID Test</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Boîtier</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Statut</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">T-2456</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">B-7890</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">10:45 Aujourd'hui</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Réussi</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            <a href="#" class="text-blue-600 hover:text-blue-900">Voir</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">T-2455</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">B-7889</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">10:30 Aujourd'hui</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Échec</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            <a href="#" class="text-blue-600 hover:text-blue-900">Voir</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">T-2454</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">B-7888</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">10:15 Aujourd'hui</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Réussi</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            <a href="#" class="text-blue-600 hover:text-blue-900">Voir</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="p-4 border-t text-center">
+                            <a href="#" class="text-sm text-blue-600 hover:underline">Voir tous les tests</a>
+                        </div>
+                    </div>
+
+                    <!-- Defects Chart -->
+                    <div class="bg-white shadow rounded-lg">
+                        <div class="p-6 border-b">
+                            <h2 class="text-lg font-medium text-gray-900">Types de défauts</h2>
+                        </div>
+                        <div class="p-6">
+                            <div class="chart-container">
+                                <canvas id="defectsChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Test Results and Export -->
+                <div class="bg-white shadow rounded-lg mb-8">
+                    <div class="p-6 border-b flex justify-between items-center">
+                        <h2 class="text-lg font-medium text-gray-900">Résultats des tests</h2>
+                        <div class="flex space-x-2">
+                            <button class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 flex items-center">
+                                <i class="fas fa-filter mr-2"></i> Filtrer
+                            </button>
+                            <div class="relative">
+                                <button id="exportDropdownBtn" class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 flex items-center">
+                                    <i class="fas fa-download mr-2"></i> Exporter
+                                    <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                                </button>
+                                <div id="exportDropdown" class="hidden absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg z-10">
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">CSV</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">PDF</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Excel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                    <label for="testType" class="block text-sm font-medium text-gray-700 mb-1">Type de test</label>
+                                    <select id="testType" class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                        <option>Tous</option>
+                                        <option>Fuites de tension</option>
+                                        <option>Courts-circuits</option>
+                                        <option>Résistances</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="dateRange" class="block text-sm font-medium text-gray-700 mb-1">Période</label>
+                                    <select id="dateRange" class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                        <option>Aujourd'hui</option>
+                                        <option>Cette semaine</option>
+                                        <option>Ce mois</option>
+                                        <option>Personnalisé</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="pinNumber" class="block text-sm font-medium text-gray-700 mb-1">Numéro de broche</label>
+                                    <input type="text" id="pinNumber" placeholder="Toutes" class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Broche</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Valeur mesurée</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Valeur attendue</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Statut</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Détails</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#12</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Résistance</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">0.2 Ω</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">4.7 Ω</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Échec</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            <a href="#" class="text-blue-600 hover:text-blue-900">Analyse</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#15</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Tension</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">5.1 V</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">5.0 V</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Réussi</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            <a href="#" class="text-blue-600 hover:text-blue-900">Analyse</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#8</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Courant</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">0.0 mA</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">20.0 mA</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Échec</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            <a href="#" class="text-blue-600 hover:text-blue-900">Analyse</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Login functionality
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Simple validation
+            if (username && password) {
+                document.getElementById('loginPage').classList.add('hidden');
+                document.getElementById('appContainer').classList.remove('hidden');
+                document.getElementById('usernameDisplay').textContent = username;
+                
+                // Initialize charts
+                initCharts();
+            } else {
+                alert('Veuillez entrer un nom d\'utilisateur et un mot de passe');
+            }
+        });
+
+        // Logout functionality
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            document.getElementById('loginPage').classList.remove('hidden');
+            document.getElementById('appContainer').classList.add('hidden');
+        });
+        
+        document.getElementById('logoutBtnMobile').addEventListener('click', function() {
+            document.getElementById('loginPage').classList.remove('hidden');
+            document.getElementById('appContainer').classList.add('hidden');
+        });
+
+        // Toggle sidebar on mobile
+        document.getElementById('sidebarToggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('active');
+        });
+
+        // Toggle dropdowns
+        document.getElementById('notificationsBtn').addEventListener('click', function() {
+            document.getElementById('notificationsDropdown').classList.toggle('hidden');
+        });
+
+        document.getElementById('userMenuBtn').addEventListener('click', function() {
+            document.getElementById('userMenuDropdown').classList.toggle('hidden');
+        });
+
+        document.getElementById('exportDropdownBtn').addEventListener('click', function() {
+            document.getElementById('exportDropdown').classList.toggle('hidden');
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('#notificationsBtn')) {
+                document.getElementById('notificationsDropdown').classList.add('hidden');
+            }
+            
+            if (!event.target.closest('#userMenuBtn')) {
+                document.getElementById('userMenuDropdown').classList.add('hidden');
+            }
+            
+            if (!event.target.closest('#exportDropdownBtn')) {
+                document.getElementById('exportDropdown').classList.add('hidden');
+            }
+        });
+
+        // Initialize charts
+        function initCharts() {
+            // Defects Chart
+            const defectsCtx = document.getElementById('defectsChart').getContext('2d');
+            const defectsChart = new Chart(defectsCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Courts-circuits', 'Fuites de tension', 'Résistances incorrectes', 'Autres'],
+                    datasets: [{
+                        data: [12, 8, 5, 3],
+                        backgroundColor: [
+                            '#EF4444',
+                            '#3B82F6',
+                            '#F59E0B',
+                            '#10B981'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
