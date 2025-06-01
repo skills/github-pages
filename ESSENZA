@@ -1,0 +1,48 @@
+<html> 
+<head> 
+<title> ESSENZA </title>
+</head>
+
+<body bgcolor="Grey" text="white">
+	<table border="0">
+	<tr><td colspan="3"><center>
+	<p><img src="ESSENZA.PNG" width="15%"></p>
+	<a href="inicio fm.html"><img src="Inicio.png" width="15%"></a>
+	<a href="productos.html"><img src="productos.png" width="15%"></a>
+	<a href="nosotros.html"><img src="acerca de nosotros.png" width="15%"></a>
+	<a href="contacto.html"><img src="contacto.png" width="15%"></a>
+	<a href="legal.html"><img src="legal.png" width="15%"></a>
+	</center>
+	</td></tr>
+	<tr><td width="20%">
+	
+	</td><td><font face="Leelawadee" color="white" size="3">
+
+	<center><p><b>SIGUENOS EN:</b></p>
+	<img src="fb.png" width=100></a>
+	<img src="tik tok.png" width=80></a>
+	<img src="insta.png" width=100></a>
+<img src="whats.png" width=100></center></a>
+	</font>
+	<center>
+	</center></td><td width="20%"><center>
+	<marquee direction=left>
+	<img src="catalogo.png" width="85%">
+	<img src="flyer 2.png" width="85%">	
+	<img src="flyer 3.png" width="85%">
+	<img src="flyer 4.png" width="85%">
+	</marquee>
+	</center></td></tr>
+	<tr><td colspan="3">
+	<p>	
+	<center><font face="Leelawadee" color="white" size="3"><b>
+	© 2025 ESSENZA Perfumes. Todos los derechos reservados.
+	</b></center></p>
+	</td></tr>	
+	</table>
+
+</body>
+
+
+
+</html
