@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dostana House Lifting Shifting</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f4f4;
+    }
+    header {
+      background: #1e90ff;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #104e8b;
+    }
+    nav a {
+      color: white;
+      padding: 14px 20px;
+      text-decoration: none;
+      display: block;
+    }
+    nav a:hover {
+      background-color: #0d3c6e;
+    }
+    section {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      margin-top: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #1e90ff;
+      color: white;
+      margin-top: 40px;
+    }
+    iframe {
+      width: 100%;
+      height: 300px;
+      border: none;
+      margin-top: 20px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #1e90ff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #0b65c2;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Dostana House Lifting Shifting</h1>
+    <p>Reliable service since 2000 BC</p>
+  </header>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About Us</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="home">
+    <h2>Welcome to Dostana House Lifting Shifting</h2>
+    <p>We provide safe and efficient house lifting and shifting services with the latest technology. Watch our real work on our YouTube channel below:</p>
+    <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=UC7iXg6gFdiD1MVeqq3jYjyg" allowfullscreen></iframe>
+  </section>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>Dostana House Lifting Shifting ek bharosemand aur purani company hai jo <strong>2000 BC</strong> se house lifting aur shifting services me kaam kar rahi hai.
+      Hamare paas advanced technology aur skilled professionals hain jo bina kisi damage ke ghar uthana aur shift karna possible banate hain. Aap hamare kaam ko hamare YouTube channel par dekh sakte hain – jahan live projects aur customer satisfaction ka proof diya gaya hai.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Phone: <strong>8295695119</strong></p>
+    <form onsubmit="alert('Thank you! We will contact you soon.'); return false;">
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea rows="4" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    &copy; 2025 Dostana House Lifting Shifting. All rights reserved.
+  </footer>
+</body>
+</html>
