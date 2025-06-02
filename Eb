@@ -1,0 +1,137 @@
+<html>
+<head>
+<title>Estructura b&aacutesica y texto</title>
+</head>
+<body>
+Hola soy del grupo 2 IM2
+Me llamo hamburgueza_conpapas.
+Esta es mi primer p&aacutegina web<br><br>
+<b><i><u>Encabezados</b></i></u>
+<font color="Orange" ="Comic sans">
+<h1>CECyT 3</h1>
+<h2>CECyT 3</h2>
+<h3>CECyT 3</h3>
+<h4>CECyT 3</h4>
+<h5>CECyT 3</h5>
+<h6>CECyT 3</h6></font>
+<b><i><u>Fuente</b></i></u><br><br>
+Tamaño<br><font size=1>
+<font>Computaci&oacuten b&aacutesica 2</font>
+<font size=1><font>Computaci&oacuten b&aacutesica 2</font>
+<font size=2><font>Computaci&oacuten b&aacutesica 2</font>
+<font size=3><font>Computaci&oacuten b&aacutesica 2</font>
+<font size=4><font>Computaci&oacuten b&aacutesica 2</font>
+<font size=5><font>Computaci&oacuten b&aacutesica 2</font>
+<font size=6><font>Computaci&oacuten b&aacutesica 2</font><br><br>
+
+Tipo de fuente<br><br>
+<font face="Arial">Creaci&oacuten de p&aacutengina web</font>
+<font face="Algerian">Creaci&oacuten de p&aacutengina web</font>
+<font face="Harlow Solid">Creaci&oacuten de p&aacutengina web</font>
+<font face="Cooper">Creaci&oacuten de p&aacutengina web</font><br><br>
+
+Color de fuente<br>
+<font color="gray">HTML</font><br>
+<font color="pink">HTML</font><br>
+<font color="blue">HTML</font><br>
+<font color="lightblue">HTML</font><br>
+<font color="darkblue">HTML</font><br>
+<font color="#33e3ff ">HTML</font><br>
+<font color="#8a33ff ">HTML</font><br>
+
+Todos juntos<br>
+<font color="Lime" face="Comic sans" size=5>Voca 3</font><br>
+
+<h1>Sangría</h1><br>
+
+<blockquote>Voca 3</blockquote>
+
+<blockquote>Voca 3 <br>Voca 3 <br>Voca 3
+
+<blockquote>Voca 3 <br>Voca 3 <br>Voca 3
+
+<blockquote>Voca 3 <br>Voca 3 <br>Voca 3 </blockquote>
+
+Voca 3 <br>Voca 3 <br>Voca 3 </blockquote>
+Voca 3 <br>Voca 3 <br>Voca 3 </blockquote>
+
+Voca 3 <br>Voca 3 <br>Voca 3
+
+<center><b><i><font color="lime" face="magneto" size="4">CECyT No. 3
+"ERR"</font></b></i></center>
+
+<h1>Párrafos</h1>
+<p>El Ing. Estanislao Ramírez Ruiz nace el 7 de mayo de 1887 en el pueblo de Tláhuac, D.F. egresa
+del Colegio Militar, obteniendo una beca para estudiar en la Universidad de Sorbona de París la
+carrera de Ingeniería, posteriormente obtiene la especialización en Físico - Química y
+Termodinámica en Zurich, Suiza, destacándose en el diseño de equipo y plantas industriales. En el
+año de 1921 regresa a México y poco tiempo después se integra al grupo encargado de elaborar el
+proyecto de planes y programas de estudio que sería la base de la fundación del IPN. El Ing.
+Estanislao Ramírez Ruiz es fundador de la ESIQIE y después de esta ardua labor fallece el 11 de
+octubre de 1952. Por estos antecedentes que resultan relevantes es que nos enorgullece que
+nuestra escuela se distinga con tan honorable nombre. </p>
+<p align="right">El Ing. Estanislao Ramírez Ruiz nace el 7 de mayo de 1887 en el pueblo de
+Tláhuac, D.F. egresa del Colegio Militar, obteniendo una beca para estudiar en la Universidad de
+Sorbona de París la carrera de Ingeniería, posteriormente obtiene la especialización en Físico -
+Química y Termodinámica en Zurich, Suiza, destacándose en el diseño de equipo y plantas
+industriales. En el año de 1921 regresa a México y poco tiempo después se integra al grupo
+encargado de elaborar el proyecto de planes y programas de estudio que sería la base de la
+fundación del IPN. El Ing. Estanislao Ramírez Ruiz es fundador de la ESIQIE y después de esta ardua
+labor fallece el 11 de octubre de 1952. Por estos antecedentes que resultan relevantes es que nos
+enorgullece que nuestra escuela se distinga con tan honorable nombre. </p>
+<p align="center">El Ing. Estanislao Ramírez Ruiz nace el 7 de mayo de 1887 en el pueblo de
+Tláhuac, D.F. egresa del Colegio Militar, obteniendo una beca para estudiar en la Universidad de
+Sorbona de París la carrera de Ingeniería, posteriormente obtiene la especialización en Físico -
+Química y Termodinámica en Zurich, Suiza, destacándose en el diseño de equipo y plantas
+industriales. En el año de 1921 regresa a México y poco tiempo después se integra al grupo
+encargado de elaborar el proyecto de planes y programas de estudio que sería la base de la
+fundación del IPN. El Ing. Estanislao Ramírez Ruiz es fundador de la ESIQIE y después de esta ardua
+labor fallece el 11 de octubre de 1952. Por estos antecedentes que resultan relevantes es que nos
+enorgullece que nuestra escuela se distinga con tan honorable nombre. </p>
+<p align="justify">El Ing. Estanislao Ramírez Ruiz nace el 7 de mayo de 1887 en el pueblo de
+Tláhuac, D.F. egresa del Colegio Militar, obteniendo una beca para estudiar en la Universidad de
+Sorbona de París la carrera de Ingeniería, posteriormente obtiene la especialización en Físico -
+Química y Termodinámica en Zurich, Suiza, destacándose en el diseño de equipo y plantas
+industriales. En el año de 1921 regresa a México y poco tiempo después se integra al grupo
+encargado de elaborar el proyecto de planes y programas de estudio que sería la base de la
+fundación del IPN. El Ing. Estanislao Ramírez Ruiz es fundador de la ESIQIE y después de esta ardua
+labor fallece el 11 de octubre de 1952. Por estos antecedentes que resultan relevantes es que nos
+enorgullece que nuestra escuela se distinga con tan honorable nombre. </p>
+
+<h1>Marquesinas</h1>
+<marquee>Wendoline</marquee>
+
+<!--Dirección: izq, derecha, arriba y abajo-->
+<marquee direction="right">Wendoline</marquee>
+<marquee direction="up">Wendoline</marquee>
+<marquee direction="down">Wendoline</marquee>
+
+<!--Comportamiento-->
+<marquee behavior="alternate">Sandoval</marquee>
+<marquee behavior="slide">Sandoval</marquee>
+<marquee behavior="scroll">Sandoval</marquee>
+
+<!--Velocidad-->
+<marquee scrolldelay="50">Trasviña</marquee>
+<marquee scrolldelay="500">Trasviña</marquee>
+
+<!--Color-->
+<marquee bgcolor="lightblue">Y esoooo que son mis consen...</marquee>
+
+
+<marquee behavior="alternate">Sandoval</marquee>
+<marquee behavior="slide">Sandoval</marquee>
+<marquee behavior="scroll">Sandoval</marquee>
+
+<!--Velocidad-->
+<marquee scrolldelay="50">Trasviña</marquee>
+<marquee scrolldelay="500">Trasviña</marquee>
+
+<!--Color-->
+<marquee bgcolor="lightblue">Y esoooo que son mis consen...</marquee>
+
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
