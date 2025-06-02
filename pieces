@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fun Facts Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #16213e;
+            padding: 2rem 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .fact-box {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #0f3460;
+            border-radius: 8px;
+            min-height: 60px;
+            font-size: 1.1rem;
+        }
+
+        button {
+            background: #e94560;
+            color: #fff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #ff2e63;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fun Facts About Space</h1>
+        <div id="fact" class="fact-box">Click the button to see a fun fact!</div>
+        <button onclick="generateFact()">Show Me a Fun Fact</button>
+    </div>
+    <script>
+        const facts = [
+            "Space is completely silent.",
+            "A day on Venus is longer than a year on Venus.",
+            "Neutron stars are incredibly dense—a sugar-cube-sized amount would weigh about a billion tons!",
+            "There are more stars in the universe than grains of sand on Earth.",
+            "The footprints on the Moon will last millions of years.",
+            "Jupiter has the shortest day of all the planets—just under 10 hours.",
+            "A spoonful of a black hole would weigh as much as a mountain.",
+            "Saturn could float in water because it’s less dense than water.",
+            "The largest volcano in the solar system is on Mars: Olympus Mons.",
+            "Space is not very far away—the Kármán line is only 100 km above sea level."
+        ];
+
+        function generateFact() {
+            const factBox = document.getElementById('fact');
+            const randomIndex = Math.floor(Math.random() * facts.length);
+            factBox.textContent = facts[randomIndex];
+        }
+    </script>
+</body>
+</html>
