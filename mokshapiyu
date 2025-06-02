@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fun Facts About Animals</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f8ff;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #2e7d32;
+      margin-bottom: 24px;
+    }
+
+    #fact-display {
+      margin: 30px auto;
+      padding: 20px;
+      background: #fffbe7;
+      border-radius: 10px;
+      font-size: 1.3em;
+      width: 60%;
+      min-height: 60px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      color: #333;
+    }
+
+    button {
+      padding: 12px 28px;
+      font-size: 1em;
+      background: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background: #388e3c;
+    }
+  </style>
+</head>
+<body>
+  <h1>Fun Facts About Animals</h1>
+  <div id="fact-display">Click the button to see a fun fact!</div>
+  <button onclick="generateFact()">Generate Another Fun Fact</button>
+  <script>
+    const facts = [
+      "A group of flamingos is called a 'flamboyance.'",
+      "Elephants are the only mammals that can't jump.",
+      "A snail can sleep for up to three years at a time.",
+      "Dolphins have names for each other and can call out to one another.",
+      "The fingerprints of a koala are so similar to humans that they can taint crime scenes.",
+      "Octopuses have three hearts and blue blood.",
+      "Cows have best friends and can become stressed when separated.",
+      "A group of owls is called a 'parliament.'",
+      "Frogs can freeze without dying and thaw out later.",
+      "The heart of a shrimp is located in its head.",
+      "Sloths only poop once a week, and it’s a dangerous journey for them!",
+      "Butterflies taste with their feet.",
+      "Penguins propose to their mates with a pebble.",
+      "Wombat poop is cube-shaped.",
+      "Some turtles can breathe through their butts.",
+      "Male seahorses are the ones that get pregnant and give birth.",
+      "Giraffes have the same number of neck vertebrae as humans—seven!",
+      "Crocodiles cannot stick their tongues out.",
+      "Honeybees can recognize human faces.",
+      "Axolotls can regrow lost limbs, including parts of their heart and brain."
+    ];
+
+    function generateFact() {
+      const randomIndex = Math.floor(Math.random() * facts.length);
+      document.getElementById('fact-display').textContent = facts[randomIndex];
+    }
+
+    // Show a fact on page load
+    window.onload = generateFact;
+  </script>
+</body>
+</html>
