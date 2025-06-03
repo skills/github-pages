@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Juego de Draft de Jugadores de Fútbol</title>
+<style>
+  :root {
+    --primary: #0077b6;
+    --secondary: #023e8a;
+    --accent: #90e0ef;
+    --bg: #caf0f8;
+    --text: #03045e;
+    --danger: #d00000;
+    --star-color: #f9c74f;
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  header {
+    background: var(--primary);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+  main {
+    flex: 1;
+    padding: 1rem;
+    max-width: 900px;
+    margin: 0 auto 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .center {
+    text-align: center;
+  }
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.3rem;
+    margin: 0.5rem;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  button:hover:not(:disabled) {
+    background: var(--secondary);
+  }
+  button:disabled {
+    background: #999;
+    cursor: not-allowed;
+  }
+  select {
+    font-size: 1.1rem;
+    padding: 0.5rem;
+    border: 2px solid var(--primary);
+    border-radius: 5px;
+    margin-left: 0.5rem;
+    outline: none;
+  }
+  .hidden {
+    display: none !important;
+  }
+  #setup-section, #team-selection-section, #draft-section, #summary-section {
+    margin-top: 1rem;
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    padding: 1rem;
+    background: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  #team-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .team-card {
+    background: var(--accent);
+    border: 2px solid var(--primary);
+    border-radius: 10px;
+    padding: 0.7rem 1rem;
+    cursor: pointer;
+    min-width: 140px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--secondary);
+    user-select: none;
+    transition: background 0.3s, color 0.3s;
+  }
+  .team-card:hover {
+    background: var(--primary);
+    color: white;
+  }
+  .team-card.selected {
+    background: var(--secondary);
+    color: var(--accent);
+    cursor: default;
+  }
+  #players-available, #draft-status {
+    margin-top: 1rem;
+  }
+  #players-available ul, #draft-status ul {
+    list-style: none;
+    padding-left: 0;
+    max-height: 280px;
+    overflow-y: auto;
+    border: 1px solid var(--primary);
+    border-radius: 6px;
+    background: var(--bg);
+  }
+  #players-available li, #draft-status li {
+    padding: 0.3rem 0.6rem;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  #players-available li:hover:not(.disabled) {
+    background: var(--accent);
+  }
+  #players-available li.disabled {
+    color: #999;
+    cursor: not-allowed;
+    text-decoration: line-through;
+  }
+  .player-name {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .player-position {
+    font-style: italic;
+    color: var(--secondary);
+    font-size: 0.9rem;
+  }
+  .flex-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .flex-column {
+    display: flex;
+    flex-direction: column;
+  }
+  .draft-player {
+    border: 1px solid var(--secondary);
+    background: var(--accent);
+    border-radius: 6px;
+    margin: 4px 0;
+    padding: 4px 8px;
+    color: var(--secondary);
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .draft-player.coach {
+    background: #ffb703;
+    border-color: #fb8500;
+    color: #6a040f;
+    font-weight: 700;
+  }
+  #current-turn {
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 0.7rem;
+    color: var(--primary);
+  }
+  #instructions {
+    margin: 8px 0 1rem;
+    font-size: 1rem;
+    color: var(--secondary);
+    font-style: italic;
+  }
+  .footer {
+    text-align: center;
+    color: var(--text);
+    font-size: 0.9rem;
+    padding: 1rem 0;
+    border-top: 1px solid #ccc;
+  }
+  .rank-badge {
+    background: var(--primary);
+    color: white;
+    font-weight: 700;
+    padding: 0 6px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    min-width: 20px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<header>Juego de Draft de Jugadores de Fútbol</header>
+<main>
+  <section id="setup-section" class="center">
+    <h2>Configuración inicial</h2>
+    <label for="numPlayers">Número de jugadores (2 a 5):</label>
+    <select id="numPlayers" aria-label="Número de jugadores">
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+    <button id="startGameBtn">Iniciar Juego</button>
+  </section>
+
+  <section id="team-selection-section" class="hidden">
+    <h2>Jugador 1: Escoge un equipo</h2>
+    <div id="team-list">
+      <!-- Teams will appear here -->
+    </div>
+  </section>
+
+  <section id="draft-section" class="hidden">
+    <h2>Draft de jugadores</h2>
+    <div id="current-turn"></div>
+    <div id="instructions">Escoge un jugador de la lista para agregar a tu equipo.</div>
+    <div class="flex-row">
+      <div style="flex:1; min-width: 280px;">
+        <h3>Jugadores disponibles</h3>
+        <div id="players-available">
+          <ul id="availablePlayersList"></ul>
+        </div>
+      </div>
+      <div style="flex:1; min-width: 280px;">
+        <h3>Estado del draft</h3>
+        <div id="draft-status">
+          <!-- Picks will show here -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="summary-section" class="hidden center">
+    <h2>Equipo finalizado</h2>
+    <div id="final-teams">
+      <!-- Final teams shown here -->
+    </div>
+    <button id="restartBtn">Reiniciar Juego</button>
+  </section>
+</main>
+<footer class="footer">
+  &copy; Juego de Draft de Fútbol &mdash; Creado por BLACKBOXAI
+</footer>
+
+<script>
+// Sample team data with players and coach, without preset ratings
+const teams = [
+  {
+    name: "FC Barcelona",
+    coach: { name: "Xavi Hernández", position: "Entrenador" },
+    players: [
+      { name: "Marc-André ter Stegen", position: "Portero" },
+      { name: "Gerard Piqué", position: "Defensa" },
+      { name: "Jordi Alba", position: "Defensa" },
+      { name: "Ronald Araújo", position: "Defensa" },
+      { name: "Sergio Busquets", position: "Mediocampista" },
+      { name: "Pedri", position: "Mediocampista" },
+      { name: "Frenkie de Jong", position: "Mediocampista" },
+      { name: "Ousmane Dembélé", position: "Delantero" },
+      { name: "Robert Lewandowski", position: "Delantero" },
+      { name: "Ansu Fati", position: "Delantero" },
+      { name: "Raphinha", position: "Delantero" },
+      { name: "Sergi Roberto", position: "Defensa" },
+      { name: "Nico González", position: "Mediocampista" },
+    ],
+  },
+  {
+    name: "Manchester City",
+    coach: { name: "Pep Guardiola", position: "Entrenador" },
+    players: [
+      { name: "Ederson", position: "Portero" },
+      { name: "Kyle Walker", position: "Defensa" },
+      { name: "Rúben Dias", position: "Defensa" },
+      { name: "John Stones", position: "Defensa" },
+      { name: "Kevin De Bruyne", position: "Mediocampista" },
+      { name: "Rodri", position: "Mediocampista" },
+      { name: "Bernardo Silva", position: "Mediocampista" },
+      { name: "Jack Grealish", position: "Delantero" },
+      { name: "Erling Haaland", position: "Delantero" },
+      { name: "Riyad Mahrez", position: "Delantero" },
+      { name: "Phil Foden", position: "Delantero" },
+      { name: "Aymeric Laporte", position: "Defensa" },
+      { name: "Ilkay Gündogan", position: "Mediocampista" },
+    ],
+  },
+  {
+    name: "Paris Saint-Germain",
+    coach: { name: "Luis Enrique", position: "Entrenador" },
+    players: [
+      { name: "Gianluigi Donnarumma", position: "Portero" },
+      { name: "Achraf Hakimi", position: "Defensa" },
+      { name: "Marquinhos", position: "Defensa" },
+      { name: "Presnel Kimpembe", position: "Defensa" },
+      { name: "Leandro Paredes", position: "Mediocampista" },
+      { name: "Marco Verratti", position: "Mediocampista" },
+      { name: "Kylian Mbappé", position: "Delantero" },
+      { name: "Neymar Jr.", position: "Delantero" },
+      { name: "Lionel Messi", position: "Delantero" },
+      { name: "Ángel Di María", position: "Delantero" },
+      { name: "Sergio Ramos", position: "Defensa" },
+      { name: "Danilo Pereira", position: "Mediocampista" },
+      { name: "Julian Draxler", position: "Delantero" },
+    ],
+  },
+  {
+    name: "Argentina",
+    coach: { name: "Lionel Scaloni", position: "Entrenador" },
+    players: [
+      { name: "Emiliano Martínez", position: "Portero" },
+      { name: "Nahuel Molina", position: "Defensa" },
+      { name: "Cristian Romero", position: "Defensa" },
+      { name: "Nicolás Otamendi", position: "Defensa" },
+      { name: "Leandro Paredes", position: "Mediocampista" },
+      { name: "Giovani Lo Celso", position: "Mediocampista" },
+      { name: "Rodrigo De Paul", position: "Mediocampista" },
+      { name: "Ángel Di María", position: "Delantero" },
+      { name: "Lionel Messi", position: "Delantero" },
+      { name: "Lautaro Martínez", position: "Delantero" },
+      { name: "Paulo Dybala", position: "Delantero" },
+      { name: "Julián Álvarez", position: "Delantero" },
+      { name: "Marcos Acuña", position: "Defensa" },
+    ],
+  },
+  {
+    name: "Juventus",
+    coach: { name: "Massimiliano Allegri", position: "Entrenador" },
+    players: [
+      { name: "Wojciech Szczęsny", position: "Portero" },
+      { name: "Danilo", position: "Defensa" },
+      { name: "Leonardo Bonucci", position: "Defensa" },
+      { name: "Giorgio Chiellini", position: "Defensa" },
+      { name: "Adrien Rabiot", position: "Mediocampista" },
+      { name: "Manuel Locatelli", position: "Mediocampista" },
+      { name: "Federico Chiesa", position: "Delantero" },
+      { name: "Álvaro Morata", position: "Delantero" },
+      { name: "Dusan Vlahovic", position: "Delantero" },
+      { name: "Paulo Dybala", position: "Delantero" },
+      { name: "Juan Cuadrado", position: "Delantero" },
+      { name: "Matthijs de Ligt", position: "Defensa" },
+      { name: "Alex Sandro", position: "Defensa" },
+    ],
+  },
+];
+
+// Game state variables
+let numPlayers = 2;
+let players = []; // Array of player objects { id, name, picks }
+let currentTeam = null; // Selected team object
+let draftOrder = []; // Array of player ids in order
+let currentTurnIndex = 0;
+
+// Limits for picks: starters 11, bench 5, coach 1
+const startersLimit = 11;
+const benchLimit = 5;
+
+// UI Elements
+const setupSection = document.getElementById('setup-section');
+const startGameBtn = document.getElementById('startGameBtn');
+const numPlayersSelect = document.getElementById('numPlayers');
+
+const teamSelectionSection = document.getElementById('team-selection-section');
+const teamListDiv = document.getElementById('team-list');
+
+const draftSection = document.getElementById('draft-section');
+const currentTurnDiv = document.getElementById('current-turn');
+const playersAvailableList = document.getElementById('availablePlayersList');
+const draftStatusDiv = document.getElementById('draft-status');
+
+const summarySection = document.getElementById('summary-section');
+const finalTeamsDiv = document.getElementById('final-teams');
+const restartBtn = document.getElementById('restartBtn');
+
+startGameBtn.addEventListener('click', startGame);
+restartBtn.addEventListener('click', () => location.reload());
+
+function startGame() {
+  numPlayers = parseInt(numPlayersSelect.value);
+  players = [];
+  for (let i = 1; i <= numPlayers; i++) {
+    // picks: starters, bench (arrays), coach (object or null)
+    players.push({ id: i, name: 'Jugador ' + i, picks: { starters: [], bench: [], coach: null } });
+  }
+  setupSection.classList.add('hidden');
+  teamSelectionSection.classList.remove('hidden');
+  draftSection.classList.add('hidden');
+  summarySection.classList.add('hidden');
+  currentTeam = null;
+  showTeams();
+}
+
+function showTeams() {
+  teamListDiv.innerHTML = '';
+  teams.forEach((team, idx) => {
+    const div = document.createElement('div');
+    div.className = 'team-card';
+    div.textContent = team.name;
+    div.dataset.index = idx;
+    div.addEventListener('click', () => selectTeam(idx));
+    teamListDiv.appendChild(div);
+  });
+}
+
+function selectTeam(idx) {
+  if (currentTeam !== null) return; // Only first selection
+  currentTeam = teams[idx];
+  // Mark selected
+  Array.from(teamListDiv.children).forEach(c => c.classList.remove('selected'));
+  teamListDiv.children[idx].classList.add('selected');
+  // Proceed to draft section
+  teamSelectionSection.classList.add('hidden');
+  draftSection.classList.remove('hidden');
+  currentTurnIndex = 0;
+  draftOrder = [...players.map(p => p.id)];
+  refreshDraftUI();
+  renderPlayersAvailable();
+  updateStatus();
+}
+
+function refreshDraftUI() {
+  draftStatusDiv.innerHTML = '';
+  players.forEach(pl => {
+    const container = document.createElement('div');
+    container.className = 'flex-column';
+    const title = document.createElement('h4');
+    title.textContent = pl.name;
+    container.appendChild(title);
+
+    const coachDiv = document.createElement('div');
+    coachDiv.textContent = pl.picks.coach ? `DT: ${pl.picks.coach.name}` : 'DT: —';
+    coachDiv.className = 'draft-player coach';
+    container.appendChild(coachDiv);
+
+    const startersDiv = document.createElement('div');
+    startersDiv.innerHTML = `<strong>11 Titulares:</strong>`;
+    pl.picks.starters.forEach(player => {
+      const pdiv = document.createElement('div');
+      pdiv.className = 'draft-player';
+      pdiv.textContent = `${player.name} (${player.position})`;
+      startersDiv.appendChild(pdiv);
+    });
+    container.appendChild(startersDiv);
+
+    const benchDiv = document.createElement('div');
+    benchDiv.innerHTML = `<strong>Banca (5):</strong>`;
+    pl.picks.bench.forEach(player => {
+      const pdiv = document.createElement('div');
+      pdiv.className = 'draft-player';
+      pdiv.textContent = `${player.name} (${player.position})`;
+      benchDiv.appendChild(pdiv);
+    });
+    container.appendChild(benchDiv);
+
+    draftStatusDiv.appendChild(container);
+  });
+}
+
+function renderPlayersAvailable() {
+  playersAvailableList.innerHTML = '';
+  // Filter players not yet picked
+  const pickedPlayers = new Set();
+  players.forEach(pl => {
+    if (pl.picks.coach) pickedPlayers.add(pl.picks.coach.name);
+    pl.picks.starters.forEach(p => pickedPlayers.add(p.name));
+    pl.picks.bench.forEach(p => pickedPlayers.add(p.name));
+  });
+
+  // Coach special pick only by player 1
+  if (!players[0].picks.coach) {
+    const coachLi = document.createElement('li');
+    coachLi.className = 'player-name';
+    coachLi.style.fontWeight = '700';
+    coachLi.style.cursor = 'pointer';
+    coachLi.textContent = `${currentTeam.coach.name} (${currentTeam.coach.position})`;
+    coachLi.addEventListener('click', () => pickCoach(players[0].id));
+    playersAvailableList.appendChild(coachLi);
+  }
+
+  currentTeam.players.forEach(player => {
+    if (!pickedPlayers.has(player.name)) {
+      const li = document.createElement('li');
+      li.className = 'player-name';
+      li.textContent = `${player.name} (${player.position})`;
+      li.dataset.name = player.name;
+      li.addEventListener('click', () => pickPlayer(players[currentTurnIndex].id, player));
+      playersAvailableList.appendChild(li);
+    }
+  });
+
+  if (playersAvailableList.children.length === 0) {
+    const li = document.createElement('li');
+    li.textContent = 'No hay jugadores disponibles.';
+    li.classList.add('disabled');
+    playersAvailableList.appendChild(li);
+  }
+}
+
+function pickCoach(playerId) {
+  const pl = players.find(p => p.id === playerId);
+  if (pl.picks.coach) return;
+  pl.picks.coach = { name: currentTeam.coach.name, position: currentTeam.coach.position };
+  nextTurn();
+}
+
+function pickPlayer(playerId, playerObj) {
+  const pl = players.find(p => p.id === playerId);
+  if (!pl) return;
+
+  const totalPicksPlayer = pl.picks.starters.length + pl.picks.bench.length;
+  if (totalPicksPlayer < startersLimit) {
+    pl.picks.starters.push(playerObj);
+  } else if (pl.picks.bench.length < benchLimit) {
+    pl.picks.bench.push(playerObj);
+  } else {
+    alert("Ya tienes todos tus jugadores y banca completos.");
+    return;
+  }
+  nextTurn();
+}
+
+function nextTurn() {
+  currentTurnIndex = (currentTurnIndex + 1) % players.length;
+  const allDone = players.every(pl =>
+    pl.picks.coach &&
+    pl.picks.starters.length === startersLimit &&
+    pl.picks.bench.length === benchLimit
+  );
+  refreshDraftUI();
+  if (allDone) {
+    endDraft();
+  } else {
+    renderPlayersAvailable();
+    updateStatus();
+  }
+}
+
+function updateStatus() {
+  currentTurnDiv.textContent = `Turno de: ${players[currentTurnIndex].name}`;
+}
+
+// Function to rank all players by their position after draft ends
+function rankPlayersByPosition(allPlayers) {
+  // Group players by position
+  const positionGroups = {};
+  allPlayers.forEach(p => {
+    if (!positionGroups[p.position]) positionGroups[p.position] = [];
+    positionGroups[p.position].push(p);
+  });
+
+  // For each position group, sort players by name (alphabetically) to have consistent order
+  // Then assign ranks from 5 (best) down to 1, or up to max 5 players per position ranked
+  const rankedPlayers = {};
+  Object.entries(positionGroups).forEach(([position, players]) => {
+    // Sort by name (could be changed to other criteria)
+    players.sort((a,b) => a.name.localeCompare(b.name));
+    // Assign rank in reverse order - top 5 players get points 5 descending to 1
+    for (let i=0; i<players.length; i++) {
+      const player = players[i];
+      const rank = Math.max(1, 5 - i); // max 5 down to 1
+      rankedPlayers[player.name] = rank;
+    }
+  });
+  return rankedPlayers;
+}
+
+function endDraft() {
+  draftSection.classList.add('hidden');
+  summarySection.classList.remove('hidden');
+  // Gather all players from all users
+  let allSelectedPlayers = [];
+  players.forEach(pl => {
+    if(pl.picks.coach) allSelectedPlayers.push({ name: pl.picks.coach.name, position: pl.picks.coach.position });
+    allSelectedPlayers = allSelectedPlayers.concat(pl.picks.starters);
+    allSelectedPlayers = allSelectedPlayers.concat(pl.picks.bench);
+  });
+  // Compute ranks based on positions
+  const positionRanks = rankPlayersByPosition(allSelectedPlayers);
+  renderFinalTeams(positionRanks);
+}
+
+function renderFinalTeams(positionRanks) {
+  finalTeamsDiv.innerHTML = '';
+  players.forEach(pl => {
+    const container = document.createElement('div');
+    container.className = 'flex-column';
+    container.style.border = '2px solid var(--primary)';
+    container.style.borderRadius = '8px';
+    container.style.padding = '10px';
+    container.style.margin = '10px 0';
+    container.style.background = '#fafafa';
+
+    const title = document.createElement('h3');
+    title.textContent = pl.name;
+    container.appendChild(title);
+
+    const coachDiv = document.createElement('div');
+    const coachRank = positionRanks[pl.picks.coach?.name] || '-';
+    coachDiv.innerHTML = `<strong>DT:</strong> ${pl.picks.coach ? pl.picks.coach.name : '—'} <span class="rank-badge">${coachRank}</span>`;
+    coachDiv.className = 'draft-player coach';
+    container.appendChild(coachDiv);
+
+    const startersTitle = document.createElement('h4');
+    startersTitle.textContent = '11 Titulares';
+    container.appendChild(startersTitle);
+    pl.picks.starters.forEach(p => {
+      const pdiv = document.createElement('div');
+      const rank = positionRanks[p.name] || '-';
+      pdiv.className = 'draft-player';
+      pdiv.innerHTML = `${p.name} (${p.position}) <span class="rank-badge">${rank}</span>`;
+      pdiv.style.marginLeft = '10px';
+      container.appendChild(pdiv);
+    });
+
+    const benchTitle = document.createElement('h4');
+    benchTitle.textContent = 'Banca (5)';
+    benchTitle.style.marginTop = '10px';
+    container.appendChild(benchTitle);
+    pl.picks.bench.forEach(p => {
+      const pdiv = document.createElement('div');
+      const rank = positionRanks[p.name] || '-';
+      pdiv.className = 'draft-player';
+      pdiv.innerHTML = `${p.name} (${p.position}) <span class="rank-badge">${rank}</span>`;
+      pdiv.style.marginLeft = '10px';
+      container.appendChild(pdiv);
+    });
+
+    finalTeamsDiv.appendChild(container);
+  });
+}
+</script>
+</body>
+</html>
+
