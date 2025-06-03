@@ -2,7 +2,7 @@
 
 Good job! You turned on GitHub Pages! :tada:
 
-You can see the link to your website at the top of the [Pages](https://github.com/{{full_repo_name}}/settings/pages) section of your repository settings _(you may need to refresh it)_
+You can see the link to your website at the top of the [Pages](https://github.com/{{ full_repo_name }}/settings/pages) section of your repository settings _(you may need to refresh it)_
 
 > [!TIP]
 > Keep your GitHub Pages [website](https://{{login}}.github.io/{{repo_name}}/) open in a separate browser tab and keep it handy!
