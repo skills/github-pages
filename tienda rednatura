@@ -1,0 +1,91 @@
+// TiendaRedNatura.jsx
+import React, { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
+const productos = [
+  { id: 1, nombre: "Flussorin NF", descripcion: "Prevención y tratamiento de hiperplasia prostática. Mejora función urinaria y aporta vitalidad.", precio: 730, imagen: "https://via.placeholder.com/200x200?text=Flussorin+NF" },
+  { id: 2, nombre: "Dugran-X", descripcion: "Afrodisíaco natural. Mejora deseo y resistencia sexual.", precio: 474, imagen: "https://via.placeholder.com/200x200?text=Dugran-X" },
+  { id: 3, nombre: "Ventre Tea", descripcion: "Té laxante, depurativo y auxiliar en control de peso.", precio: 265.5, imagen: "https://via.placeholder.com/200x200?text=Ventre+Tea" },
+  { id: 4, nombre: "Levius", descripcion: "Efecto saciante del apetito. Estimula la pérdida de peso y mejora la circulación.", precio: 516, imagen: "https://via.placeholder.com/200x200?text=Levius" },
+  { id: 5, nombre: "Levius Night", descripcion: "Inhibidor del apetito. Apoyo nocturno para quemar grasa abdominal.", precio: 544, imagen: "https://via.placeholder.com/200x200?text=Levius+Night" },
+  { id: 6, nombre: "Gummys", descripcion: "Vinagre de manzana, vitaminas y antioxidantes. Mejora digestión, regula apetito.", precio: 697, imagen: "https://via.placeholder.com/200x200?text=Gummys" },
+  { id: 7, nombre: "Divant NF", descripcion: "Mejora producción y función de insulina. Apoyo para personas con diabetes.", precio: 656, imagen: "https://via.placeholder.com/200x200?text=Divant+NF" },
+  { id: 8, nombre: "Norantrix", descripcion: "Regula azúcar en sangre y promueve función digestiva y hepática.", precio: 480, imagen: "https://via.placeholder.com/200x200?text=Norantrix" },
+  { id: 9, nombre: "Flubi", descripcion: "Previene infecciones urinarias y apoya la salud renal.", precio: 413, imagen: "https://via.placeholder.com/200x200?text=Flubi" },
+  { id: 10, nombre: "Ant1-VR", descripcion: "Fortalece sistema inmune. Propiedades antimicrobianas y antivirales.", precio: 450, imagen: "https://via.placeholder.com/200x200?text=Ant1-VR" },
+  { id: 11, nombre: "Blunner NF", descripcion: "Energizante con vitaminas, minerales y aminoácidos. Mejora rendimiento físico y mental.", precio: 625, imagen: "https://via.placeholder.com/200x200?text=Blunner+NF" },
+  { id: 12, nombre: "Cloori", descripcion: "Clorofila líquida. Antioxidante, desintoxicante y energizante.", precio: 514, imagen: "https://via.placeholder.com/200x200?text=Cloori" },
+  { id: 13, nombre: "Geltyvit Gummys", descripcion: "Vitaminas y minerales para fortalecer el sistema inmune y prevenir anemia.", precio: 730, imagen: "https://via.placeholder.com/200x200?text=Geltyvit+Gummys" },
+  { id: 14, nombre: "Oxialoe NF", descripcion: "Mejora digestión, absorción de nutrientes y salud gastrointestinal.", precio: 735, imagen: "https://via.placeholder.com/200x200?text=Oxialoe+NF" },
+  { id: 15, nombre: "Desmodim", descripcion: "Protección y desintoxicación hepática. Mejora función del hígado.", precio: 752, imagen: "https://via.placeholder.com/200x200?text=Desmodim" },
+  { id: 16, nombre: "Dialegri NF", descripcion: "Apoyo digestivo completo. Recomendado en casos de colitis, úlceras, gastritis.", precio: 555, imagen: "https://via.placeholder.com/200x200?text=Dialegri+NF" },
+  { id: 17, nombre: "Serentra", descripcion: "Relajante natural. Mejora el sueño, reduce ansiedad y migrañas.", precio: 619, imagen: "https://via.placeholder.com/200x200?text=Serentra" },
+  { id: 18, nombre: "Pro Shake", descripcion: "Malteada nutritiva. Aporta energía, fortalece sistema inmune y previene anemia.", precio: 983, imagen: "https://via.placeholder.com/200x200?text=Pro+Shake" },
+  { id: 19, nombre: "4Kiddy's Gummys", descripcion: "Multivitamínico para niños. Refuerza sistema inmune, mejora memoria y crecimiento.", precio: 728, imagen: "https://via.placeholder.com/200x200?text=4Kiddys+Gummys" },
+  { id: 20, nombre: "4Kiddy's NF", descripcion: "Apoyo nutricional líquido para niños. Energía, crecimiento y prevención de anemia.", precio: 494, imagen: "https://via.placeholder.com/200x200?text=4Kiddys+NF" }
+  // Puedes continuar agregando el resto aquí si deseas más adelante
+];
+
+export default function TiendaRedNatura() {
+  const [carrito, setCarrito] = useState([]);
+
+  const agregarAlCarrito = (producto) => {
+    setCarrito([...carrito, producto]);
+  };
+
+  const total = carrito.reduce((acc, prod) => acc + prod.precio, 0);
+
+  return (
+    <div className="p-4 bg-gray-50 min-h-screen">
+      <h1 className="text-3xl font-bold text-green-700 mb-6">Tienda RedNatura</h1>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {productos.map((producto) => (
+          <Card key={producto.id} className="bg-white shadow-lg">
+            <img
+              src={producto.imagen}
+              alt={producto.nombre}
+              className="w-full h-48 object-cover"
+            />
+            <CardContent className="p-4">
+              <h2 className="text-xl font-semibold text-green-800">
+                {producto.nombre}
+              </h2>
+              <p className="text-sm text-gray-600 mb-2">
+                {producto.descripcion}
+              </p>
+              <p className="text-lg font-bold text-green-700 mb-4">
+                ${producto.precio}
+              </p>
+              <Button onClick={() => agregarAlCarrito(producto)} className="bg-green-600 hover:bg-green-700">
+                Añadir al carrito
+              </Button>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      <div className="mt-10 p-4 bg-white rounded-xl shadow-md">
+        <h2 className="text-2xl font-bold text-green-700 mb-4">Carrito de compras</h2>
+        {carrito.length === 0 ? (
+          <p className="text-gray-500">Tu carrito está vacío.</p>
+        ) : (
+          <ul className="mb-4">
+            {carrito.map((item, index) => (
+              <li key={index} className="text-gray-700">
+                {item.nombre} - ${item.precio}
+              </li>
+            ))}
+          </ul>
+        )}
+        <p className="text-lg font-semibold text-green-800">
+          Total: ${total.toFixed(2)}
+        </p>
+        <Button className="mt-2 bg-green-700 hover:bg-green-800">
+          Proceder al pago
+        </Button>
+      </div>
+    </div>
+  );
+}
