@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reclives 应用官网</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .screenshot {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Reclives - 捕捉生活中的珍贵时刻</h1>
+        <p>Reclives-记录生命是一款帮您分享和回顾生命中重要时刻的应用。活动记录上传10分钟后不可删除，将被永久留存。您人生每个精彩时刻都会被珍藏，让您的朋友和孩子了解您的人生轨迹。</p>
+
+        <h2>核心功能</h2>
+        <ul>
+            <li>创建时间胶囊：记录文字、图片、视频等多种形式的内容。</li>
+            <li>设定开启时间：精确控制时间胶囊在未来的某个时刻或特定条件下开启。</li>
+            <li>社交互动：与朋友分享时间胶囊，共同创造和回忆。</li>
+            <li>回顾与反思：在设定的时间开启胶囊，重温过去的美好瞬间。</li>
+        </ul>
+
+        <h2>应用截图</h2>
+        <img src="/placeholder_screenshot_1.png" alt="应用截图 1" class="screenshot">
+        <img src="/placeholder_screenshot_2.png" alt="应用截图 2" class="screenshot">
+
+        <h2>下载应用</h2>
+        <p>应用即将上线，敬请期待！</p>
+        <!-- 如果有应用商店链接，可以在这里添加 -->
+        <!-- <p>在 App Store 下载：<a href="[您的 App Store 链接]">[链接文字]</a></p> -->
+
+        <h2>联系我们</h2>
+        <p>如果您有任何问题或建议，请通过以下方式联系我们：</p>
+        <p>邮箱：20909854@qq.com</p>
+        <!-- 如果有其他联系方式，可以在这里添加 -->
+
+    </div>
+</body>
+</html>
