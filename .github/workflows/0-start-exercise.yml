@@ -18,7 +18,7 @@ jobs:
     if: |
       !github.event.repository.is_template
     name: Start Exercise
-    uses: skills/exercise-toolkit/.github/workflows/start-exercise.yml@v0.4.0
+    uses: skills/exercise-toolkit/.github/workflows/start-exercise.yml@v0.5.0
     with:
       exercise-title: "GitHub Pages"
       intro-message: "Create a site or blog from your GitHub repositories with GitHub Pages."
