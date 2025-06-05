@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>성룡 | Director</title>
+  <style>
+    :root {
+      --bg: #f9f9f9;
+      --text: #111;
+      --accent: #000;
+      --muted: #666;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Pretendard', 'Noto Sans KR', 'Helvetica Neue', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+    }
+    header {
+      position: fixed;
+      top: 20px;
+      left: 40px;
+      right: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      z-index: 1000;
+    }
+    .logo {
+      height: 32px;
+    }
+    .nav a {
+      margin-left: 25px;
+      text-decoration: none;
+      color: var(--text);
+      letter-spacing: 1px;
+      transition: color 0.2s;
+    }
+    .nav a:hover {
+      color: var(--accent);
+    }
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+    .hero h1 {
+      font-size: 42px;
+      font-weight: 600;
+      margin: 0;
+      letter-spacing: -1px;
+    }
+    .hero p {
+      margin-top: 16px;
+      font-size: 18px;
+      color: var(--muted);
+    }
+    .hero a {
+      margin-top: 40px;
+      display: inline-block;
+      text-decoration: none;
+      border: 1px solid var(--accent);
+      padding: 12px 28px;
+      font-size: 14px;
+      color: var(--accent);
+      transition: all 0.3s ease;
+    }
+    .hero a:hover {
+      background-color: var(--accent);
+      color: white;
+    }
+    .section {
+      padding: 120px 30px;
+      max-width: 960px;
+      margin: auto;
+    }
+    .section h2 {
+      font-size: 22px;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+    }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+    }
+    .video-grid iframe {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    .footer {
+      text-align: center;
+      padding: 80px 20px;
+      color: #aaa;
+      font-size: 13px;
+    }
+    a {
+      word-break: break-word;
+    }
+  </style>
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css" rel="stylesheet">
+  </head>
+<body>
+
+  <header>
+    <div class="logo" style="font-weight: bold; font-size: 18px; color: #ff00b7;">EARLY HIGH</div>
+    <nav class="nav">
+      <a href="#about">About</a>
+      <a href="#works">Works</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div style="margin-top: -40px; font-size: 14px; font-weight: 600; color: #ff00b7;">성룡</div>
+        <h1 style="font-size: 42px; font-weight: 700; margin: 0; letter-spacing: -0.5px; color: #111;">
+      SUNG YONG | Director
+    </h1>
+    <p style="margin-top: 16px; font-size: 16px; color: var(--muted);">
+      Visual storytelling through clarity and calm
+    </p>
+    <a href="#reel">Watch Showreel</a>
+  </div>
+
+  <div class="section" id="reel">
+    <h2>Showreel</h2>
+    <div class="video-grid">
+      <iframe src="https://player.vimeo.com/video/1085953647" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <div class="section" id="works">
+    <h2>Works</h2>
+    <div class="video-grid">
+      <iframe src="https://www.youtube.com/embed/VWbg4BHdHIc" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/oMMFimDwUqQ" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/mnUIXDfv3d8" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/KJPBGPJpN2s" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/BppDexxIwZc" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/UCeqtowCxFo" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/hgaJrXyCgXU" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/-nCffoqlrDg" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/AC71aSvyJaA" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/V8PchOY9pQE" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/4pPtjOrdyq8" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/and_nTkqb80" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/SgViSPFRz7k" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/oQs4eH57Z94" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/QioEuxLpO1A" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/uavtU7fNKvs" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/XpkzoZDrSKo" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/KeDXiW6rIBE" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/Nu_swo-aglU" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/1lO_KNC9AsU" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/sOwOPwzLPBs" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/CyLwZIo4MaA" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/TcAUTFw0u4Q" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/DYyFDR8Bdf0" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/iUFiyXsrmA4" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/YCKWSL2V020" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/kWLB1XAQZKo" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/btZOtPotwHI" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/ZSRrjCVJ5UM" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/M0qn-Iy1aMU" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/PHpWgKhkVw8" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/dytCQtDhNV8" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/AyaNS05kd0M" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/ilOHgx_WQOc" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/EwBRcCnz4Xw" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/_znjGT9QRyw" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/-530gP2sS4U" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/KHOk0jthrfk" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/dNK26ShfSHw" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/I06upIcobOc" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/ZN2r02yKllY" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/-lbLB6sX2VU" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/SwGoboBxKaQ" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/5qC5clkHWoE" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/N1_njDiCz3Q" frameborder="0" allowfullscreen></iframe>
+      </div>
+  </div>
+
+  <div class="section" id="about">
+      <h2>About</h2>
+    <p>
+      성룡은 서울을 기반으로 활동하는 커머셜 디렉터입니다.<br>
+      절제된 미장센과 감각적인 디테일로 브랜드의 정체성을 시각적으로 구축하며,<br>
+      다양한 브랜드와의 협업을 통해 영상의 미학과 메시지를 정교하게 조율해왔습니다.<br><br>
+      SUNG YONG is a Seoul-based commercial director.<br>
+      He visually constructs brand identity through restrained mise-en-scène and refined detail,<br>
+      and has precisely orchestrated the harmony of aesthetics and message through collaborations with a wide range of brands.
+    </p>
+  </div>
+
+  <div class="section" id="contact">
+    <h2>Contact</h2>
+    <p>
+      Email: <a href="mailto:s20217y@naver.com">s20217y@naver.com</a><br>
+      Vimeo: <a href="https://vimeo.com/1085953647" target="_blank">vimeo.com/1085953647</a>
+    </p>
+  </div>
+
+  <div class="footer">
+    <div style="margin-bottom: 8px; font-weight: bold; color: #555;">EARLY HIGH</div>
+    &copy; 2025 성룡 SUNG YONG. All rights reserved.
+  </div>
+
+</body>
+</html>
