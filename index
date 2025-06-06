@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisador de Capturas Wireshark</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset e Estilos Globais */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #d1d5db;
+            background: linear-gradient(-45deg, #0f172a, #1e293b, #334155, #020617);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            padding: 1rem;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Utilitários */
+        .hidden {
+            display: none;
+        }
+
+        /* Estrutura Principal */
+        .container {
+            max-width: 56rem; /* Equivalente a max-w-5xl, ajustado para melhor visualização */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.125rem;
+            color: #9ca3af;
+        }
+        
+        main.card {
+            background-color: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Componentes */
+        details {
+            background-color: #111827;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        details summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.125rem;
+            cursor: pointer;
+            list-style: none;
+        }
+
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        
+        details summary svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            transition: transform 0.2s;
+            stroke: currentColor;
+        }
+
+        details[open] summary svg {
+            transform: rotate(180deg);
+        }
+
+        .instructions-content {
+            margin-top: 1rem;
+            color: #9ca3af;
+        }
+        .instructions-content p { margin-bottom: 0.5rem; }
+        .instructions-content ol { list-style-position: inside; list-style-type: decimal; padding-left: 1rem; }
+        .instructions-content li { margin-bottom: 0.25rem; }
+        .instructions-content code { background-color: #374151; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-family: monospace; }
+        h2.section-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem; display: flex; align-items: center; }
+        h2 .step-number { background-color: #6366f1; color: white; border-radius: 9999px; width: 2rem; height: 2rem; display: inline-flex; align-items: center; justify-content: center; margin-right: 0.75rem; }
+        
+        .upload-area {
+            margin-top: 0.5rem;
+            display: flex;
+            justify-content: center;
+            padding: 1.5rem 1.25rem;
+            border: 2px dashed #4b5563;
+            border-radius: 0.375rem;
+            text-align: center;
+        }
+        
+        .upload-area label {
+            cursor: pointer;
+            background-color: #1f2937;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            color: #818cf8;
+            padding: 0.25rem;
+        }
+        .upload-area label:hover { color: #6366f1; }
+        #file-name { font-size: 0.75rem; color: #6b7280; margin-top: 0.5rem; }
+        .results-section { padding-top: 1.5rem; margin-top: 1.5rem; border-top: 1px solid #4b5563; }
+        .results-grid { display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 1rem; text-align: center; margin-bottom: 1.5rem; }
+        .stat-card { background-color: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); padding: 1rem; border-radius: 0.5rem; }
+        .stat-card h3 { font-size: 0.875rem; font-weight: 600; color: #9ca3af; }
+        .stat-card p { font-size: 1.875rem; font-weight: 700; }
+        .diagnosis-box { padding: 1rem; border-radius: 0.5rem; text-align: center; margin-bottom: 1.5rem; }
+        .diagnosis-box h3 { font-size: 1.25rem; font-weight: 700; }
+        
+        .table-container { background-color: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); padding: 1rem; border-radius: 0.5rem; max-height: 24rem; overflow-y: auto; }
+        .table-container table { width: 100%; font-size: 0.875rem; text-align: left; color: #d1d5db; }
+        .table-container thead { font-size: 0.75rem; color: #9ca3af; text-transform: uppercase; background-color: #374151; }
+        .table-container th, .table-container td { padding: 0.75rem 1rem; }
+        .table-container tbody tr { background-color: #1f2937; border-bottom: 1px solid #374151; }
+        .table-container tbody tr:hover { background-color: #4b5563; }
+        #error-message { background-color: #991b1b; color: white; padding: 1rem; border-radius: 0.5rem; text-align: center; margin-top: 1rem; }
+        
+        @media (min-width: 768px) {
+            .results-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Analisador Inteligente de Wireshark</h1>
+            <p>Encontre perdas de pacotes em capturas `.csv` exportadas do Wireshark.</p>
+        </header>
+
+        <main class="card">
+            <details open>
+                <summary>
+                    <span>1. Como exportar os dados do Wireshark</span>
+                    <svg fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="instructions-content">
+                    <p>Para a análise funcionar, você precisa exportar sua captura para o formato CSV com as colunas corretas. Siga os passos:</p>
+                    <ol>
+                        <li>No Wireshark, com sua captura aberta, vá em <code>Arquivo > Exportar Dissecações de Pacotes > Como CSV...</code></li>
+                        <li>Na janela de exportação, assegure-se que as seguintes colunas estão sendo exibidas:</li>
+                        <li style="list-style-type: none; padding-left: 1rem;">
+                            - <code>frame.number</code> (essencial)<br>
+                            - <code>ip.src</code> (essencial)<br>
+                            - <code>ip.dst</code> (essencial)<br>
+                            - <code>tcp.analysis.retransmission</code> (essencial para perdas)<br>
+                            - <code>tcp.analysis.fast_retransmission</code> (essencial para perdas)<br>
+                            - <code>tcp.analysis.duplicate_ack</code> (indicador de problemas)<br>
+                            - <code>_ws.col.Info</code> (para contexto)
+                        </li>
+                        <li>Salve o arquivo `.csv` em seu computador.</li>
+                    </ol>
+                </div>
+            </details>
+            
+            <div>
+                <h2 class="section-title">
+                    <span class="step-number">2</span>
+                    Faça o upload do seu arquivo .csv
+                </h2>
+                <div class="upload-area">
+                    <div>
+                        <svg style="margin: 0 auto; width: 3rem; height: 3rem; color: #9ca3af;" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <div style="font-size: 0.875rem; color: #6b7280; margin-top: 0.5rem;">
+                            <label for="file-upload">
+                                <span>Selecione o arquivo</span>
+                                <input id="file-upload" type="file" style="display: none;" accept=".csv">
+                            </label>
+                            <span style="padding-left: 0.25rem;">ou arraste e solte aqui</span>
+                        </div>
+                        <p id="file-name">Nenhum arquivo selecionado</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="results-area" class="results-section hidden">
+                <h2 style="font-size: 1.5rem; font-weight: 700; text-align: center; color: white; margin-bottom: 1.5rem;">Diagnóstico da Captura</h2>
+                
+                <div class="results-grid">
+                    <div class="stat-card">
+                        <h3>TOTAL DE PACOTES TCP</h3>
+                        <p id="total-packets">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>RETRANSMISSÕES (PERDAS)</h3>
+                        <p id="lost-packets">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>TAXA DE PERDA</h3>
+                        <p id="loss-rate">0%</p>
+                    </div>
+                </div>
+
+                <div id="diagnosis-box" class="diagnosis-box">
+                    <h3 id="diagnosis-title"></h3>
+                    <p id="diagnosis-text"></p>
+                </div>
+
+                <div>
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem; text-align: center;">Detalhes dos Pacotes Problemáticos</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th># Pacote</th>
+                                    <th>Origem</th>
+                                    <th>Destino</th>
+                                    <th>Motivo</th>
+                                </tr>
+                            </thead>
+                            <tbody id="problems-table-body">
+                            </tbody>
+                        </table>
+                        <p id="no-problems-found" style="text-align: center; color: #9ca3af; padding: 1rem;">Nenhum pacote problemático encontrado.</p>
+                    </div>
+                </div>
+            </div>
+            <div id="error-message" class="hidden"></div>
+        </main>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const fileUpload = document.getElementById('file-upload');
+            const fileNameDisplay = document.getElementById('file-name');
+            const resultsArea = document.getElementById('results-area');
+            const errorMessage = document.getElementById('error-message');
+
+            fileUpload.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (!file) {
+                    fileNameDisplay.textContent = 'Nenhum arquivo selecionado';
+                    return;
+                }
+                fileNameDisplay.textContent = `Arquivo selecionado: ${file.name}`;
+                
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const csvContent = e.target.result;
+                        const stats = parseCsvAndAnalyze(csvContent);
+                        displayResults(stats);
+                        resultsArea.classList.remove('hidden');
+                        errorMessage.classList.add('hidden');
+                    } catch (error) {
+                        console.error("Erro ao processar arquivo:", error);
+                        showError(error.message);
+                        resultsArea.classList.add('hidden');
+                    }
+                };
+                reader.onerror = () => {
+                     showError('Não foi possível ler o arquivo.');
+                     resultsArea.classList.add('hidden');
+                };
+                reader.readAsText(file);
+            });
+            
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.classList.remove('hidden');
+            }
+
+            function parseCsvAndAnalyze(csv) {
+                const lines = csv.split('\n');
+                if (lines.length < 2) throw new Error('Arquivo CSV inválido ou vazio.');
+                
+                const header = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+                
+                const colIndices = {
+                    frameNumber: header.indexOf('frame.number'),
+                    ipSrc: header.indexOf('ip.src'),
+                    ipDst: header.indexOf('ip.dst'),
+                    retransmission: header.indexOf('tcp.analysis.retransmission'),
+                    fastRetransmission: header.indexOf('tcp.analysis.fast_retransmission'),
+                    duplicateAck: header.indexOf('tcp.analysis.duplicate_ack'),
+                };
+                
+                if (colIndices.frameNumber === -1 || colIndices.ipSrc === -1 || colIndices.ipDst === -1 || (colIndices.retransmission === -1 && colIndices.fastRetransmission === -1)) {
+                    throw new Error('Arquivo CSV não contém as colunas necessárias. Exporte novamente do Wireshark com as colunas: frame.number, ip.src, ip.dst, e as de tcp.analysis.');
+                }
+
+                let totalTcpPackets = 0;
+                let lostPackets = 0;
+                const problematicPackets = [];
+
+                for (let i = 1; i < lines.length; i++) {
+                    const line = lines[i];
+                    if (!line.trim()) continue;
+                    
+                    const data = line.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g).map(d => d.replace(/"/g, ''));
+
+                    if (data[colIndices.ipSrc] && data[colIndices.ipDst]) {
+                        totalTcpPackets++;
+                        let isProblem = false;
+                        let reason = '';
+
+                        if (colIndices.retransmission !== -1 && data[colIndices.retransmission]) {
+                            isProblem = true;
+                            reason = 'Retransmissão TCP';
+                        } else if (colIndices.fastRetransmission !== -1 && data[colIndices.fastRetransmission]) {
+                            isProblem = true;
+                            reason = 'Retransmissão Rápida';
+                        } else if (colIndices.duplicateAck !== -1 && data[colIndices.duplicateAck]) {
+                            isProblem = true;
+                            reason = `ACK Duplicado (${data[colIndices.duplicateAck]})`;
+                        }
+
+                        if(isProblem) {
+                            if(reason.includes('Retransmissão')) {
+                                lostPackets++;
+                            }
+                            problematicPackets.push({
+                                frameNumber: data[colIndices.frameNumber],
+                                src: data[colIndices.ipSrc],
+                                dst: data[colIndices.ipDst],
+                                reason: reason
+                            });
+                        }
+                    }
+                }
+                
+                return { totalTcpPackets, lostPackets, problematicPackets };
+            }
+
+            function displayResults(stats) {
+                const lossRate = stats.totalTcpPackets > 0 ? (stats.lostPackets / stats.totalTcpPackets * 100).toFixed(2) : 0;
+
+                document.getElementById('total-packets').textContent = stats.totalTcpPackets;
+                document.getElementById('lost-packets').textContent = stats.lostPackets;
+                document.getElementById('loss-rate').textContent = `${lossRate}%`;
+                
+                document.getElementById('lost-packets').style.color = stats.lostPackets > 0 ? '#f87171' : '#4ade80';
+                document.getElementById('loss-rate').style.color = lossRate > 1 ? '#f87171' : (lossRate > 0 ? '#facc15' : '#4ade80');
+                
+                const diagnosisBox = document.getElementById('diagnosis-box');
+                const diagnosisTitle = document.getElementById('diagnosis-title');
+                const diagnosisText = document.getElementById('diagnosis-text');
+
+                diagnosisBox.style.border = '1px solid';
+                if (lossRate > 2) {
+                    diagnosisBox.style.backgroundColor = '#450a0a';
+                    diagnosisBox.style.borderColor = '#7f1d1d';
+                    diagnosisTitle.textContent = 'Conexão Muito Ruim';
+                    diagnosisText.textContent = 'Uma taxa de perda acima de 2% indica problemas sérios de rede que afetarão negativamente a performance de jogos, streaming e chamadas de vídeo.';
+                } else if (lossRate > 0.5) {
+                    diagnosisBox.style.backgroundColor = '#422006';
+                    diagnosisBox.style.borderColor = '#713f12';
+                    diagnosisTitle.textContent = 'Conexão Instável';
+                    diagnosisText.textContent = 'Existe uma perda de pacotes moderada. Você pode experienciar "lags" e pequenas interrupções. Verifique as comunicações com maior perda na tabela abaixo.';
+                } else {
+                    diagnosisBox.style.backgroundColor = '#14532d';
+                    diagnosisBox.style.borderColor = '#166534';
+                    diagnosisTitle.textContent = 'Conexão Saudável';
+                    diagnosisText.textContent = 'A taxa de retransmissão está muito baixa ou zerada. Sua conexão TCP parece estável e confiável.';
+                }
+                
+                const tableBody = document.getElementById('problems-table-body');
+                const noProblemsP = document.getElementById('no-problems-found');
+                tableBody.innerHTML = '';
+
+                if(stats.problematicPackets.length > 0) {
+                    noProblemsP.classList.add('hidden');
+                    stats.problematicPackets.forEach(p => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${p.frameNumber}</td>
+                            <td>${p.src}</td>
+                            <td>${p.dst}</td>
+                            <td style="color: #facc15;">${p.reason}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                } else {
+                    noProblemsP.classList.remove('hidden');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
