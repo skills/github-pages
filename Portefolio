@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio | Kossi Noumagno</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-white text-gray-800 font-sans">
+  <!-- Header -->
+  <header class="bg-blue-600 text-white p-6 shadow-md">
+    <div class="container mx-auto">
+      <h1 class="text-3xl font-bold">Kossi Noumagno</h1>
+      <p>Étudiant en Mathématiques Appliquées | Futur Data Scientist</p>
+    </div>
+  </header>
+
+  <!-- Présentation -->
+  <section class="container mx-auto my-10 px-4">
+    <h2 class="text-2xl font-bold mb-4">À propos</h2>
+    <p>
+      Passionné par les mathématiques, la data science et l'intelligence artificielle, je prépare un Master en Ingénierie Mathématique et Data Science. J'ai également suivi une formation certifiante en développement web sur Udemy et je me forme en Data Analyse avec Google.
+    </p>
+  </section>
+
+  <!-- Parcours -->
+  <section class="container mx-auto my-10 px-4">
+    <h2 class="text-2xl font-bold mb-4">Parcours académique</h2>
+    <ul class="list-disc pl-6">
+      <li>Licence 3 - Mathématiques Appliquées - UHA (2024 – 2025)</li>
+      <li>Master à venir - Ingénierie Mathématique & Data Science (2025 – 2027)</li>
+      <li>Google Data Analytics (en cours)</li>
+      <li>Développement Web - Certification Udemy</li>
+    </ul>
+  </section>
+
+  <!-- Expérience -->
+  <section class="container mx-auto my-10 px-4">
+    <h2 class="text-2xl font-bold mb-4">Expériences professionnelles</h2>
+    <ul class="list-disc pl-6">
+      <li><strong>Technicien Informatique</strong> – Support, configuration, maintenance, attestation disponible</li>
+      <li><strong>Équipier polyvalent – McDonald's</strong> – Travail d'équipe, rigueur et adaptabilité</li>
+    </ul>
+  </section>
+
+  <!-- Projets -->
+  <section class="container mx-auto my-10 px-4">
+    <h2 class="text-2xl font-bold mb-4">Projets</h2>
+    <ul class="list-disc pl-6">
+      <li>Agent IA conversationnel – Hugging Face, LangChain</li>
+      <li>Analyse de données – Projets Kaggle</li>
+      <li>Application IA pour la révision express – Scikit-learn, Gradio</li>
+      <li>Site web personnel – HTML/CSS/JS (en cours)</li>
+    </ul>
+  </section>
+
+  <!-- Compétences --><!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio | Kossi Noumagno</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-blue-200 text-gray-800 font-sans min-h-screen">
+  <!-- Header -->
+  <header class="bg-blue-700 text-white p-8 shadow-lg">
+    <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
+      <div>
+        <h1 class="text-4xl font-extrabold tracking-tight">Kossi Noumagno</h1>
+        <p class="mt-2 text-lg">Étudiant en Mathématiques Appliquées | Futur Data Scientist</p>
+      </div>
+      <img src="https://ui-avatars.com/api/?name=Kossi+Noumagno&background=2563eb&color=fff&size=128" alt="Avatar" class="rounded-full mt-6 md:mt-0 shadow-lg border-4 border-white w-28 h-28">
+    </div>
+  </header>
+
+  <!-- Présentation -->
+  <section class="container mx-auto my-12 px-4">
+    <div class="bg-white rounded-xl shadow-md p-8 flex flex-col md:flex-row items-center gap-8">
+      <div class="flex-1">
+        <h2 class="text-2xl font-bold mb-4 text-blue-700">À propos</h2>
+        <p class="text-lg">
+          Passionné par les mathématiques, la data science et l'intelligence artificielle, je prépare un Master en Ingénierie Mathématique et Data Science. J'ai également suivi une formation certifiante en développement web sur Udemy et je me forme en Data Analyse avec Google.
+        </p>
+      </div>
+      <div class="flex-shrink-0 hidden md:block">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=300&q=80" alt="Data Science" class="rounded-lg shadow-md w-48 h-32 object-cover">
+      </div>
+    </div>
+  </section>
+
+  <!-- Parcours -->
+  <section class="container mx-auto my-12 px-4">
+    <div class="bg-white rounded-xl shadow-md p-8">
+      <h2 class="text-2xl font-bold mb-4 text-blue-700">Parcours académique</h2>
+      <ul class="list-disc pl-8 space-y-2 text-lg">
+        <li><span class="font-semibold">Licence 3</span> - Mathématiques Appliquées - UHA <span class="text-gray-500">(2024 – 2025)</span></li>
+        <li><span class="font-semibold">Master à venir</span> - Ingénierie Mathématique & Data Science <span class="text-gray-500">(2025 – 2027)</span></li>
+        <li><span class="font-semibold">Google Data Analytics</span> <span class="text-gray-500">(en cours)</span></li>
+        <li><span class="font-semibold">Développement Web</span> - Certification Udemy</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Expérience -->
+  <section class="container mx-auto my-12 px-4">
+    <div class="bg-white rounded-xl shadow-md p-8">
+      <h2 class="text-2xl font-bold mb-4 text-blue-700">Expériences professionnelles</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-blue-50 rounded-lg p-4 shadow">
+          <h3 class="font-semibold text-lg mb-1">Technicien Informatique</h3>
+          <ul class="list-disc pl-5 text-base">
+            <li>Support, configuration, maintenance</li>
+            <li>Attestation disponible</li>
+          </ul>
+        </div>
+        <div class="bg-blue-50 rounded-lg p-4 shadow">
+          <h3 class="font-semibold text-lg mb-1">Équipier polyvalent – McDonald's</h3>
+          <ul class="list-disc pl-5 text-base">
+            <li>Travail d'équipe</li>
+            <li>Rigueur et adaptabilité</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projets -->
+  <section class="container mx-auto my-12 px-4">
+    <div class="bg-white rounded-xl shadow-md p-8">
+      <h2 class="text-2xl font-bold mb-4 text-blue-700">Projets</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-blue-50 rounded-lg p-4 shadow">
+          <h3 class="font-semibold text-lg mb-1">Agent IA conversationnel</h3>
+          <p class="text-base mb-1">Hugging Face, LangChain</p>
+        </div>
+        <div class="bg-blue-50 rounded-lg p-4 shadow">
+          <h3 class="font-semibold text-lg mb-1">Analyse de données</h3>
+          <p class="text-base mb-1">Projets Kaggle</p>
+        </div>
+        <div class="bg-blue-50 rounded-lg p-4 shadow">
+          <h3 class="font-semibold text-lg mb-1">Application IA pour la révision express</h3>
+          <p class="text-base mb-1">Scikit-learn, Gradio</p>
+        </div>
+        <div class="bg-blue-50 rounded-lg p-4 shadow">
+          <h3 class="font-semibold text-lg mb-1">Site web personnel</h3>
+          <p class="text-base mb-1">HTML/CSS/JS (en cours)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compétences -->
+  <section class="container mx-auto my-12 px-4">
+    <div class="bg-white rounded-xl shadow-md p-8">
+      <h2 class="text-2xl font-bold mb-4 text-blue-700">Compétences</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div>
+          <h3 class="font-semibold mb-2">Langages</h3>
+          <ul class="list-disc pl-5">
+            <li>Python</li>
+            <li>SQL</li>
+            <li>HTML/CSS</li>
+            <li>JavaScript (bases)</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-2">Outils</h3>
+          <ul class="list-disc pl-5">
+            <li>Pandas</li>
+            <li>Scikit-learn</li>
+            <li>Matplotlib</li>
+            <li>Streamlit</li>
+            <li>Hugging Face</li>
+            <li>GitHub</li>
+            <li>Google Data Studio</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-2">Qualités</h3>
+          <ul class="list-disc pl-5">
+            <li>Autonomie</li>
+            <li>Curiosité</li>
+            <li>Rigueur</li>
+            <li>Communication</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <footer class="bg-blue-700 py-8 mt-12">
+    <div class="container mx-auto text-center text-white">
+      <p class="mb-2">📧 Email : <a href="mailto:ton.email@example.com" class="underline hover:text-blue-200">ton.email@example.com</a></p>
+      <p class="mb-2">🔗 
+        <a href="#" class="underline hover:text-blue-200 mx-2">LinkedIn</a> | 
+        <a href="#" class="underline hover:text-blue-200 mx-2">GitHub</a>
+      </p>
+      <p class="text-sm mt-4">&copy; 2024 Kossi Noumagno. Tous droits réservés.</p>
+    </div>
+  </footer>
+</body>
+</html>
+  <section class="container mx-auto my-10 px-4">
+    <h2 class="text-2xl font-bold mb-4">Compétences</h2>
+    <p><strong>Langages :</strong> Python, SQL, HTML/CSS, JavaScript (bases)</p>
+    <p><strong>Outils :</strong> Pandas, Scikit-learn, Matplotlib, Streamlit, Hugging Face, GitHub, Google Data Studio</p>
+    <p><strong>Qualités :</strong> Autonomie, curiosité, rigueur, communication</p>
+  </section>
+
+  <!-- Contact -->
+  <footer class="bg-blue-100 py-6 mt-10">
+    <div class="container mx-auto text-center">
+      <p>📧 Email : ton.email@example.com</p>
+      <p>🔗 <a href="#" class="text-blue-600 hover:underline">LinkedIn</a> | <a href="#" class="text-blue-600 hover:underline">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>
