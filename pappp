@@ -1,0 +1,32 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>REMdey Subscription</title>
+</head>
+<body>
+  <h2>Subscribe to REMdey</h2>
+  <div id="paypal-button-container-P-7FP54155VG4015417NBCCVEI"></div>
+
+  <script src="https://www.paypal.com/sdk/js?client-id=AcIK6WjCWuFHOYmVSOU-Vwr2-nrIRxjfs7F2L9BMsFrN_57Wy_5FtRiv6uFSIHl1byRiSVVwIh2hID6v&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+  <script>
+    paypal.Buttons({
+        style: {
+            shape: 'rect',
+            color: 'gold',
+            layout: 'vertical',
+            label: 'subscribe'
+        },
+        createSubscription: function(data, actions) {
+            return actions.subscription.create({
+                plan_id: 'P-7FP54155VG4015417NBCCVEI'
+            });
+        },
+        onApprove: function(data, actions) {
+            alert('Thank you for subscribing! Your ID is: ' + data.subscriptionID);
+        }
+    }).render('#paypal-button-container-P-7FP54155VG4015417NBCCVEI');
+  </script>
+</body>
+</html>
