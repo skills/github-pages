@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+  <meta charset="UTF-8">
+  <title>Devganiya Parivar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      background: #f0f0f0;
+    }
+
+    h2 {
+      font-size: 60px;
+    }
+
+    .inputarea {
+      max-width: 110%;
+      width: 1080px;
+      margin: 20px auto;
+      text-align: start;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+    }
+
+    input[type="text"] {
+      padding: 20px;
+      font-size: 40px;
+      width: 92%;
+    }
+
+    label[for="photoInput"] {
+      background-color: #007bff;
+      color: white;
+      padding: 20px 30px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: inline-block;
+      margin-top: 40px;
+      margin-bottom: 40px;
+      font-size: 40px;
+    }
+
+    button {
+      background-color: #EFF6FF;
+      color: #3B82F7;
+      padding: 20px 30px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 40px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #dbeafe;
+    }
+
+    #photoInput {
+      display: none;
+    }
+
+    #previewArea {
+      position: relative;
+      width: 1080px;
+      height: 1261px;
+      margin: 20px auto;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+    }
+
+    #bgImage {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 4;
+    }
+
+    #userPhoto {
+      position: absolute;
+      top: 400px;
+      left: 301px;
+      width: 478px;
+      height: 465px;
+      object-fit: cover;
+      border-radius: 10px;
+      z-index: 2;
+    }
+
+    #userName {
+      position: absolute;
+      top: 924px;
+      left: 384px;
+      width: 320px;
+      text-align: center;
+      font-size: 35px;
+      color: white;
+      font-weight: bold;
+      z-index: 5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="inputarea">
+    <h2>Devganiya Parivar</h2>
+    <input type="text" id="nameInput" placeholder="તમારુ નામ લખો" oninput="updateCard()"><br>
+    <label for="photoInput">ફોટો અપલોડ કરો</label>
+    <input type="file" id="photoInput" accept="image/*" onchange="updateCard()"><br>
+    <button onclick="downloadCard()">Download</button>
+  </div>
+
+  <div id="previewArea">
+    <img src="DBC.png" id="bgImage" alt="Background">
+    <img id="userPhoto" src="" alt="User Photo">
+    <div id="userName">તમારુ નામ</div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script>
+    const nameInput = document.getElementById('nameInput');
+    const photoInput = document.getElementById('photoInput');
+    const userName = document.getElementById('userName');
+    const userPhoto = document.getElementById('userPhoto');
+
+    function updateCard() {
+      userName.textContent = nameInput.value || 'તમારુ નામ';
+
+      if (photoInput.files && photoInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          userPhoto.src = e.target.result;
+        };
+        reader.readAsDataURL(photoInput.files[0]);
+      }
+    }
+
+    function downloadCard() {
+      const preview = document.getElementById('previewArea');
+      const bgImage = document.getElementById('bgImage');
+      const userPhotoImg = document.getElementById('userPhoto');
+
+      const waitForImages = [bgImage, userPhotoImg].map(img => {
+        return new Promise(resolve => {
+          if (img.complete) {
+            resolve();
+          } else {
+            img.onload = () => resolve();
+          }
+        });
+      });
+
+      Promise.all(waitForImages).then(() => {
+        html2canvas(preview).then(canvas => {
+          const link = document.createElement('a');
+          link.download = 'image.png';
+          link.href = canvas.toDataURL();
+          link.click();
+        });
+      });
+    }
+  </script>
+
+</body>
+</html>
