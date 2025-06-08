@@ -1,0 +1,31 @@
+// pages/api/generate.js
+import { Configuration, OpenAIApi } from 'openai';
+
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+const openai = new OpenAIApi(configuration);
+
+export default async function handler(req, res) {
+  const { userInputCondition, userInputCuisine } = req.body;
+
+  try {
+    const response = await openai.createChatCompletion({
+      model: 'gpt-3.5-turbo',
+      messages: [
+        {
+          role: 'system',
+          content: 'You are a helpful nutritionist.',
+        },
+        {
+          role: 'user',
+          content: `Create a meal plan for someone with ${userInputCondition} who prefers ${userInputCuisine} cuisine.`,
+        },
+      ],
+    });
+
+    res.status(200).json({ output: response.data.choices[0].message });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to generate meal plan' });
+  }
+}
