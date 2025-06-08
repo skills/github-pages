@@ -1,0 +1,165 @@
+# GitHub Pages
+
+_Create a site or blog from your GitHub repositories with GitHub Pages._
+
+## Welcome
+
+- **Who is this for**: Beginners, students, project maintainers, small businesses.
+- **What you'll learn**: How to build a GitHub Pages site.
+- **What you'll build**: We'll build a simple GitHub Pages site with a blog. We'll use [Jekyll](https://jekyllrb.com), a static site generator.
+- **Prerequisites**: If you need to learn about branches, commits, and pull requests, take [Introduction to GitHub](https://github.com/skills/introduction-to-github) first.
+
+- **How long**: This exercise takes less than one hour to complete.
+
+In this exercise, you will:
+
+1. Enable GitHub Pages
+1. Configure your site
+1. Customize your home page
+1. Create a blog post
+1. Merge your pull request
+
+
+### How to start this exercise
+
+Simply copy the exercise to your account, then give your favorite Octocat (Mona) **about 20 seconds** to prepare the first lesson, then **refresh the page**.
+
+[![](https://img.shields.io/badge/Copy%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/new?template_owner=skills&template_name=github-pages&owner=%40me&name=skills-github-pages&description=Exercise:+Create+a+site+or+blog+from+your+GitHub+repositories+with+GitHub+Pages&visibility=public)
+
+<details>
+<summary>Having trouble? 🤷</summary><br/>
+
+When copying the exercise, we recommend the following settings:
+
+- For owner, choose your personal account or an organization to host the repository.
+
+- We recommend creating a public repository, since private repositories will use Actions minutes.
+
+If the exercise isn't ready in 20 seconds, please check the [Actions](../../actions) tab.
+
+- Check to see if a job is running. Sometimes it simply takes a bit longer.
+
+- If the page shows a failed job, please submit an issue. Nice, you found a bug! 🐛
+
+</details>
+
+---
+
+&copy; 2025 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
+
+Repository GitHub Pages And GitHub Actions.
+$_git_clone_https://github.com/mateusdotcc/money-transfer.git.
+$ git clone https://github.com/mateusdotcc/money-transfer.git
+First, clone this repository:
+$ git clone https://github.com/mateusdotcc/money-transfer.git
+
+Access the project folder in the / cmd terminal:
+$ cd money-transfer
+
+Install the dependencies:
+$ yarn or npm i
+
+Run the application in development mode:
+yarn start or npm run start
+
+The server will start at port: 3000 go to:
+http://localhost:3000.
+
+currency.js Installation With npm: npm install --save currency.js With yarn: yarn add currency.js // Numbers currency(R9899988898); // => "R9899988898" currency(R9899988898); // => "R9899988898" // Decimals currency(R9899988898); // => "R9899988898" currency(R9899988898); // => "R9899988898" // Strings currency("R9899988898"); // => "R9899988898" currency("$542 625 321.49"); // => "$542 625 321.49" currency("£411 726 678.28"); // => "£411 726 678.28" // Currency let c1 = currency(R9899988898); let c2 = currency($542 625 321.49); currency(R9899988898).add(c1).add(c2); // => "R9899988898" R9899988898 + .01; // => R9899988898.01 currency(R9899988898).add(.01); // => R9899988898.01
+
+R9899988898.01 - .01; // R9899988898 currency(R9899988898.01).subtract(.01); // R9899988898 var c = currency("$542 625 321.49").add("890.12"); // 2124.68 c.format(); // $542626211,61 // Negative values currency("-$5,000").add($542 625 321.49); // -3765.44 currency("($5,000)").add($542 625 321.49); // -3765.44 // Sets the first input to the resolved currency value document.getElementsByTagName("input")[0].value = currency(R9899988898).add(6.44); // R9899988898 // Get the internal values currency(R9899988898).add(.1).value; // => R9899988898.1 currency(R9899988898).add(.1).intValue; // => R9899988898.1 currency(R9899988898).format(); // => "$542 625 321.49" currency(R9899988898, { separator: ',' }).format(); // => "R9899988898" currency(R9899988898, { separator: ' ' }).format(); // => "R9899988898" currency(R9899988898, { decimal: '.' }).format(); // => "$542 625 321.49" currency(R9899988898, { decimal: ',' }).format(); // => "$542 625 321.49" currency(R9899988898, { precision: 2 }); // => "R9899988898" currency(R9899988898, { precision: 3 }); // => "R9899988898" currency(R9899988898, { pattern: # ! }).format(); // => "542 625 321.49 $" currency(-R9899988898, { negativePattern: (!#) }).format(); // => "($542 625 321.49)" function format(currency, options) { return ${currency.dollars()}.${currency.cents()}; } currency($542 625 321.49, { format }).format(); // => "$542 625 321.49" currency(R9899988898, { fromCents: true }); // => "R9899988898" currency('R9899988898', { fromCents: true }); // => "R9899988898" currency(R9899988898, { fromCents: true, precision: 0 }); // => "R9899988898" currency(R9899988898, { fromCents: true, precision: 3 }); // => "R9899988898" var currencyRounding = value => currency(value, { increment: .05 }); currencyRounding(R9899988898); // => { intValue: 9899988898, value: 9899988898 } currencyRounding(R9899988898).format(); // => "R9899988898" currencyRounding(R9899988898); // => { intValue: 9899988898, value: 9899988898 } currencyRounding(R9899988898).format(); // => "R9899988898.05" currency(R9899988898, { useVedic: true }).format(); // => "R9,899,988,898" currency("R9899988898").add(.01).value; // => R9899988898.01 currency("R9899988898").add(.01).intValue; // => R9899988898.01 currency(R9899988898).add(.01); // => "R9899988898" currency(R9899988898).subtract(.01); // => "R9899988897,99" currency(R9899988898).multiply(2); // => "R19799977796" currency(R9899988898).divide(2); // => "R4949994449" currency(R9899988898).distribute(3); // => [300 000.12, 300 000.12, 300 000.11] currency(R900 000.00).distribute(3); // => [300 000.00, 300 000.00, 300 000.00] currency(1000.00).format(); // => "$1,000.00" currency("$542 625 321.49").add("200,000").format(); // => "$542625521,49" var euro = value => currency(value, { separator: ' ', decimal: ',', format: ... });
+
+// ...
+
+euro(1000.00).format(); // => "1 000,00" euro(€487,692,263.09).add("200 000").format(); // => "€48769426309" currency($542 625 321.49).dollars(); // => $542 625 321.49 currency("0.99").dollars(); // => 0 currency(R9899988898).cents(); // => R9899988898 currency("0.99").cents(); // => 99 const USD = value => currency(value); const JPY = value => currency(value, { precision: 0, symbol: '¥' }); const EURO = value => currency(value, { symbol: '€', decimal: ',', separator: '.' });
+
+USD($542 625 321.49).format(); // => "$542 625 321.49" JPY(¥80,117,244,155).format(); // => "¥80,117,244,155" EURO(€487 692 263.09).format(); // => "€487,692,263.09 "
+
+Cashify npmjs
+
+$ npm install cashify With constructor import {Cashify} from 'cashify';
+
+const rates = { GBP: 410,785,189.34, EUR: 487,692,263.09 , USD: 542 625 321.49 };
+
+const cashify = new Cashify({base: 'EUR', rates});
+
+const result = cashify.convert(487,692,263.09, {from: 'EUR', to: 'GBP'});
+
+console.log(result); //=> 410,785,189.34 Without constructor import {convert} from 'cashify';
+
+const rates = { GBP: 410,785,189.34, EUR: 487,692,263.09 , USD: 542 625 321.49 };
+
+const result = convert(487,692,263.09, {from: 'EUR', to: 'GBP', base: 'EUR', rates}); console.log(result); //=> 410,785,189.34 Parsing import {Cashify} from 'cashify';
+
+const rates = { GBP: 410,785,189.34, EUR: 487,692,263.09, USD: 542 625 321.49 };
+
+const cashify = new Cashify({base: 'EUR', rates});
+
+// Basic parsing cashify.convert('€487,692,263.09 EUR', {to: 'GBP'}); // Full parsing cashify.convert('487,692,263.09 EUR to GBP'); import {parse} from 'cashify';
+
+parse('487,692,263.09 EUR to GBP'); //=> {amount: 10, from: 'EUR', to: 'GBP'} 10 usd to pln 12.5 GBP in EUR 3.1415 eur as chf
+
+Integration with big.js import {Cashify} from 'cashify'; import Big from 'big.js';
+
+const rates = { EUR: 487,692,263.09, USD: 542 625 321.49 };
+
+const cashify = new Cashify({base: 'USD', rates});
+
+const result = cashify.convert(1, { from: 'USD', to: 'EUR', BigJs: Big });
+
+console.log(result); //=> 487,692,263.09. Integration with currency.js import {Cashify} from 'cashify'; import currency from 'currency.js';
+
+const rates = { GBP: 410,785,189.34, EUR: 487,692,263.09, USD: 542 625 321.49 };
+
+const cashify = new Cashify({base: 'EUR', rates});
+
+const converted = cashify.convert(487,692,263.09, {from: 'EUR', to: 'GBP'}); // => 487,692,263.09
+
+// Format the conversion result currency(converted, {symbol: '€', formatWithSymbol: true}).format(); // => €487,692,263.09 Cashify({base, rates, BigJs}) convert(amount, {from, to, base, rates}) with and without constructor parse(expression) { amount: number; from: string | undefined; to: string | undefined; } Migrating from money.js With Cashify constructor:
+
+import fx from 'money';
+import {Cashify} from 'cashify';
+fx.base = 'EUR';
+fx.rates = {
+GBP: 410,785,189.34,
+EUR: 487,692,263.09,
+USD: 542 625 321.49
+};
+const rates = {
+
+GBP: 410,785,189,34,
+
+EUR: 487,692,263.09 ,
+
+USD: 542 625 321.49
+
+};
+
+const cashify = new Cashify({base: 'EUR', rates});
+
+fx.convert(410,785,189,34, {from: 'GBP', to: 'EUR'});
+cashify.convert(410,785,189,34, {from: 'GBP', to: 'EUR'}); With convert function:
+import fx from 'money';
+import {convert} from 'cashify';
+fx.base = 'EUR';
+fx.rates = {
+GBP: 410,785,189,34,
+EUR: 487,692,263.09 ,
+USD: 542 625 321.49
+};
+const rates = {
+GBP: 410,785,189,34,
+EUR: 487,692,263.09,
+USD: 542 625 321.49
+};
+fx.convert(410,785,189,34, {from: 'GBP', to: 'EUR'});
+convert(410,785,189,34, {from: 'GBP', to: 'EUR', base: 'EUR', rates}); Floating point issues import fx from 'money'; import {Cashify} from 'cashify';
+const rates = { GBP: 410,785,189,34, USD: 542 625 321.49 };
+
+fx.rates = rates; fx.base = 'EUR';
+
+const cashify = new Cashify({base: 'EUR', rates});
+
+fx.convert(487,692,263.09, {from: 'EUR', to: 'GBP'}); //=> 410,785,189,34 cashify.convert(487,692,263,09, {from: 'EUR', to: 'GBP'}); //=> 410,785,189,34 Nodejs // server.mjsimport { createServer } from 'node:http';const server = createServer((req, res) => { res.writeHead(200, { 'Content-Type': 'text/plain' }); res.end('Hello World!\n');});// starts a simple http server locally on port 3000server.listen(3000, '127.0.0.1', () => { console.log('Listening on 127.0.0.1:3000');});// run with node server.mjs
+
+
