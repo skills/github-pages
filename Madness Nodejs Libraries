@@ -1,0 +1,2687 @@
+# GitHub Pages
+
+_Create a site or blog from your GitHub repositories with GitHub Pages._
+
+## Welcome
+
+- **Who is this for**: Beginners, students, project maintainers, small businesses.
+- **What you'll learn**: How to build a GitHub Pages site.
+- **What you'll build**: We'll build a simple GitHub Pages site with a blog. We'll use [Jekyll](https://jekyllrb.com), a static site generator.
+- **Prerequisites**: If you need to learn about branches, commits, and pull requests, take [Introduction to GitHub](https://github.com/skills/introduction-to-github) first.
+
+- **How long**: This exercise takes less than one hour to complete.
+
+In this exercise, you will:
+
+1. Enable GitHub Pages
+1. Configure your site
+1. Customize your home page
+1. Create a blog post
+1. Merge your pull request
+
+
+### How to start this exercise
+
+Simply copy the exercise to your account, then give your favorite Octocat (Mona) **about 20 seconds** to prepare the first lesson, then **refresh the page**.
+
+[![](https://img.shields.io/badge/Copy%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/new?template_owner=skills&template_name=github-pages&owner=%40me&name=skills-github-pages&description=Exercise:+Create+a+site+or+blog+from+your+GitHub+repositories+with+GitHub+Pages&visibility=public)
+
+<details>
+<summary>Having trouble? 🤷</summary><br/>
+
+When copying the exercise, we recommend the following settings:
+
+- For owner, choose your personal account or an organization to host the repository.
+
+- We recommend creating a public repository, since private repositories will use Actions minutes.
+
+If the exercise isn't ready in 20 seconds, please check the [Actions](../../actions) tab.
+
+- Check to see if a job is running. Sometimes it simply takes a bit longer.
+
+- If the page shows a failed job, please submit an issue. Nice, you found a bug! 🐛
+
+</details>
+
+---
+
+&copy; 2025 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
+
+Madness Nodejs Libraries.
+
+
+JavaScript
+
+// Example login route
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) return res.status(401).send('Invalid email or password');
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) return res.status(401).send('Invalid email or password');
+  // Generate session or token here
+  res.send('Login successful');
+});
+
+// server.mjs
+import { createServer } from 'node:http';
+
+const server = createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Hello World!\n');
+});
+
+// starts a simple http server locally on port 3000
+server.listen(3000, '127.0.0.1', () => {
+  console.log('Listening on 127.0.0.1:3000');
+});
+
+// run with `node server.mjs`
+
+
+Mad Science.
+
+WebTorrent.
+
+Install
+To install WebTorrent for use in node or the browser with import WebTorrent from 'webtorrent', run:
+
+npm install webtorrent
+To install a webtorrent command line program, run:
+
+npm install webtorrent-cli -g
+To install a WebTorrent desktop application for Mac, Windows, or Linux,
+
+
+WebTorrent API Documentation
+Read the full API Documentation.
+
+Usage
+WebTorrent is the first BitTorrent client that works in the browser, using open web standards (no plugins, just HTML5 and WebRTC)! It's easy to get started!
+
+In the browser
+Downloading a file is simple:
+import WebTorrent from 'webtorrent'
+
+const client = new WebTorrent()
+const magnetURI = '...'
+
+client.add(magnetURI, torrent => {
+  // Got torrent metadata!
+  console.log('Client is downloading:', torrent.infoHash)
+
+  for (const file of torrent.files) {
+    document.body.append(file.name)
+  }
+})
+Seeding a file is simple, too:
+import dragDrop from 'drag-drop'
+import WebTorrent from 'webtorrent'
+
+const client = new WebTorrent()
+
+// When user drops files on the browser, create a new torrent and start seeding it!
+dragDrop('body', files => {
+  client.seed(files, torrent => {
+    console.log('Client is seeding:', torrent.infoHash)
+  })
+})
+There are more examples in docs/get-started.md.
+
+Browserify
+WebTorrent works great with browserify, an npm package that lets you use node-style require() to organize your browser code and load modules installed by npm (as seen in the previous examples).
+
+Webpack
+WebTorrent also works with webpack, another module bundler. However, webpack requires extra configuration which you can find in the webpack bundle config used by webtorrent.
+
+Or, you can just use the pre-built version via import WebTorrent from 'webtorrent/dist/webtorrent.min.js' and skip the webpack configuration.
+
+Script tag
+WebTorrent is also available as a standalone script (webtorrent.min.js) which exposes WebTorrent on the window object, so it can be used with just a script tag:
+
+<script type='module'>
+  import WebTorrent from 'webtorrent.min.js'
+</script>
+The WebTorrent script is also hosted on fast, reliable CDN infrastructure (Cloudflare and MaxCDN) for easy inclusion on your site:
+
+<script type='module'>
+  import WebTorrent from 'https://esm.sh/webtorrent'
+</script>
+Chrome App
+If you want to use WebTorrent in a Chrome App, you can include the following script:
+
+<script type='module'>
+  import WebTorrent from 'webtorrent.chromeapp.js'
+</script>
+Be sure to enable the chrome.sockets.udp and chrome.sockets.tcp permissions!
+
+In Node.js
+WebTorrent also works in node.js, using the same npm package! It's mad science!
+
+NOTE: To connect to "web peers" (browsers) in addition to normal BitTorrent peers, use webtorrent-hybrid which includes WebRTC support for node.
+
+As a command line app
+WebTorrent is also available as a command line app. Here's how to use it:
+
+$ npm install webtorrent-cli -g
+$ webtorrent --help
+To download a torrent:
+
+$ webtorrent magnet_uri
+To stream a torrent to a device like AirPlay or Chromecast, just pass a flag:
+
+$ webtorrent magnet_uri --airplay
+There are many supported streaming options:
+
+--airplay               Apple TV
+--chromecast            Chromecast
+--mplayer               MPlayer
+--mpv                   MPV
+--omx [jack]            omx [default: hdmi]
+--vlc                   VLC
+--xbmc                  XBMC
+--stdout                standard out [implies --quiet]
+In addition to magnet uris, WebTorrent supports many ways to specify a torrent.
+
+
+Enable debug logs
+In node, enable debug logs by setting the DEBUG environment variable to the name of the module you want to debug (e.g. bittorrent-protocol, or * to print all logs).
+
+DEBUG=* webtorrent
+In the browser, enable debug logs by running this in the developer console:
+
+localStorage.setItem('debug', '*')
+Disable by running this:
+
+localStorage.removeItem('debug')
+License
+MIT. Copyright (c) Feross Aboukhadijeh and WebTorrent, LLC.
+
+
+Peerflix.
+peerflix
+Streaming torrent client for Node.js
+
+npm install -g peerflix
+Usage
+Peerflix can be used with a magnet link or a torrent file. To stream a video with its magnet link use the following command.
+
+peerflix "magnet:?xt=urn:btih:ef330b39f4801d25b4245212e75a38634bfc856e" --vlc
+Remember to put " around your magnet link since they usually contain &. peerflix will print a terminal interface. The first line contains an address to a http server. The --vlc flag ensures vlc is opened when the torrent is ready to stream.
+
+
+To stream music with a torrent file use the following command.
+
+peerflix "http://some-torrent/music.torrent" -a --vlc
+The -a flag ensures that all files in the music repository are played with vlc. Otherwise if the torrent contains multiple files, peerflix will choose the biggest one. To get a full list of available options run peerflix with the help flag.
+
+peerflix --help
+Examples of usage of could be
+
+peerflix magnet-link --list # Select from a list of files to download
+peerflix magnet-link --vlc -- --fullscreen # will pass --fullscreen to vlc
+peerflix magnet-link --mplayer --subtitles subtitle-file.srt # play in mplayer with subtitles
+peerflix magnet-link --connection 200 # set max connection to 200
+Programmatic usage
+If you want to build your own app using streaming bittorrent in Node you should checkout torrent-stream
+
+Chromebook users
+Chromebooks are set to refuse all incoming connections by default - to change this:
+
+sudo iptables -P INPUT ACCEPT
+Chromecast
+If you wanna use peerflix on your chromecast checkout peercast or castnow
+
+License
+MIT
+
+
+Dat.
+
+More info on active projects and modules at dat-ecosystem.org 
+
+dat-node
+dat-node is a high-level module for building Dat applications on the file system.
+
+For a lower-level API for building your own applications, use the Dat SDK which works in Node and the Web
+
+Compatibility
+Note: Version 4 of dat-node is not compatible with earlier versions (3.5.15 and below).
+
+Dat Project Documentation & Resources
+dat project Docs
+dat protocol
+Chat on Gitter or #dat on IRC
+Features
+High-level glue for common dat:// and hyperdrive modules.
+Sane defaults and consistent management of storage & secret keys across applications, using dat-storage.
+Easily connect to the dat:// network with holepunching, using hyperswarm
+Import files from the file system, using mirror-folder
+Serve dats over http with hyperdrive-http
+Access APIs to lower level modules with a single require!
+Browser Support
+Many of our dependencies work in the browser, but dat-node is tailored for file system applications. See dat-sdk if you want to build browser-friendly applications.
+
+Example
+To send files via dat:
+
+Tell dat-node where the files are.
+Import the files.
+Share the files on the dat network! (And share the link)
+var Dat = require('dat-node')
+
+// 1. My files are in /joe/cat-pic-analysis
+Dat('/joe/cat-pic-analysis', function (err, dat) {
+  if (err) throw err
+
+  // 2. Import the files
+  dat.importFiles()
+
+  // 3. Share the files on the network!
+  dat.joinNetwork()
+  // (And share the link)
+  console.log('My Dat link is: dat://' + dat.key.toString('hex'))
+})
+These files are now available to share over the dat network via the key printed in the console.
+
+var Dat = require('dat-node')
+
+// 1. Tell Dat where to download the files
+Dat('/download/cat-analysis', {
+  // 2. Tell Dat what link I want
+  key: '<dat-key>' // (a 64 character hash from above)
+}, function (err, dat) {
+  if (err) throw err
+
+  // 3. Join the network & download (files are automatically downloaded)
+  dat.joinNetwork()
+})
+Example Applications
+CLI: We use dat-node in the dat CLI.
+Desktop: The Dat Desktop application manages multiple dat-node instances via dat-worker.
+See the examples folder for a minimal share + download usage.
+And more! Let us know if you have a neat dat-node application to add here.
+Usage
+All dat-node applications have a similar structure around three main elements:
+
+Storage - where the files and metadata are stored.
+Network - connecting to other users to upload or download data.
+Adding Files - adding files from the file system to the hyperdrive archive.
+Storage
+Every dat archive has storage, this is the required first argument for dat-node. By default, we use dat-storage which stores the secret key in ~/.dat/ and the rest of the data in dir/.dat. Other common options are:
+
+Persistent storage: Stored files in /my-dir and metadata in my-dir/.dat by passing /my-dir as the first argument.
+Temporary Storage: Use the temp: true option to keep metadata stored in memory.
+// Permanent Storage
+Dat('/my-dir', function (err, dat) {
+  // Do Dat Stuff
+})
+
+// Temporary Storage
+Dat('/my-dir', {temp: true}, function (err, dat) {
+  // Do Dat Stuff
+})
+Both of these will import files from /my-dir when doing dat.importFiles() but only the first will make a .dat folder and keep the metadata on disk.
+
+The storage argument can also be passed through to hyperdrive for more advanced storage use cases.
+
+Network
+Dat is all about the network! You'll almost always want to join the network right after you create your Dat:
+
+Dat('/my-dir', function (err, dat) {
+  dat.joinNetwork()
+  dat.network.on('connection', function () {
+    console.log('I connected to someone!')
+  })
+})
+Downloading Files
+Remember, if you are downloading - metadata and file downloads will happen automatically once you join the network!
+
+dat runs on a peer to peer network, sometimes there may not be anyone online for a particular key. You can make your application more user friendly by using the callback in joinNetwork:
+
+// Downloading <key> with joinNetwork callback
+Dat('/my-dir', {key: '<key>'}, function (err, dat) {
+  dat.joinNetwork(function (err) {
+    if (err) throw err
+
+    // After the first round of network checks, the callback is called
+    // If no one is online, you can exit and let the user know.
+    if (!dat.network.connected || !dat.network.connecting) {
+      console.error('No users currently online for that key.')
+      process.exit(1)
+    }
+  })
+})
+Download on Demand
+If you want to control what files and metadata are downloaded, you can use the sparse option:
+
+// Downloading <key> with sparse option
+Dat('/my-dir', {key: '<key>', sparse: true}, function (err, dat) {
+  dat.joinNetwork()
+
+  // Manually download files via the hyperdrive API:
+  dat.archive.readFile('/cat-locations.txt', function (err, content) {
+    console.log(content) // prints cat-locations.txt file!
+  })
+})
+Dat will only download metadata and content for the parts you request with sparse mode!
+
+Importing Files
+There are many ways to get files imported into an archive! Dat node provides a few basic methods. If you need more advanced imports, you can use the archive.createWriteStream() methods directly.
+
+By default, just call dat.importFiles() to import from the directory you initialized with. You can watch that folder for changes by setting the watch option:
+
+Dat('/my-data', function (err, dat) {
+  if (err) throw err
+
+  var progress = dat.importFiles({watch: true}) // with watch: true, there is no callback
+  progress.on('put', function (src, dest) {
+    console.log('Importing ', src.name, ' into archive')
+  })
+})
+You can also import from another directory:
+
+Dat('/my-data', function (err, dat) {
+  if (err) throw err
+
+  dat.importFiles('/another-dir', function (err) {
+    console.log('done importing another-dir')
+  })
+})
+That covers some of the common use cases, let us know if there are more to add! Keep reading for the full API docs.
+
+API
+Dat(dir|storage, [opts], callback(err, dat))
+Initialize a Dat Archive in dir. If there is an existing Dat Archive, the archive will be resumed.
+
+Storage
+dir (Default) - Use dat-storage inside dir. This stores files as files, sleep files inside .dat, and the secret key in the user's home directory.
+dir with opts.latest: false - Store as SLEEP files, including storing the content as a content.data file. This is useful for storing all history in a single flat file.
+dir with opts.temp: true - Store everything in memory (including files).
+storage function - pass a custom storage function along to hyperdrive, see dat-storage for an example.
+Most options are passed directly to the module you're using (e.g. dat.importFiles(opts). However, there are also some initial opts can include:
+
+opts = {
+  key: '<dat-key>', // existing key to create archive with or resume
+  temp: false, // Use random-access-memory as the storage.
+
+  // Hyperdrive options
+  sparse: false // download only files you request
+}
+The callback, cb(err, dat), includes a dat object that has the following properties:
+
+dat.key: key of the dat (this will be set later for non-live archives)
+dat.archive: Hyperdrive archive instance.
+dat.path: Path of the Dat Archive
+dat.live: archive.live
+dat.writable: Is the archive writable?
+dat.resumed: true if the archive was resumed from an existing database
+dat.options: All options passed to Dat and the other submodules
+Module Interfaces
+dat-node provides an easy interface to common Dat modules for the created Dat Archive on the dat object provided in the callback:
+
+var network = dat.joinNetwork([opts], [cb])
+Join the network to start transferring data for dat.key, using discovery-swarm. You can also use dat.join([opts], [cb]).
+
+If you specify cb, it will be called when the first round of discovery has completed. This is helpful to check immediately if peers are available and if not fail gracefully, more similar to http requests.
+
+Returns a network object with properties:
+
+network.connected - number of peers connected
+network.on('listening') - emitted with network is listening
+network.on('connection', connection, info) - Emitted when you connect to another peer. Info is an object that contains info about the connection
+Network Options
+opts are passed to discovery-swarm, which can include:
+
+opts = {
+  upload: true, // announce and upload data to other peers
+  download: true, // download data from other peers
+  port: 3282, // port for discovery swarm
+  utp: true, // use utp in discovery swarm
+  tcp: true // use tcp in discovery swarm
+}
+
+//Defaults from datland-swarm-defaults can also be overwritten:
+
+opts = {
+  dns: {
+    server: // DNS server
+    domain: // DNS domain
+  }
+  dht: {
+    bootstrap: // distributed hash table bootstrapping nodes
+  }
+}
+Returns a discovery-swarm instance.
+
+dat.leaveNetwork() or dat.leave()
+Leaves the network for the archive.
+
+var importer = dat.importFiles([src], [opts], [cb])
+Archive must be writable to import.
+
+Import files to your Dat Archive from the directory using mirror-folder.
+
+src - By default, files will be imported from the folder where the archive was initiated. Import files from another directory by specifying src.
+opts - options passed to mirror-folder (see below).
+cb - called when import is finished.
+Returns a importer object with properties:
+
+importer.on('error', err)
+importer.on('put', src, dest) - file put started. src.live is true if file was added by file watch event.
+importer.on('put-data', chunk) - chunk of file added
+importer.on('put-end', src, dest) - end of file write stream
+importer.on('del', dest) - file deleted from dest
+importer.on('end') - Emits when mirror is done (not emitted in watch mode)
+If opts.count is true:
+importer.on('count', {files, bytes}) - Emitted after initial scan of src directory. See import progress section for details.
+importer.count will be {files, bytes} to import after initial scan.
+importer.putDone will track {files, bytes} for imported files.
+Importer Options
+Options include:
+
+var opts = {
+  count: true, // do an initial dry run import for rendering progress
+  ignoreHidden: true, // ignore hidden files  (if false, .dat will still be ignored)
+  ignoreDirs: true, // do not import directories (hyperdrive does not need them and it pollutes metadata)
+  useDatIgnore: true, // ignore entries in the `.datignore` file from import dir target.
+  ignore: // (see below for default info) anymatch expression to ignore files
+  watch: false, // watch files for changes & import on change (archive must be live)
+}
+Ignoring Files
+You can use a .datignore file in the imported directory, src, to ignore any the user specifies. This is done by default.
+
+dat-node uses dat-ignore to provide a default ignore option, ignoring the .dat folder and all hidden files or directories. Use opts.ignoreHidden = false to import hidden files or folders, except the .dat directory.
+
+It's important that the .dat folder is not imported because it contains a private key that allows the owner to write to the archive.
+
+var stats = dat.trackStats()
+stats.on('update')
+Emitted when archive stats are updated. Get new stats with stats.get().
+
+var st = stats.get()
+dat.trackStats() adds a stats object to dat. Get general archive stats for the latest version:
+
+{
+  files: 12,
+  byteLength: 1234,
+  length: 4, // number of blocks for latest files
+  version: 6, // archive.version for these stats
+  downloaded: 4 // number of downloaded blocks for latest
+}
+stats.network
+Get upload and download speeds: stats.network.uploadSpeed or stats.network.downloadSpeed. Transfer speeds are tracked using hyperdrive-network-speed.
+
+var peers = stats.peers
+peers.total - total number of connected peers
+peers.complete - connected peers with all the content data
+var server = dat.serveHttp(opts)
+Serve files over http via hyperdrive-http. Returns a node http server instance.
+
+opts = {
+  port: 8080, // http port
+  live: true, // live update directory index listing
+  footer: 'Served via Dat.', // Set a footer for the index listing
+  exposeHeaders: false // expose dat key in headers
+}
+dat.pause()
+Pause all upload & downloads. Currently, this is the same as dat.leaveNetwork(), which leaves the network and destroys the swarm. Discovery will happen again on resume().
+
+dat.resume()
+Resume network activity. Current, this is the same as dat.joinNetwork().
+
+dat.close(cb)
+Stops replication and closes all the things opened for dat-node, including:
+
+dat.archive.close(cb)
+dat.network.close(cb)
+dat.importer.destroy() (file watcher)
+License
+MIT
+
+
+Stackgl.
+
+#stackgl
+
+Learning
+shader-school1.1.0
+webgl-workshop1.2.1
+learning-webgl-011.0.0
+learning-webgl-021.0.0
+learning-webgl-031.0.0
+bunny-walkthrough1.0.0
+glsl-lighting-walkthrough1.0.0
+three-glslify-example1.0.0
+Core
+regl1.4.2
+gl-fbo2.0.5
+gl-vao1.3.0
+gl-buffer2.1.2
+gl-texture2d2.1.0
+gl-shader4.2.1
+gl-texture-cube1.0.1
+Quickstarts
+gl-now1.4.0
+gl-toy2.0.3
+WebGL API
+gl-post1.0.1
+gl-compare2.0.2
+gl-state1.0.0
+gl-reset1.0.0
+gl-clear2.0.0
+gl-geometry3.1.1
+gl-texture2d-display1.0.0
+gl-texture2d-read-float1.0.1
+gl-texture2d-pixels1.0.2
+gl-texture2d-pip1.0.0
+webgl-context2.2.0
+gl-context0.1.1
+gl-fbo-matching1.0.0
+gl-particles1.1.0
+gl-constants1.0.0
+gl-extension1.1.1
+WebVR API
+vrdevices0.0.1
+Interoperability
+glslify-loader2.0.0
+glslify-promise1.0.2
+glslify-sync2.0.0
+three-glslify2.0.2
+glslify-bundle5.1.1
+glslify-deps1.3.1
+glslify-resolve-remote2.1.0
+glslify-client2.0.0
+Tools/Development
+glslify7.0.0
+headless-gl4.5.0
+glslify-live2.1.1
+glslify-optimize2.0.1
+wzrd1.5.0
+budo11.6.3
+installify1.1.0
+hihat2.6.4
+glsl-testify1.0.0
+gl-shader-output2.0.1
+glsl-editor1.0.0
+stackgl-generator1.0.4
+gl-api1.0.3
+stackgl-shader-experiment1.0.2
+webgl-debug2.0.1
+Camera Controls
+3d-view2.0.0
+turntable-camera1.0.0
+lookat-camera1.0.0
+orbit-camera1.0.0
+game-shell-orbit-camera1.0.0
+3d-camera-core1.0.0
+orbit-camera-controller3.0.0
+free-camera-controller1.0.0
+perspective-camera-controller
+canvas-orbit-camera1.0.2
+first-person-camera1.1.0
+perspective-camera2.0.1
+camera-picking-ray1.0.1
+camera-unproject1.0.1
+camera-project1.0.2
+camera-spin3.0.1
+gl-movable-camera1.0.1
+birds-eye-camera0.1.0
+Interaction
+mouse-change1.4.0
+mouse-wheel1.2.0
+mouse-event1.0.5
+key-pressed0.0.1
+mouse-pressed1.0.0
+mouse-position2.1.0
+touch-position2.0.0
+touches1.2.2
+scroll-speed1.0.0
+vkey1.0.1
+trackball-controller2.0.0
+Test Assets
+bunny1.0.1
+baboon-image2.1.0
+teapot1.0.0
+stanford-dragon1.1.1
+snowden1.0.1
+gl-cubemap-placeholder2.0.1
+Asset Handling
+get-pixels3.3.2
+save-pixels2.3.4
+shadertoy-export0.0.1
+google-panorama-equirectangular2.1.0
+svg-mesh-3d1.1.0
+soundcloud-badge1.1.0
+gl-audio-analyser1.0.3
+ndpack-image3.0.0
+font-atlas2.1.0
+gl-gif3.1.0
+image-sdf1.0.4
+gl-sprite-batch3.1.1
+gl-checker-background1.0.0
+gl-vignette-background2.0.1
+gl-basic-shader1.3.0
+ndarray-bin-pack1.0.2
+parse-dds1.2.1
+serialize-stl1.0.2
+parse-stl1.0.2
+parse-obj0.0.0
+parse-ply0.1.0
+serialize-wavefront-obj1.0.0
+parse-wavefront-obj1.0.3
+parse-cube-lut1.0.1
+png-chunk-text1.0.0
+png-chunks-encode1.0.0
+png-chunks-extract1.0.0
+gl-render-cubemap2.0.0
+parse-pc21.0.1
+Geometry
+gl-wireframe1.0.1
+icosphere1.0.0
+primitive-torus1.0.4
+geo-3d-box2.0.2
+geo-arc1.1.2
+geo-star1.0.1
+geo-piecering1.0.1
+geo-chevron1.0.3
+geo-asterisk1.0.3
+heightmap-contours1.0.1
+mesh-heightmap-contours1.0.2
+normals1.1.0
+surface-nets1.0.2
+isosurface1.0.0
+refine-mesh1.0.1
+cdt2d1.0.0
+simplicial-complex1.0.0
+svg-3d-simplicial-complex0.1.1
+greedy-mesher1.0.3
+voxelize1.0.0
+convex-hull1.0.3
+affine-hull1.0.0
+triangulate-polyline1.0.3
+orthogami1.1.0
+plane-to-polygon1.0.0
+find-basis-3d1.0.0
+mesh-mean-curvature1.0.1
+mesh-laplacian1.0.0
+box-frustum0.0.0
+delaunay-triangulate1.1.6
+voronoi-diagram1.0.1
+surface-vectors0.0.0
+face-normals0.0.0
+mesh-reindex1.0.0
+mesh-combine1.1.0
+unindex-mesh2.0.0
+from-3d-to-2d0.0.1
+extrude1.0.2
+merge-vertices1.0.0
+merge-meshes1.0.0
+remove-degenerate-cells1.0.0
+remove-orphan-vertices1.0.0
+vertices-bounding-box1.0.0
+rescale-vertices1.0.0
+quantize-vertices1.0.2
+quad-indices2.0.1
+triangle-incenter1.0.2
+triangle-centroid1.0.0
+geo-identify-position-format1.0.2
+geo-convert-position-format1.0.0
+geo-3d-transform-mat41.0.0
+gl-skybox1.0.1
+geo-ambient-occlusion3.0.4
+geo-center1.0.2
+primitive-cube2.0.1
+primitive-box1.0.0
+primitive-plane2.0.0
+primitive-capsule3.0.0
+geom-edges1.1.0
+geom-triangulate1.0.1
+primitive-ellipsoid1.1.0
+primitive-sphere3.0.0
+primitive-quad2.0.0
+primitive-cylinder1.0.3
+mesh-simplify2.0.0
+gl-skydome-sun2.0.5
+quads1.2.0
+primitive-geometry1.2.0
+frenet-serret-frames1.1.0
+path-tangents1.0.0
+Animation
+skeletal-animation-system0.8.1
+Math
+gl-vec21.3.0
+gl-vec31.1.3
+gl-mat21.0.1
+gl-mat32.0.0
+gl-mat41.2.0
+gl-quat1.0.0
+mat4-recompose1.0.4
+mat4-decompose1.0.4
+mat4-interpolate1.0.4
+css-mat41.0.0
+css-transform-to-mat41.0.4
+cubic-hermite1.0.0
+cubic-hermite-spline1.0.1
+eases1.0.8
+get-plane-normal1.0.0
+Collision
+ray-aabb3.0.2
+ray-3d1.1.1
+ray-sphere-intersection1.0.0
+ray-plane-intersection1.0.0
+ray-triangle-intersection1.0.3
+ray-aabb-intersection1.0.1
+gl-swept-sphere-triangle1.3.0
+Text Rendering
+text-modules1.0.5
+vectorize-text3.2.1
+gl-sprite-text2.3.1
+GUI
+pnp-gui0.0.4
+Shader Components
+glsl-specular-beckmann1.1.2
+glsl-specular-cook-torrance2.0.2
+glsl-diffuse-oren-nayar1.0.1
+glsl-diffuse-lambert1.0.0
+glsl-specular-ward1.0.0
+glsl-specular-gaussian1.0.0
+glsl-specular-phong1.0.0
+glsl-specular-blinn-phong1.0.2
+glsl-perturb-normal1.0.3
+glsl-face-normal1.0.2
+glsl-checker1.0.1
+glsl-earth1.0.2
+glsl-easings1.0.0
+matcap0.0.2
+glsl-inverse1.0.0
+glsl-determinant1.0.0
+glsl-transpose1.0.0
+glsl-frobenius1.0.0
+glsl-look-at1.0.0
+glsl-camera-ray1.0.0
+glsl-raytrace1.0.0
+glsl-sdf-normal1.0.0
+glsl-sdf-sphere1.0.0
+glsl-sdf-box1.0.0
+glsl-sdf-primitives0.0.0
+glsl-sdf-ops0.0.0
+glsl-ruler1.0.0
+glsl-turntable-camera1.0.0
+glsl-combine-smooth1.0.0
+glsl-luma1.0.1
+glsl-gamma2.0.0
+glsl-aastep1.0.1
+glsl-dither1.0.1
+glsl-noise0.0.0
+glsl-fractal-brownian-noise1.1.0
+glsl-worley1.0.1
+glsl-random0.0.5
+glsl-fog0.0.1
+glsl-fxaa3.0.0
+glsl-lut1.1.1
+glsl-range1.0.0
+glsl-scale-linear1.0.0
+glsl-scale-log1.0.0
+glsl-square-frame1.0.1
+glsl-cornell-box2.0.4
+glsl-read-float1.1.0
+glsl-rgba-to-float1.0.0
+glsl-smooth-min1.0.0
+glsl-film-grain1.0.4
+glsl-hash-blur1.0.3
+glsl-fast-gaussian-blur1.0.2
+glsl-halftone1.0.4
+glsl-crosshatch-filter1.0.0
+glsl-ascii-filter1.0.1
+glsl-hsv2rgb1.0.0
+glsl-hsl2rgb1.1.0
+glsl-blend-overlay1.0.5
+glsl-blend-soft-light1.0.5
+glsl-map1.0.1
+glsl-edge-detection1.1.0
+glsl-atmosphere2.0.0
+glsl-godrays1.0.2
+glsl-cos-palette1.0.0
+glsl-gradient-palette1.0.0
+glsl-vignette1.1.0
+glsl-solid-wireframe1.0.2
+glsl-domain-coloring2.0.6
+glsl-sat0.1.0
+glsl-numerify1.0.0
+glsl-quad1.0.0
+glsl-gaussian0.1.0
+glsl-zoom0.1.0
+screen-projected-lines2.0.1
+glsl-fft1.0.3
+glsl-rfft1.0.2
+glsl-smaa1.0.0
+glsl-rotate1.1.0
+glsl-constants1.0.0
+glsl-conditionals1.0.0
+glsl-tiling1.0.1
+glsl-gcd1.0.1
+glsl-rectangular-function1.0.1
+Shader Transforms
+glslify-hex2.1.1
+glslify-import3.1.0
+Visualisation
+gl-surface3d1.5.2
+gl-line3d1.2.1
+gl-scatter3d1.2.3
+gl-plot2d1.4.4
+gl-heatmap2d1.0.6
+gl-scatter2d1.3.2
+gl-scatter2d-fancy1.2.1
+gl-axes3d1.5.3
+Utilities
+webglew1.0.5
+canvas-fit1.5.0
+canvas-autoscale2.0.0
+canvas-pixels0.0.0
+raf-loop1.1.3
+canvas-loop1.0.7
+rotate-vector-about-axis1.0.2
+gl-quads-to-tris1.0.0
+gl-catmull-clark1.0.0
+raf-perf1.2.0
+canvas-screenshot3.0.0
+Internals
+glsl-resolve0.0.1
+gl-shader-extract1.1.2
+glsl-extract-reflect1.0.1
+glsl-parser2.0.1
+glsl-tokenizer2.1.5
+glsl-token-macros1.0.0
+glsl-token-functions1.0.1
+glsl-token-extension-dedupe1.0.0
+glsl-token-depth1.1.2
+glsl-token-defines1.0.0
+glsl-token-descope1.0.2
+glsl-token-scope1.1.2
+glsl-token-assignments2.0.2
+glsl-token-properties1.0.1
+glsl-token-string1.0.1
+gl-conformance2.0.8
+stackgl-readme-css1.2.0
+stack.gl package documentation
+This is a full list of the packages that fall under the stack.gl umbrella, catalogued into a single page with all of their documentation for you to peruse at your leisure.
+
+You can very easily add your own packages to this list by updating the GitHub wiki. You'll see your repository added to the list when it's next updated, which happens once every hour or so. No need to be shy contributing: the more the merrier
+
+Peerwiki.
+
+peerwiki
+BROWSE ALL OF WIKIPEDIA USING BITTORENT
+
+npm install -g peerwiki
+Usage
+peerwiki 9090 # starts a peerwiki server on port 9090
+To get more debug output do
+
+DEBUG=peerwiki peerwiki 9090
+This can useful the first time you start browsing since it needs to some download some shared static assets which can result in a added latency
+
+To use a pregenerated index (will speed up page load) do
+
+peerwiki 9090 --use-index
+And open a browser on http://localhost:9090/BitTorrent
+
+Cache
+When downloading articles they are cached on your local file system in ./peerwiki.
+
+Programmatic usage
+var peerwiki = require('peerwiki')
+var wiki = peerwiki(function() {
+  // wiki is ready
+
+  // fetch the BitTorrent article metadata from other peers
+  wiki.findEntryByUrl('html/B/i/t/T/BitTorrent', function(err, result) {
+    console.log(result)
+  })
+
+  // fetch the actual article from other peers
+  wiki.findBlobByUrl('html/B/i/t/T/BitTorrent', function(err, buf) {
+    console.log(buf)
+  })
+
+  wiki.listen(9091) // listen for p2p connections on port 9091
+})
+License
+MIT
+
+
+Peercast.
+peercast
+torrent-stream + chromecast
+
+npm install -g peercast
+Usage
+Be on the same wifi as your chromecast and do
+
+peercast magnet:?xt=urn:btih:99feae0a05c6a5dd9af939ffce5ca9b0d16f31b0
+Currently this does not do any transcoding so the torrent should be mp4 (or whatever chromecast supports)
+
+Programmatic usage
+var peercast = require('peercast')
+
+var engine = peercast(torrentOrMagnetLink)
+
+engine.on('chromecast-status', function(status) {
+  console.log('chromecast status: %s', status.playerState)
+})
+
+engine.on('chromecast-playing', function(file) {
+  console.log('chromcast is playing %s', file.name)
+})
+License
+MIT
+
+
+PDFKit.
+PDFKit
+A JavaScript PDF generation library for Node and the browser.
+
+Description
+PDFKit is a PDF document generation library for Node and the browser that makes creating complex, multi-page, printable documents easy. The API embraces chainability, and includes both low level functions as well as abstractions for higher level functionality. The PDFKit API is designed to be simple, so generating complex documents is often as simple as a few function calls.
+
+Check out some of the documentation and examples to see for yourself! You can also read the guide as a self-generated PDF with example output displayed inline. If you'd like to see how it was generated, check out the README in the docs folder.
+
+You can also try out an interactive in-browser demo of PDFKit here.
+
+Installation
+Installation uses the npm package manager. Just type the following command after installing npm.
+
+npm install pdfkit
+Features
+Vector graphics
+HTML5 canvas-like API
+Path operations
+SVG path parser for easy path creation
+Transformations
+Linear and radial gradients
+Text
+Line wrapping (with soft hyphen recognition)
+Text alignments
+Bulleted lists
+Font embedding
+Supports TrueType (.ttf), OpenType (.otf), WOFF, WOFF2, TrueType Collections (.ttc), and Datafork TrueType (.dfont) fonts
+Font subsetting
+See fontkit for more details on advanced glyph layout support.
+Image embedding
+Supports JPEG and PNG files (including indexed PNGs, and PNGs with transparency)
+Annotations
+Links
+Notes
+Highlights
+Underlines
+etc.
+AcroForms
+Outlines
+PDF security
+Encryption
+Access privileges (printing, copying, modifying, annotating, form filling, content accessibility, document assembly)
+Accessibility support (marked content, logical structure, Tagged PDF, PDF/UA)
+Coming soon!
+Patterns fills
+Higher level APIs for creating tables and laying out content
+More performance optimizations
+Even more awesomeness, perhaps written by you! Please fork this repository and send me pull requests.
+Example
+const PDFDocument = require('pdfkit');
+const fs = require('fs');
+
+// Create a document
+const doc = new PDFDocument();
+
+// Pipe its output somewhere, like to a file or HTTP response
+// See below for browser usage
+doc.pipe(fs.createWriteStream('output.pdf'));
+
+// Embed a font, set the font size, and render some text
+doc
+  .font('fonts/PalatinoBold.ttf')
+  .fontSize(25)
+  .text('Some text with an embedded font!', 100, 100);
+
+// Add an image, constrain it to a given size, and center it vertically and horizontally
+doc.image('path/to/image.png', {
+  fit: [250, 300],
+  align: 'center',
+  valign: 'center'
+});
+
+// Add another page
+doc
+  .addPage()
+  .fontSize(25)
+  .text('Here is some vector graphics...', 100, 100);
+
+// Draw a triangle
+doc
+  .save()
+  .moveTo(100, 150)
+  .lineTo(100, 250)
+  .lineTo(200, 250)
+  .fill('#FF3300');
+
+// Apply some transforms and render an SVG path with the 'even-odd' fill rule
+doc
+  .scale(0.6)
+  .translate(470, -380)
+  .path('M 250,75 L 323,301 131,161 369,161 177,301 z')
+  .fill('red', 'even-odd')
+  .restore();
+
+// Add some text with annotations
+doc
+  .addPage()
+  .fillColor('blue')
+  .text('Here is a link!', 100, 100)
+  .underline(100, 100, 160, 27, { color: '#0000FF' })
+  .link(100, 100, 160, 27, 'http://google.com/');
+
+// Finalize PDF file
+doc.end();
+The PDF output from this example (with a few additions) shows the power of PDFKit — producing complex documents with a very small amount of code. For more, see the demo folder and the PDFKit programming guide.
+
+Browser Usage
+There are three ways to use PDFKit in the browser:
+
+Use Browserify. See demo source code and build script
+Use webpack. See complete example.
+Use prebuilt version. Distributed as pdfkit.standalone.js file in the releases or in the package js folder.
+In addition to PDFKit, you'll need somewhere to stream the output to. HTML5 has a Blob object which can be used to store binary data, and get URLs to this data in order to display PDF output inside an iframe, or upload to a server, etc. In order to get a Blob from the output of PDFKit, you can use the blob-stream module.
+
+The following example uses Browserify or webpack to load PDFKit and blob-stream. See here and here for examples of prebuilt version usage.
+
+// require dependencies
+const PDFDocument = require('pdfkit');
+const blobStream = require('blob-stream');
+
+// create a document the same way as above
+const doc = new PDFDocument();
+
+// pipe the document to a blob
+const stream = doc.pipe(blobStream());
+
+// add your content to the document here, as usual
+
+// get a blob when you are done
+doc.end();
+stream.on('finish', function() {
+  // get a blob you can do whatever you like with
+  const blob = stream.toBlob('application/pdf');
+
+  // or get a blob URL for display in the browser
+  const url = stream.toBlobURL('application/pdf');
+  iframe.src = url;
+});
+You can see an interactive in-browser demo of PDFKit.
+
+Note that in order to Browserify a project using PDFKit, you need to install the brfs module with npm, which is used to load built-in font data into the package. It is listed as a devDependency in PDFKit's package.json, so it isn't installed by default for Node users. If you forget to install it, Browserify will print an error message.
+
+Documentation
+For complete API documentation and more examples, see the PDFKit website.
+
+License
+PDFKit is available under the MIT license.
+
+
+TURF
+
+Getting started
+The source of truth for published versions of Turf is NPM. You are welcome to use other providers that republish these packages.
+
+Installation​
+In Node.js​
+# get all of turf
+npm install @turf/turf
+
+# or get individual packages
+npm install @turf/helpers
+npm install @turf/buffer
+
+As of v7, both CommonJS and ESM bundles are included.
+
+In browser​
+Whether downloading locally, or including a 3rd party version of turf directly, there are multiple CDN's to choose from and each has a URL scheme that allows you to specify what version you want, with some flexibility. Structure your URL as appropriate for your needs:
+
+jsdelivr
+browse: https://www.jsdelivr.com/package/npm/@turf/turf
+latest within major version: https://cdn.jsdelivr.net/npm/@turf/turf@7/turf.min.js
+latest within minor version: https://cdn.jsdelivr.net/npm/@turf/turf@7.0/turf.min.js
+specific version: https://cdn.jsdelivr.net/npm/@turf/turf@7.0.0/turf.min.js
+unpkg
+browse: https://unpkg.com/browse/@turf/turf@7.0.0/
+latest within major version: https://unpkg.com/@turf/turf@^7/turf.min.js
+latest within minor version: https://unpkg.com/@turf/turf@^7.0/turf.min.js
+specific version: https://unpkg.com/@turf/turf@7.0.0/turf.min.js
+For example, download the latest minified version 7, and include it in a script tag. This will expose a global variable named turf.
+
+<script src="turf.min.js" charset="utf-8"></script>
+
+You can also include it directly from a CDN. This example specifies the latest version within v7.
+
+<script src="https://cdn.jsdelivr.net/npm/@turf/turf@7/turf.min.js"></script>
+
+It is not recommended to use a CDN URL that gives you the latest bleeding edge version of Turf, especially in a production app. There are breaking changes to turf functions between major versions that can leave your app in a broken state because it always gives your browser users the latest version.
+
+TypeScript​
+TypeScript definitions are included and exported by each Turf module, except for GeoJSON type definitions (e.g. Polygon, FeatureCollection) which are provided by the @types/geojson package. Turf does not re-export these type definitionas. If you need them, you can import and use them directly, e.g. import { Polygon, FeatureCollection } from 'geojson'. You may need to install the @types/geojson package first.
+
+Other languages​
+Ports of Turf.js are available in:
+
+Java (Android, Java SE)
+The current to-do list for porting to Java
+
+Swift (iOS, macOS, tvOS, watchOS, Linux)
+Turf for Swift is experimental and its public API is subject to change. Please use with care.
+
+Dart/Flutter (Dart Web, Dart Native; Flutter for iOS, Android, macOS, Windows, Linux, Web)
+The Turf for Dart port is still in progress, the implementation status can be found in the README.
+
+Data in Turf​
+Turf uses GeoJSON for all geographic data. Turf expects the data to be standard WGS84 longitude, latitude coordinates. Check out geojson.io for a tool to easily create this data.
+
+NOTE: Turf expects data in (longitude, latitude) order per the GeoJSON standard.
+
+Most Turf functions work with GeoJSON features. These are pieces of data that represent a collection of properties (ie: population, elevation, zipcode, etc.) along with a geometry. GeoJSON has several geometry types such as:
+
+Point
+LineString
+Polygon
+Turf provides a few geometry functions of its own. These are nothing more than simple (and optional) wrappers that output plain old GeoJSON. For example, these two methods of creating a point are functionally equivalent:
+
+// Note order: longitude, latitude.
+var point1 = turf.point([-73.988214, 40.749128]);
+
+var point2 = {
+  type: "Feature",
+  geometry: {
+    type: "Point",
+    // Note order: longitude, latitude.
+    coordinates: [-73.988214, 40.749128],
+  },
+  properties: {},
+};
+
+Browser support​
+Turf packages are compiled to target ES2017. However, the browser version of @turf/turf is transpiled to also include support for IE11. If you are using these packages and need to target IE11, please transpile the following packages as part of your build:
+
+@turf/*
+robust-predicates
+rbush
+tinyqueue
+
+
+WebCat
+
+webcat
+Mad science p2p pipe across the web using webrtc that uses your Github private/public key for authentication and a signalhub for discovery
+
+We also want to support other key hosts beyond Github. If you have suggestions or want to help implement this check out this issue.
+
+npm install -g webcat
+If you have trouble getting it to compile try following the wrtc install instructions
+
+Usage
+webcat lets you establish a p2p pipe to other github users over the web. Let's say I wanted to connect to @maxogden
+
+First I need to configure webcat once
+
+webcat --configure
+Enter your github username: mafintosh
+Then on my machine I run
+
+webcat maxogden
+hello max
+On Max's machine he runs
+
+webcat mafintosh
+hi mathias
+webcat will create a p2p pipe between connect me and max by using a signalhub to exchange webrtc metadata and Github private/public keys to authenticate that Max is actually @maxogden and that I am actually @mafintosh
+
+On my machine my prompt now looks like
+
+webcat maxogden
+hello max
+hi mathias
+And on Max's machine it now looks like
+
+webcat mafintosh
+hi mathias
+hello max
+How it works
+webcat works the following way
+
+First you sign a message that says you want to connect to another user using your Github private key
+You post this message to a known signalhub in the channel /
+The other user does the same thing only they posts it to the channel /
+One of you receives the connect message and verifies that it came from the right person by looking up the other users public key using https://github.com/.keys (and this will work in the browser if Github adds CORS GET to this API!)
+You then create a webrtc signal handshake, sign it and post it to the other user's lobby
+The other user receives this and posts back a signed version of their signaling data
+You use this data to establish a secure webrtc connection between eachother that is encrypted using DTLS
+You are now connected :)
+warning. we invented the first 6 parts of this scheme. it has not been properly peer reviewed so use at your own risk :)
+
+we use the following crypto dependencies:
+
+openssl from node core (rsa signing and https for fetching public keys)
+dtls from webrtc
+Use cases
+You can use webcat to pipe files across the internet!
+
+On my machine
+
+webcat maxogden < some-file
+On Max's machine
+
+webcat mafintosh > some-file
+Pipe to yourself
+Assuming you have your github key on two different machines you can also open and pipe between them by using the same username.
+
+On one machine connected to the internet that has your Github key
+
+echo machine one | webcat mafintosh
+On another machine connected to the internet that has your Github key
+
+echo machine two | webcat mafintosh
+Programmatic usage
+You can use webcat from node as well.
+
+var webcat = require('webcat')
+
+var stream = webcat('mafintosh') // put in the name of the person you want to talk to
+process.stdin.pipe(stream).pipe(process.stdout)
+License
+MIT
+
+
+NodeOS
+
+NodeOS
+
+
+Lightweight operating system using Node.js as userspace.
+
+NodeOS is an operating system built entirely in Javascript and managed by npm. Any package in npm is a NodeOS package, that means a selection of more than 400.000 packages. The goal of NodeOS is to provide just enough to let npm provide the rest. Since anyone can contribute to it, anyone can create NodeOS packages.
+
+This project won the Spanish 9th National Free Software Championship on the Systems category and was Honorable Mention of its 10th edition. It was also presented as the degree thesis of Jesús Leganes Combarro with a qualification of 10/10 with distinction.
+
+Useful links
+New Wiki (under work)
+pre-build releases images
+1.0 Roadmap
+2.0 Roadmap
+media files (logos, wallpapers...)
+discussion
+
+
+Introduction
+NodeOS is a Node.js based operating system, built-off of the Linux kernel. The NodeOS Project is aiming to, and can already run on some of the following platforms:
+
+real hardware like desktops, laptops, or SoC's (Raspberry Pi)
+cloud providers like Joyent, Amazon or Rackspace
+virtual machines like QEmu, VirtualBox, VMWare and KVM
+PaaS providers like Heroku or Joyent's Manta
+container providers like Docker & Vagga
+Core development is being done in layers. There could be some differences to adjust better to each target platform, but the general structure is:
+
+barebones custom Linux kernel with an initramfs that boots to a Node.js REPL
+initramfs Initram environment to mount the users partition & boot the system
+usersfs multi-user environment with the same behaviour of traditional OSes
+Booting process
+All the layers are bootable, leading barebones to a raw naked Node.js REPL prompt as PID 1, while initramfs exec actual NodeOS code to isolate user code from the core system and, if available, mount a partition with the users' home directories and root filesystems.
+
+If a usersfs partition is being set at boot time, it will be mounted and the system will consider each one of its folders as the home folder for a valid user on the system, and will execute a init file in the root of each of them. If found, the root user will be the first to be considered and will have access to all of the home directories, but by design it will not be possible to elevate permissions once the system has finished booting.
+
+Hacking
+If you are hacking on NodeOS for a somewhat production environment, you are likely interested on building a custom usersfs image or modify it once booted, since each user is isolated from the others and everyone can be able to define its own root filesystem, but you can customize all other layers if you want. For example, you can modify initramfs to login users and mount their home folders from a cloud service or craft a system without global services (no root user), or also dedicate a full NodeOS instance to a single Node.js application.
+
+Pre-built Images
+Ready to use pre-build images are automatically generated after each commit in master branch that sucessfully pass the tests. To exec them, you'll need to have QEmu installed on your system.
+
+The iso can be written to a CD-R or flashed to a USB pendrive, but will only provide the read-only rootfs and the changes will be done in memory, losing them after reboot, so you'll manually need to set a read-write usersfs partition if you want to persist them. On the other hand, if you want to flash it to a USB pendrive, We recommended doing it by using bin/installUSB command so it will automatically create a read-write usersfs partition to fill the remaining space and use it as persistent storage.
+
+Build NodeOS in five steps
+Download the project source code:
+
+git clone git@github.com:NodeOS/NodeOS.git
+cd NodeOS
+Install the required build tools. On a Ubuntu based system you can do it by executing:
+
+sudo bin/install-dependencies
+Install NodeOS build dependencies:
+
+npm install
+Build NodeOS:
+
+npm run build
+By default it will generate some files that can be used with QEmu, compiled for your current machine architecture. You can configure the build process by passing some environment variables. For example, to force to build for 32 bits, use BITS=32 npm install instead.
+
+Exec your freshly compiled NodeOS image:
+
+npm start
+It will automatically detect what CPU architecture will need to be used on QEmu and exec the correct emulation.
+
+...profit! :-D
+
+If you encounter an error when building NodeOS, take a look at the wiki or open an issue.
+
+Single Process OS
+NodeOS can be used as a Single Process OS, where only run a single executable. To do so, set the SINGLE_USER environment variable to the name of a npm module when executing npm run build. This will run fully from initram, persistence can be achieved by setting this environment variable to an empty string and later using a custom usersfs partition, but this is still experimental.
+
+NodeOS on LXC containers (Docker and vagga)
+NodeOS fully officially supports Docker, published images are available at the DockerHub NodeOS organization. If you are interested in helping or testing, you can build them from source code.
+
+Vagga support is fairly experimental, and help here will be greatly appreciated.
+
+Quick Start
+Install Docker
+
+One Liner
+
+sudo docker run -t -i nodeos/nodeos
+Build from Source
+git clone https://github.com/NodeOS/NodeOS.git
+cd NodeOS
+PLATFORM=docker npm install
+License
+MIT
+
+This software consists of voluntary contributions made by many individuals. For exact contribution history, see the revision history available at https://github.com/NodeOS/NodeOS
+
+YodaOS.
+
+This is a modern operating system for next generation interactive device, and it embraces Web community, uses JavaScript as the application language.
+
+Get Started
+To start with compiling YODAOS, a Linux is required, we recommend the followings distributions:
+
+Ubuntu 16.04
+Centos 7
+For Ubuntu:
+
+$ apt-get install build-essential subversion libncurses5-dev zlib1g-dev gawk gcc-multilib flex git-core gettext libssl-dev unzip texinfo device-tree-compiler dosfstools libusb-1.0-0-dev
+For Centos 7, the install command-line is:
+
+$ yum install -y unzip bzip2 dosfstools wget gcc gcc-c++ git ncurses-devel zlib-static openssl-devel svn patch perl-Module-Install.noarch perl-Thread-Queue
+# And the `device-tree-compiler` also needs to install manually:
+$ wget http://www.rpmfind.net/linux/epel/6/x86_64/Packages/d/dtc-1.4.0-1.el6.x86_64.rpm
+$ rpm -i dtc-1.4.0-1.el6.x86_64.rpm
+Download Source
+Click http://openai-corp.rokid.com, and do register as Rokid Developer.
+
+Then, go SSH Settings to config your local public key.
+
+https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/
+
+Install the repo cli
+YODAOS uses the repo command-line to manage the source tree:
+
+Repo unifies Git repositories when necessary, performs uploads to the Gerrit revision control system, and automates parts of the Android development workflow. Repo is not meant to replace Git, only to make it easier to work with Git in the context of Android. The repo command is an executable Python script that you can put anywhere in your path.
+
+Follow the below commands to install manually:
+
+$ curl https://raw.githubusercontent.com/yodaos-project/yodaos/master/tools/repo > /usr/local/bin/repo
+$ chmod 777 /usr/local/bin/repo
+And use repo --help to test if installation is done.
+
+Compile
+When the repo cli is ready, follow the instruments to get the complete source of YODAOS:
+
+$ repo init -u https://github.com/yodaos-project/yodaos.git -m manifest.xml --repo-url=http://openai-corp.rokid.com/tools/repo --no-repo-verify
+$ .repo/manifests/tools/repo-username -u {your rokid developer username} # set your username to fetch source from gerrit
+$ repo sync
+The above takes few minutes, just be patient. The next step is to build out the OS image, let's take the example of Raspberry board:
+
+$ cp -r products/yodaos/rbpi-3b-plus/configs/broadcom_bcm2710_rpi3b_plus_defconfig openwrt/.config
+$ cd openwrt
+$ make defconfig && make
+The cp command is to select which board that you would build, the following are the boards config table:
+
+board	product	config
+Raspberry 3b plus	raspberry	products/yodaos/rbpi-3b-plus/configs/broadcom_bcm2710_rpi3b_plus_defconfig
+Kamino18	kamino18	products/rokid/dev3.3/configs/leo_k18_dev33_defconfig
+Remember that make defconfig after you redo the copy on the specific board config.
+
+Go compile & run for more details.
+
+Children projects
+The YODAOS is a group of children projects open sourced which mainly are:
+
+BSP
+
+Kernel
+kamino18
+amlogic a113
+Uboot
+kamino18
+amlogic a113
+raspberry
+AIAL
+
+ai-libs-common includes the common libraries for AIAL.
+System Service
+
+flora-dispatcher is the centered service for flora.
+yoda-speech-service is the speech service that talks to [Rokid][] ASR/NLP cloud.
+net_manager manages the networking.
+gsensor_service G-sensor service.
+powermanager_service manages the power.
+battery_service manages the battery.
+bluetooth_service provides the A2DP-SINK, A2DP-SOURCE and AVRCP functions.
+Library
+
+flora is the PUB/SUB messaging library, also supports the request/response model for IPC.
+rklog rokid's logging library.
+httpdns httpdns library.
+httpsession http library based on CURL.
+librplayer MediaPlayer library based on SDL and ffmpeg.
+librokid-bt rokid's bluetooth library.
+librokid-bcmdhd-bt rokid's bluetooth library for bcmdhd.
+input-event The library controls the keyboard based on linux input API.
+lumenlight The LED library.
+Framework
+
+ShadowNode is the Node.js runtime that implements most of core APIs and N-API-compatible.
+yoda.js is the application-layer of YODAOS, it's also the VUI framework for JavaScript.
+Releases
+This section describes how do YODAOS release and its lifecycle.
+
+versions
+YODAOS uses Semver 2.0 for versioning management, and we have lifecycles for major and minor.
+
+major: one release per 6 month, and all releases are stable.
+minor: one release per 1 month, and only the even ones are stable, namely 1.0.x, 1.2.x, 1.4.x.
+We assume the 3rd Thursday at every month as YodaOS release date.
+
+release requirements
+Every release must contain the following parts:
+
+Repo manifest commit with specific version, for downloading the source code.
+Multiple platform images, includes:
+Rokid Kamino18 soc.
+AmLogic A113.
+Changelog describes what changes this updated.
+stable and pre-versions
+Stable version requires the complete tests on:
+
+Compatibility test suite
+Unit tests of modules and services
+Functional tests
+Integration tests
+The above workload is in usual 2 weeks for the team, therefore we introduce pre-version, namely release candidates(RC) to track the stable releasing progress.
+
+For stable version, we preserve 2 weeks at least to take the workload of full tests, and create a pre-version branch v1.2.x-rc. Once all the full tests are passed, then create a stable branch(v1.2.x) from release candidate branch(v1.2.x-rc).
+
+Community
+YouTube
+Contributing
+YODAOS is a community-driven project that we accepts any improved proposals, pull requests and issues.
+
+For JavaScript development, go [yodart][] for details.
+For proposal, yodaos-project/evolution is the place where someone can submit pull request to propose something.
+Documentation
+YodaOS Book
+License
+Apache 2.0
+
+Brain.js
+brain.js
+GPU accelerated Neural networks in JavaScript for Browsers and Node.Js.
+
+About
+brain.js is a GPU accelerated library for Neural Networks written in JavaScript.
+
+ This is a continuation of the harthur/brain, which is not maintained anymore. More info
+
+Table of Contents
+Installation and Usage
+NPM
+CDN
+Download
+Installation note
+Building from source
+Examples
+More Examples
+Training
+Data format
+For training with NeuralNetwork
+For training with RNNTimeStep, LSTMTimeStep and GRUTimeStep
+For training with RNN, LSTM and GRU
+For training with AE
+Training Options
+Async Training
+Cross Validation
+Train Stream
+Methods
+train
+run
+forecast
+Failing
+JSON
+Standalone Function
+Options
+activation
+hiddenLayers
+Streams
+Utilities
+likely
+toSVG
+Neural Network Types
+Why different Neural Network Types?
+Installation and Usage
+NPM
+If you can install brain.js with npm:
+
+npm install brain.js
+CDN
+<script src="//unpkg.com/brain.js"></script>
+Download
+Download the latest brain.js for browser
+
+Installation note
+Brain.js depends on a native module headless-gl for GPU support. In most cases installing brain.js from npm should just work. However, if you run into problems, this means prebuilt binaries are not able to download from GitHub repositories and you might need to build it yourself.
+
+Building from source
+Please make sure the following dependencies are installed and up to date and then run:
+
+npm rebuild
+System dependencies
+Mac OS X
+A supported version of Python
+XCode
+Ubuntu/Debian
+A supported version of Python
+A GNU C++ environment (available via the build-essential package on apt)
+libxi-dev
+Working and up-to-date OpenGL drivers
+GLEW
+pkg-config
+sudo apt-get install -y build-essential libglew-dev libglu1-mesa-dev libxi-dev pkg-config
+Windows
+A supported version of Python See: https://apps.microsoft.com/store/search/python
+Microsoft Visual Studio Build Tools 2022
+run in cmd: npm config set msvs_version 2022 Note: This no longer works in modern versions of npm.
+run in cmd: npm config set python python3 Note: This no longer works in modern versions of npm.
+* If you are using Build Tools 2017 then run npm config set msvs_version 2017 Note: This no longer works in modern versions of npm.
+
+Examples
+Here's an example showcasing how to approximate the XOR function using brain.js: more info on config.
+
+ A fun and practical introduction to Brain.js
+
+// provide optional config object (or undefined). Defaults shown.
+const config = {
+  binaryThresh: 0.5,
+  hiddenLayers: [3], // array of ints for the sizes of the hidden layers in the network
+  activation: 'sigmoid', // supported activation types: ['sigmoid', 'relu', 'leaky-relu', 'tanh'],
+  leakyReluAlpha: 0.01, // supported for activation type 'leaky-relu'
+};
+
+// create a simple feed-forward neural network with backpropagation
+const net = new brain.NeuralNetwork(config);
+
+net.train([
+  { input: [0, 0], output: [0] },
+  { input: [0, 1], output: [1] },
+  { input: [1, 0], output: [1] },
+  { input: [1, 1], output: [0] },
+]);
+
+const output = net.run([1, 0]); // [0.987]
+or more info on config here.
+
+// provide optional config object, defaults shown.
+const config = {
+  inputSize: 20,
+  inputRange: 20,
+  hiddenLayers: [20, 20],
+  outputSize: 20,
+  learningRate: 0.01,
+  decayRate: 0.999,
+};
+
+// create a simple recurrent neural network
+const net = new brain.recurrent.RNN(config);
+
+net.train([
+  { input: [0, 0], output: [0] },
+  { input: [0, 1], output: [1] },
+  { input: [1, 0], output: [1] },
+  { input: [1, 1], output: [0] },
+]);
+
+let output = net.run([0, 0]); // [0]
+output = net.run([0, 1]); // [1]
+output = net.run([1, 0]); // [1]
+output = net.run([1, 1]); // [0]
+. (-: So, here is a more involved, realistic example: Demo: training a neural network to recognize color contrast.
+
+More Example
+Training
+Use train() to train the network with an array of training data. The network has to be trained with all the data in bulk in one call to train(). More training patterns will probably take longer to train, but will usually result in a network better at classifying new patterns.
+
+Note
+Training is computationally expensive, so you should try to train the network offline (or on a Worker) and use the toFunction() or toJSON() options to plug the pre-trained network into your website.
+
+Data format
+For training with NeuralNetwork
+Each training pattern should have an input and an output, both of which can be either an array of numbers from 0 to 1 or a hash of numbers from 0 to 1. For the color contrast demo it looks something like this:
+
+const net = new brain.NeuralNetwork();
+
+net.train([
+  { input: { r: 0.03, g: 0.7, b: 0.5 }, output: { black: 1 } },
+  { input: { r: 0.16, g: 0.09, b: 0.2 }, output: { white: 1 } },
+  { input: { r: 0.5, g: 0.5, b: 1.0 }, output: { white: 1 } },
+]);
+
+const output = net.run({ r: 1, g: 0.4, b: 0 }); // { white: 0.99, black: 0.002 }
+Here's another variation of the above example. (Note that input objects do not need to be similar.)
+
+net.train([
+  { input: { r: 0.03, g: 0.7 }, output: { black: 1 } },
+  { input: { r: 0.16, b: 0.2 }, output: { white: 1 } },
+  { input: { r: 0.5, g: 0.5, b: 1.0 }, output: { white: 1 } },
+]);
+
+const output = net.run({ r: 1, g: 0.4, b: 0 }); // { white: 0.81, black: 0.18 }
+For training with RNNTimeStep, LSTMTimeStep and GRUTimeStep
+Each training pattern can either:
+
+Be an array of numbers
+Be an array of arrays of numbers
+Example using an array of numbers:
+
+const net = new brain.recurrent.LSTMTimeStep();
+
+net.train([[1, 2, 3]]);
+
+const output = net.run([1, 2]); // 3
+Example using an array of arrays of numbers:
+
+const net = new brain.recurrent.LSTMTimeStep({
+  inputSize: 2,
+  hiddenLayers: [10],
+  outputSize: 2,
+});
+
+net.train([
+  [1, 3],
+  [2, 2],
+  [3, 1],
+]);
+
+const output = net.run([
+  [1, 3],
+  [2, 2],
+]); // [3, 1]
+For training with RNN, LSTM and GRU
+Each training pattern can either:
+
+Be an array of values
+Be a string
+Have an input and an output
+Either of which can have an array of values or a string
+CAUTION: When using an array of values, you can use ANY value, however, the values are represented in the neural network by a single input. So the more distinct values has the larger your input layer. If you have a hundreds, thousands, or millions of floating point values THIS IS NOT THE RIGHT CLASS FOR THE JOB. Also, when deviating from strings, this gets into beta
+
+Example using direct strings: Hello World Using Brainjs
+
+
+  const net = new brain.recurrent.LSTM();
+
+  net.train(['I am brainjs, Hello World!']);
+
+  const output = net.run('I am brainjs');
+  alert(output);
+const net = new brain.recurrent.LSTM();
+
+net.train([
+  'doe, a deer, a female deer',
+  'ray, a drop of golden sun',
+  'me, a name I call myself',
+]);
+
+const output = net.run('doe'); // ', a deer, a female deer'
+Example using strings with inputs and outputs:
+
+const net = new brain.recurrent.LSTM();
+
+net.train([
+  { input: 'I feel great about the world!', output: 'happy' },
+  { input: 'The world is a terrible place!', output: 'sad' },
+]);
+
+const output = net.run('I feel great about the world!'); // 'happy'
+For training with AE
+Each training pattern can either:
+
+Be an array of numbers
+Be an array of arrays of numbers
+Training an autoencoder to compress the values of a XOR calculation:
+
+const net = new brain.AE(
+  {
+    hiddenLayers: [ 5, 2, 5 ]
+  }
+);
+
+net.train([
+  [ 0, 0, 0 ],
+  [ 0, 1, 1 ],
+  [ 1, 0, 1 ],
+  [ 1, 1, 0 ]
+]);
+Encoding/decoding:
+
+const input = [ 0, 1, 1 ];
+
+const encoded = net.encode(input);
+const decoded = net.decode(encoded);
+Denoise noisy data:
+
+const noisyData = [ 0, 1, 0 ];
+
+const data = net.denoise(noisyData);
+Test for anomalies in data samples:
+
+const shouldBeFalse = net.includesAnomalies([0, 1, 1]);
+const shouldBeTrue = net.includesAnomalies([0, 1, 0]);
+Training Options
+train() takes a hash of options as its second argument:
+
+net.train(data, {
+  // Defaults values --> expected validation
+  iterations: 20000, // the maximum times to iterate the training data --> number greater than 0
+  errorThresh: 0.005, // the acceptable error percentage from training data --> number between 0 and 1
+  log: false, // true to use console.log, when a function is supplied it is used --> Either true or a function
+  logPeriod: 10, // iterations between logging out --> number greater than 0
+  learningRate: 0.3, // scales with delta to effect training rate --> number between 0 and 1
+  momentum: 0.1, // scales with next layer's change value --> number between 0 and 1
+  callback: null, // a periodic call back that can be triggered while training --> null or function
+  callbackPeriod: 10, // the number of iterations through the training data between callback calls --> number greater than 0
+  timeout: number, // the max number of milliseconds to train for --> number greater than 0. Default --> Infinity
+});
+The network will stop training whenever one of the two criteria is met: the training error has gone below the threshold (default 0.005), or the max number of iterations (default 20000) has been reached.
+
+By default, training will not let you know how it's doing until the end, but set log to true to get periodic updates on the current training error of the network. The training error should decrease every time. The updates will be printed to the console. If you set log to a function, this function will be called with the updates instead of printing to the console. However, if you want to use the values of the updates in your own output, the callback can be set to a function to do so instead.
+
+The learning rate is a parameter that influences how quickly the network trains. It's a number from 0 to 1. If the learning rate is close to 0, it will take longer to train. If the learning rate is closer to 1, it will train faster, but training results may be constrained to a local minimum and perform badly on new data.(Overfitting) The default learning rate is 0.3.
+
+The momentum is similar to learning rate, expecting a value from 0 to 1 as well, but it is multiplied against the next level's change value. The default value is 0.1
+
+Any of these training options can be passed into the constructor or passed into the updateTrainingOptions(opts) method and they will be saved on the network and used during the training time. If you save your network to json, these training options are saved and restored as well (except for callback and log, callback will be forgotten and log will be restored using console.log).
+
+A boolean property called invalidTrainOptsShouldThrow is set to true by default. While the option is true, if you enter a training option that is outside the normal range, an error will be thrown with a message about the abnormal option. When the option is set to false, no error will be sent, but a message will still be sent to console.warn with the related information.
+
+Async Training
+trainAsync() takes the same arguments as train (data and options). Instead of returning the results object from training, it returns a promise that when resolved will return the training results object. Does NOT work with:
+
+brain.recurrent.RNN
+brain.recurrent.GRU
+brain.recurrent.LSTM
+brain.recurrent.RNNTimeStep
+brain.recurrent.GRUTimeStep
+brain.recurrent.LSTMTimeStep
+const net = new brain.NeuralNetwork();
+net
+  .trainAsync(data, options)
+  .then((res) => {
+    // do something with my trained network
+  })
+  .catch(handleError);
+With multiple networks you can train in parallel like this:
+
+const net = new brain.NeuralNetwork();
+const net2 = new brain.NeuralNetwork();
+
+const p1 = net.trainAsync(data, options);
+const p2 = net2.trainAsync(data, options);
+
+Promise.all([p1, p2])
+  .then((values) => {
+    const res = values[0];
+    const res2 = values[1];
+    console.log(
+      `net trained in ${res.iterations} and net2 trained in ${res2.iterations}`
+    );
+    // do something super cool with my 2 trained networks
+  })
+  .catch(handleError);
+Cross Validation
+Cross Validation can provide a less fragile way of training on larger data sets. The brain.js api provides Cross Validation in this example:
+
+const crossValidate = new brain.CrossValidate(() => new brain.NeuralNetwork(networkOptions));
+crossValidate.train(data, trainingOptions, k); //note k (or KFolds) is optional
+const json = crossValidate.toJSON(); // all stats in json as well as neural networks
+const net = crossValidate.toNeuralNetwork(); // get top performing net out of `crossValidate`
+
+// optionally later
+const json = crossValidate.toJSON();
+const net = crossValidate.fromJSON(json);
+Use CrossValidate with these classes:
+
+brain.NeuralNetwork
+brain.RNNTimeStep
+brain.LSTMTimeStep
+brain.GRUTimeStep
+An example of using cross validate can be found in cross-validate.ts
+
+Methods
+train(trainingData) -> trainingStatus
+The output of train() is a hash of information about how the training went:
+
+{
+  error: 0.0039139985510105032,  // training error
+  iterations: 406                // training iterations
+}
+run(input) -> prediction
+Supported on classes:
+
+brain.NeuralNetwork
+brain.NeuralNetworkGPU -> All the functionality of brain.NeuralNetwork but, ran on GPU (via gpu.js in WebGL2, WebGL1, or fallback to CPU)
+brain.recurrent.RNN
+brain.recurrent.LSTM
+brain.recurrent.GRU
+brain.recurrent.RNNTimeStep
+brain.recurrent.LSTMTimeStep
+brain.recurrent.GRUTimeStep
+Example:
+
+// feed forward
+const net = new brain.NeuralNetwork();
+net.fromJSON(json);
+net.run(input);
+
+// time step
+const net = new brain.LSTMTimeStep();
+net.fromJSON(json);
+net.run(input);
+
+// recurrent
+const net = new brain.LSTM();
+net.fromJSON(json);
+net.run(input);
+forecast(input, count) -> predictions
+Available with the following classes. Outputs a array of predictions. Predictions being a continuation of the inputs.
+
+brain.recurrent.RNNTimeStep
+brain.recurrent.LSTMTimeStep
+brain.recurrent.GRUTimeStep
+Example:
+
+const net = new brain.LSTMTimeStep();
+net.fromJSON(json);
+net.forecast(input, 3);
+toJSON() -> json
+Serialize neural network to json
+
+fromJSON(json)
+Deserialize neural network from json
+
+Failing
+If the network failed to train, the error will be above the error threshold. This could happen if the training data is too noisy (most likely), the network does not have enough hidden layers or nodes to handle the complexity of the data, or it has not been trained for enough iterations.
+
+If the training error is still something huge like 0.4 after 20000 iterations, it's a good sign that the network can't make sense of the given data.
+
+RNN, LSTM, or GRU Output too short or too long
+The instance of the net's property maxPredictionLength (default 100) can be set to adjust the output of the net;
+
+Example:
+
+const net = new brain.recurrent.LSTM();
+
+// later in code, after training on a few novels, write me a new one!
+net.maxPredictionLength = 1000000000; // Be careful!
+net.run('Once upon a time');
+JSON
+Serialize or load in the state of a trained network with JSON:
+
+const json = net.toJSON();
+net.fromJSON(json);
+Standalone Function
+You can also get a custom standalone function from a trained network that acts just like run():
+
+const run = net.toFunction();
+const output = run({ r: 1, g: 0.4, b: 0 });
+console.log(run.toString()); // copy and paste! no need to import brain.js
+Options
+NeuralNetwork() takes a hash of options:
+
+const net = new brain.NeuralNetwork({
+  activation: 'sigmoid', // activation function
+  hiddenLayers: [4],
+  learningRate: 0.6, // global learning rate, useful when training using streams
+});
+activation
+This parameter lets you specify which activation function your neural network should use. There are currently four supported activation functions, sigmoid being the default:
+
+sigmoid
+relu
+leaky-relu
+related option - 'leakyReluAlpha' optional number, defaults to 0.01
+tanh
+summarizing a plethora of activation functions — Activation Function
+
+hiddenLayers
+You can use this to specify the number of hidden layers in the network and the size of each layer. For example, if you want two hidden layers - the first with 3 nodes and the second with 4 nodes, you'd give:
+
+hiddenLayers: [3, 4];
+By default brain.js uses one hidden layer with size proportionate to the size of the input array.
+
+Streams
+Use https://www.npmjs.com/package/train-stream to stream data to a NeuralNetwork
+
+Utilities
+likely
+const likely = require('brain/likely');
+const key = likely(input, net);
+Likely example see: simple letter detection
+
+toSVG
+<script src="../../src/utilities/svg.js"></script>
+Renders the network topology of a feedforward network
+
+document.getElementById('result').innerHTML = brain.utilities.toSVG(
+  network,
+  options
+);
+toSVG example see: network rendering
+
+The user interface used: 
+
+Neural Network Types
+brain.NeuralNetwork - Feedforward Neural Network with backpropagation
+brain.NeuralNetworkGPU - Feedforward Neural Network with backpropagation, GPU version
+brain.AE - Autoencoder or "AE" with backpropogation and GPU support
+brain.recurrent.RNNTimeStep - Time Step Recurrent Neural Network or "RNN"
+brain.recurrent.LSTMTimeStep - Time Step Long Short Term Memory Neural Network or "LSTM"
+brain.recurrent.GRUTimeStep - Time Step Gated Recurrent Unit or "GRU"
+brain.recurrent.RNN - Recurrent Neural Network or "RNN"
+brain.recurrent.LSTM - Long Short Term Memory Neural Network or "LSTM"
+brain.recurrent.GRU - Gated Recurrent Unit or "GRU"
+brain.FeedForward - Highly Customizable Feedforward Neural Network with backpropagation
+brain.Recurrent - Highly Customizable Recurrent Neural Network with backpropagation
+
+Pipcook.
+
+Installer	Version Range
+Node.js	>= 12.17 or >= 14.0.0
+npm	>= 6.14.4
+Install the command-line tool for managing Pipcook projects:
+
+$ npm install -g @pipcook/cli
+Then train from anyone of those pipelines, we take image classification as an example:
+
+$ pipcook train https://cdn.jsdelivr.net/gh/alibaba/pipcook@main/example/pipelines/image-classification-mobilenet.json -o ./output
+This dataset specfied by the pipeline includes 2 categories image: avatar and blurBackground. After training, we can predict the category of a image:
+
+$ pipcook predict ./output/image-classification-mobilenet.json -s ./output/data/validation/blurBackground/71197_223__30.7_36.jpg
+✔ Origin result:[{"id":1,"category":"blurBackground","score":0.9998120665550232}]
+The input is a blurBackground image from the validation dataset. And the model determines that its category is blurBackground.
+
+Want to deploy it?
+
+$ pipcook serve ./output
+ℹ preparing framework
+ℹ preparing scripts
+ℹ preparing artifact plugins
+ℹ initializing framework packages
+Pipcook has served at: http://localhost:9091
+Then you can open the browser and try your image classification server.
+
+Playground
+open https://pipboard.imgcook.com
+Pipelines
+If you want to train a model to recognize MNIST handwritten digits by yourself, you could try the examples below.
+
+Name	Description	Open in Colab
+mnist-image-classification	pipeline for classific MNIST image classification problem.	N/A
+databinding-image-classification	pipeline example to train the image classification task which is
+to classify imgcook databinding pictures.	
+object-detection	pipeline example to train object detection task which is for component recognition
+used by imgcook.	
+text-bayes-classification	pipeline example to train text classification task with bayes	N/A
+See here for complete list, and it's easy and quick to run these examples. For example, to do a MNIST image classification, just run the following to start the pipeline:
+
+$ pipcook run https://cdn.jsdelivr.net/gh/alibaba/pipcook@main/example/pipelines/image-classification-mobilenet.json -o output
+After the above pipeline is completed, you have already trained a model at the current output/model directory, it's a tensorflow.js model.
+
+Developers
+Clone this repository:
+
+$ git clone git@github.com:alibaba/pipcook.git
+Install dependencies, e.g. via npm:
+
+$ npm install
+After the above, now build the project:
+
+$ npm run build
+Developer Documentation English | 中文
+Project Guide
+Community
+DingTalk
+
+Or searched via the group number: 30624012.
+
+Download DingTalk (an all-in-one free communication and collaboration platform) here: English | 中文
+
+Gitter Room
+Who's using it
+
+License
+Apache 2.0
+
+
+Cytoscape.js.
+
+Cytoscape.js
+Graph theory (network) library for visualisation and analysis : https://js.cytoscape.org
+
+Description
+Cytoscape.js is a fully featured graph theory library. Do you need to model and/or visualise relational data, like biological data or social networks? If so, Cytoscape.js is just what you need.
+
+Cytoscape.js contains a graph theory model and an optional renderer to display interactive graphs. This library was designed to make it as easy as possible for programmers and scientists to use graph theory in their apps, whether it's for server-side analysis in a Node.js app or for a rich user interface.
+
+You can get started with Cytoscape.js with one line:
+
+var cy = cytoscape({ elements: myElements, container: myDiv });
+Learn more about the features of Cytoscape.js by reading its documentation.
+
+Example
+The Tokyo railway stations network can be visualised with Cytoscape:
+
+ 
+A live demo and source code are available for the Tokyo railway stations graph. More demos are available in the documentation.
+
+Documentation
+You can find the documentation and downloads on the project website.
+
+Roadmap
+Future versions of Cytoscape.js are planned in the milestones of the Github issue tracker. You can use the milestones to see what's currently planned for future releases.
+
+Contributing to Cytoscape.js
+Would you like to become a Cytoscape.js contributor? You can contribute in technical roles (e.g. features, testing) or non-technical roles (e.g. documentation, outreach), depending on your interests. Get in touch with us by posting a GitHub discussion.
+
+For the mechanics of contributing a pull request, refer to CONTRIBUTING.md.
+
+Feature releases are made monthly, while patch releases are made weekly. This allows for rapid releases of first- and third-party contributions.
+
+Citation
+To cite Cytoscape.js in a paper, please cite the Oxford Bioinformatics issue:
+
+Cytoscape.js: a graph theory library for visualisation and analysis
+
+Franz M, Lopes CT, Huck G, Dong Y, Sumer O, Bader GD
+
+Bioinformatics (2016) 32 (2): 309-311 first published online September 28, 2015 doi:10.1093/bioinformatics/btv557 (PDF)
+
+PubMed abstract for the original 2016 article
+PubMed abstract for the 2023 update article
+Build dependencies
+Install node and npm. Run npm install before using npm run.
+
+Build instructions
+Run npm run <target> in the console. The main targets are:
+
+Building:
+
+build: do all builds of the library (umd, min, umd, esm)
+build:min : do the unminified build with bundled dependencies (for simple html pages, good for novices)
+build:umd : do the umd (cjs/amd/globals) build
+build:esm : do the esm (ES 2015 modules) build
+clean : clean the build directory
+docs : build the docs into documentation
+release : build all release artifacts
+watch : automatically build lib for debugging (with sourcemap, no babel, very quick)
+good for general testing on debug/index.html
+served on http://localhost:8080 or the first available port thereafter, with livereload on debug/index.html
+watch:babel : automatically build lib for debugging (with sourcemap, with babel, a bit slower)
+good for testing performance or for testing out of date browsers
+served on http://localhost:8080 or the first available port thereafter, with livereload on debug/index.html
+watch:umd : automatically build prod umd bundle (no sourcemap, with babel)
+good for testing cytoscape in another project (with a "cytoscape": "file:./path/to/cytoscape" reference in your project's package.json)
+no http server
+dist : update the distribution js for npm etc.
+Testing:
+
+The default test scripts run directly against the source code. Tests can alternatively be run on a built bundle. The library can be built on node>=6, but the library's bundle can be tested on node>=0.10.
+
+test : run all testing & linting
+test:js : run the mocha tests on the public API of the lib (directly on source files)
+npm run test:js -- -g "my test name" runs tests on only the matching test cases
+test:build : run the mocha tests on the public API of the lib (on a built bundle)
+npm run build should be run beforehand on a recent version of node
+npm run test:build -- -g "my test name" runs build tests on only the matching test cases
+test:modules : run unit tests on private, internal API
+npm run test:modules -- -g "my test name" runs modules tests on only the matching test cases
+lint : lint the js sources via eslint
+benchmark : run all benchmarks
+benchmark:single : run benchmarks only for the suite specified in benchmark/single
+Release instructions
+Background
+Ensure that a milestone exists for the release you want to make, with all the issues for that release assigned in the milestone.
+Bug fixes should be applied to both the master and unstable branches. PRs can go on either branch, with the patch applied to the other branch after merging.
+When a patch release is made concurrently with a feature release, the patch release should be made first. Wait 5 minutes after the patch release completes before starting the feature release -- otherwise Zenodo doesn't pick up releases properly.
+Patch version
+Go to Actions > Patch release
+Go to the 'Run workflow' dropdown
+[Optional] The 'master' branch should be preselected for you
+Press the green 'Run workflow' button
+Close the milestone for the release
+
+Feature version
+Go to Actions > Feature release
+Go to the 'Run workflow' dropdown
+[Optional] The 'unstable' branch should be preselected for you
+Press the green 'Run workflow' button
+Close the milestone for the release
+Make the release announcement on the blog
+
+Notes on GitHub Actions UI
+'Use workflow from' in the GitHub UI selects the branch from which the workflow YML file is selected. Since the workflow files should usually be the same on the master and unstable branches, it shouldn't matter what's selected.
+'Branch to run the action on' in the GitHub UI is preselected for you. You don't need to change it.
+Tests
+Mocha tests are found in the test directory. The tests can be run in the browser or they can be run via Node.js (npm run test:js).
+
+SeedShot.
+
+ Zapsnap
+
+Temporary peer to peer screenshot sharing from your browser.
+
+Links
+zapsnap-desktop - MacOS app for taking screenshots
+seedshot-cli - CLI tool for taking screenshots (Linux and MacOS)
+What rocks
+the files are temporary, so we don't waste resources on storing them
+powered by WebTorrent
+browser is used for sharing images peer to peer
+when all browsers with the image are closed, the image is gone forever
+What sucks
+browser support, since it depends on WebTorrent which doesn't support IE and probably lacks support for majority of mobile browsers
+each file depends on torrent network so it takes around ~3s to load the image
+no Windows support for taking screenshots
+once you as an owner of an image close the browser, the file might still be available if other peers keep their browser open
+Development
+npm start     # will start the server
+npm run watch # watch for CSS/JS file changes and build 
+npm run build # build CSS/JS for production
+License
+MIT
+
+Sponsors
+Two Bucks Ltd © 2017
+
+JS-GIT.
+
+JS-Git.
+This project is a collection of modules that helps in implementing git powered applications in JavaScript. The original purpose for this is to enable better developer tools for authoring code in restricted environments like ChromeBooks and tablets. It also enables using git as a database to replace SQL and no-SQL data stores in many applications.
+
+This project was initially funded by two crowd-sourced fundraisers. See details in BACKERS.md and BACKERS-2.md. Thanks to all of you who made this possible!
+
+Usage
+Detailed API docs are contained in the doc subfolder of this repository.
+
+In general the way you use js-git is you create a JS object and then mixin the functionality you need. Here is an example of creating an in-memory database, creating some objects, and then walking that tree using the high-level walker APIs.
+
+Creating a repo object.
+// This provides symbolic names for the octal modes used by git trees.
+var modes = require('js-git/lib/modes');
+
+// Create a repo by creating a plain object.
+var repo = {};
+
+// This provides an in-memory storage backend that provides the following APIs:
+// - saveAs(type, value) => hash
+// - loadAs(type, hash) => hash
+// - saveRaw(hash, binary) =>
+// - loadRaw(hash) => binary
+require('js-git/mixins/mem-db')(repo);
+
+// This adds a high-level API for creating multiple git objects by path.
+// - createTree(entries) => hash
+require('js-git/mixins/create-tree')(repo);
+
+// This provides extra methods for dealing with packfile streams.
+// It depends on
+// - unpack(packStream, opts) => hashes
+// - pack(hashes, opts) => packStream
+require('js-git/mixins/pack-ops')(repo);
+
+// This adds in walker algorithms for quickly walking history or a tree.
+// - logWalk(ref|hash) => stream<commit>
+// - treeWalk(hash) => stream<object>
+require('js-git/mixins/walkers')(repo);
+
+// This combines parallel requests for the same resource for efficiency under load.
+require('js-git/mixins/read-combiner')(repo);
+
+// This makes the object interface less strict.  See its docs for details
+require('js-git/mixins/formats')(repo);
+Generators vs Callbacks
+There are two control-flow styles that you can use to consume js-git APIs. All the examples here use yield style and assume the code is contained within a generator function that's yielding to a tool like gen-run.
+
+This style requires ES6 generators. This feature is currently in stable Firefox, in stable Chrome behind a user-configurable flag, in node.js 0.11.x or greater with a command-line flag.
+
+Also you can use generators on any ES5 platform if you use a source transform like Facebook's regenerator tool.
+
+You read more about how generators work at Generators vs Fibers.
+
+var run = require('gen-run');
+
+run(function*() {
+ // Blocking logic goes here.  You can use yield
+ var result = yield someAction(withArgs);
+ // The generator pauses at yield and resumes when the data is available.
+ // The rest of your process is not blocked, just this generator body.
+ // If there was an error, it will throw into this generator.
+});
+If you can't use this new feature or just plain prefer node-style callbacks, all js-git APIs also support that. The way this works is actually quite simple. If you don't pass in the callback, the function will return a partially applied version of your call expecting just the callback.
+
+someAction(withArgs, function (err, value) {
+  if (err) return handleMyError(err);
+  // do something with value
+});
+
+// The function would be implemented to support both style like this.
+function someAction(arg, callback) {
+  if (!callback) return someAction.bind(this, arg);
+  // We now have callback and arg
+}
+Basic Object Creation
+Now we have an in-memory git repo useful for testing the network operations or just getting to know the available APIs.
+
+In this example, we'll create a blob, create a tree containing that blob, create a commit containing that tree. This shows how to create git objects manually.
+
+  // First we create a blob from a string.  The `formats` mixin allows us to
+  // use a string directly instead of having to pass in a binary buffer.
+  var blobHash = yield repo.saveAs("blob", "Hello World\n");
+
+  // Now we create a tree that is a folder containing the blob as `greeting.txt`
+  var treeHash = yield repo.saveAs("tree", {
+    "greeting.txt": { mode: modes.file, hash: blobHash }
+  });
+
+  // With that tree, we can create a commit.
+  // Again the `formats` mixin allows us to omit details like committer, date,
+  // and parents.  It assumes sane defaults for these.
+  var commitHash = yield repo.saveAs("commit", {
+    author: {
+      name: "Tim Caswell",
+      email: "tim@creationix.com"
+    },
+    tree: treeHash,
+    message: "Test commit\n"
+  });
+
+Basic Object Loading
+We can read objects back one at a time using loadAs.
+
+// Reading the file "greeting.txt" from a commit.
+
+// We first read the commit.
+var commit = yield repo.loadAs("commit", commitHash);
+// We then read the tree using `commit.tree`.
+var tree = yield repo.loadAs("tree", commit.tree);
+// We then read the file using the entry hash in the tree.
+var file = yield repo.loadAs("blob", tree["greeting.txt"].hash);
+// file is now a binary buffer.
+When using the formats mixin there are two new types for loadAs, they are "text" and "array".
+
+// When you're sure the file contains unicode text, you can load it as text directly.
+var fileAsText = yield repo.loadAs("text", blobHash);
+
+// Also if you prefer array format, you can load a directory as an array.
+var entries = yield repo.loadAs("array", treeHash);
+entries.forEach(function (entry) {
+  // entry contains {name, mode, hash}
+});
+Using Walkers
+Now that we have a repo with some minimal data in it, we can query it. Since we included the walkers mixin, we can walk the history as a linear stream or walk the file tree as a depth-first linear stream.
+
+// Create a log stream starting at the commit we just made.
+// You could also use symbolic refs like `refs/heads/master` for repos that
+// support them.
+var logStream = yield repo.logWalk(commitHash);
+
+// Looping through the stream is easy by repeatedly calling waiting on `read`.
+var commit, object;
+while (commit = yield logStream.read(), commit !== undefined) {
+
+  console.log(commit);
+
+  // We can also loop through all the files of each commit version.
+  var treeStream = yield repo.treeWalk(commit.tree);
+  while (object = yield treeStream.read(), object !== undefined) {
+    console.log(object);
+  }
+
+}
+Filesystem Style Interface
+If you feel that creating a blob, then creating a tree, then creating the parent tree, etc is a lot of work to save just one file, I agree. While writing the tedit app, I discovered a nice high-level abstraction that you can mixin to make this much easier. This is the create-tree mixin referenced in the above config.
+
+// We wish to create a tree that contains `www/index.html` and `README.me` files.
+// This will create these two blobs, create a tree for `www` and then create a
+// tree for the root containing `README.md` and the newly created `www` tree.
+var treeHash = yield repo.createTree({
+  "www/index.html": {
+    mode: modes.file,
+    content: "<h1>Hello</h1>\n<p>This is an HTML page?</p>\n"
+  },
+  "README.md": {
+    mode: modes.file,
+    content: "# Sample repo\n\nThis is a sample\n"
+  }
+});
+This is great for creating several files at once, but it can also be used to edit existing trees by adding new files, changing existing files, or deleting existing entries.
+
+var changes = [
+  {
+    path: "www/index.html" // Leaving out mode means to delete the entry.
+  },
+  {
+    path: "www/app.js", // Create a new file in the existing directory.
+    mode: modes.file,
+    content: "// this is a js file\n"
+  }
+];
+
+// We need to use array form and specify the base tree hash as `base`.
+changes.base = treeHash;
+
+treeHash = yield repo.createTree(changes);
+Creating Composite Filesystems
+The real fun begins when you create composite filesystems using git submodules.
+
+The code that handles this is not packaged as a repo mixin since it spans several independent repos. Instead look to the git-tree repo for the code. It's interface is still slightly unstable and undocumented but is used in production by tedit and my node hosting service that complements tedit.
+
+Basically this module allows you to perform high-level filesystem style commands on a virtual filesystem that consists of many js-git repos. Until there are proper docs, you can see how tedit uses it at https://github.com/creationix/tedit-app/blob/master/src/data/fs.js#L11-L21.
+
+Mounting Github Repos
+I've been asking Github to enable CORS headers to their HTTPS git servers, but they've refused to do it. This means that a browser can never clone from github because the browser will disallow XHR requests to the domain.
+
+They do, however, offer a REST interface to the raw git data.
+
+Using this I wrote a mixin for js-git that uses github as the backend store.
+
+Code at https://github.com/creationix/js-github. Usage in tedit can be seen at https://github.com/creationix/tedit-app/blob/master/src/data/fs.js#L31.
+
+
+SKALE.
+
+Development activity is stopped, and this project is now archived.
+
+
+High performance distributed data processing and machine learning.
+
+Skale provides a high-level API in Javascript and an optimized parallel execution engine on top of NodeJS.
+
+Features
+Pure javascript implementation of a Spark like engine
+Multiple data sources: filesystems, databases, cloud (S3, azure)
+Multiple data formats: CSV, JSON, Columnar (Parquet)...
+50 high level operators to build parallel apps
+Machine learning: scalable classification, regression, clusterization
+Run interactively in a nodeJS REPL shell
+Docker ready, simple local mode or full distributed mode
+Very fast, see benchmark
+Quickstart
+npm install skale
+Word count example:
+
+var sc = require('skale').context();
+
+sc.textFile('/my/path/*.txt')
+  .flatMap(line => line.split(' '))
+  .map(word => [word, 1])
+  .reduceByKey((a, b) => a + b, 0)
+  .count(function (err, result) {
+    console.log(result);
+    sc.end();
+  });
+Local mode
+In local mode, worker processes are automatically forked and communicate with app through child process IPC channel. This is the simplest way to operate, and it allows to use all machine available cores.
+
+To run in local mode, just execute your app script:
+
+node my_app.js
+or with debug traces:
+
+SKALE_DEBUG=2 node my_app.js
+Distributed mode
+In distributed mode, a cluster server process and worker processes must be started prior to start app. Processes communicate with each other via raw TCP or via websockets.
+
+To run in distributed cluster mode, first start a cluster server on server_host:
+
+./bin/server.js
+On each worker host, start a worker controller process which connects to server:
+
+./bin/worker.js -H server_host
+Then run your app, setting the cluster server host in environment:
+
+SKALE_HOST=server_host node my_app.js
+The same with debug traces:
+
+SKALE_HOST=server_host SKALE_DEBUG=2 node my_app.js
+Resources
+Contributing guide
+Documentation
+Gitter for support and discussion
+Mailing list for discussion about use and development
+Authors
+The original authors of skale are Cedric Artigue and Marc Vertes.
+
+List of all contributors
+
+License
+Apache-2.0
+
+Credits
+Logo Icon made by Smashicons from www.flaticon.com is licensed by CC 3.0 BY
+
+XLSX.
+
+SheetJS
+The SheetJS Community Edition offers battle-tested open-source solutions for extracting useful data from almost any complex spreadsheet and generating new spreadsheets that will work with legacy and modern software alike.
+
+SheetJS Pro offers solutions beyond data processing: Edit complex templates with ease; let out your inner Picasso with styling; make custom sheets with images/graphs/PivotTables; evaluate formula expressions and port calculations to web apps; automate common spreadsheet tasks, and much more!
+
+Documentation
+API and Usage Documentation
+
+Downloadable Scripts and Modules
+
+Related Projects
+https://oss.sheetjs.com/notes/: File Format Notes
+
+ssf: Format data using ECMA-376 spreadsheet format codes
+
+xlsx-cli: NodeJS command-line tool for processing files
+
+test_files: Sample spreadsheets
+
+cfb: Container (OLE/ZIP) format library
+
+codepage: Legacy text encodings
+
+License
+Please consult the attached LICENSE file for details. All rights not explicitly granted by the Apache 2.0 License are reserved by the Original Author.
+
+
+isomorphic-git.
+
+isomorphic-git
+isomorphic-git is a pure JavaScript reimplementation of git that works in both Node.js and browser JavaScript environments. It can read and write to git repositories, fetch from and push to git remotes (such as GitHub), all without any native C++ module dependencies.
+
+Goals
+Isomorphic-git aims for 100% interoperability with the canonical git implementation. This means it does all its operations by modifying files in a ".git" directory just like the git you are used to. The included isogit CLI can operate on git repositories on your desktop or server.
+
+This library aims to be a complete solution with no assembly required. The API has been designed with modern tools like Rollup and Webpack in mind. By providing functionality as individual functions, code bundlers can produce smaller bundles by including only the functions your application uses.
+
+The project includes type definitions so you can enjoy static type-checking and intelligent code completion in editors like VS Code and CodeSandbox.
+
+Supported Environments
+The following environments are tested in CI and will continue to be supported until the next breaking version:
+
+
+Node 10	
+Chrome 79	
+Edge 79	
+Firefox 72	
+Safari 13	
+Android 10	
+iOS 13
+Upgrading from version 0.x to version 1.x?
+See the full Release Notes on GitHub and the release Blog Post.
+
+Install
+You can install it from npm:
+
+npm install --save isomorphic-git
+Getting Started
+The "isomorphic" in isomorphic-git means that the same code runs in either the server or the browser. That's tricky to do since git uses the file system and makes HTTP requests. Browsers don't have an fs module. And node and browsers have different APIs for making HTTP requests!
+
+So rather than relying on the fs and http modules, isomorphic-git lets you bring your own file system and HTTP client.
+
+If you're using isomorphic-git in node, you use the native fs module and the provided node HTTP client.
+
+// node.js example
+const path = require('path')
+const git = require('isomorphic-git')
+const http = require('isomorphic-git/http/node')
+const fs = require('fs')
+
+const dir = path.join(process.cwd(), 'test-clone')
+git.clone({ fs, http, dir, url: 'https://github.com/isomorphic-git/lightning-fs' }).then(console.log)
+If you're using isomorphic-git in the browser, you'll need something that emulates the fs API. The easiest to setup and most performant library is LightningFS which is written and maintained by the same author and is part of the isomorphic-git suite. If LightningFS doesn't meet your requirements, isomorphic-git should also work with BrowserFS and Filer. Instead of isomorphic-git/http/node this time import isomorphic-git/http/web:
+
+<script src="https://unpkg.com/@isomorphic-git/lightning-fs"></script>
+<script src="https://unpkg.com/isomorphic-git"></script>
+<script type="module">
+import http from 'https://unpkg.com/isomorphic-git@beta/http/web/index.js'
+const fs = new LightningFS('fs')
+
+const dir = '/test-clone'
+git.clone({ fs, http, dir, url: 'https://github.com/isomorphic-git/lightning-fs', corsProxy: 'https://cors.isomorphic-git.org' }).then(console.log)
+</script>
+If you're using ES module syntax, you can use either the default import for convenience, or named imports to benefit from tree-shaking if you are using a bundler:
+
+import git from 'isomorphic-git'
+// or
+import * as git from 'isomorphic-git'
+// or
+import {plugins, clone, commit, push} from 'isomorphic-git'
+View the full Getting Started guide on the docs website.
+
+Then check out the Useful Snippets page, which includes even more sample code written by the community!
+
+CORS support
+Unfortunately, due to the same-origin policy by default isomorphic-git can only clone from the same origin as the webpage it is running on. This is terribly inconvenient, as it means for all practical purposes cloning and pushing repos must be done through a proxy.
+
+For this purpose, @isomorphic-git/cors-proxy exists; which you can clone it or npm install it. Alternatively, use CloudFlare workers, which can be setup without leaving the browser (instructions).
+
+We hope to get CORS headers added to all the major Git hosting platforms eventually, and will list the progress made here:
+
+Service	Supports CORS requests
+Gogs (self-hosted)	✔
+Gitea (self-hosted)	✔
+Azure DevOps	✔ (Usage Note: requires authentication)
+Gitlab	❌ Our PR was rejected, but the issue is still open!
+Bitbucket	❌
+Github	❌
+It is literally just two lines of code to add the CORS headers!! Easy stuff. Surely it will happen.
+
+isogit CLI
+Isomorphic-git comes with a simple CLI tool, named isogit because isomorphic-git is a lot to type. It is really just a thin shell that translates command line arguments into the equivalent JS API commands. So you should be able to run any current or future isomorphic-git commands using the CLI.
+
+It always starts with an the assumption that the current working directory is a git root. E.g. { dir: '.' }.
+
+It uses minimisted to parse command line options and will print out the equivalent JS command and pretty-print the output JSON.
+
+The CLI is more of a lark for quickly testing isomorphic-git and isn't really meant as a git CLI replacement.
+
+Supported Git commands
+This project follows semantic versioning, so we may continue to make changes to the API but they will always be backwards compatible unless there is a major version bump.
+
+commands
+abortMerge
+add
+addNote
+addRemote
+annotatedTag
+branch
+checkout
+clone
+commit
+currentBranch
+deleteBranch
+deleteRef
+deleteRemote
+deleteTag
+expandOid
+expandRef
+fastForward
+fetch
+findMergeBase
+findRoot
+getConfig
+getConfigAll
+getRemoteInfo
+getRemoteInfo2
+hashBlob
+indexPack
+init
+isDescendent
+isIgnored
+listBranches
+listFiles
+listNotes
+listRefs
+listRemotes
+listServerRefs
+listTags
+log
+merge
+packObjects
+pull
+push
+readBlob
+readCommit
+readNote
+readObject
+readTag
+readTree
+remove
+removeNote
+renameBranch
+resetIndex
+resolveRef
+setConfig
+stash
+status
+statusMatrix
+tag
+updateIndex
+version
+walk
+writeBlob
+writeCommit
+writeObject
+writeRef
+writeTag
+writeTree
+Contributing to isomorphic-git
+The development setup is similar to that of a large web application. The main difference is the ridiculous amount of hacks involved in the tests. We use Facebook's Jest for testing, which make doing TDD fast and fun, but we also used custom hacks so that the same tests will also run in the browser using Jasmine via Karma. We even have our own mock server for serving git repository test fixtures!
+
+You'll need node.js installed, but everything else is a devDependency.
+
+git clone https://github.com/isomorphic-git/isomorphic-git
+cd isomorphic-git
+npm install
+npm test
+
