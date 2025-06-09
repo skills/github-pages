@@ -1,0 +1,67 @@
+<!DOCTYPE html><html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entre Nosotras</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #fff0f5; color: black; }
+    header { background-color: #ff69b4; color: black; padding: 1rem; text-align: center; }
+    nav { display: flex; justify-content: center; gap: 2rem; background-color: #ffc0cb; padding: 0.5rem; position: sticky; top: 0; z-index: 1000; }
+    nav a { text-decoration: none; color: black; font-weight: bold; padding: 0.5rem; }
+    nav a:hover { background-color: #ffb6c1; border-radius: 5px; }
+    section { padding: 2rem; color: black; }
+    h2 { color: black; }
+    img { max-width: 100%; height: auto; margin: 1rem 0; }
+    .video { margin: 2rem 0; }
+    footer { background-color: #ff69b4; color: black; text-align: center; padding: 1rem; }
+    .foro-button { background-color: #d63384; color: white; padding: 1rem; text-align: center; margin: 2rem auto; display: block; width: fit-content; border-radius: 10px; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Entre Nosotras</h1>
+    <p>Educación sexual integral y empática para mujeres</p>
+  </header>
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#temas">Temas</a>
+    <a href="#videos">Videos</a>
+    <a href="#foro">Foro</a>
+  </nav>  <section id="inicio">
+    <h2>Bienvenida</h2>
+    <p>Este espacio está diseñado para compartir, aprender y hablar sin prejuicios sobre salud sexual y reproductiva.</p>
+    <img src="/mnt/data/file-1CiAfaiuqRGRGxxxA28v7i" alt="Educadora con libro de sexualidad" />
+  </section>  <section id="temas">
+    <h2>Temas principales</h2>
+    <ul>
+      <li>Anatomía y ciclo menstrual - <a href="https://www.saba.com.mx/calculadora-menstrual/" target="_blank" style="color:black;">Calculadora menstrual</a></li>
+      <li>Anticonceptivos y planificación - <a href="https://www.reproduccionasistida.org/metodos-anticonceptivos/amp/" target="_blank" style="color:black;">Métodos anticonceptivos</a></li>
+      <li>Consentimiento y relaciones sanas</li>
+      <li>Autoconocimiento y placer femenino</li>
+    </ul>
+    <p>
+      Artículos recomendados:
+      <ul>
+        <li><a href="https://dialnet.unirioja.es/descarga/articulo/7862367.pdf" target="_blank" style="color:black;">Educación sexual integral en la escuela</a></li>
+        <li><a href="https://www.redalyc.org/pdf/356/35630404006.pdf" target="_blank" style="color:black;">Sexualidad y educación en adolescentes</a></li>
+      </ul>
+    </p>
+    <img src="/mnt/data/file-Sf7fpFSD6b3xM3a4uzTnkf" alt="Pareja joven con símbolos de género" />
+  </section>  <section id="videos">
+    <h2>Videos educativos</h2>
+    <div class="video">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/2Sv20zNo5n8?si=oDji6So7PnTecvC8" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="video">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/BRcsBkN58dQ?si=dlTTR9t8Sbdkd_a7" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <img src="/mnt/data/file-QptKJKnSoLKcakLcEcsS3x" alt="Docente explicando sexualidad a niños" />
+  </section>  <section id="foro">
+    <h2>Foro Entre Nosotras</h2>
+    <p>Comparte tus dudas, experiencias o consejos. ¡Tu voz importa!</p>
+    <a href="https://forms.gle/vcSsGxJxSDfzwUq77" class="foro-button" target="_blank">Unirse al Foro</a>
+  </section>  <footer>
+    <p>&copy; 2025 Entre Nosotras | Comunidad de educación sexual para mujeres</p>
+  </footer>
+</body>
+</html>
