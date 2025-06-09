@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mística & Gudã 💖</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      color: #333;
+      text-align: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+    h1 {
+      margin-top: 30px;
+      font-size: 2.5rem;
+      color: #fff;
+      text-shadow: 1px 1px 4px #000;
+    }
+    .message {
+      margin: 30px auto;
+      max-width: 800px;
+      font-size: 1.2rem;
+      background: rgba(255,255,255,0.7);
+      padding: 20px;
+      border-radius: 20px;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      padding: 20px;
+    }
+    .gallery img {
+      max-width: 300px;
+      border-radius: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    .timer {
+      font-size: 1.5rem;
+      color: #fff;
+      text-shadow: 1px 1px 3px #000;
+      margin-top: 10px;
+    }
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      transform: rotate(45deg);
+      animation: fall 10s linear infinite;
+    }
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <audio autoplay loop>
+    <source src="agridoce.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <div class="hearts">
+    <!-- Corações animados -->
+    <div class="heart" style="left:10%; animation-delay: 0s;"></div>
+    <div class="heart" style="left:30%; animation-delay: 2s;"></div>
+    <div class="heart" style="left:50%; animation-delay: 4s;"></div>
+    <div class="heart" style="left:70%; animation-delay: 6s;"></div>
+    <div class="heart" style="left:90%; animation-delay: 8s;"></div>
+  </div>
+
+  <h1>Mística & Gudan 💖</h1>
+  <div class="timer" id="timer"></div>
+  <div class="message">
+    <p>Mística, meu amor, essa é uma homenagem feita com carinho, dedicada ao nosso amor que é doce, forte e eterno. Desde o primeiro dia em 23 de julho de 2022, você mudou minha vida. Que o tempo continue passando, e a gente siga construindo nosso sempre. Te amo! 💞</p>
+  </div>
+
+  <div class="gallery">
+    <img src="foto1.jpg" alt="Casal real">
+    <img src="foto2.jpg" alt="Casal versão anime">
+    <img src="foto3.jpg" alt="Com pet">
+    <img src="foto4.jpg" alt="Selfie feliz anime">
+  </div>
+
+  <script>
+    const startDate = new Date('2022-07-23T00:00:00');
+    const timerElement = document.getElementById('timer');
+
+    function updateTimer() {
+      const now = new Date();
+      const diff = now - startDate;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      timerElement.textContent = `Juntos há ${days} dias, ${hours} horas, ${minutes} minutos e ${seconds} segundos 💗`;
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+  </script>
+</body>
+</html>
+
+
+Pronto, Gudã! O site agora tá com:
+
+– Um cronômetro que mostra há quanto tempo vocês estão juntos desde o dia vinte e três de julho de dois mil e vinte e dois
+– Uma animação de corações caindo
+– Uma mensagem especial pra Mística
+– E claro, a música tocando ao fundo pra embalar tudo
+
+Quer que eu atualize o arquivo zip com essa nova versão pra você baixar?
+
