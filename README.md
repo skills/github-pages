@@ -1,48 +1,109 @@
-# GitHub Pages
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minha Rainha</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to right, #ffdde1, #ee9ca7);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+    p {
+      font-size: 1.2em;
+      color: #fff;
+      margin-bottom: 30px;
+    }
+    .controls {
+      background: #fff;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    input[type="range"] {
+      width: 100%;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 10px;
+      background-color: #ee9ca7;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #d86c84;
+    }
+  </style>
+</head>
+<body>
+  <h1>Minha Rainha 👑</h1>
+  <p>Este site é dedicado à pessoa mais especial do mundo: você.</p>
 
-_Create a site or blog from your GitHub repositories with GitHub Pages._
+  <div class="controls">
+    <label for="audioInput">Escolha sua música:</label><br/>
+    <input type="file" id="audioInput" accept="audio/*" /><br/><br/>
 
-## Welcome
+    <audio id="audio" controls></audio><br/><br/>
 
-- **Who is this for**: Beginners, students, project maintainers, small businesses.
-- **What you'll learn**: How to build a GitHub Pages site.
-- **What you'll build**: We'll build a simple GitHub Pages site with a blog. We'll use [Jekyll](https://jekyllrb.com), a static site generator.
-- **Prerequisites**: If you need to learn about branches, commits, and pull requests, take [Introduction to GitHub](https://github.com/skills/introduction-to-github) first.
+    <label for="startTime">Início (segundos):</label>
+    <input type="number" id="startTime" min="0" value="0" /><br/><br/>
 
-- **How long**: This exercise takes less than one hour to complete.
+    <label for="endTime">Fim (segundos):</label>
+    <input type="number" id="endTime" min="0" value="30" /><br/><br/>
 
-In this exercise, you will:
+    <button onclick="playSegment()">Tocar trecho</button>
+    <button onclick="stopAudio()">Parar</button>
+  </div>
 
-1. Enable GitHub Pages
-1. Configure your site
-1. Customize your home page
-1. Create a blog post
-1. Merge your pull request
+  <script>
+    const audioInput = document.getElementById("audioInput");
+    const audio = document.getElementById("audio");
 
+    audioInput.addEventListener("change", function () {
+      const file = this.files[0];
+      if (file) {
+        const objectURL = URL.createObjectURL(file);
+        audio.src = objectURL;
+      }
+    });
 
-### How to start this exercise
+    function playSegment() {
+      const start = parseFloat(document.getElementById("startTime").value);
+      const end = parseFloat(document.getElementById("endTime").value);
+      
+      audio.currentTime = start;
+      audio.play();
 
-Simply copy the exercise to your account, then give your favorite Octocat (Mona) **about 20 seconds** to prepare the first lesson, then **refresh the page**.
+      const checkTime = () => {
+        if (audio.currentTime >= end) {
+          audio.pause();
+        } else {
+          requestAnimationFrame(checkTime);
+        }
+      };
+      requestAnimationFrame(checkTime);
+    }
 
-[![](https://img.shields.io/badge/Copy%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/new?template_owner=skills&template_name=github-pages&owner=%40me&name=skills-github-pages&description=Exercise:+Create+a+site+or+blog+from+your+GitHub+repositories+with+GitHub+Pages&visibility=public)
-
-<details>
-<summary>Having trouble? 🤷</summary><br/>
-
-When copying the exercise, we recommend the following settings:
-
-- For owner, choose your personal account or an organization to host the repository.
-
-- We recommend creating a public repository, since private repositories will use Actions minutes.
-
-If the exercise isn't ready in 20 seconds, please check the [Actions](../../actions) tab.
-
-- Check to see if a job is running. Sometimes it simply takes a bit longer.
-
-- If the page shows a failed job, please submit an issue. Nice, you found a bug! 🐛
-
-</details>
-
----
-
-&copy; 2025 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
+    function stopAudio() {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  </script>
+</body>
+</html>
