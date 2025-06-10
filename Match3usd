@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"> <!-- RTL for Arabic -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة Match-3</title>
+    <!-- Chosen Palette: Serene Desert Dawn -->
+    <!-- Application Structure Plan: This is a single-page application focused solely on the core Match-3 game loop and its direct interactive elements (buttons, modals). The main game board is central, surrounded by stats and action buttons. Modals are used for additional interactions (profile, payment, ads), as depicted in user screenshots. The structure prioritizes immediate gameplay and direct interaction with financial options. -->
+    <!-- Visualization & Content Choices: Game Board (HTML divs for gems, vanilla JS interaction), Live Stats (text, vanilla JS), Profile Stats (text, vanilla JS, shown in a modal), Payment Modals (HTML forms, vanilla JS for simulation), Boost Info Modal (text, vanilla JS), Ad Modal (dynamic image/text, vanilla JS), Auth Buttons (HTML buttons, Firebase JS SDK). -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js is not included as profit trend chart is part of the 'dashboard' context, which is removed for this core game version. -->
+    <!-- If you later add a specific chart within a modal, Chart.js can be re-added. -->
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* Dark background from previous versions */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            color: #E2E8F0; /* Light text for readability on dark background */
+        }
+        .game-container {
+            background-color: #2d3748; /* Slightly lighter dark background for container */
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+        }
+        .user-info {
+            color: #cbd5e0;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            text-align: center;
+            width: 100%;
+        }
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-bottom: 10px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .stat-display {
+            background-color: #10b981; /* Green for profit */
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.2em;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            flex: 1;
+            min-width: 120px;
+        }
+        .stat-display.moves {
+            background-color: #f59e0b; /* Amber for moves */
+        }
+
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(var(--grid-width), 1fr);
+            gap: 4px;
+            border: 2px solid #4a5568;
+            border-radius: 8px;
+            padding: 8px;
+            background-color: #1a202c;
+            width: fit-content;
+            margin: 0 auto;
+        }
+        .gem {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out, border 0.1s ease-in-out;
+            border: 2px solid transparent;
+        }
+        .gem-0 { background-color: #ef4444; }
+        .gem-1 { background-color: #3b82f6; }
+        .gem-2 { background-color: #22c55e; }
+        .gem-3 { background-color: #f97316; }
+        .gem-4 { background-color: #a855f7; }
+        .gem-special {
+            background-color: #84cc16;
+            font-size: 30px;
+        }
+        .gem.selected {
+            border: 4px solid #38b2ac; /* Teal border for selected */
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #38b2ac;
+        }
+        .gem.matched {
+            border: 4px solid #facc15;
+            animation: pulse-border 0.3s infinite alternate;
+        }
+        @keyframes pulse-border {
+            from { border-color: #facc15; }
+            to { border-color: #fee300; }
+        }
+        .gem-empty {
+            background-color: #3b4453;
+            border: 2px dashed #4a5568;
+            color: transparent;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+            width: 100%;
+        }
+        .button-style {
+            background-color: #4c51bf; /* Indigo */
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            border: none;
+            flex-grow: 1;
+            min-width: 120px;
+        }
+        .button-style:hover {
+            background-color: #6366f1;
+            transform: translateY(-2px);
+        }
+        .button-style:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .button-style.danger {
+            background-color: #dc2626;
+        }
+        .button-style.danger:hover {
+            background-color: #ef4444;
+        }
+        .button-style.success {
+            background-color: #059669;
+        }
+        .button-style.success:hover {
+            background-color: #10b981;
+        }
+        .button-style.google {
+            background-color: #db4437;
+        }
+        .button-style.google:hover {
+            background-color: #e26154;
+        }
+        .button-style.facebook {
+            background-color: #4267b2;
+        }
+        .button-style.facebook:hover {
+            background-color: #5879c3;
+        }
+        .button-style.buy-boost {
+            background-color: #8B5CF6;
+        }
+        .button-style.buy-boost:hover {
+            background-color: #A78BFA;
+        }
+
+        .message-box {
+            background-color: #4a5568;
+            color: #e2e8f0;
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.1em;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+
+        .ad-space {
+            background-color: #3f51b5;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 30px;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+        .branding-footer {
+            margin-top: 20px;
+            color: #a0aec0;
+            font-size: 0.8em;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: #2d3748;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+            width: 90%;
+            max-width: 500px;
+            color: white;
+            position: relative;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .modal-close-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.8em;
+            color: #cbd5e0;
+            cursor: pointer;
+        }
+        .modal-close-button:hover {
+            color: white;
+        }
+        .modal-content h2 {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #63b3ed;
+        }
+        .modal-content p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        .modal-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 15px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .modal-content .whatsapp-link {
+            display: inline-block;
+            background-color: #25d366;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .modal-content .whatsapp-link:hover {
+            background-color: #128c7e;
+        }
+        .profile-stat-item {
+            display: flex;
+            justify-content: space-between;
+            background-color: #3f51b5;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            font-size: 1em;
+        }
+        .profile-stat-item span:first-child {
+            font-weight: bold;
+        }
+        .modal-input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #4a5568;
+            background-color: #1a202c;
+            color: white;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .payment-option-button {
+            background-color: #4a5568;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .payment-option-button:hover {
+            background-color: #636e82;
+        }
+        .credit-card-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .gem {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+            .game-board {
+                gap: 2px;
+                padding: 4px;
+            }
+            .game-container {
+                padding: 16px;
+            }
+            .button-style {
+                padding: 10px 15px;
+                font-size: 0.9em;
+                min-width: unset;
+            }
+            .stats-bar {
+                flex-direction: column;
+            }
+            .stat-display {
+                font-size: 1em;
+                padding: 8px 12px;
+                min-width: unset;
+            }
+            .modal-content {
+                padding: 20px;
+                gap: 10px;
+            }
+            .modal-content h2 {
+                font-size: 1.5em;
+            }
+            .modal-content p {
+                font-size: 0.9em;
+            }
+            .modal-input {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1 class="text-3xl font-bold text-white mb-4">لعبة Match-3</h1>
+
+        <div id="user-display-info" class="user-info hidden">
+            <!-- User info will be displayed here -->
+        </div>
+
+        <div class="stats-bar">
+            <div id="profit-display" class="stat-display">
+                الرصيد: $0.00
+            </div>
+            <div id="moves-display" class="stat-display moves">
+                الحركات المتبقية: 0
+            </div>
+            <div id="free-attempts-display" class="stat-display moves">
+                محاولات مجانية: 0
+            </div>
+        </div>
+
+        <div id="game-board" class="game-board">
+            <!-- Gems will be inserted here by JavaScript -->
+        </div>
+
+        <div class="button-group">
+            <button id="new-game-button" class="button-style success">لعبة جديدة</button>
+            <button id="profile-button" class="button-style">الملف الشخصي</button>
+            <button id="add-credit-button" class="button-style">إضافة رصيد</button>
+            <button id="withdraw-profit-button" class="button-style danger">سحب الأرباح</button>
+            <button id="buy-double-profit-button" class="button-style buy-boost">شراء مضاعفة الأرباح ($10)</button>
+            <button id="buy-annual-sub-button" class="button-style buy-boost">الاشتراك السنوي ($10)</button>
+        </div>
+
+        <div class="button-group">
+            <button id="login-google-button" class="button-style google">تسجيل الدخول (جوجل)</button>
+            <button id="login-facebook-button" class="button-style facebook">تسجيل الدخول (فيسبوك)</button>
+        </div>
+
+        <div id="message-box" class="message-box hidden">
+            <!-- Messages will appear here -->
+        </div>
+
+        <div class="ad-space">
+            مساحة للإعلانات هنا!
+            <br>
+            <span class="text-sm">إعلان رائع قد يظهر هنا قريباً...</span>
+        </div>
+
+        <div class="branding-footer">
+            تصميم الشعار بواسطة Digitalino
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div id="profile-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-button" id="close-profile-modal">&times;</button>
+            <h2>ملف اللاعب الشخصي</h2>
+            <div class="profile-stat-item">
+                <span>إجمالي الألعاب التي تم لعبها:</span> <span id="profile-total-games">0</span>
+            </div>
+            <div class="profile-stat-item">
+                <span>إجمالي الجواهر التي تمت إزالتها:</span> <span id="profile-total-gems">0</span>
+            </div>
+            <div class="profile-stat-item">
+                <span>جواهر '$' التي تم جمعها:</span> <span id="profile-special-gems">0</span>
+            </div>
+            <div class="profile-stat-item">
+                <span>الرصيد الحالي:</span> <span id="profile-current-profit">$0.00</span>
+            </div>
+            <div class="profile-stat-item">
+                <span>حالة سحب الأرباح:</span> <span id="profile-withdrawal-status">لم يتم طلب سحب الأرباح</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Credit Options Modal (Choose Payment Method) -->
+    <div id="add-credit-options-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-button" id="close-add-credit-options-modal">&times;</button>
+            <h2>كيف ترغب في إضافة الرصيد؟</h2>
+            <div class="payment-options">
+                <button id="option-credit-card" class="payment-option-button">بطاقة الائتمان</button>
+                <button id="option-cashplus" class="payment-option-button">كاش بلوس</button>
+                <button id="option-custom-amount" class="payment-option-button">أضف مبلغًا مخصصًا (اختبار)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Credit Card Payment Modal (Simulated) -->
+    <div id="credit-card-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-button" id="close-credit-card-modal">&times;</button>
+            <h2>دفع ببطاقة الائتمان (محاكاة)</h2>
+            <p>أدخل تفاصيل بطاقتك الائتمانية لإضافة <span id="cc-payment-amount" class="font-bold text-green-400">$0.00</span>.</p>
+            <div class="credit-card-inputs">
+                <input type="text" id="card-number-input" class="modal-input" placeholder="رقم البطاقة" pattern="[0-9]{16}" maxlength="16">
+                <input type="text" id="expiry-date-input" class="modal-input" placeholder="MM/YY" pattern="(0[1-9]|1[0-2])\/([0-9]{2})">
+                <input type="text" id="cvv-input" class="modal-input" placeholder="CVV" pattern="[0-9]{3,4}" maxlength="4">
+            </div>
+            <div class="modal-buttons">
+                <button id="confirm-credit-card-payment" class="button-style success">تأكيد الدفع</button>
+                <button id="cancel-credit-card-payment" class="button-style">إلغاء</button>
+            </div>
+            <p class="text-sm text-red-400 mt-2">
+                (تنبيه: هذه عملية محاكاة فقط. لن يتم معالجة أي دفعات حقيقية أو تخزين بيانات البطاقة.)
+            </p>
+        </div>
+    </div>
+
+    <!-- CashPlus Payment Modal (Simulated) -->
+    <div id="cashplus-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-button" id="close-cashplus-modal">&times;</button>
+            <h2>دفع عبر كاش بلوس (محاكاة)</h2>
+            <p>
+                لإتمام عملية الشراء، يرجى تحويل <span id="cashplus-payment-amount" class="font-bold text-green-400">$0.00</span> إلى رقم الهاتف التالي :
+                <span class="font-bold text-blue-400">0526055509</span>
+            </p>
+            <p class="text-sm text-gray-300">
+                (المغرب: كاش بلوس، عالمياً: يمكنك استخدام طرق تحويل الأموال الأخرى بالتواصل المسبق).
+            </p>
+            <p class="mt-4">بعد الدفع، يرجى تحميل لقطة شاشة لتأكيد العملية:</p>
+            <input type="file" id="cashplus-screenshot-input" accept="image/*" class="modal-input file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100">
+            <div class="modal-buttons">
+                <button id="confirm-cashplus-payment" class="button-style success">تأكيد الدفع وتفعيل الرصيد</button>
+                <button id="cancel-cashplus-payment" class="button-style">إلغاء</button>
+            </div>
+            <p class="text-sm text-red-400 mt-2">
+                (تنبيه: هذه عملية محاكاة فقط. لن يتم معالجة أي دفعات حقيقية أو رفع صور.)
+            </p>
+        </div>
+    </div>
+
+    <!-- Double Profit Info Modal -->
+    <div id="double-profit-info-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-button" id="close-double-profit-info-modal">&times;</button>
+            <h2>معلومات مضاعفة الأرباح</h2>
+            <p>
+                مع هذا البونص، كل الأرباح التي تحققها من تطابق الجواهر
+                **ستتضاعف *2!**
+                اجمع أكثر في وقت أقل واستمتع بمضاعفة أرباحك في اللعبة.
+            </p>
+            <p class="text-xl font-bold text-green-400">التكلفة: $10.00</p>
+            <div class="modal-buttons">
+                <button id="confirm-double-profit-info" class="button-style success">تأكيد الشراء والمتابعة للدفع</button>
+                <button id="cancel-double-profit-info" class="button-style">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Verification Modal (for boosts/subscription) -->
+    <div id="payment-verification-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-button" id="close-payment-verification-modal">&times;</button>
+            <h2 id="payment-verification-title">تأكيد عملية الدفع</h2>
+            <p id="payment-verification-text">
+                لإتمام عملية الشراء، يرجى تحويل <span id="payment-amount" class="font-bold text-green-400">$0.00</span> عبر إحدى الطرق التالية ثم تحميل لقطة شاشة للتأكيد.
+            </p>
+            <div class="text-left text-sm text-gray-300">
+                <h3 class="font-bold text-lg mb-1">طرق الدفع المحلية (المغرب):</h3>
+                <ul class="list-disc ml-5">
+                    <li>تحويل بنكي (تفاصيل الحساب عند التواصل)</li>
+                    <li>الدفع النقدي (بالتنسيق المسبق)</li>
+                </ul>
+                <h3 class="font-bold text-lg mt-3 mb-1">طرق الدفع العالمية:</h3>
+                <ul class="list-disc ml-5">
+                    <li>PayPal (حساب: your.paypal@example.com)</li>
+                    <li>بطاقة الائتمان (عبر بوابة دفع آمنة عند التواصل)</li>
+                </ul>
+                <p class="mt-4">بعد الدفع، يرجى تحميل لقطة شاشة لتأكيد العملية:</p>
+            </div>
+            
+            <input type="file" id="screenshot-upload-input" accept="image/*" class="modal-input file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100">
+            <div class="modal-buttons">
+                <button id="confirm-payment-verification" class="button-style success">تأكيد الدفع وتفعيل الرصيد</button>
+                <button id="cancel-payment-verification" class="button-style">إلغاء</button>
+            </div>
+             <p class="text-sm text-red-400 mt-2">
+                (تنبيه: هذه عملية محاكاة فقط. لن يتم معالجة أي دفعات حقيقية أو رفع صور.)
+            </p>
+        </div>
+    </div>
+
+
+    <!-- Ad Modal -->
+    <div id="ad-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-button" id="close-ad-modal">&times;</button>
+            <h2 id="ad-title"></h2>
+            <img id="ad-image" src="" alt="Ad Image Placeholder">
+            <p id="ad-text"></p>
+            <a id="ad-whatsapp-link" href="#" target="_blank" class="whatsapp-link"></a>
+        </div>
+    </div>
+
+    <script type="module">
+        // Import Firebase modules - NOTE: This requires Firebase to be set up in your project
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js';
+        import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js';
+        // import { getFirestore, doc, setDoc, getDoc, updateDoc } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js'; // For persistence
+
+        // --- Firebase Configuration ---
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        let app;
+        let authService;
+        if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
+            try {
+                app = initializeApp(firebaseConfig);
+                authService = getAuth(app);
+            } catch (e) {
+                console.error("Firebase initialization failed:", e);
+            }
+        }
+
+        // --- Game Parameters ---
+        const GRID_WIDTH = 6;
+        const GRID_HEIGHT = 6;
+        const NUM_REGULAR_GEM_TYPES = 5;
+        const SPECIAL_GEM_TYPE = NUM_REGULAR_GEM_TYPES;
+        const SPECIAL_GEM_SPAWN_PROB = 0.1;
+
+        const STARTING_GAME_COST = 5.00;
+        const MAX_MOVES = 50;
+        const FREE_ATTEMPTS_INITIAL = 50;
+
+        // Profit rules per match group
+        const PROFIT_PER_GROUP = {
+            3: 0.03,
+            4: 0.08,
+            5: 0.15
+        };
+        const PROFIT_SPECIAL_GEM_BONUS = 0.10;
+        const WITHDRAWAL_THRESHOLD = 20.00;
+        const DAILY_WITHDRAWAL_LIMIT = 20.00;
+
+        // --- Boost Parameters ---
+        const DOUBLE_PROFIT_COST = 10.00;
+        const ANNUAL_SUB_COST = 10.00;
+        const ANNUAL_SUB_BONUS = 5.00;
+        const ANNUAL_SUB_DAILY_BENEFIT = 5.00;
+
+        // --- Game State ---
+        let gameGrid = [];
+        let selectedGem = null;
+        let currentProfit = 0.00;
+        let movesLeft = 0;
+        let freeAttemptsLeft = FREE_ATTEMPTS_INITIAL;
+        let totalGamesPlayed = 0;
+        let totalGemsRemoved = 0;
+        let totalSpecialGemsCollected = 0;
+        let withdrawalRequested = false;
+        let dailyWithdrawalAmountToday = 0.00;
+        let lastWithdrawalDate = null;
+        let doubleProfitActive = false;
+        let serviceActive = false;
+        let lastAnnualSubBonusDate = null;
+
+        let currentUser = null;
+
+        // Ad content array - WhatsApp number: 0526055509
+        const adContents = [
+            {
+                title: "هل تبحث عن تطبيق رائع؟",
+                text: "نقدم خدمات تطوير تطبيقات واتساب مخصصة تلبي احتياجاتك. حوّل فكرتك إلى واقع اليوم!",
+                whatsapp: "0526055509",
+                image: "https://placehold.co/400x200/228B22/FFFFFF?text=تطبيق+واتساب"
+            },
+            {
+                title: "حلول برمجية مبتكرة!",
+                text: "لدينا فريق من المطورين المهرة يقدم حلولًا برمجية متكاملة لعملك. دعنا نساعدك على النمو.",
+                whatsapp: "0526055509",
+                image: "https://placehold.co/400x200/00008B/FFFFFF?text=حلول+برمجية"
+            },
+            {
+                title: "ادعم مطوري الألعاب العرب!",
+                text: "إذا استمتعت بهذه اللعبة، فكر في دعم جهودنا لتطوير المزيد من الألعاب والبرامج الترفيهية.",
+                whatsapp: "0526055509",
+                image: "https://placehold.co/400x200/8B0000/FFFFFF?text=ادعم+المطورين"
+            }
+        ];
+        let currentAdIndex = 0;
+
+        // --- DOM Elements ---
+        const newGameButton = document.getElementById('new-game-button');
+        const profileButton = document.getElementById('profile-button');
+        const addCreditButton = document.getElementById('add-credit-button');
+        const withdrawProfitButton = document.getElementById('withdraw-profit-button');
+        const buyDoubleProfitButton = document.getElementById('buy-double-profit-button');
+        const buyAnnualSubButton = document.getElementById('buy-annual-sub-button');
+        const loginGoogleButton = document.getElementById('login-google-button');
+        const loginFacebookButton = document.getElementById('login-facebook-button');
+        const messageBox = document.getElementById('message-box');
+        const profitDisplayElement = document.getElementById('profit-display');
+        const movesDisplayElement = document.getElementById('moves-display');
+        const freeAttemptsDisplayElement = document.getElementById('free-attempts-display');
+        const userDisplayInfo = document.getElementById('user-display-info');
+        const gameBoardElement = document.getElementById('game-board');
+
+        // Modals
+        const profileModal = document.getElementById('profile-modal');
+        const closeProfileModalButton = document.getElementById('close-profile-modal');
+
+        const addCreditOptionsModal = document.getElementById('add-credit-options-modal');
+        const closeAddCreditOptionsModalButton = document.getElementById('close-add-credit-options-modal');
+        const optionCreditCardButton = document.getElementById('option-credit-card');
+        const optionCashPlusButton = document.getElementById('option-cashplus');
+        const optionCustomAmountButton = document.getElementById('option-custom-amount');
+
+        const creditCardModal = document.getElementById('credit-card-modal');
+        const closeCreditCardModalButton = document.getElementById('close-credit-card-modal');
+        const ccPaymentAmountDisplay = document.getElementById('cc-payment-amount');
+        const cardNumberInput = document.getElementById('card-number-input');
+        const expiryDateInput = document.getElementById('expiry-date-input');
+        const cvvInput = document.getElementById('cvv-input');
+        const confirmCreditCardPaymentButton = document.getElementById('confirm-credit-card-payment');
+        const cancelCreditCardPaymentButton = document.getElementById('cancel-credit-card-payment');
+
+        const cashplusModal = document.getElementById('cashplus-modal');
+        const closeCashplusModalButton = document.getElementById('close-cashplus-modal');
+        const cashplusPaymentAmountDisplay = document.getElementById('cashplus-payment-amount');
+        const cashplusScreenshotInput = document.getElementById('cashplus-screenshot-input');
+        const confirmCashplusPaymentButton = document.getElementById('confirm-cashplus-payment');
+        const cancelCashplusPaymentButton = document.getElementById('cancel-cashplus-payment');
+
+        const doubleProfitInfoModal = document.getElementById('double-profit-info-modal');
+        const closeDoubleProfitInfoModalButton = document.getElementById('close-double-profit-info-modal');
+        const confirmDoubleProfitInfoButton = document.getElementById('confirm-double-profit-info');
+        const cancelDoubleProfitInfoButton = document.getElementById('cancel-double-profit-info');
+
+
+        const adModal = document.getElementById('ad-modal');
+        const closeAdModalButton = document.getElementById('close-ad-modal');
+
+        const paymentVerificationModal = document.getElementById('payment-verification-modal');
+        const closePaymentVerificationModalButton = document.getElementById('close-payment-verification-modal');
+        const paymentVerificationTitle = document.getElementById('payment-verification-title');
+        const paymentVerificationText = document.getElementById('payment-verification-text');
+        const paymentAmountDisplay = document.getElementById('payment-amount');
+        const screenshotUploadInput = document.getElementById('screenshot-upload-input');
+        const confirmPaymentVerificationButton = document.getElementById('confirm-payment-verification');
+        const cancelPaymentVerificationButton = document.getElementById('cancel-payment-verification');
+
+
+        // --- Utility Functions ---
+
+        function isToday(someDate) {
+            const today = new Date();
+            return someDate.getDate() === today.getDate() &&
+                   someDate.getMonth() === today.getMonth() &&
+                   someDate.getFullYear() === today.getFullYear();
+        }
+
+        function checkAndResetDailyWithdrawal() {
+            if (lastWithdrawalDate && !isToday(new Date(lastWithdrawalDate))) {
+                dailyWithdrawalAmountToday = 0.00;
+                lastWithdrawalDate = null;
+                showMessage("تمت إعادة تعيين حد السحب اليومي.", 3000);
+            }
+        }
+
+        function checkAndApplyAnnualSubBonus() {
+            if (serviceActive && (!lastAnnualSubBonusDate || !isToday(new Date(lastAnnualSubBonusDate)))) {
+                currentProfit += ANNUAL_SUB_DAILY_BENEFIT;
+                lastAnnualSubBonusDate = new Date().toISOString().split('T')[0];
+                updateProfitDisplay();
+                showMessage(`تهانينا! لقد تلقيت مكافأة الاشتراك السنوي اليومية: $${ANNUAL_SUB_DAILY_BENEFIT.toFixed(2)}`, 4000);
+            }
+        }
+
+        function updateProfitDisplay() {
+            profitDisplayElement.textContent = `الرصيد: $${currentProfit.toFixed(2)}`;
+        }
+
+        function updateMovesDisplay() {
+            movesDisplayElement.textContent = `الحركات المتبقية: ${movesLeft}`;
+        }
+
+        function updateFreeAttemptsDisplay() {
+            freeAttemptsDisplayElement.textContent = `محاولات مجانية: ${freeAttemptsLeft}`;
+        }
+
+        function showMessage(message, duration = 3000) {
+            messageBox.textContent = message;
+            messageBox.classList.remove('hidden');
+            clearTimeout(messageBox.hideTimeout);
+            messageBox.hideTimeout = setTimeout(() => {
+                messageBox.classList.add('hidden');
+                messageBox.textContent = '';
+            }, duration);
+        }
+
+        function createGrid(width, height, numRegularTypes) {
+            const newGrid = [];
+            for (let r = 0; r < height; r++) {
+                const row = [];
+                for (let c = 0; c < width; c++) {
+                    if (Math.random() < SPECIAL_GEM_SPAWN_PROB) {
+                        row.push(SPECIAL_GEM_TYPE);
+                    } else {
+                        row.push(Math.floor(Math.random() * numRegularTypes));
+                    }
+                }
+                newGrid.push(row);
+            }
+            return newGrid;
+        }
+
+        function displayGrid(grid) {
+            gameBoardElement.style.setProperty('--grid-width', GRID_WIDTH);
+            gameBoardElement.style.setProperty('--grid-height', GRID_HEIGHT);
+            gameBoardElement.innerHTML = '';
+
+            for (let r = 0; r < GRID_HEIGHT; r++) {
+                for (let c = 0; c < GRID_WIDTH; c++) {
+                    const gemType = grid[r][c];
+                    const gemElement = document.createElement('div');
+                    gemElement.classList.add('gem', 'flex', 'items-center', 'justify-center');
+                    if (gemType !== null) {
+                        if (gemType === SPECIAL_GEM_TYPE) {
+                            gemElement.classList.add('gem-special');
+                            gemElement.textContent = '$';
+                        } else {
+                            gemElement.classList.add(`gem-${gemType}`);
+                            gemElement.textContent = gemType;
+                        }
+                    } else {
+                        gemElement.classList.add('gem-empty');
+                        gemElement.textContent = '';
+                    }
+                    gemElement.dataset.row = r;
+                    gemElement.dataset.col = c;
+                    if (gemType !== null) {
+                        gemElement.addEventListener('click', () => handleGemClick(r, c));
+                    }
+                    gameBoardElement.appendChild(gemElement);
+                }
+            }
+        }
+
+        function findMatches(grid) {
+            const matches = new Set();
+            const addMatch = (r, c) => matches.add(`${r},${c}`);
+
+            for (let r = 0; r < GRID_HEIGHT; r++) {
+                for (let c = 0; c < GRID_WIDTH - 2; c++) {
+                    const currentGem = grid[r][c];
+                    if (currentGem !== null &&
+                        currentGem === grid[r][c + 1] &&
+                        currentGem === grid[r][c + 2]) {
+                        addMatch(r, c); addMatch(r, c + 1); addMatch(r, c + 2);
+                        let k = 3;
+                        while (c + k < GRID_WIDTH && grid[r][c + k] === currentGem) {
+                            addMatch(r, c + k); k++;
+                        }
+                    }
+                }
+            }
+
+            for (let c = 0; c < GRID_WIDTH; c++) {
+                for (let r = 0; r < GRID_HEIGHT - 2; r++) {
+                    const currentGem = grid[r][c];
+                    if (currentGem !== null &&
+                        currentGem === grid[r + 1][c] &&
+                        currentGem === grid[r + 2][c]) {
+                        addMatch(r, c); addMatch(r + 1, c); addMatch(r + 2, c);
+                        let k = 3;
+                        while (r + k < GRID_HEIGHT && grid[r + k][c] === currentGem) {
+                            addMatch(r + k, c); k++;
+                        }
+                    }
+                }
+            }
+            return matches;
+        }
+
+        function getDistinctMatchGroups(grid, allMatchedCoordsSet) {
+            const groups = [];
+            const processedGemsInThisCall = new Set();
+            const isMatchedCoord = (r, c) => allMatchedCoordsSet.has(`${r},${c}`);
+
+            for (let r = 0; r < GRID_HEIGHT; r++) {
+                for (let c = 0; c < GRID_WIDTH - 2; c++) {
+                    const gem = grid[r][c];
+                    if (gem !== null && isMatchedCoord(r, c) && !processedGemsInThisCall.has(`${r},${c}`)) {
+                        if (isMatchedCoord(r, c + 1) && isMatchedCoord(r, c + 2)) {
+                            let currentHMatch = [];
+                            let k = 0;
+                            while (c + k < GRID_WIDTH && grid[r][c + k] === gem && isMatchedCoord(r, c + k)) {
+                                currentHMatch.push([r, c + k]);
+                                k++;
+                            }
+                            if (currentHMatch.length >= 3) {
+                                groups.push({ coords: currentHMatch, type: gem });
+                                currentHMatch.forEach(coord => processedGemsInThisCall.add(`${coord[0]},${coord[1]}`));
+                            }
+                        }
+                    }
+                }
+            }
+
+            for (let c = 0; c < GRID_WIDTH; c++) {
+                for (let r = 0; r < GRID_HEIGHT - 2; r++) {
+                    const gem = grid[r][c];
+                    if (gem !== null && isMatchedCoord(r, c) && !processedGemsInThisCall.has(`${r},${c}`)) {
+                        if (isMatchedCoord(r + 1, c) && isMatchedCoord(r + 2, c)) {
+                            let currentVMatch = [];
+                            let k = 0;
+                            while (r + k < GRID_HEIGHT && grid[r + k][c] === gem && isMatchedCoord(r + k, c)) {
+                                currentVMatch.push([r + k, c]);
+                                k++;
+                            }
+                            if (currentVMatch.length >= 3) {
+                                groups.push({ coords: currentVMatch, type: gem });
+                                currentVMatch.forEach(coord => processedGemsInThisCall.add(`${coord[0]},${coord[1]}`));
+                            }
+                        }
+                    }
+                }
+            }
+            return groups;
+        }
+
+        function clearHighlights() {
+            document.querySelectorAll('.gem.matched').forEach(gem => {
+                gem.classList.remove('matched');
+                gem.style.animation = '';
+            });
+            document.querySelectorAll('.gem.selected').forEach(gem => {
+                gem.classList.remove('selected');
+            });
+            document.querySelectorAll('.gem').forEach(gem => {
+                gem.style.transition = '';
+                gem.style.transform = '';
+                gem.style.opacity = '';
+            });
+        }
+
+        function highlightMatches(matchedCoordsSet) {
+            clearHighlights();
+            if (matchedCoordsSet.size === 0) { return; }
+            matchedCoordsSet.forEach(coordStr => {
+                const [r, c] = coordStr.split(',').map(Number);
+                const gemElement = gameBoardElement.querySelector(`[data-row="${r}"][data-col="${c}"]`);
+                if (gemElement) { gemElement.classList.add('matched'); }
+            });
+        }
+
+        function swapGemsLogic(r1, c1, r2, c2) {
+            const temp = gameGrid[r1][c1];
+            gameGrid[r1][c1] = gameGrid[r2][c2];
+            gameGrid[r2][c2] = temp;
+        }
+
+        function areAdjacent(gem1, gem2) {
+            const dr = Math.abs(gem1.row - gem2.row);
+            const dc = Math.abs(gem1.col - gem2.col);
+            return (dr === 1 && dc === 0) || (dr === 0 && dc === 1);
+        }
+
+        function removeMatches(matchedCoordsSet) {
+            matchedCoordsSet.forEach(coordStr => {
+                const [r, c] = coordStr.split(',').map(Number);
+                gameGrid[r][c] = null;
+            });
+        }
+
+        function applyGravity() {
+            for (let c = 0; c < GRID_WIDTH; c++) {
+                let emptySpots = [];
+                for (let r = GRID_HEIGHT - 1; r >= 0; r--) {
+                    if (gameGrid[r][c] === null) {
+                        emptySpots.push(r);
+                    } else if (emptySpots.length > 0) {
+                        const lowestEmptyRow = emptySpots.shift();
+                        gameGrid[lowestEmptyRow][c] = gameGrid[r][c];
+                        gameGrid[r][c] = null;
+                        emptySpots.push(r);
+                        emptySpots.sort((a, b) => b - a);
+                    }
+                }
+            }
+        }
+
+        function refillGems() {
+            for (let r = 0; r < GRID_HEIGHT; r++) {
+                for (let c = 0; c < GRID_WIDTH; c++) {
+                    if (gameGrid[r][c] === null) {
+                        if (Math.random() < SPECIAL_GEM_SPAWN_PROB) {
+                            gameGrid[r][c] = SPECIAL_GEM_TYPE;
+                        } else {
+                            gameGrid[r][c] = Math.floor(Math.random() * NUM_REGULAR_GEM_TYPES);
+                        }
+                    }
+                }
+            }
+        }
+
+        function showAdModal() {
+            const ad = adContents[currentAdIndex];
+            document.getElementById('ad-title').textContent = ad.title;
+            document.getElementById('ad-text').textContent = ad.text;
+            document.getElementById('ad-image').src = ad.image;
+            document.getElementById('ad-image').alt = ad.title;
+            document.getElementById('ad-whatsapp-link').href = `https://wa.me/${ad.whatsapp}`;
+            document.getElementById('ad-whatsapp-link').textContent = `تواصل عبر واتساب: ${ad.whatsapp}`;
+            adModal.classList.remove('hidden');
+            currentAdIndex = (currentAdIndex + 1) % adContents.length;
+            setTimeout(() => { adModal.classList.add('hidden'); }, 5000);
+        }
+
+        async function processMatches() {
+            clearHighlights();
+            let matchesFoundInLoop = true;
+            let currentCascadeGemsRemoved = 0;
+            let specialGemsRemovedThisCascade = 0;
+
+            while (matchesFoundInLoop) {
+                const allMatchedCoordsSet = findMatches(gameGrid);
+                if (allMatchedCoordsSet.size > 0) {
+                    const distinctMatchGroups = getDistinctMatchGroups(gameGrid, allMatchedCoordsSet);
+                    let profitThisStep = 0;
+                    distinctMatchGroups.forEach(group => {
+                        const groupLength = group.coords.length;
+                        if (groupLength >= 5) { profitThisStep += PROFIT_PER_GROUP[5]; }
+                        else if (PROFIT_PER_GROUP[groupLength]) { profitThisStep += PROFIT_PER_GROUP[groupLength]; }
+                        group.coords.forEach(([r, c]) => {
+                            if (gameGrid[r][c] === SPECIAL_GEM_TYPE) { profitThisStep += PROFIT_SPECIAL_GEM_BONUS; specialGemsRemovedThisCascade++; }
+                        });
+                    });
+
+                    if (doubleProfitActive) { profitThisStep *= 2; }
+                    currentProfit += profitThisStep;
+                    totalGemsRemoved += allMatchedCoordsSet.size;
+                    totalSpecialGemsCollected += specialGemsRemovedThisCascade;
+                    updateProfitDisplay();
+                    currentCascadeGemsRemoved += allMatchedCoordsSet.size;
+
+                    highlightMatches(allMatchedCoordsSet);
+                    showMessage(`تم العثور على ${allMatchedCoordsSet.size} جوهرة متطابقة! أرباح +$${profitThisStep.toFixed(2)}`, 1000);
+                    await new Promise(resolve => setTimeout(resolve, 700));
+
+                    allMatchedCoordsSet.forEach(coordStr => {
+                        const [r, c] = coordStr.split(',').map(Number);
+                        const gemElement = gameBoardElement.querySelector(`[data-row="${r}"][data-col="${c}"]`);
+                        if (gemElement) { gemElement.style.transition = 'transform 0.2s ease-out, opacity 0.2s ease-out'; gemElement.style.transform = 'scale(0.1)'; gemElement.style.opacity = '0'; }
+                    });
+                    await new Promise(resolve => setTimeout(resolve, 300));
+
+                    removeMatches(allMatchedCoordsSet);
+                    displayGrid(gameGrid);
+                    showMessage(`إزالة ${allMatchedCoordsSet.size} جوهرة.`, 1000);
+
+                    if (specialGemsRemovedThisCascade > 0) { showAdModal(); specialGemsRemovedThisCascade = 0; }
+                    await new Promise(resolve => setTimeout(resolve, 500));
+
+                    applyGravity();
+                    displayGrid(gameGrid);
+                    showMessage("الجواهر تسقط...", 1000);
+                    await new Promise(resolve => setTimeout(resolve, 500));
+
+                    refillGems();
+                    displayGrid(gameGrid);
+                    showMessage("جواهر جديدة تظهر!", 1000);
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                } else {
+                    matchesFoundInLoop = false;
+                }
+            }
+
+            if (currentCascadeGemsRemoved > 0) {
+                showMessage(`انتهت الجولة. تم إزالة ${currentCascadeGemsRemoved} جوهرة بنجاح! رصيدك: $${currentProfit.toFixed(2)}`, 3000);
+            }
+            clearHighlights();
+
+            if (movesLeft <= 0) {
+                showMessage(`انتهت اللعبة! رصيدك النهائي: $${currentProfit.toFixed(2)}. ابدأ لعبة جديدة.`, 5000);
+            }
+        }
+
+        async function handleGemClick(r, c) {
+            if (movesLeft <= 0) { showMessage("انتهت اللعبة! ابدأ لعبة جديدة."); return; }
+            clearHighlights();
+            if (gameGrid[r][c] === null) { return; }
+
+            const clickedGemElement = gameBoardElement.querySelector(`[data-row="${r}"][data-col="${c}"]`);
+
+            if (!selectedGem) {
+                selectedGem = { row: r, col: c };
+                if (clickedGemElement) { clickedGemElement.classList.add('selected'); }
+                showMessage("تم تحديد جوهرة. انقر على جوهرة مجاورة للتبديل.");
+            } else {
+                const targetGem = { row: r, col: c };
+                if (selectedGem.row === targetGem.row && selectedGem.col === targetGem.col) {
+                    selectedGem = null;
+                    if (clickedGemElement) { clickedGemElement.classList.remove('selected'); }
+                    showMessage("تم إلغاء تحديد الجوهرة."); return;
+                }
+
+                if (areAdjacent(selectedGem, targetGem)) {
+                    swapGemsLogic(selectedGem.row, selectedGem.col, targetGem.row, targetGem.col);
+                    displayGrid(gameGrid);
+                    const initialMatches = findMatches(gameGrid);
+                    if (initialMatches.size > 0) {
+                        movesLeft--;
+                        updateMovesDisplay();
+                        await processMatches();
+                    } else {
+                        showMessage("لم يتم العثور على تطابقات. يتم التراجع عن التبديل...");
+                        await new Promise(resolve => setTimeout(resolve, 400));
+                        swapGemsLogic(selectedGem.row, selectedGem.col, targetGem.row, targetGem.col);
+                        displayGrid(gameGrid);
+                        showMessage("تم التراجع عن التتبديل.");
+                    }
+                } else {
+                    showMessage("هذه ليست جوهرة مجاورة. يرجى اختيار جوهرة مجاورة أخرى.");
+                }
+
+                document.querySelectorAll('.gem.selected').forEach(gem => { gem.classList.remove('selected'); });
+                selectedGem = null;
+            }
+        }
+
+        async function initGame() {
+            if (freeAttemptsLeft > 0) {
+                freeAttemptsLeft--;
+                showMessage(`بدأت لعبة مجانية! محاولات مجانية متبقية: ${freeAttemptsLeft}. حركاتك المتبقية: ${MAX_MOVES}.`);
+            } else if (currentProfit >= STARTING_GAME_COST) {
+                currentProfit -= STARTING_GAME_COST;
+                showMessage(`بدأت لعبة جديدة! تم خصم $${STARTING_GAME_COST.toFixed(2)}. حركاتك المتبقية: ${MAX_MOVES}.`);
+            } else {
+                showMessage(`ليس لديك رصيد كافٍ لبدء لعبة جديدة. تحتاج إلى $${STARTING_GAME_COST.toFixed(2)}.`, 4000); return;
+            }
+
+            totalGamesPlayed++;
+            updateProfitDisplay();
+            updateFreeAttemptsDisplay();
+            clearHighlights();
+            selectedGem = null;
+            movesLeft = MAX_MOVES;
+            updateMovesDisplay();
+
+            let hasInitialMatches;
+            do {
+                gameGrid = createGrid(GRID_WIDTH, GRID_HEIGHT, NUM_REGULAR_GEM_TYPES);
+                hasInitialMatches = findMatches(gameGrid).size > 0;
+            } while (hasInitialMatches);
+            displayGrid(gameGrid);
+            showMessage("حظا سعيدا!");
+        }
+
+        // --- Firebase Authentication Functions ---
+        async function handleGoogleLogin() {
+            if (!authService) { showMessage("خدمة المصادقة غير متوفرة. يرجى التحقق من تكوين Firebase.", 4000); return; }
+            const provider = new GoogleAuthProvider();
+            try {
+                const result = await signInWithPopup(authService, provider);
+                currentUser = result.user;
+                updateUserDisplay();
+                showMessage(`مرحبًا بك, ${currentUser.displayName || currentUser.email}!`);
+            } catch (error) {
+                console.error("Google Login Error:", error);
+                if (error.code === 'auth/popup-closed-by-user') { showMessage("تم إلغاء تسجيل الدخول.", 2000); }
+                else { showMessage("فشل تسجيل الدخول باستخدام جوجل. يرجى المحاولة مرة أخرى."); }
+            }
+        }
+
+        async function handleFacebookLogin() {
+            if (!authService) { showMessage("خدمة المصادقة غير متوفرة. يرجى التحقق من تكوين Firebase.", 4000); return; }
+            const provider = new FacebookAuthProvider();
+            try {
+                const result = await signInWithPopup(authService, provider);
+                currentUser = result.user;
+                updateUserDisplay();
+                showMessage(`مرحبًا بك, ${currentUser.displayName || currentUser.email}!`);
+            } catch (error) {
+                console.error("Facebook Login Error:", error);
+                if (error.code === 'auth/popup-closed-by-user') { showMessage("تم إلغاء تسجيل الدخول.", 2000); }
+                else { showMessage("فشل تسجيل الدخول باستخدام فيسبوك. يرجى المحاولة مرة أخرى."); }
+            }
+        }
+
+        if (authService) {
+            onAuthStateChanged(authService, (user) => {
+                currentUser = user;
+                updateUserDisplay();
+                if (user) {
+                    loginGoogleButton.classList.add('hidden');
+                    loginFacebookButton.classList.add('hidden');
+                } else {
+                    loginGoogleButton.classList.remove('hidden');
+                    loginFacebookButton.classList.remove('hidden');
+                }
+            });
+        }
+
+        function updateUserDisplay() {
+            if (currentUser) {
+                userDisplayInfo.textContent = `مرحبًا, ${currentUser.displayName || currentUser.email || 'مستخدم مجهول'}!`;
+                userDisplayInfo.classList.remove('hidden');
+            } else {
+                userDisplayInfo.classList.add('hidden');
+                userDisplayInfo.textContent = '';
+            }
+        }
+
+        // --- Event Listeners for UI Buttons ---
+        newGameButton.addEventListener('click', initGame);
+
+        profileButton.addEventListener('click', () => {
+            profileModal.classList.remove('hidden'); // Show the profile modal
+            document.getElementById('profile-total-games').textContent = totalGamesPlayed;
+            document.getElementById('profile-total-gems').textContent = totalGemsRemoved;
+            document.getElementById('profile-special-gems').textContent = totalSpecialGemsCollected;
+            document.getElementById('profile-current-profit').textContent = `$${currentProfit.toFixed(2)}`;
+            document.getElementById('profile-withdrawal-status').textContent = withdrawalRequested ? 'تم طلب سحب الأرباح (قيد المعالجة)' : 'لم يتم طلب سحب الأرباح';
+        });
+
+        closeProfileModalButton.addEventListener('click', () => {
+            profileModal.classList.add('hidden');
+        });
+
+        addCreditButton.addEventListener('click', () => {
+            addCreditOptionsModal.classList.remove('hidden');
+        });
+
+        closeAddCreditOptionsModalButton.addEventListener('click', () => {
+            addCreditOptionsModal.classList.add('hidden');
+        });
+
+        optionCreditCardButton.addEventListener('click', () => {
+            addCreditOptionsModal.classList.add('hidden');
+            ccPaymentAmountDisplay.textContent = '20.00';
+            creditCardModal.classList.remove('hidden');
+            cardNumberInput.value = ''; expiryDateInput.value = ''; cvvInput.value = '';
+        });
+
+        optionCashPlusButton.addEventListener('click', () => {
+            addCreditOptionsModal.classList.add('hidden');
+            cashplusPaymentAmountDisplay.textContent = '20.00';
+            cashplusModal.classList.remove('hidden');
+            cashplusScreenshotInput.value = '';
+        });
+
+        optionCustomAmountButton.addEventListener('click', () => {
+            addCreditOptionsModal.classList.add('hidden');
+            const amountToAdd = parseFloat(prompt("أدخل المبلغ الذي ترغب في إضافته (بالدولار):"));
+            if (!isNaN(amountToAdd) && amountToAdd > 0) {
+                currentProfit += amountToAdd;
+                updateProfitDisplay();
+                showMessage(`تم إضافة $${amountToAdd.toFixed(2)} إلى رصيدك. رصيدك الحالي: $${currentProfit.toFixed(2)}.`, 3000);
+            } else {
+                showMessage("مبلغ غير صالح. يرجى إدخال رقم موجب.", 3000);
+            }
+        });
+
+        closeCreditCardModalButton.addEventListener('click', () => { creditCardModal.classList.add('hidden'); showMessage("تم إلغاء عملية الدفع ببطاقة الائتمان.", 2000); });
+        cancelCreditCardPaymentButton.addEventListener('click', () => { creditCardModal.classList.add('hidden'); showMessage("تم إلغاء عملية الدفع ببطاقة الائتمان.", 2000); });
+        confirmCreditCardPaymentButton.addEventListener('click', () => {
+            const cardNumber = cardNumberInput.value; const expiryDate = expiryDateInput.value; const cvv = cvvInput.value;
+            if (cardNumber.length < 16 || !/^\d+$/.test(cardNumber) || !expiryDate.match(/^(0[1-9]|1[0-2])\/([0-9]{2})$/) || !cvv.match(/^\d{3,4}$/)) { showMessage("يرجى إدخال تفاصيل بطاقة ائتمان صالحة (محاكاة).", 3000); return; }
+            const simulatedAmount = parseFloat(ccPaymentAmountDisplay.textContent.replace('$', ''));
+            currentProfit += simulatedAmount; updateProfitDisplay();
+            showMessage(`تمت معالجة دفع $${simulatedAmount.toFixed(2)} بنجاح عبر بطاقة الائتمان!`, 4000);
+            creditCardModal.classList.add('hidden');
+        });
+
+        closeCashplusModalButton.addEventListener('click', () => { cashplusModal.classList.add('hidden'); showMessage("تم إلغاء عملية الدفع عبر كاش بلوس.", 2000); });
+        cancelCashplusPaymentButton.addEventListener('click', () => { cashplusModal.classList.add('hidden'); showMessage("تم إلغاء عملية الدفع عبر كاش بلوس.", 2000); });
+        confirmCashplusPaymentButton.addEventListener('click', () => {
+            const file = cashplusScreenshotInput.files[0]; if (!file) { showMessage("الرجاء تحميل لقطة شاشة لإثبات الدفع عبر كاش بلوس.", 3000); return; }
+            showMessage("جارٍ التحقق من لقطة الشاشة وتفعيل الرصيد...", 3000);
+            setTimeout(() => {
+                const simulatedAmount = parseFloat(cashplusPaymentAmountDisplay.textContent.replace('$', ''));
+                currentProfit += simulatedAmount; updateProfitDisplay();
+                showMessage(`تمت معالجة دفع $${simulatedAmount.toFixed(2)} بنجاح عبر كاش بلوس!`, 4000);
+                cashplusModal.classList.add('hidden');
+            }, 2000);
+        });
+
+        // Double Profit Info Modal Listeners
+        buyDoubleProfitButton.addEventListener('click', () => { doubleProfitInfoModal.classList.remove('hidden'); });
+        closeDoubleProfitInfoModalButton.addEventListener('click', () => { doubleProfitInfoModal.classList.add('hidden'); showMessage("تم إلغاء عملية الشراء.", 2000); });
+        cancelDoubleProfitInfoButton.addEventListener('click', () => { doubleProfitInfoModal.classList.add('hidden'); showMessage("تم إلغاء عملية الشراء.", 2000); });
+        confirmDoubleProfitInfoButton.addEventListener('click', () => {
+            doubleProfitInfoModal.classList.add('hidden');
+            showPaymentVerificationModal(DOUBLE_PROFIT_COST, 'doubleProfit');
+        });
+
+        buyAnnualSubButton.addEventListener('click', () => { showPaymentVerificationModal(ANNUAL_SUB_COST, 'annualSub'); });
+
+        let pendingBoostType = null;
+        function showPaymentVerificationModal(cost, boostType) {
+            paymentVerificationModal.classList.remove('hidden');
+            paymentVerificationTitle.textContent = `تأكيد شراء ${boostType === 'doubleProfit' ? 'مضاعفة الأرباح' : 'الاشتراك السنوي'}`;
+            paymentAmountDisplay.textContent = `$${cost.toFixed(2)}`;
+            paymentVerificationText.innerHTML = `لإتمام عملية الشراء، يرجى تحويل <span class="font-bold text-green-400">$${cost.toFixed(2)}</span> عبر إحدى الطرق المذكورة أعلاه ثم تحميل لقطة شاشة للتأكيد.`;
+            screenshotUploadInput.value = '';
+            pendingBoostType = boostType;
+        }
+
+        closePaymentVerificationModalButton.addEventListener('click', () => { paymentVerificationModal.classList.add('hidden'); pendingBoostType = null; showMessage("تم إلغاء عملية الدفع.", 2000); });
+        cancelPaymentVerificationButton.addEventListener('click', () => { paymentVerificationModal.classList.add('hidden'); pendingBoostType = null; showMessage("تم إلغاء عملية الدفع.", 2000); });
+        confirmPaymentVerificationButton.addEventListener('click', () => {
+            const file = screenshotUploadInput.files[0]; if (!file) { showMessage("الرجاء تحميل لقطة شاشة لإثبات الدفع.", 3000); return; }
+            showMessage("جارٍ معالجة الدفع وتفعيل الرصيد...", 3000);
+            setTimeout(() => {
+                if (pendingBoostType === 'doubleProfit') { doubleProfitActive = true; showMessage(`تم تفعيل مضاعفة الأرباح بنجاح!`, 5000); }
+                else if (pendingBoostType === 'annualSub') { serviceActive = true; currentProfit += ANNUAL_SUB_BONUS; lastAnnualSubBonusDate = new Date().toISOString().split('T')[0]; updateProfitDisplay(); showMessage(`تم تفعيل الاشتراك السنوي بنجاح! وتلقيت مكافأة $${ANNUAL_SUB_BONUS.toFixed(2)}.`, 5000); }
+                updateProfitDisplay(); paymentVerificationModal.classList.add('hidden'); pendingBoostType = null;
+            }, 2000);
+        });
+
+        withdrawProfitButton.addEventListener('click', () => {
+            checkAndResetDailyWithdrawal();
+            if (currentProfit < WITHDRAWAL_THRESHOLD) { showMessage(`لا يمكنك سحب الأرباح. الحد الأدنى للسحب هو $${WITHDRAWAL_THRESHOLD.toFixed(2)}. رصيدك الحالي: $${currentProfit.toFixed(2)}.`, 4000); return; }
+            if (dailyWithdrawalAmountToday >= DAILY_WITHDRAWAL_LIMIT) { showMessage(`لقد تجاوزت حد السحب اليومي البالغ $${DAILY_WITHDRAWAL_LIMIT.toFixed(2)}. حاول مرة أخرى غدًا.`, 4000); return; }
+
+            let amountToWithdraw = Math.min(currentProfit, DAILY_WITHDRAWAL_LIMIT - dailyWithdrawalAmountToday);
+            amountToWithdraw = parseFloat(amountToWithdraw.toFixed(2));
+            if (amountToWithdraw <= 0) { showMessage("لا يوجد مبلغ متاح للسحب ضمن الحدود اليومية.", 3000); return; }
+
+            withdrawalRequested = true;
+            showMessage(`تم طلب سحب أرباحك البالغة $${amountToWithdraw.toFixed(2)}. هذه ميزة قيد التطوير وستتم معالجتها قريباً.`, 5000);
+            setTimeout(() => {
+                currentProfit -= amountToWithdraw; dailyWithdrawalAmountToday += amountToWithdraw; lastWithdrawalDate = new Date().toISOString().split('T')[0];
+                updateProfitDisplay(); withdrawalRequested = false;
+                showMessage(`تم مسح رصيدك بعد طلب السحب (محاكاة). رصيدك المتبقي: $${currentProfit.toFixed(2)}. تم سحب $${dailyWithdrawalAmountToday.toFixed(2)} اليوم.`, 4000);
+            }, 2000);
+        });
+
+        closeAdModalButton.addEventListener('click', () => { adModal.classList.add('hidden'); });
+
+        loginGoogleButton.addEventListener('click', handleGoogleLogin);
+        loginFacebookButton.addEventListener('click', handleFacebookLogin);
+
+        // --- Initial Setup ---
+        window.onload = () => {
+            currentProfit = 0.00;
+            movesLeft = 0;
+            freeAttemptsLeft = FREE_ATTEMPTS_INITIAL;
+            totalGamesPlayed = 0;
+            totalGemsRemoved = 0;
+            totalSpecialGemsCollected = 0;
+            withdrawalRequested = false;
+            dailyWithdrawalAmountToday = 0.00;
+            lastWithdrawalDate = null;
+            doubleProfitActive = false;
+            serviceActive = false;
+            lastAnnualSubBonusDate = null;
+
+            updateProfitDisplay();
+            updateMovesDisplay();
+            updateFreeAttemptsDisplay();
+            updateUserDisplay();
+
+            if (firebaseConfig.apiKey === "YOUR_API_KEY") {
+                showMessage("تنبيه: لم يتم تكوين Firebase. ميزات تسجيل الدخول والادخار لن تعمل. يرجى استبدال 'YOUR_API_KEY' وما إلى ذلك بمعلومات مشروعك الحقيقية في الكود.", 7000);
+            }
+
+            checkAndApplyAnnualSubBonus();
+            showMessage(`مرحبًا بك في لعبة Match-3! لديك ${FREE_ATTEMPTS_INITIAL} محاولة مجانية. ابدأ لعبة جديدة!`);
+            // The game board will be initialized when 'لعبة جديدة' is clicked.
+        };
+    </script>
+</body>
+</html>
