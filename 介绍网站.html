@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能药盒 - 定时提醒，健康无忧</title>
+    <style>
+        /* 全局样式 */
+        body {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        header {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        section {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+        h2 {
+            color: #2E7D32;
+            border-bottom: 2px solid #E0E0E0;
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+        .highlight {
+            color: #2E7D32;
+            font-weight: bold;
+        }
+        img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .feature-card {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .feature-card img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+        .cta-button {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            margin: 1rem 0;
+            transition: background 0.3s;
+        }
+        .cta-button:hover {
+            background: #2E7D32;
+        }
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部标题和简介 -->
+    <header>
+        <h1>智能药盒</h1>
+        <p>为老人、孩子和健忘者设计的健康守护者</p>
+        <a href="#contact" class="cta-button">联系我们</a>
+    </header>
+
+    <div class="container">
+        <!-- 产品概述 -->
+        <section id="overview">
+            <h2>产品简介</h2>
+            <p>智能药盒是一款专为解决<span class="highlight">忘记服药问题</span>而设计的智能设备。通过<span class="highlight">定时蜂鸣提醒</span>和<span class="highlight">药量显示</span>功能，帮助用户规律服药，尤其适合记忆力减退的老人、独居患者和忙碌的上班族。</p>
+            <img src="https://cbu01.alicdn.com/img/ibank/2018/409/293/8958392904_669810167.jpg" alt="智能药盒外观图">
+        </section>
+
+        <!-- 核心功能 -->
+        <section id="features">
+            <h2>核心功能</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <img src="https://img.51miz.com/Element/00/23/66/14/e1518a65_E236614_b748efb7.png" alt="闹钟图标">
+                    <h3>定时提醒</h3>
+                    <p>可设置多个服药时间，蜂鸣提醒直到用户确认服药。</p>
+                </div>
+                <div class="feature-card">
+                    <img src="https://img.tukuppt.com/png_preview/00/58/75/Ih04wEywLF.jpg!/fw/780" alt="药片图标">
+                    <h3>药量显示</h3>
+                    <p>LED屏幕清晰显示当前需服用的药片数量。</p>
+                </div>
+                <div class="feature-card">
+                    <img src="https://pic.nximg.cn/file/20230112/28926322_111631453101_2.jpg" alt="电池图标">
+                    <h3>超长续航</h3>
+                    <p>一次充电可使用30天，支持USB-C快充。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 使用场景 -->
+        <section id="scenarios">
+            <h2>适用人群</h2>
+            <ul>
+                <li><span class="highlight">老年人</span>：记忆力减退，容易漏服或多服药物。</li>
+                <li><span class="highlight">慢性病患者</span>：需长期规律服药（如高血压、糖尿病）。</li>
+                <li><span class="highlight">儿童</span>：家长可远程设置提醒，确保孩子按时吃药。</li>
+                <li><span class="highlight">健忘者</span>：工作繁忙或注意力分散的上班族。</li>
+            </ul>
+        </section>
+
+        <!-- 技术参数 -->
+        <section id="specs">
+            <h2>技术参数</h2>
+            <table style="width:100%; border-collapse: collapse;">
+                <tr style="background: #E8F5E9;">
+                    <td style="padding: 0.8rem; border: 1px solid #ddd;"><strong>尺寸</strong></td>
+                    <td style="padding: 0.8rem; border: 1px solid #ddd;">12cm × 8cm × 5cm</td>
+                </tr>
+                <tr>
+                    <td style="padding: 0.8rem; border: 1px solid #ddd;"><strong>重量</strong></td>
+                    <td style="padding: 0.8rem; border: 1px solid #ddd;">200g</td>
+                </tr>
+                <tr style="background: #E8F5E9;">
+                    <td style="padding: 0.8rem; border: 1px solid #ddd;"><strong>容量</strong></td>
+                    <td style="padding: 0.8rem; border: 1px solid #ddd;">7格分装（支持一周药量）</td>
+                </tr>
+                <tr>
+                    <td style="padding: 0.8rem; border: 1px solid #ddd;"><strong>提醒方式</strong></td>
+                    <td style="padding: 0.8rem; border: 1px solid #ddd;">蜂鸣器 + LED闪烁</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- 联系我们 -->
+        <section id="contact">
+            <h2>联系我们</h2>
+            <p>如需购买或咨询，请通过以下方式联系：</p>
+            <p>邮箱：1743137308@qq.com<br>电话：13551223600</p>
+            <a href="mailto:1743137308@qq.com" class="cta-button">发送邮件</a>
+        </section>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <p>© 2023 智能药盒 | 健康生活，从按时服药开始</p>
+    </footer>
+</body>
+</html>
