@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tukana | Creatividad Visual</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --azul-pastel: #b3d8f0;
+      --azul-oscuro: #2a4d69;
+      --azul-claro: #e6f4fa;
+      --blanco: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--azul-claro);
+      color: var(--azul-oscuro);
+    }
+
+    .empresa {
+      padding: 60px 20px 80px;
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: var(--blanco);
+      border-radius: 10px;
+    }
+
+    .empresa h2 {
+      font-size: 2.2rem;
+      color: var(--azul-oscuro);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .empresa h3 {
+      margin-top: 30px;
+      font-size: 1.3rem;
+      border-left: 5px solid var(--azul-oscuro);
+      padding-left: 10px;
+    }
+
+    .empresa p, .empresa li {
+      margin-top: 10px;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .empresa ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .empresa li::before {
+      content: '✔️ ';
+      margin-right: 5px;
+    }
+
+    .btn-whatsapp,
+    .btn-portfolio {
+      display: inline-block;
+      margin-top: 16px;
+      background-color: var(--azul-oscuro);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .btn-whatsapp:hover,
+    .btn-portfolio:hover {
+      background-color: #1c344d;
+    }
+
+    .login-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: var(--azul-oscuro);
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      z-index: 1000;
+    }
+
+    .login-form {
+      position: fixed;
+      top: 60px;
+      right: 20px;
+      background-color: var(--blanco);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+      display: none;
+      z-index: 999;
+      width: 280px;
+    }
+
+    .login-form input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .login-form button {
+      width: 100%;
+      padding: 10px;
+      background-color: var(--azul-oscuro);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .login-form .message {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: var(--azul-oscuro);
+      text-align: center;
+    }
+
+    .dashboard {
+      display: none;
+      background-color: var(--azul-pastel);
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .dashboard h2 {
+      margin-bottom: 30px;
+    }
+
+    .dashboard .menu {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .dashboard .menu button {
+      background-color: var(--azul-oscuro);
+      color: white;
+      padding: 16px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      min-width: 180px;
+      transition: background 0.3s ease;
+    }
+
+    .dashboard .menu button:hover {
+      background-color: #1c344d;
+    }
+
+    @media (max-width: 600px) {
+      .empresa {
+        padding: 30px 15px;
+      }
+
+      .login-form {
+        right: 10px;
+        width: 90%;
+      }
+
+      .dashboard .menu {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Botón para mostrar login -->
+  <button class="login-toggle" onclick="toggleLogin()">Iniciar sesión</button>
+
+  <!-- Formulario de login oculto -->
+  <div class="login-form" id="loginForm">
+    <input type="text" id="usuario" placeholder="Usuario" />
+    <input type="password" id="contrasena" placeholder="Contraseña" />
+    <button onclick="iniciarSesion()">Ingresar</button>
+    <div class="message" id="mensaje"></div>
+  </div>
+
+  <!-- Apartado de empresa -->
+  <div class="empresa" id="empresaInfo">
+    <h2>Bienvenido a Tukana</h2>
+
+    <h3>¿Quiénes somos?</h3>
+    <p><strong>Tukana</strong> es una marca audiovisual y de marketing digital que combina creatividad, identidad cultural y enfoque tropical. Nuestro trabajo se conecta con el alma del Putumayo y transforma cada proyecto en una obra visual poderosa.</p>
+
+    <h3>Servicios</h3>
+    <ul>
+      <li>Fotografía profesional</li>
+      <li>Producción de video y dirección de arte</li>
+      <li>Branding cultural y diseño visual</li>
+      <li>Estrategia digital y contenidos creativos</li>
+    </ul>
+
+    <h3>Contacto directo</h3>
+    <p>¿Quieres trabajar con nosotros o agendar una sesión?</p>
+    <a href="https://wa.me/573001234567?text=Hola%20Tukana%2C%20quiero%20más%20información" class="btn-whatsapp" target="_blank">📱 Escríbenos por WhatsApp</a>
+    <br/>
+    <a href="https://www.behance.net/giovannbarrera1" class="btn-portfolio" target="_blank">🎨 Ver Portafolio</a>
+  </div>
+
+  <!-- Panel de usuario -->
+  <div class="dashboard" id="dashboard">
+    <h2>Panel de Usuario</h2>
+    <div class="menu">
+      <button onclick="alert('Aquí irá el calendario.')">📅 Calendario</button>
+      <button onclick="alert('Aquí irán tus tareas pendientes.')">✅ Tareas Pendientes</button>
+      <button onclick="alert('Este es tu perfil.')">👤 Perfil</button>
+      <button onclick="alert('Aquí verás tu progreso.')">📊 Progreso</button>
+      <button onclick="alert('Se generará tu reporte.')">📄 Generar Reporte</button>
+    </div>
+  </div>
+
+  <script>
+    function toggleLogin() {
+      const form = document.getElementById('loginForm');
+      form.style.display = form.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function iniciarSesion() {
+      const usuario = document.getElementById('usuario').value.toLowerCase();
+      const contrasena = document.getElementById('contrasena').value;
+      const mensaje = document.getElementById('mensaje');
+
+      const empleados = {
+        alejandro: 'alejandro123',
+        nesly: 'neslygoap123',
+      };
+
+      if ((empleados[usuario] && empleados[usuario] === contrasena) ||
+          (usuario === 'cliente' && contrasena === 'cliente123')) {
+        mensaje.innerText = `Bienvenido, ${usuario}`;
+        document.getElementById('empresaInfo').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        document.getElementById('loginForm').style.display = 'none';
+      } else {
+        mensaje.innerText = 'Usuario o contraseña incorrectos.';
+      }
+    }
+  </script>
+</body>
+</html>
