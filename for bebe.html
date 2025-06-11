@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hi Bebe 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: linear-gradient(to right, #ffd6e8, #ffe6f0);
+      font-family: 'Open Sans', sans-serif;
+      text-align: center;
+      padding: 40px 20px;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.5em;
+      color: #ff66a3;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.1em;
+      margin-bottom: 30px;
+    }
+
+    .button {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 25px;
+      font-size: 1em;
+      border: none;
+      border-radius: 30px;
+      background-color: #ff99c8;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .button:hover {
+      background-color: #ff66a3;
+      transform: scale(1.05);
+    }
+
+    #message-box {
+      display: none;
+      background: white;
+      margin: 30px auto;
+      padding: 25px;
+      max-width: 600px;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      text-align: left;
+    }
+
+    .heart {
+      font-size: 2.5em;
+      color: #ff66a3;
+      animation: beat 1s infinite;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    .typing {
+      font-size: 1.1em;
+      line-height: 1.6;
+      white-space: pre-line;
+      border-right: 2px solid #ff66a3;
+      display: inline-block;
+      animation: caret 0.8s steps(1) infinite;
+    }
+
+    @keyframes caret {
+      50% { border-color: transparent; }
+    }
+
+    .falling-heart {
+      position: fixed;
+      top: -20px;
+      color: #ff66a3;
+      font-size: 20px;
+      animation: fall linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(120vh);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2em; }
+      .button { padding: 10px 20px; font-size: 0.95em; }
+      #message-box { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Hi Bebe 💖</h1>
+  <p>I made this just for you.</p>
+
+  <button class="button" onclick="showMessage()">Read Message 💌</button>
+  <button class="button" onclick="alert(`Let's grab some ice cream na and eat na uli tayo. I miss our bonding, bebe 💗`)">Click Me Too</button>
+
+  <div id="message-box">
+    <div class="heart">💗</div>
+    <h2>My Message for You</h2>
+    <p class="typing" id="typedText"></p>
+    <br>
+    <button class="button" onclick="hideMessage()">Back</button>
+  </div>
+
+  <audio id="heartSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3" preload="auto"></audio>
+
+  <script>
+    function showMessage() {
+      document.getElementById('message-box').style.display = 'block';
+
+      const text = `Hi bebe, I'm really sorry for what I said to you last night. I’m really sorry po for what you felt.
+
+I’m really serious sayo and I wanna pursue you. I’ll do anything para maniwala ka na I want more with you.
+
+Alam ko di masyado tong ginagawa ko but hopefully matuwa ka dito sa message na 'to.
+
+I want you to know na I love you bebe and hindi ko na kaya mawala ka sakin.
+
+I love you so much bebe and I really miss your presence na.
+
+Bebe, let’s talk na uli plssssss. 🥺`;
+
+      let i = 0;
+      document.getElementById("typedText").innerText = "";
+      const speed = 35;
+      function typeWriter() {
+        if (i < text.length) {
+          document.getElementById('typedText').innerHTML += text.charAt(i);
+          i++;
+          setTimeout(typeWriter, speed);
+        }
+      }
+      typeWriter();
+    }
+
+    function hideMessage() {
+      document.getElementById('message-box').style.display = 'none';
+    }
+
+    // Falling hearts w/ sound
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.classList.add('falling-heart');
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.innerText = '💖';
+      heart.style.animationDuration = 3 + Math.random() * 2 + 's';
+      document.body.appendChild(heart);
+
+      // Play sound
+      const sound = document.getElementById("heartSound");
+      sound.volume = 0.1;
+      sound.play().catch(() => {}); // catch autoplay errors
+
+      setTimeout(() => heart.remove(), 5000);
+    }, 400);
+  </script>
+
+</body>
+</html>
