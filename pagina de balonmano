@@ -1,0 +1,166 @@
+from zipfile import ZipFile
+import os
+
+# Crear la estructura del proyecto
+project_name = "periodico-balonmano"
+os.makedirs(f"/mnt/data/{project_name}/src", exist_ok=True)
+
+# Archivos del proyecto
+app_jsx = """
+import React from "react";
+import { CalendarDays, Newspaper } from "lucide-react";
+
+const news = [
+  {
+    title: "Victoria épica del Barça en la final de la Champions League",
+    date: "2025-06-10",
+    summary:
+      "El FC Barcelona logró una remontada histórica para coronarse campeón de Europa en un partido lleno de emoción.",
+  },
+  {
+    title: "Entrevista exclusiva con Gonzalo Pérez de Vargas",
+    date: "2025-06-09",
+    summary:
+      "El portero del Barça comparte sus sensaciones tras la victoria y analiza su papel clave en la final.",
+  },
+  {
+    title: "Liga ASOBAL: Resultados de la jornada 25",
+    date: "2025-06-08",
+    summary:
+      "Repasamos los marcadores y la clasificación tras una jornada decisiva en la liga española de balonmano.",
+  },
+];
+
+export default function App() {
+  return (
+    <main className="p-6 max-w-5xl mx-auto">
+      <h1 className="text-4xl font-bold mb-6 flex items-center gap-2">
+        <Newspaper className="text-blue-600" />
+        Noticias de Balonmano
+      </h1>
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {news.map((item, index) => (
+          <div key={index} className="shadow-lg hover:shadow-xl transition duration-300 border rounded-xl bg-white p-4">
+            <h2 className="text-xl font-semibold mb-2">{item.title}</h2>
+            <p className="text-gray-500 text-sm flex items-center gap-1 mb-2">
+              <CalendarDays className="w-4 h-4" /> {item.date}
+            </p>
+            <p className="mb-4 text-gray-700">{item.summary}</p>
+            <button className="px-4 py-2 border rounded text-blue-600 hover:bg-blue-50">Leer más</button>
+          </div>
+        ))}
+      </section>
+    </main>
+  );
+}
+"""
+
+index_jsx = """
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.jsx';
+import './index.css';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+"""
+
+index_html = """
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Periódico Balonmano</title>
+  </head>
+  <body class="bg-gray-100">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+"""
+
+index_css = """
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+"""
+
+tailwind_config = """
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+"""
+
+package_json = """
+{
+  "name": "periodico-balonmano",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lucide-react": "^0.263.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.3.2",
+    "vite": "^5.0.0"
+  }
+}
+"""
+
+postcss_config = """
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+"""
+
+main_jsx = index_jsx.replace('main.jsx', 'main.jsx')
+
+# Guardar los archivos
+with open(f"/mnt/data/{project_name}/src/App.jsx", "w") as f:
+    f.write(app_jsx)
+with open(f"/mnt/data/{project_name}/src/main.jsx", "w") as f:
+    f.write(main_jsx)
+with open(f"/mnt/data/{project_name}/index.html", "w") as f:
+    f.write(index_html)
+with open(f"/mnt/data/{project_name}/src/index.css", "w") as f:
+    f.write(index_css)
+with open(f"/mnt/data/{project_name}/tailwind.config.js", "w") as f:
+    f.write(tailwind_config)
+with open(f"/mnt/data/{project_name}/package.json", "w") as f:
+    f.write(package_json)
+with open(f"/mnt/data/{project_name}/postcss.config.js", "w") as f:
+    f.write(postcss_config)
+
+# Crear el archivo ZIP
+zip_path = "/mnt/data/periodico-balonmano.zip"
+with ZipFile(zip_path, "w") as zipf:
+    for root, dirs, files in os.walk(f"/mnt/data/{project_name}"):
+        for file in files:
+            filepath = os.path.join(root, file)
+            arcname = os.path.relpath(filepath, "/mnt/data")
+            zipf.write(filepath, arcname)
+
+zip_path
