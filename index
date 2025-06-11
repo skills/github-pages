@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry, My Love ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: #ffebee;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            color: #d32f2f;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            margin-bottom: 0;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            background: #d32f2f;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px;
+        }
+        
+        .btn:hover {
+            transform: scale(1.1);
+            background: #b71c1c;
+        }
+        
+        /* Floating Hearts */
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-100px) rotate(20deg); }
+        }
+        
+        /* Navigation */
+        nav {
+            margin: 20px 0;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #d32f2f;
+            margin: 0 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+        
+        nav a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Popup */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            max-width: 80%;
+        }
+        
+        .popup button {
+            margin-top: 10px;
+        }
+
+        /* Music Player */
+        #music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 100;
+        }
+        
+        /* Page System */
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        /* Promises Page Specific */
+        .promise-list {
+            text-align: left;
+            margin: 30px 0;
+        }
+        
+        .promise-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s;
+        }
+        
+        .promise-item:hover {
+            transform: scale(1.02);
+        }
+        
+        .promise-item input[type="checkbox"] {
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border: 2px solid #d32f2f;
+            border-radius: 50%;
+            margin-right: 15px;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .promise-item input[type="checkbox"]:checked {
+            background: #d32f2f;
+        }
+        
+        .promise-item input[type="checkbox"]:checked::after {
+            content: '❤️';
+            position: absolute;
+            top: -5px;
+            left: 2px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts -->
+    <div id="hearts-container"></div>
+    
+    <!-- Music Player (Hidden Audio) -->
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        (Your browser doesn't support audio)
+    </audio>
+    <div id="music-control" onclick="toggleMusic()">🎵</div>
+    
+    <div class="container">
+        <h1 id="page-title">I'm So Sorry, My Love ❤️</h1>
+        
+        <nav>
+            <a onclick="showPage('home')">Home</a>
+            <a onclick="showPage('promises')">My Promises</a>
+        </nav>
+        
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <p>I messed up, and I regret every word that hurt you. You mean everything to me.</p>
+            <p>I never meant to upset you. You're the most amazing person in my life, and I'll do better.</p>
+            <button class="btn" onclick="showPopup()">Click for a Surprise</button>
+        </div>
+        
+        <!-- Promises Page -->
+        <div id="promises" class="page">
+            <p>I'll prove my love with actions, not just words.</p>
+            <div class="promise-list">
+                <div class="promise-item">
+                    <input type="checkbox" id="promise1">
+                    <label for="promise1">I'll always listen to you, even when I'm wrong.</label>
+                </div>
+                <div class="promise-item">
+                    <input type="checkbox" id="promise2">
+                    <label for="promise2">I'll never raise my voice in anger again.</label>
+                </div>
+                <div class="promise-item">
+                    <input type="checkbox" id="promise3">
+                    <label for="promise3">I'll surprise you with little things just to see you smile.</label>
+                </div>
+                <div class="promise-item">
+                    <input type="checkbox" id="promise4">
+                    <label for="promise4">I'll hold you tighter when we argue instead of pushing away.</label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Popup -->
+        <div id="lovePopup" class="popup">
+            <h2>I Love You More Than Anything! 💖</h2>
+            <p>You're my world, and I'll spend forever making it up to you.</p>
+            <button class="btn" onclick="hidePopup()">Close</button>
+        </div>
+    </div>
+    
+    <script>
+        // Create floating hearts
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.classList.add('heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.animationDuration = (Math.random() * 5 + 3) + 's';
+                container.appendChild(heart);
+            }
+        }
+        
+        // Popup functions
+        function showPopup() {
+            document.getElementById('lovePopup').style.display = 'block';
+        }
+        
+        function hidePopup() {
+            document.getElementById('lovePopup').style.display = 'none';
+        }
+        
+        // Music control
+        const music = document.getElementById('bg-music');
+        
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+                document.getElementById('music-control').textContent = '🔊';
+            } else {
+                music.pause();
+                document.getElementById('music-control').textContent = '🎵';
+            }
+        }
+        
+        // Page navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update title
+            const title = document.getElementById('page-title');
+            if (pageId === 'home') {
+                title.textContent = "I'm So Sorry, My Love ❤️";
+            } else if (pageId === 'promises') {
+                title.textContent = "My Promises to You ❤️";
+            }
+        }
+        
+        // Initialize
+        window.onload = function() {
+            createHearts();
+            music.volume = 0.3; // 30% volume
+        };
+    </script>
+</body>
+</html>
