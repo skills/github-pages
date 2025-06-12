@@ -1,0 +1,4776 @@
+# GitHub Pages
+
+_Create a site or blog from your GitHub repositories with GitHub Pages._
+
+## Welcome
+
+- **Who is this for**: Beginners, students, project maintainers, small businesses.
+- **What you'll learn**: How to build a GitHub Pages site.
+- **What you'll build**: We'll build a simple GitHub Pages site with a blog. We'll use [Jekyll](https://jekyllrb.com), a static site generator.
+- **Prerequisites**: If you need to learn about branches, commits, and pull requests, take [Introduction to GitHub](https://github.com/skills/introduction-to-github) first.
+
+- **How long**: This exercise takes less than one hour to complete.
+
+In this exercise, you will:
+
+1. Enable GitHub Pages
+1. Configure your site
+1. Customize your home page
+1. Create a blog post
+1. Merge your pull request
+
+
+### How to start this exercise
+
+Simply copy the exercise to your account, then give your favorite Octocat (Mona) **about 20 seconds** to prepare the first lesson, then **refresh the page**.
+
+[![](https://img.shields.io/badge/Copy%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/new?template_owner=skills&template_name=github-pages&owner=%40me&name=skills-github-pages&description=Exercise:+Create+a+site+or+blog+from+your+GitHub+repositories+with+GitHub+Pages&visibility=public)
+
+<details>
+<summary>Having trouble? 🤷</summary><br/>
+
+When copying the exercise, we recommend the following settings:
+
+- For owner, choose your personal account or an organization to host the repository.
+
+- We recommend creating a public repository, since private repositories will use Actions minutes.
+
+If the exercise isn't ready in 20 seconds, please check the [Actions](../../actions) tab.
+
+- Check to see if a job is running. Sometimes it simply takes a bit longer.
+
+- If the page shows a failed job, please submit an issue. Nice, you found a bug! 🐛
+
+</details>
+
+---
+
+&copy; 2025 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
+
+Command Line Apps Nodejs Libraries.
+Command-line Apps.
+Np.
+np 
+A better npm publish
+
+Interactive UI
+Ensures you are publishing from your release branch (main and master by default)
+Ensures the working directory is clean and that there are no unpulled changes
+Reinstalls dependencies to ensure your project works with the latest dependency tree
+Ensures your Node.js and npm versions are supported by the project and its dependencies
+Runs the tests
+Bumps the version in package.json and npm-shrinkwrap.json (if present) and creates a git tag
+Prevents accidental publishing of pre-release versions under the latest dist-tag
+Publishes the new version to npm, optionally under a dist-tag
+Rolls back the project to its previous state in case publishing fails
+Pushes commits and tags (newly & previously created) to GitHub/GitLab
+Supports two-factor authentication
+Enables two-factor authentication on new repositories
+(does not apply to external registries)
+Opens a prefilled GitHub Releases draft after publish
+Warns about the possibility of extraneous files being published
+See exactly what will be executed with preview mode, without pushing or publishing anything remotely
+Supports GitHub Packages
+Supports npm 9+, Yarn (Classic and Berry), pnpm 8+, and Bun
+Why not
+Monorepos are not supported.
+Custom registries are not supported (but could be with your help).
+CI is not an ideal environment for np. It's meant to be used locally as an interactive tool.
+Prerequisite
+Node.js 18 or later
+npm 9 or later
+Git 2.11 or later
+Install
+npm install --global np
+Usage
+$ np --help
+
+  Usage
+    $ np <version>
+
+    Version can be:
+      patch | minor | major | prepatch | preminor | premajor | prerelease | 1.2.3
+
+  Options
+    --any-branch            Allow publishing from any branch
+    --branch                Name of the release branch (default: main | master)
+    --no-cleanup            Skips cleanup of node_modules
+    --no-tests              Skips tests
+    --yolo                  Skips cleanup and testing
+    --no-publish            Skips publishing
+    --preview               Show tasks without actually executing them
+    --tag                   Publish under a given dist-tag
+    --contents              Subdirectory to publish
+    --no-release-draft      Skips opening a GitHub release draft
+    --release-draft-only    Only opens a GitHub release draft for the latest published version
+    --test-script           Name of npm run script to run tests before publishing (default: test)
+    --no-2fa                Don't enable 2FA on new packages (not recommended)
+    --message               Version bump commit message, '%s' will be replaced with version (default: '%s' with npm and 'v%s' with yarn)
+    --package-manager       Use a specific package manager (default: 'packageManager' field in package.json)
+
+  Examples
+    $ np
+    $ np patch
+    $ np 1.0.2
+    $ np 1.0.2-beta.3 --tag=beta
+    $ np 1.0.2-beta.3 --tag=beta --contents=dist
+Interactive UI
+Run np without arguments to launch the interactive UI that guides you through publishing a new version.
+
+
+Config
+np can be configured both globally and locally. When using the global np binary, you can configure any of the CLI flags in either a .np-config.js (as CJS), .np-config.cjs, .np-config.mjs, or .np-config.json file in the home directory. When using the local np binary, for example, in a npm run script, you can configure np by setting the flags in either a top-level np field in package.json or in one of the aforementioned file types in the project directory. If it exists, the local installation will always take precedence. This ensures any local config matches the version of np it was designed for.
+
+Currently, these are the flags you can configure:
+
+anyBranch - Allow publishing from any branch (false by default).
+branch - Name of the release branch (main or master by default).
+cleanup - Cleanup node_modules (true by default).
+tests - Run npm test (true by default).
+yolo - Skip cleanup and testing (false by default).
+publish - Publish (true by default).
+preview - Show tasks without actually executing them (false by default).
+tag - Publish under a given dist-tag (latest by default).
+contents - Subdirectory to publish (. by default).
+releaseDraft - Open a GitHub release draft after releasing (true by default).
+testScript - Name of npm run script to run tests before publishing (test by default).
+2fa - Enable 2FA on new packages (true by default) (setting this to false is not recommended).
+message - The commit message used for the version bump. Any %s in the string will be replaced with the new version. By default, npm uses %s and Yarn uses v%s.
+packageManager - Set the package manager to be used. Defaults to the packageManager field in package.json, so only use if you can't update package.json for some reason.
+For example, this configures np to use unit-test as a test script, and to use dist as the subdirectory to publish:
+
+package.json
+
+{
+	"name": "superb-package",
+	"np": {
+		"testScript": "unit-test",
+		"contents": "dist"
+	}
+}
+.np-config.json
+
+{
+	"testScript": "unit-test",
+	"contents": "dist"
+}
+.np-config.js or .np-config.cjs
+
+module.exports = {
+	testScript: 'unit-test',
+	contents: 'dist'
+};
+.np-config.mjs
+
+export default {
+	testScript: 'unit-test',
+	contents: 'dist'
+};
+Note: The global config only applies when using the global np binary, and is never inherited when using a local binary.
+
+Tips
+npm hooks
+You can use any of the test/version/publish related npm lifecycle hooks in your package.json to add extra behavior.
+
+For example, here we build the documentation before tagging the release:
+
+{
+	"name": "my-awesome-package",
+	"scripts": {
+		"version": "./build-docs && git add docs"
+	}
+}
+Release script
+You can also add np to a custom script in package.json. This can be useful if you want all maintainers of a package to release the same way (Not forgetting to push Git tags, for example). However, you can't use publish as name of your script because it's an npm defined lifecycle hook.
+
+{
+	"name": "my-awesome-package",
+	"scripts": {
+		"release": "np"
+	},
+	"devDependencies": {
+		"np": "*"
+	}
+}
+User-defined tests
+If you want to run a user-defined test script before publishing instead of the normal npm test or yarn test, you can use --test-script flag or the testScript config. This can be useful when your normal test script is running with a --watch flag or in case you want to run some specific tests (maybe on the packaged files) before publishing.
+
+For example, np --test-script=publish-test would run the publish-test script instead of the default test.
+
+{
+	"name": "my-awesome-package",
+	"scripts": {
+		"test": "ava --watch",
+		"publish-test": "ava"
+	},
+	"devDependencies": {
+		"np": "*"
+	}
+}
+Signed Git tag
+Set the sign-git-tag npm config to have the Git tag signed:
+
+$ npm config set sign-git-tag true
+Or set the version-sign-git-tag Yarn config:
+
+$ yarn config set version-sign-git-tag true
+Private packages
+
+You can use np for packages that aren't publicly published to npm (perhaps installed from a private git repo).
+
+Set "private": true in your package.json and the publishing step will be skipped. All other steps including versioning and pushing tags will still be completed.
+
+Public scoped packages
+To publish scoped packages to the public registry, you need to set the access level to public. You can do that by adding the following to your package.json:
+
+"publishConfig": {
+	"access": "public"
+}
+If publishing a scoped package for the first time, np will prompt you to ask if you want to publish it publicly.
+
+Note: When publishing a scoped package, the first ever version you publish has to be done interactively using np. If not, you cannot use np to publish future versions of the package.
+
+Private Org-scoped packages
+To publish a private Org-scoped package, you need to set the access level to restricted. You can do that by adding the following to your package.json:
+
+"publishConfig": {
+	"access": "restricted"
+}
+Publish to a custom registry
+Set the registry option in package.json to the URL of your registry:
+
+"publishConfig": {
+	"registry": "https://my-internal-registry.local"
+}
+Package managers
+If a package manager is not set in package.json, via configuration (packageManager), or via the CLI (--package-manager), np will attempt to infer the best package manager to use by looking for lockfiles. But it's recommended to set the packageManager field in your package.json to be consistent with other tools. See also the corepack docs.
+
+Publish with a CI
+If you use a Continuous Integration server to publish your tagged commits, use the --no-publish flag to skip the publishing step of np.
+
+Publish to gh-pages
+To publish to gh-pages (or any other branch that serves your static assets), install branchsite, an np-like CLI tool aimed to complement np, and create an npm "post" hook that runs after np.
+
+npm install --save-dev branchsite
+"scripts": {
+	"deploy": "np",
+	"postdeploy": "bs"
+}
+Initial version
+For new packages, start the version field in package.json at 0.0.0 and let np bump it to 1.0.0 or 0.1.0 when publishing.
+
+Release an update to an old major version
+To release a minor/patch version for an old major version, create a branch from the major version's git tag and run np:
+
+$ git checkout -b fix-old-bug v1.0.0 # Where 1.0.0 is the previous major version
+# Create some commits…
+$ git push --set-upstream origin HEAD
+$ np patch --any-branch --tag=v1
+The prerequisite step runs forever on macOS
+If you're using macOS Sierra 10.12.2 or later, your SSH key passphrase is no longer stored into the keychain by default. This may cause the prerequisite step to run forever because it prompts for your passphrase in the background. To fix this, add the following lines to your ~/.ssh/config and run a simple Git command like git fetch.
+
+Host *
+ AddKeysToAgent yes
+ UseKeychain yes
+If you're running into other issues when using SSH, please consult GitHub's support article.
+
+Ignore strategy
+The ignore strategy, either maintained in the files-property in package.json or in .npmignore, is meant to help reduce the package size. To avoid broken packages caused by essential files being accidentally ignored, np prints out all the new and unpublished files added to Git. Test files and other common files that are never published are not considered. np assumes either a standard directory layout or a customized layout represented in the directories property in package.json.
+
+
+If you get an error like this…
+
+❯ Prerequisite check
+✔ Ping npm registry
+✔ Check npm version
+✔ Check yarn version
+✖ Verify user is authenticated
+
+npm ERR! code E403
+npm ERR! 403 Forbidden - GET https://registry.yarnpkg.com/-/package/my-awesome-package/collaborators?format=cli - Forbidden
+…please check whether the command npm access list collaborators my-awesome-package succeeds. If it doesn't, Yarn has overwritten your registry URL. To fix this, add the correct registry URL to package.json:
+
+"publishConfig": {
+	"registry": "https://registry.npmjs.org"
+}
+
+
+Npm-Name.
+
+npm-name
+Check whether a package or organization name is available on npm
+
+Install
+npm install npm-name
+Usage
+import npmName from 'npm-name';
+
+// Check a package name
+console.log(await npmName('chalk'));
+//=> false
+
+// Check an organization name
+console.log(await npmName('@ava'));
+//=> false
+
+console.log(await npmName('@abc123'));
+//=> true
+
+try {
+	await npmName('_ABC');
+} catch (error) {
+	console.log(error.message);
+	// Invalid package name: _ABC
+	// - name cannot start with an underscore
+	// - name can no longer contain capital letters
+}
+API
+npmName(name, options?)
+Check whether a package/organization name is available (not registered) on npm.
+
+An organization name should start with @ and should not be a scoped package.
+
+Returns a Promise<boolean> of whether the given name is available.
+
+name
+Type: string
+
+The name to check.
+
+options
+Type: object
+
+registryUrl
+Default: User's configured npm registry URL.
+
+THe registry URL to check name availability against.
+
+Note: You're unlikely to need this option. Most use-cases are best solved by using the default. You should only use this option if you need to check a package name against a specific registry.
+
+npmNameMany(names, options?)
+Check whether multiple package/organization names are available (not registered) on npm.
+
+Returns a Promise<Map> of name and status.
+
+import {npmNameMany} from 'npm-name';
+
+const result = await npmNameMany(['chalk', '@sindresorhus/is', 'abc123']);
+
+console.log(result.get('chalk'));
+//=> false
+
+console.log(result.get('@sindresorhus/is'));
+//=> false
+
+console.log(result.get('abc123'));
+//=> true
+names
+Type: string[]
+
+Multiple names to check.
+
+options
+Type: object
+
+Same as npmName().
+
+Related
+npm-name-cli - CLI for this module
+
+
+Gh-home.
+gh-home
+Open the GitHub page of the given or current directory repo
+
+It will attempt to open the upstream repo if there is one or the forked repo.
+
+Install
+npm install --global gh-home
+Usage
+$ gh-home --help
+
+  Usage
+    $ gh-home [repo | user/repo]
+
+  Options
+	  --prs -p	   Open the pull requests of a GitHub repo
+	  --issues -i  Open the issues of a GitHub repo
+
+  Examples
+    $ gh-home
+    $ gh-home myrepo
+    $ gh-home avajs/ava
+    $ gh-home --issues
+    $ gh-home --prs
+Tips
+Add alias gh=gh-home to your .zshrc/.bashrc, so that you can run it with $ gh instead.
+
+You can also use the official GitHub CLI instead:
+
+$ gh alias set home "repo view --web"
+$ gh home
+Related
+npm-home - Open the npm page of a package
+
+
+Npm-home.
+npm-home
+Open the npm page, Yarn page, or GitHub repo of a package
+
+Install
+npm install --global npm-home
+Usage
+$ npm-home --help
+
+  Usage
+    $ npm-home [name] […]
+    $ nh [name] […]
+
+  Options
+    --github -g  Open the GitHub repo of the package
+    --yarn   -y  Open the Yarn homepage of the package
+
+  Examples
+    $ npm-home
+    $ npm-home chalk -g
+    $ npm-home execa ava -y
+Related
+gh-home - Open the GitHub page of the given or current directory repo.
+
+
+Trash.
+
+
+Move files and folders to the trash
+
+Works on macOS (10.12+), Linux, and Windows (8+).
+
+Note: The Linux implementation is not very good and not maintained. Help welcome. If no one steps up to help maintain it, I will eventually remove Linux support.
+
+In contrast to fs.unlink, del, and rimraf which permanently delete files, this only moves them to the trash, which is much safer and reversible.
+
+Install
+npm install trash
+Usage
+import trash from 'trash';
+
+await trash(['*.png', '!rainbow.png']);
+API
+trash(input, options)
+Returns a Promise.
+
+input
+Type: string | string[]
+
+Accepts paths and glob patterns.
+
+options
+Type: object
+
+glob
+Type: boolean
+Default: true
+
+Enable globbing when matching file paths.
+
+CLI
+To install the trash command, run:
+
+npm install --global trash-cli
+Info
+On macOS, macos-trash is used.
+On Linux, the XDG spec is followed.
+On Windows, recycle-bin is used.
+
+FAQ
+ The mv command isn't cross-platform and moving to trash is not just about moving the file to a "trash" directory. On all OSes you'll run into file conflicts. The user won't easily be able to restore the file. It won't work on an external drive. The trash directory location varies between Windows versions. For Linux, there's a whole spec you need to follow. On macOS, you'll lose the Put back feature.
+Related
+trash-cli - CLI for this module
+empty-trash - Empty the trash
+del - Delete files and folders
+
+
+Speed-Test.
+speed-test
+Test your internet connection speed and ping using speedtest.net from the CLI
+
+
+Install
+Ensure you have Node.js version 12.20+ installed. Then run the following:
+
+npm install --global speed-test
+Usage
+$ speed-test --help
+
+  Usage
+    $ speed-test
+
+  Options
+    --json -j     Output the result as JSON
+    --bytes -b    Output the result in megabytes per second (MBps)
+    --verbose -v  Output more detailed information
+Links
+Product Hunt post
+Related
+fast-cli - Test your download speed using fast.com
+
+Pageres.
+
+
+Capture screenshots of websites in various resolutions. A good way to make sure your websites are responsive. It's speedy and generates 100 screenshots from 10 different websites in just over a minute. It can also be used to render SVG images.
+
+See pageres-cli for the command-line tool.
+
+Install
+npm install pageres
+Note to Linux users: If you get a "No usable sandbox!" error, you need to enable system sandboxing.
+
+Usage
+import Pageres from 'pageres';
+
+await new Pageres({delay: 2})
+	.source('https://github.com/sindresorhus/pageres', ['480x320', '1024x768'], {crop: true})
+	.source('https://sindresorhus.com', ['1280x1024', '1920x1080'])
+	.source('data:text/html,<h1>Awesome!</h1>', ['1024x768'])
+	.destination('screenshots')
+	.run();
+
+console.log('Finished generating screenshots!');
+API
+Pageres(options?)
+options
+Type: object
+
+delay
+Type: number (Seconds)
+Default: 0
+
+Delay capturing the screenshot.
+
+Useful when the site does things after load that you want to capture.
+
+timeout
+Type: number (Seconds)
+Default: 60
+
+Number of seconds after which the request is aborted.
+
+crop
+Type: boolean
+Default: false
+
+Crop to the set height.
+
+css
+Type: string
+
+Apply custom CSS to the webpage. Specify some CSS or the path to a CSS file.
+
+script
+Type: string
+
+Apply custom JavaScript to the webpage. Specify some JavaScript or the path to a file.
+
+cookies
+Type: Array<string | object>
+
+A string with the same format as a browser cookie or an object.
+
+Tip: Go to the website you want a cookie for and copy-paste it from DevTools.
+
+filename
+Type: string
+Default: '<%= url %>-<%= size %><%= crop %>'
+
+Define a customized filename using Lo-Dash templates.
+For example: <%= date %> - <%= url %>-<%= size %><%= crop %>.
+
+Available variables:
+
+url: The URL in slugified form, eg. http://yeoman.io/blog/ becomes yeoman.io!blog
+size: Specified size, eg. 1024x1000
+width: Width of the specified size, eg. 1024
+height: Height of the specified size, eg. 1000
+crop: Outputs -cropped when the crop option is true
+date: The current date (YYYY-MM-DD), eg. 2015-05-18
+time: The current time (HH-mm-ss), eg. 21-15-11
+incrementalName
+Type: boolean
+Default: false
+
+When a file exists, append an incremental number.
+
+selector
+Type: string
+
+Capture a specific DOM element matching a CSS selector.
+
+hide
+Type: string[]
+
+Hide an array of DOM elements matching CSS selectors.
+
+username
+Type: string
+
+Username for authenticating with HTTP auth.
+
+password
+Type: string
+
+Password for authenticating with HTTP auth.
+
+scale
+Type: number
+Default: 1
+
+Scale webpage n times.
+
+format
+Type: string
+Default: png
+Values: 'png' | 'jpg'
+
+Image format.
+
+userAgent
+Type: string
+
+Custom user agent.
+
+headers
+Type: object
+
+Custom HTTP request headers.
+
+transparent
+Type: boolean
+Default: false
+
+Set background color to transparent instead of white if no background is set.
+
+darkMode
+Type: boolean
+Default: false
+
+Emulate preference of dark color scheme.
+
+launchOptions
+Type: object
+Default: {}
+
+Options passed to puppeteer.launch().
+
+beforeScreenshot
+Type: Function
+
+The specified function is called right before the screenshot is captured, as well as before any bounding rectangle is calculated as part of options.element. It receives the Puppeteer Page instance as the first argument and the browser instance as the second argument. This gives you a lot of power to do custom stuff. The function can be async.
+
+Note: Make sure to not call page.close() or browser.close().
+
+import Pageres from 'pageres';
+
+await new Pageres({
+	delay: 2,
+	beforeScreenshot: async (page, browser) => {
+		await checkSomething();
+		await page.click('#activate-button');
+		await page.waitForSelector('.finished');
+	}
+})
+	.source('https://github.com/sindresorhus/pageres', ['480x320', '1024x768', 'iphone 5s'], {crop: true})
+	.destination('screenshots')
+	.run();
+
+console.log('Finished generating screenshots!');
+pageres.source(url, sizes, options?)
+Add a page to screenshot.
+
+url
+Required
+Type: string
+
+URL or local path to the website you want to screenshot. You can also use a data URI.
+
+sizes
+Required
+Type: string[]
+
+Use a <width>x<height> notation or a keyword.
+
+A keyword is a version of a device from this list.
+
+You can also pass in the w3counter keyword to use the ten most popular resolutions from w3counter.
+
+options
+Type: object
+
+Options set here will take precedence over the ones set in the constructor.
+
+pageres.destination(directory)
+Set the destination directory.
+
+directory
+Type: string
+
+pageres.run()
+Run pageres.
+
+Returns Promise<Uint8Array[]>.
+
+Task runners
+Check out grunt-pageres if you're using Grunt.
+
+For Gulp and Broccoli, just use the API directly. No need for a wrapper plugin.
+
+Built with Pageres
+Break Shot - Desktop app for capturing screenshots of responsive websites.
+Related
+capture-website - A different take on screenshotting websites
+
+
+Vtop.
+
+vtop
+ 
+
+A graphical activity monitor for the command line.
+
+
+
+How to install
+If you haven't already got Node.js, then go get it.
+
+npm install -g vtop
+If you're on macOS, or get an error about file permissions, you may need to do sudo npm install -g vtop. Don't do this if you're using nvm.
+
+Running
+This is pretty simple too.
+
+vtop
+If you really like vtop, but your finger muscle memory means you keep typing 'top' then why not add an alias to ~/.bashrc.
+
+alias top="vtop"
+alias oldtop="/usr/bin/top"
+Keyboard shortcuts
+Press 'u' to update to the latest version of vtop.
+Arrow up or k to move up the process list.
+Arrow down or j to move down.
+Arrow left or h to zoom the graphs in.
+Arrow right or l to zoom the graphs out.
+g to go to the top of the process list.
+G to move to the end of the list.
+dd to kill all the processes in that group
+Mouse control
+If your terminal supports mouse events (like iTerm) then you can click on the items in the process list. As well as use the scroll wheel. You can disable mouse control with the vtop --no-mouse option.
+
+it works
+It uses drawille to draw CPU and Memory charts with Unicode braille characters, helping you visualize spikes. We also group processes with the same name together.
+
+I think the CPU % is coming out wrong.
+We calculate the CPU percentage as a total of your overall system power. 100% is all cores and HyperThreads maxed out. This is different to how Apple Activity monitor works.
+
+Change the color scheme.
+vtop --theme wizard
+This loads the theme file in themes/ with the same name. Make your own and send me a Pull Request :)
+
+You could add this to your aliases if you'd like to use it always.
+
+alias vtop="vtop --theme brew".
+ Measuring server req/s, log entries, etc etc.
+Yeah that's on the list :) Feel free to send a pull request though. Check out the sensors/ folder.
+
+
+
+License is this under.
+
+MIT – do what you like with it :)
+
+Contributing
+Get stuck in – click the fork button, then clone to your local machine. Use the GitHub Desktop client if you don't know Git. Tinker with the code then run this from the command line:
+
+./bin/vtop.js
+When you push it'll run the Standard JS checker http://standardjs.com/. If you run 'npm test' in your own terminal too, this runs in Travis, your PR will fail the test if this command fails.
+
+
+
+
+
+Empty Trash.
+empty-trash
+Empty the trash
+
+Works on macOS, Linux, and Windows.
+
+Install
+npm install empty-trash
+Usage
+import emptyTrash from 'empty-trash';
+
+await emptyTrash();
+Info
+On macOS, AppleScript is used as it's the only way to do it without incurring permission issues.
+
+On Linux, the XDG spec is followed.
+
+On Windows, empty-recycle-bin is used.
+
+Related
+empty-trash-cli - CLI for this module
+trash - Move files and folders to the trash
+
+
+is-up.
+is-up
+Check whether a website is up or down using the isitup.org API
+
+Install
+npm install is-up
+Usage
+import isUp from 'is-up';
+
+console.log(await isUp('https://sindresorhus.com'));
+//=> true
+Related
+is-up-cli - CLI for this module
+
+
+is-online.
+
+is-online
+Check if the internet connection is up
+
+Works in Node.js and the browser (with a bundler).
+
+In the browser, there is already navigator.onLine, but it's useless as it only tells you if there's a local connection, and not whether the internet is accessible.
+
+Install
+npm install is-online
+Usage
+import isOnline from 'is-online';
+
+console.log(await isOnline());
+//=> true
+API
+isOnline(options?)
+options
+Type: object
+
+timeout
+Type: number
+Default: 5000
+
+Milliseconds to wait for a server to respond.
+
+ipVersion
+Type: number
+Values: 4 | 6
+Default: 4
+
+The Internet Protocol version to use.
+
+This is an advanced option that is usually not necessary to be set, but it can prove useful to specifically assert IPv6 connectivity.
+
+How it works
+The following checks are run in parallel:
+
+Retrieve icanhazip.com (or ipify.org as fallback) via HTTPS.
+Query myip.opendns.com and o-o.myaddr.l.google.com DNS entries. (Node.js only)
+Retrieve Apple's Captive Portal test page (this is what iOS does). (Node.js only)
+When any check succeeds, the returned Promise is resolved to true.
+
+Proxy support
+To make it work through proxies, you need to set up global-agent.
+
+Related
+is-online-cli - CLI for this module
+is-reachable - Check if servers are reachable
+
+
+Public-ip.
+public-ip
+Get your public IP address - very fast!
+
+In Node.js, it queries the DNS records of OpenDNS, Google DNS, and HTTPS services to determine your IP address. In browsers, it uses the excellent icanhaz and ipify services through HTTPS.
+
+Install
+npm install public-ip
+Usage
+import {publicIp, publicIpv4, publicIpv6} from 'public-ip';
+
+console.log(await publicIp()); // Falls back to IPv4
+//=> 'fe80::200:f8ff:fe21:67cf'
+
+console.log(await publicIpv6());
+//=> 'fe80::200:f8ff:fe21:67cf'
+
+console.log(await publicIpv4());
+//=> '46.5.21.123'
+API
+publicIp(options?)
+Returns a Promise<string> with your public IPv4 or IPv6 address. Rejects on error or timeout.
+
+A .cancel() method is available on the promise, which can be used to cancel the request.
+
+publicIpv6(options?)
+Returns a Promise<string> with your public IPv6 address. Rejects on error or timeout.
+
+A .cancel() method is available on the promise, which can be used to cancel the request.
+
+publicIpv4(options?)
+Returns a Promise<string> with your public IPv4 address. Rejects on error or timeout.
+
+A .cancel() method is available on the promise, which can be used to cancel the request.
+
+options
+Type: object
+
+onlyHttps
+Type: boolean
+Default: false
+
+Use a HTTPS check using the icanhazip.com service instead of the DNS query. ipify.org is used as a fallback if icanhazip.com fails. This check is much more secure and tamper-proof, but also a lot slower. This option is only available in the Node.js version. The default behaviour is to check against DNS before using HTTPS fallback. If set to true, it will only check against HTTPS.
+
+fallbackUrls
+Type: string[]
+Default: []
+
+Add your own custom HTTPS endpoints to get the public IP from. They will only be used if everything else fails. Any service used as fallback must return the IP as a plain string.
+
+import {publicIpv6} from 'public-ip';
+
+await publicIpv6({
+	fallbackUrls: [
+		'https://ifconfig.co/ip'
+	]
+});
+timeout
+Type: number
+Default: 5000
+
+The time in milliseconds until a request is considered timed out.
+
+IpNotFoundError
+Error thrown when the public IP address could not be found.
+
+CancelError
+Error thrown when the operation was canceled.
+
+Related
+public-ip-cli - CLI for this module
+internal-ip - Get your internal IP address
+
+Clipboard-cli.
+clipboard-cli
+Access the system clipboard (copy/paste) - cross-platform
+
+Supports: macOS, Windows, Linux, OpenBSD, FreeBSD, Android with Termux.
+
+Install
+npm install --global clipboard-cli
+Usage
+clipboard --help
+
+Example
+  $ echo 🦄 | clipboard
+  $ clipboard
+  🦄
+Tip
+Run it with $ cb instead by adding alias cb=clipboard to your .zshrc/.bashrc.
+
+Related
+clipboardy - API for this module
+
+XO.
+
+
+
+
+
+JavaScript/TypeScript linter (ESLint wrapper) with great defaults.
+
+Opinionated but configurable ESLint wrapper with lots of goodies included. Enforces strict and readable code. Never discuss code style on a pull request again! No decision-making. No eslint.config.js to manage. It just works!
+
+It uses ESLint underneath, so issues regarding built-in rules should be opened over there.
+
+XO requires your project to be ESM.
+
+
+
+Highlights
+Beautiful output.
+Zero-config, but configurable when needed.
+Enforces readable code, because you read more code than you write.
+No need to specify file paths to lint as it lints all JS/TS files except for commonly ignored paths.
+Flat config customization.
+TypeScript supported by default.
+Includes many useful ESLint plugins, like unicorn, import, ava, n and more.
+Caches results between runs for much better performance.
+Super simple to add XO to a project with $ npm init xo.
+Fix many issues automagically with $ xo --fix.
+Open all files with errors at the correct line in your editor with $ xo --open.
+Specify indent and semicolon preferences easily without messing with the rule config.
+Optionally use the Prettier code style or turn off all Prettier rules with the compat option.
+Optionally use eslint-config-xo-react for easy jsx and react linting with zero config.
+Optionally use with ESLint directly
+Great editor plugins.
+Install
+npm install xo --save-dev
+You must install XO locally. You can run it directly with $ npx xo.
+
+You'll need eslint-config-xo-vue for specific linting in a Vue app.
+
+Usage
+$ xo --help
+
+	Usage
+		$ xo [<file|glob> ...]
+
+	Options
+		--fix             Automagically fix issues
+		--reporter        Reporter to use
+		--space           Use space indent instead of tabs [Default: 2]
+		--config          Path to a XO configuration file
+		--semicolon       Use semicolons [Default: true]
+		--react           Include React specific parsing and xo-react linting rules [Default: false]
+		--prettier        Format with prettier or turn off prettier conflicted rules when set to 'compat' [Default: false]
+		--print-config    Print the effective ESLint config for the given file
+		--version         Print XO version
+		--open            Open files with issues in your editor
+		--quiet           Show only errors and no warnings
+		--stdin           Validate/fix code from stdin
+		--stdin-filename  Specify a filename for the --stdin option
+		--ignore          Ignore pattern globs, can be set multiple times
+		--cwd=<dir>       Working directory for files [Default: process.cwd()]
+
+	Examples
+		$ xo
+		$ xo index.js
+		$ xo *.js !foo.js
+		$ xo --space
+		$ xo --print-config=index.js
+		$ echo 'const x=true' | xo --stdin --fix
+
+	Tips
+		- Add XO to your project with `npm init xo`.
+		- Put options in xo.config.js instead of using flags so other tools can read it.
+Default code style
+Any of these can be overridden if necessary.
+
+Tab indentation (or space)
+Semicolons (or not)
+Single-quotes
+Trailing comma for multiline statements
+No unused variables
+Space after keyword if (condition) {}
+Always === instead of ==
+Check out an example and the ESLint rules.
+
+Workflow
+The recommended workflow is to add XO locally to your project and run it with the tests.
+
+Simply run $ npm init xo (with any options) to add XO to create an xo.config.js.
+
+Config
+You can configure XO options by creating an xo.config.js or an xo.config.ts file in the root directory of your project. XO supports all js/ts file extensions (js,cjs,mjs,ts,cts,mts) automatically. A XO config is an extension of ESLint's Flat Config. Like ESLint, an XO config exports an array of XO config objects. XO config objects extend ESLint Configuration Objects. This means all the available configuration params for ESLint also work for XO. However, XO enhances and adds extra params to the configuration objects to make them easier to work with.
+
+Config types
+XO exports the types FlatXoConfig, XoConfigItem, and other types for you to get TypeScript validation on your config files.
+
+examples: xo.config.js
+
+/** @type {import('xo').FlatXoConfig} */
+const xoConfig = [...]
+xo.config.ts
+
+import {type FlatXoConfig} from 'xo';
+
+const xoConfig: FlatXoConfig = [...]
+files
+Type: string | string[] | undefined
+Default: **/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}
+
+A glob or array of glob strings which the config object will apply. By default XO will apply the configuration to all files.
+
+ignores
+Type: string[]
+
+Some paths are ignored by default, including paths in .gitignore. Additional ignores can be added here. For global ignores, keep ignores as the only key in the config item.
+
+space
+Type: boolean | number
+Default: false (tab indentation)
+
+Set it to true to get 2-space indentation or specify the number of spaces.
+
+This option exists for pragmatic reasons, but I would strongly recommend you read “Why tabs are superior”.
+
+semicolon
+Type: boolean
+Default: true (Semicolons required)
+
+Set it to false to enforce no-semicolon style.
+
+prettier
+Type: boolean | 'compat'
+Default: false
+
+Format code with Prettier.
+
+Prettier options will be based on your Prettier config. XO will then merge your options with its own defaults:
+
+semi: based on semicolon option
+useTabs: based on space option
+tabWidth: based on space option
+singleQuote: true
+bracketSpacing: false
+To stick with Prettier's defaults, add this to your Prettier config:
+
+export default {
+	singleQuote: false,
+	bracketSpacing: true,
+};
+If contradicting options are set for both Prettier and XO, an error will be thrown.
+
+Compat
+If the Prettier option is set to compat, instead of formatting your code automatically, XO will turn off all rules that conflict with Prettier code style and allow you to pass your formatting to the Prettier tool directly.
+
+react
+Type: boolean
+Default: false
+
+Adds eslint-plugin-react, eslint-plugin-react-hooks, and eslint-config-xo-react to get all the React best practices applied automatically.
+
+TypeScript
+XO will automatically lint TypeScript files (.ts, .mts, .cts, and .tsx) with the rules defined in eslint-config-xo-typescript#use-with-xo.
+
+XO will handle the @typescript-eslint/parser project option automatically even if you don't have a tsconfig.json in your project.
+
+Usage as an ESLint Configuration
+With the introduction of the ESLint flat config, many of the original goals of xo were brought into the ESLint core, and shareable configs with plugins became possible. Although we highly recommend the use of the xo cli, we understand that some teams need to rely on ESLint directly.
+
+For these purposes, you can still get most of the features of xo by using our ESLint configuration helpers.
+
+xoToEslintConfig
+The xoToEslintConfig function is designed for use in an eslint.config.js file. It is NOT for use in an xo.config.js file. This function takes a FlatXoConfig and outputs an ESLint config object. This function will neither be able to automatically handle TS integration for you nor automatic Prettier integration. You are responsible for configuring your other tools appropriately. The xo cli, will however, handle all of these details for you.
+
+eslint.config.js
+
+import xo from 'xo';
+
+export default xo.xoToEslintConfig([{space: true, prettier: 'compat'}]);
+Tips
+Monorepo
+Put a xo.config.js with your config at the root and do not add a config to any of your bundled packages.
+
+Including files ignored by default
+To include files that XO ignores by default, add them as negative globs in the ignores option:
+
+const xoConfig = [{ignores: ['!vendor/**']}];
+
+export default xoConfig;
+XO means.
+It means hugs and kisses.
+
+Standard.
+The Standard style is a really cool idea. I too wish we could have one style to rule them all! But the reality is that the JS community is just too diverse and opinionated to create one code style. They also made the mistake of pushing their own style instead of the most popular one. In contrast, XO is more pragmatic and has no aspiration of being the style. My goal with XO is to make it simple to enforce consistent code style with close to no config. XO comes with my code style preference by default, as I mainly made it for myself, but everything is configurable.
+
+ESLint.
+XO is based on ESLint. This project started out as just a shareable ESLint config, but it quickly grew out of that. I wanted something even simpler. Just typing xo and be done. No decision-making. No config. I also have some exciting future plans for it. However, you can still get most of the XO benefits while using ESLint directly with the ESLint shareable config.
+
+Editor plugins
+Sublime Text
+Atom
+Vim
+TextMate 2
+VSCode
+Emacs
+WebStorm
+Build-system plugins
+Gulp
+Grunt
+webpack loader
+webpack plugin
+Metalsmith
+Fly
+Configs
+eslint-config-xo - ESLint shareable config for XO with tab indent
+eslint-config-xo-space - ESLint shareable config for XO with 2-space indent
+eslint-config-xo-react - ESLint shareable config for React to be used with the above
+eslint-config-xo-vue - ESLint shareable config for Vue to be used with the above
+stylelint-config-xo - Stylelint shareable config for XO with tab indent
+stylelint-config-xo-space - Stylelint shareable config for XO with 2-space indent
+eslint-config-xo-typescript - ESLint shareable config for TypeScript
+Related
+eslint-plugin-unicorn - Various awesome ESLint rules (Bundled in XO)
+xo-summary - Display output from xo as a list of style errors, ordered by count
+Badge
+Show the world you're using XO → 
+
+[![XO code style](https://shields.io/badge/code_style-5ed9c7?logo=xo&labelColor=gray&logoSize=auto)](https://github.com/xojs/xo)
+Or customize the badge.
+
+You can also find some nice dynamic XO badges on badgen.net.
+
+
+Eslint.
+ESLint
+Website | Configure ESLint | Rules | Contribute to ESLint | Report Bugs | Code of Conduct | Discord | Mastodon | Bluesky
+
+ESLint is a tool for identifying and reporting on patterns found in ECMAScript/JavaScript code. In many ways, it is similar to JSLint and JSHint with a few exceptions:
+
+ESLint uses Espree for JavaScript parsing.
+ESLint uses an AST to evaluate patterns in code.
+ESLint is completely pluggable, every single rule is a plugin and you can add more at runtime.
+Table of Contents
+Installation and Usage
+Configuration
+Version Support
+Code of Conduct
+Filing Issues
+Frequently Asked Questions
+Releases
+Security Policy
+Semantic Versioning Policy
+License
+Team
+Sponsors
+Technology Sponsors
+Installation and Usage
+Prerequisites: Node.js (^18.18.0, ^20.9.0, or >=21.1.0) built with SSL support. (If you are using an official Node.js distribution, SSL is always built in.)
+
+You can install and configure ESLint using this command:
+
+npm init @eslint/config@latest
+After that, you can run ESLint on any file or directory like this:
+
+npx eslint yourfile.js
+pnpm Installation
+To use ESLint with pnpm, we recommend setting up a .npmrc file with at least the following settings:
+
+auto-install-peers=true
+node-linker=hoisted
+This ensures that pnpm installs dependencies in a way that is more compatible with npm and is less likely to produce errors.
+
+Configuration
+You can configure rules in your eslint.config.js files as in this example:
+
+import { defineConfig } from "eslint/config";
+
+export default defineConfig([
+	{
+		files: ["**/*.js", "**/*.cjs", "**/*.mjs"],
+		rules: {
+			"prefer-const": "warn",
+			"no-constant-binary-expression": "error",
+		},
+	},
+]);
+The names "prefer-const" and "no-constant-binary-expression" are the names of rules in ESLint. The first value is the error level of the rule and can be one of these values:
+
+"off" or 0 - turn the rule off
+"warn" or 1 - turn the rule on as a warning (doesn't affect exit code)
+"error" or 2 - turn the rule on as an error (exit code will be 1)
+The three error levels allow you fine-grained control over how ESLint applies rules (for more configuration options and details, see the configuration docs).
+
+Version Support
+The ESLint team provides ongoing support for the current version and six months of limited support for the previous version. Limited support includes critical bug fixes, security issues, and compatibility issues only.
+
+ESLint offers commercial support for both current and previous versions through our partners, Tidelift and HeroDevs.
+
+See Version Support for more details.
+
+Code of Conduct
+ESLint adheres to the OpenJS Foundation Code of Conduct.
+
+Filing Issues
+Before filing an issue, please be sure to read the guidelines for what you're reporting:
+
+Bug Report
+Propose a New Rule
+Proposing a Rule Change
+Request a Change
+Frequently Asked Questions
+ESLint support JSX.
+Yes, ESLint natively supports parsing JSX syntax (this must be enabled in configuration). Please note that supporting JSX syntax is not the same as supporting React. React applies specific semantics to JSX syntax that ESLint doesn't recognize. We recommend using eslint-plugin-react if you are using React and want React semantics.
+
+Prettier , ESLint.
+ESLint and Prettier have different jobs: ESLint is a linter (looking for problematic patterns) and Prettier is a code formatter. Using both tools is common, refer to Prettier's documentation to learn how to configure them to work well with each other.
+
+ECMAScript versions ESLint support.
+ESLint has full support for ECMAScript 3, 5, and every year from 2015 up until the most recent stage 4 specification (the default). You can set your desired ECMAScript syntax and other settings (like global variables) through configuration.
+
+Experimental features.
+ESLint's parser only officially supports the latest final ECMAScript standard. We will make changes to core rules in order to avoid crashes on stage 3 ECMAScript syntax proposals (as long as they are implemented using the correct experimental ESTree syntax). We may make changes to core rules to better work with language extensions (such as JSX, Flow, and TypeScript) on a case-by-case basis.
+
+In other cases (including if rules need to warn on more or fewer cases due to new syntax, rather than just not crashing), we recommend you use other parsers and/or rule plugins. If you are using Babel, you can use @babel/eslint-parser and @babel/eslint-plugin to use any option available in Babel.
+
+Once a language feature has been adopted into the ECMAScript standard (stage 4 according to the TC39 process), we will accept issues and pull requests related to the new feature, subject to our contributing guidelines. Until then, please use the appropriate parser and plugin(s) for your experimental feature.
+
+Node.js versions ESLint support.
+ESLint updates the supported Node.js versions with each major release of ESLint. At that time, ESLint's supported Node.js versions are updated to be:
+
+The most recent maintenance release of Node.js
+The lowest minor version of the Node.js LTS release that includes the features the ESLint team wants to use.
+The Node.js Current release
+ESLint is also expected to work with Node.js versions released after the Node.js Current release.
+
+Refer to the Quick Start Guide for the officially supported Node.js versions for a given ESLint release.
+
+ask for help.
+Discord server.
+
+ESLint lock dependency versions.
+Lock files like package-lock.json are helpful for deployed applications. They ensure that dependencies are consistent between environments and across deployments.
+
+Packages like eslint that get published to the npm registry do not include lock files. npm install eslint as a user will respect version constraints in ESLint's package.json. ESLint and its dependencies will be included in the user's lock file if one exists, but ESLint's own lock file would not be used.
+
+We intentionally don't lock dependency versions so that we have the latest compatible dependency versions in development and CI that our users get when installing ESLint in a project.
+
+The Twilio blog has a deeper dive to learn more.
+
+Releases
+We have scheduled releases every two weeks on Friday or Saturday. You can follow a release issue for updates about the scheduling of any particular release.
+
+Security Policy
+ESLint takes security seriously. We work hard to ensure that ESLint is safe for everyone and that security issues are addressed quickly and responsibly. Read the full security policy.
+
+Semantic Versioning Policy
+ESLint follows semantic versioning. However, due to the nature of ESLint as a code quality tool, it's not always clear when a minor or major version bump occurs. To help clarify this for everyone, we've defined the following semantic versioning policy for ESLint:
+
+Patch release (intended to not break your lint build)
+A bug fix in a rule that results in ESLint reporting fewer linting errors.
+A bug fix to the CLI or core (including formatters).
+Improvements to documentation.
+Non-user-facing changes such as refactoring code, adding, deleting, or modifying tests, and increasing test coverage.
+Re-releasing after a failed release (i.e., publishing a release that doesn't work for anyone).
+Minor release (might break your lint build)
+A bug fix in a rule that results in ESLint reporting more linting errors.
+A new rule is created.
+A new option to an existing rule that does not result in ESLint reporting more linting errors by default.
+A new addition to an existing rule to support a newly-added language feature (within the last 12 months) that will result in ESLint reporting more linting errors by default.
+An existing rule is deprecated.
+A new CLI capability is created.
+New capabilities to the public API are added (new classes, new methods, new arguments to existing methods, etc.).
+A new formatter is created.
+eslint:recommended is updated and will result in strictly fewer linting errors (e.g., rule removals).
+Major release (likely to break your lint build)
+eslint:recommended is updated and may result in new linting errors (e.g., rule additions, most rule option updates).
+A new option to an existing rule that results in ESLint reporting more linting errors by default.
+An existing formatter is removed.
+Part of the public API is removed or changed in an incompatible way. The public API includes:
+Rule schemas
+Configuration schema
+Command-line options
+Node.js API
+Rule, formatter, parser, plugin APIs
+According to our policy, any minor update may report more linting errors than the previous release (ex: from a bug fix). As such, we recommend using the tilde (~) in package.json e.g. "eslint": "~3.1.0" to guarantee the results of your builds.
+
+License
+MIT License
+
+Copyright OpenJS Foundation and other contributors, <www.openjsf.org>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+DAVID.
+
+
+
+     
+
+Node.js module that tells you when your package npm dependencies are out of date.
+
+Getting Started
+Install Node.js.
+
+Install david:
+
+cd /your/project/directory
+npm install david
+Use:
+
+var david = require('david');
+
+// Your package.json
+var manifest = {
+  name: 'xxx',
+  dependencies: {
+    'aaa': '~0.0.0',
+    'bbb': '~0.0.0'
+  },
+  devDependencies: {
+    'yyy': '~0.0.0',
+    'zzz': '~0.0.0'
+  }
+};
+
+david.getDependencies(manifest, function (er, deps) {
+  console.log('latest dependencies information for', manifest.name);
+  listDependencies(deps);
+});
+
+david.getDependencies(manifest, { dev: true }, function (er, deps) {
+  console.log('latest devDependencies information for', manifest.name);
+  listDependencies(deps);
+});
+
+david.getUpdatedDependencies(manifest, function (er, deps) {
+  console.log('dependencies with newer versions for', manifest.name);
+  listDependencies(deps);
+});
+
+david.getUpdatedDependencies(manifest, { dev: true }, function (er, deps) {
+  console.log('devDependencies with newer versions for', manifest.name);
+  listDependencies(deps);
+});
+
+david.getUpdatedDependencies(manifest, { stable: true }, function (er, deps) {
+  console.log('dependencies with newer STABLE versions for', manifest.name);
+  listDependencies(deps);
+});
+
+david.getUpdatedDependencies(manifest, { dev: true, stable: true }, function (er, deps) {
+  console.log('devDependencies with newer STABLE versions for', manifest.name);
+  listDependencies(deps);
+});
+
+function listDependencies(deps) {
+  Object.keys(deps).forEach(function(depName) {
+    var required = deps[depName].required || '*';
+    var stable = deps[depName].stable || 'None';
+    var latest = deps[depName].latest;
+    console.log('%s Required: %s Stable: %s Latest: %s', depName, required, stable, latest);
+  });
+}
+Both getDependencies and getUpdatedDependencies return an object result, whose keys are package names. The values are objects which contain the following properties:
+
+required - The version required according to the manifest
+stable - The latest stable version available
+latest - The latest version available (including build and patch versions)
+CLI
+If you install David globally with npm install -g david, you can run david in your project directory to see which dependencies are out of date.
+
+You can also run david --global to see your outdated global dependencies.
+
+Update to latest
+To update all your project dependencies to the latest stable versions, and save to your package.json, run:
+
+david update
+To update a particular project dependency to the latest stable version, and save to your package.json, run:
+
+david update package-name
+You can also update global dependencies to latest versions:
+
+david update --global
+To update all your project dependencies to the latest versions (including unstable versions), pass the --unstable flag:
+
+david update --unstable
+Alternate registry
+david update --registry http://registry.nodejitsu.com/
+Non-npm and SCM (Git) dependencies
+If you have dependencies that are not published to npm, david will print a warning message by default. To throw an error and exit, pass the error404 option:
+
+david --error404
+If using david programmatically, pass error: {E404: true} in the options object.
+
+If you have dependencies whose versions are SCM URLs, david will print a warning message by default. To throw an error and exit, pass the errorSCM option:
+
+david --errorSCM
+If using david programmatically, pass error: {ESCM: true} in the options object.
+
+Specify package.json path
+Use -p, --package to specify the path to your package.json.
+
+Ignore dependencies
+To tell david to ignore dependencies, add a david.ignore property to your package.json which lists the dependencies david should ignore. If using david programmatically you can also pass this as an option. Globs are also supported. e.g.
+
+package.json
+
+{
+  "david": {
+    "ignore": ["async", "underscore", "@types/*"]
+  }
+}
+
+
+
+
+HTTP-Server.
+
+    
+
+http-server: a simple static HTTP server
+http-server is a simple, zero-configuration command-line static HTTP server. It is powerful enough for production usage, but it's simple and hackable enough to be used for testing, local development and learning.
+
+
+
+Installation:
+Running on-demand:
+Using npx you can run the script without installing it first:
+
+npx http-server [path] [options]
+Globally via npm
+npm install --global http-server
+This will install http-server globally so that it may be run from the command line anywhere.
+
+Globally via Homebrew
+brew install http-server
+As a dependency in your npm package:
+npm install http-server
+Using Docker
+Note: public Image.
+
+Dockerfile.
+
+Create an image
+docker build -t my-image .
+Run a container
+docker run -p 8080:8080 -v "${pwd}:/public" my-image
+In the example above we're serving the directory ./ (working directory). If you wanted to serve ./test you'd replace ${pwd} with ${pwd}/test.
+
+Usage:
+ http-server [path] [options]
+[path] defaults to ./public if the folder exists, and ./ otherwise.
+
+Now you can visit http://localhost:8080 to view your server
+
+Note: Caching is on by default. Add -c-1 as an option to disable caching.
+
+Available Options:
+Command	Description	Defaults
+-p or --port	Port to use. Use -p 0 to look for an open port, starting at 8080. It will also read from process.env.PORT.	8080
+-a	Address to use	0.0.0.0
+--base-dir	Base path to serve files from	/
+-d	Show directory listings	true
+-i	Display autoIndex	true
+-g or --gzip	When enabled it will serve ./public/some-file.js.gz in place of ./public/some-file.js when a gzipped version of the file exists and the request accepts gzip encoding. If brotli is also enabled, it will try to serve brotli first.	false
+-b or --brotli	When enabled it will serve ./public/some-file.js.br in place of ./public/some-file.js when a brotli compressed version of the file exists and the request accepts br encoding. If gzip is also enabled, it will try to serve brotli first.	false
+-e or --ext	Default file extension if none supplied	html
+-s or --silent	Suppress log messages from output	
+--cors	Enable CORS via the Access-Control-Allow-Origin header	
+-H or --header	Add an extra response header (can be used several times)	
+-o [path]	Open browser window after starting the server. Optionally provide a URL path to open. e.g.: -o /other/dir/	
+-c	Set cache time (in seconds) for cache-control max-age header, e.g. -c10 for 10 seconds. To disable caching, use -c-1.	3600
+-U or --utc	Use UTC time format in log messages.	
+--log-ip	Enable logging of the client's IP address	false
+-P or --proxy	Proxies all requests which can't be resolved locally to the given url. e.g.: -P http://someurl.com	
+--proxy-options	Pass proxy options using nested dotted objects. e.g.: --proxy-options.secure false
+--username	Username for basic authentication	
+--password	Password for basic authentication	
+-S, --tls or --ssl	Enable secure request serving with TLS/SSL (HTTPS)	false
+-C or --cert	Path to ssl cert file	cert.pem
+-K or --key	Path to ssl key file	key.pem
+-r or --robots	Automatically provide a /robots.txt (The content of which defaults to User-agent: *\nDisallow: /)	false
+--no-dotfiles	Do not show dotfiles	
+--mimetypes	Path to a .types file for custom mimetype definition	
+-h or --help	Print this list and exit.	
+-v or --version	Print the version and exit.	
+Magic Files
+index.html will be served as the default file to any directory requests.
+404.html will be served if a file is not found. This can be used for Single-Page App (SPA) hosting to serve the entry page.
+Catch-all redirect
+To implement a catch-all redirect, use the index page itself as the proxy with:
+
+http-server --proxy http://localhost:8080?
+Note the ? at the end of the proxy URL. Thanks to @houston3 for this clever hack!
+
+TLS/SSL
+First, you need to make sure that openssl is installed correctly, and you have key.pem and cert.pem files. You can generate them using this command:
+
+openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem
+You will be prompted with a few questions after entering the command. Use 127.0.0.1 as value for Common name if you want to be able to install the certificate in your OS's root certificate store or browser so that it is trusted.
+
+This generates a cert-key pair and it will be valid for 3650 days (about 10 years).
+
+Then you need to run the server with -S for enabling SSL and -C for your certificate file.
+
+http-server -S -C cert.pem
+ to use a passphrase with your private key you can include one in the openssl command via the -passout parameter (using password of foobar)
+
+e.g. openssl req -newkey rsa:2048 -passout pass:foobar -keyout key.pem -x509 -days 365 -out cert.pem
+
+For security reasons, the passphrase will only be read from the NODE_HTTP_SERVER_SSL_PASSPHRASE environment variable.
+
+This is what should be output if successful:
+
+Starting up http-server, serving ./ through https
+
+http-server settings:
+CORS: disabled
+Cache: 3600 seconds
+Connection Timeout: 120 seconds
+Directory Listings: visible
+AutoIndex: visible
+Serve GZIP Files: false
+Serve Brotli Files: false
+Default File Extension: none
+
+Available on:
+  https://127.0.0.1:8080
+  https://192.168.1.101:8080
+  https://192.168.1.104:8080
+Hit CTRL-C to stop the server
+Development
+Checkout this repository locally, then:
+
+$ npm i
+$ npm start
+Now you can visit http://localhost:8080 to view your server
+
+You should see the turtle image in the screenshot above hosted at that URL. See the ./public folder for demo content.
+
+
+Live Server.
+
+ 
+
+Live Server
+This is a little development server with live reload capability. Use it for hacking your HTML/JavaScript/CSS files, but not for deploying the final site.
+
+There are two reasons for using this:
+
+AJAX requests don't work with the file:// protocol due to security restrictions, i.e. you need a server if your site fetches content through JavaScript.
+Having the page reload automatically after changes to files can accelerate development.
+You don't need to install any browser plugins or manually add code snippets to your pages for the reload functionality to work, see "How it works" section below for more information. If you don't want/need the live reload, you should probably use something even simpler, like the following Python-based one-liner:
+
+python -m SimpleHTTPServer
+Installation
+You need node.js and npm. You should probably install this globally.
+
+Npm way
+
+npm install -g live-server
+Manual way
+
+git clone https://github.com/tapio/live-server
+cd live-server
+npm install # Local dependencies if you want to hack
+npm install -g # Install globally
+Usage from command line
+Issue the command live-server in your project's directory. Alternatively you can add the path to serve as a command line parameter.
+
+This will automatically launch the default browser. When you make a change to any file, the browser will reload the page - unless it was a CSS file in which case the changes are applied without a reload.
+
+Command line parameters:
+
+--port=NUMBER - select port to use, default: PORT env var or 8080
+--host=ADDRESS - select host address to bind to, default: IP env var or 0.0.0.0 ("any address")
+--no-browser - suppress automatic web browser launching
+--browser=BROWSER - specify browser to use instead of system default
+--quiet | -q - suppress logging
+--verbose | -V - more logging (logs all requests, shows all listening IPv4 interfaces, etc.)
+--open=PATH - launch browser to PATH instead of server root
+--watch=PATH - comma-separated string of paths to exclusively watch for changes (default: watch everything)
+--ignore=PATH - comma-separated string of paths to ignore (anymatch-compatible definition)
+--ignorePattern=RGXP - Regular expression of files to ignore (ie .*\.jade) (DEPRECATED in favor of --ignore)
+--no-css-inject - reload page on CSS change, rather than injecting changed CSS
+--middleware=PATH - path to .js file exporting a middleware function to add; can be a name without path nor extension to reference bundled middlewares in middleware folder
+--entry-file=PATH - serve this file (server root relative) in place of missing files (useful for single page apps)
+--mount=ROUTE:PATH - serve the paths contents under the defined route (multiple definitions possible)
+--spa - translate requests from /abc to /#/abc (handy for Single Page Apps)
+--wait=MILLISECONDS - (default 100ms) wait for all changes, before reloading
+--htpasswd=PATH - Enables http-auth expecting htpasswd file located at PATH
+--cors - Enables CORS for any origin (reflects request origin, requests with credentials are supported)
+--https=PATH - PATH to a HTTPS configuration module
+--https-module=MODULE_NAME - Custom HTTPS module (e.g. spdy)
+--proxy=ROUTE:URL - proxy all requests for ROUTE to URL
+--help | -h - display terse usage hint and exit
+--version | -v - display version and exit
+Default options:
+
+If a file ~/.live-server.json exists it will be loaded and used as default options for live-server on the command line. See "Usage from node" for option names.
+
+Usage from node
+var liveServer = require("live-server");
+
+var params = {
+	port: 8181, // Set the server port. Defaults to 8080.
+	host: "0.0.0.0", // Set the address to bind to. Defaults to 0.0.0.0 or process.env.IP.
+	root: "/public", // Set root directory that's being served. Defaults to cwd.
+	open: false, // When false, it won't load your browser by default.
+	ignore: 'scss,my/templates', // comma-separated string for paths to ignore
+	file: "index.html", // When set, serve this file (server root relative) for every 404 (useful for single-page applications)
+	wait: 1000, // Waits for all changes, before reloading. Defaults to 0 sec.
+	mount: [['/components', './node_modules']], // Mount a directory to a route.
+	logLevel: 2, // 0 = errors only, 1 = some, 2 = lots
+	middleware: [function(req, res, next) { next(); }] // Takes an array of Connect-compatible middleware that are injected into the server middleware stack
+};
+liveServer.start(params);
+HTTPS
+In order to enable HTTPS support, you'll need to create a configuration module. The module must export an object that will be used to configure a HTTPS server. The keys are the same as the keys in options for tls.createServer.
+
+For example:
+
+var fs = require("fs");
+
+module.exports = {
+	cert: fs.readFileSync(__dirname + "/server.cert"),
+	key: fs.readFileSync(__dirname + "/server.key"),
+	passphrase: "12345"
+};
+If using the node API, you can also directly pass a configuration object instead of a path to the module.
+
+HTTP/2
+To get HTTP/2 support one can provide a custom HTTPS module via --https-module CLI parameter (httpsModule option for Node.js script). Be sure to install the module first. HTTP/2 unencrypted mode is not supported by browsers, thus not supported by live-server. See this question and can I use page on HTTP/2 for more details.
+
+For example from CLI(bash):
+
+live-server \
+	--https=path/to/https.conf.js \
+	--https-module=spdy \
+	my-app-folder/
+Troubleshooting
+No reload on changes
+Open your browser's console: there should be a message at the top stating that live reload is enabled. Note that you will need a browser that supports WebSockets. If there are errors, deal with them. If it's still not working, file an issue.
+Error: watch ENOSPC
+See this suggested solution.
+Reload works but changes are missing or outdated
+Try using --wait=MS option. Where MS is time in milliseconds to wait before issuing a reload.
+it works
+The server is a simple node app that serves the working directory and its subdirectories. It also watches the files for changes and when that happens, it sends a message through a web socket connection to the browser instructing it to reload. In order for the client side to support this, the server injects a small piece of JavaScript code to each requested html file. This script establishes the web socket connection and listens to the reload requests. CSS files can be refreshed without a full page reload by finding the referenced stylesheets from the DOM and tricking the browser to fetch and parse them again.
+
+Contributing
+We welcome contributions! See CONTRIBUTING.md for details.
+
+Version history
+v1.2.2
+Fix dependency problem
+v1.2.1
+--https-module=MODULE_NAME to specify custom HTTPS module (e.g. spdy) (@pavel)
+--no-css-inject to reload page on css change instead of injecting the changes (@kylecordes)
+Dependencies updated to get rid of vulnerabilities in deps
+v1.2.0
+Add --middleware parameter to use external middlewares
+middleware API parameter now also accepts strings similar to --middleware
+Changed file watcher to improve speed (@pavel)
+--ignore now accepts regexps and globs, --ignorePattern deprecated (@pavel)
+Added --verbose cli option (logLevel 3) (@pavel)
+Logs all requests, displays warning when can't inject html file, displays all listening IPv4 interfaces...
+HTTPS configuration now also accepts a plain object (@pavel)
+Move --spa to a bundled middleware file
+New bundled spa-no-assets middleware that works like spa but ignores requests with extension
+Allow multiple --open arguments (@PirtleShell)
+Inject to head if body not found (@pmd1991)
+Update dependencies
+v1.1.0
+Proxy support (@pavel)
+Middleware support (@achandrasekar)
+Dependency updates (@tapio, @rahatarmanahmed)
+Using Travis CI
+v1.0.0
+HTTPS support (@pavel)
+HTTP Basic authentication support (@hey-johnnypark)
+CORS support (@pavel)
+Support mounting single files (@pavel)
+--spa cli option for single page apps, translates requests from /abc to /#/abc (@evanplaice)
+Check IP env var for default host (@dotnetCarpenter)
+Fix ignorePattern from config file (@cyfersystems)
+Fix test running for Windows (@peterhull90)
+v0.9.2
+Updated most dependencies to latest versions
+--quiet now silences warning about injection failure
+Giving explicit --watch paths now disables adding mounted paths to watching
+v0.9.1
+--ignorePattern=RGXP exclude files from watching by regexp (@psi-4ward)
+--watch=PATH cli option to only watch given paths
+v0.9.0
+--mount=ROUTE:PATH cli option to specify alternative routes to paths (@pmentz)
+--browser=BROWSER cli option to specify browser to use (@sakiv)
+Improved error reporting
+Basic support for injecting the reload code to SVG files (@dotnetCarpenter, @tapio)
+LiveServer.shutdown() function to close down the server and file watchers
+If host parameter is given, use it for browser URL instead of resolved IP
+Initial testing framework (@harrytruong, @evanplaice, @tapio)
+v0.8.2
+Load initial settings from ~/.live-server.json if exists (@mikker)
+Allow --port=0 to select random port (@viqueen)
+Fix injecting when file extension is not lower case (@gusgard)
+Fail gracefully if browser does not support WebSockets (@mattymaloney)
+Switched to a more maintained browser opening library
+v0.8.1
+Add --version / -v command line flags to display version
+Add --host cli option to mirror the API parameter
+Once again use 127.0.0.1 instead of 0.0.0.0 as the browser URL
+v0.8.0
+Support multiple clients simultaneously (@dvv)
+Pick a random available port if the default is in use (@oliverzy, @harrytruong)
+Fix Chrome sometimes not applying CSS changes (@harrytruong)
+--ignore=PATH cli option to not watch given server root relative paths (@richardgoater)
+--entry-file=PATH cli option to specify file to use when request is not found (@izeau)
+--wait=MSECS cli option to wait specified time before reloading (@leolower, @harrytruong)
+v0.7.1
+Fix hang caused by trying to inject into fragment html files without </body>
+logLevel parameter in library to control amount of console spam
+--quiet cli option to suppress console spam
+--open=PATH cli option to launch browser in specified path instead of root (@richardgoater)
+Library's noBrowser: true option is deprecated in favor of open: false
+v0.7.0
+API BREAKAGE: LiveServer library now takes parameters in an object
+Add possibility to specify host to the lib
+Only inject to host page when working with web components (e.g. Polymer) (@davej)
+Open browser to 127.0.0.1, as 0.0.0.0 has issues
+--no-browser command line flag to suppress browser launch
+--help command line flag to display usage
+v0.6.4
+Allow specifying port from the command line: live-server --port=3000 (@Pomax)
+Don't inject script as the first thing so that DOCTYPE remains valid (@wmira)
+Be more explicit with listening to all interfaces (@inadarei)
+v0.6.3
+Fix multiple _cacheOverride parameters polluting css requests
+Don't create global variables in the injected script
+v0.6.2
+Fix a deprecation warning from send
+v0.6.1
+Republish to fix npm troubles
+v0.6.0
+Support for using as node library (@dpgraham)
+v0.5.0
+Watching was broken with new versions of watchr > 2.3.3
+Added some logging to console
+v0.4.0
+Allow specifying directory to serve from command line
+v0.3.0
+Directory listings
+v0.2.0
+On-the-fly CSS refresh (no page reload)
+Refactoring
+v0.1.1
+Documentation and meta tweaks
+v0.1.0
+Initial release
+License
+Uses MIT licensed code from Connect and Roots.
+
+(MIT License)
+
+Copyright (c) 2012 Tapio Vierros
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+BCAT.
+node-bcat
+Pipe to the browser utility, Very useful for log tail fun :)
+
+node-bcat features auto scrolling (with enable/disable), ansi to html coloring (--ansi) and behavior and color customization.
+
+This module uses RC to manage its configuration, so in addition to command line arguments you may save your favorite configuration in .bcatrc.
+
+> npm install -g bcat
+
+> cat somefile | bcat
+
+// redirect error stream also
+> node index.js 2>&1 | bcat
+
+
+test.js:
+
+setInterval(function () {
+	console.log(1)
+}, 1000)
+then
+
+> node test.js | bcat
+
+
+usage
+ --port                   set a port for this bcat execution
+ --contentType            content type header, must be lower case      [default: "text/html"]
+ --backgroundColor        (only in text/html)                          [default: "#000000"]
+ --foregroundColor        (only in text/html)                          [default: "#ffffff"]
+ --tabLength              length of a tab in spaces                    [default: 4]
+ --tabReplace             tab replacement                              [default: "&nbsp;&nbsp;&nbsp;&nbsp;"
+ --disableTabReplace      disable tab replacement                      [default: false]
+ --newlineReplace         new line replacement                         [default: "<br />"
+ --disableNewlineReplace  disable new line replacement                 [default: false]
+ --ansi                   show colorful ansi (implies text/html)       [default: true]
+ --ansiOptions            override replacement of ansi black color
+ --scrollDownInterval     interval to execute javascript scroll down   [default: 1000 (ms)]
+ --serverTimeout          http://nodejs.org/api/http.html#http_server_timeout  [default: 0 (no timeout)]
+An available port between 8080 - 8181 will be automatically picked if --port is not specified
+ansi feature is on by default.
+
+
+NORMIT.
+
+Normit 
+  
+Normit is an easy way to translate stuff in your terminal. You can check out its Ruby gem version termit.
+
+Installation
+npm install normit -g
+Usage
+normit 'source_language' 'target_language' 'text'
+Example:
+
+
+normit en es "hey cowboy where is your horse?"
+=> "Hey vaquero dónde está tu caballo?"
+
+normit fr en "qui est votre papa?"
+=> "Who's Your Daddy?"
+Parenthesis are not necessary for text data input:
+
+normit fr ru qui est votre papa
+=> "Кто твой папочка?"
+Speech synthesis
+Specify a -t (talk) flag to use speech synthesis (requires mpg123):
+
+normit en fr "hey cowboy where is your horse?" -t
+=> "Hey cowboy où est votre cheval ?" # and a french voice says something about a horse
+You can use normit as a speech synthesizer of any supported language without having to translate anything:
+
+normit en en "hold your horses cowboy !" -t
+=> "hold your horses cowboy !" # and an english voice asks you to hold on
+Learning language when committing to git (zsh only)
+Idea by Nedomas . See and hear your messages translated to target lang every time you commit:
+
+In ~/.zshrc
+
+export LANG=es
+git(){[[ "$@" = commit\ -m* ]]&&normit en $LANG ${${@:$#}//./} -t;command git $@}
+I am no shell ninja so if you know how to make it work in bash then please submit a PR.
+
+Language codes:
+To find all available language codes visit https://msdn.microsoft.com/en-us/library/hh456380.aspx
+
+Requirements
+Works with node 0.10.0 and higher.
+
+To use speech synthesis you need to have mpg123 installed.
+
+For Ubuntu:
+
+sudo apt-get install mpg123
+For MacOSX:
+
+brew install mpg123
+For Windows: Download Site or Direct Download mpg123-1.24.0-x86-64.zip
+
+Status
+It was rewritten to work with Bing Translator . Thanks to Ragnarson for supporting it !
+
+Disclaimer
+Normit works by scraping the private APIs and is therefore not recommended for use in production or on a large scale.
+
+
+FKILL.
+
+
+
+
+
+Fabulously kill processes. Cross-platform.
+
+Works on macOS, Linux, and Windows.
+
+Install
+npm install --global fkill-cli
+Usage
+$ fkill --help
+
+	Usage
+		$ fkill [<pid|name|:port> …]
+
+	Options
+		--force, -f                  Force kill
+		--verbose, -v                Show process arguments
+		--silent, -s                 Silently kill and always exit with code 0
+		--force-timeout <N>, -t <N>  Force kill processes which didn't exit after N seconds
+
+	Examples
+		$ fkill 1337
+		$ fkill safari
+		$ fkill :8080
+		$ fkill 1337 safari :8080
+		$ fkill
+
+	To kill a port, prefix it with a colon. For example: :8080.
+
+	Run without arguments to use the interactive interface.
+	In interactive mode, 🚦n% indicates high CPU usage and 🐏n% indicates high memory usage.
+	Supports fuzzy search in the interactive mode.
+
+	The process name is case insensitive.
+Interactive UI
+Run fkill without arguments to launch the interactive UI.
+
+
+
+Related
+fkill - API for this module
+alfred-fkill - Alfred workflow for this module
+
+PJS.
+
+
+
+Pipeable JavaScript - another utility like sed/awk/wc... but with JS! Quickly filter, map and reduce from the command line. Features a streaming API. Inspired by pipeable ruby.
+
+
+
+Overview
+pjs is a cli tool that can accept input on stdin, or read from a list of files. Its filter, map and reduce options take expressions to be run, in that order, and applies them to the supplied input. The expressions themselves can contain identifiers used by keys in String.prototype, which will automatically be bound to the given line. This lets you save a bit of typing with your one-liners, while still giving you access to all your JS string functions! Check out some of the examples below to see how they translate.
+
+# Return all lines longer than 5 chars
+# => lines.filter(function(line) { return line.length > 5; });
+ls -1 | pjs -f 'length > 5'
+
+# Count characters in each line
+# => lines.map(function(line) { return line.length; });
+ls -1 | pjs -m 'length'
+
+# Uppercase and pad each line
+# => lines.map(function(line) { return '  ' + line.toUpperCase()"; });
+ls -1 | pjs -m '"  " + toUpperCase()'
+
+# Return lines longer than 5 chars, and remove any digits
+# => lines
+#      .filter(function(line) { return line.length > 5; })
+#      .map(function(line) { return line.replace(/\d/g, ''); });
+ls -1 | pjs -f 'length > 5' -m 'replace(/\d/g, "")'
+The current line and value can also be accessed via the $ variable, and the tool supports json output.
+
+(echo 'foo' && echo 'foobar') | pjs -jm '{name: $, length: length}'
+[
+{"name":"foo","length":3},
+{"name":"foobar","length":6}
+]
+pjs also includes lodash functions, which can be accessed via the _ object, and chained using $$
+
+echo 'hello' | pjs -m '_.upperFirst($)'
+# Hello
+
+echo 'please-titleize-this-sentence' | \
+pjs -m '$$.lowerCase().split(" ").map(_.upperFirst).join(" ")'
+# Please Titleize This Sentence
+as well as Ramda and point-free style
+
+echo 'please-titleize-this-sentence' | \
+pjs -m "R.compose(R.replace(/(^|\s)\w/g, R.toUpper), R.replace(/-/g, ' '))"
+# Please Titleize This Sentence
+Installation
+It can be installed via npm using:
+
+npm install -g pipeable-js
+Usage
+Usage: pjs [options] [files ...]
+
+Functions and expressions are invoked in the following order:
+filter, map, reduce
+
+All functions are passed the line ($) and index (i)
+Built-in reduce functions: length, min, max, sum, avg, concat
+Custom reduce expressions accept: prev, curr, i, array
+Includes lodash (_), and can be chained using $$
+Supports Ramda (R) and point-free style
+
+Options:
+
+  -h, --help               output usage information
+  -V, --version            output the version number
+  -i, --ignore             ignore empty lines
+  -j, --json               output as json
+  -f, --filter <exp>       filter by a boolean expression
+  -m, --map <exp>          map values using the expression
+  -r, --reduce <func|exp>  reduce using a function or expression
+filter
+# Print all odd lines
+# awk 'NR % 2 == 1' file
+pjs -f 'i % 2 == 0' file
+
+# Print all lines greater than 80 chars in length
+# awk 'length($0) > 80' file
+pjs -f 'length > 80' file
+map
+# Remove all digits
+# tr -d 0-9 < file
+pjs -m "replace(/\d/g, '')" file
+
+# Get second item of each line in csv
+# awk -F "," '{print $2}' file
+pjs -m 'split(",")[1]' file
+reduce
+# Count lines in file
+# wc -l file
+# awk 'END { print NR }' file
+pjs -r length file
+
+# Sum all decimal numbers in a file
+# awk '{ sum += $1 } END { print sum }' file
+# perl -nle '$sum += $_ } END { print $sum' file
+pjs -r 'Number(prev) + Number(curr)' file
+pjs -r '(+prev) + (+curr)' file
+pjs -r sum file
+
+# Concatenate all lines in multiple files
+# awk '{printf $0;}' file1 file2
+# cat file1 file2 | tr -d '\n'
+pjs -r concat file1 file2
+mixed
+# Print the length of the longest line
+# awk '{ if (length($0) > max) max = length($0) } END { print max }' file
+pjs -m 'length' -r max file
+Comparison
+Features	pjs	pythonpy	pru
+Language	JavaScript	Python	Ruby
+Streaming	Yes	Limited [1]	Yes
+Implementation	Streams	Iterables	Generators
+Easy JSON output	Yes	No	No
+WebscaleTM	YES	No	No
+[1] Can't perform "tail -f logfile | py -x x"
+
+
+
+LICENSE-CHECKER.
+
+NPM License Checker
+
+As of v17.0.0 the failOn and onlyAllow arguments take semicolons as delimeters instead of commas. Some license names contain commas and it messed with the parsing
+
+Ever needed to see all the license info for a module and its dependencies?
+
+It's this easy:
+
+npm install -g license-checker
+
+mkdir foo
+cd foo
+npm install yui-lint
+license-checker
+You should see something like this:
+
+├─ cli@0.4.3
+│  ├─ repository: http://github.com/chriso/cli
+│  └─ licenses: MIT
+├─ glob@3.1.14
+│  ├─ repository: https://github.com/isaacs/node-glob
+│  └─ licenses: UNKNOWN
+├─ graceful-fs@1.1.14
+│  ├─ repository: https://github.com/isaacs/node-graceful-fs
+│  └─ licenses: UNKNOWN
+├─ inherits@1.0.0
+│  ├─ repository: https://github.com/isaacs/inherits
+│  └─ licenses: UNKNOWN
+├─ jshint@0.9.1
+│  └─ licenses: MIT
+├─ lru-cache@1.0.6
+│  ├─ repository: https://github.com/isaacs/node-lru-cache
+│  └─ licenses: MIT
+├─ lru-cache@2.0.4
+│  ├─ repository: https://github.com/isaacs/node-lru-cache
+│  └─ licenses: MIT
+├─ minimatch@0.0.5
+│  ├─ repository: https://github.com/isaacs/minimatch
+│  └─ licenses: MIT
+├─ minimatch@0.2.9
+│  ├─ repository: https://github.com/isaacs/minimatch
+│  └─ licenses: MIT
+├─ sigmund@1.0.0
+│  ├─ repository: https://github.com/isaacs/sigmund
+│  └─ licenses: UNKNOWN
+└─ yui-lint@0.1.1
+   ├─ licenses: BSD
+      └─ repository: http://github.com/yui/yui-lint
+An asterisk next to a license name means that it was deduced from an other file than package.json (README, LICENSE, COPYING, ...) You could see something like this:
+
+└─ debug@2.0.0
+   ├─ repository: https://github.com/visionmedia/debug
+   └─ licenses: MIT*
+Options
+--production only show production dependencies.
+--development only show development dependencies.
+--start [path of the initial json to look for]
+--unknown report guessed licenses as unknown licenses.
+--onlyunknown only list packages with unknown or guessed licenses.
+--json output in json format.
+--csv output in csv format.
+--csvComponentPrefix prefix column for component in csv format.
+--out [filepath] write the data to a specific file.
+--customPath to add a custom Format file in JSON
+--exclude [list] exclude modules which licenses are in the comma-separated list from the output
+--relativeLicensePath output the location of the license files as relative paths
+--summary output a summary of the license usage',
+--failOn [list] fail (exit with code 1) on the first occurrence of the licenses of the semicolon-separated list
+--onlyAllow [list] fail (exit with code 1) on the first occurrence of the licenses not in the semicolon-seperated list
+--packages [list] restrict output to the packages (package@version) in the semicolon-seperated list
+--excludePackages [list] restrict output to the packages (package@version) not in the semicolon-seperated list
+--excludePrivatePackages restrict output to not include any package marked as private
+--direct look for direct dependencies only
+Exclusions
+A list of licenses is the simplest way to describe what you want to exclude.
+
+You can use valid SPDX identifiers. You can use valid SPDX expressions like MIT OR X11. You can use non-valid SPDX identifiers, like Public Domain, since npm does support some license strings that are not SPDX identifiers.
+
+Examples
+license-checker --json > /path/to/licenses.json
+license-checker --csv --out /path/to/licenses.csv
+license-checker --unknown
+license-checker --customPath customFormatExample.json
+license-checker --exclude 'MIT, MIT OR X11, BSD, ISC'
+license-checker --packages 'react@16.3.0;react-dom@16.3.0;lodash@4.3.1'
+license-checker --excludePackages 'internal-1;internal-2'
+license-checker --onlyunknown
+Custom format
+The --customPath option can be used with CSV to specify the columns. Note that the first column, module_name, will always be used.
+
+When used with JSON format, it will add the specified items to the usual ones.
+
+The available items are the following:
+
+name
+version
+description
+repository
+publisher
+email
+url
+licenses
+licenseFile
+licenseText
+licenseModified
+You can also give default values for each item. See an example in customFormatExample.json.
+
+Requiring
+var checker = require('license-checker');
+
+checker.init({
+    start: '/path/to/start/looking'
+}, function(err, packages) {
+    if (err) {
+        //Handle error
+    } else {
+        //The sorted package data
+        //as an Object
+    }
+});
+Debugging
+license-checker uses debug for internal logging. There’s two internal markers:
+
+license-checker:error for errors
+license-checker:log for non-errors
+Set the DEBUG environment variable to one of these to see debug output:
+
+$ export DEBUG=license-checker*; license-checker
+scanning ./yui-lint
+├─ cli@0.4.3
+│  ├─ repository: http://github.com/chriso/cli
+│  └─ licenses: MIT
+# ...
+Licenses Found
+We walk through the node_modules directory with the read-installed module. Once we gathered a list of modules we walk through them and look at all of their package.json's, We try to identify the license with the spdx module to see if it has a valid SPDX license attached. If that fails, we then look into the module for the following files: LICENSE, LICENCE, COPYING, & README.
+
+If one of the those files are found (in that order) we will attempt to parse the license data from it with a list of known license texts. This will be shown with the * next to the name of the license to show that we "guessed" at it.
+
+
+BROWSER-RUN.
+browser-run
+The easiest way of running code in a browser environment.
+
+Bundles electronjs by default!
+
+Usage
+$ echo "console.log('Hey from ' + location); window.close()" | browser-run
+Hey from http://localhost:53227/
+$
+Or use browser-run programmatically:
+
+var run = require('browser-run');
+
+var browser = run();
+browser.pipe(process.stdout);
+browser.end('console.log(location); window.close()');
+Example with browserify
+$ browserify main.js | browser-run
+or
+
+var browserify = require('browserify');
+var browser = require('browser-run');
+
+browserify('main.js').bundle().pipe(browser()).pipe(process.stdout);
+CLI
+$ browser-run --help
+Run JavaScript in a browser.
+Write code to stdin and receive console output on stdout.
+Usage: browser-run [OPTIONS]
+
+Options:
+      --version  Show version number                                   [boolean]
+  -b, --browser  Browser to use. Always available: electron. Available if
+                 installed: chrome, firefox, ie, safari    [default: "electron"]
+      --sandbox  Enable electron sandbox               [boolean] [default: true]
+      --basedir  Set this if you need to require node modules in node mode
+  -h, --help     Print help                                            [boolean]
+  -p, --port     Starts listening on that port and waits for you to open a
+                 browser
+  -s, --static   Serve static assets from this directory
+  -m, --mock     Path to code to handle requests for mocking a dynamic back-end
+  -i, --input    Input type. Defaults to 'javascript', can be set to 'html'.
+  -n, --node     Enable nodejs apis in electron
+Custom html file
+By using --input html or { input: 'html' } you can provide a custom html file for browser-run to use. Keep in mind though that it always needs to have <script src="/reporter.js"></script> above other script tags so browser-run is able to properly forward your console.logs etc to the terminal.
+
+Dynamic back-end mock
+By using --mock mock.js or { mock: 'mock.js'} you can provide a custom server-side implementation and handle all requests that are sent to paths beginning with /mock
+
+mock.js needs to export a function that accepts req and res arguments for handling requests.
+
+Example:
+
+module.exports = function(req,res){
+  if (req.url === '/mock/echo') {
+    req.pipe(res)
+  }
+}
+API
+run([opts])
+Returns a duplex stream and starts a webserver.
+
+opts can be:
+
+port: If speficied, no browser will be started, so you can point one yourself to http://localhost/<port>
+browser: Browser to use. Defaults to electron. Available if installed:
+chrome
+firefox
+ie
+safari
+static: Serve static files from this directory
+mock: Path to code to handle requests for mocking a dynamic back-end
+input: Input type. Defaults to javascript, can be set to html.
+node: Enable nodejs integration in electron
+sandbox: Enable electron sandbox. Default: true.
+basedir: Set this if you need to require node modules in node mode
+If only an empty string is written to it, an error will be thrown as there is nothing to execute.
+
+If you call window.close() inside the script, the browser will exit.
+
+run#stop()
+Stop the underlying webserver.
+
+Headless testing
+In environments without a screen, you can use Xvfb to simulate one.
+
+GitHub Actions
+This is a full example to run npm test. Refer to the last 2 lines in the YAML config:
+
+on:
+  - pull_request
+  - push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - run: npm install
+    - run: xvfb-run npm test
+      timeout-minutes: 5 # If the tests fails, the browser will hang open indefinitely
+Travis
+Add this to your travis.yml:
+
+addons:
+  apt:
+    packages:
+      - xvfb
+install:
+  - export DISPLAY=':99.0'
+  - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+  - npm install
+Full example.
+
+Any gnu/linux box
+$ sudo apt-get install xvfb # or equivalent
+$ export DISPLAY=':99.0'
+$ Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+$ browser-run ...
+Docker
+There is also an example Docker image. Source
+
+Installation
+With npm do
+
+$ npm install browser-run    # for library
+$ npm install -g browser-run # for cli
+License
+(MIT).
+
+
+
+TMPiN.
+
+tmpin
+Add stdin support to any CLI app that accepts file input
+
+It pipes stdin to a temp file and spawns the chosen app with the temp file path as the first argument.
+
+Similar to process substitution in ZSH/Bash, but cross-platform and without its limitation.
+
+Install
+$ npm install --global tmpin
+Usage
+$ tmpin --help
+
+  Usage
+    echo <string> | tmpin <app> [<args>]
+
+  Example
+    git diff | tmpin atom
+
+  Note that the first argument to <app> will be set to the temp file
+Tip
+Create an alias in your .zshrc/.bashrc:
+
+alias atom='tmpin atom'
+
+# Or more specific
+alias gda='git diff | tmpin atom'
+
+
+WIFI-PASSWORD.
+
+wifi-password-cli 
+Get current wifi password
+
+Install
+$ npm install --global wifi-password-cli
+Usage
+$ wifi-password --help
+
+  Usage
+    $ wifi-password [network-name]
+
+  Example
+    $ wifi-password
+    unicorns
+    $ wifi-password foo-network
+    foosecretpassword
+Related
+wifi-password - API for this module.
+License
+MIT © Kevin Martensson
+
+
+
+WALLPAPER.
+
+wallpaper
+Get or set the desktop wallpaper
+
+Works on macOS 10.14.4+, Linux, and Windows 10+.
+
+Maintainer needed for the Linux part of the code. No new Linux-related changes will be accepted until someone with good Linux knowledge volunteers.
+
+Install
+npm install wallpaper
+Usage
+import {getWallpaper, setWallpaper} from 'wallpaper';
+
+await setWallpaper('unicorn.jpg');
+
+await getWallpaper();
+//=> '/Users/sindresorhus/unicorn.jpg'
+API
+getWallpaper(options?)
+Returns a Promise<string> with the path of the current desktop wallpaper.
+
+options
+Type: object
+
+screen (macOS only)
+Type: string | number
+Values: 'all', 'main', or the index of a screen from .screens()
+Default: 'main'
+
+The screen to get the wallpaper from.
+
+If you set 'all' then getWallpaper() will return a Promise<string[]>.
+
+setWallpaper(imagePath, options?)
+Returns a Promise.
+
+On macOS, it sets the wallpaper on the active space. There is no way to set it on all spaces.
+
+imagePath
+Type: string
+
+The path to the image to set as the desktop wallpaper.
+
+options
+Type: object
+
+screen (macOS only)
+Type: string | number
+Values: 'all', 'main', or the index of a screen from .screens() Default: 'all'
+
+The screen to set the wallpaper on.
+
+On Linux and Windows it's hard-coded to 'main'.
+
+scale (macOS & Windows)
+Type: string
+macOS Values: 'auto' | 'fill' | 'fit' | 'stretch' | 'center'
+Windows Values: 'center' | 'stretch' | 'tile' | 'span' | 'fit' | 'fill'
+Default macOS: 'auto'
+Default Windows: 'span'
+
+Scaling method.
+
+setSolidColorWallpaper(color, options?) (macOS only)
+Returns a Promise.
+
+color
+Type: string
+
+The color to set as a RGB Hex value. For example, 000000 for black.
+
+options
+Type: object
+
+screen
+Type: string | number
+Values: 'all', 'main', or the index of a screen from .screens() Default: 'all'
+
+The screen to set the wallpaper on.
+
+import {setSolidColorWallpaper} from 'wallpaper';
+
+await setSolidColorWallpaper('000000');
+screens() (macOS only)
+Returns a Promise<string[]> with the available screens.
+
+import {screens} from 'wallpaper';
+
+await screens();
+//=> ['Color LCD']
+
+
+PEN.
+ LOGO
+A better Markdown previewer.
+
+
+pen is a Markdown previewer written in JavaScript, aiming to just work.
+
+There are literally tons of Markdown previewers out there. I love some of them, I even made one of them. Nevertheless, we always need a better one, don't we?
+
+Using pen is super simple, we don't need to install any special editor or launch any GUI application. pen is just a tidy command-line tool. You can use your favourite editor and browser. No manual refresh is even needed.
+
+Also, the previewer renders the content using React. It means that it will not re-render entire DOM when the document is updated. This is a huge advantage because images or other media won't be reloaded for the DOM update.
+
+BLACK_NIB.
+Demo
+Here is a short demo showing how awesome pen is.
+
+The following demo shows pen incrementally updates only modified part using React and its Reconciliation.
+
+
+Requirement
+pen uses Node.js >= 4.0. It may not work on earlier versions.
+
+Install
+Using npm:
+
+npm i -g pen
+You can try using pen with npx:
+
+npx pen
+Usage
+To use pen, simply run the pen command.
+
+pen README.md
+The command above will launch a pen server and open the file in your default browser. The server will listen to a 6060 port by default. To be honest, you don't even need to launch it with a filename. You can manually open http://localhost:6060/README.md, or any other files in the same directory.
+
+To stop the server, enter ^C.
+
+For the further details of the pen command, please enter pen -h or pen --help.
+
+Pandoc
+Pen uses markdown-it as Markdown parser by default, but it also supports Pandoc. Please provide a proper Pandoc format for the value.
+
+pen --pandoc gfm README.md
+Contribution
+I welcome every contribution on pen. You may start from forking and cloning this repo.
+
+git clone git@github.com:your_username/pen.git
+cd pen
+
+# Install dependencies
+npm i
+
+# Lint, build, and test pen codes at once
+npm test
+To build frontend scripts:
+
+npm run build
+To lint with ESLint:
+
+npm run lint
+To test with Mocha
+
+npm run mocha
+License
+Pen is released under the MIT License.
+
+
+DARK-MODE.
+dark-mode
+Control the macOS dark mode from the command-line
+
+Requires macOS 10.10 or later. macOS 10.13 or earlier needs to download the Swift runtime support libraries.
+
+Install
+Homebrew
+$ brew install dark-mode
+npm
+$ npm install --global dark-mode-cli
+Manually
+Download the binary and put it in /usr/local/bin.
+
+Usage
+$ dark-mode --help
+
+  Usage
+    $ dark-mode [command]
+
+  Commands
+    <none>  Toggle dark mode
+    on      Enable dark mode
+    off     Disable dark mode
+    status  Dark mode status
+Build
+Run ./build. The binary can be found at ./bin/dark-mode.
+
+Building in Xcode works, but it does not export a binary.
+
+Related
+node-dark-mode - Node.js port
+alfred-dark-mode - Alfred workflow
+
+
+Jsome.
+Make your JSON objects look AWESOME!
+
+
+This package allows you to give style to your JSON on your console!
+
+Installation :
+  $ npm install jsome
+if you need to use jsome as a command line, you may need to instal it globally
+
+  $ [sudo] npm install -g jsome
+it works.
+Command line :
+Using jsome as a command line, you need to run the following command that takes the path to your json file as argument
+
+  $ jsome /path/to/your/json/file.json
+  $ jsome [options] /path/to/your/json/file.json
+You can also send a json string through a pipe (|)
+
+  $ cat /path/to/your/json/file.json | jsome
+The options available are :
+
+-c: to enable or disable colors (defualt value: true)
+-l: to enable or disable levels (default value: false)
+-s: to specify the number of tabulation spaces (default value: 2)
+-r: to specify valid JSON as output (default value: true)
+examples :
+
+  $ jsome -c false /path/to/your/file.json
+  $ jsome -c false -l true /path/to/your/file.json
+  $ jsome -s 4 /path/to/your/file.json
+Module :
+On your nodejs application, when you need to console.log a json object, all you need to do is to use the jsome function
+
+    var jsome = require('jsome');
+    jsome([{"id":1,"email":"Khalid@Morocco.ma","active":true},{"id":2,"email":"Someone@somewhere.com","active":false},{"id":3,"email":"chinese@bamboo.tree","active":true}]);
+Then your json object will be displayed on the console in a pretty format with Awsome colors ! Here is the result :
+
+
+The jsome function returns the object passed as argument so that when debugging, you can print the value of an object without having to change a lot on your code
+
+
+    // instead of 
+    
+    var foo = {
+      bar : obj
+    }
+    jsome (obj);
+    
+    // you can do this :
+    
+    var foo = {
+      bar : jsome(obj)
+    }
+    
+You can add some points to show levels of elements... very helpful when you are dealing with complex json objects
+
+    jsome.level.show = true;
+
+
+The object jsome.level has as default value the following json :
+
+  jsome.level = {
+      'show'    : false
+    , 'char'    : '.'
+    , 'color'   : 'red'
+    , 'spaces'  : 2
+    , 'start'   : 0
+  }
+You can change the level char, its color ( see chalk package ) and the number of spaces for each level.
+
+You can also display your json starting from a specific level to avoid displaying your json starting from the extreme left. You can do that by changing the value jsome.level.start.
+
+You can configure the colors of the displayed json by changing the values of the jsome.colors object which has as default these values.
+
+  jsome.colors = {
+      'num'   : 'cyan'    // stands for numbers
+    , 'str'   : 'magenta' // stands for strings
+    , 'bool'  : 'red'     // stands for booleans
+    , 'regex' : 'blue'    // stands for regular expressions
+    , 'undef' : 'grey'    // stands for undefined
+    , 'null'  : 'grey'    // stands for null
+    , 'attr'  : 'green'   // objects attributes -> { attr : value }
+    , 'quot'  : 'yellow'  // strings quotes -> "..."
+    , 'punc'  : 'yellow'  // commas seperating arrays and objects values -> [ , , , ]
+    , 'brack' : 'yellow'  // for both {} and []
+  }
+You can not only use the color value as string but also you can use an array to specify the background color or you can make things look bold ( see chalk package for more details )
+
+  jsome.colors.bool  = ['green' , 'bgRed']
+  jsome.colors.attr  = ['green' , 'bold']
+  jsome.colors.quot  = ['yellow', 'bold']
+  jsome.colors.punc  = ['yellow', 'bold']
+  jsome.colors.brack = ['yellow', 'bold']
+
+
+When you have a json as a string, instead of passing by JSON.parse function, you can just call the parse function of jsome
+
+  jsome(JSON.parse('[1,2,3]'));
+becomes:
+
+  jsome.parse('[1,2,3]');
+If you need to disable the colors:
+
+  jsome.params.colored = false;
+If you need JSON which pases linting:
+
+  jsome.params.lintable = true;
+When you have a very long json to display, don't make your code blocking... you can enable the asynchronous mode.
+
+  jsome.params.async = true;
+
+  jsome(longJson, function () {
+      /* Your code here */
+  });
+The default value of params is:
+
+  jsome.params = {
+      'colored' : true
+    , 'async'   : false
+    , 'lintable': false
+  }
+In order to get the colored string without printing it on the console :
+
+   var coloredString = jsome.getColoredString(obj)
+
+MOBICON.
+mobicon-cli.
+Mobile app icon generator
+
+Install
+$ npm install --global mobicon-cli
+Note: Make sure to install GraphicsMagick as well.
+
+Usage
+$ mobicon --help
+
+  Usage
+    $ mobicon <file>
+
+  Options
+    --platform, -p      Platform to generate icons for
+    --background, -b    Color of the icon background if the icon is transparant [Default: white]
+    --contentRatio, -r  Logo-icon ratio [Default: 1]
+    --roundedCorners    Generate icons with rounded corners [Default: true for pwa and Android]
+    --borderRadius      Border radius percentage [Default: 0.0909]
+    --out, -o           Output directory [Default: cwd]
+
+  Examples
+    $ mobicon icon.png -p=android
+      ✔  success
+    $ mobicon icon.png -p=android -p=ios -p=pwa
+      ✔  success
+    $ mobicon icon.svg -p=ios -o=resources
+      ✔  success
+Platforms
+A list of the available platforms and their generated icons can be found here.
+
+Related
+mobicon - API for this module
+License
+MIT © Sam Verschueren
+
+
+
+MOBISPLASH.
+
+mobisplash-cli 
+Mobile app splash screen generator
+
+Install
+$ npm install --global mobisplash-cli
+Usage
+$ mobisplash --help
+
+  Usage
+    $ mobisplash <file>
+
+  Options
+    -p, --platform      Platform to generate splash screens for
+    -b, --background    Color of the splash screen background [Default: white]
+    -r, --contentRatio  Logo-splash screen ratio [Default: 0.8]
+    -o, --out           Output directory [Default: cwd]
+    --orientation       Orientation to generate the splash screens for [Default: both]
+    --9patch            9-patch the Android splash screens [Default: true]
+
+  Examples
+    $ mobisplash icon.png -p=android
+      ✔  success
+    $ mobisplash icon.png -p=android --no-9patch
+      ✔  success
+    $ mobisplash icon.png -p=android -p=ios --orientation=landscape
+      ✔  success
+    $ mobisplash icon.svg -p=ios -o=resources
+      ✔  success
+    $ mobisplash icon.svg -p=blackberry10 -o=resources --orientation=portrait
+      ✔  success
+Platforms
+A list of the available platforms and their generated splash screens can be found here.
+
+Related
+mobisplash - API for this module
+License
+MIT © Sam Verschueren.
+
+
+DIFF2HTML-CLi
+
+diff2html-cli
+
+
+Diff to Html generates pretty HTML diffs from unified and git diff output in your terminal.
+
+Table of Contents
+Features
+Online Example
+Distributions
+Setup
+Usage
+Exit Status Codes
+Custom HTML wrapper template
+Examples
+Contribute
+Developing
+License
+Thanks
+Features
+Unified diff and Git diff input
+
+line-by-line and side-by-side diff
+
+new and old line numbers
+
+inserted and removed lines
+
+GitHub like style
+
+Code syntax highlight
+
+Line similarity matching
+
+Online Example
+Go to Diff2HTML
+
+Distributions
+NPM CLI
+NPM / Node.js library [ES5 & ES6]
+CDNJS
+WebJar
+Setup
+npm install -g diff2html-cli
+Usage
+Usage: diff2html [ flags and/or options ] -- [git diff passthrough flags and options]
+
+flag alias description choices default
+-s --style Output style line, side line
+--fct --fileContentToggle Adds a viewed checkbox to toggle file content true, false true
+--sc --synchronisedScroll Synchronised horizontal scroll true, false true
+--hc --highlightCode Highlight code true, false true
+--cs --colorScheme Color scheme auto, dark, light auto
+--su --summary Show files summary closed, open, hidden closed
+-d --diffStyle Diff style word, char word
+--lm --matching Diff line matching type lines, words, none none
+--lmt --matchWordsThreshold Diff line matching word threshold 0.25
+--lmm --matchingMaxComparisons Diff line matching maximum line comparisons of a block of changes 2500
+--diffMaxChanges Number of changed lines after which a file diff is deemed as too big and not displayed  
+--diffMaxLineLength Number of characters in a diff line after which a file diff is deemed as too big and not displayed  
+--renderNothingWhenEmpty Render nothing if the diff shows no change in its comparison false
+--maxLineSizeInBlockForComparison Maximum number of characters of the bigger line in a block to apply comparison 200
+--maxLineLengthHighlight Maximum number of characters in a line to apply highlight 10000
+--hwt --htmlWrapperTemplate Path to custom template to be rendered when using the html output format [string]
+-t --title Page title for html output [string]
+-f --format Output format html, json html
+-i --input Diff input source file, command, stdin command
+-o --output Output destination preview, stdout preview
+-u --diffy Upload to diffy.org browser, pbcopy, print 
+-F --file Send output to file (overrides output option) [string] 
+--ig --ignore Ignore particular files from the diff [string] 
+-v --version Show version number  
+-h --help Show help  
+Exit Status Codes
+0: Success
+1: Generic Error
+3: Input diff is empty
+4: Value of --hwt | --htmlWrapperTemplate is not a valid file
+Custom HTML wrapper template
+The template is a very based on a simple replace of several placeholders as coded https://github.com/rtfpessoa/diff2html-cli/blob/master/src/cli.ts#L40
+
+To provide a custom template you need to make sure you have the following comments and imports in your HTML, exactly as they are here:
+
+Inside the tag
+
+
+<br /> document.addEventListener('DOMContentLoaded', () => {<br /> const targetElement = document.getElementById('diff');<br /> const diff2htmlUi = new Diff2HtmlUI(targetElement);<br /> //diff2html-fileListToggle<br /> //diff2html-synchronisedScroll<br /> //diff2html-highlightCode<br /> });<br />
+Inside the tag
+
+
+Examples
+diff2html -s line -f html -d word -i command -o preview -- -M HEAD~1
+
+diff last commit, line by line, word comparison between lines, previewed in the browser and input from git diff command
+diff2html -i file -- my-file-diff.diff
+
+reading the input from a file
+diff -u file1.txt file2.txt | diff2html -i stdin
+
+reading diff from stdin
+diff2html -f json -o stdout -- -M HEAD~1
+
+print json format to stdout
+diff2html -F my-pretty-diff.html -- -M HEAD~1
+
+print to file
+diff2html -F my-pretty-diff.html --hwt my-custom-template.html -- -M HEAD~1
+
+print to file using custom markup templates can include the following variables
+diff2html --ig package-lock.json --ig yarn.lock
+
+Ignore package-lock.json and yarn.lock from the generated diff
+NOTE: notice the -- in the examples
+
+Contribute
+This is a developer friendly project, all the contributions are welcome. To contribute just send a pull request with your changes following the guidelines described in CONTRIBUTING.md. I will try to review them as soon as possible.
+
+Developing
+Make some changes, yarn build and then ./bin/diff2html 😉
+
+License
+Copyright 2014-present Rodrigo Fernandes. Released under the terms of the MIT license.
+
+
+TRYMODULE.
+
+trymodule Circle CI
+A simple cli tool for trying out different nodejs modules.
+
+trymodule demo
+
+Installation
+npm install -g trymodule
+
+Usage
+trymodule colors
+
+Downloads the module colors if needed, and starts a nodejs REPL with colors loaded in the current scope, ready for you to use.
+
+trymodule colors lodash
+
+Same as above but with many packages in one go!
+
+trymodule colors=c lodash=l
+
+Assign packages to custom variable names.
+
+trymodule --clear
+
+Removes the directory where trymodules stores the node modules. Removes TRYMODULE_PATH + '/node_modules'
+
+Configuration
+There are a couple of environment variables you can use to customize trymodule.
+
+TRYMODULE_PATH for setting the path of where modules are stored. By default this is $HOME/.trymodule or $USERPROFILE/.trymodule
+
+TRYMODULE_NONINTERACTIVE for making trymodule not fire up the repl in the end. This is useful if you want to just install some packages for future use. By default this is undefined. Setting it to any value would make trymodule non-interactive.
+
+TRYMODULE_HISTORY_PATH for changing where to save the repl history. Should be pointing to a user write-able file. Defaults to $TRYMODULE_PATH/repl_history
+
+You can set the environment variables for one session with export TRYMODULE_PATH=/usr/bin/trymodule or for just one time by doing TRYMOUDLE_PATH=/usr/bin/trymodule trymodule colors.
+
+License
+The MIT License (MIT)
+
+Copyright (c) 2016 Victor Bjelkholm
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+
+JSCPD.
+
+jscpd.
+
+Copy/paste detector for programming source code, supports 150+ formats.
+
+Copy/paste is a common technical debt on a lot of projects. The jscpd gives the ability to find duplicated blocks implemented on more than 150 programming languages and digital formats of documents. The jscpd tool implements Rabin-Karp algorithm for searching duplications.
+
+Packages of jscpd
+name version description
+jscpd main package for jscpd (cli and API for detections included)
+@jscpd/core core detection algorithm, can be used for detect duplication in different environments, one dependency to eventemitter3
+@jscpd/finder detector of duplication in files
+@jscpd/tokenizer tool for tokenize programming source code
+@jscpd/leveldb-store LevelDB store, used for big repositories, slower than default store
+@jscpd/html-reporter Html reporter for jscpd
+@jscpd/badge-reporter Badge reporter for jscpd
+Installation
+$ npm install -g jscpd
+Usage
+$ npx jscpd /path/to/source
+or
+
+$ jscpd /path/to/code
+or
+
+$ jscpd --pattern "src/**/*.js"
+More information about cli here.
+
+Programming API
+For integration copy/paste detection to your application you can use programming API:
+
+jscpd Promise API
+
+import {IClone} from '@jscpd/core';
+import {jscpd} from 'jscpd';
+
+const clones: Promise<IClone[]> = jscpd(process.argv);
+jscpd async/await API
+
+import {IClone} from '@jscpd/core';
+import {jscpd} from 'jscpd';
+(async () => {
+  const clones: IClone[] = await jscpd(['', '', __dirname + '/../fixtures', '-m', 'weak', '--silent']);
+  console.log(clones);
+})();
+
+detectClones API
+
+import {detectClones} from "jscpd";
+
+(async () => {
+  const clones = await detectClones({
+    path: [
+      __dirname + '/../fixtures'
+    ],
+    silent: true
+  });
+  console.log(clones);
+})()
+detectClones with persist store
+
+import {detectClones} from "jscpd";
+import {IMapFrame, MemoryStore} from "@jscpd/core";
+
+(async () => {
+  const store = new MemoryStore<IMapFrame>();
+
+  await detectClones({
+    path: [
+      __dirname + '/../fixtures'
+    ],
+  }, store);
+
+  await detectClones({
+    path: [
+      __dirname + '/../fixtures'
+    ],
+    silent: true
+  }, store);
+})()
+In case of deep customisation of detection process you can build your own tool with @jscpd/core, @jscpd/finder and @jscpd/tokenizer.
+
+Start contribution
+Fork the repo kucherenko/jscpd
+Clone forked version (git clone https://github.com/{your-id}/jscpd)
+Install dependencies (pnpm install)
+Run the project in dev mode: pnpm dev (watch changes and rebuild the packages)
+Add your changes
+Add tests and check it with pnpm test
+Build your project pnpm build
+Create PR
+ jscpd
+GitHub Super Linter is combination of multiple linters to install as a GitHub Action
+Code-Inspector is a code analysis and technical debt management service.
+Mega-Linter is a 100% open-source linters aggregator for CI (GitHub Action & other CI tools) or to run locally
+Codacy automatically analyzes your source code and identifies issues as you go, helping you develop software more efficiently with fewer issues down the line.
+Natural is a general natural language facility for nodejs. It offers a broad range of functionalities for natural language processing.
+
+
+License
+MIT © Andrey Kucherenko
+
+
+ATM.
+
+Mock data for your prototypes and demos
+
+Atmo makes creating mock web services for demos, presentations and experiments ridiculously easy.
+
+Features
+Mock Http endpoints
+SSL support
+Static assets directory
+Returns JSON/XML/Text
+Write custom scripts with JS
+Deploy with a single click (via Zeit's Now)
+Download
+Windows
+
+OS X
+
+Shortcuts
+Ctrl + N | Cmd + N - Create a new endpoint
+
+Ctrl + D | Cmd + D - Deploy the project
+
+Ctrl + S | Cmd + DS - Save the project
+
+Get atmo classic
+You are looking at the new Atmo, which is an electron app. But the initial version was a CLI tool. Find atmo classic here.
+
+Contribute
+Installing dependencies
+npm install
+Running the build
+Following will start building the scripts for main and renderer processes.
+
+npm run dev
+Open an another console and run the following command to start the shell.
+
+npm start
+License
+MIT © Raathigeshan
+
+AUTO-INSTALL.
+
+auto-install.
+
+Auto installs dependencies as you code. Just hit save.
+
+
+Featured in npm weekly #56!
+
+Install
+npm install -g auto-install
+
+Usage
+Run auto-install in the directory you are working in.
+
+Modules in .spec.js and .test.js are added to devDependencies
+
+Options
+--secure Install popular modules only (> 10k downloads in the last month)
+
+--exact Install exact version similar to npm install express --save-exact
+
+--dont-uninstall Do not uninstall unused modules
+
+--yarn Use yarn instead of npm
+
+Hackernews post
+
+License
+MIT © siddharthkp
+
+
+LessMD.
+
+title
+Less.js
+Functions
+unit(30px / 5px) #=> 6
+unit(5, px) #=> 5px
+
+e("ms:stuff()") #=> ms:stuff() (unquote)
+
+%("count: %d", 1+2) #=> "count: 3"
+
+iscolor(@x)
+isstring(@x)
+isnumber(@x)
+iskeyword(@x)
+isurl(url(...))
+ispixel()
+isem()
+ispercentage()
+isunit()
+
+hue(@color)
+saturation(@color)
+lightness(@color)
+luma(@color)
+luminance(@color)
+
+fade(@color, amount)
+fadein(@color, amount)
+fadeout(@color, amount)
+spin(@color, degrees)
+mix(@a, @b, amount)
+Conditionals
+.image when (luma(@color) > 50%) { }
+.image when (not(...)) { }
+.image when (default()) {}
+.image when (e(@shape) = 'circle') { }
+
+
+COST-OF-MODULES.
+
+Cost of modules
+Find out which of your dependencies is slowing you down.
+
+Install
+npm install -g cost-of-modules
+
+Usage
+Run cost-of-modules in the directory you are working in.
+
+Options
+--less Show the biggest 10 modules
+
+--yarn Use yarn instead of npm to install dependencies
+
+--no-install Skip installation
+
+--include-dev Include devDependencies as well - for 🚀 collaborator experience
+
+Show your support
+ this repo
+
+Motivation
+I recently published a npm module (auto-install) and I wanted to know how many bytes am I making people download before they can use it. Turns out, it was a whopping 30M!
+
+More than space on disk, I want to optimise for install speed - setup is part of the user experience
+
+--
+
+Now, there are 3 things that you can do to make your npm package smaller
+
+Make sure all your workflow tools are in devDependencies and not in dependencies These include your build tools, testing frameworks, etc. Only dependencies get installed when someone installs your package. (That being said, for better collaborator experience, you should optimise for both)
+
+Only include the files you need by using files in your package.json or by including a .npmignore. More on that here.
+
+Use packages which do the job and take the least amount of space. For example, I realised that I did not need yargs, I only needed their parser yargs-parser which is much smaller.
+
+Bonus: Bundle all your code together and strip out the functions that you don't use - I still have to try this out. This could be the most impactful one.
+
+-
+
+You can't fix what you can't measure
+
+With npm 2.x, it was easy to find how much space is each of your dependencies taking. You could just look at the size of each directory in node_modules
+
+With npm 3, the packages are installed in flat manner, so it isn't so straightforward.
+
+--
+
+Future
+
+ See the size of your node_modules
+ Include the size of your files
+ Check if files or .npmignore exists
+ Check if there are any dev dependencies that are specified as dependencies (tricky)
+ Compare size with the last release. Something like this: 
+License
+MIT © siddharthkp
+
+
+
+LOCALTUNNELS.
+
+localtunnel
+localtunnel exposes your localhost to the world for easy testing and sharing! No need to mess with DNS or deploy just to have others test out your changes.
+
+Great for working with browser testing tools like browserling or external api callback services like twilio which require a public url for callbacks.
+
+Quickstart
+npx localtunnel --port 8000
+Installation
+Globally
+npm install -g localtunnel
+As a dependency in your project
+yarn add localtunnel
+CLI usage
+When localtunnel is installed globally, just use the lt command to start the tunnel.
+
+lt --port 8000
+Thats it! It will connect to the tunnel server, setup the tunnel, and tell you what url to use for your testing. This url will remain active for the duration of your session; so feel free to share it with others for happy fun time!
+
+You can restart your local server all you want, lt is smart enough to detect this and reconnect once it is back.
+
+Arguments
+Below are some common arguments. See lt --help for additional arguments
+
+--subdomain request a named subdomain on the localtunnel server (default is random characters)
+--local-host proxy to a hostname other than localhost
+You may also specify arguments via env variables. E.x.
+
+PORT=3000 lt
+API
+The localtunnel client is also usable through an API (for test integration, automation, etc)
+
+localtunnel(port [,options][,callback])
+Creates a new localtunnel to the specified local port. Will return a Promise that resolves once you have been assigned a public localtunnel url. options can be used to request a specific subdomain. A callback function can be passed, in which case it won't return a Promise. This exists for backwards compatibility with the old Node-style callback API. You may also pass a single options object with port as a property.
+
+const localtunnel = require('localtunnel');
+
+(async () => {
+  const tunnel = await localtunnel({ port: 3000 });
+
+  // the assigned public url for your tunnel
+  // i.e. https://abcdefgjhij.localtunnel.me
+  tunnel.url;
+
+  tunnel.on('close', () => {
+    // tunnels are closed
+  });
+})();
+options
+port (number) [required] The local port number to expose through localtunnel.
+subdomain (string) Request a specific subdomain on the proxy server. Note You may not actually receive this name depending on availability.
+host (string) URL for the upstream proxy server. Defaults to https://localtunnel.me.
+local_host (string) Proxy to this hostname instead of localhost. This will also cause the Host header to be re-written to this value in proxied requests.
+local_https (boolean) Enable tunneling to local HTTPS server.
+local_cert (string) Path to certificate PEM file for local HTTPS server.
+local_key (string) Path to certificate key file for local HTTPS server.
+local_ca (string) Path to certificate authority file for self-signed certificates.
+allow_invalid_cert (boolean) Disable certificate checks for your local HTTPS server (ignore cert/key/ca options).
+Refer to tls.createSecureContext for details on the certificate options.
+
+Tunnel
+The tunnel instance returned to your callback emits the following events
+
+event args description
+request info fires when a request is processed by the tunnel, contains method and path fields
+error err fires when an error happens on the tunnel
+close fires when the tunnel has closed
+The tunnel instance has the following methods
+
+method args description
+close close the tunnel
+other clients
+Clients in other languages
+
+go gotunnelme
+
+go go-localtunnel
+
+C#/.NET localtunnel-client
+
+Rust rlt
+
+server
+See localtunnel/server for details on the server that powers localtunnel.
+
+License
+MIT
+
+
+SVG-TERM-CLI.
+
+Share terminal sessions as razor-sharp animated SVG everywhere.
+
+Example generated with svg-term --cast 113643 --out examples/parrot.svg --window --no-cursor --from=4500
+
+svg-term-cli
+💄 Render asciicast to animated SVG
+🌐 Share asciicasts everywhere (sans JS)
+🤖 Style with common color profiles
+Install
+Install asciinema via: https://asciinema.org/docs/installation
+Install svg-term-cli:
+npm install -g svg-term-cli
+Usage
+Generate the parrot.svg example from asciicast at https://asciinema.org/a/113643
+
+svg-term --cast=113643 --out examples/parrot.svg --window
+Interface
+λ svg-term --help
+
+  Share terminal sessions as razor-sharp animated SVG everywhere
+
+  Usage
+    $ svg-term [options]
+
+  Options
+    --at timestamp of frame to render in ms [number]
+    --cast asciinema cast id to download [string], required if no stdin provided [string]
+    --command command to record [string]
+    --from lower range of timeline to render in ms [number]
+    --height height in lines [number]
+    --help print this help [boolean]
+    --in json file to use as input [string]
+    --no-cursor disable cursor rendering [boolean]
+    --no-optimize disable svgo optimization [boolean]
+    --out output file, emits to stdout if omitted, [string]
+    --padding distance between text and image bounds, [number]
+    --padding-x distance between text and image bounds on x axis [number]
+    --padding-y distance between text and image bounds on y axis [number]
+    --profile terminal profile file to use, requires --term [string]
+    --term terminal profile format [iterm2, xrdb, xresources, terminator, konsole, terminal, remmina, termite, tilda, xcfe], requires --profile [string]
+    --to upper range of timeline to render in ms [number]
+    --width width in columns [number]
+    --window render with window decorations [boolean]
+
+  Examples
+    $ cat rec.json | svg-term
+    $ svg-term --cast 113643
+    $ svg-term --cast 113643 --out examples/parrot.svg
+Rationale
+Replace GIF asciicast recordings where you can not use the asciinema player, e.g. README.md files on GitHub and the npm registry.
+
+The image at the top of this README is an example. See how sharp the text looks, even when you zoom in? That’s because it’s an SVG!
+
+Related
+asciinema/asciinema - Terminal session recorder
+derhuerst/asciicast-to-svg - Render frames of Asciicasts as SVGs
+marionebl/svg-term - Render asciicast to animated SVG
+marionebl/term-schemes - Parse and normalize common terminal emulator color schemes
+Gallery
+marionebl/commitlint
+marionebl/share-cli
+marionebl/remote-share-cli
+License
+Copyright 2017. Released under the MIT license.
+
+
+Gtop.
+gtop.
+
+System monitoring dashboard for terminal.
+
+Requirements
+Linux / OSX / Windows (partial support)
+Node.js >= v8
+Installation
+$ npm install gtop -g
+Docker
+You need to assign host net and pid to access the metrics in the host machine.
+
+$ docker run --rm -it \
+    --name gtop \
+    --net="host" \
+    --pid="host" \
+    aksakalli/gtop
+Usage
+Start gtop with the gtop command
+
+$ gtop
+To stop gtop use q, or ctrl+c in most shell environments.
+
+You can sort the process table by pressing
+
+p: Process Id
+c: CPU usage
+m: Memory usage
+Troubleshooting
+If you see question marks or other different characters, try to run it with these environment variables:
+
+$ LANG=en_US.utf8 TERM=xterm-256color gtop
+License
+Released under the MIT license.
+
+
+Themer.
+
+themer 
+themer takes a set of colors and generates editor themes, terminal themes, themes for other apps, and desktop wallpapers.
+
+
+Table of contents
+Getting started
+CLI documentation
+Installation
+Usage
+Example workflow: dotfiles integration
+Example workflow: npx
+Example workflow: using base16 schemes with Themer
+API documentation
+Installation
+Interface
+Create custom ColorSets
+Color mappings
+Create custom Templates
+Themer color sets
+Web-only color sets
+Original color sets
+Ports from third-party themes
+Themer templates
+Terminals
+Editors/IDEs
+Other apps
+Wallpapers
+Prior art
+Contributing
+Getting started
+There are a few different ways to level up your development setup with themer:
+
+Web-based graphical user interface. themer has an official progressive web app located at themer.dev.
+Command-line interface. themer can be used to generate themes on the CLI, see the CLI docs below.
+Application programming interface. themer exposes a JavaScript API (complete with TypeScript type definitions) for programmatic use; see the API docs below.
+Feature comparison:
+
+Web UI CLI/API
+Instant preview ✅ ❌
+Supported color format Any CSS format Hex only
+Wallpaper output format PNG + SVG SVG only
+Raytraced 3D wallpaper ✅ ❌
+Seamless dotfiles integration ❌ ✅
+CLI documentation
+As of V5, themer is distributed as a single TypeScript/JavaScript package containing all built-in color sets and templates for ease of use—but still supports the use of custom color sets or templates.
+
+Installation
+Install themer from npm with your JavaScript package manager of choice.
+
+npm install themer
+themer can also be installed globally. Or if you prefer not to install it at all, it can be used with npx.
+
+Usage
+themer [options]
+Pass themer one or more color sets, as many templates as you wish, as many wallpaper resolutions as you wish, and an output directory.
+
+Option Description Default value Available options
+-c, --color-set <built-in color set name or file path...> the color set(s) to render default color set name, or path to JS file containing a custom color set, or a file path to a base16 yaml file
+-t, --template <built-in template name or file path...> the theme template(s) to render * (all built-in templates) template name, or path to JS file containing a custom template
+-s, --size <wallpaper resolution...> resolution to render in pixels, in the format [width]x[height] 2880x1800 any
+-o, --output <path> the output directory themer-output any
+--color-set, --template, and --size may be specified multiple times.
+
+Your generated theme files, as well as a README on how to install them, will be written to the output directory.
+
+Example workflow: dotfiles integration
+Say you wanted to generate a vim theme and desktop background using themer's default color set. First, install themer:
+
+cd my-dotfiles
+npm install themer
+Then edit your package.json:
+
+{
+  "scripts": {
+    "build": "themer -c default -t vim -t vim-lightline -t hyper -t wallpaper-block-wave -o gen"
+  }
+}
+Then run your new script:
+
+npm run build
+Now check the gen/ folder for your generated files. Here's the result:
+
+
+
+Example workflow: npx
+This command will generate a Vim theme and the Block Wave wallpaper, using themer's default color set, and put them in a folder called output:
+
+npx themer -c default -t vim -t wallpaper-block-wave -o output
+Example workflow: using base16 schemes with Themer
+In place of a themer color set, you can also provide themer with any base16 scheme YAML file.
+
+themer --color-set path/to/base16-scheme.yml ...
+Refer to the base16 repository for a list of base16 schemes.
+
+API documentation
+themer ships with a JavaScript API (with TypeScript type definitions) for use in programmatically generating themes.
+
+Installation
+npm install themer
+Interface
+themer's default export is an async generator function that takes three arguments:
+
+An array of ColorSet objects, or string identifiers of themer's built-in color sets
+An array of Template objects, or string identifiers of themer's built-in templates
+A RenderOptions object used to specify the resolution of the outputted wallpaper images
+(Optional) an OutputFileTransform async generator function that transforms the files generated by the provided templates. This function runs between each template's render and renderInstructions functions.
+The objects yielded by the generator are OutputFiles or the type yielded by OutputFileTransform.
+
+import themer from "themer";
+import myColors from "./my-colors";
+import myTemplate from "./my-template";
+
+// Example usage: generate Vim themes, 1440x900 wallpapers, and custom files
+// from themer's "Night Sky" color set and a custom color set.
+const files = themer(
+  ["night-sky", myColors],
+  ["vim", "wallpaper-block-wave", myTemplate],
+  { wallpaperSizes: [{ width: 1440, height: 900 }] }
+);
+
+for await (const file of files) {
+  // ...
+}
+Create custom ColorSets
+import type { ColorSet } from "themer";
+
+const myColorSet: ColorSet = {
+  // Color sets should provide a human-readable name.
+  name: "My Color Set",
+
+  // Color sets can define a dark variant, a light variant, or both.
+  // Each variant provides two or eight shades and eight accent colors in hex format.
+  variants: {
+    // In a dark variant, shade0 should be the darkest and shade7 should be
+    // the lightest.
+    dark: {
+      shade0: "#333333",
+      // Note: you can define shades 1 through 6 yourself, or you can omit
+      // them; if omitted, they will be calculated automatically by
+      // interpolating between shade0 and shade7.
+      shade7: "#eeeeee",
+      accent0: "#ff4050",
+      accent1: "#f28144",
+      accent2: "#ffd24a",
+      accent3: "#a4cc35",
+      accent4: "#26c99e",
+      accent5: "#66bfff",
+      accent6: "#cc78fa",
+      accent7: "#f553bf",
+    },
+
+    // In a light variant, shade7 should be the darkest and shade0 should be
+    // the lightest.
+    light: {
+      shade0: "#eeeeee",
+      shade7: "#333333",
+      accent0: "#f03e4d",
+      accent1: "#f37735",
+      accent2: "#eeba21",
+      accent3: "#97bd2d",
+      accent4: "#1fc598",
+      accent5: "#53a6e1",
+      accent6: "#bf65f0",
+      accent7: "#ee4eb8",
+    },
+  },
+};
+
+export default myColorSet;
+Pro Tip: you can use themer's Web UI to more easily select your colors, then click the "Download" button to generate a colors.js file in the correct format. With the Web UI, you can also input any valid CSS color format (keyword, HSL, RGB, etc.) and it will automatically convert the color to hex for you.
+
+Color mappings
+To help you choose colors for your own color set, this is approximately how most themer templates will utilize your colors:
+
+Color Key Typical Usage Conventional Color*
+accent0 error, VCS deletion Red
+accent1 syntax Orange
+accent2 warning, VCS modification Yellow
+accent3 success, VCS addition Green
+accent4 syntax Cyan
+accent5 syntax Blue
+accent6 syntax, caret/cursor 
+accent7 syntax, special Magenta
+shade0 background color 
+shade1 UI 
+shade2 UI, text selection 
+shade3 UI, code comments 
+shade4 UI 
+shade5 UI 
+shade6 foreground text 
+shade7 foreground text 
+*Conventional color is suggested for consistency with ANSI color names in terminal themes, but is not a hard requirement.
+
+See themer's Web UI for a more visual representation of the color mappings.
+
+Create custom Templates
+import type { Template } from "themer";
+
+const template: Template = {
+  // Templates should provide a human-readable name.
+  name: "My Template",
+
+  // The render async generator function takes a color set and the render
+  // options, and yields one or more output files. The color set is fully
+  // expanded (e.g., if the color set did not include shades 1 through 6
+  // when originally authored, those intermediary shades will have already
+  // been calculated and included).
+  render: async function* (colorSet, options) {
+    // The yielded output file has two properties: a string path (relative)
+    // and a Buffer of the file's content.
+    yield {
+      path: "my-file.txt",
+      content: Buffer.from("Hello, world!", "utf8"),
+    };
+  },
+
+  // The renderInstructions function takes an array of paths generated from
+  // the render function and should return a Markdown string, which will be
+  // included in the generated README.md file.
+  renderInstructions: (paths) =>
+    `Copy the files (${paths.join(" and ")}) to your home directory.`,
+};
+
+export default template;
+Themer color sets
+Web-only color sets
+(Only available on themer.dev.)
+
+Name Dark Preview Light Preview
+Concert  
+Victor Mono  
+Future Pro  
+Original color sets
+Name Dark Preview Light Preview
+default  
+finger-paint  
+green-as-a-whistle  
+monkey  
+night-sky (dark only)
+polar-ice  
+right-in-the-teals  
+shoulder-pads  
+Ports from third-party themes
+Name Dark Preview Light Preview
+dracula (dark only)
+github-universe (dark only)
+lucid  
+mojave  
+nova (dark only)
+one  
+rivet  
+seti (dark only)
+solarized  
+Themer templates
+Terminals
+alacritty
+cmd
+conemu
+hyper
+iterm
+kitty
+konsole
+terminal
+terminator
+warp
+windows-terminal
+Editors/IDEs
+bbedit
+emacs
+sublime-text
+vim-lightline
+vim
+visual-studio
+vs-code
+xcode
+Other apps
+alfred
+brave
+chrome
+css
+firefox-addon
+firefox-color
+kde-plasma-colors
+keypirinha
+prism
+sketch-palettes
+slack
+wox
+xresources
+Wallpapers
+See themer's Web UI for wallpaper previews.
+
+3D (web-only)
+wallpaper-exhibit
+wallpaper-logos
+2D (web & CLI)
+wallpaper-block-wave
+wallpaper-burst
+wallpaper-circuits
+wallpaper-diamonds
+wallpaper-dot-grid
+wallpaper-octagon
+wallpaper-shirts
+wallpaper-triangles
+wallpaper-trianglify
+Prior art
+themer is inspired by chriskempson/base16 and similar projects.
+
+Conceptually, themer is very similar to base16, but:
+
+It is lighter, and simpler to use.
+It is more easily extensible with your own color sets and templates.
+It integrates better with your dotfiles, especially if you keep them under version control.
+Contributing
+For instructions on how to contribute to themer, see CONTRIBUTING.md and themer's code of conduct.
+
+
+
+Carbon-Now-CLi.
+
+
+🎨 Beautiful images of your code — from right inside your terminal.
+       
+
+Table of Contents
+Description
+Features
+Installation
+Usage
+Presets
+License
+Examples
+Description
+carbon-now-cli brings the power of Carbon directly to your terminal. ⚡️
+
+Generate beautiful images of your code with a single command.
+
+Customize everything before generating the image. Run it in --interactive mode. 💅
+
+Features
+🖼 Downloads the real, high-quality image (no DOM screenshots)
+✨ Detects file type automatically
+🗂 Supports all languages & covers extra ground
+⚡️ Interactive mode via --interactive
+🎒 Presets via --preset to save and re-use your favorite settings
+🖱 Selective processing via --start and --end
+📎 Copies image to clipboard via --to-clipboard (cross-OS 😱)
+📚 Accepts file, stdin, or clipboard content as input
+🖋️ Supports custom theme colors
+🥞 Supports concurrency for easier batch processing
+👀 Saves to given location or opens in browser for manual finish
+🐶 Displays image directly in supported terminals
+🌈 Supports different export types (png, svg)
+📏 Supports different resolutions (1x, 2x, 4x)
+⏱ Reports each step and therefore shortens the wait
+✅ Heavily tested
+⛏ Actively maintained
+🧺 …and more!
+Installation
+Bun
+bun i -g carbon-now-cli
+pnpm
+pnpm i -g carbon-now-cli
+npx
+npx carbon-now-cli <file>
+npm
+npm i -g carbon-now-cli
+yarn
+yarn global add carbon-now-cli
+Requirements
+
+Usage
+Beautiful images of your code — from right inside your terminal.
+
+Usage
+  $ carbon-now <file>
+  $ pbpaste | carbon-now
+  $ carbon-now --from-clipboard
+
+Options
+  --start, -s Starting line of input
+  --end, -e Ending line of input
+  --interactive, -i Interactive mode
+  --preset, -p Apply an existing preset
+  --save-to Image save location, default: cwd
+  --save-as Image name without extension, default: original-hash
+  --from-clipboard Read input from clipboard instead of file
+  --to-clipboard Copy image to clipboard instead of saving
+  --open-in-browser Open in browser instead of saving
+  --config Use a different, local config (read-only)
+  --settings Override specific settings for this run
+  --disable-headless Run Playwright in headful mode
+  --engine Use different rendering engine, default: `chromium`
+                       Options: `chromium`, `firefox`, `webkit`
+  --skip-display Don’t display the image in the terminal
+
+Examples
+  See: https://github.com/mixn/carbon-now-cli#examples
+Presets
+Creating a Preset
+Running the carbon-now command generates a ~/.carbon-now.json config file.
+
+Presets are stored in this file and consist of available settings. You can create presets either manually or automatically via the --interactive flag. When prompted, answer the following:
+
+For example, naming the preset presentation will add it to ~/.carbon-now.json like this:
+
+{
+  "latest-preset": {
+    // Equal to `presentation` below
+  },
+  "presentation": {
+    "theme": "base16-light",
+    "backgroundColor": "white",
+    "windowTheme": "none",
+    "windowControls": true,
+    "fontFamily": "Space Mono",
+    "fontSize": "18px",
+    "lineNumbers": false,
+    "firstLineNumber": 1,
+    "selectedLines": "*",
+    "dropShadow": false,
+    "dropShadowOffsetY": "20px",
+    "dropShadowBlurRadius": "68px",
+    "widthAdjustment": true,
+    "width": "20000px",
+    "lineHeight": "140%",
+    "paddingVertical": "35px",
+    "paddingHorizontal": "35px",
+    "squaredImage": false,
+    "watermark": false,
+    "exportSize": "2x",
+    "type": "png"
+  }
+}
+latest-preset will be overwritten after each run, while presentation remains until manually deleted.
+
+Using a saved preset
+To use a saved preset, simply run:
+
+carbon-now _unfold.js --preset <name-of-preset>
+If the preset or ~/.carbon-now.json does not exist, carbon-now-cli will fall back to the default settings and be smart about the rest.
+
+Result:
+
+Settings
+interface CarbonCLIPresetInterface {
+  backgroundColor: string;
+  dropShadow: boolean;
+  dropShadowBlurRadius: string;
+  dropShadowOffsetY: string;
+  exportSize: '1x' | '2x' | '4x';
+  firstLineNumber: number;
+  fontFamily: CarbonFontFamilyType;
+  fontSize: string;
+  lineHeight: string;
+  lineNumbers: boolean;
+  paddingHorizontal: string;
+  paddingVertical: string;
+  selectedLines: string; // All: "*"; Lines 3-6: "3,4,5,6", etc.
+  squaredImage: boolean;
+  theme: CarbonThemeType;
+  type: 'png' | 'svg';
+  watermark: boolean;
+  widthAdjustment: boolean;
+  windowControls: boolean;
+  windowTheme: 'none' | 'sharp' | 'bw';
+  custom?: CarbonThemeHighlightsInterface;
+  width?: string;
+  // Below are detected automatically, and not persisted as keys
+  language?: string;
+  titleBar?: string;
+}
+Also see CarbonFontFamilyType, CarbonThemeType & CarbonThemeHighlightsInterface
+
+Re-using settings
+It just works. ™
+carbon-now automatically reuses settings from previous runs, so you don’t need to worry about manually reconfiguring them.
+
+Custom theme colors
+From v2.0, carbon-now-cli supports custom theme colors for detailed styling. Define a custom key inside a preset that complies to the following type:
+
+interface CarbonThemeHighlightsInterface {
+  background?: string;
+  text?: string;
+  variable?: string;
+  variable2?: string;
+  variable3?: string;
+  attribute?: string;
+  definition?: string;
+  keyword?: string;
+  operator?: string;
+  property?: string;
+  number?: string;
+  string?: string;
+  comment?: string;
+  meta?: string;
+  tag?: string;
+}
+Example ~/.carbon-now.json with custom theme colors:
+
+{
+  "hacker": {
+    "backgroundColor": "rgba(0, 255, 0, 1)",
+    "windowTheme": "bw",
+    "windowControls": true,
+    "fontFamily": "Anonymous Pro",
+    "fontSize": "18px",
+    "lineNumbers": false,
+    "firstLineNumber": 1,
+    "dropShadow": false,
+    "selectedLines": "*",
+    "dropShadowOffsetY": "20px",
+    "dropShadowBlurRadius": "68px",
+    "widthAdjustment": true,
+    "lineHeight": "133%",
+    "paddingVertical": "30px",
+    "paddingHorizontal": "30px",
+    "squaredImage": false,
+    "watermark": false,
+    "exportSize": "2x",
+    "type": "png",
+    "custom": {
+      "background": "rgba(0, 0, 0, 1)",
+      "text": "rgba(0, 255, 0, 1)",
+      "variable": "rgba(0, 255, 0, 1)",
+      "variable2": "rgba(0, 255, 0, 1)",
+      "attribute": "rgba(0, 255, 0, 1)",
+      "definition": "rgba(0, 255, 0, 1)",
+      "keyword": "rgba(0, 255, 0, 1)",
+      "operator": "rgba(0, 255, 0, 1)",
+      "property": "rgba(0, 255, 0, 1)",
+      "number": "rgba(0, 255, 0, 1)",
+      "string": "rgba(0, 255, 0, 1)",
+      "comment": "rgba(0, 255, 0, 1)",
+      "meta": "rgba(0, 255, 0, 1)",
+      "tag": "rgba(0, 255, 0, 1)"
+    }
+  }
+}
+carbon-now _unfold.js --preset hacker
+Result:
+
+
+Limitations
+Please note that custom theme colors aren’t applied with --open-in-browser because they aren’t query string parameters but instead use localStorage, which is solely set inside the Playwright instance.
+
+Local configs
+Use the --config flag for local configuration files. This is helpful for sharing presets across users in a project.
+
+carbon-now _unfold.js --config local-config.json --preset dark
+Local configs are read-only and differ from ~/.carbon-now.json in that:
+
+local-config.json won’t be created if it doesn’t exist.
+latest-preset is not written to local-config.json.
+Examples
+Assuming you have a file _unfold.js with this content:
+
+// Example from https://carbon.now.sh/
+const unfold = (f, seed) => {
+  const go = (f, seed, acc) => {
+    const res = f(seed)
+    return res ? go(f, res[1], acc.concat([res[0]])) : acc
+  }
+  return go(f, seed, [])
+};
+Basic
+carbon-now _unfold.js
+Uses default settings and saves the image as .png in your cwd.
+
+Result:
+
+Fully customized
+carbon-now _unfold.js --interactive
+Launches interactive mode to customize every aspect, like theme, font-family, padding, etc.
+
+Input:
+
+Result:
+
+Selective
+carbon-now _unfold.js --start 3 --end 6
+Generates an image for lines 3 to 6. Will throw an error if --start > --end.
+
+Result:
+
+Copying to clipboard
+
+Copies the image to clipboard instead of saving it. Requires xclip on Linux.
+
+carbon-now _unfold.js --to-clipboard
+Linux
+xclip is required. Install with
+
+sudo apt-get install xclip
+Windows & macOS
+It just works. ™
+
+Input Sources
+In addition to files, input from stdin or the clipboard is also supported.
+
+stdin
+pbpaste | carbon-now
+echo '<h1>Hi</h1>' | carbon-now
+Clipboard
+carbon-now --from-clipboard
+Overrides
+You can override settings on a per-run basis.
+
+carbon-now _unfold.js --preset presentation --settings '{"theme": "nord", "titleBar": "custom-title.js"}'
+Result:
+
+Full Example
+carbon-now _unfold.js --start 3 --end 6 --save-to ~/Desktop --save-as example-23 --interactive
+Saves an image of lines 3-6 to ~/Desktop/example-23.png with custom settings.
+
+To preview in the browser instead of saving, do
+
+carbon-now _unfold.js --start 3 --end 6 --interactive --open-in-browser
+License
+MIT © Miloš Sutanovac.
+
+
+
+Cash-CLi.
+
+cash-cli
+Convert Currency Rates directly from your Terminal!.
+
+Highlights
+Fast & Simple
+Supports multiple APIs
+Caches API results
+Install
+via npm  
+
+npm install --global cash-cli
+via homebrew  
+
+brew install cash-cli
+Usage
+ Usage
+  $ cash <amount> <from> <to>
+  $ cash <options>
+ Options
+  --api -a Configure API source
+  --save -s Save default currencies
+ Examples
+  $ cash --api
+  $ cash 10 usd eur pln
+  $ cash --save usd aud
+Supported APIs
+Right now, cash-cli supports the following APIs:
+
+Exchange Rates API (default)
+Fixer
+Currency Layer
+Open Exchange Rates
+If you want cash-cli to support your favorite API, please open an issue 
+
+Related projects
+gocash - Copy of cash-cli, written in golang.
+License
+MIT
+
+
+
+Taskbook .
+
+Taskbook
+Tasks, boards & notes for the command-line habitat.
+
+Spot, Resolve, and Prevent Downtime.
+Description
+By utilizing a simple and minimal usage syntax, that requires a flat learning curve, taskbook enables you to effectively manage your tasks and notes across multiple boards from within your terminal. All data are written atomically to the storage in order to prevent corruptions, and are never shared with anyone or anything. Deleted items are automatically archived and can be inspected or restored at any moment.
+
+Read this document in: 简体中文, Русский, Français, Deutsch, Portuguese, 日本語, 한국어, Spanish, Bulgarian.
+
+You can now support the development process through GitHub Sponsors.
+
+Visit the contributing guidelines to learn more on how to translate this document into more languages.
+
+Come over to Gitter or Twitter to share your thoughts on the project.
+
+Highlights
+Organize tasks & notes to boards
+Board & timeline views
+Priority & favorite mechanisms
+Search & filter items
+Archive & restore deleted items
+Lightweight & fast
+Data written atomically to storage
+Custom storage location
+Progress overview
+Simple & minimal usage syntax
+Update notifications
+Configurable through ~/.taskbook.json
+Data stored in JSON file at ~/.taskbook/storage
+View highlights in a taskbook board.
+
+Contents
+Description
+Highlights
+Install
+Usage
+Views
+Configuration
+Flight Manual
+Development
+Related
+Team
+Sponsors
+License
+Install
+Yarn
+yarn global add taskbook
+NPM
+npm install --global taskbook
+Snapcraft
+snap install taskbook
+snap alias taskbook tb # set alias
+Note: Due to the snap's strictly confined nature, both the storage & configuration files will be saved under the $SNAP_USER_DATA environment variable instead of the generic $HOME one.
+
+Usage
+$ tb --help
+
+  Usage
+    $ tb [<options> ...]
+
+    Options
+        none             Display board view
+      --archive, -a      Display archived items
+      --begin, -b        Start/pause task
+      --check, -c        Check/uncheck task
+      --clear            Delete all checked items
+      --copy, -y         Copy item description
+      --delete, -d       Delete item
+      --edit, -e         Edit item description
+      --find, -f         Search for items
+      --help, -h         Display help message
+      --list, -l         List items by attributes
+      --move, -m         Move item between boards
+      --note, -n         Create note
+      --priority, -p     Update priority of task
+      --restore, -r      Restore items from archive
+      --star, -s         Star/unstar item
+      --task, -t         Create task
+      --timeline, -i     Display timeline view
+      --version, -v      Display installed version
+
+    Examples
+      $ tb
+      $ tb --archive
+      $ tb --begin 2 3
+      $ tb --check 1 2
+      $ tb --clear
+      $ tb --copy 1 2 3
+      $ tb --delete 4
+      $ tb --edit @3 Merge PR #42
+      $ tb --find documentation
+      $ tb --list pending coding
+      $ tb --move @1 cooking
+      $ tb --note @coding Mergesort worse-case O(nlogn)
+      $ tb --priority @3 2
+      $ tb --restore 4
+      $ tb --star 2
+      $ tb --task @coding @reviews Review PR #42
+      $ tb --task @coding Improve documentation
+      $ tb --task Make some buttercream
+      $ tb --timeline
+Views
+Board View
+Invoking taskbook without any options will display all saved items grouped into their respective boards.
+
+Timeline View
+In order to display all items in a timeline view, based on their creation date, the --timeline/-i option can be used.
+
+Configuration
+To configure taskbook navigate to the ~/.taskbook.json file and modify any of the options to match your own preference. To reset back to the default values, simply delete the config file from your home directory.
+
+The following illustrates all the available options with their respective default values.
+
+{
+  "taskbookDirectory": "~",
+  "displayCompleteTasks": true,
+  "displayProgressOverview": true
+}
+In Detail
+taskbookDirectory
+Type: String
+Default: ~
+Filesystem path where the storage will be initialized, i.e: /home/username/the-cloud or ~/the-cloud
+
+If left undefined the home directory ~ will be used and taskbook will be set-up under ~/.taskbook/.
+
+displayCompleteTasks
+Type: Boolean
+Default: true
+Display tasks that are marked as complete.
+
+displayProgressOverview
+Type: Boolean
+Default: true
+Display progress overview below the timeline and board views.
+
+Flight Manual
+The following is a minor walkthrough containing a set of examples on how to use taskbook. In case you spotted an error or think that an example is not to clear enough and should be further improved, please feel free to open an issue or pull request.
+
+Create Task
+To create a new task use the --task/-t option with your task's description following right after.
+
+$ tb -t Improve documentation
+Create Note
+To create a new note use the --note/-n option with your note's body following right after.
+
+$ tb -n Mergesort worse-case O(nlogn)
+Create Board
+Boards are automatically initialized when creating a new task or note. To create one or more boards, include their names, prefixed by the @ symbol, in the description of the about-to-be created item. As a result the newly created item will belong to all of the given boards. By default, items that do not contain any board names in their description are automatically added to the general purpose; My Board.
+
+$ tb -t @coding @docs Update contributing guidelines
+Check Task
+To mark a task as complete/incomplete, use the --check/-c option followed by the ids of the target tasks. Note that the option will update to its opposite the complete status of the given tasks, thus checking a complete task will render it as pending and a pending task as complete. Duplicate ids are automatically filtered out.
+
+$ tb -c 1 3
+Begin Task
+To mark a task as started/paused, use the --begin/-b option followed by the ids of the target tasks. The functionality of this option is the same as the one of the above described --check option.
+
+$ tb -b 2 3
+Star Item
+To mark one or more items as favorite, use the --star/-s option followed by the ids of the target items. The functionality of this option is the same as the one of the above described --check option.
+
+$ tb -s 1 2 3
+Copy Item Description
+To copy to your system's clipboard the description of one or more items, use the --copy/-y option followed by the ids of the target items. Note that the option will also include the newline character as a separator to each pair of adjacent copied descriptions, thus resulting in a clear and readable stack of sentences on paste.
+
+$ tb -y 1 2 3
+Display Boards
+Invoking taskbook without any options will display all of saved items grouped into their respective boards.
+
+$ tb
+Display Timeline
+In order to display all items in a timeline view, based on their creation date, the --timeline/-i option can be used.
+
+$ tb -i
+Set Priority
+To set a priority level for a task while initializing it, include the p:x syntax in the task's description, where x can be an integer of value 1, 2 or 3. Note that all tasks by default are created with a normal priority - 1.
+
+1 - Normal priority
+2 - Medium priority
+3 - High priority
+$ tb -t @coding Fix issue `#42` p:3
+To update the priority level of a specific task after its creation, use the --priority/-p option along with the id the target task, prefixed by the @ symbol, and an integer of value 1, 2 or 3. Note that the order in which the target id and priority level are placed is not significant.
+
+$ tb -p @1 2
+Move Item
+To move an item to one or more boards, use the --move/-m option, followed by the target item id, prefixed by the @ symbol, and the name of the destination boards. The default My board can be accessed through the myboard keyword. The order in which the target id and board names are placed is not significant.
+
+$ tb -m @1 myboard reviews
+Delete Item
+To delete one or more items, use the --delete/-d options followed by the ids of the target items. Note that deleted items are automatically archived, and can be inspected or restored at any moment. Duplicate ids are automatically filtered out.
+
+$ tb -d 1 2
+Delete Checked Tasks
+To delete/clear all complete tasks at once across all boards, use the --clear option. Note that all deleted tasks are automatically archived, and can be inspected or restored at any moment. In order to discourage any possible accidental usage, the --clear option has no available shorter alias.
+
+$ tb --clear
+Display Archive
+To display all archived items, use the --archive/-a option. Note that all archived items are displayed in timeline view, based on their creation date.
+
+$ tb -a
+Restore Items
+To restore one or more items, use the --restore/-r option followed by the ids of the target items. Note that the ids of all archived items can be seen when invoking the --archive/-a option. Duplicate ids are automatically filtered out.
+
+$ tb -r 1 2
+List Items
+To list a group of items where each item complies with a specific set of attributes, use the --list/-l option followed by the desired attributes. Board names along with item traits can be considered valid listing attributes. For example to list all items that belong to the default myboard and are pending tasks, the following could be used;
+
+$ tb -l myboard pending
+The by default supported listing attributes, together with their respective aliases, are the following;
+
+myboard - Items that belong to My board
+task, tasks, todo - Items that are tasks.
+note, notes - Items that are notes.
+pending, unchecked, incomplete - Items that are pending tasks.
+progress, started, begun - Items that are in-progress tasks.
+done, checked, complete - Items that complete tasks.
+star, starred - Items that are starred.
+Search Items
+To search for one of more items, use the --find/-f option, followed by your search terms.
+
+$ tb -f documentation
+Development
+For more info on how to contribute to the project, please read the contributing guidelines.
+
+Fork the repository and clone it to your machine
+Navigate to your local fork: cd taskbook
+Install the project dependencies: npm install or yarn install
+Lint the code for errors: npm test or yarn test
+Related
+signale - Highly configurable logging utility
+qoa - Minimal interactive command-line prompts
+hyperocean - Deep oceanic blue Hyper terminal theme.
+
+Better Stack: Spot, Resolve, and Prevent Downtime.
+License
+MIT.
+
+
+Discharge.
+
+A simple, easy way to deploy static websites to Amazon S3. 
+
+Features
+Very little understanding of AWS required
+Interactive UI for configuring deployment
+Step-by-step list of what’s happening
+Support for clean URLs (no .html extensions)
+Support for subdomains
+Use an AWS Profile (named credentials) to authenticate with AWS
+CDN (CloudFront) and HTTPS/TLS support
+Installation
+Install it globally:
+
+$ npm install --global @static/discharge
+Or add it to your application’s package.json:
+
+$ npm install --save-dev @static/discharge
+Usage
+Authentication
+Credentials in file
+Configuring AWS credentials can be a bit confusing. After getting your Access Key ID and Secret Access Key from AWS, you should store them in a file at ~/.aws/credentials. It should look something like this:
+
+[default]
+aws_access_key_id=AKIAIOSFODNN7EXAMPLE
+aws_secret_access_key=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+Replace the example keys with your own.
+
+Credentials in environment
+Alternatively, if you prefer environment variables or you are running Discharge in an automated environment like a continuous integration/deployment server you can omit the aws_profile configuration option explained later and set environment variables instead.
+
+export AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
+export AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+Replace the example keys with your own.
+
+Configure
+Configuration is done via a .discharge.json file located at the root of your application. You can run discharge init to get an interactive UI that will help you generate the configuration file, or you can write it yourself from scratch. It will look something like this:
+
+{
+  "domain": "anti-pattern.com",
+  "build_command": "bundle exec middleman build",
+  "upload_directory": "build",
+  "index_key": "index.html",
+  "error_key": "404.html",
+  "cache": 3600,
+  "aws_profile": "website-deployment",
+  "aws_region": "us-west-1",
+  "cdn": true,
+  "dns_configured": false
+}
+Those are most of the configuration options but a complete list is next.
+
+Configuration options
+There are no defaults—all configuration options are explicit and must be provided unless marked as optional.
+
+domain String
+
+The domain name of your website. This will be used as the name of the S3 bucket your website will be uploaded to.
+
+build_command String
+
+The command that will be executed in the shell to build your static website.
+
+upload_directory String
+
+The name of the directory that the build_command generated with the static files in it. This is the directory that will be uploaded to S3.
+
+index_key String
+
+The key of the document to respond with at the root of the website. index.html is almost certainly what you want to use. For example, if https://example.com is requested, https://example.com/index.html will be returned.
+
+error_key String
+
+The key of the document to respond with if the website endpoint responds with a 404 Not Found. For example, 404.html is pretty common.
+
+cache Number (optional when cache_control is set)
+
+The number of seconds a browser should cache the files of your website for. This is a simplified version of the HTTP Cache-Control header. If you set it to 0 the Cache-Control will be set to "no-cache, no-store, must-revalidate". If you set it to a positive number, say, 3600, the Cache-Control will be set to "public, max-age=3600".
+
+Be careful about setting too high a cache length. If you do, when a browser caches it, if you then update the content, that browser will not get the updated content unless the user specifically hard-refreshes the page.
+
+When cdn is enabled, the s-maxage directive is included and set to a very high number (one month). It is recommended you set cache to a very low number (e.g five minutes). The CDN will use the s-maxage directive and the browser will use the max-age directive. This works because when you deploy the CDN’s cache will be automatically expired. For more information see the distribute command.
+
+If you need finer-grained control over the Cache-Control header, use the cache_control configuration option.
+
+cache_control String (optional)
+
+A Cache-Control directive as described in the HTTP documentation. This is for more advanced, finer-grained control of caching. If you don’t need that, use the cache configuration option.
+
+The s-maxage directive added to cache when cdn is enabled is not added here—you have to do it yourself. Caveat emptor.
+
+redirects Array<Object> (optional)
+
+prefix_match String
+
+The URL path prefix to match on. The redirects are matched in order, so if you have two paths with similar parts, like some/page and some, make sure you put the more specific path first.
+
+destination String
+
+The path to redirect to if the prefix_match matches.
+
+AWS does not allow the prefix_match and destination to start with a forward slash (/some/page). You can include them in the configuration for your convenience, but the forward slashes will be invisibly removed when configuring the bucket.
+
+If you need finer-grained control over the routing rules, use the routing_rules configuration option.
+
+routing_rules Array<Object> (optional)
+
+If the redirects configuration is not enough, you can declare more complex routing rules. There are some horrible AWS docs that explain the available options and here’s an example of the syntax from the AWS JavaScript docs.
+
+[
+  {
+    Redirect: { /* required */
+      HostName: "STRING",
+      HttpRedirectCode: "STRING",
+      Protocol: "http" || "https",
+      ReplaceKeyPrefixWith: "STRING",
+      ReplaceKeyWith: "STRING"
+    },
+    Condition: {
+      HttpErrorCodeReturnedEquals: "STRING",
+      KeyPrefixEquals: "STRING"
+    }
+  },
+  /* more items */
+]
+The unusual property casing is intentional—the entire configuration will be passed directly through in the HTTP request.
+
+cdn: Boolean
+
+Set this to true if you want to use a CDN and HTTPS/TLS. Setting up the CDN does not happen automatically when deploying. After deploying, run discharge distribute to set up the CDN. Once the CDN is set up, future deploys will expire the CDN’s cache.
+
+For more information see the cache configuration or the distribute command.
+
+aws_profile String (optional)
+
+The AWS profile you’ve specified in a credentials file at ~/.aws/credentials.
+
+If you only have one set of credentials then specify “default”.
+
+If you want to create a new AWS user with specific permissions/policies for deployment, you can add another profile in the credentials file and specify the custom profile you’ve added.
+
+If you prefer environment variables or you are running Discharge in an automated environment like a continuous integration/deployment server you can omit this configuration option.
+
+aws_region String
+
+The Amazon S3 region you want to create your website (bucket) in.
+
+dns_configured Boolean
+
+If you run discharge init this will be set to false automatically. Then when you run discharge deploy it will show the record you need to add to your DNS configuration. The deploy command will then automatically set this value to true, assuming you have properly created the DNS record.
+
+Deploy
+After you’ve finished configuring you can run discharge deploy to deploy. Deploying is a series of steps that are idempotent—that is, they are safe to run over and over again, and if you haven’t changed anything, then the outcome should always be the same.
+
+If you change your website configuration (cache, redirects, etc.) it will be updated. If you change your website content, a diff will be done to figure out what needs to change. New files will be added, changed files will be updated, and deleted files will be removed. The synchronization is one way—that is, if you remove a file from S3 it will just be re-uploaded the next time you deploy.
+
+Clean URLs
+Clean URLs are when the .html extensions are dropped from URLs for aesthetic or functional reasons. The .html extensions are now commonly considered superfluous. If you have a file named /projects.html it’s now understood and generally preferred that the URL domain.com/projects would serve that file.
+
+When you deploy, two copies of each HTML file will be uploaded: one with the .html extension and one without. So a file some-page.html will be uploaded as some-page.html and as some-page, which will allow it to be served from https://example.com/some-page.html, with the extension, or from https://example.com/some-page, without the extension. You are free to use whichever URL style you prefer!
+
+Distribute
+After you’ve finished deploying you can run discharge distribute to distribute your website via a CDN (content delivery network). The command will create a TLS certificate, ensure it’s verified, create a distribution, and ensure it’s deployed. Almost no configuration necessary[1]. This step is completely optional, but if you have a high-traffic website it’s highly recommended, and if you want to secure your website with HTTPS/TLS then you have to do it[2].
+
+A CDN is a caching layer. It can significantly speed up requests for users located geographically farther from where your website is deployed, and sometimes even for users nearby it. In brief, the way a CDN works is you point your DNS to the CDN. When a request comes in, the CDN relays the request to your origin (in this case S3) then takes the response and caches it according to the Cache-Control header in the response. Future requests will only hit the CDN and not your origin, until either the CDN’s cache expires or it’s expired early.
+
+The Cache-Control header can specify two different cache lengths, one for the CDN and one for the browser. Because static sites are… static, the only times they change are when deployed, so it’s safe to set a very high cache length for the CDN, a low cache length for the browser, and then expire the CDN’s cache early when deploying.
+
+[1]: CDNs can be configured in a lot of different, complex ways. The goal was to abstract away all of that—choose sane defaults and require no configuration. I think this will work for the vast majority of people, but if there’s a specific reason you need more flexibility let me know, and if it’s widely-needed we can add it.
+
+[2]: While CDNs can be configured without TLS, given that TLS certificates are free and we want the entire web to be encrypted, I can’t see any reason to support not using TLS.
+
+.io domains
+Verifying the TLS certificate is done via email. AWS will look up the contact information in the WHOIS database for your domain and then send a verification email to the following email addresses:
+
+Domain registrant
+Technical contact
+Administrative contact
+administrator@domain.tld
+hostmaster@domain.tld
+postmaster@domain.tld
+webmaster@domain.tld
+admin@domain.tld
+Inexplicably, the .io domain registrar is the only registrar that does not return contact information from the WHOIS database. That means you have to have one of the five common system email addresses set up on a .io domain or you will not receive the TLS certificate verification email.
+
+Subdomains
+You can use any domain, subdomain, or combination you like. You just need to configure your DNS appropriately.
+
+If you want to use a naked domain (domain.com), because S3 and CloudFront expose a special URL rather than an IP address, your DNS provider will need to support ALIAS records; not all do.
+
+If you want to use a subdomain like www.domain.com or blog.domain.com, create a CNAME record for it. The TLS/HTTPS certificate is created for the root domain and all subdomains via a wildcard.
+
+If you want to use both a naked domain and a subdomain, create an ALIAS and a CNAME record.
+
+If you want to use only a naked domain or a subdomain, but redirect one to the other (like redirect www.domain.com to domain.com), then the easiest way to do that is to add a redirect at the DNS-level. It’s not technically a part of the DNS specification so not all DNS providers have it, but the vast majority do. If yours does not, you can either switch to a DNS provider that does or manually create an S3 bucket that does the redirect and create an ALIAS or CNAME record pointing to it.
+
+Contributing
+Bug reports and pull requests are welcome on GitHub at https://github.com/brandonweiss/discharge.
+
+License
+The package is available as open source under the terms of the MIT License.
+
+
+
+Npkill.
+   
+Easily find and remove old and heavy node_modules folders .
+
+This tool allows you to list any node_modules directories in your system, as well as the space they take up. You can then select which ones you want to erase to free up space. Yay!
+
+i18n
+We're making an effort to internationalize the Npkill docs. Here's a list of the available translations:
+
+Español
+Table of Contents
+Features
+Installation
+Usage
+Options
+Examples
+Set Up Locally
+Roadmap
+Known bugs
+Contributing
+Buy us a coffee
+License
+
+ Features
+Clear space: Get rid of old and dusty node_modules cluttering up your machine.
+
+Last Workspace Usage: Check when was the last time you modified a file in the workspace (indicated in the last_mod column).
+
+Very fast: NPKILL is written in TypeScript, but searches are performed at a low level, improving performance greatly.
+
+Easy to use: Say goodbye to lengthy commands. Using npkill is as simple as reading a list of your node_modules, and pressing Del to get rid of them. Could it be any easier? ;)
+
+Minified: It barely has any dependencies.
+
+ Installation.
+
+To install it to use it! Simply use the following command:
+
+$ npx npkill
+Or if for some reason you really want to install it:
+
+$ npm i -g npkill
+# Unix users may need to run the command with sudo. Go carefully
+NPKILL does not support node<v14. If this affects you you can use npkill@0.8.3
+
+ Usage
+$ npx npkill
+# or just npkill if installed globally
+By default, npkill will scan for node_modules starting at the path where npkill command is executed.
+
+Move between the listed folders with ↓ ↑, and use Space or Del to delete the selected folder. You can also use j and k to move between the results.
+
+You can open the directory where the selected result is placed by pressing o.
+
+To exit, Q or Ctrl + c if you're brave.
+
+Important! Some applications installed on the system need their node_modules directory to work and deleting them may break them. NPKILL will highlight them by displaying a  to be careful.
+
+
+Options
+ARGUMENT	DESCRIPTION
+-c, --bg-color	Change row highlight color. (Available: blue, cyan, magenta, white, red and yellow)
+-d, --directory	Set the directory from which to begin searching. By default, starting-point is .
+-D, --delete-all	Automatically delete all node_modules folders that are found. Suggested to be used together with -x.
+-e, --hide-errors	Hide errors if any
+-E, --exclude	Exclude directories from search (directory list must be inside double quotes "", each directory separated by ',' ) Example: "ignore1, ignore2"
+-f, --full	Start searching from the home of the user (example: "/home/user" in linux)
+-gb	Show folders in Gigabytes instead of Megabytes.
+-h, --help, ?	Show this help page and exit
+-nu, --no-check-update	Don't check for updates on startup
+-s, --sort	Sort results by: size, path or last-mod
+-t, --target	Specify the name of the directories you want to search (by default, is node_modules)
+-x, --exclude-hidden-directories	Exclude hidden directories ("dot" directories) from search.
+--dry-run	It does not delete anything (will simulate it with a random delay).
+-v, --version	Show npkill version
+Warning: In future versions some commands may change.
+
+Examples
+Search node_modules directories in your projects directory:
+npkill -d ~/projects
+
+# other alternative:
+cd ~/projects
+npkill
+List directories named "dist" and show errors if any occur:
+npkill --target dist -e
+Displays the magenta color cursor... because I like magenta!
+npkill --color magenta
+List vendor directories in your projects directory, sort by size, and show size in gb:
+npkill -d '~/more projects' -gb --sort size --target vendor
+List node_modules in your projects directory, excluding the ones in progress and ignore-this directories:
+npkill -d 'projects' --exclude "progress, ignore-this"
+Automatically delete all node_modules that have sneaked into your backups:
+npkill -d ~/backups/ --delete-all
+
+ Set Up Locally
+# -- First, clone the repository
+git clone https://github.com/voidcosmos/npkill.git
+
+# -- Navigate to the dir
+cd npkill
+
+# -- Install dependencies
+npm install
+
+# -- And run!
+npm run start
+
+# -- If you want to run it with some parameter, you will have to add "--" as in the following example:
+npm run start -- -f -e
+
+ Roadmap
+ Release 0.1.0 !
+ Improve code
+ Improve performance
+ Improve performance even more!
+ Sort results by size and path
+ Allow the search for other types of directories (targets)
+ Reduce dependencies to be a more minimalist module
+ Allow to filter by directories that have not been used in a period of time
+ Create option for displaying directories in tree format
+ Add some menus
+ Add log service
+ Periodic and automatic cleaning (?)
+
+ Known bugs 
+Sometimes, CLI is blocked while folder is deleting.
+Some terminals that do not use TTY (like git bash in windows) do not work.
+Sorting, especially by routes, can slow down the terminal when there are many results at the same time.
+Sometimes, size calculations are higher than they should be.
+(SOLVED) Performance issues when searching from high level directories (like / in linux).
+(SOLVED) Sometimes text collapses when updating the cli.
+(SOLVED) Analyzing the size of the directories takes longer than it should.
+If you find any bugs, don't hesitate and open an issue :)
+
+Crypto alternative
+btc: 1ML2DihUoFTqhoQnrWy4WLxKbVYkUXpMAX
+bch: 1HVpaicQL5jWKkbChgPf6cvkH8nyktVnVk
+eth: 0x7668e86c8bdb52034606db5aa0d2d4d73a0d4259
+
+ License
+MIT © Nya García Gallardo and Juan Torres Gómez
+
+
+
+
