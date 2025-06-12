@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Teleportasi Senyum</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: white;
+    }
+    canvas {
+      display: block;
+      background: #ffffff;
+    }
+    #btnTeleport, #btnReturn {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 24px;
+      padding: 15px 30px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 10;
+    }
+    #btnReturn {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <button id="btnTeleport">Teleportasi ke Jepang</button>
+  <button id="btnReturn">Balik lagi ke Indo</button>
+  <canvas id="gameCanvas"></canvas>
+
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    let player = { x: width / 2, y: height / 2, size: 60, alpha: 1 };
+    let fadingOut = false;
+    let fadingIn = false;
+
+    const btnTeleport = document.getElementById("btnTeleport");
+    const btnReturn = document.getElementById("btnReturn");
+
+    btnTeleport.onclick = () => {
+      fadingOut = true;
+    };
+    btnReturn.onclick = () => {
+      fadingIn = true;
+    };
+
+    // Joystick
+    let joy = {
+      baseX: 100,
+      baseY: height - 100,
+      baseR: 50,
+      stickX: 100,
+      stickY: height - 100,
+      dragging: false
+    };
+
+    function drawJoystick() {
+      ctx.beginPath();
+      ctx.arc(joy.baseX, joy.baseY, joy.baseR, 0, Math.PI * 2);
+      ctx.fillStyle = "#ccc";
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(joy.stickX, joy.stickY, 25, 0, Math.PI * 2);
+      ctx.fillStyle = "red";
+      ctx.fill();
+    }
+
+    function drawPlayer() {
+      ctx.save();
+      ctx.globalAlpha = player.alpha;
+      ctx.beginPath();
+      ctx.arc(player.x, player.y, player.size / 2, 0, Math.PI * 2);
+      ctx.fillStyle = "yellow";
+      ctx.fill();
+
+      // Eyes
+      ctx.beginPath();
+      ctx.arc(player.x - 10, player.y - 10, 5, 0, Math.PI * 2);
+      ctx.arc(player.x + 10, player.y - 10, 5, 0, Math.PI * 2);
+      ctx.fillStyle = "black";
+      ctx.fill();
+
+      // Smile
+      ctx.beginPath();
+      ctx.arc(player.x, player.y + 5, 15, 0, Math.PI);
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "black";
+      ctx.stroke();
+
+      ctx.restore();
+    }
+
+    function update() {
+      if (fadingOut) {
+        player.alpha -= 0.02;
+        if (player.alpha <= 0) {
+          player.alpha = 0;
+          fadingOut = false;
+          btnTeleport.style.display = "none";
+          btnReturn.style.display = "block";
+        }
+      } else if (fadingIn) {
+        player.alpha += 0.02;
+        if (player.alpha >= 1) {
+          player.alpha = 1;
+          fadingIn = false;
+          btnTeleport.style.display = "block";
+          btnReturn.style.display = "none";
+        }
+      }
+
+      // Move if dragging
+      if (joy.dragging) {
+        let dx = joy.stickX - joy.baseX;
+        let dy = joy.stickY - joy.baseY;
+        let dist = Math.sqrt(dx * dx + dy * dy);
+        let max = joy.baseR;
+        if (dist > max) {
+          dx = dx / dist * max;
+          dy = dy / dist * max;
+        }
+        player.x += dx * 0.1;
+        player.y += dy * 0.1;
+      }
+    }
+
+    function loop() {
+      ctx.clearRect(0, 0, width, height);
+      update();
+      drawPlayer();
+      drawJoystick();
+      requestAnimationFrame(loop);
+    }
+
+    // Touch input
+    canvas.addEventListener("touchstart", e => {
+      let touch = e.touches[0];
+      let dx = touch.clientX - joy.baseX;
+      let dy = touch.clientY - joy.baseY;
+      let dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < joy.baseR + 30) {
+        joy.dragging = true;
+        joy.stickX = touch.clientX;
+        joy.stickY = touch.clientY;
+      }
+    });
+
+    canvas.addEventListener("touchmove", e => {
+      if (joy.dragging) {
+        let touch = e.touches[0];
+        joy.stickX = touch.clientX;
+        joy.stickY = touch.clientY;
+      }
+    });
+
+    canvas.addEventListener("touchend", () => {
+      joy.dragging = false;
+      joy.stickX = joy.baseX;
+      joy.stickY = joy.baseY;
+    });
+
+    loop();
+  </script>
+</body>
+  </html>
