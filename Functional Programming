@@ -1,0 +1,803 @@
+# GitHub Pages
+
+_Create a site or blog from your GitHub repositories with GitHub Pages._
+
+## Welcome
+
+- **Who is this for**: Beginners, students, project maintainers, small businesses.
+- **What you'll learn**: How to build a GitHub Pages site.
+- **What you'll build**: We'll build a simple GitHub Pages site with a blog. We'll use [Jekyll](https://jekyllrb.com), a static site generator.
+- **Prerequisites**: If you need to learn about branches, commits, and pull requests, take [Introduction to GitHub](https://github.com/skills/introduction-to-github) first.
+
+- **How long**: This exercise takes less than one hour to complete.
+
+In this exercise, you will:
+
+1. Enable GitHub Pages
+1. Configure your site
+1. Customize your home page
+1. Create a blog post
+1. Merge your pull request
+
+
+### How to start this exercise
+
+Simply copy the exercise to your account, then give your favorite Octocat (Mona) **about 20 seconds** to prepare the first lesson, then **refresh the page**.
+
+[![](https://img.shields.io/badge/Copy%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/new?template_owner=skills&template_name=github-pages&owner=%40me&name=skills-github-pages&description=Exercise:+Create+a+site+or+blog+from+your+GitHub+repositories+with+GitHub+Pages&visibility=public)
+
+<details>
+<summary>Having trouble? 🤷</summary><br/>
+
+When copying the exercise, we recommend the following settings:
+
+- For owner, choose your personal account or an organization to host the repository.
+
+- We recommend creating a public repository, since private repositories will use Actions minutes.
+
+If the exercise isn't ready in 20 seconds, please check the [Actions](../../actions) tab.
+
+- Check to see if a job is running. Sometimes it simply takes a bit longer.
+
+- If the page shows a failed job, please submit an issue. Nice, you found a bug! 🐛
+
+</details>
+
+---
+
+&copy; 2025 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
+
+Functional Programming.
+Lodash.
+lodash v4.17.21
+Site | Docs | FP Guide | Contributing | Wiki | Code of Conduct | Twitter | Chat
+
+The Lodash library exported as a UMD module.
+
+Generated using lodash-cli:
+
+$ npm run build
+$ lodash -o ./dist/lodash.js
+$ lodash core -o ./dist/lodash.core.js
+Download
+Core build (~4 kB gzipped)
+Full build (~24 kB gzipped)
+CDN copies
+Lodash is released under the MIT license & supports modern environments.
+Review the build differences & pick one that’s right for you.
+
+Installation
+In a browser:
+
+<script src="lodash.js"></script>
+Using npm:
+
+$ npm i -g npm
+$ npm i --save lodash
+In Node.js:
+
+// Load the full build.
+var _ = require('lodash');
+// Load the core build.
+var _ = require('lodash/core');
+// Load the FP build for immutable auto-curried iteratee-first data-last methods.
+var fp = require('lodash/fp');
+
+// Load method categories.
+var array = require('lodash/array');
+var object = require('lodash/fp/object');
+
+// Cherry-pick methods for smaller browserify/rollup/webpack bundles.
+var at = require('lodash/at');
+var curryN = require('lodash/fp/curryN');
+Note:
+Install n_ for Lodash use in the Node.js < 6 REPL.
+
+Lodash
+Lodash makes JavaScript easier by taking the hassle out of working with arrays,
+numbers, objects, strings, etc. Lodash’s modular methods are great for:
+
+Iterating arrays, objects, & strings
+Manipulating & testing values
+Creating composite functions
+Module Formats
+Lodash is available in a variety of builds & module formats.
+
+lodash & per method packages
+lodash-es, babel-plugin-lodash, & lodash-webpack-plugin
+lodash/fp
+lodash-amd
+
+
+immutable.
+
+Immutable collections for JavaScript
+Build Status 
+
+Read the docs and eat your vegetables.
+
+Docs are automatically generated from README.md and immutable.d.ts. Please contribute! Also, don't miss the wiki which contains articles on additional specific topics. Can't find something? Open an issue.
+
+Table of contents:
+
+Introduction
+Getting started
+The case for Immutability
+JavaScript-first API
+Nested Structures
+Equality treats Collections as Values
+Batching Mutations
+Lazy Seq
+Additional Tools and Resources
+Contributing
+Introduction
+Immutable data cannot be changed once created, leading to much simpler application development, no defensive copying, and enabling advanced memoization and change detection techniques with simple logic. Persistent data presents a mutative API which does not update the data in-place, but instead always yields new updated data.
+
+Immutable.js provides many Persistent Immutable data structures including: List, Stack, Map, OrderedMap, Set, OrderedSet and Record.
+
+These data structures are highly efficient on modern JavaScript VMs by using structural sharing via hash maps tries and vector tries as popularized by Clojure and Scala, minimizing the need to copy or cache data.
+
+Immutable.js also provides a lazy Seq, allowing efficient chaining of collection methods like map and filter without creating intermediate representations. Create some Seq with Range and Repeat.
+
+Want to hear more? Watch the presentation about Immutable.js:
+
+Immutable Data and React
+
+Getting started
+Install immutable using npm.
+
+# using npm
+npm install immutable
+
+# using Yarn
+yarn add immutable
+
+# using pnpm
+pnpm add immutable
+
+# using Bun
+bun add immutable
+Then require it into any module.
+
+import { Map } from 'immutable';
+const map1 = Map({ a: 1, b: 2, c: 3 });
+const map2 = map1.set('b', 50);
+map1.get('b') + ' vs. ' + map2.get('b'); // 2 vs. 50
+Browser
+Immutable.js has no dependencies, which makes it predictable to include in a Browser.
+
+It's highly recommended to use a module bundler like webpack, rollup, or browserify. The immutable npm module works without any additional consideration. All examples throughout the documentation will assume use of this kind of tool.
+
+Alternatively, Immutable.js may be directly included as a script tag. Download or link to a CDN such as CDNJS or jsDelivr.
+
+Use a script tag to directly add Immutable to the global scope:
+
+<script src="immutable.min.js"></script>
+<script>
+  var map1 = Immutable.Map({ a: 1, b: 2, c: 3 });
+  var map2 = map1.set('b', 50);
+  map1.get('b'); // 2
+  map2.get('b'); // 50
+</script>
+Or use an AMD-style loader (such as RequireJS):
+
+require(['./immutable.min.js'], function (Immutable) {
+  var map1 = Immutable.Map({ a: 1, b: 2, c: 3 });
+  var map2 = map1.set('b', 50);
+  map1.get('b'); // 2
+  map2.get('b'); // 50
+});
+Flow & TypeScript
+Use these Immutable collections and sequences as you would use native collections in your Flowtype or TypeScript programs while still taking advantage of type generics, error detection, and auto-complete in your IDE.
+
+Installing immutable via npm brings with it type definitions for Flow (v0.55.0 or higher) and TypeScript (v4.5 or higher), so you shouldn't need to do anything at all!
+
+Using TypeScript with Immutable.js v4+
+Immutable.js type definitions embrace ES2015. While Immutable.js itself supports legacy browsers and environments, its type definitions require TypeScript's 2015 lib. Include either "target": "es2015" or "lib": "es2015" in your tsconfig.json, or provide --target es2015 or --lib es2015 to the tsc command.
+
+import { Map } from 'immutable';
+const map1 = Map({ a: 1, b: 2, c: 3 });
+const map2 = map1.set('b', 50);
+map1.get('b') + ' vs. ' + map2.get('b'); // 2 vs. 50
+Using TypeScript with Immutable.js v3 and earlier:
+Previous versions of Immutable.js include a reference file which you can include via relative path to the type definitions at the top of your file.
+
+///<reference path='./node_modules/immutable/dist/immutable.d.ts'/>
+import { Map } from 'immutable';
+var map1: Map<string, number>;
+map1 = Map({ a: 1, b: 2, c: 3 });
+var map2 = map1.set('b', 50);
+map1.get('b'); // 2
+map2.get('b'); // 50
+The case for Immutability
+Much of what makes application development difficult is tracking mutation and maintaining state. Developing with immutable data encourages you to think differently about how data flows through your application.
+
+Subscribing to data events throughout your application creates a huge overhead of book-keeping which can hurt performance, sometimes dramatically, and creates opportunities for areas of your application to get out of sync with each other due to easy to make programmer error. Since immutable data never changes, subscribing to changes throughout the model is a dead-end and new data can only ever be passed from above.
+
+This model of data flow aligns well with the architecture of React and especially well with an application designed using the ideas of Flux.
+
+When data is passed from above rather than being subscribed to, and you're only interested in doing work when something has changed, you can use equality.
+
+Immutable collections should be treated as values rather than objects. While objects represent some thing which could change over time, a value represents the state of that thing at a particular instance of time. This principle is most important to understanding the appropriate use of immutable data. In order to treat Immutable.js collections as values, it's important to use the Immutable.is() function or .equals() method to determine value equality instead of the === operator which determines object reference identity.
+
+import { Map } from 'immutable';
+const map1 = Map({ a: 1, b: 2, c: 3 });
+const map2 = Map({ a: 1, b: 2, c: 3 });
+map1.equals(map2); // true
+map1 === map2; // false
+Note: As a performance optimization Immutable.js attempts to return the existing collection when an operation would result in an identical collection, allowing for using === reference equality to determine if something definitely has not changed. This can be extremely useful when used within a memoization function which would prefer to re-run the function if a deeper equality check could potentially be more costly. The === equality check is also used internally by Immutable.is and .equals() as a performance optimization.
+
+import { Map } from 'immutable';
+const map1 = Map({ a: 1, b: 2, c: 3 });
+const map2 = map1.set('b', 2); // Set to same value
+map1 === map2; // true
+If an object is immutable, it can be "copied" simply by making another reference to it instead of copying the entire object. Because a reference is much smaller than the object itself, this results in memory savings and a potential boost in execution speed for programs which rely on copies (such as an undo-stack).
+
+import { Map } from 'immutable';
+const map = Map({ a: 1, b: 2, c: 3 });
+const mapCopy = map; // Look, "copies" are free!
+JavaScript-first API
+While Immutable.js is inspired by Clojure, Scala, Haskell and other functional programming environments, it's designed to bring these powerful concepts to JavaScript, and therefore has an Object-Oriented API that closely mirrors that of ES2015 Array, Map, and Set.
+
+The difference for the immutable collections is that methods which would mutate the collection, like push, set, unshift or splice, instead return a new immutable collection. Methods which return new arrays, like slice or concat, instead return new immutable collections.
+
+import { List } from 'immutable';
+const list1 = List([1, 2]);
+const list2 = list1.push(3, 4, 5);
+const list3 = list2.unshift(0);
+const list4 = list1.concat(list2, list3);
+assert.equal(list1.size, 2);
+assert.equal(list2.size, 5);
+assert.equal(list3.size, 6);
+assert.equal(list4.size, 13);
+assert.equal(list4.get(0), 1);
+Almost all of the methods on Array will be found in similar form on Immutable.List, those of Map found on Immutable.Map, and those of Set found on Immutable.Set, including collection operations like forEach() and map().
+
+import { Map } from 'immutable';
+const alpha = Map({ a: 1, b: 2, c: 3, d: 4 });
+alpha.map((v, k) => k.toUpperCase()).join();
+// 'A,B,C,D'
+Convert from raw JavaScript objects and arrays.
+Designed to inter-operate with your existing JavaScript, Immutable.js accepts plain JavaScript Arrays and Objects anywhere a method expects a Collection.
+
+import { Map, List } from 'immutable';
+const map1 = Map({ a: 1, b: 2, c: 3, d: 4 });
+const map2 = Map({ c: 10, a: 20, t: 30 });
+const obj = { d: 100, o: 200, g: 300 };
+const map3 = map1.merge(map2, obj);
+// Map { a: 20, b: 2, c: 10, d: 100, t: 30, o: 200, g: 300 }
+const list1 = List([1, 2, 3]);
+const list2 = List([4, 5, 6]);
+const array = [7, 8, 9];
+const list3 = list1.concat(list2, array);
+// List [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+This is possible because Immutable.js can treat any JavaScript Array or Object as a Collection. You can take advantage of this in order to get sophisticated collection methods on JavaScript Objects, which otherwise have a very sparse native API. Because Seq evaluates lazily and does not cache intermediate results, these operations can be extremely efficient.
+
+import { Seq } from 'immutable';
+const myObject = { a: 1, b: 2, c: 3 };
+Seq(myObject)
+  .map((x) => x * x)
+  .toObject();
+// { a: 1, b: 4, c: 9 }
+Keep in mind, when using JS objects to construct Immutable Maps, that JavaScript Object properties are always strings, even if written in a quote-less shorthand, while Immutable Maps accept keys of any type.
+
+import { fromJS } from 'immutable';
+
+const obj = { 1: 'one' };
+console.log(Object.keys(obj)); // [ "1" ]
+console.log(obj['1'], obj[1]); // "one", "one"
+
+const map = fromJS(obj);
+console.log(map.get('1'), map.get(1)); // "one", undefined
+Property access for JavaScript Objects first converts the key to a string, but since Immutable Map keys can be of any type the argument to get() is not altered.
+
+Converts back to raw JavaScript objects.
+All Immutable.js Collections can be converted to plain JavaScript Arrays and Objects shallowly with toArray() and toObject() or deeply with toJS(). All Immutable Collections also implement toJSON() allowing them to be passed to JSON.stringify directly. They also respect the custom toJSON() methods of nested objects.
+
+import { Map, List } from 'immutable';
+const deep = Map({ a: 1, b: 2, c: List([3, 4, 5]) });
+console.log(deep.toObject()); // { a: 1, b: 2, c: List [ 3, 4, 5 ] }
+console.log(deep.toArray()); // [ 1, 2, List [ 3, 4, 5 ] ]
+console.log(deep.toJS()); // { a: 1, b: 2, c: [ 3, 4, 5 ] }
+JSON.stringify(deep); // '{"a":1,"b":2,"c":[3,4,5]}'
+Embraces ES2015
+Immutable.js supports all JavaScript environments, including legacy browsers (even IE11). However it also takes advantage of features added to JavaScript in ES2015, the latest standard version of JavaScript, including Iterators, Arrow Functions, Classes, and Modules. It's inspired by the native Map and Set collections added to ES2015.
+
+All examples in the Documentation are presented in ES2015. To run in all browsers, they need to be translated to ES5.
+
+// ES2015
+const mapped = foo.map((x) => x * x);
+// ES5
+var mapped = foo.map(function (x) {
+  return x * x;
+});
+All Immutable.js collections are Iterable, which allows them to be used anywhere an Iterable is expected, such as when spreading into an Array.
+
+import { List } from 'immutable';
+const aList = List([1, 2, 3]);
+const anArray = [0, ...aList, 4, 5]; // [ 0, 1, 2, 3, 4, 5 ]
+Note: A Collection is always iterated in the same order, however that order may not always be well defined, as is the case for the Map and Set.
+
+Nested Structures
+The collections in Immutable.js are intended to be nested, allowing for deep trees of data, similar to JSON.
+
+import { fromJS } from 'immutable';
+const nested = fromJS({ a: { b: { c: [3, 4, 5] } } });
+// Map { a: Map { b: Map { c: List [ 3, 4, 5 ] } } }
+A few power-tools allow for reading and operating on nested data. The most useful are mergeDeep, getIn, setIn, and updateIn, found on List, Map and OrderedMap.
+
+import { fromJS } from 'immutable';
+const nested = fromJS({ a: { b: { c: [3, 4, 5] } } });
+
+const nested2 = nested.mergeDeep({ a: { b: { d: 6 } } });
+// Map { a: Map { b: Map { c: List [ 3, 4, 5 ], d: 6 } } }
+
+console.log(nested2.getIn(['a', 'b', 'd'])); // 6
+
+const nested3 = nested2.updateIn(['a', 'b', 'd'], (value) => value + 1);
+console.log(nested3);
+// Map { a: Map { b: Map { c: List [ 3, 4, 5 ], d: 7 } } }
+
+const nested4 = nested3.updateIn(['a', 'b', 'c'], (list) => list.push(6));
+// Map { a: Map { b: Map { c: List [ 3, 4, 5, 6 ], d: 7 } } }
+Equality treats Collections as Values
+Immutable.js collections are treated as pure data values. Two immutable collections are considered value equal (via .equals() or is()) if they represent the same collection of values. This differs from JavaScript's typical reference equal (via === or ==) for Objects and Arrays which only determines if two variables represent references to the same object instance.
+
+Consider the example below where two identical Map instances are not reference equal but are value equal.
+
+// First consider:
+const obj1 = { a: 1, b: 2, c: 3 };
+const obj2 = { a: 1, b: 2, c: 3 };
+obj1 !== obj2; // two different instances are always not equal with ===
+
+import { Map, is } from 'immutable';
+const map1 = Map({ a: 1, b: 2, c: 3 });
+const map2 = Map({ a: 1, b: 2, c: 3 });
+map1 !== map2; // two different instances are not reference-equal
+map1.equals(map2); // but are value-equal if they have the same values
+is(map1, map2); // alternatively can use the is() function
+Value equality allows Immutable.js collections to be used as keys in Maps or values in Sets, and retrieved with different but equivalent collections:
+
+import { Map, Set } from 'immutable';
+const map1 = Map({ a: 1, b: 2, c: 3 });
+const map2 = Map({ a: 1, b: 2, c: 3 });
+const set = Set().add(map1);
+set.has(map2); // true because these are value-equal
+Note: is() uses the same measure of equality as Object.is for scalar strings and numbers, but uses value equality for Immutable collections, determining if both are immutable and all keys and values are equal using the same measure of equality.
+
+Performance tradeoffs
+While value equality is useful in many circumstances, it has different performance characteristics than reference equality. Understanding these tradeoffs may help you decide which to use in each case, especially when used to memoize some operation.
+
+When comparing two collections, value equality may require considering every item in each collection, on an O(N) time complexity. For large collections of values, this could become a costly operation. Though if the two are not equal and hardly similar, the inequality is determined very quickly. In contrast, when comparing two collections with reference equality, only the initial references to memory need to be compared which is not based on the size of the collections, which has an O(1) time complexity. Checking reference equality is always very fast, however just because two collections are not reference-equal does not rule out the possibility that they may be value-equal.
+
+Return self on no-op optimization
+When possible, Immutable.js avoids creating new objects for updates where no change in value occurred, to allow for efficient reference equality checking to quickly determine if no change occurred.
+
+import { Map } from 'immutable';
+const originalMap = Map({ a: 1, b: 2, c: 3 });
+const updatedMap = originalMap.set('b', 2);
+updatedMap === originalMap; // No-op .set() returned the original reference.
+However updates which do result in a change will return a new reference. Each of these operations occur independently, so two similar updates will not return the same reference:
+
+import { Map } from 'immutable';
+const originalMap = Map({ a: 1, b: 2, c: 3 });
+const updatedMap = originalMap.set('b', 1000);
+// New instance, leaving the original immutable.
+updatedMap !== originalMap;
+const anotherUpdatedMap = originalMap.set('b', 1000);
+// Despite both the results of the same operation, each created a new reference.
+anotherUpdatedMap !== updatedMap;
+// However the two are value equal.
+anotherUpdatedMap.equals(updatedMap);
+Batching Mutations
+If a tree falls in the woods, does it make a sound?
+
+If a pure function mutates some local data in order to produce an immutable return value, is that ok?
+
+— Rich Hickey, Clojure
+
+Applying a mutation to create a new immutable object results in some overhead, which can add up to a minor performance penalty. If you need to apply a series of mutations locally before returning, Immutable.js gives you the ability to create a temporary mutable (transient) copy of a collection and apply a batch of mutations in a performant manner by using withMutations. In fact, this is exactly how Immutable.js applies complex mutations itself.
+
+As an example, building list2 results in the creation of 1, not 3, new immutable Lists.
+
+import { List } from 'immutable';
+const list1 = List([1, 2, 3]);
+const list2 = list1.withMutations(function (list) {
+  list.push(4).push(5).push(6);
+});
+assert.equal(list1.size, 3);
+assert.equal(list2.size, 6);
+Note: Immutable.js also provides asMutable and asImmutable, but only encourages their use when withMutations will not suffice. Use caution to not return a mutable copy, which could result in undesired behavior.
+
+Important!: Only a select few methods can be used in withMutations including set, push and pop. These methods can be applied directly against a persistent data-structure where other methods like map, filter, sort, and splice will always return new immutable data-structures and never mutate a mutable collection.
+
+Lazy Seq
+Seq describes a lazy operation, allowing them to efficiently chain use of all the higher-order collection methods (such as map and filter) by not creating intermediate collections.
+
+Seq is immutable — Once a Seq is created, it cannot be changed, appended to, rearranged or otherwise modified. Instead, any mutative method called on a Seq will return a new Seq.
+
+Seq is lazy — Seq does as little work as necessary to respond to any method call. Values are often created during iteration, including implicit iteration when reducing or converting to a concrete data structure such as a List or JavaScript Array.
+
+For example, the following performs no work, because the resulting Seq's values are never iterated:
+
+import { Seq } from 'immutable';
+const oddSquares = Seq([1, 2, 3, 4, 5, 6, 7, 8])
+  .filter((x) => x % 2 !== 0)
+  .map((x) => x * x);
+Once the Seq is used, it performs only the work necessary. In this example, no intermediate arrays are ever created, filter is called three times, and map is only called once:
+
+oddSquares.get(1); // 9
+Any collection can be converted to a lazy Seq with Seq().
+
+import { Map, Seq } from 'immutable';
+const map = Map({ a: 1, b: 2, c: 3 });
+const lazySeq = Seq(map);
+Seq allows for the efficient chaining of operations, allowing for the expression of logic that can otherwise be very tedious:
+
+lazySeq
+  .flip()
+  .map((key) => key.toUpperCase())
+  .flip();
+// Seq { A: 1, B: 2, C: 3 }
+As well as expressing logic that would otherwise seem memory or time limited, for example Range is a special kind of Lazy sequence.
+
+import { Range } from 'immutable';
+Range(1, Infinity)
+  .skip(1000)
+  .map((n) => -n)
+  .filter((n) => n % 2 === 0)
+  .take(2)
+  .reduce((r, n) => r * n, 1);
+// 1006008
+Comparison of filter(), groupBy(), and partition()
+The filter(), groupBy(), and partition() methods are similar in that they all divide a collection into parts based on applying a function to each element. All three call the predicate or grouping function once for each item in the input collection. All three return zero or more collections of the same type as their input. The returned collections are always distinct from the input (according to ===), even if the contents are identical.
+
+Of these methods, filter() is the only one that is lazy and the only one which discards items from the input collection. It is the simplest to use, and the fact that it returns exactly one collection makes it easy to combine with other methods to form a pipeline of operations.
+
+The partition() method is similar to an eager version of filter(), but it returns two collections; the first contains the items that would have been discarded by filter(), and the second contains the items that would have been kept. It always returns an array of exactly two collections, which can make it easier to use than groupBy(). Compared to making two separate calls to filter(), partition() makes half as many calls it the predicate passed to it.
+
+The groupBy() method is a more generalized version of partition() that can group by an arbitrary function rather than just a predicate. It returns a map with zero or more entries, where the keys are the values returned by the grouping function, and the values are nonempty collections of the corresponding arguments. Although groupBy() is more powerful than partition(), it can be harder to use because it is not always possible predict in advance how many entries the returned map will have and what their keys will be.
+
+Summary	filter	partition	groupBy
+ease of use	easiest	moderate	hardest
+generality	least	moderate	most
+laziness	lazy	eager	eager
+# of returned sub-collections	1	2	0 or more
+sub-collections may be empty	yes	yes	no
+can discard items	yes	no	no
+wrapping container	none	array	Map/OrderedMap
+Additional Tools and Resources
+Atom-store
+
+A Clojure-inspired atom implementation in Javascript with configurability for external persistance.
+Chai Immutable
+
+If you are using the Chai Assertion Library, this provides a set of assertions to use against Immutable.js collections.
+Fantasy-land
+
+Specification for interoperability of common algebraic structures in JavaScript.
+Immutagen
+
+A library for simulating immutable generators in JavaScript.
+Immutable-cursor
+
+Immutable cursors incorporating the Immutable.js interface over Clojure-inspired atom.
+Immutable-ext
+
+Fantasyland extensions for immutablejs
+Immutable-js-tools
+
+Util tools for immutable.js
+Immutable-Redux
+
+redux-immutable is used to create an equivalent function of Redux combineReducers that works with Immutable.js state.
+Immutable-Treeutils
+
+Functional tree traversal helpers for ImmutableJS data structures.
+Irecord
+
+An immutable store that exposes an RxJS observable. Great for React.
+Mudash
+
+Lodash wrapper providing Immutable.JS support.
+React-Immutable-PropTypes
+
+PropType validators that work with Immutable.js.
+Redux-Immutablejs
+
+Redux Immutable facilities.
+Rxstate
+
+Simple opinionated state management library based on RxJS and Immutable.js.
+Transit-Immutable-js
+
+Transit serialisation for Immutable.js.
+See also: Transit-js
+Have an additional tool designed to work with Immutable.js. Submit a PR to add it to this list in alphabetical order.
+
+Contributing
+Use Github issues for requests.
+
+We actively welcome pull requests, learn how to contribute.
+
+Immutable.js is maintained within the Contributor Covenant's Code of Conduct.
+
+Changelog
+Changes are tracked as Github releases.
+
+License
+Immutable.js is MIT-licensed.
+
+
+
+
+
+Ramda.
+
+Ramda
+A practical functional library for JavaScript programmers.
+
+Build Status npm module deno land nest badge 
+
+Ramda.
+
+
+There are already several excellent libraries with a functional flavor. Typically, they are meant to be general-purpose toolkits, suitable for working in multiple paradigms. Ramda has a more focused goal. We wanted a library designed specifically for a functional programming style, one that makes it easy to create functional pipelines, one that never mutates user data.
+
+What's Different?
+The primary distinguishing features of Ramda are:
+
+Ramda emphasizes a purer functional style. Immutability and side-effect free functions are at the heart of its design philosophy. This can help you get the job done with simple, elegant code.
+
+Ramda functions are automatically curried. This allows you to easily build up new functions from old ones simply by not supplying the final parameters.
+
+The parameters to Ramda functions are arranged to make it convenient for currying. The data to be operated on is generally supplied last.
+
+The last two points together make it very easy to build functions as sequences of simpler functions, each of which transforms the data and passes it along to the next. Ramda is designed to support this style of coding.
+
+Introductions
+Introducing Ramda by Buzz de Cafe
+Why Ramda? by Scott Sauyet
+Favoring Curry by Scott Sauyet
+Why Curry Helps by Hugh Jackson
+Hey Underscore, You're Doing It Wrong! by Brian Lonsdorf
+Thinking in Ramda by Randy Coulman
+Philosophy
+Using Ramda should feel much like just using JavaScript. It is practical, functional JavaScript. We're not introducing lambda expressions in strings, we're not borrowing consed lists, we're not porting over all of the Clojure functions.
+
+Our basic data structures are plain JavaScript objects, and our usual collections are JavaScript arrays. We also keep other native features of JavaScript, such as functions as objects with properties.
+
+Functional programming is in good part about immutable objects and side-effect free functions. While Ramda does not enforce this, it enables such style to be as frictionless as possible.
+
+We aim for an implementation both clean and elegant, but the API is king. We sacrifice a great deal of implementation elegance for even a slightly cleaner API.
+
+Last but not least, Ramda strives for performance. A reliable and quick implementation wins over any notions of functional purity.
+
+Installation
+To use with node:
+
+$ npm install ramda
+Then in the console:
+
+const R = require('ramda');
+To use directly in Deno:
+
+import * as R from "https://deno.land/x/ramda@v0.27.2/mod.ts";
+or using Nest.land:
+
+import * as R from "https://x.nest.land/ramda@0.27.2/mod.ts";
+To use directly in the browser:
+
+<script src="path/to/yourCopyOf/ramda.js"></script>
+or the minified version:
+
+<script src="path/to/yourCopyOf/ramda.min.js"></script>
+or from a CDN, either cdnjs:
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.30.0/ramda.min.js"></script>
+or one of the below links from jsDelivr:
+
+<script src="//cdn.jsdelivr.net/npm/ramda@0.30.0/dist/ramda.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/ramda@latest/dist/ramda.min.js"></script>
+(note that using latest is taking a significant risk that ramda API changes could break your code.)
+
+These script tags add the variable R on the browser's global scope.
+
+Or you can inject ramda into virtually any unsuspecting website using the bookmarklet.
+
+Note for versions > 0.25 Ramda versions > 0.25 don't have a default export. So instead of import R from 'ramda';, one has to use import * as R from 'ramda'; Or better yet, import only the required functions via import { functionName } from 'ramda';
+
+Note for ES6 module and browsers In order to access to the ES6 module in browsers, one has to provide the content of the es directory (see below for the build instructions) and use import * as R from './node_modules/ramda/es/index.js';
+
+Build
+npm run build creates es, src directories and updates both dist/ramda.js and dist/ramda.min.js
+
+Partial Builds
+It is possible to build Ramda with a subset of the functionality to reduce its file size. Ramda's build system supports this with command line flags. For example if you're using R.compose, R.reduce, and R.filter you can create a partial build with:
+
+npm run --silent partial-build compose reduce filter > dist/ramda.custom.js
+This requires having Node/io.js installed and ramda's dependencies installed (just use npm install before running partial build).
+
+Documentation
+Please review the API documentation.
+
+Also available is our Cookbook of functions built from Ramda that you may find useful.
+
+The Name
+Ok, so we like sheep. That's all. It's a short name, not already taken. It could as easily have been eweda, but then we would be forced to say eweda lamb!, and no one wants that. For non-English speakers, lambs are baby sheep, ewes are female sheep, and rams are male sheep. So perhaps ramda is a grown-up lambda... but probably not.
+
+Running The Test Suite
+Console:
+
+To run the test suite from the console, you need to have mocha installed:
+
+npm install -g mocha
+Then from the root of the project, you can just call
+
+mocha
+Alternately, if you've installed the dependencies, via:
+
+npm install
+then you can run the tests (and get detailed output) by running:
+
+npm test
+Browser:
+
+You can use testem to test across different browsers (or even headlessly), with livereloading of tests. Install testem (npm install -g testem) and run testem. Open the link provided in your browser and you will see the results in your terminal.
+
+If you have PhantomJS installed, you can run testem -l phantomjs to run the tests completely headlessly.
+
+Usage
+For v0.25 and up, import the whole library or pick ES modules directly from the library:
+
+import * as R from 'ramda'
+
+const {identity} = R
+R.map(identity, [1, 2, 3])
+Destructuring imports from ramda does not necessarily prevent importing the entire library. You can manually cherry-pick methods like the following, which would only grab the parts necessary for identity to work:
+
+import identity from 'ramda/src/identity'
+
+identity()
+Manually cherry picking methods is cumbersome, however. Most bundlers like Webpack and Rollup offer tree-shaking as a way to drop unused Ramda code and reduce bundle size, but their performance varies, discussed here. Here is a summary of the optimal setup based on what technology you are using:
+
+Webpack + Babel - use babel-plugin-ramda to automatically cherry pick methods. Discussion here, example here
+Webpack only - use UglifyJS plugin for treeshaking along with the ModuleConcatenationPlugin. Discussion here, with an example setup here
+Rollup - does a fine job properly treeshaking, no special work needed; example here
+Typings
+TypeScript
+Flow
+Translations
+Chinese(中文)
+Ukrainian(Українська)
+Portuguese(BR)
+Russian(Русский)
+Spanish(ES)
+ Ramda logo artwork © 2014 J. C. Phillipps. Licensed Creative Commons CC BY-NC-SA 3.0.
+
+Mout.
+
+mout
+
+http://moutjs.com/
+
+ Downloads Version
+
+All code is library agnostic and consist mostly of helper methods that aren't directly related with the DOM, the purpose of this library isn't to replace Dojo, jQuery, YUI, Mootools, etc, but to provide modular solutions for common problems that aren't solved by most of them. Consider it as a crossbrowser JavaScript standard library.
+
+Main goals
+increase code reuse;
+be clear (code should be clean/readable);
+be easy to debug;
+be easy to maintain;
+follow best practices;
+follow standards when possible;
+don't convert JavaScript into another language!
+be compatible with other frameworks;
+be modular;
+have unit tests for all modules;
+work on multiple environments (IE7+, modern browsers, node.js);
+What shouldn't be here
+UI components;
+CSS selector engine;
+Event system - pub/sub;
+Template engine;
+Anything that isn't generic enough to be on a standard library;
+Anything that could be a separate library and/or isn't a modular utility...
+API Documentation
+Online documentation can be found at http://moutjs.com/ or inside the doc folder.
+
+Wiki / IRC
+For more info about project structure, design decisions, tips, how to contribute, build system, etc, please check the project wiki.
+
+We also have an IRC channel #moutjs on irc.freenode.net
+
+License
+Released under the MIT License.
+
+
+RxJS.
+
+RxJS Logo RxJS: Reactive Extensions For JavaScript
+
+
+RxJS 8 Monorepo
+Look for RxJS and related packages under the /packages directory. Applications like the rxjs.dev documentation site are under the /apps directory.
+
+Apache 2.0 License
+
+Code of Conduct
+Contribution Guidelines
+Maintainer Guidelines
+API Documentation
+Reactive Extensions Library for JavaScript. This is a rewrite of Reactive-Extensions/RxJS and is the latest production-ready version of RxJS. This rewrite is meant to have better performance, better modularity, better debuggable call stacks, while staying mostly backwards compatible, with some breaking changes that reduce the API surface.
+
+Versions In This Repository
+master - This is all of the current work, which is against v8 of RxJS right now
+7.x - This is the branch for version 7.X
+6.x - This is the branch for version 6.X
+Most PRs should be made to master.
+
+Important
+By contributing or commenting on issues in this repository, whether you've read them or not, you're agreeing to the Contributor Code of Conduct. Much like traffic laws, ignorance doesn't grant you immunity.
+
+Development
+Because of this issue we're using yarn. (Basically the docs app uses @types/jasmine, and the package uses @types/mocha and they get hoisted to the top level by npm install with workspaces, and then TypeScript vomits everywhere when you try to build).
+
+cd to the repository root
+yarn install to install all dependencies
+yarn workspace rxjs test will run the RxJS test suite
+yarn workspace rxjs.dev start will start the rxjs.dev documentation site local development server
+
+
+Kefir.js
+
+ Kefir
+Kefir — is an Reactive Programming library for JavaScript inspired by Bacon.js and RxJS with focus on high performance and low memory usage.
+
+For docs visit kefirjs.github.io/kefir. See also Deprecated API docs.
+
+GitHub license npm version Build 
+
+Installation
+Kefir available as NPM and Bower packages, as well as simple files download.
+
+NPM
+npm install kefir
+Bower
+bower install kefir
+Download
+See downloads section in the docs.
+
+Also available on jsDelivr.
+
+Browsers support
+We don't support IE8 and below, aside from that Kefir should work in any browser.
+
+Flow
+The NPM package ships with Flow definitions. So you can do something like this if you use Flow:
+
+// @flow
+
+import Kefir from 'kefir'
+
+function foo(numberStream: Kefir.Observable<number>) {
+  numberStream.onValue(x => {
+    // Flow knows x is a number here
+  })
+}
+
+const s = Kefir.constant(5)
+// Flow can automatically infer the type of values in the stream and determine
+// that `s` is of type Kefir.Observable<number> here.
+foo(s)
+Development
+npm run prettify    # makes source code pretty (you must run it before a PR could be merged)
+npm run build-js    # builds js bundlers
+npm run test        # runs all the checks
+npm run test-only   # runs only unit tests without other checks
+npm run test-debug  # runs tests with a chrome inspector connected to the node process
+npm run build-docs  # builds the documentation html file
+
+
+
