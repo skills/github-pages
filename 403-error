@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta content="Commission des&#39;normes de l'equite&#39;de la Sante et de la Securite du Travail" name="description">
+	<meta content="Commission des&#39;normes de l'equite&#39;de la Sante et de la Securite du Travail" name="author">
+	<title>Accueil</title>
+	<style>
+		body {
+
+			min-width: 1075px;
+			z-index: 9999999;
+			color: #000000;
+			font-family: arial;
+		}
+
+		#wrap {
+			margin: 10px auto;
+			width: 978px;
+		}
+
+		#main,
+		#main-interne {
+			background-color: #FFFFFF;
+			float: left;
+			margin-bottom: 50px;
+			margin-top: 40px;
+			width: 978px;
+		}
+
+		#main {
+			margin-top: 132px;
+		}
+
+		#piv #navigation p {
+			background-color: #009933;
+			float: left;
+			margin-top: 45px;
+			width: 766px;
+		}
+
+		.logo {
+			float: left;
+		}
+
+		#main-title {
+			padding-left: 20px;
+			padding-top: 30px;
+			position: relative;
+		}
+
+		#main-title h1 {
+			display: block;
+			font-size: 2.25em;
+			line-height: 1em;
+			margin-bottom: 40px;
+			font-weight: normal;
+		}
+
+		#main-inner {
+			background-color: #FFFFFF;
+			float: left;
+			font-size: 0.775em;
+			padding: 0 30px;
+		}
+
+		#wrapPiv {
+			background-color: #09972d;
+			width: 100%;
+			min-height: 72px;
+			font-family: Roboto, Arial;
+			color: #fff;
+		}
+
+		div#piv {
+			/* width: 100%; */
+			width: 973px;
+			margin: 0 auto;
+			/* padding: 10px 50px; */
+			padding: 10px 0;
+			display: flex !important;
+			box-sizing: border-box;
+		}
+
+		#wrapPiv div#pivLogo {
+			-ms-flex: 0 0 25%;
+			flex: 0 0 25%;
+			min-width: 160px;
+			max-width: 25%;
+			padding-bottom: 1rem;
+			padding-top: 1rem;
+			display: flex !important;
+			align-items: center !important;
+			justify-content: flex-start !important;
+		}
+
+		#wrapPiv div#pivTitre {
+			-ms-flex: 0 0 50%;
+			flex: 0 0 50%;
+			max-width: 50%;
+			display: flex !important;
+			align-items: center !important;
+			justify-content: flex-start !important;
+			font-size: 1.2rem;
+			line-height: 1.5;
+		}
+
+		#wrapPiv div#pivMenu {
+			-ms-flex: 0 0 25%;
+			flex: 0 0 25%;
+			max-width: 25%;
+			display: flex !important;
+			align-items: center !important;
+			justify-content: flex-end !important;
+		}
+
+		#wrapPiv div#pivLogo img#quebecDrapeau {
+			max-height: 2rem;
+			max-width: 10.175rem;
+		}
+
+		img {
+			border: 0;
+			-ms-interpolation-mode: bicubic;
+			vertical-align: middle;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div id="wrapPiv" role="banner">
+			<div id="piv">
+				<div id="pivLogo">
+					<a href="https://www.quebec.ca/" class=""><img
+							src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NjMuNTUgOTEiPjxkZWZzPjxzdHlsZT4uY2xzLTEsLmNscy0ye2ZpbGw6I2ZmZjt9LmNscy0ye2ZpbGwtcnVsZTpldmVub2RkO308L3N0eWxlPjwvZGVmcz48dGl0bGU+RmljaGllciAxPC90aXRsZT48ZyBpZD0iQ2FscXVlXzIiIGRhdGEtbmFtZT0iQ2FscXVlIDIiPjxnIGlkPSJTaWduYXR1cmUiPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEyNS4yMiw2Mi44OVYyNC4xMWgtLjI5Yy0xLjM4LDEuMjctNi40OCwxLjM3LTguNjQsMS4zN2gtMy43NXYuMzFjNC4zMywyLjY2LDMuNzQsNi41OSwzLjc0LDExLjQ4VjUzLjY4YzAsOC4yMS04LjA2LDE0LTE0LjU2LDE0LTguNTYsMC0xMi4xMS02LjA4LTEyLjExLTE1Ljg5VjI0LjExaC0uM2MtMS4zOCwxLjI3LTYuNTEsMS4zNy04LjY3LDEuMzdINzYuOTR2LjMyYzQuMzMsMi42NiwzLjc0LDYuNTgsMy43NCwxMS40N1Y1My42M2MwLDE1LDYuNDksMjIuMDgsMTguMSwyMi4wOCw2Ljg5LDAsMTQtMi40NCwxNy41MS04LjI4djcuMDhIMTI5di0uMzJDMTI0LjYzLDcxLjc0LDEyNS4yMiw2Ny43OSwxMjUuMjIsNjIuODlaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTQ0Ljg4LDQyLjE1YzEuMTgtNi42Niw2LjEtMTAuODksMTIuNy0xMC44OSw3LjA5LDAsMTEuNjEsMy40OSwxMi43LDEwLjg5Wm0zNS43NCw2LjE4Yy4zOS0xMy42OC04Ljc3LTI0LTIyLjE2LTI0LTE0LjY2LDAtMjQuNiwxMC42NC0yNC42LDI1LjRzMTEuNTEsMjYuMjEsMjguMjUsMjYuMjFhMzMuMjYsMzMuMjYsMCwwLDAsMTMuNTgtMi42NGw0LjkzLTEwaC0uM0EyNC42NSwyNC42NSwwLDAsMSwxNjQuMTcsNjljLTExLjEyLDAtMTkuNDktNy41OS0xOS42OC0yMC42NVoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xODguNDIsMS41OGMyLjM2LDAsNy4xNy0uMTUsOC42My0xLjU4aC4yOVY2Ny4xN2EzMC4zLDMwLjMsMCwwLDAsOC4xMiwxLjI3YzEwLjc1LDAsMTYuOTItNy41MywxNi45Mi0xOCwwLTEwLjI4LTQuOC0xOC4yMy0xNC42Ny0xOC4yM2ExNS45MSwxNS45MSwwLDAsMC04LjIyLDIuMzNsNS4yOC05YTE5LjUzLDE5LjUzLDAsMCwxLDYuOTUtMS4xN2MxMS4xNSwwLDIwLjYzLDkuNjgsMjAuNjMsMjQuMiwwLDE2LjYzLTExLjI1LDI3LjM5LTI5LDI3LjM5LTYuNjUsMC0xMy0xLjE4LTE3Ljg1LTEuOTJ2LS4zM2MzLjI1LTEuNDksMy01LDMtOC41MVYxNi4zM2MwLTQuOTEuNTktMTEuNzctMy42NC0xNC40M1YxLjU4WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTI0OS44Myw0Mi4xNWMxLjE4LTYuNjYsNi4xLTEwLjg5LDEyLjctMTAuODksNy4wOSwwLDExLjYxLDMuNDksMTIuNywxMC44OVptMzUuNzMsNi4xOGMuNC0xMy42OC04Ljc2LTI0LTIyLjE1LTI0LTE0LjY2LDAtMjQuNiwxMC42NC0yNC42LDI1LjRzMTEuNTEsMjYuMjEsMjguMjQsMjYuMjFhMzMuMjcsMzMuMjcsMCwwLDAsMTMuNTktMi42NGw0LjkyLTEwaC0uMjlBMjQuNjUsMjQuNjUsMCwwLDEsMjY5LjEyLDY5Yy0xMS4xMiwwLTE5LjQ5LTcuNTktMTkuNjktMjAuNjVaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMzI5LjU5LDM2LjQ5aC0uM2MtMi44NS0zLjUyLTcuNTgtNS4yMy0xMi01LjIzLTkuNTUsMC0xNi40Myw3LjI1LTE2LjQzLDE3LjM3LDAsMTIuMjUsOS41NCwyMC4zNSwyMC40NywyMC4zNWEyNC4xOCwyNC4xOCwwLDAsMCwxNC4zNy01LjIyaC4zbC01LjEyLDEwLjA2YTM0LjMyLDM0LjMyLDAsMCwxLTEzLDIuMTFjLTE1LjE1LDAtMjctMTAuNjgtMjctMjQuNTMsMC0xOC4zMiwxMy4yMi0yNy4wOCwyOC4wOS0yNy4wOGE0NS4zNyw0NS4zNywwLDAsMSwxMC42MywxLjI2WiIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTE2OC4zMywxNS41M1Y0Ljg3Yy02LjQ1LDIuODktMTIuNDQsOC4zLTE2LjQ0LDEzLjU2djQuMTVDMTYxLjQ3LDE2LjEzLDE2OC4zMywxNS44MywxNjguMzMsMTUuNTNaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMzYuNDMsNjguNmMtMTQuODcsMC0yNS4yMS0xNi43Ny0yNS4yMS0zMSwwLS4xNCwwLTEuNDYsMC0xLjYuMTgtMTMuOCw5LjEyLTI2Ljc1LDI0LjcxLTI2Ljc1LDE2LjQsMCwyNC44NiwxNS41MiwyNSwzMC4yM1Y0MUM2MC45NCw1Ni42Niw1MS4yLDY4LjYsMzYuNDMsNjguNlpNODcuMzgsODQuOWMtMTEsMS43OS0yMS41My0xLjY2LTMyLjc0LTE0LjQ5LDEwLjgzLTUuNDQsMTcuNTMtMTksMTcuNTMtMzEuNTVWMzcuMjlDNzIsMTUuNzcsNTUuOCwxLjU2LDM2LjUzLDEuNTZTLjE1LDE2LjM1LDAsMzhWMzkuNUMwLDYwLjYsMTUuNjYsNzYuMjcsMzQuODUsNzYuMjdhMzQuMzIsMzQuMzIsMCwwLDAsOC4wOC0xLjA3QzU1LjUsODcsNjYuNzEsOTIsNzYuMzksOTAuODNjNC41OS0uNTUsOS40NS0yLjM4LDEyLjM2LTYuMTZaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMzc1LjY1LDI3LjE3Yy0zLC45NS0zLTEuNzUtMy0xLjc1LDIuNjguNDcsMi45NC0xLjc4LDIuOTQtMS43OGgtNS4zNVYyMS4xMmgyLjU0cy0uNDMtMy4zNi0yLjkyLTMuMzZjLTIuMjksMC0yLjYxLDIuNTQtMi4xOSwzLjU5LTEuMTUuMi0yLjgzLTEuNzktMi44My00LjEzYTQuNDUsNC40NSwwLDAsMSw0LjQ1LTQuNTdjMy4zNywwLDUuODksMy44OSw1Ljg5LDguNDdoMWExNS4xLDE1LjEsMCwwLDAtLjI0LTQuMjJjLS43Mi0zLjE3LTIuMy01LTIuMzMtNy4xOS0uMDYtMy43MywyLjE5LTQuMzMsNC03LjU5LDEuOCwzLjI2LDQuMDUsMy44Niw0LDcuNTksMCwyLjE1LTEuNjEsNC0yLjM0LDcuMTlhMTQuODksMTQuODksMCwwLDAtLjIzLDQuMjJoMWMwLTQuNTgsMi41My04LjQ3LDUuOS04LjQ3YTQuNDUsNC40NSwwLDAsMSw0LjQ1LDQuNTdjMCwyLjM0LTEuNjgsNC4zMy0yLjgzLDQuMTMuNDItMS4wNS4xLTMuNTktMi4yLTMuNTktMi40OCwwLTIuOTEsMy4zNi0yLjkxLDMuMzZIMzg1djIuNTJoLTUuMzRzLjI2LDIuMjUsMi45NCwxLjc4YzAsMCwwLDIuNy0zLjA1LDEuNzUsMCwwLS4xMiwyLjQxLTEuOTMsMy4yOEMzNzUuNzcsMjkuNTgsMzc1LjY1LDI3LjE3LDM3NS42NSwyNy4xN1pNNDAxLjU3LDEuNTloLTQ4VjMxaDQ4WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTQzNy42MywyNy4xN2MtMywuOTUtMy4wNS0xLjc1LTMuMDUtMS43NSwyLjY3LjQ3LDIuOTQtMS43OCwyLjk0LTEuNzhoLTUuMzRWMjEuMTJoMi41M3MtLjQzLTMuMzYtMi45Mi0zLjM2Yy0yLjI5LDAtMi42MSwyLjU0LTIuMTksMy41OS0xLjE1LjItMi44My0xLjc5LTIuODMtNC4xM2E0LjQ1LDQuNDUsMCwwLDEsNC40NS00LjU3YzMuMzcsMCw1LjksMy44OSw1LjksOC40N2gxYTE0Ljg5LDE0Ljg5LDAsMCwwLS4yMy00LjIyYy0uNzMtMy4xNy0yLjMtNS0yLjM0LTcuMTktLjA2LTMuNzMsMi4xOS00LjMzLDQtNy41OSwxLjc5LDMuMjYsNC4wNSwzLjg2LDQsNy41OSwwLDIuMTUtMS42LDQtMi4zMiw3LjE5YTE1LjMxLDE1LjMxLDAsMCwwLS4yNSw0LjIyaDFjMC00LjU4LDIuNTItOC40Nyw1Ljg5LTguNDdhNC40NSw0LjQ1LDAsMCwxLDQuNDUsNC41N2MwLDIuMzQtMS42OCw0LjMzLTIuODMsNC4xMy40Mi0xLjA1LjEtMy41OS0yLjE5LTMuNTktMi40OSwwLTIuOTIsMy4zNi0yLjkyLDMuMzZoMi41M3YyLjUySDQ0MS42cy4yNiwyLjI1LDIuOTQsMS43OGMwLDAsMCwyLjctMy4wNSwxLjc1LDAsMC0uMTIsMi40MS0xLjkzLDMuMjhDNDM3Ljc1LDI5LjU4LDQzNy42MywyNy4xNyw0MzcuNjMsMjcuMTdaTTQ2My41NSwxLjU5aC00OFYzMWg0OFoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0zNzUuNjUsNzAuNjNjLTMsMS0zLTEuNzUtMy0xLjc1LDIuNjguNDgsMi45NC0xLjc4LDIuOTQtMS43OGgtNS4zNVY2NC41OGgyLjU0cy0uNDMtMy4zNi0yLjkyLTMuMzZjLTIuMjksMC0yLjYxLDIuNTQtMi4xOSwzLjYtMS4xNS4xOS0yLjgzLTEuOC0yLjgzLTQuMTRhNC40NSw0LjQ1LDAsMCwxLDQuNDUtNC41N2MzLjM3LDAsNS44OSwzLjg5LDUuODksOC40N2gxYTE1LjEsMTUuMSwwLDAsMC0uMjQtNC4yMmMtLjcyLTMuMTYtMi4zLTUtMi4zMy03LjE4LS4wNi0zLjc0LDIuMTktNC4zNCw0LTcuNiwxLjgsMy4yNiw0LjA1LDMuODYsNCw3LjYsMCwyLjE0LTEuNjEsNC0yLjM0LDcuMThhMTQuODksMTQuODksMCwwLDAtLjIzLDQuMjJoMWMwLTQuNTgsMi41My04LjQ3LDUuOS04LjQ3YTQuNDUsNC40NSwwLDAsMSw0LjQ1LDQuNTdjMCwyLjM0LTEuNjgsNC4zMy0yLjgzLDQuMTQuNDItMS4wNi4xLTMuNi0yLjItMy42LTIuNDgsMC0yLjkxLDMuMzYtMi45MSwzLjM2SDM4NVY2Ny4xaC01LjM0cy4yNiwyLjI2LDIuOTQsMS43OGMwLDAsMCwyLjctMy4wNSwxLjc1LDAsMC0uMTIsMi40MS0xLjkzLDMuMjhDMzc1Ljc3LDczLDM3NS42NSw3MC42MywzNzUuNjUsNzAuNjNabTI1LjkyLTI1LjU3aC00OHYyOS40aDQ4WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTQzNy42Myw3MC42M2MtMywxLTMuMDUtMS43NS0zLjA1LTEuNzUsMi42Ny40OCwyLjk0LTEuNzgsMi45NC0xLjc4aC01LjM0VjY0LjU4aDIuNTNzLS40My0zLjM2LTIuOTItMy4zNmMtMi4yOSwwLTIuNjEsMi41NC0yLjE5LDMuNi0xLjE1LjE5LTIuODMtMS44LTIuODMtNC4xNGE0LjQ1LDQuNDUsMCwwLDEsNC40NS00LjU3YzMuMzcsMCw1LjksMy44OSw1LjksOC40N2gxYTE0Ljg5LDE0Ljg5LDAsMCwwLS4yMy00LjIyYy0uNzMtMy4xNi0yLjMtNS0yLjM0LTcuMTgtLjA2LTMuNzQsMi4xOS00LjM0LDQtNy42LDEuNzksMy4yNiw0LjA1LDMuODYsNCw3LjYsMCwyLjE0LTEuNiw0LTIuMzIsNy4xOGExNS4zMSwxNS4zMSwwLDAsMC0uMjUsNC4yMmgxYzAtNC41OCwyLjUyLTguNDcsNS44OS04LjQ3YTQuNDUsNC40NSwwLDAsMSw0LjQ1LDQuNTdjMCwyLjM0LTEuNjgsNC4zMy0yLjgzLDQuMTQuNDItMS4wNi4xLTMuNi0yLjE5LTMuNi0yLjQ5LDAtMi45MiwzLjM2LTIuOTIsMy4zNmgyLjUzVjY3LjFINDQxLjZzLjI2LDIuMjYsMi45NCwxLjc4YzAsMCwwLDIuNy0zLjA1LDEuNzUsMCwwLS4xMiwyLjQxLTEuOTMsMy4yOEM0MzcuNzUsNzMsNDM3LjYzLDcwLjYzLDQzNy42Myw3MC42M1ptMjUuOTItMjUuNTdoLTQ4djI5LjRoNDhaIi8+PC9nPjwvZz48L3N2Zz4="
+							width="463" height="91" id="quebecDrapeau" alt="Logo du gouvernement du Québec"
+							title="Québec.ca"></a>
+				</div>
+				
+				<div id="pivTitre">
+					Commission des normes de l'équite de la santé et de la sécurite au Travail<br> 
+				</div>
+			</div>
+		</div>
+		<div class="">
+			<div id="wrap">
+				<div class="accueil-wrap">
+					<div class="wrapwhite">
+						<h1>Accès refusé</h1>
+					</div>
+					<div class="wrapwhite">
+						<p>Vous n'êtes  pas autorisé à acceder aux  sites web de la Commission des normes de l'équite de la santé et de la sécurite au Travail.</p>
+						<p>Merci de vous rapprocher de L'administrateur du site Web.</p>
+						<a href="https://www.cnesst.gouv.qc.ca/fr/service-clientele/nous-joindre"<p style="color: rgb(28, 83, 47); font-size: 18px;">Nous joindre</a>
+						<a href="mailto:adminInfraCloud@cnesst.gouv.qc.ca">Declarer Votre Incident</a> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
