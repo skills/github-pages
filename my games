@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Download Your Favorite Apps & Games</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Google Fonts for Modern Look -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: linear-gradient(120deg, #667eea 0%, #764ba2 100%);
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: #22223b;
+      background-attachment: fixed;
+    }
+    .header {
+      text-align: center;
+      padding: 60px 16px 36px 16px;
+      color: #fff;
+      background: linear-gradient(120deg, #667eea 50%, #764ba2 100%);
+      box-shadow: 0 4px 24px rgba(118, 75, 162, 0.13);
+      border-bottom-left-radius: 40px 28px;
+      border-bottom-right-radius: 40px 28px;
+    }
+    .header h1 {
+      margin: 0 0 14px 0;
+      font-size: 2.7em;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-shadow: 0 3px 18px rgba(40, 40, 80, 0.17);
+    }
+    .header p {
+      font-size: 1.18em;
+      opacity: 0.97;
+      margin: 0;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+    .cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 36px;
+      justify-content: center;
+      margin: 44px auto 30px auto;
+      max-width: 1100px;
+      padding: 0 12px;
+    }
+    .app-card {
+      background: rgba(255,255,255,0.98);
+      border-radius: 22px;
+      box-shadow: 0 8px 40px rgba(102,126,234,0.13), 0 1.5px 6px #e0e7ff;
+      width: 330px;
+      transition: transform 0.19s cubic-bezier(.7,.2,.4,1), box-shadow 0.18s;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      border: 1.5px solid #e0e7ff;
+      backdrop-filter: blur(1.5px);
+      z-index: 1;
+    }
+    .app-card:hover {
+      transform: translateY(-14px) scale(1.04) rotateZ(-1deg);
+      box-shadow: 0 14px 48px 0 rgba(102,126,234,0.19), 0 4px 18px #c7d2fe;
+      border-color: #b5b5ff;
+    }
+    .app-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      background: #e0e7ff;
+      border-bottom: 1.5px solid #e0e7ff;
+      filter: brightness(0.98) saturate(1.12);
+      transition: filter 0.2s;
+    }
+    .app-card:hover .app-image {
+      filter: brightness(1.1) saturate(1.2);
+    }
+    .app-content {
+      padding: 25px 20px 20px 20px;
+      text-align: center;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .app-title {
+      font-size: 1.28em;
+      font-weight: 700;
+      color: #5a189a;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+      text-shadow: 0 1px 10px #e0c3fc11;
+    }
+    .app-desc {
+      font-size: 1em;
+      color: #22223b;
+      margin-bottom: 20px;
+      line-height: 1.7;
+      min-height: 54px;
+      font-weight: 400;
+      opacity: 0.93;
+    }
+    .download-link {
+      background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+      color: #22223b;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 36px;
+      text-decoration: none;
+      font-size: 1.08em;
+      font-weight: bold;
+      box-shadow: 0 2px 12px #e0e7ff;
+      transition: background 0.23s, box-shadow 0.23s, color 0.19s;
+      margin-top: auto;
+      display: inline-block;
+      letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
+    }
+    .download-link:hover {
+      background: linear-gradient(90deg, #38f9d7 0%, #43e97b 100%);
+      color: #44227a;
+      box-shadow: 0 6px 24px #a3ffe6;
+      transform: scale(1.04);
+    }
+    .download-link::after {
+      content: "⬇️";
+      margin-left: 10px;
+      font-size: 1em;
+      vertical-align: middle;
+      opacity: 0.8;
+    }
+    .social-links {
+      text-align: center;
+      margin: 46px 0 12px 0;
+    }
+    .social-links a {
+      margin: 0 16px;
+      color: #fff;
+      background: linear-gradient(120deg, #43e97b 30%, #38f9d7 100%);
+      font-size: 2.05em;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 2px 12px #38f9d733;
+      transition: background 0.21s, color 0.21s, transform 0.17s;
+    }
+    .social-links a:hover {
+      background: linear-gradient(120deg, #764ba2 30%, #667eea 100%);
+      color: #fff;
+      transform: scale(1.1) rotate(-6deg);
+    }
+    @media (max-width: 900px) {
+      .cards-container { gap: 20px; }
+      .app-card { width: 98vw; min-width: 210px; max-width: 380px;}
+    }
+    @media (max-width: 600px) {
+      .header h1 { font-size: 1.3em; }
+      .app-card { width: 99vw; }
+      .app-image { height: 115px; }
+      .app-content { padding: 14px 4vw 18px 4vw; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Download Your Favorite Apps & Games</h1>
+    <p>Discover the best apps and games, carefully selected just for you.<br> Click download to start your adventure!</p>
+  </div>
+
+  <div class="cards-container">
+    <!-- Card 1 -->
+    <div class="app-card">
+      <img class="app-image" src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Car Race Game">
+      <div class="app-content">
+        <div class="app-title">Car Race Game</div>
+        <div class="app-desc">
+          Enjoy fast-paced 3D racing! Choose your favorite car, beat your friends, and become a racing champion.
+        </div>
+        <a class="download-link" href="https://example.com/car-race" target="_blank">Download</a>
+      </div>
+    </div>
+    <!-- Card 2 -->
+    <div class="app-card">
+      <img class="app-image" src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Learn English App">
+      <div class="app-content">
+        <div class="app-title">Learn English App</div>
+        <div class="app-desc">
+          Boost your English with interactive lessons, daily progress tracking, and fun quizzes for all levels.
+        </div>
+        <a class="download-link" href="https://example.com/learn-english" target="_blank">Download</a>
+      </div>
+    </div>
+    <!-- Card 3 -->
+    <div class="app-card">
+      <img class="app-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Smart Puzzle Game">
+      <div class="app-content">
+        <div class="app-title">Smart Puzzle Game</div>
+        <div class="app-desc">
+          Challenge your mind with clever puzzles! Tons of levels and cool designs await you.
+        </div>
+        <a class="download-link" href="https://example.com/puzzle-game" target="_blank">Download</a>
+      </div>
+    </div>
+    <!-- Example of another attractive game card -->
+    <div class="app-card">
+      <img class="app-image" src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=400&q=80" alt="Chess Game">
+      <div class="app-content">
+        <div class="app-title">Chess Game</div>
+        <div class="app-desc">
+          Play classic chess against friends or AI. Improve your strategy and climb the leaderboards!
+        </div>
+        <a class="download-link" href="https://example.com/chess-game" target="_blank">Download</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="social-links">
+    <a href="https://t.me/yourchannel" target="_blank" title="Telegram">📱</a>
+    <a href="https://wa.me/yourwhatsapp" target="_blank" title="WhatsApp">💬</a>
+    <!-- Add your real links here -->
+  </div>
+</body>
+</html>
