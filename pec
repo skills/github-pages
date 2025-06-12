@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escuela Normal de Atlacomulco</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f2f2f2;
+    }
+    header {
+      background-color: #004080;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    section {
+      padding: 30px;
+      background-color: white;
+      margin: 20px;
+      border-radius: 10px;
+    }
+    h2 {
+      color: #004080;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+    .gallery img {
+      width: 300px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    footer {
+      background-color: #004080;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Escuela Normal de Atlacomulco</h1>
+  <p>Formando docentes con excelencia y compromiso</p>
+</header>
+
+<section>
+  <h2>¿Qué nos ofrece la Escuela Normal de Atlacomulco?</h2>
+  <p>
+    La Escuela Normal de Atlacomulco ofrece una formación integral para futuros docentes,
+    con enfoque en el desarrollo pedagógico, humanista y profesional. Cuenta con instalaciones modernas,
+    biblioteca, laboratorios, aulas digitales, actividades culturales y deportivas, y programas de práctica docente en escuelas reales.
+  </p>
