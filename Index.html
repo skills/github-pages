@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Para Melany</title>
+  <style>
+    body {
+      margin:0; padding:0;
+      height:100vh;
+      background: url('https://i.imgur.com/4NJ6IvH.jpg') center/cover no-repeat;
+      display:flex; justify-content:center; align-items:center;
+      font-family: 'Segoe UI', sans-serif;
+      overflow:hidden;
+    }
+    .message {
+      background: rgba(255,255,255,0.8);
+      padding: 2rem;
+      border-radius: 1rem;
+      max-width: 90%;
+      opacity: 0;
+      animation: type 5s steps(100) forwards;
+      font-size: 1.5rem;
+      text-align: center;
+    }
+    @keyframes type {
+      0% { opacity:0; }
+      100% { opacity:1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="message">
+    Eu te amo muito Melany, só de imaginar você consegue trazer um sorriso ao seu rosto, N Eu te amo, eu te amo.
+  </div>
+  <audio autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+  </audio>
+</body>
+</html>
