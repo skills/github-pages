@@ -1,0 +1,2034 @@
+# GitHub Pages
+
+_Create a site or blog from your GitHub repositories with GitHub Pages._
+
+## Welcome
+
+- **Who is this for**: Beginners, students, project maintainers, small businesses.
+- **What you'll learn**: How to build a GitHub Pages site.
+- **What you'll build**: We'll build a simple GitHub Pages site with a blog. We'll use [Jekyll](https://jekyllrb.com), a static site generator.
+- **Prerequisites**: If you need to learn about branches, commits, and pull requests, take [Introduction to GitHub](https://github.com/skills/introduction-to-github) first.
+
+- **How long**: This exercise takes less than one hour to complete.
+
+In this exercise, you will:
+
+1. Enable GitHub Pages
+1. Configure your site
+1. Customize your home page
+1. Create a blog post
+1. Merge your pull request
+
+
+### How to start this exercise
+
+Simply copy the exercise to your account, then give your favorite Octocat (Mona) **about 20 seconds** to prepare the first lesson, then **refresh the page**.
+
+[![](https://img.shields.io/badge/Copy%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/new?template_owner=skills&template_name=github-pages&owner=%40me&name=skills-github-pages&description=Exercise:+Create+a+site+or+blog+from+your+GitHub+repositories+with+GitHub+Pages&visibility=public)
+
+<details>
+<summary>Having trouble? 🤷</summary><br/>
+
+When copying the exercise, we recommend the following settings:
+
+- For owner, choose your personal account or an organization to host the repository.
+
+- We recommend creating a public repository, since private repositories will use Actions minutes.
+
+If the exercise isn't ready in 20 seconds, please check the [Actions](../../actions) tab.
+
+- Check to see if a job is running. Sometimes it simply takes a bit longer.
+
+- If the page shows a failed job, please submit an issue. Nice, you found a bug! 🐛
+
+</details>
+
+---
+
+&copy; 2025 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
+
+Debugging Profiling.
+Debug.
+debug
+OpenCollective OpenCollective
+
+A tiny JavaScript debugging utility modelled after Node.js core's debugging technique. Works in Node.js and web browsers.
+
+Installation
+$ npm install debug
+Usage
+debug exposes a function; simply pass this function the name of your module, and it will return a decorated version of console.error for you to pass debug statements to. This will allow you to toggle the debug output for different parts of your module as well as the module as a whole.
+
+Example app.js:
+
+var debug = require('debug')('http')
+  , http = require('http')
+  , name = 'My App';
+
+// fake app
+
+debug('booting %o', name);
+
+http.createServer(function(req, res){
+  debug(req.method + ' ' + req.url);
+  res.end('hello\n');
+}).listen(3000, function(){
+  debug('listening');
+});
+
+// fake worker of some kind
+
+require('./worker');
+Example worker.js:
+
+var a = require('debug')('worker:a')
+  , b = require('debug')('worker:b');
+
+function work() {
+  a('doing lots of uninteresting work');
+  setTimeout(work, Math.random() * 1000);
+}
+
+work();
+
+function workb() {
+  b('doing some work');
+  setTimeout(workb, Math.random() * 2000);
+}
+
+workb();
+The DEBUG environment variable is then used to enable these based on space or comma-delimited names.
+
+Here are some examples:
+
+screen shot 2017-08-08 at 12 53 04 pm screen shot 2017-08-08 at 12 53 38 pm screen shot 2017-08-08 at 12 53 25 pm
+Windows command prompt notes
+CMD
+On Windows the environment variable is set using the set command.
+
+set DEBUG=*,-not_this
+Example:
+
+set DEBUG=* & node app.js
+PowerShell (VS Code default)
+PowerShell uses different syntax to set environment variables.
+
+$env:DEBUG = "*,-not_this"
+Example:
+
+$env:DEBUG='app';node app.js
+Then, run the program to be debugged as usual.
+
+npm script example:
+
+  "windowsDebug": "@powershell -Command $env:DEBUG='*';node app.js",
+Namespace Colors
+Every debug instance has a color generated for it based on its namespace name. This helps when visually parsing the debug output to identify which debug instance a debug line belongs to.
+
+Node.js
+In Node.js, colors are enabled when stderr is a TTY. You also should install the supports-color module alongside debug, otherwise debug will only use a small handful of basic colors.
+
+
+Web Browser
+Colors are also enabled on "Web Inspectors" that understand the %c formatting option. These are WebKit web inspectors, Firefox (since version 31) and the Firebug plugin for Firefox (any version).
+
+
+Millisecond diff
+When actively developing an application it can be useful to see when the time spent between one debug() call and the next. Suppose for example you invoke debug() before requesting a resource, and after as well, the "+NNNms" will show you how much time was spent between calls.
+
+
+When stdout is not a TTY, Date#toISOString() is used, making it more useful for logging the debug information as shown below:
+
+
+Conventions
+If you're using this in one or more of your libraries, you should use the name of your library so that developers may toggle debugging as desired without guessing names. If you have more than one debuggers you should prefix them with your library name and use ":" to separate features. For example "bodyParser" from Connect would then be "connect:bodyParser". If you append a "*" to the end of your name, it will always be enabled regardless of the setting of the DEBUG environment variable. You can then use it for normal output as well as debug output.
+
+Wildcards
+The * character may be used as a wildcard. Suppose for example your library has debuggers named "connect:bodyParser", "connect:compress", "connect:session", instead of listing all three with DEBUG=connect:bodyParser,connect:compress,connect:session, you may simply do DEBUG=connect:*, or to run everything using this module simply use DEBUG=*.
+
+You can also exclude specific debuggers by prefixing them with a "-" character. For example, DEBUG=*,-connect:* would include all debuggers except those starting with "connect:".
+
+Environment Variables
+When running through Node.js, you can set a few environment variables that will change the behavior of the debug logging:
+
+Name Purpose
+DEBUG Enables/disables specific debugging namespaces.
+DEBUG_HIDE_DATE Hide date from debug output (non-TTY).
+DEBUG_COLORS Whether or not to use colors in the debug output.
+DEBUG_DEPTH Object inspection depth.
+DEBUG_SHOW_HIDDEN Shows hidden properties on inspected objects.
+Note: The environment variables beginning with DEBUG_ end up being converted into an Options object that gets used with %o/%O formatters. See the Node.js documentation for util.inspect() for the complete list.
+
+Formatters
+Debug uses printf-style formatting. Below are the officially supported formatters:
+
+Formatter Representation
+%O Pretty-print an Object on multiple lines.
+%o Pretty-print an Object all on a single line.
+%s String.
+%d Number (both integer and float).
+%j JSON. Replaced with the string '[Circular]' if the argument contains circular references.
+%% Single percent sign ('%'). This does not consume an argument.
+Custom formatters
+You can add custom formatters by extending the debug.formatters object. For example, if you wanted to add support for rendering a Buffer as hex with %h, you could do something like:
+
+const createDebug = require('debug')
+createDebug.formatters.h = (v) => {
+  return v.toString('hex')
+}
+
+// …elsewhere
+const debug = createDebug('foo')
+debug('this is hex: %h', new Buffer('hello world'))
+// foo this is hex: 68656c6c6f20776f726c6421 +0ms
+Browser Support
+You can build a browser-ready script using browserify, or just use the browserify-as-a-service build, if you don't want to build it yourself.
+
+Debug's enable state is currently persisted by localStorage. Consider the situation shown below where you have worker:a and worker:b, and wish to debug both. You can enable this using localStorage.debug:
+
+localStorage.debug = 'worker:*'
+And then refresh the page.
+
+a = debug('worker:a');
+b = debug('worker:b');
+
+setInterval(function(){
+  a('doing some work');
+}, 1000);
+
+setInterval(function(){
+  b('doing some work');
+}, 1200);
+In Chromium-based web browsers (e.g. Brave, Chrome, and Electron), the JavaScript console will—by default—only show messages logged by debug if the "Verbose" log level is enabled.
+
+
+Output streams
+By default debug will log to stderr, however this can be configured per-namespace by overriding the log method:
+
+Example stdout.js:
+
+var debug = require('debug');
+var error = debug('app:error');
+
+// by default stderr is used
+error('goes to stderr!');
+
+var log = debug('app:log');
+// set this namespace to log via console.log
+log.log = console.log.bind(console); // don't forget to bind to console!
+log('goes to stdout');
+error('still goes to stderr!');
+
+// set all output to go via console.info
+// overrides all per-namespace log settings
+debug.log = console.info.bind(console);
+error('now goes to stdout via console.info');
+log('still goes to stdout, but via console.info now');
+Extend
+You can simply extend debugger
+
+const log = require('debug')('auth');
+
+//creates new debug instance with extended namespace
+const logSign = log.extend('sign');
+const logLogin = log.extend('login');
+
+log('hello'); // auth hello
+logSign('hello'); //auth:sign hello
+logLogin('hello'); //auth:login hello
+Set dynamically
+You can also enable debug dynamically by calling the enable() method :
+
+let debug = require('debug');
+
+console.log(1, debug.enabled('test'));
+
+debug.enable('test');
+console.log(2, debug.enabled('test'));
+
+debug.disable();
+console.log(3, debug.enabled('test'));
+
+print :
+
+1 false
+2 true
+3 false
+Usage :
+enable(namespaces)
+namespaces can include modes separated by a colon and wildcards.
+
+Note that calling enable() completely overrides previously set DEBUG variable :
+
+$ DEBUG=foo node -e 'var dbg = require("debug"); dbg.enable("bar"); console.log(dbg.enabled("foo"))'
+=> false
+disable()
+
+Will disable all namespaces. The functions returns the namespaces currently enabled (and skipped). This can be useful if you want to disable debugging temporarily without knowing what was enabled to begin with.
+
+For example:
+
+let debug = require('debug');
+debug.enable('foo:*,-foo:bar');
+let namespaces = debug.disable();
+debug.enable(namespaces);
+Note: There is no guarantee that the string will be identical to the initial enable string, but semantically they will be identical.
+
+Checking whether a debug target is enabled
+After you've created a debug instance, you can determine whether or not it is enabled by checking the enabled property:
+
+const debug = require('debug')('http');
+
+if (debug.enabled) {
+  // do stuff...
+}
+You can also manually toggle this property to force the debug instance to be enabled or disabled.
+
+Usage in child processes
+Due to the way debug detects if the output is a TTY or not, colors are not shown in child processes when stderr is piped. A solution is to pass the DEBUG_COLORS=1 environment variable to the child process.
+For example:
+
+worker = fork(WORKER_WRAP_PATH, [workerPath], {
+  stdio: [
+    /* stdin: */ 0,
+    /* stdout: */ 'pipe',
+    /* stderr: */ 'pipe',
+    'ipc',
+  ],
+  env: Object.assign({}, process.env, {
+    DEBUG_COLORS: 1 // without this settings, colors won't be shown
+  }),
+});
+
+worker.stderr.pipe(process.stderr, { end: false });
+Authors
+TJ Holowaychuk
+Nathan Rajlich
+Andrew Rhyne
+Josh Junon
+Backers
+Support us with a monthly donation and help us continue our activities. [Become a backer]
+
+                             
+
+Sponsors
+Become a sponsor and get your logo on our README on Github with a link to your site. [Become a sponsor]
+
+                             
+
+License
+(The MIT License)
+
+Copyright (c) 2014-2017 TJ Holowaychuk <tj@vision-media.ca> Copyright (c) 2018-2021 Josh Junon
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Why-is-node-running.
+
+why-is-node-running
+Node.js is running but you don't know why? why-is-node-running is here to help you.
+
+Installation
+If you want to use why-is-node-running in your code, you can install it as a local dependency of your project. If you want to use it as a CLI, you can install it globally, or use npx to run it without installing it.
+
+As a local dependency
+Node.js 20.11 and above (ECMAScript modules):
+
+npm install --save-dev why-is-node-running
+Node.js 8 or higher (CommonJS):
+
+npm install --save-dev why-is-node-running@v2.x
+As a global package
+npm install --global why-is-node-running
+why-is-node-running /path/to/some/file.js
+Alternatively if you do not want to install the package globally, you can run it with npx:
+
+npx why-is-node-running /path/to/some/file.js
+Usage (as a dependency)
+import whyIsNodeRunning from 'why-is-node-running' // should be your first import
+import { createServer } from 'node:net'
+
+function startServer () {
+  const server = createServer()
+  setInterval(() => {}, 1000)
+  server.listen(0)
+}
+
+startServer()
+startServer()
+
+// logs out active handles that are keeping node running
+setImmediate(() => whyIsNodeRunning())
+Save the file as example.js, then execute:
+
+node ./example.js
+Here's the output:
+
+There are 4 handle(s) keeping the process running
+
+# Timeout
+example.js:6 - setInterval(() => {}, 1000)
+example.js:10 - startServer()
+
+# TCPSERVERWRAP
+example.js:7 - server.listen(0)
+example.js:10 - startServer()
+
+# Timeout
+example.js:6 - setInterval(() => {}, 1000)
+example.js:11 - startServer()
+
+# TCPSERVERWRAP
+example.js:7 - server.listen(0)
+example.js:11 - startServer()
+Usage (as a CLI)
+You can run why-is-node-running as a standalone if you don't want to include it inside your code. Sending SIGUSR1/SIGINFO signal to the process will produce the log. (Ctrl + T on macOS and BSD systems)
+
+why-is-node-running /path/to/some/file.js
+probing module /path/to/some/file.js
+kill -SIGUSR1 31115 for logging
+To trigger the log:
+
+kill -SIGUSR1 31115
+Usage (with Node.js' --import option)
+You can also use Node's --import option to preload why-is-node-running:
+
+node --import why-is-node-running/include /path/to/some/file.js
+The steps are otherwise the same as the above CLI section
+
+License
+MIT.
+
+
+
+NjsTrace.
+
+njsTrace - Instrumentation and Tracing
+njstrace lets you easily instrument and trace you code, see all function calls, arguments, return values, as well as the time spent in each function.
+
+Installation
+npm install njstrace
+
+Example
+To start tracing with the default settings just require njstrace and call its inject method.
+
+var njstrace = require('njstrace').inject();
+
+Lets take a look at the following 2 files dummy "app":
+
+main.js
+
+// *** main.js ***
+var njstrace = require('njstrace').inject(),
+    mymod = require('./mymod.js');
+
+// Use only 4 digits so the output would be easier to read
+mymod.run(parseFloat(Math.random().toFixed(4)));
+mymod.js
+
+// *** mymod.js ***
+exports.run = function(number) {
+    number = first(number);
+    printResult(number);
+}
+
+function first(i) {
+    i *= 100;
+    return second(i, 'sqrt');
+}
+
+function second(k, method) {
+    return {input: k, output: parseFloat(Math.sqrt(k).toFixed(4)), method: method};
+}
+
+function printResult(res) {
+    require('fs').writeFileSync('output.txt', JSON.stringify(res));
+}
+The njstrace output of this silly app would be like that
+
+--> MyMod.run@c:\temp\tracedemo\mymod.js::17, args: {0}: 0.9967
+  --> first@c:\temp\tracedemo\mymod.js::4, args: {0}: 0.9967
+    --> second@c:\temp\tracedemo\mymod.js::9, args: {0}: 99.67 {1}: 'sqrt'
+    <-- second@c:\temp\tracedemo\mymod.js::9, ts: 0, retLine: 10, retVal: { input: 99.67, output: 9.9835, method: 'sqrt' }
+  <-- first@c:\temp\tracedemo\mymod.js::4, ts: 1, retLine: 6, retVal: { input: 99.67, output: 9.9835, method: 'sqrt' }
+  --> printResult@c:\temp\tracedemo\mymod.js::13, args: {0}: { input: 99.67, output: 9.9835, method: 'sqrt' }
+  <-- printResult@c:\temp\tracedemo\mymod.js::13, ts: 2, retLine: 15, retVal:
+<-- MyMod.run@c:\temp\tracedemo\mymod.js::17, ts: 4, retLine: 20, retVal:
+How it works?
+Once njstrace.inject() is called njstrace "hijacks" node.js Module._compile() method, this method is called whenever a module is being "required", njstrace instrument the required module code, and then calls to the original Module._compile() with the instrumented code. The instrumentation just adds calls to njstrace tracing methods at the beginning of each function, at the end of each function, and before any return statement.
+
+All these calls to njstrace tracing methods should be totally neutral and should not affect your code logic, it will however (obviously), affect the runtime performance of your code, hence it is recommended to run with tracing ONLY when debugging (there is a possibility to run with njstrace disabled and enable it when necessary, see configuration explanation below).
+
+NOTE: Since the instrumentation happens when the Module._compile() is called, only modules that are "required" after the call to njstrace.inject() would get instrumented. Practically it means that the actual module that calls to njstrace.inject() will not be instrumented, so in the example above, there is no instrumentation on main.js
+
+NJSTrace object
+The NJSTrace object is the result of require('njstrace') it exposes the following:
+
+inject(config)
+The inject method can get a configuration object with the following:
+
+enabled {boolean} - Whether tracing is active, default: true Note: njstrace will instrument the code regardless of this setting, and njstrace tracing methods would be called, they will just do nothing, so the affect on runtime peeformace should be minimal. You can enable njstrace during runtime by setting njstrace.enabled = true
+
+ecmaVersion {number|string} - The Ecma Version to use when parsing javascript code, default: 2022. Supported values are the same that are supported by the Espree parser. Use "latest" to use the latest supported version.
+
+files {string|string[]} - A glob file pattern(s) that matches the files to instrument, this can be any pattern that is supported by minimatch npm module. The matching is case-insensitive. Patterns are processed in-order with an 'or' operator, unless it's a negative pattern (i.e starts with "!") which negates (if matches) all matches up to it. default: All .js files EXCLUDING node_modules ['**/*.js', '!**/node_modules/**'] NOTE: All file paths are processed relative to the process working directory, which means that the glob patterns also have to be relative to the working directory. If you are not running your app from the "root" of your app (i.e running from a sub-direcotry "node ../server.js"), you will not be able to use the default glob patterns, a solution could be to use something like that:
+
+var path = require('path');
+
+// Get the relative path from the working directory to the directory of the main app file
+var rel = path.relative(process.cwd(), __dirname);
+
+// Build the glob pattern for all JS files one that excludes node_modules, and use those
+var alljs = path.join(rel, '**', '*.js');
+var noNodeMods = '!' + path.join(rel, '**', 'node_modules', '**');
+var njstrace = require('njstrace').inject({files: [alljs, noNodeMods]}),
+wrapFunctions {boolean} - Whether njstrace should wrap the instrumented functions in a try/catch block. Wrapping the functions in try/catch can give better tracing in case of uncaought exceptions. default: true NOTE: wrapping functions in try/catch prevent v8 optimizations on the function, don't use it when profiling.
+
+logger {boolean|string|function} - Controls where the logger output should go. default: false njstrace uses the logger to log about the instrumentation process and other information messages, the logger is NOT used for writing the tracing info (for this see formatter below).
+
+If Boolean, indicates whether NJSTrace will log (to the console) its progress.
+If string, a path to an output file (absolute or relative to current working directory).
+If function, a custom log function, gets a single argument.
+inspectArgs {boolean} - Whether njstrace should inspect the traced functions arguments and return values. default: true NOTE: Inspecting the arguments is done by passing the function's arguments object to a tracer method, passing the arguments object to another method prevent v8 optimizations on the function, don't use it when profiling.
+
+formatter {Formatter|object | (Formatter|object)[]} - An instance of Formatter(s) to use for output or a config object(s) for the default formatter (read more on Formatters below)
+
+if Formatter object, it will be added to the list of formatters to use
+if object, a configuration to the default Formatter (see its options in the Formatters section below).
+if Array, a list of formatters to use, or a list of configurations for the default formatter (can be mixed, so if two configuration objects are provided, two default formatters would be created with the given config).
+enabled
+Gets or sets whether njstrace is enabled or not. This let you start your application with instrumented code, but delay start the actual tracing (say start the tracing only after a specific event etc).
+
+// Start njstrace disabled (instrument the code but tracing is not active)
+var njstrace = require('njstrace').inject({enabled: false});
+// And somewhere later in the code activate the tracing
+njstrace.enabled = true;
+Formatters
+njstrace uses formatters to write the tracing output, it can use multiple formatters so in a single run several files in different formats would be written. The formatters that njstrace will use are configured using the formatter property on the configuration object passed to the inject() method.
+
+Default Formatter
+While you can write your own Formatter object, njstrace comes with a default formatter which can be configured using an object with the following properties:
+
+stdout {boolean|string|function} - Controls where the output should go. default: true
+
+If Boolean, indicates whether the formatter will write output (to the console) or not.
+If String, a path to an output file (absolute or relative to current working dir).
+If function, this function will be used for output (gets a single string arg).
+indentationChar {string} - The character used for output indentation of the call stack (e.g '\t', ' ', etc). default: 2 space chars
+
+inspectArgsCount {number} - The number of arguments to inspect on functions entry. default: 5
+
+inspectArgsMaxLen {number} - The maximum number of characters to print for each argument and return value (prevent endless prints on very long arguments). If 0 then unlimited. default: 500
+
+inspectOptions {object} - The inspection is done using Node.js util.inspect method, this is an options object for that function. default: null
+
+Example
+
+// Create formatter options that will write to the console, limit each argument inspect output to 100 chars,
+// color the arguments and use 4 spaces indentation
+var consoleFormatter = {
+    stdout: true, // this is actually the default and can be removed
+    inspectArgsMaxLen: 100,
+    indentationChar: '    ',
+    inspectOptions: {colors: true}
+};
+
+// Create another formatter options that will write to a file, no limit on arguments length, and use "\t" as indentation
+var fileFormatter = {
+    stdout: 'trace.out',
+    inspectArgsMaxLen: 0,
+    indentationChar: '\t'
+};
+
+// Call inject and pass the 2 formatters config objects
+var njstrace = require('njstrace').inject({
+    formatter: [consoleFormatter, fileFormatter]
+});
+The result of the above run would be both an output to the console and output to a "trace.out" file.
+
+Custom Formatter
+Writing a custom formatter is easy, all you have to do is write a "class" that inherits from njstrace Formatter, and implement the onEntry and onExit methods.
+
+onEntry - This method is called whenever a traced function is being called, the method gets a single args object with the following:
+
+name {string} - The traced function name
+
+file {string} - The traced file
+
+line {number} - The traced function line number
+
+args {object} - The function arguments object
+
+stack {Tracer.CallStack} - The current call stack including the current traced function (see Tracer.CallStack below)
+
+onExit - This method is called whenever a traced function returns, the method gets a single args object with the following:
+
+name {string} - The traced function name
+
+file {string} - The traced file
+
+line {number} - The traced function line number
+
+retLine {number} - The line number where the exit is (can be either a return statement of function end)
+
+stack {Tracer.CallStack} - The current call stack AFTER popping the current traced function (see Tracer.CallStack below)
+
+span {number} - The execution time span (milliseconds) of the traced function
+
+exception {boolean} - Whether this exit is due to exception
+
+returnValue {*|null} - The function return value
+
+Tracer.CallStack - A call stack object. This is an Array object where each element is a function stack id. In order to get the function name/file/line the CallStack object has a stackMap property which is a dictionary where the key is the stack id and the value is a string in the following format fnName@fnFile:line
+
+Example
+Creating a simple formatter that writes to the console.
+
+main.js
+
+// Get a reference to njstrace default Formatter class
+var Formatter = require('njstrace/lib/formatter.js');
+
+// Create my custom Formatter class
+function MyFormatter() {
+    // No need to call Formatter ctor here
+}
+// But must "inherit" from Formatter
+require('util').inherits(MyFormatter, Formatter);
+
+// Implement the onEntry method
+MyFormatter.prototype.onEntry = function(args) {
+    console.log('Got call to %s@%s::%s, num of args: %s, stack location: %s',
+                args.name, args.file, args.line, args.args.length, args.stack.length);
+};
+
+// Implement the onExit method
+MyFormatter.prototype.onExit = function(args) {
+    console.log('Exit from %s@%s::%s, had exception: %s, exit line: %s, execution time: %s, has return value: %s',
+                args.name, args.file, args.line, args.exception, args.retLine, args.span, args.returnValue !== null);
+};
+
+// Call inject and use MyFormatter as the formatter
+var njstrace = require('njstrace').inject({ formatter: new MyFormatter() }),
+    b = require('./b.js');
+
+// Do some stuff on "b"
+setTimeout(function(){
+    b.foo();
+}, 1000);
+b.js
+
+function doFoo() {
+    console.log('fooing');
+    return 3;
+}
+
+exports.foo = function() {
+    doFoo();
+}
+And the console output would be:
+
+Got call to exports.foo@C:\MyProjects\njsTrace\test\b.js::6, num of args: 0, stack location: 1
+Got call to doFoo@C:\MyProjects\njsTrace\test\b.js::1, num of args: 0, stack location: 2
+fooing
+Exit from doFoo@C:\MyProjects\njsTrace\test\b.js::1, had exception: false, exit line: 3, execution time: 0, has return value: true
+Exit from exports.foo@C:\MyProjects\njsTrace\test\b.js::6, had exception: false, exit line: 8, execution time: 1, has return value: false
+
+ next I would want to see if I can create some GUI that will parse the tracing output and display it nicely (forks are welcomed as I don't see myself getting to this :)).
+
+Vstream.
+
+node-vstream: instrumented streams
+When working with Node streams, particularly object-mode streams, it's often helpful to be able to inspect a pipeline. This module instruments objects to provide:
+
+For all objects:
+
+a name: used in debug output and especially useful for data pipelines
+custom counters: create your own counters for events of interest like errors, requests handled, messages sent, or the like
+custom warnings: Error objects that are counted, forwarded to subscribers, but otherwise ignored
+For all streams:
+
+forward and back pointers: vstream watches pipe events and records upstreams and downstreams. You can walk to the head of a pipeline and iterate downstream streams.
+debug methods to dump stream state, including high watermarks and data buffered on the upstream and downstream sides
+For object-mode transform streams:
+
+automatic counters for inputs processed and outputs emitted
+provenance: history information for objects passed through the pipeline (so you can report errors with precise information, like "object X from line N")
+Usage
+Instrumenting a simple pipeline
+You can instrument one or more regular Node streams by calling vstream.wrapStream on them. wrapStream returns the same stream, but attaches a few new functions (and private properties). Here's a simple pipeline that reads data from "/usr/bin/more", sends it through a pass-through stream, and then writes it to "/dev/null":
+
+var instream, passthru, outstream;
+instream = vstream.wrapStream(fs.createReadStream('/usr/bin/more'), 'source');
+passthru = vstream.wrapStream(new stream.PassThrough(), 'passthru');
+outstream = vstream.wrapStream(fs.createWriteStream('/dev/null'), 'devnull');
+
+instream.pipe(passthru);
+passthru.pipe(outstream);
+As an example, we'll attach a listener to each 'data' event that dumps the debug information from each stream in the pipeline. The debug information includes the stream's name, what kind of stream it is (readable, writable, or duplex), the amount of data buffered, and the high watermark. We'll also dump this when the pipeline finishes (when the last stream emits 'finish').
+
+instream.on('data', report);
+outstream.on('finish', report);
+
+function report()
+{
+ var head = outstream.vsHead();
+ assert.ok(head == instream);
+ head.vsWalk(function (stream) { stream.vsDumpDebug(process.stdout); });
+ console.error('-----');
+}
+On my system, this prints:
+
+source (readable, rbuf: 0/65536)
+passthru (duplex, wbuf: 0/16384, rbuf: 0/16384)
+devnull (writable, wbuf: 65536/16384)
+-----
+source (readable, rbuf: 0/65536)
+passthru (duplex, wbuf: 0/16384, rbuf: 65536/16384)
+devnull (writable, wbuf: 65536/16384)
+-----
+source (readable, rbuf: 0/65536)
+passthru (duplex, wbuf: 0/16384, rbuf: 6640/16384)
+devnull (writable, wbuf: 65536/16384)
+-----
+source (readable, rbuf: 0/65536)
+passthru (duplex, wbuf: 0/16384, rbuf: 0/16384)
+devnull (writable, wbuf: 0/16384)
+-----
+"source", "passthrough", and "devnull" are the names we gave these streams, which are readable, duplex, and writable, respectively. Notice that the default high watermark for a readable file stream ("source") is 64K, or 65536 bytes. The default high watermarks for the PassThrough and the writable file streams are 16K, or 16384 bytes.
+
+Seeing this while writing this example, I picked /usr/bin/more because it's just over 128K. On my system, this causes Node to read two full 64K chunks, plus one smaller chunk. This makes for an interesting example:
+
+When we get the first data event (the first printout above), the data has already been written to the PassThrough, which wrote it downstream to the /dev/null stream. The /dev/null stream has it all buffered, since it hasn't had a chance to do I/O yet. The /dev/null stream buffered all 64K, not just 16K, presumably because it came in as one chunk. (Remember that the high watermark is a guideline, but it's possible to buffer more bytes than that -- as we see here.)
+When we get the second data event (the second printout above), the data is still buffered on the /dev/null stream and has backed up to the PassThrough. For whatever reason, the /dev/null stream isn't keeping up with the source read stream, and we can see the buffering here. This is flow control (backpressure) in action.
+At this point, if the /dev/null stream were totally blocked, we'd expect the PassThrough stream to buffer at least 16K on the write side as well, then the source would back up on its readable side, and then we'd stop reading from the original file.
+This doesn't happen, because by the time we get the third data event, the /dev/null stream must have written some data out, because the PassThrough has fewer bytes buffered.
+When the pipeline has finished (the last printout), there are no bytes buffered anywhere.
+The example's pretty trivial, but you can learn a lot about Node streams by understanding what's going on at each stage. Of course, the real point of vstream isn't to demonstrate this, but to help debug situations where things aren't going as expected. The debug information can help you understand where data has buffered up way more than you wanted (usually a memory leak) or where the pipeline's plugged up.
+
+Instrumenting a transform stream
+When you wrap Transform streams, vstream modifies _transform, _flush, and push to keep track of which outputs were generated by which inputs. You can use this to generate useful error messages when you encounter bad input. Here's a little program that reads /etc/passwd and emits a warning when it finds the "nobody" user:
+
+var instream, linestream, mystream;
+var user = 'nobody';
+
+/*
+ * Read the contents of /etc/passwd and chunk it into lines.
+ */
+instream = vstream.wrapStream(fs.createReadStream('/etc/passwd'), 'source');
+linestream = vstream.wrapTransform(new lstream());
+
+/*
+ * Pipe the lines into a stream that looks for the "nobody" user and emits a
+ * warning, which will include the line number.
+ */
+mystream = new stream.Transform({ 'objectMode': true });
+mystream._transform = function myTransform(line, _, callback) {
+ if (line.substr(0, user.length + 1) == user + ':') {
+  this.push(user);
+  this.vsWarn(new Error('found "' + user + '"'), 'nfoundusers');
+ }
+
+ callback();
+};
+mystream = vstream.wrapTransform(mystream, 'UserSearcher');
+
+instream.pipe(linestream);
+linestream.pipe(mystream);
+
+mystream.on('warn', function (context, kind, error) {
+ console.log('kind: %s', kind);
+ console.log('error: %s', error.message);
+ console.log('context: %s', context.label());
+
+ mystream.vsHead().vsWalk(function (s) {
+  s.vsDumpDebug(process.stdout);
+ });
+});
+When I run this on OS X Mavericks, I get:
+
+kind: nfoundusers
+error: found "nobody"
+context: UserSearcher input 11 from LineStream input 1: value 'nobody:*:-2:-2:Unprivileged User:/var/empty:/usr/bin/false'
+source (readable, rbuf: 0/65536)
+LineStream (duplex, wbuf: 1/16384, rbuf: 0/16384)
+    ninputs: 1
+    noutputs: 11
+UserSearcher (duplex, wbuf: 1/16384, rbuf: 1/16384)
+    nfoundusers: 1
+    ninputs: 11
+    noutputs: 1
+The context for each warning keeps track of the history through all vstream-wrapped Transform streams. vstream also bumps a counter for each warning, which is why "nfoundusers" is 1.
+
+PipelineStream
+vstream also provides a PipelineStream class, which takes an array of streams that should be piped into each other (A piped to B piped to C) and wraps them into a single stream P. Writes to P are directed to A, and reads from P read from C. This is mainly useful when you want to expose a single stream that's logically made up of a couple of existing streams.
+
+Design notes
+A key design principle for this module is that it should be possible to usefully instrument streams that were not written to support this module. Some features (like bumping custom counters or emitting warnings) may require adding code, but basic features should work without special support, and instrumenting a stream should not break existing functionality. That's why this module is implemented (somewhat regrettably) by attaching properties to existing objects rather than requiring users to inherit from a custom class.
+
+Public properties attached to instrumented objects use camel case and start with a "vs" prefix to avoid colliding with other properties a user might be using. Similarly, private properties use snake case with a "vs_" prefix.
+
+Caveats
+Memory usage
+vstream tracks pipes to add upstream and downstream references, but it does not track unpipes to remove these references. That's because streams are unpiped when the end-of-stream is reached, but this is often when it's most useful to debug the pipeline, so it's useful to keep these references around. As a result, if you keep a reference to any stream in the pipeline, you'll likely have references to the whole pipeline. If you implement a stream that makes heavy use of pipe and unpipe, you may end up referencing more memory than you'd expect. In all cases, once all references to all streams in the pipeline have been removed, all of these objects can be garbage collected.
+
+API stability
+The stream debugging information relies on accessing the internal Node state of the stream, which is not guaranteed to remain stable across Node releases. It's possible that Node upgrades could break this behavior. If you notice incorrect output or unexpected crashes, please file an issue.
+
+Contributions
+Contributions welcome, and should be 'make prepush' clean. The prepush checks use javascriptlint and jsstyle.
+
+
+Stackman.
+
+Stackman
+Give Stackman an error and he will give an array of stack frames with extremely detailed information for each frame in the stack trace.
+
+With Stackman you get access to the actual source code and surrounding lines for where the error occurred, you get to know if it happened inside a 3rd party module, in Node.js or in your own code. For a full list of information, check out the API below.
+
+npm Build status js-standard-style sponsor
+
+Install
+npm install stackman
+Basic usage
+var stackman = require('stackman')()
+
+var err = new Error('Oops!')
+
+stackman.callsites(err, function (err, callsites) {
+  if (err) throw err
+
+  callsites.forEach(function (callsite) {
+    console.log('Error occured in at %s line %d',
+      callsite.getFileName(),
+      callsite.getLineNumber())
+  })
+})
+Gotchas
+error.stack
+This module works because V8 (the JavaScript engine behind Node.js) allows us to hook into the stack trace generator function before that stack trace is generated. It's triggered by accessing the .stack property on the Error object, so please don't do that before parsing the error to stackman, else this will not work!
+
+If you want to output the regular stack trace, just do so after parsing the callsites:
+
+// first call stackman.callsites with the error
+stackman.callsites(err, function () {...})
+
+// then you can print out the stack trace
+console.log(err.stack)
+Stackman API
+var stackman = Stackman([options])
+This module exposes a single function which you must call to get a stackman object.
+
+The function takes an optional options object as its only argument. These are the available options:
+
+fileCacheMax - When source files are read from disk, they are kept in memory in an LRU cache to speed up processing of future errors. You can change the max number of files kept in the LRU cache using this property (default: 500)
+sourceMapCacheMax - When source maps are read from disk, the processed source maps are kept in memory in an LRU cache to speed up processing of future errors. You can change the max number of source maps kept in the LRU cache using this property (default: 100)
+stackman.callsites(err[, options], callback)
+Given an error object, this function will call the callback with an optional error as the first argument and an array of CallSite objects as the 2nd (a call site is a frame in the stack trace).
+
+Note that any error related to loading or parsing source maps will be suppressed. If a source map related error occurs, Stackman behaves as if the sourcemap option is false.
+
+Options:
+
+sourcemap - A boolean specifying if Stackman should look for and process source maps (default: true)
+var properties = stackman.properties(err)
+Given an error object, this function will return an object containing all the custom properties from the original error object (beside date objects, properties of type object and function are not included in this object).
+
+stackman.sourceContexts(callsites[, options], callback)
+Convenience function to get the source context for all call sites in the callsites argument in one go (instead of iterating over the call sites and calling callsite.sourceContext() for each of them).
+
+Calls the callback with an optional error object as the first argument and an array of source context objects as the 2nd. Each element in the context array matches a call site in the callsites array.
+
+Options:
+
+lines - Total number of lines of soruce context to be loaded with the call site line in the center (default: 5)
+inAppLines - Total number of lines of soruce context to be loaded with the call site line in the center if callsite.isApp() is true. Overwrites lines (default: 5)
+libraryLines - Number of lines of soruce context to be loaded with the call site line in the center if callsite.isApp() is false. Overwrites lines (default: 5)
+All node core call sites and call sites where no lines were collected due to the above options being 0, will have the context value null.
+
+CallSite API
+A CallSite object is an object provided by the V8 stack trace API representing a frame in the stack trace. Stackman will decorate each CallSite object with custom functions and behavior.
+
+callsite.sourcemap
+If source map support is enabled and a source map have been found for the CallSite, this property will be a reference to a SourceMapConsumer object representing the given CallSite.
+
+If set, all functions on the CallSite object will be source map aware. I.e. their return values will be related to the original source code and not the transpiled source code.
+
+var val = callsite.getThis()
+Inherited from V8
+
+Returns the value of this.
+
+To maintain restrictions imposed on strict mode functions, frames that have a strict mode function and all frames below (its caller etc.) are not allow to access their receiver and function objects. For those frames, getThis() will return undefined.
+
+var str = callsite.getTypeName()
+Inherited from V8
+
+Returns the type of this as a string. This is the name of the function stored in the constructor field of this, if available, otherwise the object's [[Class]] internal property.
+
+var str = callsite.getTypeNameSafely()
+A safer version of callsite.getTypeName() that safely handles an exception that sometimes is thrown when using "use strict" in which case null is returned.
+
+var fn = callsite.getFunction()
+Inherited from V8
+
+Returns the current function.
+
+To maintain restrictions imposed on strict mode functions, frames that have a strict mode function and all frames below (its caller etc.) are not allow to access their receiver and function objects. For those frames, getFunction() will return undefined.
+
+var str = callsite.getFunctionName()
+Inherited from V8
+
+Returns the name of the current function, typically its name property. If a name property is not available an attempt will be made to try to infer a name from the function's context.
+
+var str = callsite.getFunctionNameSanitized()
+Guaranteed to always return the most meaningful function name. If none can be determined, the string <anonymous> will be returned.
+
+var str = callsite.getMethodName()
+Inherited from V8
+
+Returns the name of the property of this or one of its prototypes that holds the current function.
+
+var str = callsite.getFileName()
+Inherited from V8 if callsite.sourcemap is undefined
+
+If this function was defined in a script returns the name of the script.
+
+var str = callsite.getRelativeFileName()
+Returns a filename realtive to process.cwd().
+
+var num = callsite.getLineNumber()
+Inherited from V8 if callsite.sourcemap is undefined
+
+If this function was defined in a script returns the current line number.
+
+var num = callsite.getColumnNumber()
+Inherited from V8 if callsite.sourcemap is undefined
+
+If this function was defined in a script returns the current column number.
+
+var str = callsite.getEvalOrigin()
+Inherited from V8
+
+If this function was created using a call to eval returns a CallSite object representing the location where eval was called.
+
+Note that since Node.js v12.11.0, this function returns undefined unless eval was used.
+
+var str = callsite.getModuleName()
+Returns the name of the module if isModule() is true. Otherwise returns null.
+
+var bool = callsite.isToplevel()
+Inherited from V8
+
+Is this a toplevel invocation, that is, is this the global object?
+
+var bool = callsite.isEval()
+Inherited from V8
+
+Does this call take place in code defined by a call to eval?
+
+var bool = callsite.isNative()
+Inherited from V8
+
+Is this call in native V8 code?
+
+var bool = callsite.isConstructor()
+Inherited from V8
+
+Is this a constructor call?
+
+var bool = callsite.isApp()
+Is this inside the app? (i.e. not native, not node code and not a module inside the node_modules directory)
+
+var bool = callsite.isModule()
+Is this inside the node_modules directory?
+
+var bool = callsite.isNode()
+Is this inside node core?
+
+callsite.sourceContext([lines, ]callback)
+Get the source code surrounding the call site line.
+
+If the callsite is a node core call site, the callback will be called with an error.
+
+Arguments:
+
+lines - Total number of lines of soruce context to be loaded with the call site line in the center (default: 5)
+callback - called when the source context have been loaded with an optional error object as the first argument and a source context object as the 2nd
+Source Context
+The source context objects provided by callsite.sourceContext contains the following properties:
+
+pre - The lines before the main callsite line
+line - The main callsite line
+post - The lines after the main callsite line
+Troubleshooting
+To enable debug mode, set the environment variable DEBUG=stackman.
+
+Acknowledgements
+License
+MIT.
+
+
+
+Locus.
+
+ʆ Locus
+Locus is a debugging module which allows you to execute commands at runtime via a REPL.
+
+asciicast
+
+Installing
+npm install locus --save-dev
+Using
+require('locus');
+
+var myVar = 123;
+var myObj = {
+  key: 'value'
+};
+
+function makeSomething() {
+  var some = 'some value';
+
+  // will start a repl session
+  // you can manipulate the program at runtime
+  eval(locus);
+
+  // another option
+  eval(require('locus'))
+
+  return some;
+}
+
+makeSomething();
+Use exit command to leave.
+
+
+Ox.
+
+0x
+0x
+🔥 single-command flamegraph profiling 🔥
+
+Discover the bottlenecks and hot paths in your code, with flamegraphs.
+
+Visualize Stack Traces
+0x can profile and generate an interactive flamegraph for a Node process with a single command, on any platform which Node runs on (macOs, Linux, Windows, Android...).
+
+Support
+Node v12.x and above
+Default usage supports any Operating System that Node runs on!
+Chrome
+Other browsers may open flamegraphs in a degraded, but functional form
+Demo
+An example interactive flamegraph can be viewed at http://davidmarkclements.github.io/0x-demo/
+
+Install
+npm install -g 0x
+Usage
+Use 0x to run a script:
+
+0x my-app.js
+Immediately open the flamegraph in the browser:
+
+0x -o my-app.js
+Automatically execute profiling command against the first port opened by profiled process:
+
+0x -P 'autocannon localhost:$PORT' my-app.js
+Use a custom node executable:
+
+0x -- /path/to/node my-app.js
+Pass custom arguments to node:
+
+0x -- node --zero-fill-buffers my-app.js
+for pwsh users, switch to CMD at first or run with npx
+
+npx 0x -o my-app.js
+Generating
+When ready to generate a flamegraph, send a SIGINT or a SIGTERM.
+
+The simplest way to do this is pressing CTRL+C.
+
+When 0x catches the SIGINT or the SIGTERM, it process the stacks and generates a profile folder (<pid>.0x), containing flamegraph.html.
+
+The UI
+The flamegraph.html file contains the 0x UI, which is explained in docs/ui.md.
+
+Production Servers
+A lightweight, production server friendly, approach to generating a flamegraph is described in docs/production-servers.md.
+
+The Profile Folder
+By default, a Profile Folder will be created and named after the PID, e.g. 3866.0x (we can set this name manually using the --output-dir flag).
+
+The Profile Folder is explained in more detail in docs/profile-folder.md
+
+Example
+Clone this repo, run npm i -g and from the repo root run
+
+0x examples/rest-api
+In another tab run
+
+npm run stress-rest-example
+To put some load on the rest server, once that's done use ctrl + c to kill the server.
+
+Command Line API
+--help | -h
+Print usage info.
+
+--open | -o
+Open the flamegraph in the browser using open or xdg-open (see https://www.npmjs.com/package/open for details).
+
+--on-port | -P
+Run a given command and then generate the flamegraph. The command as specified has access to a $PORT variable. The $PORT variable is set according to the first port that profiled process opens.
+
+For instance, here's an example of using autocannon to load-test the process:
+
+0x -P 'autocannon localhost:$PORT' app.js
+When the load-test completes, the profiled processed will be sent a SIGINT and the flamegraph will be automatically generated.
+
+Remember to use single quotes to avoid bash interpolation, or else escape variable (e.g. 0x -P "autocannon localhost:$PORT" app.js won't work wheras 0x -P "autocannon localhost:\$PORT" app.js will).
+
+Note: On Windows interpolation usually occurs with %PORT%, however in this case the dollar-prefix $PORT is the correct syntax (because the interpolation is not shell based).
+
+Default: ''
+
+--name
+The name of the HTML file, without the .html extension Can be set to - to write HTML to STDOUT (note due to the nature of CLI argument parsing, this must be set using =, e.g. --name=-).
+
+If either this flag or --output-html-file is set to - then the HTML will go to STDOUT.
+
+Default: flamegraph
+
+---title
+Set the title to display in the flamegraph UI.
+
+Default: the command that 0x ran to start the process
+
+--output-dir | -D
+Specify artifact output directory. This can be specified in template form with possible variables being {pid}, {timestamp}, {name} (based on the --name flag) and {outputDir}(variables must be specified without whitespace, e.g. { pid } is not supported).
+
+Default: {pid}.0x
+
+--output-html | -F
+Specify destination of the generated flamegraph HTML file. This can be specified in template form with possible variables being {pid}, {timestamp}, {name} (based on the --name flag) and {outputDir} (variables must be specified without whitespace, e.g. { pid } is not supported). It can also be set to - to send the HTML output to STDOUT (note due to the nature of CLI argument parsing, this must be set using =, e.g. --output-html=-).
+
+If either this flag or --name is set to - then the HTML will go to STDOUT.
+
+Default: {outputDir}/{name}.html
+
+--kernel-tracing
+Use an OS kernel tracing tool (perf on Linux). This will capture native stack frames (C++ modules and Libuv I/O), but may result in missing stacks from Node.js due to the optimizing compiler.
+
+See docs/kernel-tracing.md for more information.
+
+Default: false
+
+--quiet | -q
+Limit output, the only output will be fatal errors or the path to the flamegraph.html upon successful generation.
+
+Default: false
+
+--silent | -s
+Suppress all output, except fatal errors.
+
+Default: false
+
+--collect-only
+Don't generate the flamegraph, only create the Profile Folder, with relevant outputs.
+
+Default: false
+
+--collect-delay
+Delay the collection of stacks by a specified time(ms) relative to the first entry.
+
+Default: 0
+
+--visualize-only
+Supply a path to a profile folder to build or rebuild visualization from original stacks.
+
+Default: undefined
+
+--visualize-cpu-profile
+Supply a path to a CPU profile (.cpuprofile). See examples/cpu-profile for examples.
+
+CPU Profile output does not have as much information but it can be exported from Chrome Devtools in the browser. There's also an automated headless tool for doing so: automated-chrome-profiling. For creating Node.js Cpu Profiles in Node see v8-profiler or v8-profiler-next. They can also be generated from Node.js 12 and above using the command-line flag --cpu-prof.
+
+Default: undefined
+
+--kernel-tracing-debug
+Show output from perf(1) tools.
+
+Default: false
+
+--tree-debug
+Save the intermediate tree representation of captured trace output to a JSON file.
+
+Default: false
+
+Programmatic API
+0x can also be required as a Node module and scripted:
+
+const zeroEks = require('0x')
+const path = require('path')
+
+async function capture () {
+  const opts = {
+    argv: [path.join(__dirname, 'my-app.js'), '--my-flag', '"value for my flag"'],
+    workingDir: __dirname
+  }
+  try {
+    const file = await zeroEks(opts)
+    console.log(`flamegraph in ${file}`)
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+capture()
+
+The Programmatic API is detailed in docs/api.md.
+
+Troubleshooting
+Memory Issues
+Very complex applications with lots of stacks may hit memory issues.
+
+The --stack-size flag can be used to set the memory to the maximum 8GB in order to work around this when profiling:
+
+node --stack-size=8024 $(which 0x) my-app.js
+There may still be a problem opening the flamegraph in Chrome. The same work around can be used by opening Chrome from the command line (platform dependent) and nesting the --stack-size flag within the --js-flags flag: --js-flags="--stack-size 8024".
+
+Debugging
+DEBUG=0x* 0x my-app.js
+
+Alternatives
+https://github.com/brendangregg/FlameGraph (perl)
+https://www.npmjs.com/package/stackvis (node)
+https://www.npmjs.com/package/d3-flame-graph (node).
+
+This tool is inspired from various info and code sources and would have taken much longer without the following people and their Open Source/Info Sharing efforts:
+
+Thorsten Lorenz (http://thlorenz.com/)
+Dave Pacheco (http://dtrace.org/blogs/dap/about/)
+Brendan Gregg (http://www.brendangregg.com/)
+Martin Spier (http://martinspier.io/)
+License
+MIT.
+
+
+Ctrace.
+
+ctrace
+Well-formatted and improved trace system calls and signals (when the debugger does not help).
+
+ 
+Why?
+Awesome tools strace and dtruss have only one drawback: too much information which is hard to understand without additional sources of information and various configuration options. ctrace resolves it.
+
+ctrace are indispensable in the following cases
+
+Debugging complex performance issues or not identified unhandled errors and exceptions in own code or someone else's code
+Learning OS kernel
+Let's try it!
+What do you think how difficult it is to display a hint for using CLI utility, let us say NPM?
+
+> ctrace -c "npm --help"
+What we see?! What NPM does to simply display help?
+
+over 6800 system calls elapsed over 650 msec!
+7 child processes emoji people:open_mouth
+aims to open over 400 files
+Сlearly there is something to improve! emoji people:muscle
+
+
+Features
+Supported platforms: OSx (dtruss), Linux (strace)
+Trace command or attach to process (with forks following)
+Syscall details in output (number, description, synonyms, is it platform specific syscall)
+pread (preadv), 534 -- read or write data into multiple
+Resolving errno in syscall result
+Err#22 -> EINVAL : Invalid argument (only OSx)
+Prints by default only syscall with errors, with -v prints all output
+Filter output with syscall list -f "lstat,open"
+Installation
+$> npm install -g ctrace
+$> ctrace --help
+
+Usage: ctrace [options]
+
+ ctrace - well-formatted and improved trace system calls and signals
+
+ Options:
+
+   -h, --help output usage information
+   -V, --version output the version number
+   -p, --pid [pid] process id to trace
+   -c, --cmd [cmd] command to trace
+   -f, --filter [syscall,] trace syscall only from list
+   -v, --verbose print all syscalls (by default only with errors)
+
+ Examples:
+
+   $ ctrace -p 2312 -v
+   $ ctrace -c "ping google.com"
+Troubleshooting
+OSx : Dtrace cannot control executables signed with restricted entitlements
+As you may know Apple released their new OS X revision 10.11 this year with a great security feature built-in: System Integrity Protection. In a nutshell, this mechanism protects any system data and important filesystem components (like /System or /usr) from being modified by user; even if they are root. SIP also disables any use of code-injection and debugging techniques for third-party software, so some of your favorite hacks may not work anymore. ...
+
+Completely disable SIP
+Although not recommended by Apple, you can entirely disable System Integrity Protection on you Mac. Here's how:
+
+Boot your Mac into Recovery Mode: reboot it and hold cmd+R until a progress bar appears. Choose the language and go to Utilities menu. Choose Terminal there. Enter this command to disable System Integrity Protection:
+
+$> csrutil disable
+It will ask you to reboot — do so and you're free from SIP!
+
+http://internals.exposed/blog/dtrace-vs-sip.html#fnref1
+
+
+
+Leakage.
+
+Leakage - Memory Leak Testing for Node
+Build Status NPM Version JavaScript Style Guide
+
+Write leakage tests using Mocha or another test runner of your choice.
+
+Does not only support spotting and fixing memory leaks, but writing tests also enables you to prevent regressions and show that the code does not leak.
+
+Screencast
+
+Table of Contents
+Installation
+Usage
+Memory Management in JS?
+API
+Under the Hood
+Travis CI
+FAQ
+Contribute
+License
+Installation
+npm install --save-dev leakage
+# or
+yarn --dev leakage
+Usage
+In theory you could use any testing framework to run leakage tests. In practice, though, you want to use one that generates a minimal memory overhead itself. We suggest using Mocha or Tape, since they are quite simple and don't produce much noise in the captured data.
+
+Usage with Mocha
+import myLib from 'my-lib'
+import { iterate } from 'leakage'
+
+describe('myLib', () => {
+  it('does not leak when doing stuff', () => {
+    iterate(() => {
+      const instance = myLib.createInstance()
+      instance.doStuff('foo', 'bar')
+    })
+  })
+})
+iterate() will run the function several times, create a heap snapshot and repeat that process until there is a set of heap diffs. If a memory leak has been detected an error with some debugging information will be thrown.
+
+Make sure you run all tests serially in order to get clean heap diffs. Mocha should run them sequentially by default.
+
+Use iterate.async() for asynchronous test code. See Asynchronous Tests and API for details.
+
+Usage with tape
+import test from 'tape'
+import myLib from 'my-lib'
+import { iterate } from 'leakage'
+
+test('myLib does not leak when doing stuff', () => {
+  iterate(() => {
+    const instance = myLib.createInstance()
+    instance.doStuff('foo', 'bar')
+  })
+})
+Asynchronous Tests
+Use iterate.async() to test asynchronous code. The iterator function is supposed to return a promise and iterate.async() will return a promise itself. In case of a memory leak that returned promise will be rejected instead of iterate failing synchronously.
+
+Do not forget to return the promise in your test or use async functions and await iterate.async().
+
+import fetch from 'isomorphic-fetch'
+import { iterate } from 'leakage'
+
+describe('isomorphic-fetch', () => {
+  it('does not leak when requesting data and parsing JSON', async () => {
+    await iterate.async(async () => {
+      const response = await fetch()
+      await response.json()
+    })
+  })
+})
+Memory Management in JS?
+Since every JavaScript runtime comes with a garbage collector you should not have to care about memory allocation / freeing memory at all, right? Sadly not.
+
+Memory leaks are a common problem in most programming languages. Memory gets allocated, but is not freed again, leading to a steadily increasing usage of memory. Since the memory you use is finite your application will eventually crash or become so slow it is rendered useless.
+
+As soon as you still have a reference to an object, array, arrow function, ... you do not use anymore you might have already created a memory leak. Creating an object (incl. arrays and closures) means allocating heap memory that will be freed by the next automatic garbage collection only if all references to this object have vanished.
+
+API
+iterate(syncIterator: Function, options: ?Object): Result
+Test for memory leaks. Will throw an error when a leak is recognized.
+
+syncIterator can be any synchronous function. Let it perform your operations you want to test for memory leaks.
+
+options.iterations is the number the iterator function is run for each heap diff / garbage collection. Defaults to 30.
+
+options.gcollections is the number of heap snapshots to create. Defaults to 60.
+
+iterate.async(asyncIterator: Function, options: ?Object): Promise
+Test for memory leaks. Will return a rejecting promise when a leak is recognized.
+
+asyncIterator can be any asynchronous function. Let it perform your operations you want to test for memory leaks.
+
+options.iterations is the number the iterator function is run for each heap diff / garbage collection. Defaults to 30.
+
+options.gcollections is the number of heap snapshots to create. Defaults to 60.
+
+Result object
+Properties:
+
+heapDiffs - An array of heap diffs as created by node-memwatch
+iterations - The number of iterator runs per heap diff
+gcollections - The number of garbage collections / heap diffs performed
+Methods:
+
+printSummary(title: ?String, log: ?Function) - Prints a short summary. Can pass a title to print. log is the function used to output the summary line by line. Defaults to console.log.
+MemoryLeakError
+Memory leak errors are instances of this custom error. You can use it to check if an error is really a memory leak error or just a generic kind of problem (like a broken reference).
+
+Import it as const { MemoryLeakError } = require('leakage').
+
+CLI Parameters
+You can pass special CLI parameters for leakage to your test runner:
+
+mocha test/sample.test.js --heap-file heap-diff.json
+--heap-file
+Will make the library write a detailed heap diff JSON to the file system. Make sure you only run a single test using it.only. Otherwise you will only find the heap diff of the last test in the file. Useful for debugging.
+
+Under the Hood
+Leakage uses node-memwatch to trigger the garbage collector and create heap diffs.
+
+You just specify an iterator function. It will be run 30 times by default then a garbage collection will be performed and a heap snapshot will be made. This process is iterated 6 times by default to collect several heap diffs, since especially in async tests there is always a bit of background noise.
+
+If the heap size increased over more than [heapDiffCount * 2 / 3] subsequent garbage collections an error is thrown.
+
+Travis CI
+You might want your leakage tests to be run by your CI service. There is an issue with Travis CI's linux containers, g++ and a transitive dependency of node-memwatch (nan).
+
+Fortunately there is a fix: You need to install and use version 4.8 of g++ in order to compile the dependency.
+
+Have a look at leakage's .travis.yml file to see how it can be done or find further details by @btmills in this issue.
+
+Used it successfully or were unable to use it? Let us know!
+
+Have an improvement? Open a pull request any time.
+
+License
+Released under the terms of the MIT license. See LICENSE for details.
+
+
+Thetool.
+
+thetool
+Build Status NPM thetool package
+
+thetool is a CLI tool to capture different cpu, memory and other profiles for your node app in Chrome DevTools friendly format.
+
+Quick start
+npx thetool -o . -t memorysampling npm run test
+# .. open DevTools frontend and do three clicks to get:
+Screen Shot 2019-05-27 at 2 10 14 AM
+Getting Started
+thetool works only with Node >= 10.x.
+
+thetool interface is simple as 1-2-3.
+
+Specify output folder using -o flag, e.g. -o . to put output in current folder.
+Specify tool using -t, available tools: cpu, memorysampling, memoryallocation, coverage, type, heapsnapshot.
+Specify any command to start node, e.g. node index.js or npx thetool or npm run test.
+When report is ready, thetool will dump thetool> Report captured in ... message in terminal with a hint how to analyze it.
+
+Why not to use Chrome DevTools directly?
+it can be used in environments where it is not possible to run Chrome DevTools, e.g., on the server, run thetool <yourapp> there, send report back and analyze it locally,
+it supports child processes and workers,
+it supports some other tools, e.g., node tracing and type profiler.
+Tool selector
+| Problem | Tool | Insight | DevTools tab | |-|-|-|-| | my app is slow | cpu | where in code does app spend most time? | Performance | | my app requires too much memory | memorysampling | where in code does app allocate most memory? | Memory | | my app requires too much memory | memoryallocation | most precise version of memorysampling with much bigger overhead | Memory | | my app requires too much memory | heapsnapshot | what is inside the heap right now? | Memory | | my app package is too big | coverage | what code was executed and how many times? | | | my app needs type annotations | type | what are the types of function arguments and returns? | |
+
+On-demand tooling
+You can use --ondemand flag to profile only part of your app:
+
+Add --ondemand flag to the list of thetool arguments.
+Call startTheTool/stopTheTool from your Node scripts (thetool will add these methods to Node context).
+startTheTool/stopTheTool methods are asynchronous, so you should await them or chain them using promise.then
+
+Couple examples:
+
+async function main() {
+  await startTheTool();
+  // code of your app
+  await stopTheTool();
+}
+// .. or using promises..
+function main() {
+  startTheTool().then(() => {
+    // code of your app
+  }).then(() => stopTheTool());
+}
+CPU: Profiler
+thetool -o . -t cpu npm run test
+To analyze: open Chrome DevTools, to to Performance tab, click load button, select file with data.
+
+Screen Shot 2019-05-27 at 2 10 14 AM
+Memory: Sampling Profiler
+thetool -o . -t memorysampling npm run test
+To analyze: open Chrome DevTools, go to Memory tab, click load button, select file with data.
+
+--samplingInterval option is available: average sample interval in bytes, poisson distribution is used for the intervals. The default value is 32768 bytes
+
+Screen Shot 2019-05-27 at 2 10 14 AM
+Memory: Allocation Profiler
+thetool -o . -t memoryallocation npm run test
+To analyze: open Chrome DevTools, go to Memory tab, click load button, select file with data.
+
+Screen Shot 2019-05-27 at 2 10 14 AM
+Memory: Heap Snapshot
+thetool -o . -t heapsnapshot node -e "captureTheTool.then(captureTheTool).then(captureTheTool)"
+Given command will capture three heap snapshots. To analyze: open Chrome DevTools, go to Memory tab, click load button, select file with data. You can load multiple snapshots and compare them from DevTools UI.
+
+Screen Shot 2019-05-27 at 2 10 14 AM
+Tracing
+thetool -o . -t tracing --recordMode recordAsMuchAsPossible --includedCategories node,v8 npm run test
+To analyze: open Chrome DevTools, go to Performance tab, click load button, select file with data.
+
+--recordMode controls how the trace buffer stores data (recordUntilFull, recordContinuously, recordAsMuchAsPossible) --includedCategories please take a look on different available categories on https://nodejs.org/api/tracing.html
+
+E.g. you can capture V8 sampling profiler using following command:
+
+thetool -o . -t tracing --recordMode recordAsMuchAsPossible --includedCategories v8.execute,v8.cpu_profiler,v8.cpu_profiler.hires npm run test
+Screen Shot 2019-05-27 at 2 10 14 AM
+Coverage Profiler
+thetool -o . -t coverage npm run test
+To analyze: in current folder create ./coverage/tmp folder and move files with data to this folder, run c8: npx c8 report. Please take a look at c8 README.md to see what output formats are supported.
+
+Screen Shot 2019-05-27 at 2 10 14 AM
+Type Profiler
+thetool -o . -t type npm run test
+To analyze: no tool yet.
+
+
+Swagger-Stats.
+
+swagger-stats
+
+swagger-stats | API Observability
+https://swaggerstats.io | Guide
+CircleCI Coverage Status npm version npm downloads Gitter
+
+Trace API calls and Monitor API performance, health and usage statistics in Node.js Microservices
+Express, Fastify, Koa, Hapi, Restify
+swagger-stats traces REST API requests and responses in Node.js Microservices, and collects statistics per API Operation. swagger-stats detects API operations based on express routes. You may also provide Swagger (Open API) specification, and swagger-stats will match API requests with API Operations defined in swagger specification.
+
+swagger-stats exposes statistics and metrics per API Operation, such as GET /myapi/:parameter, or GET /pet/{petId}
+
+Built-In API Telemetry
+swagger-stats provides built-in Telemetry UX, so you may enable swagger-stats in your app, and start monitoring immediately, with no infrastructure requirements. Navigate to http://<your app host:port>/swagger-stats/
+
+swagger-stats Built-In Telemetry
+
+API Analytics with Elasticsearch and Kibana
+swagger-stats stores details about each request/response in Elasticsearch, so you may use Kibana to perform detailed analysis of API usage over time, build visualizations and dashboards
+
+swagger-stats Kibana Dashboard
+
+See dashboards/elastic6 for swagger-stats Kibana visualizations and dashboards
+
+Monitoring and Alerting with Prometheus and Grafana
+swagger-stats exposes metrics in Prometheus format, so you may use Prometheus and Grafana to setup API monitoring and alerting
+
+swagger-stats Prometheus Dashboard
+
+See dashboards/prometheus for swagger-stats Grafana dashboards
+
+With statistics and metrics exposed by swagger-stats you may spot problematic API endpoints, see where most of errors happens, catch long-running requests, analyze details of last errors, observe trends, setup alerting.
+
+swagger-stats provides:
+
+Metrics in Prometheus format, so you may use Prometheus and Grafana to setup API monitoring and alerting
+Storing details about each API Request/Response in Elasticsearch, so you may use Kibana to perform analysis of API usage over time, build visualizations and dashboards
+Built-in API Telemetry UI, so you may enable swagger-stats in your app, and start monitoring right away, with no additional tools required
+Exposing collected statistics via API, including:
+Counts of requests and responses(total and by response class), processing time (total/avg/max), content length(total/avg/max) for requests and responses, rates for requests and errors. This is baseline set of stats.
+Statistics by Request Method: baseline stats collected for each request method
+Timeline: baseline stats collected for each 1 minute interval during last 60 minutes. Timeline helps you to analyze trends.
+Errors: count of responses per each error code, top "not found" resources, top "server error" resources
+Last errors: request and response details for the last 100 errors (last 100 error responses)
+Longest requests: request and response details for top 100 requests that took longest time to process (time to send response)
+Tracing: Request and Response details - method, URLs, parameters, request and response headers, addresses, start/stop times and processing duration, matched API Operation info
+API Statistics: baseline stats and parameter stats per each API Operation. API operation detected based on express routes, and based on Swagger (Open API) specification
+CPU and Memory Usage of Node process
+How to Use
+Install
+npm install swagger-stats --save
+If you haven't added prom-client already, you should do this now. It's a peer dependency of swagger-stats as of version 0.95.19.
+
+npm install prom-client@12 --save
+Enable swagger-stats middleware in your app
+Express
+const swStats = require('swagger-stats');
+const apiSpec = require('swagger.json');
+app.use(swStats.getMiddleware({swaggerSpec:apiSpec}));
+Fastify
+const swStats = require('swagger-stats');
+const apiSpec = require('swagger.json');
+
+const fastify = require('fastify')({
+    logger: true
+});
+
+// Enable swagger-stats
+fastify.register(require('fastify-express')).then(()=>{
+    fastify.register(swStats.getFastifyPlugin, {swaggerSpec:apiSpec});
+});
+
+Koa
+express-to-koa can be used which is just a simple Promise wrapper.
+
+const swStats = require('swagger-stats');
+const apiSpec = require('swagger.json');
+const e2k = require('express-to-koa');
+app.use(e2k(swStats.getMiddleware({ swaggerSpec:apiSpec })));
+Hapi
+const swStats = require('swagger-stats');
+const swaggerSpec = require('./petstore.json');
+
+const init = async () => {
+
+    server = Hapi.server({
+        port: 3040,
+        host: 'localhost'
+    });
+
+    await server.register({
+        plugin: swStats.getHapiPlugin,
+        options: {
+             swaggerSpec:swaggerSpec
+        }
+    });
+
+    await server.start();
+    console.log('Server running on %s', server.info.uri);
+};
+Restify
+const restify = require('restify');
+const swStats = require('swagger-stats');
+const apiSpec = require('swagger.json');
+
+const server = restify.createServer();
+
+server.pre(swStats.getMiddleware({
+    swaggerSpec:apiSpec,
+}));
+See /examples for sample apps
+
+Get Statistics with API
+$ curl http://<your app host:port>/swagger-stats/stats
+{
+  "startts": 1501647865959,
+  "all": {
+    "requests": 7,
+    "responses": 7,
+    "errors": 3,
+    "info": 0,
+    "success": 3,
+    "redirect": 1,
+    "client_error": 2,
+    "server_error": 1,
+    "total_time": 510,
+    "max_time": 502,
+    "avg_time": 72.85714285714286,
+    "total_req_clength": 0,
+    "max_req_clength": 0,
+    "avg_req_clength": 0,
+    "total_res_clength": 692,
+    "max_res_clength": 510,
+    "avg_res_clength": 98,
+    "req_rate": 1.0734549915657108,
+    "err_rate": 0.4600521392424475
+  },
+  "sys": {
+    "rss": 59768832,
+    "heapTotal": 36700160,
+    "heapUsed": 20081776,
+    "external": 5291923,
+    "cpu": 0
+  },
+  "name": "swagger-stats-testapp",
+  "version": "0.90.1",
+  "hostname": "hostname",
+  "ip": "127.0.0.1"
+}
+Take a look at Documentation for more details on API and returned statistics.
+
+Get Prometheus Metrics
+$ curl http://<your app host:port>/swagger-stats/metrics
+# HELP api_all_request_total The total number of all API requests received
+# TYPE api_all_request_total counter
+api_all_request_total 88715
+# HELP api_all_success_total The total number of all API requests with success response
+# TYPE api_all_success_total counter
+api_all_success_total 49051
+# HELP api_all_errors_total The total number of all API requests with error response
+# TYPE api_all_errors_total counter
+api_all_errors_total 32152
+# HELP api_all_client_error_total The total number of all API requests with client error response
+# TYPE api_all_client_error_total counter
+api_all_client_error_total 22986
+
+. . . . . . . . . .  
+
+Default Metrics
+To collect prom-client default metrics:
+
+const swaggerStats = require('swagger-stats');
+const promClient = require('prom-client');
+
+promClient.collectDefaultMetrics();
+Some Node.js specific metrics are included, such as event loop lag:
+
+# HELP nodejs_eventloop_lag_seconds Lag of event loop in seconds.
+# TYPE nodejs_eventloop_lag_seconds gauge
+nodejs_eventloop_lag_seconds 0.000193641 1597303877464
+
+. . . . . . . . . .  
+
+Updates
+See Changelog
+
+Enhancements and Bug Reports
+If you find a bug, or have an enhancement in mind please post issues on GitHub.
+
+License
+MIT.
+
+
+
+NiM.
+
+https://chromewebstore.google.com/detail/nodejs-v8-inspector-manag/gnhhdgbaldcilmgcpfddgdbkhjohddkj https://chromewebstore.google.com/detail/nodejs-v8-inspector-manag/gnhhdgbaldcilmgcpfddgdbkhjohddkj https://chromewebstore.google.com/detail/nodejs-v8-inspector-manag/gnhhdgbaldcilmgcpfddgdbkhjohddkj https://chromewebstore.google.com/detail/nodejs-v8-inspector-manag/gnhhdgbaldcilmgcpfddgdbkhjohddkj https://chromewebstore.google.com/detail/nodejs-v8-inspector-manag/gnhhdgbaldcilmgcpfddgdbkhjohddkj
+https://chromewebstore.google.com/detail/nodejs-v8-inspector-manag/gnhhdgbaldcilmgcpfddgdbkhjohddkj https://microsoftedge.microsoft.com/addons/detail/injfmegnapmoakbmnmnecjabigpdjeme https://microsoftedge.microsoft.com/addons/detail/injfmegnapmoakbmnmnecjabigpdjeme https://microsoftedge.microsoft.com/addons/detail/injfmegnapmoakbmnmnecjabigpdjeme
+
+See https://github.com/june07/nimv3 for updates as the project was upgraded to Manifest Version 3 due to Google's change.
+https://nim.june07.com https://nim.june07.com
+
+NiM (Node.js --inspector Manager)
+Streamlines your development process
+Google Chrome Web Store (works with any Chromium browsers: Google's Chrome, Microsoft's Edge, Opera, Vivaldi, Brave, Epic, and more... )
+
+Microsoft Edge Addons (Works with the Microsoft's Edge browser https://www.microsoftedgeinsider.com/en-us/)
+
+PLEASE NOTE: Installing this does require the sharing of your email address with me (and only me). You are given other notice of this, but it's become and remains such an issue that I feel the need to make it OVER-abundantly clear. If you take issue with sharing your email address with me (mine is 667@june07.com by the way) please, I implore you to clone/fork a copy yourself and change what you don't like about the code and/or use alternate solutions (none of which are as good as NiM, but call me biased). Further feel free to contact me directly and have a chat. Unlike the behemoths like Facebook, Google, Amazon that you probably (and without hesitation) share your email address with, I actually care about the concerns of the actual people who choose to use the code I wrote (~99%) and am responsible for. Here is the privacy policy that goes along with NiM https://june07.com/privacypolicy. Thank you so much.
+
+Blog Posts/Updates:
+Why I wrote NiM https://blog.june07.com/inspect-broke-my-workflow/
+Custom DevTools feature: https://blog.june07.com/nim-custom-devtools-url/
+Easier than about::inspect (chrome://inspect/#devices)
+NiM manages the Chrome DevTools window/tab lifecycle leaving you with more ability to focus on what matters... debugging your code. You no longer need to copy/paste DevTools URL's or continue opening/closing tabs/windows.
+
+NiM automatically detects the URL that is generated when running node (locally or remotely) with --inspect option. NiM provides you with the option of automatically opening and closing Chrome DevTools in a tab or window. Just toggle the Manual/Auto setting and then start a debugging session. DevTools will open either on clicking the "Open DevTools" button or after the specified timeout period. If set to auto close, once you end your debugging session, The DevTools tab/window will close automatically.
+
+Manage and monitor local and remote debugging sessions
+Manual or automatic control of DevTools interface
+Open DevTools in a new tab or window
+Make DevTools focused or inactive on start
+Customize duration between v8 Inspector probes
+Autosave settings
+Debug node processes launched by VSCode
+Setup / Usage / How To
+Simple and basic... just install the Chrome Extension in any of the following ways:
+
+Install via Chrome Web Store: https://bit.ly/2W8hQG9 (https://chrome.google.com/webstore/detail/gnhhdgbaldcilmgcpfddgdbkhjohddkj)
+Or, download .crx file directly from releases as shown here:
+https://media.giphy.com/media/xT0xenBpYPF2F0j2fe/giphy.gif
+
+Need Additional Information?
+NiM post install page provides some help https://blog.june07.com/nim-install
+Debugging NiM itself https://blog.june07.com/debugging-nim/
+Note: At the time of writing, the v8 --inspect option is fairly new. See https://nodejs.org/api/debugger.html#debugger_v8_inspector_integration_for_node_js for additional details on the option.
+
+If you enjoy using NIM please give us a 5 star rating and/or a G+1.
+Any and all feedback is encouraged and welcome. Send us an email!
+
+Digitalocean $100 Credit.
+
+
+
+Dats.
+
+
+logo
+dats
+code style: prettier semantic-release npm (scoped) license
+
+Minimalistic zero-dependencies UDP/TCP statsd client for Node.js
+
+There are times when you have to gather metrics and you want something simple without writing too much boilerplate, dats to your aid!
+
+This client aims to have a simple statsd compliant API with some optional flavour for advanced usage, like: buffered metrics and either UDP/TCP transports!
+
+Supports Node.js >=14.0.0, if you are a Node.js v12 user refer to dats@2.x.x.
+
+Table of Content
+Installation
+Usage
+Generic
+Namespacing with Hostname/PID
+TCP Client
+API
+Client
+new Client(options)
+Client.close([cb])
+Client.connect()
+Client.counter(string[, value, sampling])
+Client.timing(string, value[, sampling])
+Client.gauge(string, value)
+Client.set(string, value)
+Dats Mock
+CLI Interface
+CLI Usage
+datsrc
+Pre-compiled binary
+Benchmarks
+Powered Apps
+Support & Contribute
+License
+Installation
+The package is available at npm.
+
+You can install it with npm
+
+# lastest stable version
+$ npm i -S @immobiliarelabs/dats
+# latest development version
+$ npm i -S @immobiliarelabs/dats@next
+or yarn
+
+# lastest stable version
+$ yarn add @immobiliarelabs/dats
+# latest development version
+$ yarn @immobiliarelabs/dats@next
+Usage
+Generic
+import Client from '@immobiliarelabs/dats';
+
+const stats = new Client({
+    host: 'udp://someip:someport',
+    namespace: 'myGrafanaNamespace',
+    // Optionally register a global handler to track errors.
+    onError: (error) => {
+        processError(error);
+    },
+});
+
+// Send counter (myGrafanaNamespace.some.toCount)
+stats.counter('some.toCount', 3);
+stats.counter('some.toCount'); // defaults to 1
+stats.counter('some.toCount', 1, 10); // set sampling to 10
+// Send timing (myGrafanaNamespace.some.toTime)
+stats.timing('some.toTime', 10);
+stats.timing('some.toTime', 10, 0.1); // set sampling to 0.1
+
+// Send gauge (myGrafanaNamespace.some.toGauge)
+stats.gauge('some.toGauge', 23);
+
+// Send set (myGrafanaNamespace.some.set)
+stats.set('some.set', 765);
+Namespacing with Hostname/PID
+// Scope your stats per hostname and/or pid
+import Client from '@immobiliarelabs/dats';
+
+const stats = new Client({
+    host: 'udp://someip:someport',
+    namespace: 'myGrafanaNamespace.${hostname}.${pid}',
+});
+
+// Send counter (myGrafanaNamespace.myMachine.123.some.toCount)
+stats.counter('some.toCount', 3);
+If the hostname contains any ., the client will replace them with _.
+
+TCP Client
+import Client from '@immobiliarelabs/dats';
+
+// TCP usage
+const stats = new Client({
+    host: 'tcp://someip:someport',
+    namespace: 'myGrafanaNamespace.${hostname}.${pid}',
+});
+
+// Calling connect is required in TCP environment
+await stats.connect();
+
+// Send counter (myGrafanaNamespace.myMachine.123.some.toCount)
+stats.counter('some.toCount', 3);
+API
+This module exports:
+
+Client
+Client
+The statsd client
+
+new Client(options)
+options: configuration object.
+host: statsd host (udp://{ip}:{port} or tcp://{ip}:{port}), you can use also ipv6. If you want to force udp6 usage use: udp6://{host}:{port}, when using TCP, you have to call the Client.connect method.
+namespace: Optional. Prefix to use for the metrics. The metric will be sent as namespace. + the metric string. Optionally you can use ${hostname} and ${pid} placeholders in the namespace and have them substituted with the machine hostname and the process id.
+bufferSize: Optional. Default is 0. Setting this value to a number greather than zero will activate buffered mode, which instead of sending metrics on each call, it will buffer them and send them when one of this conditions occurs: the buffer is full, or the bufferFlushTimeout has expired. Using this approach is more performant, but you must be careful to use a value compatible to the MTU available on your network, otherwise your packets might get dropped silently. See multi-metric-packets.
+bufferFlushTimeout: Optional. Default is 100. Timeout in milliseconds to wait before flushing the metrics buffer.
+debug: Optional. Default debuglog('dats'). The logger function.
+udpDnsCache: Optional. Default true. Activate the cache DNS lookup for udp.
+udpDnsCacheTTL: Optional. Default 120. Dns cache Time to live in seconds.
+onError: Optional. Default (err) => void. Called when there is an error. Allows you to check also send errors.
+customSocket: Optional. Default null. Custom socket used by the client, this is a feature for mocking we do not recommend using it in production.
+tags: Optional Default null. If provided, metrics will include tags in the form #key1:value1,key2:value2.
+Client.close([cb])
+close the client socket
+
+cb: optional. A callback function to call when the socket is closed. If no cb is provided a Promise is returned.
+Returns: a Promise if no cb is passed.
+
+Client.connect()
+connect the TCP socket. Calling this function is required only on TCP.
+
+Returns: a Promise.
+
+Client.counter(string[, value, sampling])
+send a metric of type counter
+
+string: The metric string
+value: Optional. The metric value (Number). Defaults to 1.
+sampling: Optional. The metric sampling.
+All sending errors are handled by the onError callback.
+
+Client.timing(string, value[, sampling])
+send a metric of type timing
+
+string: The metric string
+value: The metric value (Number).
+sampling: Optional. The metric sampling.
+All sending errors are handled by the onError callback.
+
+Client.gauge(string, value)
+send a metric of type gauge
+
+string: The metric string
+value: The metric value (Number).
+All sending errors are handled by the onError callback.
+
+Client.set(string, value)
+send a metric of type set
+
+string: The metric string
+value: The metric value (Number).
+All sending errors are handled by the onError callback.
+
+Dats Mock
+Dats exports his mock, you can use it as follow:
+
+import ClientMock from '@immobiliarelabs/dats/dist/mock';
+
+const host = new URL(`udp://127.0.0.1:8232`);
+const namespace = 'ns1';
+const client = new ClientMock({ host, namespace });
+
+client.gauge('some.metric', 100);
+client.set('some.metric', 100);
+// metrics is an array with all metrics sent
+console.log(client.metrics);
+/* stdout:
+    [
+        'ns1.some.metric:100|g',
+        'ns1.some.metric:100|s',
+    ]
+*/
+// Check if a metric is in the metrics array
+client.hasSent('ns1.some.metric:100|s'); // -> true
+client.hasSent('ns1.some.metric:10|s'); // -> false
+client.hasSent(/ns1\.some\.metric:\d+\|s/); // -> true
+client.hasSent(/ns1\.some\.test:\d+\|s/); // -> false
+
+// Clean the metrics array with
+client.cleanMetrics();
+console.log(client.metrics);
+/* stdout:
+    []
+*/
+CLI Interface
+dats is also exposed as a CLI that can both be installed as a npm global package or a precompiled binary.
+
+The precompile binary can be found in the release section for Linux, MacOS or Windows.
+
+CLI Usage
+$ npm i -g @immobiliarelabs/dats
+dats --help
+# ℹ️ The following are required input flags:
+#
+# --host {string} []
+# --port {string} []
+# --type {string} [Metric type can be one of: counter, timing, gauge, set]
+# --prefix {string} [Metric prefix]
+# --namespace {string} [Metric full namespace, use dots `.` to separate metrics]
+# --value {string} [Metric value]
+# --quiet {boolean} [Suppress all console output]
+# --dryRun {boolean} [Metric wont be sent, use for debug]
+#
+# If unsure of output run the command prepended with `DRY_RUN=1`
+datsrc
+Every command flag can also be specified in JSON format in the file .datsrc, the process at runtime will search it in the current working directory and merge both file config and flags before running!
+
+{
+    "host": "123.123.123.123",
+    "port": "1234",
+    "prefix": "my_metric_prefix"
+}
+Pre-compiled binary
+If you want to use the precompiled binary get the correct link for your OS in the release section and do the following:
+
+curl https://github.com/immobiliare/dats/releases/download/v{{VERSION_TAG}}/dats-cli-{{VERSION_OS}} -L -o dats-cli
+chmod +x dats-cli
+./dats-cli
+Benchmarks
+The automatic benchmarking for every commit can be found at the following links: next and main.
+
+The tests were done using autocannon pointing to an HTTP node.js Server that sends at each request a count metric. With this kind of test, we evaluate how much the library influences the application performance.
+
+Below are reported the benchmarks with the most famous node.js statsd clients:
+
+LIBRARY Req/Sec (97.5th) Req/Sec (avg)
+dats 45503 43174.4
+hot-shots 46975 43319.47
+node-statsd 14935 11632.34
+statsd-client 42463 35790.67
+Base 50271 43312.54
+Base is the HTTP server without metrics.
+
+Powered Apps
+dats was created by the amazing Node.js team at ImmobiliareLabs, the Tech dept of Immobiliare.it, the #1 real estate company in Italy.
+
+We are currently using dats in our products as well as our internal toolings.
+
+If you are using dats in production drop us a message.
+
+Support & Contribute
+Made with ❤️ by ImmobiliareLabs & Contributors
+
+We'd love for you to contribute to dats! If you have any questions on how to use dats, bugs and enhancement please feel free to reach out by opening a GitHub Issue.
+
+License
+dats is licensed under the MIT license. See the LICENSE file for more information.
+
+
+
