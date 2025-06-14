@@ -1,0 +1,1761 @@
+# GitHub Pages
+
+_Create a site or blog from your GitHub repositories with GitHub Pages._
+
+## Welcome
+
+- **Who is this for**: Beginners, students, project maintainers, small businesses.
+- **What you'll learn**: How to build a GitHub Pages site.
+- **What you'll build**: We'll build a simple GitHub Pages site with a blog. We'll use [Jekyll](https://jekyllrb.com), a static site generator.
+- **Prerequisites**: If you need to learn about branches, commits, and pull requests, take [Introduction to GitHub](https://github.com/skills/introduction-to-github) first.
+
+- **How long**: This exercise takes less than one hour to complete.
+
+In this exercise, you will:
+
+1. Enable GitHub Pages
+1. Configure your site
+1. Customize your home page
+1. Create a blog post
+1. Merge your pull request
+
+
+### How to start this exercise
+
+Simply copy the exercise to your account, then give your favorite Octocat (Mona) **about 20 seconds** to prepare the first lesson, then **refresh the page**.
+
+[![](https://img.shields.io/badge/Copy%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/new?template_owner=skills&template_name=github-pages&owner=%40me&name=skills-github-pages&description=Exercise:+Create+a+site+or+blog+from+your+GitHub+repositories+with+GitHub+Pages&visibility=public)
+
+<details>
+<summary>Having trouble? 🤷</summary><br/>
+
+When copying the exercise, we recommend the following settings:
+
+- For owner, choose your personal account or an organization to host the repository.
+
+- We recommend creating a public repository, since private repositories will use Actions minutes.
+
+If the exercise isn't ready in 20 seconds, please check the [Actions](../../actions) tab.
+
+- Check to see if a job is running. Sometimes it simply takes a bit longer.
+
+- If the page shows a failed job, please submit an issue. Nice, you found a bug! 🐛
+
+</details>
+
+---
+
+&copy; 2025 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
+
+Logging.
+Logging.
+banner
+pino
+npm version Build Status js-standard-style
+
+Very low overhead Node.js logger.
+
+Documentation
+Benchmarks ⇗
+API ⇗
+Browser API ⇗
+Redaction ⇗
+Child Loggers ⇗
+Transports ⇗
+Web Frameworks ⇗
+Pretty Printing ⇗
+Asynchronous Logging ⇗
+Ecosystem ⇗
+Help ⇗
+Long Term Support Policy ⇗
+Install
+Using NPM:
+
+$ npm install pino
+Using YARN:
+
+$ yarn add pino
+If you would like to install pino v6, refer to https://github.com/pinojs/pino/tree/v6.x.
+
+Usage
+const logger = require('pino')()
+
+logger.info('hello world')
+
+const child = logger.child({ a: 'property' })
+child.info('hello child!')
+This produces:
+
+{"level":30,"time":1531171074631,"msg":"hello world","pid":657,"hostname":"Davids-MBP-3.fritz.box"}
+{"level":30,"time":1531171082399,"msg":"hello child!","pid":657,"hostname":"Davids-MBP-3.fritz.box","a":"property"}
+For using Pino with a web framework see:
+
+Pino with Fastify
+Pino with Express
+Pino with Hapi
+Pino with Restify
+Pino with Koa
+Pino with Node core http
+Pino with Nest
+
+Essentials
+Development Formatting
+The pino-pretty module can be used to format logs during development:
+
+pretty demo
+
+Transports & Log Processing
+Due to Node's single-threaded event-loop, it's highly recommended that sending, alert triggering, reformatting, and all forms of log processing are conducted in a separate process or thread.
+
+In Pino terminology, we call all log processors "transports" and recommend that the transports be run in a worker thread using our pino.transport API.
+
+For more details see our Transports⇗ document.
+
+Low overhead
+Using minimum resources for logging is very important. Log messages tend to get added over time and this can lead to a throttling effect on applications – such as reduced requests per second.
+
+In many cases, Pino is over 5x faster than alternatives.
+
+See the Benchmarks document for comparisons.
+
+Bundling support
+Pino supports being bundled using tools like webpack or esbuild.
+
+See Bundling document for more information.
+
+Matteo Collina
+https://github.com/mcollina
+
+https://www.npmjs.com/~matteo.collina
+
+David Mark Clements
+https://github.com/davidmarkclements
+
+https://www.npmjs.com/~davidmarkclements
+
+James Sumners
+https://github.com/jsumners
+
+https://www.npmjs.com/~jsumners.
+
+Thomas Watson Steen
+https://github.com/watson
+
+https://www.npmjs.com/~watson
+
+Contributing
+Pino is an OPEN Open Source Project. This means that:
+
+Individuals making significant and valuable contributions are given commit-access to the project to contribute as they see fit. This project is more like an open wiki than a standard guarded open source project.
+
+See the CONTRIBUTING.md file for more details.
+
+
+Acknowledgments
+Logo and identity designed by Cosmic Fox Design: https://www.behance.net/cosmicfox.
+
+License
+Licensed under MIT.
+
+Winston.
+
+winston
+A logger for just about everything.
+
+Version npm npm Downloads build status coverage status
+
+NPM
+
+winston@3
+See the Upgrade Guide for more information. Bug reports and PRs welcome!
+
+Looking for winston@2.x documentation?
+Please note that the documentation below is for winston@3. Read the winston@2.x documentation.
+
+Motivation
+winston is designed to be a simple and universal logging library with support for multiple transports. A transport is essentially a storage device for your logs. Each winston logger can have multiple transports (see: Transports) configured at different levels (see: Logging levels). For example, one may want error logs to be stored in a persistent remote location (like a database), but all logs output to the console or a local file.
+
+winston aims to decouple parts of the logging process to make it more flexible and extensible. Attention is given to supporting flexibility in log formatting (see: Formats) & levels (see: Using custom logging levels), and ensuring those APIs decoupled from the implementation of transport logging (i.e. how the logs are stored / indexed, see: Adding Custom Transports) to the API that they exposed to the programmer.
+
+Quick Start
+TL;DR? Check out the quick start example in ./examples/. There are a number of other examples in ./examples/*.js. Don't see an example you think should be there? Submit a pull request to add it!
+
+Usage
+The recommended way to use winston is to create your own logger. The simplest way to do this is using winston.createLogger:
+
+const winston = require('winston');
+
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.json(),
+  defaultMeta: { service: 'user-service' },
+  transports: [
+    //
+    // - Write all logs with importance level of `error` or higher to `error.log`
+    // (i.e., error, fatal, but not other levels)
+    //
+    new winston.transports.File({ filename: 'error.log', level: 'error' }),
+    //
+    // - Write all logs with importance level of `info` or higher to `combined.log`
+    // (i.e., fatal, error, warn, and info, but not trace)
+    //
+    new winston.transports.File({ filename: 'combined.log' }),
+  ],
+});
+
+//
+// If we're not in production then log to the `console` with the format:
+// `${info.level}: ${info.message} JSON.stringify({ ...rest }) `
+//
+if (process.env.NODE_ENV !== 'production') {
+  logger.add(new winston.transports.Console({
+    format: winston.format.simple(),
+  }));
+}
+You may also log directly via the default logger exposed by require('winston'), but this merely intended to be a convenient shared logger to use throughout your application if you so choose. Note that the default logger doesn't have any transports by default. You need add transports by yourself, and leaving the default logger without any transports may produce a high memory usage issue.
+
+Table of contents
+Motivation
+Quick Start
+Usage
+Table of Contents
+Logging
+Creating your logger
+Streams, objectMode, and info objects
+Formats
+Combining formats
+String interpolation
+Filtering info Objects
+Creating custom formats
+Logging levels
+Using logging levels
+Using custom logging levels
+Transports
+Multiple transports of the same type
+Adding Custom Transports
+Common Transport options
+Exceptions
+Handling Uncaught Exceptions with winston
+To Exit or Not to Exit
+Rejections
+Handling Uncaught Promise Rejections with winston
+Profiling
+Streaming Logs
+Querying Logs
+Further Reading
+Using the default logger
+Awaiting logs to be written in winston
+Working with multiple Loggers in winston
+Routing Console transport messages to the console instead of stdout and stderr
+Installation
+Run Tests
+Logging
+Logging levels in winston conform to the severity ordering specified by RFC5424: severity of all levels is assumed to be numerically ascending from most important to least important.
+
+const levels = {
+  error: 0,
+  warn: 1,
+  info: 2,
+  http: 3,
+  verbose: 4,
+  debug: 5,
+  silly: 6
+};
+Creating your own Logger
+You get started by creating a logger using winston.createLogger:
+
+const logger = winston.createLogger({
+  transports: [
+    new winston.transports.Console(),
+    new winston.transports.File({ filename: 'combined.log' })
+  ]
+});
+A logger accepts the following parameters:
+
+Name Default Description
+level 'info' Log only if info.level is less than or equal to this level
+levels winston.config.npm.levels Levels (and colors) representing log priorities
+format winston.format.json Formatting for info messages (see: Formats)
+transports [] (No transports) Set of logging targets for info messages
+exitOnError true If false, handled exceptions will not cause process.exit
+silent false If true, all logs are suppressed
+The levels provided to createLogger will be defined as convenience methods on the logger returned.
+
+//
+// Logging
+//
+logger.log({
+  level: 'info',
+  message: 'Hello distributed log files!'
+});
+
+logger.info('Hello again distributed logs');
+You can add or remove transports from the logger once it has been provided to you from winston.createLogger:
+
+const files = new winston.transports.File({ filename: 'combined.log' });
+const console = new winston.transports.Console();
+
+logger
+  .clear() // Remove all transports
+  .add(console) // Add console transport
+  .add(files) // Add file transport
+  .remove(console); // Remove console transport
+You can also wholesale reconfigure a winston.Logger instance using the configure method:
+
+const logger = winston.createLogger({
+  level: 'info',
+  transports: [
+    new winston.transports.Console(),
+    new winston.transports.File({ filename: 'combined.log' })
+  ]
+});
+
+//
+// Replaces the previous transports with those in the
+// new configuration wholesale.
+//
+const DailyRotateFile = require('winston-daily-rotate-file');
+logger.configure({
+  level: 'verbose',
+  transports: [
+    new DailyRotateFile(opts)
+  ]
+});
+Creating child loggers
+You can create child loggers from existing loggers to pass metadata overrides:
+
+const logger = winston.createLogger({
+  transports: [
+    new winston.transports.Console(),
+  ]
+});
+
+const childLogger = logger.child({ requestId: '451' });
+.child is likely to be bugged if you're also extending the Logger class, due to some implementation details that make this keyword to point to unexpected things. Use with caution.
+
+Streams, objectMode, and info objects
+In winston, both Logger and Transport instances are treated as objectMode streams that accept an info object.
+
+The info parameter provided to a given format represents a single log message. The object itself is mutable. Every info must have at least the level and message properties:
+
+const info = {
+  level: 'info', // Level of the logging message
+  message: 'Hey! Log something?' // Descriptive message being logged.
+};
+Properties besides level and message are considered as "meta". i.e.:
+
+const { level, message, ...meta } = info;
+Several of the formats in logform itself add additional properties:
+
+Property Format added by Description
+splat splat() String interpolation splat for %d %s-style messages.
+timestamp timestamp() timestamp the message was received.
+label label() Custom label associated with each message.
+ms ms() Number of milliseconds since the previous log message.
+As a consumer you may add whatever properties you wish – internal state is maintained by Symbol properties:
+
+Symbol.for('level') (READ-ONLY): equal to level property. Is treated as immutable by all code.
+Symbol.for('message'): complete string message set by "finalizing formats":
+json
+logstash
+printf
+prettyPrint
+simple
+Symbol.for('splat'): additional string interpolation arguments. Used exclusively by splat() format.
+These Symbols are stored in another package: triple-beam so that all consumers of logform can have the same Symbol reference. i.e.:
+
+const { LEVEL, MESSAGE, SPLAT } = require('triple-beam');
+
+console.log(LEVEL === Symbol.for('level'));
+// true
+
+console.log(MESSAGE === Symbol.for('message'));
+// true
+
+console.log(SPLAT === Symbol.for('splat'));
+// true
+NOTE: any { message } property in a meta object provided will automatically be concatenated to any msg already provided: For example the below will concatenate 'world' onto 'hello':
+
+logger.log('error', 'hello', { message: 'world' });
+logger.info('hello', { message: 'world' });
+Formats
+Formats in winston can be accessed from winston.format. They are implemented in logform, a separate module from winston. This allows flexibility when writing your own transports in case you wish to include a default format with your transport.
+
+In modern versions of node template strings are very performant and are the recommended way for doing most end-user formatting. If you want to bespoke format your logs, winston.format.printf is for you:
+
+const { createLogger, format, transports } = require('winston');
+const { combine, timestamp, label, printf } = format;
+
+const myFormat = printf(({ level, message, label, timestamp }) => {
+  return `${timestamp} [${label}] ${level}: ${message}`;
+});
+
+const logger = createLogger({
+  format: combine(
+    label({ label: 'right meow!' }),
+    timestamp(),
+    myFormat
+  ),
+  transports: [new transports.Console()]
+});
+To see what built-in formats are available and learn more about creating your own custom logging formats, see logform.
+
+Combining formats
+Any number of formats may be combined into a single format using format.combine. Since format.combine takes no opts, as a convenience it returns pre-created instance of the combined format.
+
+const { createLogger, format, transports } = require('winston');
+const { combine, timestamp, label, prettyPrint } = format;
+
+const logger = createLogger({
+  format: combine(
+    label({ label: 'right meow!' }),
+    timestamp(),
+    prettyPrint()
+  ),
+  transports: [new transports.Console()]
+})
+
+logger.log({
+  level: 'info',
+  message: 'What time is the testing at?'
+});
+// Outputs:
+// { level: 'info',
+// message: 'What time is the testing at?',
+// label: 'right meow!',
+// timestamp: '2017-09-30T03:57:26.875Z' }
+String interpolation
+The log method provides the string interpolation using util.format. It must be enabled using format.splat().
+
+Below is an example that defines a format with string interpolation of messages using format.splat and then serializes the entire info message using format.simple.
+
+const { createLogger, format, transports } = require('winston');
+const logger = createLogger({
+  format: format.combine(
+    format.splat(),
+    format.simple()
+  ),
+  transports: [new transports.Console()]
+});
+
+// info: test message my string {}
+logger.log('info', 'test message %s', 'my string');
+
+// info: test message 123 {}
+logger.log('info', 'test message %d', 123);
+
+// info: test message first second {number: 123}
+logger.log('info', 'test message %s, %s', 'first', 'second', { number: 123 });
+Filtering info Objects
+If you wish to filter out a given info Object completely when logging then simply return a falsey value.
+
+const { createLogger, format, transports } = require('winston');
+
+// Ignore log messages if they have { private: true }
+const ignorePrivate = format((info, opts) => {
+  if (info.private) { return false; }
+  return info;
+});
+
+const logger = createLogger({
+  format: format.combine(
+    ignorePrivate(),
+    format.json()
+  ),
+  transports: [new transports.Console()]
+});
+
+// Outputs: {"level":"error","message":"Public error to share"}
+logger.log({
+  level: 'error',
+  message: 'Public error to share'
+});
+
+// Messages with { private: true } will not be written when logged.
+logger.log({
+  private: true,
+  level: 'error',
+  message: 'This is super secret - hide it.'
+});
+Use of format.combine will respect any falsey values return and stop evaluation of later formats in the series. For example:
+
+const { format } = require('winston');
+const { combine, timestamp, label } = format;
+
+const willNeverThrow = format.combine(
+  format(info => { return false })(), // Ignores everything
+  format(info => { throw new Error('Never reached') })()
+);
+Creating custom formats
+Formats are prototypal objects (i.e. class instances) that define a single method: transform(info, opts) and return the mutated info:
+
+info: an object representing the log message.
+opts: setting specific to the current instance of the format.
+They are expected to return one of two things:
+
+An info Object representing the modified info argument. Object references need not be preserved if immutability is preferred. All current built-in formats consider info mutable, but [immutablejs] is being considered for future releases.
+A falsey value indicating that the info argument should be ignored by the caller. (See: Filtering info Objects) below.
+winston.format is designed to be as simple as possible. To define a new format, simply pass it a transform(info, opts) function to get a new Format.
+
+The named Format returned can be used to create as many copies of the given Format as desired:
+
+const { format } = require('winston');
+
+const volume = format((info, opts) => {
+  if (opts.yell) {
+    info.message = info.message.toUpperCase();
+  } else if (opts.whisper) {
+    info.message = info.message.toLowerCase();
+  }
+
+  return info;
+});
+
+// `volume` is now a function that returns instances of the format.
+const scream = volume({ yell: true });
+console.dir(scream.transform({
+  level: 'info',
+  message: `sorry for making you YELL in your head!`
+}, scream.options));
+// {
+// level: 'info'
+// message: 'SORRY FOR MAKING YOU YELL IN YOUR HEAD!'
+// }
+
+// `volume` can be used multiple times to create different formats.
+const whisper = volume({ whisper: true });
+console.dir(whisper.transform({
+  level: 'info',
+  message: `WHY ARE THEY MAKING US YELL SO MUCH!`
+}, whisper.options));
+// {
+// level: 'info'
+// message: 'why are they making us yell so much!'
+// }
+Logging Levels
+Logging levels in winston conform to the severity ordering specified by RFC5424: severity of all levels is assumed to be numerically ascending from most important to least important.
+
+Each level is given a specific integer priority. The higher the priority the more important the message is considered to be, and the lower the corresponding integer priority. For example, as specified exactly in RFC5424 the syslog levels are prioritized from 0 to 7 (highest to lowest).
+
+{
+  emerg: 0,
+  alert: 1,
+  crit: 2,
+  error: 3,
+  warning: 4,
+  notice: 5,
+  info: 6,
+  debug: 7
+}
+Similarly, npm logging levels are prioritized from 0 to 6 (highest to lowest):
+
+{
+  error: 0,
+  warn: 1,
+  info: 2,
+  http: 3,
+  verbose: 4,
+  debug: 5,
+  silly: 6
+}
+If you do not explicitly define the levels that winston should use, the npm levels above will be used.
+
+Using Logging Levels
+Setting the level for your logging message can be accomplished in one of two ways. You can pass a string representing the logging level to the log() method or use the level specified methods defined on every winston Logger.
+
+//
+// Any logger instance
+//
+logger.log('silly', "127.0.0.1 - there's no place like home");
+logger.log('debug', "127.0.0.1 - there's no place like home");
+logger.log('verbose', "127.0.0.1 - there's no place like home");
+logger.log('info', "127.0.0.1 - there's no place like home");
+logger.log('warn', "127.0.0.1 - there's no place like home");
+logger.log('error', "127.0.0.1 - there's no place like home");
+logger.info("127.0.0.1 - there's no place like home");
+logger.warn("127.0.0.1 - there's no place like home");
+logger.error("127.0.0.1 - there's no place like home");
+
+//
+// Default logger
+//
+winston.log('info', "127.0.0.1 - there's no place like home");
+winston.info("127.0.0.1 - there's no place like home");
+winston allows you to define a level property on each transport which specifies the maximum level of messages that a transport should log. For example, using the syslog levels you could log only error messages to the console and everything info and below to a file (which includes error messages):
+
+const logger = winston.createLogger({
+  levels: winston.config.syslog.levels,
+  transports: [
+    new winston.transports.Console({ level: 'error' }),
+    new winston.transports.File({
+      filename: 'combined.log',
+      level: 'info'
+    })
+  ]
+});
+You may also dynamically change the log level of a transport:
+
+const transports = {
+  console: new winston.transports.Console({ level: 'warn' }),
+  file: new winston.transports.File({ filename: 'combined.log', level: 'error' })
+};
+
+const logger = winston.createLogger({
+  transports: [
+    transports.console,
+    transports.file
+  ]
+});
+
+logger.info('Will not be logged in either transport!');
+transports.console.level = 'info';
+transports.file.level = 'info';
+logger.info('Will be logged in both transports!');
+winston supports customizable logging levels, defaulting to npm style logging levels. Levels must be specified at the time of creating your logger.
+
+Using Custom Logging Levels
+In addition to the predefined npm, syslog, and cli levels available in winston, you can also choose to define your own:
+
+const myCustomLevels = {
+  levels: {
+    foo: 0,
+    bar: 1,
+    baz: 2,
+    foobar: 3
+  },
+  colors: {
+    foo: 'blue',
+    bar: 'green',
+    baz: 'yellow',
+    foobar: 'red'
+  }
+};
+
+const customLevelLogger = winston.createLogger({
+  levels: myCustomLevels.levels
+});
+
+customLevelLogger.foobar('some foobar level-ed message');
+Although there is slight repetition in this data structure, it enables simple encapsulation if you do not want to have colors. If you do wish to have colors, in addition to passing the levels to the Logger itself, you must make winston aware of them:
+
+winston.addColors(myCustomLevels.colors);
+This enables loggers using the colorize formatter to appropriately color and style the output of custom levels.
+
+Additionally, you can also change background color and font style. For example,
+
+baz: 'italic yellow',
+foobar: 'bold red cyanBG'
+Possible options are below.
+
+Font styles: bold, dim, italic, underline, inverse, hidden, strikethrough.
+
+Font foreground colors: black, red, green, yellow, blue, magenta, cyan, white, gray, grey.
+
+Background colors: blackBG, redBG, greenBG, yellowBG, blueBG magentaBG, cyanBG, whiteBG
+
+Colorizing Standard logging levels
+To colorize the standard logging level add
+
+winston.format.combine(
+  winston.format.colorize(),
+  winston.format.simple()
+);
+where winston.format.simple() is whatever other formatter you want to use. The colorize formatter must come before any formatters adding text you wish to color.
+
+Colorizing full log line when json formatting logs
+To colorize the full log line with the json formatter you can apply the following
+
+winston.format.combine(
+  winston.format.json(),
+  winston.format.colorize({ all: true })
+);
+Transports
+There are several core transports included in winston, which leverage the built-in networking and file I/O offered by Node.js core. In addition, there are additional transports written by members of the community.
+
+Multiple transports of the same type
+It is possible to use multiple transports of the same type e.g. winston.transports.File when you construct the transport.
+
+const logger = winston.createLogger({
+  transports: [
+    new winston.transports.File({
+      filename: 'combined.log',
+      level: 'info'
+    }),
+    new winston.transports.File({
+      filename: 'errors.log',
+      level: 'error'
+    })
+  ]
+});
+If you later want to remove one of these transports you can do so by using the transport itself. e.g.:
+
+const combinedLogs = logger.transports.find(transport => {
+  return transport.filename === 'combined.log'
+});
+
+logger.remove(combinedLogs);
+Adding Custom Transports
+Adding a custom transport is easy. All you need to do is accept any options you need, implement a log() method, and consume it with winston.
+
+const Transport = require('winston-transport');
+const util = require('util');
+
+//
+// Inherit from `winston-transport` so you can take advantage
+// of the base functionality and `.exceptions.handle()`.
+//
+module.exports = class YourCustomTransport extends Transport {
+  constructor(opts) {
+    super(opts);
+    //
+    // Consume any custom options here. e.g.:
+    // - Connection information for databases
+    // - Authentication information for APIs (e.g. loggly, papertrail,
+    // logentries, etc.).
+    //
+  }
+
+  log(info, callback) {
+    setImmediate(() => {
+      this.emit('logged', info);
+    });
+
+    // Perform the writing to the remote service
+    callback();
+  }
+};
+Common Transport options
+As every transport inherits from winston-transport, it's possible to set a custom format and a custom log level on each transport separately:
+
+const logger = winston.createLogger({
+  transports: [
+    new winston.transports.File({
+      filename: 'error.log',
+      level: 'error',
+      format: winston.format.json()
+    }),
+    new winston.transports.Http({
+      level: 'warn',
+      format: winston.format.json()
+    }),
+    new winston.transports.Console({
+      level: 'info',
+      format: winston.format.combine(
+        winston.format.colorize(),
+        winston.format.simple()
+      )
+    })
+  ]
+});
+Exceptions
+Handling Uncaught Exceptions with winston
+With winston, it is possible to catch and log uncaughtException events from your process. With your own logger instance you can enable this behavior when it's created or later on in your applications lifecycle:
+
+const { createLogger, transports } = require('winston');
+
+// Enable exception handling when you create your logger.
+const logger = createLogger({
+  transports: [
+    new transports.File({ filename: 'combined.log' })
+  ],
+  exceptionHandlers: [
+    new transports.File({ filename: 'exceptions.log' })
+  ]
+});
+
+// Or enable it later on by adding a transport or using `.exceptions.handle`
+const logger = createLogger({
+  transports: [
+    new transports.File({ filename: 'combined.log' })
+  ]
+});
+
+// Call exceptions.handle with a transport to handle exceptions
+logger.exceptions.handle(
+  new transports.File({ filename: 'exceptions.log' })
+);
+If you want to use this feature with the default logger, simply call .exceptions.handle() with a transport instance.
+
+//
+// You can add a separate exception logger by passing it to `.exceptions.handle`
+//
+winston.exceptions.handle(
+  new winston.transports.File({ filename: 'path/to/exceptions.log' })
+);
+
+//
+// Alternatively you can set `handleExceptions` to true when adding transports
+// to winston.
+//
+winston.add(new winston.transports.File({
+  filename: 'path/to/combined.log',
+  handleExceptions: true
+}));
+To Exit or Not to Exit
+By default, winston will exit after logging an uncaughtException. If this is not the behavior you want, set exitOnError = false
+
+const logger = winston.createLogger({ exitOnError: false });
+
+//
+// or, like this:
+//
+logger.exitOnError = false;
+When working with custom logger instances, you can pass in separate transports to the exceptionHandlers property or set handleExceptions on any transport.
+
+Example 1
+const logger = winston.createLogger({
+  transports: [
+    new winston.transports.File({ filename: 'path/to/combined.log' })
+  ],
+  exceptionHandlers: [
+    new winston.transports.File({ filename: 'path/to/exceptions.log' })
+  ]
+});
+Example 2
+const logger = winston.createLogger({
+  transports: [
+    new winston.transports.Console({
+      handleExceptions: true
+    })
+  ],
+  exitOnError: false
+});
+The exitOnError option can also be a function to prevent exit on only certain types of errors:
+
+function ignoreEpipe(err) {
+  return err.code !== 'EPIPE';
+}
+
+const logger = winston.createLogger({ exitOnError: ignoreEpipe });
+
+//
+// or, like this:
+//
+logger.exitOnError = ignoreEpipe;
+Rejections
+Handling Uncaught Promise Rejections with winston
+With winston, it is possible to catch and log unhandledRejection events from your process. With your own logger instance you can enable this behavior when it's created or later on in your applications lifecycle:
+
+const { createLogger, transports } = require('winston');
+
+// Enable rejection handling when you create your logger.
+const logger = createLogger({
+  transports: [
+    new transports.File({ filename: 'combined.log' })
+  ],
+  rejectionHandlers: [
+    new transports.File({ filename: 'rejections.log' })
+  ]
+});
+
+// Or enable it later on by adding a transport or using `.rejections.handle`
+const logger = createLogger({
+  transports: [
+    new transports.File({ filename: 'combined.log' })
+  ]
+});
+
+// Call rejections.handle with a transport to handle rejections
+logger.rejections.handle(
+  new transports.File({ filename: 'rejections.log' })
+);
+If you want to use this feature with the default logger, simply call .rejections.handle() with a transport instance.
+
+//
+// You can add a separate rejection logger by passing it to `.rejections.handle`
+//
+winston.rejections.handle(
+  new winston.transports.File({ filename: 'path/to/rejections.log' })
+);
+
+//
+// Alternatively you can set `handleRejections` to true when adding transports
+// to winston.
+//
+winston.add(new winston.transports.File({
+  filename: 'path/to/combined.log',
+  handleRejections: true
+}));
+Profiling
+In addition to logging messages and metadata, winston also has a simple profiling mechanism implemented for any logger:
+
+//
+// Start profile of 'test'
+//
+logger.profile('test');
+
+setTimeout(function () {
+  //
+  // Stop profile of 'test'. Logging will now take place:
+  // '17 Jan 21:00:00 - info: test duration=1000ms'
+  //
+  logger.profile('test');
+}, 1000);
+Also you can start a timer and keep a reference that you can call .done() on:
+
+ // Returns an object corresponding to a specific timing. When done
+ // is called the timer will finish and log the duration. e.g.:
+ //
+ const profiler = logger.startTimer();
+ setTimeout(function () {
+   profiler.done({ message: 'Logging message' });
+ }, 1000);
+All profile messages are set to 'info' level by default, and both message and metadata are optional. For individual profile messages, you can override the default log level by supplying a metadata object with a level property:
+
+logger.profile('test', { level: 'debug' });
+Querying Logs
+winston supports querying of logs with Loggly-like options. See Loggly Search API. Specifically: File, Couchdb, Redis, Loggly, Nssocket, and Http.
+
+const options = {
+  from: new Date() - (24 * 60 * 60 * 1000),
+  until: new Date(),
+  limit: 10,
+  start: 0,
+  order: 'desc',
+  fields: ['message']
+};
+
+//
+// Find items logged between today and yesterday.
+//
+logger.query(options, function (err, results) {
+  if (err) {
+    /* TODO: handle me */
+    throw err;
+  }
+
+  console.log(results);
+});
+Streaming Logs
+Streaming allows you to stream your logs back from your chosen transport.
+
+//
+// Start at the end.
+//
+winston.stream({ start: -1 }).on('log', function(log) {
+  console.log(log);
+});
+Further Reading
+Using the Default Logger
+The default logger is accessible through the winston module directly. Any method that you could call on an instance of a logger is available on the default logger:
+
+const winston = require('winston');
+
+winston.log('info', 'Hello distributed log files!');
+winston.info('Hello again distributed logs');
+
+winston.level = 'debug';
+winston.log('debug', 'Now my debug messages are written to console!');
+By default, no transports are set on the default logger. You must add or remove transports via the add() and remove() methods:
+
+const files = new winston.transports.File({ filename: 'combined.log' });
+const console = new winston.transports.Console();
+
+winston.add(console);
+winston.add(files);
+winston.remove(console);
+Or do it with one call to configure():
+
+winston.configure({
+  transports: [
+    new winston.transports.File({ filename: 'somefile.log' })
+  ]
+});
+For more documentation about working with each individual transport supported by winston see the winston Transports document.
+
+Awaiting logs to be written in winston
+Often it is useful to wait for your logs to be written before exiting the process. Each instance of winston.Logger is also a [Node.js stream]. A finish event will be raised when all logs have flushed to all transports after the stream has been ended.
+
+const transport = new winston.transports.Console();
+const logger = winston.createLogger({
+  transports: [transport]
+});
+
+logger.on('finish', function (info) {
+  // All `info` log messages has now been logged
+});
+
+logger.info('CHILL WINSTON!', { seriously: true });
+logger.end();
+It is also worth mentioning that the logger also emits an 'error' event if an error occurs within the logger itself which you should handle or suppress if you don't want unhandled exceptions:
+
+//
+// Handle errors originating in the logger itself
+//
+logger.on('error', function (err) { /* Do Something */ });
+Working with multiple Loggers in winston
+Often in larger, more complex, applications it is necessary to have multiple logger instances with different settings. Each logger is responsible for a different feature area (or category). This is exposed in winston in two ways: through winston.loggers and instances of winston.Container. In fact, winston.loggers is just a predefined instance of winston.Container:
+
+const winston = require('winston');
+const { format } = winston;
+const { combine, label, json } = format;
+
+//
+// Configure the logger for `category1`
+//
+winston.loggers.add('category1', {
+  format: combine(
+    label({ label: 'category one' }),
+    json()
+  ),
+  transports: [
+    new winston.transports.Console({ level: 'silly' }),
+    new winston.transports.File({ filename: 'somefile.log' })
+  ]
+});
+
+//
+// Configure the logger for `category2`
+//
+winston.loggers.add('category2', {
+  format: combine(
+    label({ label: 'category two' }),
+    json()
+  ),
+  transports: [
+    new winston.transports.Http({ host: 'localhost', port:8080 })
+  ]
+});
+Now that your loggers are setup, you can require winston in any file in your application and access these pre-configured loggers:
+
+const winston = require('winston');
+
+//
+// Grab your preconfigured loggers
+//
+const category1 = winston.loggers.get('category1');
+const category2 = winston.loggers.get('category2');
+
+category1.info('logging to file and console transports');
+category2.info('logging to http transport');
+If you prefer to manage the Container yourself, you can simply instantiate one:
+
+const winston = require('winston');
+const { format } = winston;
+const { combine, label, json } = format;
+
+const container = new winston.Container();
+
+container.add('category1', {
+  format: combine(
+    label({ label: 'category one' }),
+    json()
+  ),
+  transports: [
+    new winston.transports.Console({ level: 'silly' }),
+    new winston.transports.File({ filename: 'somefile.log' })
+  ]
+});
+
+const category1 = container.get('category1');
+category1.info('logging to file and console transports');
+Routing Console transport messages to the console instead of stdout and stderr
+By default the winston.transports.Console transport sends messages to stdout and stderr. This is fine in most situations; however, there are some cases where this isn't desirable, including:
+
+Debugging using VSCode and attaching to, rather than launching, a Node.js process
+Writing JSON format messages in AWS Lambda
+Logging during Jest tests with the --silent option
+To make the transport log use console.log(), console.warn() and console.error() instead, set the forceConsole option to true:
+
+const logger = winston.createLogger({
+  level: 'info',
+  transports: [new winston.transports.Console({ forceConsole: true })]
+});
+Installation
+npm install winston
+yarn add winston
+Run Tests
+All of the winston tests are written with mocha, nyc, and assume. They can be run with npm.
+
+
+Console-Log-Level.
+
+console-log-level
+A dead simple logger. Will log to STDOUT or STDERR depending on the chosen log level. It uses console.info, console.warn and console.error and hence supports the same API.
+
+Log levels supported: trace, debug, info, warn, error and fatal.
+
+npm Build status js-standard-style
+
+Installation
+npm install console-log-level
+Example usage
+var log = require('console-log-level')({ level: 'info' })
+
+log.trace('a') // will not do anything
+log.debug('b') // will not do anything
+log.info('c')  // will output 'c\n' on STDOUT
+log.warn('d')  // will output 'd\n' on STDERR
+log.error('e') // will output 'e\n' on STDERR
+log.fatal('f') // will output 'f\n' on STDERR
+Options
+Configure the logger by passing an options object:
+
+var log = require('console-log-level')({
+  prefix: function (level) {
+    return new Date().toISOString()
+  },
+  level: 'info'
+})
+level
+A string to specify the log level. Defaults to info.
+
+prefix
+Specify this option if you want to set a prefix for all log messages. This must be a string or a function that returns a string.
+
+Will get the level of the currently logged message as the first argument.
+
+stderr
+A boolean to log everything to stderr. Defauls to false.
+
+License
+MIT.
+
+
+
+Storyboard.
+
+Storyboard npm version
+Storyboard DevTools
+
+A library, plus a Chrome DevTools extension.
+
+Blog post: http://guigrpa.github.io/2016/07/18/untangling-spaghetti-logs/
+
+These docs are for Storyboard v3. Docs for v2 are also available, but you're encouraged to upgrade!
+
+ emoji nature:sparkles
+Hierarchical stories: put logs in context (stories), and group them in higher-order stories; they can be a life-saver with concurrent user actions and async events.
+End-to-end stories: see all client and server tasks triggered by a user action (a click on the Login button, maybe) in a single place.
+Storyboard DevTools Chrome extension: view client and server logs with a clean and detail-rich interface, including advanced features such as remote monitoring (for mobile devices and non-Chrome browsers) and relative timestamps.
+Storyboard CLI: wrap any application with it (no changes required) to monitor it remotely with the Storyboard DevTools.
+Real-time push of server logs to the Storyboard DevTools extension via WebSockets, with opt-in client-server clock synchronization. Even more: control the level of detail you get from various parts of your server remotely, without relaunching.
+Secure server logs: remote access is opt-in, and can be authenticated.
+Attach anything to your logs for further investigation.
+Plug-in architecture. Available plugins include Console (& Parallel Console), WebSocket Server & Client, File, (PostgreSQL) Database, and Browser Extension, but you can write your own too!
+Lightweight. Plugins are now (v3) available separately, so you only need to bring in the dependencies you actually use.
+Rich filter options: give logs source and severity attributes and apply fine-grained filtering, with white and black lists.
+Colorful: use color to convey meaning and importance. Storyboard extends the popular chalk library so that it can also be used on the browser.
+Enjoy the simple-yet-powerful API.
+Flow-compatible (with zero config).
+Installation
+For the simplest possible Storyboard installation (for more options, check out the Listeners section below):
+
+$ npm install --save storyboard storyboard-preset-console
+If you only want the (less powerful) CLI tool, see this section.
+
+To install the Storyboard DevTools Chrome extension, get it from the Chrome Web Store. Optional, but highly recommended! After installing it, open the Storyboard pane in the Chrome DevTools and point your browser to a Storyboard-equipped page (see below for how to use the library).
+
+CLI tool
+Hopefully the next sections will convince you of the benefits of adding Storyboard to your project. If you don't want to modify your existing application but still want to use the Storyboard DevTools or other Storyboard features, you can use the sb CLI tool:
+
+$ npm install -g storyboard-cli
+$ sb --server ls
+
+2016-07-15T17:26:33.974Z storyboard INFO ┌── ROOT STORY [CREATED]
+2016-07-15T17:26:33.975Z storyboard INFO Log filter: *:DEBUG
+2016-07-15T17:26:34.151Z storyboard INFO Logs available via web on port 8090
+2016-07-15T17:26:34.154Z main INFO CHANGELOG.md
+2016-07-15T17:26:34.155Z main INFO LICENSE
+2016-07-15T17:26:34.155Z main INFO README.md
+2016-07-15T17:26:34.155Z main INFO ROADMAP.md
+2016-07-15T17:26:34.155Z main INFO chromeExtension
+2016-07-15T17:26:34.155Z main INFO coverage
+...
+You can pipe stdin and stdout in the standard way:
+
+$ sb ls | head -n 3
+
+2016-07-15T14:41:47.573Z storyboard INFO ┌── ROOT STORY [CREATED]
+2016-07-15T14:41:47.574Z storyboard INFO Log filter: *:DEBUG
+2016-07-15T14:41:47.601Z main INFO CHANGELOG.md
+
+$ ls | sb -- head -n 3
+
+2016-07-15T14:41:52.174Z storyboard INFO ┌── ROOT STORY [CREATED]
+2016-07-15T14:41:52.176Z storyboard INFO Log filter: *:DEBUG
+2016-07-15T14:41:52.201Z main INFO CHANGELOG.md
+2016-07-15T14:41:52.201Z main INFO LICENSE
+2016-07-15T14:41:52.201Z main INFO README.md
+2016-07-15T14:41:52.202Z main INFO  
+2016-07-15T14:41:52.203Z storyboard INFO └── ROOT STORY [CLOSED]
+Note the use of the -- separator: options before the separator are passed to the sb tool; after the separator, they are passed to the called application.
+
+Here are the CLI tool configuration options:
+
+$ sb --help
+
+  Usage: sb [options] <command> [args...]
+
+  Options:
+
+    -h, --help output usage information
+    -V, --version output the version number
+    --no-console Disable console output
+    --stderr Enable stderr for errors
+    --no-colors Disable color output
+    -f, --file <path> Save logs to file
+    -s, --server Launch web server for logs
+    -p, --port <port> Port for web server
+Storyboard library usage
+Basic usage
+import { mainStory } from 'storyboard';
+import 'storyboard-preset-console';
+
+mainStory.info('Hello world!');
+We're using the storyboard-preset-console preset for convenience, which is equivalent to:
+
+import { mainStory, addListener } from 'storyboard';
+import consoleListener from 'storyboard-listener-console';
+addListener(consoleListener);
+
+mainStory.info('Hello world!');
+See more details on plugins in Listeners below.
+
+Severity levels
+mainStory.trace('Teeny-weeny detail: x = 3, y = 4');
+mainStory.debug('Called login()');
+mainStory.info('User "admin" authenticated successfully');
+mainStory.warn('Sad we can\'t show colors in GFM');
+mainStory.error('User "admin" could not be authenticated', { attach: err });
+mainStory.fatal('Ooops! Crashed! Mayday!', { attach: fatalError });
+// ...
+// 2016-03-09T16:18:19.659Z main WARN Sad we can't show colors in GFM
+// 2016-03-09T16:18:19.672Z main ERROR User "admin" could not be authenticated
+// 2016-03-09T16:18:19.672Z main ERROR name: 'Error'
+// 2016-03-09T16:18:19.672Z main ERROR message: 'AUTHENTICATION_ERROR'
+// 2016-03-09T16:18:19.672Z main ERROR stack: Error: AUTHENTICATION_ERROR
+// 2016-03-09T16:18:19.672Z main ERROR stack: at repl:3:11
+// ...
+Maybe you noticed that the trace call produces no output by default. See Log filtering to fine-tune your filters.
+
+Sources
+Namespace your logs for readability, as well as to allow finer-grained filtering later on.
+
+mainStory.info('http', 'GET /api/item/25');
+mainStory.info('db', 'Fetching item 25...');
+// 2016-03-09T16:29:51.943Z http INFO GET /api/item/25
+// 2016-03-09T16:31:52.231Z db INFO Fetching item 25...
+Colors
+Use colors to emphasize/de-emphasize parts of your logs:
+
+import { mainStory, chalk } from 'storyboard';
+mainStory.info('http', `GET ${chalk.green.bold('/api/item/26')}`);
+mainStory.info('db', `Fetching item ${chalk.green.bold('26')}...`);
+// 2016-03-09T16:29:51.943Z http INFO GET /api/item/26
+// 2016-03-09T16:31:52.231Z db INFO Fetching item 26...
+As seen above, we recommend using the popular chalk library by Sindre Sorhus. Chalk is automatically extended by Storyboard for use in the browser. If you prefer another ANSI-color library, make sure it's universal and doesn't disable itself automatically in the browser.
+
+Attachments
+Attach anything to your logs that might provide additional context: an object, an array, an exception, a simple value... Don't worry about circular references, long buffers, or undefined! Use the attach option to display it as a tree, or attachInline for a more compact, JSON.stringify-ed version.
+
+You can also use the attachLevel option to control the (severity) level of the detailed object logs (by default: the same level of the main logged line). Pro tip: use the trace level for long attachments (hidden by default), so that they don't pollute your console but are still accessible via the Storyboard DevTools extension.
+
+mainStory.info('test', 'A simple object', { attachInline: obj1 });
+// 2016-03-09T16:51:16.436Z test INFO A simple object -- {"foo":2,"bar":3}
+mainStory.info('test', 'An object with a circular reference', {
+  attach: obj2,
+  attachLevel: 'debug',
+});
+// 2016-03-09T16:52:48.882Z test INFO An object with a circular reference
+// 2016-03-09T16:52:48.882Z test DEBUG foo: 2
+// 2016-03-09T16:52:48.882Z test DEBUG bar: 3
+// 2016-03-09T16:52:48.882Z test DEBUG circularRef: [CIRCULAR]
+mainStory.info('test', 'This message is logged', {
+  attach: butThisHugeObjectIsNot,
+  attachLevel: 'trace',
+});
+// 2017-02-17T16:03:23.124Z test INFO This message is logged
+// [attachment is hidden; inspect it in the Storyboard DevTools]
+Note: attach and attachInline have no effect on the way attachments are shown in the Storyboard DevTools.
+
+Log filtering
+Inspired by the popular debug library, Storyboard allows you to filter logs according to source, specifying white and black lists and using wildcards. Beyond that, you can specify the minimum severity level you are interested in, depending on the source:
+
+*:DEBUG (default) or * will include logs from all sources, as long as they have severity debug or higher.
+*:* will include absolutely all logs.
+foo or foo:DEBUG will include logs from foo but exclude all other sources.
+-test, *:* will include all logs, except those from source test.
+foo, bar:INFO, -test, *:WARN will include logs from foo (DEBUG or higher), bar (INFO or higher), and all other sources (WARN or higher), but exclude source test.
+ba*:*, -basket will include all logs from bar, baz, etc. but exclude source basket.
+In Node, you can configure log filtering via the STORYBOARD environment variable (have a look at cross-env for a cross-platform setup):
+
+# OS X / Linux
+$ STORYBOARD=*:* node myScript
+
+# Windows
+$ set "STORYBOARD=*:*" && node myScript
+In the browser, use localStorage:
+
+localStorage.STORYBOARD = '*:*'
+Alternatively, you can configure the log filters programatically:
+
+import { config } from 'storyboard';
+config({ filter: '*:*' });
+And even more convenient: configure filters remotely and without reloading by using the Storyboard DevTools.
+
+Children stories
+Create child stories by calling child() on the parent story and passing an options argument. Don't forget to close() the child story when you're done with it! More on child stories here.
+
+const story = mainStory.child({
+  src: 'lib',
+  title: 'Little Red Riding Hood',
+  level: 'DEBUG',
+});
+story.info('Once upon a time...');
+story.warn('...a wolf appeared!...');
+story.info('...and they lived happily ever after.');
+story.close();
+// 2016-03-19T14:10:14.080Z lib DEBUG ┌── Little Red Riding Hood [CREATED]
+// 2016-03-19T14:10:14.083Z main INFO Once upon a time...
+// 2016-03-19T14:10:14.085Z main WARN ...a wolf appeared!...
+// 2016-03-19T14:10:14.087Z main INFO ...and they lived happily ever after.
+// 2016-03-19T14:10:14.088Z lib DEBUG └── Little Red Riding Hood [CLOSED]
+Pro tip: Child stories have INFO level by default, and can be completely hidden by log filtering. However, when a log with level WARN or higher is added to a hidden story, the story and all of its ancestors will become visible. You will not miss any errors, nor the actions that led to them!
+
+Listeners (plugins)
+Logs emitted by stories are relayed by the Storyboard Hub to all attached listeners. A Hub exists at the core of every Storyboard instance. Here is an example of a typical configuration, with server and client-side Hubs (other use cases have proved possible in production):
+
+Typical configuration
+
+Several listeners are readily available as separate packages:
+
+Console (storyboard-listener-console): formats logs and sends them to the console (also in the browser).
+
+Parallel Console (storyboard-listener-console-parallel): shows parallel, top-level stories in the console, with support for resizing.
+
+WebSocket Server (storyboard-listener-ws-server): encapsulates logs and pushes them to WebSocket clients. Used jointly with the WebSocket Client and Browser Extension, it allows remote access to server stories.
+
+WebSocket Client (storyboard-listener-ws-client): downloads logs from the WebSocket Server, and optionally uploads client logs to the server for remote monitoring.
+
+Browser Extension (storyboard-listener-browser-extension): relays logs to the Storyboard DevTools.
+
+File (storyboard-listener-file): saves logs to file.
+
+PostgreSQL Database (storyboard-listener-db-postgres): saves logs to a PostgreSQL database, including attachments, story hierarchy, etc.
+
+Check out the full listener configuration options.
+
+More listeners can be added by the user (see the API), e.g. to support different databases, integrate with other services, etc. Get inspired by winston's and bunyan's plugins.
+
+Remote access to server stories
+Standalone log server
+The simplest way to add remote access to a Node application's logs is to enable the WebSocket Server listener:
+
+// Server
+import { addListener } from 'storyboard';
+import wsServerListener from 'storyboard-listener-ws-server';
+addListener(wsServerListener);
+You now have a standalone HTTP server at port 8090 (by default) and can use the Storyboard DevTools to see your logs.
+
+Integrated log server
+You can also integrate the log server functionality with your own application server. This may be desirable if you want to use a single port, or if you want to see end-to-end stories. In this case, your client application should enable the WebSocket Client and Browser Extension listeners:
+
+// Client
+import { addListener } from 'storyboard';
+import wsClientListener from 'storyboard-listener-ws-client';
+import browserExtListener from 'storyboard-listener-browser-extension';
+addListener(wsClientListener);
+addListener(browserExtListener);
+At the server side, initialize the WebSocket Server listener with either your http Server instance, or your socket.io Server instance, depending on your case:
+
+// If your application doesn't use WebSockets:
+import express from 'express';
+import http from 'http';
+const httpServer = http.createServer(express());
+httpServer.listen(3000);
+addListener(wsServerListener, { httpServer });
+
+// If your application uses socket.io WebSockets without socket auth:
+import socketio from 'socket.io';
+const socketServer = socketio(httpServer);
+addListener(wsServerListener, { socketServer });
+
+// If your application uses sockets with auth, namespace them
+// so that they don't clash with the log server's:
+// At the server...
+const io = socketServer.of('/myApp');
+io.use(myAuthMiddleware);
+io.on('connection', myConnectFunction);
+// ...and at the client:
+const socket = socketio.connect('/myApp')
+Now when you open your client-side application, you can see both server and client logs in the Storyboard DevTools.
+
+User authentication
+You can add prevent unauthorized access to your logs via a listener option:
+
+addListener(wsServerListener, {
+  authenticate: ({ login, password }) => isAuthorized(login, password),
+});
+Remote access to client stories
+In some cases, you may want to remotely monitor client logs, e.g. if you are building a mobile web app, or you want to see the logs generated in non-Chrome browsers for which there is (currently) no browser extension.
+
+For these cases, you can configure your WebSocket Client listener so that it uploads its logs to the server, which can then provide remote access to them:
+
+import { addListener } from 'storyboard';
+import wsClientListener from 'storyboard-listener-ws-client';
+addListener(wsClientListener, { uploadClientStories: true });
+Client logs will not pollute the server's own log, and will appear as a separate remote client story in the Storyboard DevTools, along with a short description of the remote platform:
+
+Remote monitoring
+
+End-to-end stories
+The icing on the cake is linking server- and client-side stories to get a complete picture of what is triggered by a user action (see video at the top of this page).
+
+Storyboard provides a simple yet flexible way to achieve this: stories can have multiple parents, which are specified upon creation. This feature is leveraged by the Storyboard DevTools: when it receives a new story from the server with multiple parents, it checks whether any of the parents is a client-side story. If so, it prioritizes this parent for display purposes, since it is expected to provide more context.
+
+For this to work, the client's storyId must be transmitted to the server somehow. This example uses the URL query string for simplicity, but feel free to use whatever technique you want (the body of a POST request, your own WebSocket messaging scheme, etc.):
+
+// Client:
+const onClick = async () => {
+  const story = mainStory.child({
+    src: 'itemList',
+    title: 'User click on Refresh',
+  });
+  try {
+    story.info('itemList', 'Fetching items...');
+    const response = await fetch(`/items?storyId=${story.storyId}`);
+    const items = await response.json();
+    story.info('itemList', `Fetched ${items.length} items`);
+  } finally {
+    story.close();
+  }
+};
+
+// Server (using Express):
+import express from 'express';
+const app = express();
+app.get('/items', (req, res) => {
+  const { storyId } = req.query;
+  const story = mainStory.child({
+    src: 'http',
+    title: `HTTP request ${req.url}`,
+    extraParents: storyId != null ? [storyId] : undefined,
+  });
+  story.info('http', 'Processing request...');
+  // ...
+  res.json(items);
+  story.close();
+});
+Want to see the end-to-end story? Use the Storyboard DevTools extension.
+
+Note: end-to-end stories work better when server and client system clocks are not too different. Servers are typically NTP-synchronized, as are most modern PCs with Internet access. If this is not the case, enable Storyboard's time synchronization function (available since v2.0.0):
+
+import { addListener } from 'storyboard';
+import wsClientListener from 'storyboard-listener-ws-client';
+addListener(wsClientListener, { clockSync: true });
+Storyboard DevTools
+Storyboard DevTools
+
+Enable the link to the browser extension in your application:
+
+import { addListener } from 'storyboard';
+import browserExtListener from 'storyboard-listener-browser-extension';
+addListener(browserExtListener);
+After installing the Chrome extension, open the Chrome DevTools, select the Storyboard pane and point your browser at either:
+
+Your standard application URL, to see both server and client logs
+Port 8090 (configurable) of your server, to see server logs only (+ uploaded client logs)
+Some highlighted features:
+
+Modify the server's filter configuration without restarting it.
+Show stories chronologically (flat) or hierarchically (tree): hover on the story title for the button to appear.
+Collapse/expand stories: click on the caret. Even when stories are collapsed, detect that they contain an error or warning thanks to a special icon.
+Open attachments and exceptions: click on the folder icon.
+Choose among 3 timestamp formats: UTC, local or relative to now: click on any timestamp.
+Set reference timestamps: right-click or control-click on any timestamp.
+Use quick find (case-insensitive) to highlight what you're looking for.
+Squash identical, consecutive messages into a convenient summary line.
+Configure when and how Storyboard forgets old logs and stories.
+Customize colors to your heart's content!
+You can check out your new extension navigating to: https://storyboard-examples-ifkpkpoyhz.now.sh/ (might be a bit slow at first; free hosting!)
+
+Storyboard DevTools is built with React, Redux and Redux-Saga.
+
+Changelog emoji objects:scroll
+License (MIT) emoji objects:books
+Copyright (c) Guillermo Grau Panea 2016-now
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+Consola.
+
+
+🐨 Consola
+Elegant Console Wrapper
+
+npm version npm downloads bundle
+
+ Consola.
+👌 Easy to use
+💅 Fancy output with fallback for minimal environments
+🔌 Pluggable reporters
+💻 Consistent command line interface (CLI) experience
+🏷 Tag support
+🚏 Redirect console and stdout/stderr to consola and easily restore redirect.
+🌐 Browser support
+⏯ Pause/Resume support
+👻 Mocking support
+👮‍♂️ Spam prevention by throttling logs
+❯ Interactive prompt support powered by clack
+
+Installation
+Using npm:
+
+npm i consola
+Using yarn:
+
+yarn add consola
+Using pnpm:
+
+pnpm i consola
+Getting Started
+// ESM
+import { consola, createConsola } from "consola";
+
+// CommonJS
+const { consola, createConsola } = require("consola");
+
+consola.info("Using consola 3.0.0");
+consola.start("Building project...");
+consola.warn("A new version of consola is available: 3.0.1");
+consola.success("Project built!");
+consola.error(new Error("This is an example error. Everything is fine!"));
+consola.box("I am a simple box");
+await consola.prompt("Deploy to the production?", {
+  type: "confirm",
+});
+Will display in the terminal:
+
+consola-screenshot
+
+You can use smaller core builds without fancy reporter to save 80% of the bundle size:
+
+import { consola, createConsola } from "consola/basic";
+import { consola, createConsola } from "consola/browser";
+import { createConsola } from "consola/core";
+Consola Methods
+<type>(logObject) <type>(args...)
+Log to all reporters.
+
+Example: consola.info('Message')
+
+await prompt(message, { type, cancel })
+Show an input prompt. Type can either of text, confirm, select or multiselect.
+
+If prompt is canceled by user (with Ctrol+C), default value will be resolved by default. This strategy can be configured by setting { cancel: "..." } option:
+
+"default" - Resolve the promise with the default value or initial value.
+"undefined" - Resolve the promise with undefined.
+"null" - Resolve the promise with null.
+"symbol" - Resolve the promise with a symbol Symbol.for("cancel").
+"reject" - Reject the promise with an error.
+See examples/prompt.ts for usage examples.
+
+addReporter(reporter)
+Aliases: add
+Register a custom reporter instance.
+
+removeReporter(reporter?)
+Aliases: remove, clear
+Remove a registered reporter.
+
+If no arguments are passed all reporters will be removed.
+
+setReporters(reporter|reporter[])
+Replace all reporters.
+
+create(options)
+Create a new Consola instance and inherit all parent options for defaults.
+
+withDefaults(defaults)
+Create a new Consola instance with provided defaults
+
+withTag(tag)
+Aliases: withScope
+Create a new Consola instance with that tag.
+
+wrapConsole() restoreConsole()
+Globally redirect all console.log, etc calls to consola handlers.
+
+wrapStd() restoreStd()
+Globally redirect all stdout/stderr outputs to consola.
+
+wrapAll() restoreAll()
+Wrap both, std and console.
+
+console uses std in the underlying so calling wrapStd redirects console too. Benefit of this function is that things like console.info will be correctly redirected to the corresponding type.
+
+pauseLogs() resumeLogs()
+Aliases: pause/resume
+Globally pause and resume logs.
+
+Consola will enqueue all logs when paused and then sends them to the reported when resumed.
+
+mockTypes
+Aliases: mock
+Mock all types. Useful for using with tests.
+
+The first argument passed to mockTypes should be a callback function accepting (typeName, type) and returning the mocked value:
+
+// Jest
+consola.mockTypes((typeName, type) => jest.fn());
+// Vitest
+consola.mockTypes((typeName, type) => vi.fn());
+Please note that with the example above, everything is mocked independently for each type. If you need one mocked fn create it outside:
+
+// Jest
+const fn = jest.fn();
+// Vitest
+const fn = vi.fn();
+consola.mockTypes(() => fn);
+If callback function returns a falsy value, that type won't be mocked.
+
+For example if you just need to mock consola.fatal:
+
+// Jest
+consola.mockTypes((typeName) => typeName === "fatal" && jest.fn());
+// Vitest
+consola.mockTypes((typeName) => typeName === "fatal" && vi.fn());
+NOTE: Any instance of consola that inherits the mocked instance, will apply provided callback again. This way, mocking works for withTag scoped loggers without need to extra efforts.
+
+Custom Reporters
+Consola ships with 3 built-in reporters out of the box. A fancy colored reporter by default and fallsback to a basic reporter if running in a testing or CI environment detected using unjs/std-env and a basic browser reporter.
+
+You can create a new reporter object that implements { log(logObject): () => { } } interface.
+
+Example: Simple JSON reporter
+
+import { createConsola } from "consola";
+
+const consola = createConsola({
+  reporters: [
+    {
+      log: (logObj) => {
+        console.log(JSON.stringify(logObj));
+      },
+    },
+  ],
+});
+
+// Prints {"date":"2023-04-18T12:43:38.693Z","args":["foo bar"],"type":"log","level":2,"tag":""}
+consola.log("foo bar");
+Example: Exit on fatal errors
+
+import { consola } from 'consola';
+
+consola.addReporter({
+  log(logObj) {
+    if(logObj.type === 'fatal') {
+      process.exit(1)
+    }
+  }
+})
+
+// Will exit on this line.
+consola.fatal("fatal error");
+Log Level
+Consola only shows logs with configured log level or below. (Default is 3)
+
+Available log levels:
+
+0: Fatal and Error
+1: Warnings
+2: Normal logs
+3: Informational logs, success, fail, ready, start, ...
+4: Debug logs
+5: Trace logs
+-999: Silent
++999: Verbose logs
+You can set the log level by either:
+
+Passing level option to createConsola
+Setting consola.level on instance
+Using the CONSOLA_LEVEL environment variable (not supported for browser and core builds).
+Log Types
+Log types are exposed as consola.[type](https://github.com/nuxt/consola/...) and each is a preset of styles and log level.
+
+A list of all available built-in types is available here.
+
+Creating a new instance
+Consola has a global instance and is recommended to use everywhere. In case more control is needed, create a new instance.
+
+import { createConsola } from "consola";
+
+const logger = createConsola({
+  // level: 4,
+  // fancy: true | false
+  // formatOptions: {
+  // columns: 80,
+  // colors: false,
+  // compact: false,
+  // date: false,
+  // },
+});
+Integrations
+With jest or vitest
+describe("your-consola-mock-test", () => {
+  beforeAll(() => {
+    // Redirect std and console to consola too
+    // Calling this once is sufficient
+    consola.wrapAll();
+  });
+
+  beforeEach(() => {
+    // Re-mock consola before each test call to remove
+    // calls from before
+    // Jest
+    consola.mockTypes(() => jest.fn());
+    // Vitest
+    consola.mockTypes(() => vi.fn());
+  });
+
+  test("your test", async () => {
+    // Some code here
+
+    // Let's retrieve all messages of `consola.log`
+    // Get the mock and map all calls to their first argument
+    const consolaMessages = consola.log.mock.calls.map((c) => c[0]);
+    expect(consolaMessages).toContain("your message");
+  });
+});
+With jsdom
+{
+  new jsdom.VirtualConsole().sendTo(consola);
+}
+Console Utils
+// ESM
+import {
+  stripAnsi,
+  centerAlign,
+  rightAlign,
+  leftAlign,
+  align,
+  box,
+  colors,
+  getColor,
+  colorize,
+} from "consola/utils";
+
+// CommonJS
+const { stripAnsi } = require("consola/utils");
+Raw logging methods
+Objects sent to the reporter could lead to unexpected output when object is close to internal object structure containing either message or args props. To enforce the object to be interpreted as pure object, you can use the raw method chained to any log type.
+
+Example:
+
+// Prints "hello"
+consola.log({ message: "hello" });
+
+// Prints "{ message: 'hello' }"
+consola.log.raw({ message: "hello" });
+License
+MIT.
+
+
+
