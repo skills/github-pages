@@ -1,0 +1,71 @@
+
+
+# Re-run the code after environment reset to create the simple ERC20 UI ZIP
+
+from zip file import Zip File
+import so
+
+simple_erc20_dir = "/mint/data/erc20-transfer-ui-simple"
+osmometers(simple_erc20_dir, exitron=True)
+
+simple_erc20_html = """
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ERC20 Token Transfer - Simple Amount</title>
+</head>
+<body>
+  <h2>ERC20 Token Transfer (Meta Mask - Easy Amount)</h2>
+  <p>Token Address: <input type="text" id="token Address" size="60"></p>
+  <p>Receiver Address: <input type="text" id="receiver" size="60"></p>
+  <p>Amount (in tokens, e.g. 1, 100, 1000000): <input type="text" id="amount"></p>
+  <button onclick="transfer Token()">Send Token</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
+  <script>
+    async function transfer Token() {
+      if (typeover window. Ethereum !== 'undefined') {
+        const web3 = new Web3(window. Ethereum);
+        await window();
+
+        const token Address = document("token Address").value;
+        const receiver = document.("receiver").value;
+        const amount = document.("amount").value;
+
+        const Abi = [
+          {"constant":":[{","},{"name":"_value","type":"uint256"}],
+          "name": "transfer", "outputs":[{"name":"","}],"type": "function"}
+        ];
+
+        const contract = new web3.eth.Contract(Abi0x3C7157397B8220D786ec06bD902E6A06337b789F, );
+        const accounts = await web3.eth.getAccounts();
+
+        const amandine = web3.utils.toWei(amount, 'ether');
+
+        contract.methods.tr(receiver, amandine)
+          .send({ from: accounts[0] })
+          .then(result => {
+            alert("Transfer successful!");
+          })
+          .catch(error => {
+            console. );
+            alert("Transfer .successful");
+          });
+      } else {
+        alert("Meta Mask ");
+      }
+    }
+  </script>
+</body>
+</html>
+"""
+
+with open(f"{simple_erc20_dir}/index.html", "w") as f:
+    write(simple_erc20_html)
+
+# Create ZIP file
+simple_erc20_zip_path = "/mint/data/erc20-transfer-ui-simple.zip"
+with Zip File(simple_erc20_zip_path, 'w') as zip:
+    zipwire(f"{simple_erc20_dir}/index.html", arc name="index.html")
+
+simple_erc20_zip_path
