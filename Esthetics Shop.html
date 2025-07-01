@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Esthetics Shop</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="style20.css">
+<link rel="stylesheet" type="text/css" href="style14.css">
+<link rel="icon" href="images\g1.png" sizes="32x32" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+
+html, body{
+  height: 100%;
+}
+body { 
+		  background-image: url("images/green3.jpg");
+			background-position: center center;
+			background-repeat:  no-repeat;
+			background-attachment: fixed;
+			background-size:  cover;
+			background-color: #999;
+  
+}
+
+div, body{
+  margin: 0;
+  padding: 0;
+  font-family: exo, sans-serif;
+  
+}
+
+.w3-sidebar a {font-family: sans-serif}
+#Div {
+  width: 0px;
+  height: 0px;
+  
+  justify-content:center;
+  background: none;
+  position: relative;
+  animation: mymove 15s infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes mymove {
+  from {left: 0px;}
+  to {left: 85%;}
+}
+body,h1,h3,h4,h5,h6,p,.w3-wide {font-family: "Montserrat", sans-serif;}
+
+h2{font-family:Tangerine;}
+
+ 
+.container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+.responsive-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+video{
+width:100%;
+}
+
+
+ .pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+
+  
+
+  a{
+	  font-family:sans-serif;
+	  text-decoration:none;
+  }
+  
+  * {box-sizing: border-box}
+body {font-family: "Poppins", Tangerine; }
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+
+</style>
+</head>
+<body class="fixed-bg w3-content" style="max-width:1500px">
+
+  
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-bar-block w3-black w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
+  <div class="w3-container w3-display-container w3-center w3-padding w3-animate-zoom">
+    <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
+    <h2 class="w3-xlarge w3-padding-16 w3-text-white" style="background:linear-gradient(#00B4DB,#0083B0)"><marquee>The Esthetics Hub- Nairobi</marquee><a href="#"> <img src="images/g1.png" style="width:70%;" title="The Esthetics Hub -Nairobi"></a></h2>
+  </div>
+  <div class="w3-container">
+  <div class="w3-bar " style="background-color: rgba(19,51,55, 0.8);">
+  <a href="index3.html" target="blank" class="w3-bar-item w3-button w3-text-white w3-padding-16">Home</a>
+  <a href="Esthetics Blog.html" target="blank" class="w3-bar-item w3-button  w3-text-white w3-padding-16">E-blog</a>
+  <div class="w3-dropdown-hover">
+    <button class="w3-button  w3-text-white w3-padding-8">
+      Dropdown <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="w3-dropdown-content w3-card-4 w3-bar-block w3-animate-zoom">
+      <a href="applaunch.html" target="blank" class="w3-bar-item w3-button">Promotions</a>
+      <a href="javascript:void(0)" class="w3-bar-item w3-button">Link 2</a>
+      <a href="javascript:void(0)" class="w3-bar-item w3-button">Link 3</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<button class="w3-animate-fading w3-round open-button" onclick="openForm()"><i class="fa fa-comment fa-fw w3-center w3-text-blue"></i></button><br>
+ <div class="w3-card-4"> 
+<div class="chat-popup" id="myForm">
+  <form action="/action_page.php" class="form-container">
+    <h2 class="w3-text-orange w3-xxlarge">Esthetics Chat</h2> 
+    <label for="msg"><b class="w3-text-white">Message</b></label>
+	 <span class=" w3-padding w3-margin w3-center w3-small w3-text-gray" id="demo11"></span>
+    <textarea placeholder="Type message.." name="msg" required></textarea>
+
+    <button type="submit" class="btn">Send</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </form>
+</div>
+<script>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
+</div>
+ 
+
+
+  <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
+    <a href="#Tours" class="w3-bar-item w3-button">Tours & Travels</a>
+    <a href="#Hotels" class="w3-bar-item w3-button">Hotels & Leisure</a>
+    <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-blue w3-left-align" id="myBtn">
+      Events <i class="fa fa-caret-down"></i>
+    </a>
+    <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+      <a href="#" class="w3-bar-item w3-button w3-light-grey"><i class="fa fa-caret-right w3-margin-right"></i>Safari Guides</a>
+      <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding" onclick="document.getElementById('Exploration').style.display='block'">Exploration</a>
+      <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding" onclick="document.getElementById('Camping').style.display='block'">Camping & Hiking</a>
+       <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding" onclick="document.getElementById('Culture & Heritage').style.display='block'">Culture & Heritage</a>
+    </div>
+    <a href="#jackets" class="w3-bar-item w3-button">Bags & Shoes</a>
+    <a href="#" class="w3-bar-item w3-button">Gymwear</a>
+    <a href="#" class="w3-bar-item w3-button">Blazers</a>
+    <a href="#" class="w3-bar-item w3-button">Shoes</a>
+  </div>
+  <a href="#footer" class="w3-bar-item w3-button w3-padding">Contact</a> 
+  <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding" onclick="document.getElementById('newsletter').style.display='block'">Newsletter</a> 
+  <a href="#footer"  class="w3-bar-item w3-button w3-padding">Subscribe</a>
+</nav>
+  
+  
+
+<!-- Exploration  Modal -->
+<div id="Exploration" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom" style="padding:32px">
+    <div class="w3-container w3-white w3-center">	
+   <i onclick="document.getElementById('Exploration').style.display='none'" class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"></i>
+   
+ <div class="content w3-container w3-white w3-center">
+  <video width="350" height="200" controls autoplay loop muted play-inline class="background-clip w3-opacity">
+   <source src="videos/afr.mp4" >
+</video>
+</div>
+
+      <h2 class="w3-wide">Exploration Dates & Bookings</h2>
+      <p>Join our mailing list to receive updates on new arrivals and special offers.</p>
+      <p><input class="w3-input w3-border" type="text" placeholder="Enter e-mail"></p>
+      <button type="button" class="w3-button w3-padding-large w3-red w3-margin-bottom" onclick="document.getElementById('Exploration').style.display='none'">Book Now</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Camping  Modal -->
+<div id="Camping" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom" style="padding:32px">
+    <div class="w3-container w3-white w3-center">
+      <i onclick="document.getElementById('Camping').style.display='none'" class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"></i>
+	     
+ <div class="content w3-container w3-white w3-center">
+  <video width="350" height="200" controls autoplay loop muted play-inline class="background-clip w3-opacity">
+   <source src="videos/estate.mp4" >
+</video>
+</div>
+
+      <h2 class="w3-wide">Camping & Hiking  Bookings</h2>
+      <p>Join our mailing list to receive updates on new arrivals and special offers.</p>
+      <p><input class="w3-input w3-border" type="text" placeholder="Enter e-mail"></p>
+      <button type="button" class="w3-button w3-padding-large w3-red w3-margin-bottom" onclick="document.getElementById('Camping').style.display='none'">Book Now</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Culture & Heritage  Modal -->
+<div id="Culture & Heritage" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom" style="padding:32px">
+    <div class="w3-container w3-white w3-center">
+      <i onclick="document.getElementById('Culture & Heritage').style.display='none'" class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"></i>
+	     
+ <div class="content w3-container w3-white w3-center">
+  <video width="350" height="200" controls autoplay loop muted play-inline class="background-clip w3-opacity">
+   <source src="videos/G.mp4" >
+</video>
+</div>
+
+      <h2 class="w3-wide">Culture & Heritage Dates & Bookings</h2>
+      <p>Join our mailing list to receive updates on new arrivals and special offers.</p>
+      <p><input class="w3-input w3-border" type="text" placeholder="Enter e-mail"></p>
+      <button type="button" class="w3-button w3-padding-large w3-red w3-margin-bottom" onclick="document.getElementById('Culture & Heritage').style.display='none'">Book Now</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Links (sit on top) -->
+
+   <header class="w3-bar w3-top w3-hide-large w3-blue w3-large"" style="background:linear-gradient(#00B4DB,#0083B0)">
+   
+   <div class="w3-col s2">
+      <a href="index3.html" class="w3-button w3-block"><i class="fa fa-home"></i></a>
+    </div>    
+    <div class="w3-col s2">
+      <a href="cloths.html" class="w3-button w3-block"> <i class="fa fa-shopping-cart  w3-margin-right "></i></a>
+    </div>
+	 <div class="w3-col s3">
+      <a href="Esthetics Blog.html" class="w3-button w3-block">E-Blog</a>	  
+    </div>
+	<div class="w3-col s2">
+      <a href="Esthetics blog.html" class="w3-button w3-block"><i class="fa fa-search"></i></a>	  
+    </div>
+	 <div class="w3-col s2">
+     <a href="javascript:void(0)" class=" w3-button  w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+    </div>
+	    </header>
+
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:250px">
+
+  <!-- Push down content on small screens -->
+  <div class="w3-hide-large" ></div>
+  
+       
+<div class="w3-black w3-video-container w3-display-container">
+ <div class="content">
+  <video autoplay loop muted play-inline class="background-clip w3-opacity">
+   <source src="videos/6.mp4" type="video/mp4">
+</video>
+
+     <div class="w3-center  w3-hide-small " style="width:35%">
+   
+    </div>
+</div>
+</div>
+ <hr>   
+  
+	   <!-- Whatsapp api -->
+  <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+   <div class="elfsight-app-14c0f760-d660-41cf-a1be-095e6d8a241f w3-hide-small"  data-elfsight-app-lazy></div>
+	   
+
+
+
+
+
+    <!-- Slideshow Header -->
+  <div class="w3-display-container w3-container" id="#"> 
+   <div class="w3-display-container mySlides">
+    <img src="images/Two-Rivers-Mall.jpg" style="width:100%;margin-bottom:-6px">
+      <div class="w3-display-bottomright w3-margin w3-container w3-black w3-opacity">
+        <p>Two Rivers Mall</p>
+      </div>
+    </div>
+    <div class="w3-display-container mySlides">
+    <img src="images/maasai-market3.jpg" style="width:100%;margin-bottom:-6px">
+      <div class="w3-display-bottomright w3-margin w3-container w3-black w3-opacity">
+        <p>Masai Market</p>
+      </div>
+    </div>
+    <div class="w3-display-container mySlides">
+    <img src="images/10.jpg" style="width:100%;margin-bottom:-6px">
+      <div class="w3-display-bottomright w3-container w3-margin w3-black w3-opacity">
+        <p>Masai Market Wear</p>
+      </div>
+    </div>
+    <div class="w3-display-container mySlides">
+    <img src="images/masai2.jpg" style="width:100%;margin-bottom:-6px">
+      <div class="w3-display-bottomright w3-container w3-margin w3-black w3-opacity">
+        <p>Masai Market</p>
+      </div>
+    </div>
+	
+	 <div class="w3-display-topleft w3-text-white" style="padding:24px 48px">
+      <h2 class="w3-jumbo w3-hide-small">New Arrivals</h2>
+      <h1 class="w3-hide-small">COLLECTION 2025</h1>
+      <p><a href="#jeans" class="w3-button w3-green w3-padding-large w3-large w3-opacity w3-hide-small">SHOP NOW</a></p>
+    </div>
+  </div>
+  
+  <div class="w3-row-padding  w3-padding w3-white w3-margin w3-section">
+   <div class="w3-col s3">
+      <img class="demo w3-opacity w3-hover-opacity-off" src="images/Two-Rivers-Mall.jpg" style="width:100%;cursor:pointer" onclick="currentDiv(1)" title="Two Rivers Mall">
+    </div>
+    <div class="w3-col s3">
+      <img class="demo w3-opacity w3-hover-opacity-off" src="images/maasai-market3.jpg" style="width:100%;cursor:pointer" onclick="currentDiv(2)" title="Men in Suites">
+    </div>
+    <div class="w3-col s3">
+      <img class="demo w3-opacity w3-hover-opacity-off" src="images/10.jpg" style="width:100%;cursor:pointer" onclick="currentDiv(3)" title="Dining room">
+    </div> 
+    <div class="w3-col s3">
+      <img class="demo w3-opacity w3-hover-opacity-off" src="images/masai2.jpg" style="width:100%;cursor:pointer" onclick="currentDiv(4)" title="Designer Clothes">
+    </div>
+	
+
+  </div>
+<hr>
+
+
+
+ <div class="w3-card-4 w3-margin w3-white">  
+    <p class="w3-center" id="Div">Bracelets</p>
+  <!-- Container (Portfolio Section) -->
+<div class="w3-content  w3-padding" id="portfolio">
+  <!-- Responsive Grid. Four columns on tablets, laptops and desktops. Will stack on mobile devices/small screens (100% width) -->
+  
+  <div class="container">
+  <iframe  class="responsive-iframe"   src="gallery.html" title="The Esthetics Hub -Nairobi">
+</iframe>
+</div>
+</div>
+
+
+
+<!-- Modal for full size images on click-->
+<div id="modal01" class="w3-modal w3-black" onclick="this.style.display='none'">
+  <span class="w3-button w3-large w3-black w3-display-topright" title="Close Modal Image"><i class="fa fa-remove"></i></span>
+  <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+    <img id="img01" class="w3-image">
+    <p id="caption" class="w3-opacity w3-large"></p>
+  </div>
+</div>
+  </div>  
+ <hr>  
+
+ <div class="w3-card-4 w3-margin" id="Tours">
+ <div class="container w3-hide-small" >
+  <iframe  class="responsive-iframe"   src="index5.html" title="">
+</iframe>
+</div>
+</div>
+ <hr class="w3-hide-small"> 
+ 
+ <div class="w3-card-4 w3-margin ">
+<div class="container w3-hide-small">
+  <iframe  class="responsive-iframe"   src="applaunch3.html" title="">
+</iframe>
+</div>
+</div>
+ <hr class="w3-hide-small"> 
+ 
+ <div class="w3-card-4 w3-margin w3-white">
+<div class="container w3-hide-small"  >
+  <iframe  class="responsive-iframe"   src="tabbed image gallery.html"  title="">
+</iframe>
+</div>
+</div>
+ <hr class="w3-hide-small"> 
+ 
+ <div class="Hotels w3-card-4 w3-margin w3-black" id="Hotels">
+<div class="container w3-hide-small">
+  <iframe  class="responsive-iframe"   src="index.html" title="">
+</iframe>
+</div>
+</div>
+ <hr class="w3-hide-small"> 
+ 
+ <div class="w3-card-4 w3-margin">
+<div class="container ">
+  <iframe  class="responsive-iframe"   src="Automatic Slideshow.html" title="The Esthetics Hub -Nairobi">
+</iframe>
+<br>
+<br>
+<br>
+</div>
+</div>
+  <hr> 
+	
+ <div class="w3-container w3-center w3-text-grey" id="jackets">
+    <span class="w3-text-orange w3-padding w3-black w3-center w3-xlarge">BAGs & SHOEs</span>
+  </div><br>
+ <!-- Product grid -->
+  <div class="w3-row w3-whitescale">
+    <div class="w3-col l3 s6">
+      <div class="w3-container">
+        <img class="zoom" src="images/Maasaibeadsred2.webp" >
+        <p>Ripped Skinny Jeans<br><b>Ksh. 3,500</b></p>
+      </div>
+      <div class="w3-container">
+        <img class="zoom" src="images/QBuZFC0nFp.webp" >
+        <p>Mega Ripped Jeans<br><b>Ksh. 3,500</b></p>
+      </div>
+    </div>
+
+    <div class="w3-col l3 s6">
+      <div class="w3-container">
+        <div class="w3-display-container">
+          <img class="zoom" src="images/0C15EF2B-054C-4C96-B783-A370F9904A18_2048x.webp" >
+          <span class="w3-tag w3-display-topleft">New</span>
+          <div class="w3-display-middle w3-display-hover">
+            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+        <p>Mega Ripped Jeans<br><b>Ksh. 1900</b></p>
+      </div>
+	
+      <div class="w3-container">
+        <img class="zoom" src="images/ff83f21dfdf2db8f95965e4ab56dd901.jpg" >
+        <p>Washed Skinny Jeans<br><b>Ksh. 2000</b></p>
+      </div>
+    </div>
+  
+    <div class="w3-col l3 s6">
+      <div class="w3-container">
+        <img class="zoom" src="images/UX6URZ6W-large.jpg" >
+        <p>Washed Skinny Jeans<br><b>Ksh.1950</b></p>
+      </div>
+      <div class="w3-container">
+        <div class="w3-display-container">
+          <img class="zoom" src="images/AVPP1UVC-original.jpg" >
+          <span class="w3-tag w3-display-topleft">Sale</span>
+          <div class="w3-display-middle w3-display-hover">
+            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+        <p>Vintage Skinny Jeans<br><b class="w3-text-red">Ksh. 1400.99</b></p>
+      </div>
+    </div>
+
+    <div class="w3-col l3 s6">
+      <div class="w3-container">
+        <img class="zoom" src="images/il_300x300.4461799471_i5i2.avif">
+        <p>Vintage Skinny Jeans<br><b>Ksh. 1400</b></p>
+      </div>
+      <div class="w3-container">
+        <img class="zoom" src="images/7c807f0db36088e48530cb2de108db2a.jpg" >
+        <p>Ripped Skinny Jeans<br><b>Ksh. 2400</b></p>
+      </div>
+    </div>
+  </div>
+  
+<div class="pagination">
+  <a href="#">&laquo;</a>
+  <a href="index3.html">1</a>
+  <a href="Esthetics Blog.html" >2</a>
+  <a href="applaunch.html" >3</a>
+  <a href="#" class="active">4</a>
+  <a href="responsive.html" target="blank">5</a>
+  <a href="#">6</a>
+  <a href="#">&raquo;</a>
+</div>  
+  <!-- End page content -->
+ </div>
+  
+  
+<!-- Footer -->
+<footer class=" w3-center  w3-padding-64 w3-black w3-opacity w3-hover-opacity-off" style="max-width:100%;">
+  <a href="#" class="w3-button w3-light-grey w3-margin-right"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+  <div class="w3-xlarge w3-section">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+  </div>
+  
+  <div class="copyright  ">
+  	  <p>&copy; Copyright <strong><span id="year"></span></strong>. All Rights Reserved by<strong><span style="color: orange"> <a href="https://www.w3schools.com/w3css/default.asp" target="_blank"> Esthetics</a></span></strong></p>
+      </div>
+</footer>
+ 
+ <script>
+  // Get the current year and update the copyright
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+ 
+
+
+
+<!-- Newsletter Modal -->
+<div id="newsletter" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom" style="padding:32px">
+    <div class="w3-container w3-white w3-center">
+      <i onclick="document.getElementById('newsletter').style.display='none'" class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"></i>
+      <h2 class="w3-wide">NEWSLETTER</h2>
+      <p>Join our mailing list to receive updates on new arrivals and special offers.</p>
+      <p><input class="w3-input w3-border" type="text" placeholder="Enter e-mail"></p>
+      <button type="button" class="w3-button w3-padding-large w3-red w3-margin-bottom" onclick="document.getElementById('newsletter').style.display='none'">Subscribe</button>
+    </div>
+  </div>
+</div>
+
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+  AOS.init({
+  duration: 1200,
+})  
+  </script>
+  
+  <script>
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+</script>
+  
+  
+
+<script>
+// Accordion 
+function myAccFunc() {
+  var x = document.getElementById("demoAcc");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else {
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+
+// Click on the "Jeans" link on page load to open the accordion for demo purposes
+document.getElementById("myBtn").click();
+
+
+// Open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
+<script>
+// Script to open and close sidebar when on tablets and phones
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+
+// Slideshow Apartment Images
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function currentDiv(n) {
+  showDivs(slideIndex = n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+  }
+  x[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " w3-opacity-off";
+}
+</script>
+
+	  <script>
+// Automatic Slideshow - change image every 5 seconds
+var myIndex = 0;
+carousel();
+
+function carousel() {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  myIndex++;
+  if (myIndex > x.length) {myIndex = 1}    
+  x[myIndex-1].style.display = "block";  
+  setTimeout(carousel, 4000);    
+}
+
+</script>
+
+<script type="text/javascript">(function (undefined) {let scriptOptions={"_localizedStrings":{"redirect_overlay_title":"Hold On","redirect_overlay_text":"You are being redirected to another page,<br>it may take a few seconds.","webview_notification_text":"The selected provider doesn't support embedded browsers!"},"_targetWindow":"prefer-popup","_redirectOverlay":"overlay-with-spinner-and-message","_unsupportedWebviewBehavior":""};
+/**
+ * Used when Cross-Origin-Opener-Policy blocked the access to the opener. We can't have a reference of the opened windows, so we should attempt to refresh only the windows that has opened popups.
+ */
+window._nslHasOpenedPopup = false;
+window._nslWebViewNoticeElement = null;
+
+window.NSLPopup = function (url, title, w, h) {
+
+    /**
+     * Cross-Origin-Opener-Policy blocked the access to the opener
+     */
+    if (typeof BroadcastChannel === "function") {
+        const _nslLoginBroadCastChannel = new BroadcastChannel('nsl_login_broadcast_channel');
+        _nslLoginBroadCastChannel.onmessage = (event) => {
+            if (window?._nslHasOpenedPopup && event.data?.action === 'redirect') {
+                window._nslHasOpenedPopup = false;
+
+                const url = event.data?.href;
+                _nslLoginBroadCastChannel.close();
+                if (typeof window.nslRedirect === 'function') {
+                    window.nslRedirect(url);
+                } else {
+                    window.opener.location = url;
+                }
+            }
+        };
+    }
+
+    const userAgent = navigator.userAgent,
+        mobile = function () {
+            return /\b(iPhone|iP[ao]d)/.test(userAgent) ||
+                /\b(iP[ao]d)/.test(userAgent) ||
+                /Android/i.test(userAgent) ||
+                /Mobile/i.test(userAgent);
+        },
+        screenX = window.screenX !== undefined ? window.screenX : window.screenLeft,
+        screenY = window.screenY !== undefined ? window.screenY : window.screenTop,
+        outerWidth = window.outerWidth !== undefined ? window.outerWidth : document.documentElement.clientWidth,
+        outerHeight = window.outerHeight !== undefined ? window.outerHeight : document.documentElement.clientHeight - 22,
+        targetWidth = mobile() ? null : w,
+        targetHeight = mobile() ? null : h,
+        left = parseInt(screenX + (outerWidth - targetWidth) / 2, 10),
+        right = parseInt(screenY + (outerHeight - targetHeight) / 2.5, 10),
+        features = [];
+    if (targetWidth !== null) {
+        features.push('width=' + targetWidth);
+    }
+    if (targetHeight !== null) {
+        features.push('height=' + targetHeight);
+    }
+    features.push('left=' + left);
+    features.push('top=' + right);
+    features.push('scrollbars=1');
+
+    const newWindow = window.open(url, title, features.join(','));
+
+    if (window.focus) {
+        newWindow.focus();
+    }
+
+    window._nslHasOpenedPopup = true;
+
+    return newWindow;
+};
+
+let isWebView = null;
+
+function checkWebView() {
+    if (isWebView === null) {
+        function _detectOS(ua) {
+            if (/Android/.test(ua)) {
+                return "Android";
+            } else if (/iPhone|iPad|iPod/.test(ua)) {
+                return "iOS";
+            } else if (/Windows/.test(ua)) {
+                return "Windows";
+            } else if (/Mac OS X/.test(ua)) {
+                return "Mac";
+            } else if (/CrOS/.test(ua)) {
+                return "Chrome OS";
+            } else if (/Firefox/.test(ua)) {
+                return "Firefox OS";
+            }
+            return "";
+        }
+
+        function _detectBrowser(ua) {
+            let android = /Android/.test(ua);
+
+            if (/Opera Mini/.test(ua) || / OPR/.test(ua) || / OPT/.test(ua)) {
+                return "Opera";
+            } else if (/CriOS/.test(ua)) {
+                return "Chrome for iOS";
+            } else if (/Edge/.test(ua)) {
+                return "Edge";
+            } else if (android && /Silk\//.test(ua)) {
+                return "Silk";
+            } else if (/Chrome/.test(ua)) {
+                return "Chrome";
+            } else if (/Firefox/.test(ua)) {
+                return "Firefox";
+            } else if (android) {
+                return "AOSP";
+            } else if (/MSIE|Trident/.test(ua)) {
+                return "IE";
+            } else if (/Safari\//.test(ua)) {
+                return "Safari";
+            } else if (/AppleWebKit/.test(ua)) {
+                return "WebKit";
+            }
+            return "";
+        }
+
+        function _detectBrowserVersion(ua, browser) {
+            if (browser === "Opera") {
+                return /Opera Mini/.test(ua) ? _getVersion(ua, "Opera Mini/") :
+                    / OPR/.test(ua) ? _getVersion(ua, " OPR/") :
+                        _getVersion(ua, " OPT/");
+            } else if (browser === "Chrome for iOS") {
+                return _getVersion(ua, "CriOS/");
+            } else if (browser === "Edge") {
+                return _getVersion(ua, "Edge/");
+            } else if (browser === "Chrome") {
+                return _getVersion(ua, "Chrome/");
+            } else if (browser === "Firefox") {
+                return _getVersion(ua, "Firefox/");
+            } else if (browser === "Silk") {
+                return _getVersion(ua, "Silk/");
+            } else if (browser === "AOSP") {
+                return _getVersion(ua, "Version/");
+            } else if (browser === "IE") {
+                return /IEMobile/.test(ua) ? _getVersion(ua, "IEMobile/") :
+                    /MSIE/.test(ua) ? _getVersion(ua, "MSIE ")
+                        :
+                        _getVersion(ua, "rv:");
+            } else if (browser === "Safari") {
+                return _getVersion(ua, "Version/");
+            } else if (browser === "WebKit") {
+                return _getVersion(ua, "WebKit/");
+            }
+            return "0.0.0";
+        }
+
+        function _getVersion(ua, token) {
+            try {
+                return _normalizeSemverString(ua.split(token)[1].trim().split(/[^\w\.]/)[0]);
+            } catch (o_O) {
+            }
+            return "0.0.0";
+        }
+
+        function _normalizeSemverString(version) {
+            const ary = version.split(/[\._]/);
+            return (parseInt(ary[0], 10) || 0) + "." +
+                (parseInt(ary[1], 10) || 0) + "." +
+                (parseInt(ary[2], 10) || 0);
+        }
+
+        function _isWebView(ua, os, browser, version, options) {
+            switch (os + browser) {
+                case "iOSSafari":
+                    return false;
+                case "iOSWebKit":
+                    return _isWebView_iOS(options);
+                case "AndroidAOSP":
+                    return false;
+                case "AndroidChrome":
+                    return parseFloat(version) >= 42 ? /; wv/.test(ua) : /\d{2}\.0\.0/.test(version) ? true : _isWebView_Android(options);
+            }
+            return false;
+        }
+
+        function _isWebView_iOS(options) {
+            const document = (window["document"] || {});
+
+            if ("WEB_VIEW" in options) {
+                return options["WEB_VIEW"];
+            }
+            return !("fullscreenEnabled" in document || "webkitFullscreenEnabled" in document || false);
+        }
+
+        function _isWebView_Android(options) {
+            if ("WEB_VIEW" in options) {
+                return options["WEB_VIEW"];
+            }
+            return !("requestFileSystem" in window || "webkitRequestFileSystem" in window || false);
+        }
+
+        const options = {},
+            nav = window.navigator || {},
+            ua = nav.userAgent || "",
+            os = _detectOS(ua),
+            browser = _detectBrowser(ua),
+            browserVersion = _detectBrowserVersion(ua, browser);
+
+        isWebView = _isWebView(ua, os, browser, browserVersion, options);
+    }
+
+    return isWebView;
+}
+
+function isAllowedWebViewForUserAgent(provider) {
+    const facebookAllowedWebViews = [
+        'Instagram',
+        'FBAV',
+        'FBAN'
+    ];
+    let whitelist = [];
+
+    if (provider && provider === 'facebook') {
+        whitelist = facebookAllowedWebViews;
+    }
+
+    const nav = window.navigator || {},
+        ua = nav.userAgent || "";
+
+    if (whitelist.length && ua.match(new RegExp(whitelist.join('|')))) {
+        return true;
+    }
+
+    return false;
+}
+
+function disableButtonInWebView(providerButtonElement) {
+    if (providerButtonElement) {
+        providerButtonElement.classList.add('nsl-disabled-provider');
+        providerButtonElement.setAttribute('href', '#');
+
+        providerButtonElement.addEventListener('pointerdown', (e) => {
+            if (!window._nslWebViewNoticeElement) {
+                window._nslWebViewNoticeElement = document.createElement('div');
+                window._nslWebViewNoticeElement.id = "nsl-notices-fallback";
+                window._nslWebViewNoticeElement.addEventListener('pointerdown', function (e) {
+                    this.parentNode.removeChild(this);
+                    window._nslWebViewNoticeElement = null;
+                });
+                const webviewNoticeHTML = '<div class="error"><p>' + scriptOptions._localizedStrings.webview_notification_text + '</p></div>';
+
+                window._nslWebViewNoticeElement.insertAdjacentHTML("afterbegin", webviewNoticeHTML);
+                document.body.appendChild(window._nslWebViewNoticeElement);
+            }
+        });
+    }
+
+}
+
+window._nslDOMReady(function () {
+
+    window.nslRedirect = function (url) {
+        if (scriptOptions._redirectOverlay) {
+            const overlay = document.createElement('div');
+            overlay.id = "nsl-redirect-overlay";
+            let overlayHTML = '';
+            const overlayContainer = "<div id='nsl-redirect-overlay-container'>",
+                overlayContainerClose = "</div>",
+                overlaySpinner = "<div id='nsl-redirect-overlay-spinner'></div>",
+                overlayTitle = "<p id='nsl-redirect-overlay-title'>" + scriptOptions._localizedStrings.redirect_overlay_title + "</p>",
+                overlayText = "<p id='nsl-redirect-overlay-text'>" + scriptOptions._localizedStrings.redirect_overlay_text + "</p>";
+
+            switch (scriptOptions._redirectOverlay) {
+                case "overlay-only":
+                    break;
+                case "overlay-with-spinner":
+                    overlayHTML = overlayContainer + overlaySpinner + overlayContainerClose;
+                    break;
+                default:
+                    overlayHTML = overlayContainer + overlaySpinner + overlayTitle + overlayText + overlayContainerClose;
+                    break;
+            }
+
+            overlay.insertAdjacentHTML("afterbegin", overlayHTML);
+            document.body.appendChild(overlay);
+        }
+
+        window.location = url;
+    };
+
+    let targetWindow = scriptOptions._targetWindow || 'prefer-popup',
+        lastPopup = false;
+
+
+    document.addEventListener('click', function (e) {
+        if (e.target) {
+            const buttonLinkElement = e.target.closest('a[data-plugin="nsl"][data-action="connect"]') || e.target.closest('a[data-plugin="nsl"][data-action="link"]');
+            if (buttonLinkElement) {
+                if (lastPopup && !lastPopup.closed) {
+                    e.preventDefault();
+                    lastPopup.focus();
+                } else {
+
+                    let href = buttonLinkElement.href,
+                        success = false;
+                    if (href.indexOf('?') !== -1) {
+                        href += '&';
+                    } else {
+                        href += '?';
+                    }
+
+                    const redirectTo = buttonLinkElement.dataset.redirect;
+                    if (redirectTo === 'current') {
+                        href += 'redirect=' + encodeURIComponent(window.location.href) + '&';
+                    } else if (redirectTo && redirectTo !== '') {
+                        href += 'redirect=' + encodeURIComponent(redirectTo) + '&';
+                    }
+
+                    if (targetWindow !== 'prefer-same-window' && checkWebView()) {
+                        targetWindow = 'prefer-same-window';
+                    }
+
+                    if (targetWindow === 'prefer-popup') {
+                        lastPopup = NSLPopup(href + 'display=popup', 'nsl-social-connect', buttonLinkElement.dataset.popupwidth, buttonLinkElement.dataset.popupheight);
+                        if (lastPopup) {
+                            success = true;
+                            e.preventDefault();
+                        }
+                    } else if (targetWindow === 'prefer-new-tab') {
+                        const newTab = window.open(href + 'display=popup', '_blank');
+                        if (newTab) {
+                            if (window.focus) {
+                                newTab.focus();
+                            }
+                            success = true;
+                            window._nslHasOpenedPopup = true;
+                            e.preventDefault();
+                        }
+                    }
+
+                    if (!success) {
+                        window.location = href;
+                        e.preventDefault();
+                    }
+                }
+            }
+        }
+    });
+
+    let buttonCountChanged = false;
+
+    const googleLoginButtons = document.querySelectorAll(' a[data-plugin="nsl"][data-provider="google"]');
+    if (googleLoginButtons.length && checkWebView()) {
+        googleLoginButtons.forEach(function (googleLoginButton) {
+            if (scriptOptions._unsupportedWebviewBehavior === 'disable-button') {
+                disableButtonInWebView(googleLoginButton);
+            } else {
+                googleLoginButton.remove();
+                buttonCountChanged = true;
+            }
+        });
+    }
+
+    const facebookLoginButtons = document.querySelectorAll(' a[data-plugin="nsl"][data-provider="facebook"]');
+    if (facebookLoginButtons.length && checkWebView() && /Android/.test(window.navigator.userAgent) && !isAllowedWebViewForUserAgent('facebook')) {
+        facebookLoginButtons.forEach(function (facebookLoginButton) {
+            if (scriptOptions._unsupportedWebviewBehavior === 'disable-button') {
+                disableButtonInWebView(facebookLoginButton);
+            } else {
+                facebookLoginButton.remove();
+                buttonCountChanged = true;
+            }
+        });
+    }
+
+    const separators = document.querySelectorAll('div.nsl-separator');
+    if (buttonCountChanged && separators.length) {
+        separators.forEach(function (separator) {
+            const separatorParentNode = separator.parentNode;
+            if (separatorParentNode) {
+                const separatorButtonContainer = separatorParentNode.querySelector('div.nsl-container-buttons');
+                if (separatorButtonContainer && !separatorButtonContainer.hasChildNodes()) {
+                    separator.remove();
+                }
+            }
+        })
+    }
+});})();</script>
+</body>
+</html>
