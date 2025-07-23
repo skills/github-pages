@@ -14,5 +14,5 @@ Here's a recap of your accomplishments:
 ### What's next?
 
 - Keep working on your GitHub Pages site... we love seeing what you come up with!
-- [Take another GitHub Skills exercise](https://skills.github.com/).
+- [Take another GitHub Skills exercise](https://learn.github.com/skills).
 - [Read the GitHub Pages docs](https://docs.github.com/en/pages).
