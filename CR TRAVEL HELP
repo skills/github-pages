@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CR Travel Help - Explore Bangladesh and beyond with expert travel and visa support.">
+  <title>CR Travel Help | Explore The World With Us</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0077b6;
+      color: white;
+      padding: 25px 0;
+      text-align: center;
+    }
+
+    nav {
+      background: #023e8a;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 14px 20px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      background: #0096c7;
+    }
+
+    .hero {
+      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center center/cover;
+      height: 70vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+    }
+
+    .hero h1 {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 10px;
+      font-size: 2.5rem;
+    }
+
+    section {
+      padding: 50px 10%;
+    }
+
+    h2 {
+      color: #023e8a;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .about, .destinations, .services, .visa, .contact {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    .destinations img {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    .visa {
+      background: #f0f8ff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    .visa ul li {
+      margin-bottom: 20px;
+    }
+
+    .visa a {
+      color: #0077b6;
+      text-decoration: none;
+    }
+
+    .visa a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      background: #023e8a;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+      }
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>CR Travel Help</h1>
+    <p>Your Trusted Travel Partner in Bangladesh</p>
+  </header>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#destinations">Destinations</a>
+    <a href="#services">Services</a>
+    <a href="#visa">Visa Info</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="hero" id="home">
+    <h1>Explore Bangladesh & The World With Us!</h1>
+  </div>
+
+  <section class="about" id="about">
+    <h2>About Us</h2>
+    <p>
+      Welcome to <strong>CR Travel Help</strong> — your gateway to explore the beauty of Bangladesh and beyond.
+      Founded by <strong>CEO Mahamudul Hasan</strong> and managed by <strong>Joynal Abedin</strong>, 
+      our mission is to make travel easier, safer, and more exciting.  
+      We are based in <strong>Gazipur, Dhaka, Bangladesh</strong>, serving clients worldwide with top-notch travel planning services.
+    </p>
+  </section>
+
+  <section class="destinations" id="destinations">
+    <h2>Top Destinations</h2>
+    <p>Discover the most beautiful and serene travel spots with CR Travel Help:</p>
+    <ul>
+      <li>Cox’s Bazar – The world’s longest sea beach</li>
+      <li>Sylhet – Land of tea gardens and hills</li>
+      <li>Bandarban – Adventure and mountain views</li>
+      <li>Dhaka City – The heart of Bangladesh</li>
+      <li>Sundarbans – Home of the Royal Bengal Tiger</li>
+    </ul>
+    <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4" alt="Bangladesh Landscape">
+  </section>
+
+  <section class="services" id="services">
+    <h2>Our Services</h2>
+    <ul>
+      <li>✅ Domestic & International Tour Packages</li>
+      <li>✈️ Flight & Hotel Booking Assistance</li>
+      <li>🧭 Visa Processing & Travel Insurance</li>
+      <li>🚗 Airport Pick-up & Transport Arrangements</li>
+      <li>🎒 Custom Travel Planning for Groups & Individuals</li>
+    </ul>
+  </section>
+
+  <!-- ✅ VISA & EMBASSY SECTION -->
+  <section class="visa" id="visa">
+    <h2>Visa & Embassy Information</h2>
+    <p>
+      CR Travel Help provides authentic and updated information regarding visa processing, embassy locations,
+      and travel documentation support for Bangladeshi citizens. Our team ensures that travelers get reliable
+      and step-by-step guidance before applying for any foreign visa.
+    </p>
+
+    <h3>Major Foreign Embassies in Bangladesh</h3>
+    <ul>
+      <li><strong>🇨🇦 Canadian High Commission</strong> – 16 Gulshan Ave, Dhaka. 
+        <a href="https://www.canadainternational.gc.ca/bangladesh" target="_blank">Website</a></li>
+      <li><strong>🇺🇸 U.S. Embassy</strong> – Madani Ave, Baridhara, Dhaka. 
+        <a href="https://bd.usembassy.gov" target="_blank">Website</a></li>
+      <li><strong>🇬🇧 British High Commission</strong> – United Nations Road, Baridhara. 
+        <a href="https://www.gov.uk/world/organisations/british-high-commission-dhaka" target="_blank">Website</a></li>
+      <li><strong>🇦🇺 Australian High Commission</strong> – Gulshan-2, Dhaka. 
+        <a href="https://bangladesh.embassy.gov.au/" target="_blank">Website</a></li>
+      <li><strong>🇯🇵 Japanese Embassy</strong> – Baridhara, Dhaka. 
+        <a href="https://www.bd.emb-japan.go.jp/" target="_blank">Website</a></li>
+      <li><strong>🇸🇦 Saudi Embassy</strong> – Gulshan-2, Dhaka.</li>
+      <li><strong>🇮🇳 Indian High Commission</strong> – Gulshan-1, Dhaka. 
+        <a href="https://www.hcidhaka.gov.in/" target="_blank">Website</a></li>
+      <li><strong>🇨🇳 Chinese Embassy</strong> – Baridhara, Dhaka. 
+        <a href="https://bd.china-embassy.gov.cn/" target="_blank">Website</a></li>
+      <li><strong>🇲🇾 Malaysian High Commission</strong> – Baridhara, Dhaka. 
+        <a href="https://www.kln.gov.my/web/bgd_dhaka/home" target="_blank">Website</a></li>
+    </ul>
+
+    <h3>Visa Support from CR Travel Help</h3>
+    <p>
+      Our professional consultants assist with document preparation, embassy appointment booking, and interview guidance.
+      Whether it's a <strong>Canada study visa</strong>, <strong>UK visitor visa</strong>, or <strong>Australian work permit</strong>,
+      we ensure you are well-prepared and confident.
+    </p>
+
+    <blockquote>
+      “Travel smart, travel legally — with CR Travel Help, every visa process becomes smoother and faster.”
+    </blockquote>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>Contact Us</h2>
+    <p>📍 Gazipur, Dhaka, Bangladesh</p>
+    <p>📧 info@crtravelhelp.com</p>
+    <p>📞 +880 1823614572</p>
+    <p>🌐 www.crtravelhelp.com</p>
+  </section>
+
+  <footer>
+    <p>© 2025 CR Travel Help | CEO: Mahamudul Hasan | Manager: Joynal Abedin</p>
+  </footer>
+
+</body>
+</html>
