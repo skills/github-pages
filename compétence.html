@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mes Compétences</title>
+  <link rel="stylesheet" href="pagecss.css">
+</head>
+<body>
+  <!-- Barre de navigation -->
+  <nav class="navbar">
+    <a href="index.html">Accueil</a>
+    <a href="CV.html">Mon CV</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="compétence.html">Compétences</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <!-- Section Compétences -->
+  <header class="hero">
+    <div class="hero-content centered">
+      <h1>Mes Compétences</h1>
+      <p>Voici un aperçu de mes compétences en programmation, réseaux et cybersécurité.</p>
+    </div>
+  </header>
+
+  <section class="skills">
+    <div class="skills-container">
+      <div class="skill-card fade-in">
+        <h3>Programmation</h3>
+        <p>Maîtrise des langages C, et HTML/CSS/.</p>
+      </div>
+      <div class="skill-card fade-in">
+        <h3>Réseaux</h3>
+        <p>Connaissance des protocoles réseau, configuration et sécurisation.</p>
+      </div>
+      <div class="skill-card fade-in">
+        <h3>Cybersécurité</h3>
+        <p>Analyse de vulnérabilités, audits de sécurité et bonnes pratiques.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ajout d'animation JavaScript -->
+  <script>
+    const skillCards = document.querySelectorAll('.skill-card');
+    skillCards.forEach((card, index) => {
+      card.style.animationDelay = `${index * 0.3}s`;
+    });
+  </script>
+</body>
+</html>
