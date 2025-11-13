@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,19 +9,74 @@
 <body>
   <!-- Barre de navigation -->
   <nav class="navbar">
-    <a href="acceuil.html">Accueil</a>
+    <a href="index.html">Accueil</a>
     <a href="CV.html">Mon CV</a>
     <a href="portfolio.html">Portfolio</a>
-    <a href="conctact.html">Contact</a>
-	<a href="compétence.html">Compétences</a>
+    <a href="compétence.html">Compétences</a>
+    <a href="contact.html">Contact</a>
   </nav>
 
   <!-- Section du CV -->
   <main class="cv-section">
     <h1>Mon CV</h1>
-    <p>Voici une image de mon CV :</p>
-    <!-- Ajouter l'image ici -->
-    <img src="images/cv-image.png" alt="Mon CV" class="CV-image">
+
+    <div class="cv-container">
+      <!-- Informations personnelles -->
+      <section class="cv-block">
+        <h2>Informations Personnelles</h2>
+        <p><strong>Nom :</strong> Armourdom Suvan</p>
+        <p><strong>Formation :</strong> BUT Réseaux et Télécommunications</p>
+        <p><strong>Spécialisation :</strong> Réseaux et Cybersécurité</p>
+      </section>
+
+      <!-- Formation -->
+      <section class="cv-block">
+        <h2>Formation</h2>
+        <div class="cv-item">
+          <h3>BUT Réseaux et Télécommunications</h3>
+          <p class="cv-date">En cours</p>
+          <p>Spécialisation dans les réseaux informatiques et la cybersécurité</p>
+        </div>
+      </section>
+
+      <!-- Compétences Techniques -->
+      <section class="cv-block">
+        <h2>Compétences Techniques</h2>
+        <ul class="skills-list">
+          <li>Programmation : C, HTML, CSS, JavaScript</li>
+          <li>Réseaux : Configuration, sécurisation, protocoles réseau</li>
+          <li>Cybersécurité : Analyse de vulnérabilités, audits de sécurité</li>
+          <li>Systèmes : GNU/Linux (Debian), Administration système</li>
+          <li>IoT : Raspberry Pi, capteurs, transmission de données</li>
+          <li>Sécurité : Chiffrement (LUKS), politiques de mots de passe</li>
+        </ul>
+      </section>
+
+      <!-- Projets Académiques -->
+      <section class="cv-block">
+        <h2>Projets Académiques (SAÉ)</h2>
+        <div class="cv-item">
+          <h3>SAÉ 101 - Hygiène Informatique et Cybersécurité</h3>
+          <p>Sensibilisation aux bonnes pratiques de cybersécurité et protection des données</p>
+        </div>
+        <div class="cv-item">
+          <h3>SAÉ 102 - Initiation aux Réseaux Informatiques</h3>
+          <p>Configuration Raspberry Pi, administration SSH, interfaçage de capteurs</p>
+        </div>
+        <div class="cv-item">
+          <h3>SAÉ 103 - Dispositifs de Transmission</h3>
+          <p>Analyse de documents techniques, caractérisation des supports de transmission</p>
+        </div>
+        <div class="cv-item">
+          <h3>SAÉ 104 - Présence sur Internet</h3>
+          <p>Création d'un portfolio professionnel avec HTML, CSS et JavaScript</p>
+        </div>
+        <div class="cv-item">
+          <h3>SAÉ 105 - Traitement des Données</h3>
+          <p>Gestion utilisateurs, chiffrement de données avec LUKS, commandes GNU/Linux</p>
+        </div>
+      </section>
+    </div>
   </main>
 </body>
 </html>

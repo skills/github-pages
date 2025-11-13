@@ -266,3 +266,178 @@ form button:hover {
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(100, 255, 218, 0.6);
 }
+
+/* === Styles pour la page CV === */
+.cv-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cv-block {
+  background: rgba(17, 34, 64, 0.9);
+  padding: 25px;
+  margin: 25px 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  border-left: 4px solid #64ffda;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cv-block:hover {
+  transform: translateX(5px);
+  box-shadow: 0 6px 15px rgba(100, 255, 218, 0.4);
+}
+
+.cv-block h2 {
+  color: #64ffda;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  text-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
+}
+
+.cv-block h3 {
+  color: #0ef;
+  font-size: 1.3rem;
+  margin-top: 15px;
+  margin-bottom: 8px;
+}
+
+.cv-item {
+  margin: 20px 0;
+  padding: 15px;
+  background: rgba(10, 25, 47, 0.5);
+  border-radius: 8px;
+  border-left: 3px solid #0ef;
+}
+
+.cv-date {
+  color: #64ffda;
+  font-style: italic;
+  margin: 5px 0;
+}
+
+.skills-list {
+  list-style: none;
+  padding: 0;
+}
+
+.skills-list li {
+  padding: 10px 0;
+  padding-left: 25px;
+  position: relative;
+  transition: color 0.3s;
+}
+
+.skills-list li:before {
+  content: "▹";
+  position: absolute;
+  left: 0;
+  color: #64ffda;
+  font-size: 1.5rem;
+}
+
+.skills-list li:hover {
+  color: #64ffda;
+  padding-left: 30px;
+}
+
+/* === Styles supplémentaires pour la page Contact === */
+.contact-info {
+  margin: 30px 0;
+  padding: 20px;
+  background: rgba(10, 25, 47, 0.5);
+  border-radius: 10px;
+  border: 2px solid #64ffda;
+}
+
+.contact-info h2 {
+  color: #64ffda;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.contact-details {
+  text-align: left;
+}
+
+.contact-details p {
+  margin: 15px 0;
+  font-size: 1.1rem;
+}
+
+.contact-link {
+  color: #0ef;
+  text-decoration: none;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+.contact-link:hover {
+  color: #64ffda;
+  text-shadow: 0 0 10px #64ffda;
+}
+
+.contact-form-section {
+  margin-top: 30px;
+}
+
+.contact-form-section h2 {
+  color: #64ffda;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* === Animations === */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* === Style pour le scroll === */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a192f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #64ffda;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0ef;
+}
+
+/* === Responsive Design === */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .skills-container {
+    flex-direction: column;
+  }
+
+  .skill-card {
+    width: 100%;
+  }
+}
