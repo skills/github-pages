@@ -2,15 +2,15 @@
   "name": "Tetris",
   "short_name": "TETRIS",
   "description": "Tetris – jeu mobile plein écran",
-  "start_url": "/tetris.html",
-  "scope": "/",
+  "start_url": "./tetris.html",
+  "scope": "./",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#0b0b1a",
   "theme_color": "#00f0f0",
   "icons": [
     {
-      "src": "/icons/icon.svg",
+      "src": "./icons/icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
