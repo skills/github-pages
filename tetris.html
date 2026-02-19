@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="TETRIS">
+  <meta name="theme-color" content="#00f0f0">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="./icons/icon.svg">
   <title>TETRIS</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
@@ -491,12 +496,14 @@
     if (!audioCtx) {
       try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {}
     }
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
     return audioCtx;
   }
 
   function playSound(type, param) {
     const ac = getAC();
     if (!ac) return;
+    if (ac.state === 'suspended') { ac.resume(); }
     const now = ac.currentTime;
 
     function note(freq, waveType, vol, dur, freqTo, startDelay) {
@@ -516,24 +523,30 @@
 
     switch (type) {
       case 'move':
-        note(260, 'sine', 0.06, 0.04);
+        note(320, 'square', 0.22, 0.06, 220);
         break;
       case 'rotate':
-        note(520, 'sine', 0.09, 0.07, 360);
+        note(620, 'square', 0.28, 0.09, 920);
+        note(310, 'sine',   0.18, 0.07, 180, 0.03);
         break;
       case 'lock':
-        note(160, 'square', 0.12, 0.11, 75);
+        note(180, 'sawtooth', 0.35, 0.16, 70);
+        note(90,  'square',   0.25, 0.13, 55, 0.05);
         break;
       case 'clear': {
         const n = Math.min(param || 1, 4);
-        const freqs = [330, 440, 550, 660];
+        const freqs = [330, 440, 660, 880];
         for (let i = 0; i < n; i++) {
-          note(freqs[i], 'square', 0.18, 0.2, freqs[i] * 1.5, i * 0.07);
+          note(freqs[i],       'square',   0.38, 0.24, freqs[i] * 2,   i * 0.09);
+          note(freqs[i] * 0.5, 'sawtooth', 0.22, 0.20, freqs[i],       i * 0.09);
         }
+        if (n >= 4) note(1000, 'sawtooth', 0.45, 0.55, 100);
         break;
       }
       case 'gameover':
-        note(440, 'sawtooth', 0.22, 1.0, 110);
+        note(440, 'sawtooth', 0.42, 1.6, 50);
+        note(220, 'square',   0.32, 1.3, 28, 0.12);
+        note(660, 'sine',     0.28, 0.9, 110, 0.22);
         break;
     }
   }
@@ -597,6 +610,7 @@
   let lockPending = false, lockTimer = null;
   let animFrame, lastTime = 0, dropAccum = 0;
   let fastDropActive = false, fastInterval = null;
+  let comboAnim = null; // { n, pts, life, decay }
 
   function dropInterval() { return Math.max(80, 1000 - score * 22); }
   function speedPct()     { return Math.min(100, Math.round((1000 - dropInterval()) / 9.2)); }
@@ -611,6 +625,7 @@
     grid = newGrid();
     score = 0;
     particles = [];
+    comboAnim = null;
     updateHUD();
     nextPiece = randPiece();
     spawnPiece();
@@ -718,13 +733,15 @@
     }
 
     if (clearedRows.length) {
-      // Les lignes supprimées étaient dans snap (indices décalés par les suppressions précédentes)
-      // On les retrouve facilement : on passe directement snap avec les bons indices
+      const n   = clearedRows.length;
+      const pts = n * n; // multiplicateur : n lignes = n×n points
       const adjustedRows = clearedRows.map((r, i) => r + i);
       spawnParticles(adjustedRows, snap);
-      playSound('clear', clearedRows.length);
-      score += clearedRows.length;
+      playSound('clear', n);
+      score += pts;
       updateHUD();
+      // Afficher l'animation combo pour 2+ lignes (et même 1 pour le +1)
+      comboAnim = { n, pts, life: 1.0, decay: 0.016 };
     }
   }
 
@@ -796,6 +813,57 @@
     }
 
     if (particles.length) drawParticles();
+    if (comboAnim && comboAnim.life > 0) drawCombo();
+  }
+
+  // ── Combo multiplicateur ──────────────────────────────────────────
+  function drawCombo() {
+    const { n, pts, life } = comboAnim;
+    const cx = boardEl.width  / 2;
+    const cy = boardEl.height / 2;
+
+    // Fondu : transparent sur les 35% finaux de vie
+    const alpha = life < 0.35 ? life / 0.35 : 1;
+    // Échelle : démarre grande, se stabilise
+    const scale = 1 + life * 0.9;
+
+    // Couleurs selon le nombre de lignes
+    const COMBO_COLORS = ['#aaffaa', '#ffee00', '#ff8800', '#00f0f0'];
+    const color = COMBO_COLORS[Math.min(n - 1, 3)];
+
+    const mainText = n >= 4 ? 'TETRIS!' : `×${n}`;
+    const fsMult   = Math.round(CELL * 2.4);
+    const fsPts    = Math.round(CELL * 0.95);
+
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.translate(cx, cy);
+    ctx.scale(scale, scale);
+    ctx.textAlign    = 'center';
+    ctx.textBaseline = 'middle';
+
+    // Ombre portée pour le glow
+    ctx.shadowColor = color;
+    ctx.shadowBlur  = n >= 4 ? 40 : 22;
+
+    // Texte multiplicateur principal
+    ctx.font      = `bold ${fsMult}px 'Press Start 2P', monospace`;
+    ctx.fillStyle = color;
+    ctx.fillText(mainText, 0, -fsMult * 0.45);
+
+    // Sous-texte : points gagnés
+    ctx.shadowBlur  = 12;
+    ctx.font        = `bold ${fsPts}px 'Press Start 2P', monospace`;
+    ctx.fillStyle   = '#ffffff';
+    ctx.fillText(`+${pts} pts`, 0, fsMult * 0.55);
+
+    ctx.restore();
+  }
+
+  function updateCombo() {
+    if (!comboAnim) return;
+    comboAnim.life -= comboAnim.decay;
+    if (comboAnim.life <= 0) comboAnim = null;
   }
 
   // ── Fenêtre NEXT ─────────────────────────────────────────────────
@@ -837,8 +905,12 @@
   overlayBtn.addEventListener('pointerdown', e => {
     e.preventDefault();
     getAC(); // initialise AudioContext dès le premier tap (obligatoire sur mobile)
-    hideOverlay();
-    initGame();
+    if (state === 'paused') {
+      togglePause();
+    } else {
+      hideOverlay();
+      initGame();
+    }
   });
 
   // ── Pause ─────────────────────────────────────────────────────────
@@ -873,6 +945,7 @@
       dropAccum = 0;
     }
     updateParticles();
+    updateCombo();
     draw();
     animFrame = requestAnimationFrame(loop);
   }
@@ -931,6 +1004,14 @@
   showOverlay('TETRIS');
 
 })();
+</script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    });
+  }
 </script>
 </body>
 </html>
