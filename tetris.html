@@ -31,7 +31,7 @@
       -webkit-user-select: none;
     }
 
-    /* ══ PORTRAIT (défaut) ══════════════════════════════════════════ */
+    /* ══ PORTRAIT ═══════════════════════════════════════════════════ */
     #app {
       display: flex;
       flex-direction: row;
@@ -43,7 +43,6 @@
       margin: 0 auto;
     }
 
-    /* Centre : header + plateau + barre vitesse + pause */
     #panel-center {
       width: 100%;
       order: 1;
@@ -56,19 +55,19 @@
       min-height: 0;
     }
 
-    /* Gauche bas : D-PAD */
     #panel-left {
-      width: 50%;
+      width: 55%;
       order: 2;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 6px 0 8px 14px;
+      gap: 4px;
     }
 
-    /* Droite bas : boutons action */
     #panel-right {
-      width: 50%;
+      width: 45%;
       order: 2;
       display: flex;
       align-items: center;
@@ -213,8 +212,8 @@
     /* ── DPAD ─────────────────────────── */
     #dpad {
       display: grid;
-      grid-template-columns: repeat(3, 48px);
-      grid-template-rows: repeat(3, 48px);
+      grid-template-columns: repeat(3, 52px);
+      grid-template-rows: repeat(3, 52px);
       gap: 3px;
     }
 
@@ -238,6 +237,18 @@
       transform: scale(0.93);
     }
 
+    /* Bouton bas = chute rapide, couleur orange distinctif */
+    #btn-down {
+      background: #221508;
+      border-color: #7a3a10;
+      color: #ff9944;
+      font-size: 0.85rem;
+    }
+    #btn-down:active, #btn-down.pressed {
+      background: #3a2010;
+      border-color: #dd6600;
+    }
+
     .dpad-corner { visibility: hidden; }
 
     #dpad-center {
@@ -247,21 +258,27 @@
       cursor: default;
     }
 
+    .dpad-hint {
+      font-size: 0.27rem;
+      color: #7a4a20;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
     /* ── ACTION BUTTONS ──────────────── */
     #action-btns {
       display: flex;
       flex-direction: column;
-      gap: 14px;
       align-items: center;
     }
 
     .action-btn {
-      width: 62px;
-      height: 62px;
+      width: 72px;
+      height: 72px;
       border-radius: 50%;
       border: none;
       font-family: 'Press Start 2P', monospace;
-      font-size: 0.75rem;
+      font-size: 1rem;
       font-weight: bold;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
@@ -285,16 +302,6 @@
       box-shadow: 0 1px 0 #005577, 0 0 14px rgba(0,200,255,0.4);
     }
 
-    #btn-fast {
-      background: radial-gradient(circle at 35% 35%, #ff8833, #cc3300);
-      color: #fff;
-      box-shadow: 0 4px 0 #881100, 0 0 14px rgba(255,100,0,0.4);
-    }
-    #btn-fast:active, #btn-fast.pressed {
-      transform: translateY(3px);
-      box-shadow: 0 1px 0 #881100, 0 0 14px rgba(255,100,0,0.4);
-    }
-
     .btn-sub { font-size: 0.42rem; opacity: 0.75; }
 
     /* ══ PAYSAGE ════════════════════════════════════════════════════ */
@@ -307,7 +314,6 @@
         height: 100dvh;
       }
 
-      /* D-PAD : colonne gauche */
       #panel-left {
         width: auto;
         flex: 0 0 auto;
@@ -317,7 +323,6 @@
         justify-content: center;
       }
 
-      /* Plateau : colonne centrale */
       #panel-center {
         flex: 1 1 auto;
         width: auto;
@@ -328,7 +333,6 @@
         gap: 3px;
       }
 
-      /* Boutons action : colonne droite */
       #panel-right {
         width: auto;
         flex: 0 0 auto;
@@ -338,23 +342,18 @@
         justify-content: center;
       }
 
-      /* Header compact */
       h1 { font-size: 0.75rem; letter-spacing: 3px; }
       .hud-box { padding: 3px 6px; min-width: 58px; }
       .hud-value { font-size: 0.65rem; }
       .hud-label { font-size: 0.32rem; }
 
-      /* D-pad légèrement réduit */
       #dpad {
-        grid-template-columns: repeat(3, 44px);
-        grid-template-rows: repeat(3, 44px);
+        grid-template-columns: repeat(3, 46px);
+        grid-template-rows: repeat(3, 46px);
         gap: 3px;
       }
 
-      /* Boutons action légèrement réduits */
-      .action-btn { width: 56px; height: 56px; }
-
-      /* Speed bar compacte */
+      .action-btn { width: 62px; height: 62px; font-size: 0.85rem; }
       #speed-bar-wrap { gap: 2px; }
     }
   </style>
@@ -372,12 +371,13 @@
       <div class="dpad-btn dpad-corner" id="dpad-center"></div>
       <button class="dpad-btn" id="btn-right">▶</button>
       <div class="dpad-corner"></div>
-      <button class="dpad-btn" id="btn-down">▼</button>
+      <button class="dpad-btn" id="btn-down">▼▼</button>
       <div class="dpad-corner"></div>
     </div>
+    <div class="dpad-hint">▼▼ CHUTE RAPIDE</div>
   </div>
 
-  <!-- CENTRE : header + plateau + contrôles -->
+  <!-- CENTRE -->
   <div id="panel-center">
 
     <div id="header">
@@ -418,16 +418,12 @@
 
   </div>
 
-  <!-- DROITE : boutons action -->
+  <!-- DROITE : bouton rotation uniquement -->
   <div id="panel-right">
     <div id="action-btns">
       <button class="action-btn" id="btn-rotate">
         ↻
         <span class="btn-sub">TOUR</span>
-      </button>
-      <button class="action-btn" id="btn-fast">
-        ▼▼
-        <span class="btn-sub">VITE</span>
       </button>
     </div>
   </div>
@@ -466,23 +462,17 @@
 
   let CELL = 28;
 
-  // ── Calcul de la taille d'une cellule ─────────────────────────────
+  // ── Taille cellules ────────────────────────────────────────────────
   function calcCell() {
     const isLandscape = window.innerWidth > window.innerHeight;
     if (isLandscape) {
-      // Hauteur disponible : viewport - header - speed - pause - paddings
-      const availH = window.innerHeight - 90;
-      return Math.max(14, Math.floor(availH / ROWS));
+      return Math.max(14, Math.floor((window.innerHeight - 90) / ROWS));
     } else {
       const app = document.getElementById('app');
-      const sideW = 80;
-      const availW = Math.min(app.clientWidth - sideW - 16, 300);
-      return Math.max(16, Math.floor(availW / COLS));
+      return Math.max(16, Math.floor(Math.min(app.clientWidth - 80 - 16, 300) / COLS));
     }
   }
 
-  // ── Redimensionnement des canvas ──────────────────────────────────
-  // IMPORTANT : ne pas appeler depuis draw() pour éviter d'effacer next-canvas
   function resizeCanvases() {
     CELL = calcCell();
     boardEl.width  = CELL * COLS;
@@ -492,14 +482,116 @@
   }
 
   resizeCanvases();
+  window.addEventListener('resize', () => { resizeCanvases(); draw(); drawNext(); });
 
-  window.addEventListener('resize', () => {
-    resizeCanvases();
-    draw();
-    drawNext(); // redessiner next APRÈS resize
-  });
+  // ══ AUDIO (Web Audio API) ════════════════════════════════════════
+  let audioCtx = null;
 
-  // ── État du jeu ──────────────────────────────────────────────────
+  function getAC() {
+    if (!audioCtx) {
+      try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {}
+    }
+    return audioCtx;
+  }
+
+  function playSound(type, param) {
+    const ac = getAC();
+    if (!ac) return;
+    const now = ac.currentTime;
+
+    function note(freq, waveType, vol, dur, freqTo, startDelay) {
+      const t = (startDelay || 0) + now;
+      const osc = ac.createOscillator();
+      const gain = ac.createGain();
+      osc.connect(gain);
+      gain.connect(ac.destination);
+      osc.type = waveType || 'sine';
+      osc.frequency.setValueAtTime(freq, t);
+      if (freqTo) osc.frequency.exponentialRampToValueAtTime(freqTo, t + dur);
+      gain.gain.setValueAtTime(vol, t);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + dur);
+      osc.start(t);
+      osc.stop(t + dur + 0.01);
+    }
+
+    switch (type) {
+      case 'move':
+        note(260, 'sine', 0.06, 0.04);
+        break;
+      case 'rotate':
+        note(520, 'sine', 0.09, 0.07, 360);
+        break;
+      case 'lock':
+        note(160, 'square', 0.12, 0.11, 75);
+        break;
+      case 'clear': {
+        const n = Math.min(param || 1, 4);
+        const freqs = [330, 440, 550, 660];
+        for (let i = 0; i < n; i++) {
+          note(freqs[i], 'square', 0.18, 0.2, freqs[i] * 1.5, i * 0.07);
+        }
+        break;
+      }
+      case 'gameover':
+        note(440, 'sawtooth', 0.22, 1.0, 110);
+        break;
+    }
+  }
+
+  // ══ PARTICULES ═══════════════════════════════════════════════════
+  let particles = [];
+
+  function spawnParticles(clearedRows, capturedGrid) {
+    const perCell = clearedRows.length >= 4 ? 6 : clearedRows.length >= 2 ? 4 : 3;
+
+    for (const row of clearedRows) {
+      for (let col = 0; col < COLS; col++) {
+        const cid = capturedGrid[row][col];
+        if (!cid) continue;
+        const color = COLORS[cid];
+        const cx = (col + 0.5) * CELL;
+        const cy = (row + 0.5) * CELL;
+
+        for (let i = 0; i < perCell; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = (Math.random() * 3 + 1) * CELL * 0.07;
+          particles.push({
+            x: cx, y: cy,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed - CELL * 0.06,
+            color,
+            size: (Math.random() * 0.22 + 0.1) * CELL,
+            life: 1.0,
+            decay: 0.025 + Math.random() * 0.03,
+          });
+        }
+      }
+    }
+  }
+
+  function updateParticles() {
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.x  += p.vx;
+      p.y  += p.vy;
+      p.vy += 0.18;
+      p.vx *= 0.97;
+      p.life -= p.decay;
+      if (p.life <= 0) particles.splice(i, 1);
+    }
+  }
+
+  function drawParticles() {
+    for (const p of particles) {
+      const s = p.size * p.life;
+      ctx.globalAlpha = Math.min(1, p.life * 1.5);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(p.x - s / 2, p.y - s / 2, s, s);
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  // ── État du jeu ───────────────────────────────────────────────────
   let grid, score, state;
   let current, curX, curY, nextPiece;
   let lockPending = false, lockTimer = null;
@@ -507,8 +599,8 @@
   let fastDropActive = false, fastInterval = null;
 
   function dropInterval() { return Math.max(80, 1000 - score * 22); }
-  function speedPct() { return Math.min(100, Math.round((1000 - dropInterval()) / 9.2)); }
-  function newGrid() { return Array.from({ length: ROWS }, () => new Array(COLS).fill(0)); }
+  function speedPct()     { return Math.min(100, Math.round((1000 - dropInterval()) / 9.2)); }
+  function newGrid()      { return Array.from({ length: ROWS }, () => new Array(COLS).fill(0)); }
 
   function randPiece() {
     const id = Math.ceil(Math.random() * 7);
@@ -518,6 +610,7 @@
   function initGame() {
     grid = newGrid();
     score = 0;
+    particles = [];
     updateHUD();
     nextPiece = randPiece();
     spawnPiece();
@@ -535,12 +628,13 @@
     lockPending = false;
     if (collides(current, curX, curY)) {
       state = 'gameover';
+      playSound('gameover');
       showOverlay('GAME OVER', true);
     }
     drawNext();
   }
 
-  // ── Collision ───────────────────────────────────────────────────
+  // ── Collision ─────────────────────────────────────────────────────
   function collides(piece, px, py) {
     for (let r = 0; r < piece.length; r++)
       for (let c = 0; c < piece[r].length; c++)
@@ -552,7 +646,7 @@
     return false;
   }
 
-  // ── Rotation ────────────────────────────────────────────────────
+  // ── Rotation ──────────────────────────────────────────────────────
   function rotate(piece) {
     const rows = piece.length, cols = piece[0].length;
     const res = Array.from({ length: cols }, () => new Array(rows).fill(0));
@@ -566,14 +660,20 @@
     const rot = rotate(current);
     for (const k of [0, -1, 1, -2, 2]) {
       if (!collides(rot, curX + k, curY)) {
-        current = rot; curX += k; onMove(); return;
+        current = rot; curX += k; onMove();
+        playSound('rotate');
+        return;
       }
     }
   }
 
-  // ── Déplacement ─────────────────────────────────────────────────
-  function moveLeft()  { if (!collides(current, curX-1, curY)) { curX--; onMove(); } }
-  function moveRight() { if (!collides(current, curX+1, curY)) { curX++; onMove(); } }
+  // ── Déplacement ───────────────────────────────────────────────────
+  function moveLeft() {
+    if (!collides(current, curX-1, curY)) { curX--; onMove(); playSound('move'); }
+  }
+  function moveRight() {
+    if (!collides(current, curX+1, curY)) { curX++; onMove(); playSound('move'); }
+  }
 
   function moveDown() {
     if (!collides(current, curX, curY+1)) { curY++; lockPending = false; return true; }
@@ -595,6 +695,7 @@
 
   function lockPiece() {
     lockPending = false;
+    playSound('lock');
     for (let r = 0; r < current.length; r++)
       for (let c = 0; c < current[r].length; c++)
         if (current[r][c] && curY + r >= 0)
@@ -604,15 +705,27 @@
   }
 
   function clearLines() {
-    let cleared = 0;
+    // Capturer la grille AVANT suppression pour les particules
+    const snap = grid.map(row => [...row]);
+    const clearedRows = [];
+
     for (let r = ROWS - 1; r >= 0; ) {
       if (grid[r].every(v => v)) {
+        clearedRows.push(r);
         grid.splice(r, 1);
         grid.unshift(new Array(COLS).fill(0));
-        cleared++;
       } else r--;
     }
-    if (cleared) { score += cleared; updateHUD(); }
+
+    if (clearedRows.length) {
+      // Les lignes supprimées étaient dans snap (indices décalés par les suppressions précédentes)
+      // On les retrouve facilement : on passe directement snap avec les bons indices
+      const adjustedRows = clearedRows.map((r, i) => r + i);
+      spawnParticles(adjustedRows, snap);
+      playSound('clear', clearedRows.length);
+      score += clearedRows.length;
+      updateHUD();
+    }
   }
 
   // ── Chute rapide ─────────────────────────────────────────────────
@@ -632,14 +745,14 @@
     fastInterval = null;
   }
 
-  // ── Ghost ────────────────────────────────────────────────────────
+  // ── Ghost ─────────────────────────────────────────────────────────
   function ghostY() {
     let gy = curY;
     while (!collides(current, curX, gy+1)) gy++;
     return gy;
   }
 
-  // ── Dessin ───────────────────────────────────────────────────────
+  // ── Dessin ────────────────────────────────────────────────────────
   function drawBlock(c, x, y, alpha = 1, targetCtx = ctx, cell = CELL) {
     if (!c) return;
     const col = COLORS[c];
@@ -654,7 +767,6 @@
   }
 
   function draw() {
-    // NE PAS appeler resizeCanvases() ici : efface le canvas Next chaque frame
     ctx.fillStyle = '#050510';
     ctx.fillRect(0, 0, boardEl.width, boardEl.height);
 
@@ -682,6 +794,8 @@
           if (current[r][c])
             drawBlock(current[r][c], curX+c, curY+r);
     }
+
+    if (particles.length) drawParticles();
   }
 
   // ── Fenêtre NEXT ─────────────────────────────────────────────────
@@ -697,13 +811,13 @@
         drawBlock(nextPiece[r][c], ox+c, oy+r, 1, nctx, cell);
   }
 
-  // ── HUD ──────────────────────────────────────────────────────────
+  // ── HUD ───────────────────────────────────────────────────────────
   function updateHUD() {
     document.getElementById('score-val').textContent = score;
     document.getElementById('speed-bar-fill').style.width = speedPct() + '%';
   }
 
-  // ── Overlay ──────────────────────────────────────────────────────
+  // ── Overlay ───────────────────────────────────────────────────────
   const overlay      = document.getElementById('overlay');
   const overlayTitle = document.getElementById('overlay-title');
   const overlayScore = document.getElementById('overlay-score');
@@ -721,10 +835,13 @@
   function hideOverlay() { overlay.classList.add('hidden'); }
 
   overlayBtn.addEventListener('pointerdown', e => {
-    e.preventDefault(); hideOverlay(); initGame();
+    e.preventDefault();
+    getAC(); // initialise AudioContext dès le premier tap (obligatoire sur mobile)
+    hideOverlay();
+    initGame();
   });
 
-  // ── Pause ────────────────────────────────────────────────────────
+  // ── Pause ─────────────────────────────────────────────────────────
   function togglePause() {
     if (state === 'playing') {
       state = 'paused';
@@ -744,7 +861,7 @@
     e.preventDefault(); togglePause();
   });
 
-  // ── Boucle de jeu ────────────────────────────────────────────────
+  // ── Boucle de jeu ─────────────────────────────────────────────────
   function loop(ts) {
     if (state !== 'playing') { draw(); return; }
     const dt = ts - lastTime;
@@ -755,26 +872,29 @@
     } else {
       dropAccum = 0;
     }
+    updateParticles();
     draw();
     animFrame = requestAnimationFrame(loop);
   }
 
-  // ── Clavier ──────────────────────────────────────────────────────
+  // ── Clavier ───────────────────────────────────────────────────────
   document.addEventListener('keydown', e => {
     if (state !== 'playing' && e.key !== 'p' && e.key !== 'P') return;
     switch (e.key) {
-      case 'ArrowLeft':  e.preventDefault(); moveLeft(); break;
-      case 'ArrowRight': e.preventDefault(); moveRight(); break;
-      case 'ArrowUp':    e.preventDefault(); tryRotate(); break;
-      case 'ArrowDown':  e.preventDefault(); moveDown(); break;
+      case 'ArrowLeft':  e.preventDefault(); moveLeft();      break;
+      case 'ArrowRight': e.preventDefault(); moveRight();     break;
+      case 'ArrowUp':    e.preventDefault(); tryRotate();     break;
+      case 'ArrowDown':  e.preventDefault(); startFastDrop(); break;
       case ' ':          e.preventDefault(); startFastDrop(); break;
       case 'p': case 'P': togglePause(); break;
     }
     draw();
   });
-  document.addEventListener('keyup', e => { if (e.key === ' ') stopFastDrop(); });
+  document.addEventListener('keyup', e => {
+    if (e.key === 'ArrowDown' || e.key === ' ') stopFastDrop();
+  });
 
-  // ── Liaisons boutons ─────────────────────────────────────────────
+  // ── Liaisons boutons ──────────────────────────────────────────────
   function bindBtn(id, onDown, onUp = null, repeat = false) {
     const el = document.getElementById(id);
     let iv;
@@ -796,14 +916,13 @@
     el.addEventListener('pointercancel', up);
   }
 
-  bindBtn('btn-left',   moveLeft,    null, true);
-  bindBtn('btn-right',  moveRight,   null, true);
-  bindBtn('btn-down',   moveDown,    null, true);
+  bindBtn('btn-left',   moveLeft,      null,         true);
+  bindBtn('btn-right',  moveRight,     null,         true);
   bindBtn('btn-up',     tryRotate);
   bindBtn('btn-rotate', tryRotate);
-  bindBtn('btn-fast',   startFastDrop, stopFastDrop);
+  bindBtn('btn-down',   startFastDrop, stopFastDrop);  // maintenir = chute rapide
 
-  // ── Init ─────────────────────────────────────────────────────────
+  // ── Init ──────────────────────────────────────────────────────────
   state = 'idle';
   grid = newGrid();
   nextPiece = randPiece();
