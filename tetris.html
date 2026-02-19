@@ -12,13 +12,10 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --cell: 28px;
       --bg: #0b0b1a;
       --panel: #12122a;
       --border: #2a2a55;
       --cyan: #00f0f0;
-      --orange: #ff6600;
-      --red: #ff2244;
       --text: #ccccee;
       --dim: #555577;
     }
@@ -34,15 +31,49 @@
       -webkit-user-select: none;
     }
 
+    /* ══ PORTRAIT (défaut) ══════════════════════════════════════════ */
     #app {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      height: 100dvh;
+      width: 100%;
+      max-width: 430px;
+      margin: 0 auto;
+    }
+
+    /* Centre : header + plateau + barre vitesse + pause */
+    #panel-center {
+      width: 100%;
+      order: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
-      height: 100dvh;
-      max-width: 430px;
-      margin: 0 auto;
       padding: 6px 8px 4px;
       gap: 5px;
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+
+    /* Gauche bas : D-PAD */
+    #panel-left {
+      width: 50%;
+      order: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 0 8px 14px;
+    }
+
+    /* Droite bas : boutons action */
+    #panel-right {
+      width: 50%;
+      order: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 14px 8px 0;
     }
 
     /* ── HEADER ─────────────────────────── */
@@ -62,10 +93,7 @@
       background-clip: text;
     }
 
-    #hud {
-      display: flex;
-      gap: 8px;
-    }
+    #hud { display: flex; gap: 8px; }
 
     .hud-box {
       background: var(--panel);
@@ -76,17 +104,8 @@
       min-width: 72px;
     }
 
-    .hud-label {
-      font-size: 0.38rem;
-      color: var(--dim);
-      letter-spacing: 2px;
-    }
-
-    .hud-value {
-      font-size: 0.85rem;
-      color: var(--cyan);
-      margin-top: 2px;
-    }
+    .hud-label { font-size: 0.38rem; color: var(--dim); letter-spacing: 2px; }
+    .hud-value { font-size: 0.85rem; color: var(--cyan); margin-top: 2px; }
 
     /* ── GAME AREA ──────────────────────── */
     #game-area {
@@ -114,11 +133,7 @@
       gap: 6px;
     }
 
-    .side-label {
-      font-size: 0.35rem;
-      color: var(--dim);
-      letter-spacing: 2px;
-    }
+    .side-label { font-size: 0.35rem; color: var(--dim); letter-spacing: 2px; }
 
     #next-canvas {
       background: var(--panel);
@@ -141,19 +156,8 @@
     }
     #overlay.hidden { display: none; }
 
-    #overlay-title {
-      font-size: 1rem;
-      color: var(--cyan);
-      letter-spacing: 3px;
-      text-align: center;
-    }
-
-    #overlay-score {
-      font-size: 0.55rem;
-      color: var(--dim);
-      text-align: center;
-      line-height: 1.8;
-    }
+    #overlay-title { font-size: 1rem; color: var(--cyan); letter-spacing: 3px; text-align: center; }
+    #overlay-score { font-size: 0.55rem; color: var(--dim); text-align: center; line-height: 1.8; }
     #overlay-score span { color: #ffdd00; }
 
     #overlay-btn {
@@ -171,22 +175,8 @@
     }
     #overlay-btn:active { background: rgba(0,240,240,0.15); }
 
-    /* ── CONTROLS ─────────────────────── */
-    #controls {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      gap: 8px;
-      flex: 1;
-      justify-content: flex-end;
-      padding-bottom: 6px;
-    }
-
-    #pause-bar {
-      display: flex;
-      justify-content: center;
-    }
+    /* ── PAUSE BAR ─────────────────────── */
+    #pause-bar { display: flex; justify-content: center; width: 100%; }
 
     #btn-pause {
       background: var(--panel);
@@ -202,12 +192,22 @@
     }
     #btn-pause:active { background: #1e1e40; }
 
-    #ctrl-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      padding: 0 14px;
+    /* ── SPEED BAR ─────────────────────── */
+    #speed-bar-wrap { width: 100%; display: flex; flex-direction: column; gap: 3px; }
+    #speed-label { font-size: 0.35rem; color: var(--dim); letter-spacing: 2px; }
+    #speed-bar-bg {
+      height: 5px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    #speed-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #00f0f0, #ff0066);
+      border-radius: 3px;
+      transition: width 0.4s;
     }
 
     /* ── DPAD ─────────────────────────── */
@@ -295,74 +295,117 @@
       box-shadow: 0 1px 0 #881100, 0 0 14px rgba(255,100,0,0.4);
     }
 
-    .btn-sub {
-      font-size: 0.42rem;
-      opacity: 0.75;
-    }
+    .btn-sub { font-size: 0.42rem; opacity: 0.75; }
 
-    #speed-bar-wrap {
-      width: 100%;
-      padding: 0 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-    #speed-label {
-      font-size: 0.35rem;
-      color: var(--dim);
-      letter-spacing: 2px;
-    }
-    #speed-bar-bg {
-      height: 5px;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      overflow: hidden;
-    }
-    #speed-bar-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #00f0f0, #ff0066);
-      border-radius: 3px;
-      transition: width 0.4s;
+    /* ══ PAYSAGE ════════════════════════════════════════════════════ */
+    @media (orientation: landscape) {
+      #app {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        max-width: 100%;
+        height: 100dvh;
+      }
+
+      /* D-PAD : colonne gauche */
+      #panel-left {
+        width: auto;
+        flex: 0 0 auto;
+        order: 1;
+        padding: 8px 6px 8px 10px;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Plateau : colonne centrale */
+      #panel-center {
+        flex: 1 1 auto;
+        width: auto;
+        order: 2;
+        padding: 4px 6px;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+      }
+
+      /* Boutons action : colonne droite */
+      #panel-right {
+        width: auto;
+        flex: 0 0 auto;
+        order: 3;
+        padding: 8px 10px 8px 6px;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Header compact */
+      h1 { font-size: 0.75rem; letter-spacing: 3px; }
+      .hud-box { padding: 3px 6px; min-width: 58px; }
+      .hud-value { font-size: 0.65rem; }
+      .hud-label { font-size: 0.32rem; }
+
+      /* D-pad légèrement réduit */
+      #dpad {
+        grid-template-columns: repeat(3, 44px);
+        grid-template-rows: repeat(3, 44px);
+        gap: 3px;
+      }
+
+      /* Boutons action légèrement réduits */
+      .action-btn { width: 56px; height: 56px; }
+
+      /* Speed bar compacte */
+      #speed-bar-wrap { gap: 2px; }
     }
   </style>
 </head>
 <body>
 <div id="app">
 
-  <!-- HEADER -->
-  <div id="header">
-    <h1>TETRIS</h1>
-    <div id="hud">
-      <div class="hud-box">
-        <div class="hud-label">SCORE</div>
-        <div class="hud-value" id="score-val">0</div>
-      </div>
+  <!-- GAUCHE : D-PAD -->
+  <div id="panel-left">
+    <div id="dpad">
+      <div class="dpad-corner"></div>
+      <button class="dpad-btn" id="btn-up">▲</button>
+      <div class="dpad-corner"></div>
+      <button class="dpad-btn" id="btn-left">◀</button>
+      <div class="dpad-btn dpad-corner" id="dpad-center"></div>
+      <button class="dpad-btn" id="btn-right">▶</button>
+      <div class="dpad-corner"></div>
+      <button class="dpad-btn" id="btn-down">▼</button>
+      <div class="dpad-corner"></div>
     </div>
   </div>
 
-  <!-- GAME AREA -->
-  <div id="game-area">
-    <div id="canvas-container">
-      <canvas id="board"></canvas>
-      <!-- Overlay -->
-      <div id="overlay">
-        <div id="overlay-title">TETRIS</div>
-        <div id="overlay-score" style="display:none">
-          SCORE<br><span id="final-score">0</span>
+  <!-- CENTRE : header + plateau + contrôles -->
+  <div id="panel-center">
+
+    <div id="header">
+      <h1>TETRIS</h1>
+      <div id="hud">
+        <div class="hud-box">
+          <div class="hud-label">SCORE</div>
+          <div class="hud-value" id="score-val">0</div>
         </div>
-        <button id="overlay-btn">JOUER</button>
       </div>
     </div>
-    <div id="side">
-      <div class="side-label">NEXT</div>
-      <canvas id="next-canvas"></canvas>
-    </div>
-  </div>
 
-  <!-- CONTROLS -->
-  <div id="controls">
+    <div id="game-area">
+      <div id="canvas-container">
+        <canvas id="board"></canvas>
+        <div id="overlay">
+          <div id="overlay-title">TETRIS</div>
+          <div id="overlay-score" style="display:none">
+            SCORE<br><span id="final-score">0</span>
+          </div>
+          <button id="overlay-btn">JOUER</button>
+        </div>
+      </div>
+      <div id="side">
+        <div class="side-label">NEXT</div>
+        <canvas id="next-canvas"></canvas>
+      </div>
+    </div>
 
     <div id="speed-bar-wrap">
       <div id="speed-label">VITESSE ▸</div>
@@ -373,33 +416,19 @@
       <button id="btn-pause">⏸ PAUSE</button>
     </div>
 
-    <div id="ctrl-row">
+  </div>
 
-      <!-- D-PAD -->
-      <div id="dpad">
-        <div class="dpad-corner"></div>
-        <button class="dpad-btn" id="btn-up">▲</button>
-        <div class="dpad-corner"></div>
-        <button class="dpad-btn" id="btn-left">◀</button>
-        <div class="dpad-btn dpad-corner" id="dpad-center"></div>
-        <button class="dpad-btn" id="btn-right">▶</button>
-        <div class="dpad-corner"></div>
-        <button class="dpad-btn" id="btn-down">▼</button>
-        <div class="dpad-corner"></div>
-      </div>
-
-      <!-- ACTION BUTTONS -->
-      <div id="action-btns">
-        <button class="action-btn" id="btn-rotate">
-          ↻
-          <span class="btn-sub">TOUR</span>
-        </button>
-        <button class="action-btn" id="btn-fast">
-          ▼▼
-          <span class="btn-sub">VITE</span>
-        </button>
-      </div>
-
+  <!-- DROITE : boutons action -->
+  <div id="panel-right">
+    <div id="action-btns">
+      <button class="action-btn" id="btn-rotate">
+        ↻
+        <span class="btn-sub">TOUR</span>
+      </button>
+      <button class="action-btn" id="btn-fast">
+        ▼▼
+        <span class="btn-sub">VITE</span>
+      </button>
     </div>
   </div>
 
@@ -409,20 +438,14 @@
 (() => {
   'use strict';
 
-  // ── Constants ──────────────────────────────────────────────────────
   const COLS = 10, ROWS = 20;
   const LOCK_DELAY = 450;
-  const FAST_INTERVAL = 45; // ms per cell when fast-drop held
+  const FAST_INTERVAL = 45;
 
   const COLORS = [
     null,
-    '#00f0f0', // I  cyan
-    '#f0c000', // O  yellow
-    '#a020f0', // T  purple
-    '#00e000', // S  green
-    '#f02020', // Z  red
-    '#2020f0', // J  blue
-    '#f07800', // L  orange
+    '#00f0f0','#f0c000','#a020f0','#00e000',
+    '#f02020','#2020f0','#f07800',
   ];
 
   const PIECES = [
@@ -436,21 +459,30 @@
     [[0,0,7],[7,7,7]],
   ];
 
-  // ── Canvas setup ────────────────────────────────────────────────────
-  const boardEl  = document.getElementById('board');
-  const ctx      = boardEl.getContext('2d');
-  const nextEl   = document.getElementById('next-canvas');
-  const nctx     = nextEl.getContext('2d');
+  const boardEl = document.getElementById('board');
+  const ctx     = boardEl.getContext('2d');
+  const nextEl  = document.getElementById('next-canvas');
+  const nctx    = nextEl.getContext('2d');
 
   let CELL = 28;
 
+  // ── Calcul de la taille d'une cellule ─────────────────────────────
   function calcCell() {
-    const app = document.getElementById('app');
-    const sideW = 68; // next panel + gap
-    const availW = Math.min(app.clientWidth - sideW - 16, 300);
-    return Math.max(16, Math.floor(availW / COLS));
+    const isLandscape = window.innerWidth > window.innerHeight;
+    if (isLandscape) {
+      // Hauteur disponible : viewport - header - speed - pause - paddings
+      const availH = window.innerHeight - 90;
+      return Math.max(14, Math.floor(availH / ROWS));
+    } else {
+      const app = document.getElementById('app');
+      const sideW = 80;
+      const availW = Math.min(app.clientWidth - sideW - 16, 300);
+      return Math.max(16, Math.floor(availW / COLS));
+    }
   }
 
+  // ── Redimensionnement des canvas ──────────────────────────────────
+  // IMPORTANT : ne pas appeler depuis draw() pour éviter d'effacer next-canvas
   function resizeCanvases() {
     CELL = calcCell();
     boardEl.width  = CELL * COLS;
@@ -460,28 +492,23 @@
   }
 
   resizeCanvases();
-  window.addEventListener('resize', () => { resizeCanvases(); draw(); drawNext(); });
 
-  // ── Game state ──────────────────────────────────────────────────────
-  let grid, score, state; // state: idle|playing|paused|gameover
+  window.addEventListener('resize', () => {
+    resizeCanvases();
+    draw();
+    drawNext(); // redessiner next APRÈS resize
+  });
+
+  // ── État du jeu ──────────────────────────────────────────────────
+  let grid, score, state;
   let current, curX, curY, nextPiece;
   let lockPending = false, lockTimer = null;
   let animFrame, lastTime = 0, dropAccum = 0;
   let fastDropActive = false, fastInterval = null;
 
-  // Speed: dropInterval = max(80, 1000 - score * 22) ms
-  function dropInterval() {
-    return Math.max(80, 1000 - score * 22);
-  }
-
-  // Speed fill bar: 0–100% when interval goes 1000→80
-  function speedPct() {
-    return Math.min(100, Math.round((1000 - dropInterval()) / 9.2));
-  }
-
-  function newGrid() {
-    return Array.from({ length: ROWS }, () => new Array(COLS).fill(0));
-  }
+  function dropInterval() { return Math.max(80, 1000 - score * 22); }
+  function speedPct() { return Math.min(100, Math.round((1000 - dropInterval()) / 9.2)); }
+  function newGrid() { return Array.from({ length: ROWS }, () => new Array(COLS).fill(0)); }
 
   function randPiece() {
     const id = Math.ceil(Math.random() * 7);
@@ -513,7 +540,7 @@
     drawNext();
   }
 
-  // ── Collision ───────────────────────────────────────────────────────
+  // ── Collision ───────────────────────────────────────────────────
   function collides(piece, px, py) {
     for (let r = 0; r < piece.length; r++)
       for (let c = 0; c < piece[r].length; c++)
@@ -525,7 +552,7 @@
     return false;
   }
 
-  // ── Rotation (with wall kicks) ──────────────────────────────────────
+  // ── Rotation ────────────────────────────────────────────────────
   function rotate(piece) {
     const rows = piece.length, cols = piece[0].length;
     const res = Array.from({ length: cols }, () => new Array(rows).fill(0));
@@ -539,26 +566,18 @@
     const rot = rotate(current);
     for (const k of [0, -1, 1, -2, 2]) {
       if (!collides(rot, curX + k, curY)) {
-        current = rot;
-        curX += k;
-        onMove();
-        return;
+        current = rot; curX += k; onMove(); return;
       }
     }
   }
 
-  // ── Movement ────────────────────────────────────────────────────────
+  // ── Déplacement ─────────────────────────────────────────────────
   function moveLeft()  { if (!collides(current, curX-1, curY)) { curX--; onMove(); } }
   function moveRight() { if (!collides(current, curX+1, curY)) { curX++; onMove(); } }
 
   function moveDown() {
-    if (!collides(current, curX, curY+1)) {
-      curY++;
-      lockPending = false;
-      return true;
-    }
-    scheduleLock();
-    return false;
+    if (!collides(current, curX, curY+1)) { curY++; lockPending = false; return true; }
+    scheduleLock(); return false;
   }
 
   function onMove() {
@@ -593,13 +612,10 @@
         cleared++;
       } else r--;
     }
-    if (cleared) {
-      score += cleared; // 1 point per line
-      updateHUD();
-    }
+    if (cleared) { score += cleared; updateHUD(); }
   }
 
-  // ── Fast drop (hold button) ─────────────────────────────────────────
+  // ── Chute rapide ─────────────────────────────────────────────────
   function startFastDrop() {
     if (fastDropActive) return;
     fastDropActive = true;
@@ -616,35 +632,32 @@
     fastInterval = null;
   }
 
-  // ── Ghost ───────────────────────────────────────────────────────────
+  // ── Ghost ────────────────────────────────────────────────────────
   function ghostY() {
     let gy = curY;
     while (!collides(current, curX, gy+1)) gy++;
     return gy;
   }
 
-  // ── Drawing ─────────────────────────────────────────────────────────
+  // ── Dessin ───────────────────────────────────────────────────────
   function drawBlock(c, x, y, alpha = 1, targetCtx = ctx, cell = CELL) {
     if (!c) return;
     const col = COLORS[c];
     targetCtx.globalAlpha = alpha;
     targetCtx.fillStyle = col;
     targetCtx.fillRect(x*cell+1, y*cell+1, cell-2, cell-2);
-    // highlight top edge
     targetCtx.fillStyle = 'rgba(255,255,255,0.3)';
     targetCtx.fillRect(x*cell+1, y*cell+1, cell-2, Math.max(2, Math.floor(cell/8)));
-    // shadow bottom edge
     targetCtx.fillStyle = 'rgba(0,0,0,0.35)';
     targetCtx.fillRect(x*cell+1, (y+1)*cell - Math.max(2, Math.floor(cell/8))-1, cell-2, Math.max(2, Math.floor(cell/8)));
     targetCtx.globalAlpha = 1;
   }
 
   function draw() {
-    resizeCanvases();
+    // NE PAS appeler resizeCanvases() ici : efface le canvas Next chaque frame
     ctx.fillStyle = '#050510';
     ctx.fillRect(0, 0, boardEl.width, boardEl.height);
 
-    // grid lines
     ctx.strokeStyle = 'rgba(255,255,255,0.035)';
     ctx.lineWidth = 0.5;
     for (let c = 0; c <= COLS; c++) {
@@ -654,19 +667,16 @@
       ctx.beginPath(); ctx.moveTo(0,r*CELL); ctx.lineTo(boardEl.width,r*CELL); ctx.stroke();
     }
 
-    // locked blocks
     for (let r = 0; r < ROWS; r++)
       for (let c = 0; c < COLS; c++)
         drawBlock(grid[r][c], c, r);
 
     if (state === 'playing' || state === 'paused') {
-      // ghost
       const gy = ghostY();
       for (let r = 0; r < current.length; r++)
         for (let c = 0; c < current[r].length; c++)
           if (current[r][c])
             drawBlock(current[r][c], curX+c, gy+r, 0.15);
-      // current piece
       for (let r = 0; r < current.length; r++)
         for (let c = 0; c < current[r].length; c++)
           if (current[r][c])
@@ -674,6 +684,7 @@
     }
   }
 
+  // ── Fenêtre NEXT ─────────────────────────────────────────────────
   function drawNext() {
     const cell = Math.floor(nextEl.width / 4);
     nctx.fillStyle = '#0a0a1e';
@@ -686,27 +697,23 @@
         drawBlock(nextPiece[r][c], ox+c, oy+r, 1, nctx, cell);
   }
 
-  // ── HUD ─────────────────────────────────────────────────────────────
+  // ── HUD ──────────────────────────────────────────────────────────
   function updateHUD() {
     document.getElementById('score-val').textContent = score;
     document.getElementById('speed-bar-fill').style.width = speedPct() + '%';
   }
 
-  // ── Overlay ─────────────────────────────────────────────────────────
-  const overlay     = document.getElementById('overlay');
+  // ── Overlay ──────────────────────────────────────────────────────
+  const overlay      = document.getElementById('overlay');
   const overlayTitle = document.getElementById('overlay-title');
   const overlayScore = document.getElementById('overlay-score');
-  const finalScore  = document.getElementById('final-score');
-  const overlayBtn  = document.getElementById('overlay-btn');
+  const finalScore   = document.getElementById('final-score');
+  const overlayBtn   = document.getElementById('overlay-btn');
 
   function showOverlay(title, showScore = false) {
     overlayTitle.textContent = title;
-    if (showScore) {
-      overlayScore.style.display = 'block';
-      finalScore.textContent = score;
-    } else {
-      overlayScore.style.display = 'none';
-    }
+    if (showScore) { overlayScore.style.display = 'block'; finalScore.textContent = score; }
+    else           { overlayScore.style.display = 'none'; }
     overlayBtn.textContent = showScore ? 'REJOUER' : 'JOUER';
     overlay.classList.remove('hidden');
   }
@@ -714,12 +721,10 @@
   function hideOverlay() { overlay.classList.add('hidden'); }
 
   overlayBtn.addEventListener('pointerdown', e => {
-    e.preventDefault();
-    hideOverlay();
-    initGame();
+    e.preventDefault(); hideOverlay(); initGame();
   });
 
-  // ── Pause ───────────────────────────────────────────────────────────
+  // ── Pause ────────────────────────────────────────────────────────
   function togglePause() {
     if (state === 'playing') {
       state = 'paused';
@@ -736,22 +741,17 @@
   }
 
   document.getElementById('btn-pause').addEventListener('pointerdown', e => {
-    e.preventDefault();
-    togglePause();
+    e.preventDefault(); togglePause();
   });
 
-  // ── Game loop ────────────────────────────────────────────────────────
+  // ── Boucle de jeu ────────────────────────────────────────────────
   function loop(ts) {
     if (state !== 'playing') { draw(); return; }
     const dt = ts - lastTime;
     lastTime = ts;
-    // don't count fast-drop ticks in auto-drop accumulator
     if (!fastDropActive) {
       dropAccum += dt;
-      if (dropAccum >= dropInterval()) {
-        dropAccum = 0;
-        moveDown();
-      }
+      if (dropAccum >= dropInterval()) { dropAccum = 0; moveDown(); }
     } else {
       dropAccum = 0;
     }
@@ -759,7 +759,7 @@
     animFrame = requestAnimationFrame(loop);
   }
 
-  // ── Keyboard (desktop) ───────────────────────────────────────────────
+  // ── Clavier ──────────────────────────────────────────────────────
   document.addEventListener('keydown', e => {
     if (state !== 'playing' && e.key !== 'p' && e.key !== 'P') return;
     switch (e.key) {
@@ -772,11 +772,9 @@
     }
     draw();
   });
-  document.addEventListener('keyup', e => {
-    if (e.key === ' ') stopFastDrop();
-  });
+  document.addEventListener('keyup', e => { if (e.key === ' ') stopFastDrop(); });
 
-  // ── Button helpers ───────────────────────────────────────────────────
+  // ── Liaisons boutons ─────────────────────────────────────────────
   function bindBtn(id, onDown, onUp = null, repeat = false) {
     const el = document.getElementById(id);
     let iv;
@@ -787,7 +785,7 @@
       onDown();
       if (repeat) iv = setInterval(onDown, 110);
     };
-    const up = e => {
+    const up = () => {
       el.classList.remove('pressed');
       clearInterval(iv);
       if (onUp) onUp();
@@ -798,14 +796,14 @@
     el.addEventListener('pointercancel', up);
   }
 
-  bindBtn('btn-left',  moveLeft,    null, true);
-  bindBtn('btn-right', moveRight,   null, true);
-  bindBtn('btn-down',  moveDown,    null, true);
-  bindBtn('btn-up',    tryRotate);          // D-pad up = rotate (classic)
-  bindBtn('btn-rotate', tryRotate);         // A button = rotate
-  bindBtn('btn-fast',  startFastDrop, stopFastDrop); // B button = fast drop
+  bindBtn('btn-left',   moveLeft,    null, true);
+  bindBtn('btn-right',  moveRight,   null, true);
+  bindBtn('btn-down',   moveDown,    null, true);
+  bindBtn('btn-up',     tryRotate);
+  bindBtn('btn-rotate', tryRotate);
+  bindBtn('btn-fast',   startFastDrop, stopFastDrop);
 
-  // ── Init ─────────────────────────────────────────────────────────────
+  // ── Init ─────────────────────────────────────────────────────────
   state = 'idle';
   grid = newGrid();
   nextPiece = randPiece();
