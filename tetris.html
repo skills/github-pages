@@ -491,12 +491,14 @@
     if (!audioCtx) {
       try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {}
     }
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
     return audioCtx;
   }
 
   function playSound(type, param) {
     const ac = getAC();
     if (!ac) return;
+    if (ac.state === 'suspended') { ac.resume(); }
     const now = ac.currentTime;
 
     function note(freq, waveType, vol, dur, freqTo, startDelay) {
@@ -516,24 +518,30 @@
 
     switch (type) {
       case 'move':
-        note(260, 'sine', 0.06, 0.04);
+        note(320, 'square', 0.22, 0.06, 220);
         break;
       case 'rotate':
-        note(520, 'sine', 0.09, 0.07, 360);
+        note(620, 'square', 0.28, 0.09, 920);
+        note(310, 'sine',   0.18, 0.07, 180, 0.03);
         break;
       case 'lock':
-        note(160, 'square', 0.12, 0.11, 75);
+        note(180, 'sawtooth', 0.35, 0.16, 70);
+        note(90,  'square',   0.25, 0.13, 55, 0.05);
         break;
       case 'clear': {
         const n = Math.min(param || 1, 4);
-        const freqs = [330, 440, 550, 660];
+        const freqs = [330, 440, 660, 880];
         for (let i = 0; i < n; i++) {
-          note(freqs[i], 'square', 0.18, 0.2, freqs[i] * 1.5, i * 0.07);
+          note(freqs[i],       'square',   0.38, 0.24, freqs[i] * 2,   i * 0.09);
+          note(freqs[i] * 0.5, 'sawtooth', 0.22, 0.20, freqs[i],       i * 0.09);
         }
+        if (n >= 4) note(1000, 'sawtooth', 0.45, 0.55, 100);
         break;
       }
       case 'gameover':
-        note(440, 'sawtooth', 0.22, 1.0, 110);
+        note(440, 'sawtooth', 0.42, 1.6, 50);
+        note(220, 'square',   0.32, 1.3, 28, 0.12);
+        note(660, 'sine',     0.28, 0.9, 110, 0.22);
         break;
     }
   }
@@ -837,8 +845,12 @@
   overlayBtn.addEventListener('pointerdown', e => {
     e.preventDefault();
     getAC(); // initialise AudioContext dès le premier tap (obligatoire sur mobile)
-    hideOverlay();
-    initGame();
+    if (state === 'paused') {
+      togglePause();
+    } else {
+      hideOverlay();
+      initGame();
+    }
   });
 
   // ── Pause ─────────────────────────────────────────────────────────
