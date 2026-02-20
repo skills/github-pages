@@ -44,6 +44,7 @@
       width: 100%;
       max-width: 430px;
       margin: 0 auto;
+      position: relative; /* ancre les overlays positionnés en absolute */
     }
 
     #panel-center {
@@ -310,6 +311,101 @@
 
     .btn-sub { font-size: 0.42rem; opacity: 0.75; }
 
+    /* ── ÉCRAN ROTATION ───────────────────────────────────────────── */
+    #rotate-screen {
+      position: absolute;
+      inset: 0;
+      z-index: 100;
+      background: var(--bg);
+      display: none; /* affiché par JS en portrait */
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+    }
+    #rotate-screen.visible { display: flex; }
+
+    #rotate-icon {
+      width: 90px;
+      height: 90px;
+      animation: phone-turn 2.4s ease-in-out infinite;
+      filter: drop-shadow(0 0 10px #00f0f0);
+    }
+    @keyframes phone-turn {
+      0%, 20%  { transform: rotate(0deg);   }
+      55%, 75% { transform: rotate(-90deg); }
+      100%     { transform: rotate(0deg);   }
+    }
+
+    #rotate-label {
+      font-size: 0.55rem;
+      color: var(--cyan);
+      letter-spacing: 3px;
+      text-align: center;
+      line-height: 2;
+    }
+    #rotate-sub {
+      font-size: 0.32rem;
+      color: var(--dim);
+      letter-spacing: 2px;
+      text-align: center;
+    }
+    #btn-continue-portrait {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--dim);
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.3rem;
+      letter-spacing: 1px;
+      padding: 6px 14px;
+      cursor: pointer;
+      border-radius: 10px;
+      -webkit-tap-highlight-color: transparent;
+      margin-top: 6px;
+    }
+    #btn-continue-portrait:active { background: #1e1e40; }
+
+    /* ── COMBO OVERLAY (plein app) ────────────────────────────────── */
+    #combo-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 30;
+    }
+    #combo-overlay.hidden { opacity: 0; visibility: hidden; }
+
+    #combo-text {
+      font-family: 'Press Start 2P', monospace;
+      font-weight: bold;
+      text-align: center;
+      line-height: 1.1;
+    }
+    #combo-pts {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.9rem;
+      color: #fff;
+      margin-top: 8px;
+      text-align: center;
+      opacity: 0.9;
+    }
+
+    @keyframes combo-fade {
+      0%   { opacity: 0; }
+      12%  { opacity: 1; }
+      65%  { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    @keyframes combo-zoom {
+      0%   { transform: scale(2.4); }
+      12%  { transform: scale(1);   }
+      65%  { transform: scale(1);   }
+      100% { transform: scale(0.85) translateY(-12px); }
+    }
+
     /* ══ PAYSAGE ════════════════════════════════════════════════════ */
     @media (orientation: landscape) {
       #app {
@@ -438,6 +534,39 @@
       </div>
     </div>
 
+  </div>
+
+  <!-- ── Overlay rotation portrait ─────────────────────────────── -->
+  <div id="rotate-screen">
+    <!-- Téléphone SVG animé qui tourne de portrait → paysage -->
+    <svg id="rotate-icon" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+      <!-- Corps du téléphone -->
+      <rect x="23" y="6" width="34" height="57" rx="6"
+            fill="#12122a" stroke="#00f0f0" stroke-width="2.5"/>
+      <!-- Écran -->
+      <rect x="28" y="14" width="24" height="38" rx="2" fill="#050510"/>
+      <!-- Bouton home -->
+      <circle cx="40" cy="57" r="3.5" fill="none" stroke="#2a2a55" stroke-width="1.8"/>
+      <!-- Pièce Tetris I sur l'écran -->
+      <rect x="31" y="20" width="6" height="6" rx="1" fill="#00f0f0" opacity=".9"/>
+      <rect x="31" y="27" width="6" height="6" rx="1" fill="#f0c000" opacity=".9"/>
+      <rect x="31" y="34" width="6" height="6" rx="1" fill="#a020f0" opacity=".9"/>
+      <rect x="31" y="41" width="6" height="6" rx="1" fill="#00e000" opacity=".9"/>
+      <!-- Flèche rotation -->
+      <path d="M 14 40 A 26 26 0 0 1 66 40"
+            fill="none" stroke="#ff0066" stroke-width="2.5"
+            stroke-linecap="round" stroke-dasharray="4,3"/>
+      <polygon points="66,40 58,34 62,46" fill="#ff0066"/>
+    </svg>
+    <div id="rotate-label">TOURNEZ<br>VOTRE TÉLÉPHONE</div>
+    <div id="rotate-sub">MEILLEURE EXPÉRIENCE EN PAYSAGE</div>
+    <button id="btn-continue-portrait">CONTINUER EN PORTRAIT</button>
+  </div>
+
+  <!-- ── Combo plein-écran ───────────────────────────────────────── -->
+  <div id="combo-overlay" class="hidden">
+    <div id="combo-text"></div>
+    <div id="combo-pts"></div>
   </div>
 
 </div>
@@ -635,7 +764,6 @@
   let lockPending = false, lockTimer = null;
   let animFrame, lastTime = 0, dropAccum = 0;
   let fastDropActive = false, fastInterval = null;
-  let comboAnim = null; // { n, pts, life, decay }
 
   function dropInterval() { return Math.max(80, 1000 - score * 10); }
   function speedPct()     { return Math.min(100, Math.round(score * 10 / 9.2)); }
@@ -650,7 +778,6 @@
     grid = newGrid();
     score = 0;
     particles = [];
-    comboAnim = null;
     updateHUD();
     nextPiece = randPiece();
     spawnPiece();
@@ -766,11 +893,8 @@
       playSound('clear', n);
       score += pts;
       updateHUD();
-      // Afficher l'animation combo pour toutes les clears (×1, ×2, ×3, TETRIS)
-      // Durée réduite pour 1 ligne seule pour ne pas être trop intrusif
-      if (!comboAnim || comboAnim.n <= n) {
-        comboAnim = { n, pts, life: 1.0, decay: n === 1 ? 0.025 : 0.014 };
-      }
+      // Animation combo plein-écran (×1, ×2, ×3, TETRIS!)
+      showComboDOM(n, pts);
     }
   }
 
@@ -842,57 +966,37 @@
     }
 
     if (particles.length) drawParticles();
-    if (comboAnim && comboAnim.life > 0) drawCombo();
   }
 
-  // ── Combo multiplicateur ──────────────────────────────────────────
-  function drawCombo() {
-    const { n, pts, life } = comboAnim;
-    const cx = boardEl.width  / 2;
-    const cy = boardEl.height / 2;
+  // ── Combo DOM plein-écran ─────────────────────────────────────────
+  const comboOverlay = document.getElementById('combo-overlay');
+  const comboTextEl  = document.getElementById('combo-text');
+  const comboPtsEl   = document.getElementById('combo-pts');
+  const COMBO_COLORS = ['#aaffaa', '#ffee00', '#ff8800', '#00f0f0'];
+  let   comboTimer   = null;
 
-    // Fondu : transparent sur les 35% finaux de vie
-    const alpha = life < 0.35 ? life / 0.35 : 1;
-    // Échelle : démarre grande, se stabilise
-    const scale = 1 + life * 0.9;
-
-    // Couleurs selon le nombre de lignes
-    const COMBO_COLORS = ['#aaffaa', '#ffee00', '#ff8800', '#00f0f0'];
-    const color = COMBO_COLORS[Math.min(n - 1, 3)];
-
+  function showComboDOM(n, pts) {
+    const color    = COMBO_COLORS[Math.min(n - 1, 3)];
     const mainText = n >= 4 ? 'TETRIS!' : `×${n}`;
-    const fsMult   = Math.round(CELL * 2.4);
-    const fsPts    = Math.round(CELL * 0.95);
+    const sizes    = ['2.2rem', '2.8rem', '3.4rem', '3rem'];
+    const dur      = n === 1 ? 900 : 1800; // ms
 
-    ctx.save();
-    ctx.globalAlpha = alpha;
-    ctx.translate(cx, cy);
-    ctx.scale(scale, scale);
-    ctx.textAlign    = 'center';
-    ctx.textBaseline = 'middle';
+    comboTextEl.textContent = mainText;
+    comboTextEl.style.color      = color;
+    comboTextEl.style.fontSize   = sizes[Math.min(n - 1, 3)];
+    comboTextEl.style.textShadow = `0 0 30px ${color}, 0 0 60px ${color}66`;
+    comboPtsEl.textContent = `+${pts} pts`;
 
-    // Ombre portée pour le glow
-    ctx.shadowColor = color;
-    ctx.shadowBlur  = n >= 4 ? 40 : 22;
+    // Relancer l'animation en forçant un reflow
+    comboOverlay.classList.remove('hidden');
+    comboOverlay.style.animation = 'none';
+    comboTextEl.style.animation  = 'none';
+    void comboOverlay.offsetWidth;
+    comboOverlay.style.animation = `combo-fade ${dur}ms ease-out forwards`;
+    comboTextEl.style.animation  = `combo-zoom ${dur}ms ease-out forwards`;
 
-    // Texte multiplicateur principal
-    ctx.font      = `bold ${fsMult}px 'Press Start 2P', monospace`;
-    ctx.fillStyle = color;
-    ctx.fillText(mainText, 0, -fsMult * 0.45);
-
-    // Sous-texte : points gagnés
-    ctx.shadowBlur  = 12;
-    ctx.font        = `bold ${fsPts}px 'Press Start 2P', monospace`;
-    ctx.fillStyle   = '#ffffff';
-    ctx.fillText(`+${pts} pts`, 0, fsMult * 0.55);
-
-    ctx.restore();
-  }
-
-  function updateCombo() {
-    if (!comboAnim) return;
-    comboAnim.life -= comboAnim.decay;
-    if (comboAnim.life <= 0) comboAnim = null;
+    clearTimeout(comboTimer);
+    comboTimer = setTimeout(() => comboOverlay.classList.add('hidden'), dur);
   }
 
   // ── Fenêtre NEXT ─────────────────────────────────────────────────
@@ -977,7 +1081,6 @@
       dropAccum = 0;
     }
     updateParticles();
-    updateCombo();
     draw();
     animFrame = requestAnimationFrame(loop);
   }
@@ -1027,6 +1130,27 @@
   bindBtn('btn-rotate', tryRotate);
   bindBtn('btn-down',   startFastDrop, stopFastDrop);  // maintenir = chute rapide
 
+  // ── Écran rotation portrait ───────────────────────────────────────
+  const rotateScreen = document.getElementById('rotate-screen');
+  let   rotateDismissed = false;
+
+  function updateRotateScreen() {
+    const isPortrait = window.innerWidth <= window.innerHeight;
+    if (isPortrait && !rotateDismissed) {
+      rotateScreen.classList.add('visible');
+    } else {
+      rotateScreen.classList.remove('visible');
+    }
+  }
+
+  document.getElementById('btn-continue-portrait').addEventListener('pointerdown', e => {
+    e.preventDefault();
+    rotateDismissed = true;
+    rotateScreen.classList.remove('visible');
+  });
+
+  window.addEventListener('resize', updateRotateScreen);
+
   // ── Init ──────────────────────────────────────────────────────────
   state = 'idle';
   grid = newGrid();
@@ -1034,6 +1158,7 @@
   drawNext();
   draw();
   showOverlay('TETRIS');
+  updateRotateScreen(); // afficher l'écran rotation si nécessaire
 
 })();
 </script>
