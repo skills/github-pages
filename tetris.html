@@ -173,6 +173,22 @@
   }
   .ctrl-btn:active { background: rgba(255,255,255,.28); }
   .ctrl-btn.wide { width: 80px; }
+  .ctrl-btn.pause { background: rgba(112,112,255,.22); }
+
+  /* ── Speed bar ── */
+  .speed-wrap {
+    width: 100%;
+    background: rgba(255,255,255,.08);
+    border-radius: 4px;
+    height: 6px;
+    overflow: hidden;
+  }
+  .speed-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: var(--accent);
+    transition: width .3s;
+  }
 </style>
 </head>
 <body>
@@ -191,6 +207,12 @@
     <div class="panel">
       <div class="panel-label">Lines</div>
       <div class="panel-value" id="lines-val">0</div>
+    </div>
+    <div class="panel" style="width:100%">
+      <div class="panel-label">Speed</div>
+      <div class="speed-wrap" style="width:100%">
+        <div class="speed-fill" id="speed-bar" style="width:10%"></div>
+      </div>
     </div>
   </div>
 
@@ -224,9 +246,10 @@
 <!-- Touch controls (mobile) -->
 <div id="controls">
   <div class="ctrl-row">
-    <div class="ctrl-btn" id="c-hold" title="Hold">⬜</div>
-    <div class="ctrl-btn" id="c-up"   title="Rotate">↻</div>
-    <div class="ctrl-btn wide" id="c-drop" title="Hard drop">▼▼</div>
+    <div class="ctrl-btn" id="c-hold"  title="Hold">⬜</div>
+    <div class="ctrl-btn" id="c-up"    title="Rotate">↻</div>
+    <div class="ctrl-btn wide" id="c-drop"  title="Hard drop">▼▼</div>
+    <div class="ctrl-btn pause" id="c-pause" title="Pause">⏸</div>
   </div>
   <div class="ctrl-row">
     <div class="ctrl-btn" id="c-left"  title="Left">◀</div>
@@ -501,6 +524,7 @@ function updateHUD(g) {
   document.getElementById('score-val').textContent = g.score;
   document.getElementById('level-val').textContent = g.level;
   document.getElementById('lines-val').textContent = g.lines;
+  document.getElementById('speed-bar').style.width = (g.level * 10) + '%';
 }
 
 function saveBest(score) {
@@ -608,6 +632,19 @@ function bindCtrl(id, fn) {
   const act = () => { if (state?.phase === 'playing' && !state.flashMs) fn(state); };
   el.addEventListener('touchstart', e => { e.preventDefault(); act(); }, { passive: false });
   el.addEventListener('mousedown',  e => { e.preventDefault(); act(); });
+}
+
+// Pause button (special: works in both playing and paused)
+const pauseEl = document.getElementById('c-pause');
+if (pauseEl) {
+  const togglePause = e => {
+    e.preventDefault();
+    if (!state) return;
+    if (state.phase === 'playing')     { state.phase = 'paused'; showOverlay('PAUSE','','REPRENDRE'); }
+    else if (state.phase === 'paused') { state.phase = 'playing'; hideOverlay(); }
+  };
+  pauseEl.addEventListener('touchstart', togglePause, { passive: false });
+  pauseEl.addEventListener('mousedown',  togglePause);
 }
 
 bindCtrl('c-left',  doLeft);
