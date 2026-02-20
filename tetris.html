@@ -208,12 +208,6 @@
       <div class="panel-label">Lines</div>
       <div class="panel-value" id="lines-val">0</div>
     </div>
-    <div class="panel" style="width:100%">
-      <div class="panel-label">Speed</div>
-      <div class="speed-wrap" style="width:100%">
-        <div class="speed-fill" id="speed-bar" style="width:10%"></div>
-      </div>
-    </div>
   </div>
 
   <!-- Game -->
@@ -239,6 +233,16 @@
     <div class="panel">
       <div class="panel-label">Best</div>
       <div class="panel-value" id="best-val">0</div>
+    </div>
+    <div class="panel" style="width:100%">
+      <div class="panel-label">Speed</div>
+      <div class="speed-wrap" style="width:100%">
+        <div class="speed-fill" id="speed-bar" style="width:10%"></div>
+      </div>
+    </div>
+    <div class="panel" style="width:100%; cursor:pointer" id="pause-panel">
+      <div class="panel-label">Pause</div>
+      <div class="panel-value" id="pause-icon">⏸</div>
     </div>
   </div>
 </div>
@@ -591,6 +595,7 @@ function startGame() {
   updateHUD(state);
   saveBest(0);
   hideOverlay();
+  document.getElementById('pause-icon').textContent = '⏸';
   dropAcc = 0;
   lastTs  = performance.now();
   rafId   = requestAnimationFrame(loop);
@@ -605,8 +610,8 @@ document.addEventListener('keydown', e => {
   if (!state) return;
 
   if (e.code === 'KeyP') {
-    if (state.phase === 'playing')     { state.phase = 'paused'; showOverlay('PAUSE','','REPRENDRE'); }
-    else if (state.phase === 'paused') { state.phase = 'playing'; hideOverlay(); }
+    if (state.phase === 'playing')     { state.phase = 'paused'; showOverlay('PAUSE','','REPRENDRE'); document.getElementById('pause-icon').textContent = '▶'; }
+    else if (state.phase === 'paused') { state.phase = 'playing'; hideOverlay(); document.getElementById('pause-icon').textContent = '⏸'; }
     return;
   }
 
@@ -640,11 +645,24 @@ if (pauseEl) {
   const togglePause = e => {
     e.preventDefault();
     if (!state) return;
-    if (state.phase === 'playing')     { state.phase = 'paused'; showOverlay('PAUSE','','REPRENDRE'); }
-    else if (state.phase === 'paused') { state.phase = 'playing'; hideOverlay(); }
+    if (state.phase === 'playing')     { state.phase = 'paused'; showOverlay('PAUSE','','REPRENDRE'); document.getElementById('pause-icon').textContent = '▶'; }
+    else if (state.phase === 'paused') { state.phase = 'playing'; hideOverlay(); document.getElementById('pause-icon').textContent = '⏸'; }
   };
   pauseEl.addEventListener('touchstart', togglePause, { passive: false });
   pauseEl.addEventListener('mousedown',  togglePause);
+}
+
+// Pause panel (right side)
+const pausePanel = document.getElementById('pause-panel');
+if (pausePanel) {
+  const togglePausePanel = e => {
+    e.preventDefault();
+    if (!state) return;
+    if (state.phase === 'playing')     { state.phase = 'paused'; showOverlay('PAUSE','','REPRENDRE'); document.getElementById('pause-icon').textContent = '▶'; }
+    else if (state.phase === 'paused') { state.phase = 'playing'; hideOverlay(); document.getElementById('pause-icon').textContent = '⏸'; }
+  };
+  pausePanel.addEventListener('touchstart', togglePausePanel, { passive: false });
+  pausePanel.addEventListener('mousedown',  togglePausePanel);
 }
 
 bindCtrl('c-left',  doLeft);
