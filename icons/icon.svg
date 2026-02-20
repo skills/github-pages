@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b0b1a"/>
+      <stop offset="100%" stop-color="#12122a"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <rect width="512" height="512" rx="80" fill="none" stroke="#2a2a55" stroke-width="6"/>
+
+  <!-- Helper: one block at (x,y) with size s and color c -->
+  <!-- Block size = 72px, grid starts at x=56, y=128 -->
+
+  <!-- Row 1: I-piece (cyan) -->
+  <g fill="#00f0f0" filter="url(#glow)">
+    <rect x="56"  y="128" width="68" height="68" rx="6"/>
+    <rect x="132" y="128" width="68" height="68" rx="6"/>
+    <rect x="208" y="128" width="68" height="68" rx="6"/>
+    <rect x="284" y="128" width="68" height="68" rx="6"/>
+  </g>
+  <!-- Highlights I-piece -->
+  <g fill="rgba(255,255,255,0.28)">
+    <rect x="56"  y="128" width="68" height="10" rx="4"/>
+    <rect x="132" y="128" width="68" height="10" rx="4"/>
+    <rect x="208" y="128" width="68" height="10" rx="4"/>
+    <rect x="284" y="128" width="68" height="10" rx="4"/>
+  </g>
+
+  <!-- Row 2: L-piece (orange) + 1 square (yellow) -->
+  <g fill="#f07800" filter="url(#glow)">
+    <rect x="56"  y="204" width="68" height="68" rx="6"/>
+    <rect x="132" y="204" width="68" height="68" rx="6"/>
+    <rect x="208" y="204" width="68" height="68" rx="6"/>
+  </g>
+  <g fill="#f0c000" filter="url(#glow)">
+    <rect x="284" y="204" width="68" height="68" rx="6"/>
+    <rect x="360" y="204" width="68" height="68" rx="6"/>
+  </g>
+  <g fill="rgba(255,255,255,0.28)">
+    <rect x="56"  y="204" width="68" height="10" rx="4"/>
+    <rect x="132" y="204" width="68" height="10" rx="4"/>
+    <rect x="208" y="204" width="68" height="10" rx="4"/>
+    <rect x="284" y="204" width="68" height="10" rx="4"/>
+    <rect x="360" y="204" width="68" height="10" rx="4"/>
+  </g>
+
+  <!-- Row 3: T-piece (purple) + S-piece (green) -->
+  <g fill="#a020f0" filter="url(#glow)">
+    <rect x="56"  y="280" width="68" height="68" rx="6"/>
+    <rect x="132" y="280" width="68" height="68" rx="6"/>
+    <rect x="208" y="280" width="68" height="68" rx="6"/>
+  </g>
+  <g fill="#00e000" filter="url(#glow)">
+    <rect x="284" y="280" width="68" height="68" rx="6"/>
+    <rect x="360" y="280" width="68" height="68" rx="6"/>
+  </g>
+  <g fill="rgba(255,255,255,0.28)">
+    <rect x="56"  y="280" width="68" height="10" rx="4"/>
+    <rect x="132" y="280" width="68" height="10" rx="4"/>
+    <rect x="208" y="280" width="68" height="10" rx="4"/>
+    <rect x="284" y="280" width="68" height="10" rx="4"/>
+    <rect x="360" y="280" width="68" height="10" rx="4"/>
+  </g>
+
+  <!-- Row 4 (partial): blue + red + orange -->
+  <g fill="#2020f0" filter="url(#glow)">
+    <rect x="56"  y="356" width="68" height="68" rx="6"/>
+    <rect x="132" y="356" width="68" height="68" rx="6"/>
+  </g>
+  <g fill="#f02020" filter="url(#glow)">
+    <rect x="208" y="356" width="68" height="68" rx="6"/>
+    <rect x="284" y="356" width="68" height="68" rx="6"/>
+  </g>
+  <g fill="#f07800" filter="url(#glow)">
+    <rect x="360" y="356" width="68" height="68" rx="6"/>
+  </g>
+  <g fill="rgba(255,255,255,0.28)">
+    <rect x="56"  y="356" width="68" height="10" rx="4"/>
+    <rect x="132" y="356" width="68" height="10" rx="4"/>
+    <rect x="208" y="356" width="68" height="10" rx="4"/>
+    <rect x="284" y="356" width="68" height="10" rx="4"/>
+    <rect x="360" y="356" width="68" height="10" rx="4"/>
+  </g>
+
+  <!-- TETRIS text glow -->
+  <text x="256" y="110" text-anchor="middle" font-family="monospace" font-weight="bold"
+        font-size="52" letter-spacing="8" fill="#00f0f0" opacity="0.18"
+        filter="url(#glow)">TETRIS</text>
+  <text x="256" y="110" text-anchor="middle" font-family="monospace" font-weight="bold"
+        font-size="52" letter-spacing="8" fill="#00f0f0">TETRIS</text>
+</svg>

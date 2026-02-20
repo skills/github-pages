@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Tetris</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f0f1a;
+    --panel: #1a1a2e;
+    --border: #2a2a4a;
+    --text: #e0e0ff;
+    --dim: #6060a0;
+    --accent: #7070ff;
+  }
+
+  html, body {
+    width: 100%; height: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Courier New', monospace;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #app {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    height: 100vh;
+    width: 100vw;
+    padding: 8px;
+  }
+
+  /* ── Side panels ── */
+  .side {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 65px;
+    max-width: 90px;
+    flex: 1;
+  }
+
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .panel-label {
+    font-size: 0.5rem;
+    color: var(--dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .panel-value {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--text);
+  }
+
+  .mini-canvas {
+    background: #0a0a14;
+    border-radius: 4px;
+    image-rendering: pixelated;
+  }
+
+  /* ── Main canvas ── */
+  #canvas-wrap {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  #game-canvas {
+    display: block;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    image-rendering: pixelated;
+  }
+
+  /* ── Overlay ── */
+  #overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.82);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    text-align: center;
+    padding: 16px;
+  }
+  #overlay.hidden { display: none; }
+
+  #overlay h1 {
+    font-size: 2rem;
+    letter-spacing: 4px;
+    color: var(--accent);
+  }
+
+  #overlay p {
+    font-size: 0.7rem;
+    color: var(--dim);
+    line-height: 1.8;
+  }
+
+  #overlay .score-display {
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+
+  .btn {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 28px;
+    font-size: 0.85rem;
+    font-family: inherit;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: opacity .15s;
+  }
+  .btn:active { opacity: .7; }
+
+  /* ── Touch controls ── */
+  #controls {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px 14px;
+    background: linear-gradient(transparent, rgba(0,0,0,.55));
+    pointer-events: none;
+  }
+  #controls.visible { display: flex; }
+
+  .ctrl-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    pointer-events: all;
+  }
+
+  .ctrl-btn {
+    width: 52px; height: 52px;
+    background: rgba(255,255,255,.11);
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 10px;
+    color: var(--text);
+    font-size: 1.3rem;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: background .1s;
+  }
+  .ctrl-btn:active { background: rgba(255,255,255,.28); }
+  .ctrl-btn.wide { width: 80px; }
+  .ctrl-btn.pause { background: rgba(112,112,255,.22); }
+
+  /* ── Speed bar ── */
+  .speed-wrap {
+    width: 100%;
+    background: rgba(255,255,255,.08);
+    border-radius: 4px;
+    height: 6px;
+    overflow: hidden;
+  }
+  .speed-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: var(--accent);
+    transition: width .3s;
+  }
+</style>
+</head>
+<body>
+
+<div id="app">
+  <!-- Left -->
+  <div class="side" style="align-items:flex-end">
+    <div class="panel">
+      <div class="panel-label">Score</div>
+      <div class="panel-value" id="score-val">0</div>
+    </div>
+    <div class="panel">
+      <div class="panel-label">Level</div>
+      <div class="panel-value" id="level-val">1</div>
+    </div>
+    <div class="panel">
+      <div class="panel-label">Lines</div>
+      <div class="panel-value" id="lines-val">0</div>
+    </div>
+  </div>
+
+  <!-- Game -->
+  <div id="canvas-wrap">
+    <canvas id="game-canvas"></canvas>
+    <div id="overlay">
+      <h1>TETRIS</h1>
+      <p>↑ Rotation &nbsp;·&nbsp; ← → Déplacer<br>↓ Descente &nbsp;·&nbsp; Espace Hard drop<br>C Hold &nbsp;·&nbsp; P Pause</p>
+      <button class="btn" id="start-btn">JOUER</button>
+    </div>
+  </div>
+
+  <!-- Right -->
+  <div class="side" style="align-items:flex-start">
+    <div class="panel">
+      <div class="panel-label">Next</div>
+      <canvas class="mini-canvas" id="next-canvas"></canvas>
+    </div>
+    <div class="panel">
+      <div class="panel-label">Hold</div>
+      <canvas class="mini-canvas" id="hold-canvas"></canvas>
+    </div>
+    <div class="panel">
+      <div class="panel-label">Best</div>
+      <div class="panel-value" id="best-val">0</div>
+    </div>
+    <div class="panel" style="width:100%">
+      <div class="panel-label">Speed</div>
+      <div class="speed-wrap" style="width:100%">
+        <div class="speed-fill" id="speed-bar" style="width:10%"></div>
+      </div>
+    </div>
+    <div class="panel" style="width:100%; cursor:pointer" id="pause-panel">
+      <div class="panel-label">Pause</div>
+      <div class="panel-value" id="pause-icon">⏸</div>
+    </div>
+  </div>
+</div>
+
+<!-- Touch controls (mobile) -->
+<div id="controls">
+  <div class="ctrl-row">
+    <div class="ctrl-btn" id="c-hold"  title="Hold">⬜</div>
+    <div class="ctrl-btn" id="c-up"    title="Rotate">↻</div>
+    <div class="ctrl-btn wide" id="c-drop"  title="Hard drop">▼▼</div>
+    <div class="ctrl-btn pause" id="c-pause" title="Pause">⏸</div>
+  </div>
+  <div class="ctrl-row">
+    <div class="ctrl-btn" id="c-left"  title="Left">◀</div>
+    <div class="ctrl-btn" id="c-down"  title="Down">▼</div>
+    <div class="ctrl-btn" id="c-right" title="Right">▶</div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════
+//  CONFIG
+// ═══════════════════════════════════════
+const COLS = 10, ROWS = 20;
+
+const COLORS = [
+  null,
+  '#00d4ff', // 1 I
+  '#f5c518', // 2 O
+  '#b04aff', // 3 T
+  '#30e060', // 4 S
+  '#ff4455', // 5 Z
+  '#3a8fff', // 6 J
+  '#ff8c00', // 7 L
+];
+
+// Canonical shapes (never mutated)
+const SHAPES = [
+  null,
+  [[0,0,0,0],[1,1,1,1],[0,0,0,0],[0,0,0,0]], // I
+  [[2,2],[2,2]],                               // O
+  [[0,3,0],[3,3,3],[0,0,0]],                   // T
+  [[0,4,4],[4,4,0],[0,0,0]],                   // S
+  [[5,5,0],[0,5,5],[0,0,0]],                   // Z
+  [[6,0,0],[6,6,6],[0,0,0]],                   // J
+  [[0,0,7],[7,7,7],[0,0,0]],                   // L
+];
+
+const LINE_SCORES = [0, 100, 300, 500, 800];
+// ms per gravity tick per level (1-10)
+const SPEEDS = [800,700,600,500,400,300,220,150,100,80];
+
+// ═══════════════════════════════════════
+//  CANVAS SETUP
+// ═══════════════════════════════════════
+const canvas     = document.getElementById('game-canvas');
+const ctx        = canvas.getContext('2d');
+const nextCanvas = document.getElementById('next-canvas');
+const nextCtx    = nextCanvas.getContext('2d');
+const holdCanvas = document.getElementById('hold-canvas');
+const holdCtx    = holdCanvas.getContext('2d');
+
+let CELL = 24;
+
+function resize() {
+  const touch  = window.matchMedia('(pointer:coarse)').matches;
+  const ctrlH  = touch ? 130 : 0;
+  const sideW  = touch ? 68  : 88;
+  const gapW   = 24;
+  const padH   = 16;
+
+  const availH = window.innerHeight - padH * 2 - ctrlH;
+  const availW = window.innerWidth  - sideW * 2 - gapW * 2 - 16;
+
+  CELL = Math.max(14, Math.floor(Math.min(availH / ROWS, availW / COLS)));
+
+  canvas.width  = CELL * COLS;
+  canvas.height = CELL * ROWS;
+
+  const mc = Math.max(10, Math.floor(CELL * 0.58));
+  nextCanvas.width  = holdCanvas.width  = mc * 5;
+  nextCanvas.height = holdCanvas.height = mc * 5;
+  nextCanvas._mc    = holdCanvas._mc    = mc;
+
+  document.getElementById('controls').classList.toggle('visible', touch);
+
+  if (state) drawAll();
+}
+
+// ═══════════════════════════════════════
+//  GAME STATE
+// ═══════════════════════════════════════
+let state = null;
+let rafId = null, lastTs = 0, dropAcc = 0;
+
+function newGame() {
+  return {
+    board:     Array.from({length: ROWS}, () => new Array(COLS).fill(0)),
+    shape:     null,   // current piece shape (2D array, mutable copy)
+    pid:       null,   // piece id 1-7
+    px: 0, py: 0,      // position
+    nextPid:   rndPid(),
+    heldPid:   null,
+    canHold:   true,
+    score:     0,
+    lines:     0,
+    level:     1,
+    phase:     'playing', // 'playing' | 'paused' | 'over'
+    flash:     [],     // rows currently flashing
+    flashMs:   0,
+  };
+}
+
+function rndPid() { return Math.floor(Math.random() * 7) + 1; }
+function cloneShape(s) { return s.map(r => [...r]); }
+
+// ═══════════════════════════════════════
+//  PIECE MECHANICS
+// ═══════════════════════════════════════
+function spawn(g) {
+  g.pid   = g.nextPid;
+  g.nextPid = rndPid();
+  g.shape = cloneShape(SHAPES[g.pid]);
+  g.px    = Math.floor((COLS - g.shape[0].length) / 2);
+  g.py    = 0;
+  if (collides(g, g.px, g.py)) { g.phase = 'over'; saveBest(g.score); }
+}
+
+function collides(g, ox, oy, sh) {
+  const shape = sh || g.shape;
+  for (let r = 0; r < shape.length; r++)
+    for (let c = 0; c < shape[r].length; c++)
+      if (shape[r][c]) {
+        const nr = oy + r, nc = ox + c;
+        if (nr >= ROWS || nc < 0 || nc >= COLS) return true;
+        if (nr >= 0 && g.board[nr][nc])         return true;
+      }
+  return false;
+}
+
+function rotateMatrix(sh, dir) {
+  const R = sh.length, C = sh[0].length;
+  const out = Array.from({length: C}, () => new Array(R).fill(0));
+  for (let r = 0; r < R; r++)
+    for (let c = 0; c < C; c++)
+      out[dir === 1 ? c : C-1-c][dir === 1 ? R-1-r : r] = sh[r][c];
+  return out;
+}
+
+function tryRotate(g, dir = 1) {
+  const rot = rotateMatrix(g.shape, dir);
+  for (const k of [0,-1,1,-2,2]) {
+    if (!collides(g, g.px+k, g.py, rot)) { g.shape = rot; g.px += k; return; }
+  }
+}
+
+function ghostRow(g) {
+  let gy = g.py;
+  while (!collides(g, g.px, gy+1)) gy++;
+  return gy;
+}
+
+function lock(g) {
+  for (let r = 0; r < g.shape.length; r++)
+    for (let c = 0; c < g.shape[r].length; c++)
+      if (g.shape[r][c]) {
+        const br = g.py+r, bc = g.px+c;
+        if (br >= 0) g.board[br][bc] = g.pid;
+      }
+
+  const full = [];
+  for (let r = 0; r < ROWS; r++) if (g.board[r].every(v => v)) full.push(r);
+
+  if (full.length) {
+    g.flash   = full;
+    g.flashMs = 170;
+    g.score  += LINE_SCORES[full.length] * g.level;
+    g.lines  += full.length;
+    g.level   = Math.min(10, Math.floor(g.lines / 10) + 1);
+  } else {
+    spawn(g);
+  }
+  g.canHold = true;
+  updateHUD(g);
+}
+
+function clearLines(g) {
+  const rows = [...g.flash].sort((a,b) => a-b);
+  for (const r of rows) { g.board.splice(r,1); g.board.unshift(new Array(COLS).fill(0)); }
+  g.flash = []; g.flashMs = 0;
+  if (g.phase === 'playing') spawn(g);
+}
+
+// Actions
+function doLeft(g)  { if (!collides(g, g.px-1, g.py)) g.px--; }
+function doRight(g) { if (!collides(g, g.px+1, g.py)) g.px++; }
+function doDown(g)  { if (!collides(g, g.px, g.py+1)) { g.py++; return true; } return false; }
+function doDrop(g)  { let d=0; while(!collides(g,g.px,g.py+1)){g.py++;d++;} g.score+=d*2; lock(g); dropAcc=0; }
+function doHold(g)  {
+  if (!g.canHold) return;
+  const tmp = g.heldPid;
+  g.heldPid = g.pid;
+  if (tmp !== null) {
+    g.pid   = tmp;
+    g.shape = cloneShape(SHAPES[tmp]);
+    g.px    = Math.floor((COLS - g.shape[0].length) / 2);
+    g.py    = 0;
+  } else { spawn(g); }
+  g.canHold = false;
+}
+
+// ═══════════════════════════════════════
+//  DRAW
+// ═══════════════════════════════════════
+function drawCell(c2d, col, row, pid, cell, alpha) {
+  if (!pid) return;
+  c2d.globalAlpha = alpha ?? 1;
+  c2d.fillStyle = COLORS[pid];
+  c2d.fillRect(col*cell+1, row*cell+1, cell-2, cell-2);
+  c2d.fillStyle = 'rgba(255,255,255,0.20)';
+  c2d.fillRect(col*cell+2, row*cell+2, cell-4, 3);
+  c2d.globalAlpha = 1;
+}
+
+function drawGame(g) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Grid
+  ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+  ctx.lineWidth = 1;
+  for (let r = 0; r <= ROWS; r++) { ctx.beginPath(); ctx.moveTo(0,r*CELL); ctx.lineTo(canvas.width,r*CELL); ctx.stroke(); }
+  for (let c = 0; c <= COLS; c++) { ctx.beginPath(); ctx.moveTo(c*CELL,0); ctx.lineTo(c*CELL,canvas.height); ctx.stroke(); }
+
+  // Board
+  const flashSet = new Set(g.flash);
+  const flashAlpha = flashSet.size ? (Math.sin(Date.now()/35) * 0.45 + 0.55) : 1;
+  for (let r = 0; r < ROWS; r++)
+    for (let c = 0; c < COLS; c++)
+      if (g.board[r][c])
+        drawCell(ctx, c, r, g.board[r][c], CELL, flashSet.has(r) ? flashAlpha : 1);
+
+  if (!g.shape) return;
+
+  // Ghost
+  const gy = ghostRow(g);
+  if (gy !== g.py)
+    for (let r = 0; r < g.shape.length; r++)
+      for (let c = 0; c < g.shape[r].length; c++)
+        if (g.shape[r][c])
+          drawCell(ctx, g.px+c, gy+r, g.pid, CELL, 0.2);
+
+  // Active piece
+  for (let r = 0; r < g.shape.length; r++)
+    for (let c = 0; c < g.shape[r].length; c++)
+      if (g.shape[r][c])
+        drawCell(ctx, g.px+c, g.py+r, g.pid, CELL);
+}
+
+function drawMini(mctx, pid) {
+  const cv = mctx.canvas;
+  const mc = cv._mc || 12;
+  mctx.clearRect(0, 0, cv.width, cv.height);
+  if (!pid) return;
+  const sh = SHAPES[pid];
+  const ox = Math.floor((5 - sh[0].length) / 2);
+  const oy = Math.floor((5 - sh.length) / 2);
+  for (let r = 0; r < sh.length; r++)
+    for (let c = 0; c < sh[r].length; c++)
+      if (sh[r][c]) drawCell(mctx, ox+c, oy+r, pid, mc);
+}
+
+function drawAll() {
+  if (!state) return;
+  drawGame(state);
+  drawMini(nextCtx, state.nextPid);
+  drawMini(holdCtx, state.heldPid);
+}
+
+// ═══════════════════════════════════════
+//  HUD
+// ═══════════════════════════════════════
+function updateHUD(g) {
+  document.getElementById('score-val').textContent = g.score;
+  document.getElementById('level-val').textContent = g.level;
+  document.getElementById('lines-val').textContent = g.lines;
+  document.getElementById('speed-bar').style.width = (g.level * 10) + '%';
+}
+
+function saveBest(score) {
+  const prev = +localStorage.getItem('tetris_best') || 0;
+  const best = Math.max(score, prev);
+  if (score > prev) localStorage.setItem('tetris_best', best);
+  document.getElementById('best-val').textContent = best;
+}
+
+// ═══════════════════════════════════════
+//  OVERLAY
+// ═══════════════════════════════════════
+function showOverlay(title, hint, btnTxt) {
+  const ov = document.getElementById('overlay');
+  ov.innerHTML = `
+    <h1>${title}</h1>
+    ${hint ? `<p>${hint}</p>` : ''}
+    ${state ? `<div class="score-display">Score : ${state.score}</div>` : ''}
+    <button class="btn" id="start-btn">${btnTxt}</button>
+  `;
+  ov.classList.remove('hidden');
+  document.getElementById('start-btn').onclick = startGame;
+}
+
+function hideOverlay() {
+  document.getElementById('overlay').classList.add('hidden');
+}
+
+// ═══════════════════════════════════════
+//  GAME LOOP
+// ═══════════════════════════════════════
+function loop(ts) {
+  const dt = Math.min(ts - lastTs, 100); // cap delta
+  lastTs = ts;
+  const g = state;
+
+  if (g.flashMs > 0) {
+    g.flashMs -= dt;
+    if (g.flashMs <= 0) clearLines(g);
+    drawAll();
+    rafId = requestAnimationFrame(loop);
+    return;
+  }
+
+  if (g.phase === 'playing') {
+    dropAcc += dt;
+    const spd = SPEEDS[g.level - 1] ?? 80;
+    if (dropAcc >= spd) {
+      dropAcc -= spd;
+      if (!doDown(g)) lock(g);
+    }
+  }
+
+  drawAll();
+
+  if (g.phase === 'over') { showOverlay('GAME OVER', '', 'REJOUER'); return; }
+  rafId = requestAnimationFrame(loop);
+}
+
+function startGame() {
+  if (rafId) cancelAnimationFrame(rafId);
+  state = newGame();
+  spawn(state);
+  updateHUD(state);
+  saveBest(0);
+  hideOverlay();
+  document.getElementById('pause-icon').textContent = '⏸';
+  dropAcc = 0;
+  lastTs  = performance.now();
+  rafId   = requestAnimationFrame(loop);
+}
+
+// ═══════════════════════════════════════
+//  KEYBOARD
+// ═══════════════════════════════════════
+const PREVENT = new Set(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Space']);
+document.addEventListener('keydown', e => {
+  if (PREVENT.has(e.code)) e.preventDefault();
+  if (!state) return;
+
+  if (e.code === 'KeyP') {
+    if (state.phase === 'playing')     { state.phase = 'paused'; showOverlay('PAUSE','','REPRENDRE'); document.getElementById('pause-icon').textContent = '▶'; }
+    else if (state.phase === 'paused') { state.phase = 'playing'; hideOverlay(); document.getElementById('pause-icon').textContent = '⏸'; }
+    return;
+  }
+
+  if (state.phase !== 'playing' || state.flashMs > 0) return;
+
+  switch (e.code) {
+    case 'ArrowLeft':  doLeft(state);            break;
+    case 'ArrowRight': doRight(state);           break;
+    case 'ArrowDown':  doDown(state); dropAcc=0; break;
+    case 'ArrowUp':    tryRotate(state, 1);      break;
+    case 'KeyZ':       tryRotate(state, -1);     break;
+    case 'Space':      doDrop(state);            break;
+    case 'KeyC':       doHold(state);            break;
+  }
+});
+
+// ═══════════════════════════════════════
+//  TOUCH CONTROLS
+// ═══════════════════════════════════════
+function bindCtrl(id, fn) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const act = () => { if (state?.phase === 'playing' && !state.flashMs) fn(state); };
+  el.addEventListener('touchstart', e => { e.preventDefault(); act(); }, { passive: false });
+  el.addEventListener('mousedown',  e => { e.preventDefault(); act(); });
+}
+
+// Pause button (special: works in both playing and paused)
+const pauseEl = document.getElementById('c-pause');
+if (pauseEl) {
+  const togglePause = e => {
+    e.preventDefault();
+    if (!state) return;
+    if (state.phase === 'playing')     { state.phase = 'paused'; showOverlay('PAUSE','','REPRENDRE'); document.getElementById('pause-icon').textContent = '▶'; }
+    else if (state.phase === 'paused') { state.phase = 'playing'; hideOverlay(); document.getElementById('pause-icon').textContent = '⏸'; }
+  };
+  pauseEl.addEventListener('touchstart', togglePause, { passive: false });
+  pauseEl.addEventListener('mousedown',  togglePause);
+}
+
+// Pause panel (right side)
+const pausePanel = document.getElementById('pause-panel');
+if (pausePanel) {
+  const togglePausePanel = e => {
+    e.preventDefault();
+    if (!state) return;
+    if (state.phase === 'playing')     { state.phase = 'paused'; showOverlay('PAUSE','','REPRENDRE'); document.getElementById('pause-icon').textContent = '▶'; }
+    else if (state.phase === 'paused') { state.phase = 'playing'; hideOverlay(); document.getElementById('pause-icon').textContent = '⏸'; }
+  };
+  pausePanel.addEventListener('touchstart', togglePausePanel, { passive: false });
+  pausePanel.addEventListener('mousedown',  togglePausePanel);
+}
+
+bindCtrl('c-left',  doLeft);
+bindCtrl('c-right', doRight);
+bindCtrl('c-down',  g => { doDown(g); dropAcc = 0; });
+bindCtrl('c-up',    g => tryRotate(g, 1));
+bindCtrl('c-drop',  doDrop);
+bindCtrl('c-hold',  doHold);
+
+// Swipe on canvas
+let sx = 0, sy = 0;
+canvas.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, {passive:true});
+canvas.addEventListener('touchend', e => {
+  if (!state || state.phase !== 'playing' || state.flashMs) return;
+  const dx = e.changedTouches[0].clientX - sx;
+  const dy = e.changedTouches[0].clientY - sy;
+  const ADX = Math.abs(dx), ADY = Math.abs(dy);
+  if (ADX < 8 && ADY < 8)       { tryRotate(state); return; }
+  if (ADX > ADY) { dx > 0 ? doRight(state) : doLeft(state); }
+  else           { if (dy > 25) doDrop(state); }
+}, {passive:true});
+
+// ═══════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════
+document.getElementById('start-btn').onclick = startGame;
+document.getElementById('best-val').textContent = localStorage.getItem('tetris_best') || 0;
+
+window.addEventListener('resize', resize);
+resize();
+</script>
+</body>
+</html>
