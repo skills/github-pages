@@ -39,9 +39,7 @@
     /* ══ PORTRAIT ═══════════════════════════════════════════════════ */
     #app {
       display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-content: flex-start;
+      flex-direction: column;
       height: 100dvh;
       width: 100%;
       max-width: 430px;
@@ -49,35 +47,38 @@
     }
 
     #panel-center {
-      width: 100%;
-      order: 1;
+      flex: 1 1 auto;
+      min-height: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 6px 8px 4px;
       gap: 5px;
-      flex: 1 1 auto;
-      min-height: 0;
+      overflow: hidden;
+    }
+
+    #controls-row {
+      flex: 0 0 auto;
+      display: flex;
+      width: 100%;
     }
 
     #panel-left {
-      width: 55%;
-      order: 2;
+      flex: 0 0 55%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 6px 0 8px 14px;
+      padding: 4px 0 8px 14px;
       gap: 4px;
     }
 
     #panel-right {
-      width: 45%;
-      order: 2;
+      flex: 0 0 45%;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 6px 14px 8px 0;
+      padding: 4px 14px 8px 0;
     }
 
     /* ── HEADER ─────────────────────────── */
@@ -313,14 +314,15 @@
     @media (orientation: landscape) {
       #app {
         flex-direction: row;
-        flex-wrap: nowrap;
         align-items: stretch;
         max-width: 100%;
         height: 100dvh;
       }
 
+      /* "Déplie" le wrapper controls-row : ses enfants rejoignent #app */
+      #controls-row { display: contents; }
+
       #panel-left {
-        width: auto;
         flex: 0 0 auto;
         order: 1;
         padding: 8px 6px 8px 10px;
@@ -336,10 +338,10 @@
         align-items: center;
         justify-content: center;
         gap: 3px;
+        overflow: visible;
       }
 
       #panel-right {
-        width: auto;
         flex: 0 0 auto;
         order: 3;
         padding: 8px 10px 8px 6px;
@@ -365,22 +367,6 @@
 </head>
 <body>
 <div id="app">
-
-  <!-- GAUCHE : D-PAD -->
-  <div id="panel-left">
-    <div id="dpad">
-      <div class="dpad-corner"></div>
-      <button class="dpad-btn" id="btn-up">▲</button>
-      <div class="dpad-corner"></div>
-      <button class="dpad-btn" id="btn-left">◀</button>
-      <div class="dpad-btn dpad-corner" id="dpad-center"></div>
-      <button class="dpad-btn" id="btn-right">▶</button>
-      <div class="dpad-corner"></div>
-      <button class="dpad-btn" id="btn-down">▼▼</button>
-      <div class="dpad-corner"></div>
-    </div>
-    <div class="dpad-hint">▼▼ CHUTE RAPIDE</div>
-  </div>
 
   <!-- CENTRE -->
   <div id="panel-center">
@@ -423,14 +409,35 @@
 
   </div>
 
-  <!-- DROITE : bouton rotation uniquement -->
-  <div id="panel-right">
-    <div id="action-btns">
-      <button class="action-btn" id="btn-rotate">
-        ↻
-        <span class="btn-sub">TOUR</span>
-      </button>
+  <!-- CONTRÔLES BAS (portrait) / CÔTÉS (paysage) -->
+  <div id="controls-row">
+
+    <!-- GAUCHE : D-PAD -->
+    <div id="panel-left">
+      <div id="dpad">
+        <div class="dpad-corner"></div>
+        <button class="dpad-btn" id="btn-up">▲</button>
+        <div class="dpad-corner"></div>
+        <button class="dpad-btn" id="btn-left">◀</button>
+        <div class="dpad-btn dpad-corner" id="dpad-center"></div>
+        <button class="dpad-btn" id="btn-right">▶</button>
+        <div class="dpad-corner"></div>
+        <button class="dpad-btn" id="btn-down">▼▼</button>
+        <div class="dpad-corner"></div>
+      </div>
+      <div class="dpad-hint">▼▼ CHUTE RAPIDE</div>
     </div>
+
+    <!-- DROITE : bouton rotation -->
+    <div id="panel-right">
+      <div id="action-btns">
+        <button class="action-btn" id="btn-rotate">
+          ↻
+          <span class="btn-sub">TOUR</span>
+        </button>
+      </div>
+    </div>
+
   </div>
 
 </div>
@@ -477,8 +484,8 @@
       // Largeur : le canvas principal (COLS) + le canvas NEXT (4) partagent la même ligne
       // 28 = gap(6) + bordures(6) + padding app(16)
       const cellW = Math.max(14, Math.floor((app.clientWidth - 28) / (COLS + 4)));
-      // Hauteur : réserver ≈130px (header+barre+pause) + ≈160px (contrôles D-pad)
-      const cellH = Math.max(14, Math.floor((window.innerHeight - 290) / ROWS));
+      // Hauteur : réserver ≈95px (header+barre+pause) + ≈178px (contrôles D-pad+padding)
+      const cellH = Math.max(14, Math.floor((window.innerHeight - 273) / ROWS));
       return Math.min(cellW, cellH);
     }
   }
@@ -630,8 +637,8 @@
   let fastDropActive = false, fastInterval = null;
   let comboAnim = null; // { n, pts, life, decay }
 
-  function dropInterval() { return Math.max(80, 1000 - score * 8); }
-  function speedPct()     { return Math.min(100, Math.round(score * 8 / 9.2)); }
+  function dropInterval() { return Math.max(80, 1000 - score * 10); }
+  function speedPct()     { return Math.min(100, Math.round(score * 10 / 9.2)); }
   function newGrid()      { return Array.from({ length: ROWS }, () => new Array(COLS).fill(0)); }
 
   function randPiece() {
@@ -752,16 +759,17 @@
 
     if (clearedRows.length) {
       const n   = clearedRows.length;
-      const pts = n * n; // multiplicateur : n lignes = n×n points
-      const adjustedRows = clearedRows.map((r, i) => r + i);
+      const pts = n; // +1 par ligne, le multiplicateur ×n s'applique visuellement
+      // Correction : les indices dans snap AVANT effacement = r - i (non r + i)
+      const adjustedRows = clearedRows.map((r, i) => r - i);
       spawnParticles(adjustedRows, snap);
       playSound('clear', n);
       score += pts;
       updateHUD();
-      // Afficher l'animation seulement pour 2+ lignes simultanées
-      // Ne jamais écraser un combo supérieur encore en cours
-      if (n >= 2 && (!comboAnim || comboAnim.n <= n)) {
-        comboAnim = { n, pts, life: 1.0, decay: 0.014 };
+      // Afficher l'animation combo pour toutes les clears (×1, ×2, ×3, TETRIS)
+      // Durée réduite pour 1 ligne seule pour ne pas être trop intrusif
+      if (!comboAnim || comboAnim.n <= n) {
+        comboAnim = { n, pts, life: 1.0, decay: n === 1 ? 0.025 : 0.014 };
       }
     }
   }
