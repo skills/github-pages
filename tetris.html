@@ -217,8 +217,8 @@
     /* ── DPAD ─────────────────────────── */
     #dpad {
       display: grid;
-      grid-template-columns: repeat(3, 52px);
-      grid-template-rows: repeat(3, 52px);
+      grid-template-columns: repeat(3, 46px);
+      grid-template-rows: repeat(3, 46px);
       gap: 3px;
     }
 
@@ -278,8 +278,8 @@
     }
 
     .action-btn {
-      width: 72px;
-      height: 72px;
+      width: 66px;
+      height: 66px;
       border-radius: 50%;
       border: none;
       font-family: 'Press Start 2P', monospace;
@@ -474,7 +474,12 @@
       return Math.max(14, Math.floor((window.innerHeight - 90) / ROWS));
     } else {
       const app = document.getElementById('app');
-      return Math.max(16, Math.floor(Math.min(app.clientWidth - 80 - 16, 300) / COLS));
+      // Largeur : le canvas principal (COLS) + le canvas NEXT (4) partagent la même ligne
+      // 28 = gap(6) + bordures(6) + padding app(16)
+      const cellW = Math.max(14, Math.floor((app.clientWidth - 28) / (COLS + 4)));
+      // Hauteur : réserver ≈130px (header+barre+pause) + ≈160px (contrôles D-pad)
+      const cellH = Math.max(14, Math.floor((window.innerHeight - 290) / ROWS));
+      return Math.min(cellW, cellH);
     }
   }
 
