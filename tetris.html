@@ -119,7 +119,8 @@
       gap: 6px;
       align-items: flex-start;
       justify-content: center;
-      flex-shrink: 0;
+      flex: 1 1 auto;
+      min-height: 0;
     }
 
     #canvas-container {
@@ -135,11 +136,11 @@
     #side {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 6px;
+      align-items: stretch;
+      gap: 4px;
     }
 
-    .side-label { font-size: 0.35rem; color: var(--dim); letter-spacing: 2px; }
+    .side-label { font-size: 0.35rem; color: var(--dim); letter-spacing: 2px; text-align: center; }
 
     #next-canvas {
       background: var(--panel);
@@ -182,16 +183,17 @@
     #overlay-btn:active { background: rgba(0,240,240,0.15); }
 
     /* ── PAUSE BAR ─────────────────────── */
-    #pause-bar { display: flex; justify-content: center; width: 100%; }
+    #pause-bar { display: flex; width: 100%; }
 
     #btn-pause {
+      width: 100%;
       background: var(--panel);
       border: 1px solid var(--border);
       color: var(--dim);
       font-family: 'Press Start 2P', monospace;
       font-size: 0.38rem;
       letter-spacing: 1px;
-      padding: 6px 14px;
+      padding: 6px 4px;
       cursor: pointer;
       border-radius: 10px;
       -webkit-tap-highlight-color: transparent;
@@ -199,8 +201,8 @@
     #btn-pause:active { background: #1e1e40; }
 
     /* ── SPEED BAR ─────────────────────── */
-    #speed-bar-wrap { width: 100%; display: flex; flex-direction: column; gap: 3px; }
-    #speed-label { font-size: 0.35rem; color: var(--dim); letter-spacing: 2px; }
+    #speed-bar-wrap { width: 100%; display: flex; flex-direction: column; gap: 2px; }
+    #speed-label { font-size: 0.3rem; color: var(--dim); letter-spacing: 1px; text-align: center; }
     #speed-bar-bg {
       height: 5px;
       background: var(--panel);
@@ -313,7 +315,7 @@
 
     /* ── ÉCRAN ROTATION ───────────────────────────────────────────── */
     #rotate-screen {
-      position: absolute;
+      position: fixed;
       inset: 0;
       z-index: 100;
       background: var(--bg);
@@ -489,18 +491,16 @@
         </div>
       </div>
       <div id="side">
+        <div id="speed-bar-wrap">
+          <div id="speed-label">VITESSE</div>
+          <div id="speed-bar-bg"><div id="speed-bar-fill"></div></div>
+        </div>
         <div class="side-label">NEXT</div>
         <canvas id="next-canvas"></canvas>
+        <div id="pause-bar">
+          <button id="btn-pause">⏸ PAUSE</button>
+        </div>
       </div>
-    </div>
-
-    <div id="speed-bar-wrap">
-      <div id="speed-label">VITESSE ▸</div>
-      <div id="speed-bar-bg"><div id="speed-bar-fill"></div></div>
-    </div>
-
-    <div id="pause-bar">
-      <button id="btn-pause">⏸ PAUSE</button>
     </div>
 
   </div>
@@ -613,8 +613,8 @@
       // Largeur : le canvas principal (COLS) + le canvas NEXT (4) partagent la même ligne
       // 28 = gap(6) + bordures(6) + padding app(16)
       const cellW = Math.max(14, Math.floor((app.clientWidth - 28) / (COLS + 4)));
-      // Hauteur : réserver ≈95px (header+barre+pause) + ≈178px (contrôles D-pad+padding)
-      const cellH = Math.max(14, Math.floor((window.innerHeight - 273) / ROWS));
+      // Hauteur : réserver ≈50px (header) + ≈178px (contrôles D-pad+padding) + padding
+      const cellH = Math.max(14, Math.floor((window.innerHeight - 238) / ROWS));
       return Math.min(cellW, cellH);
     }
   }
