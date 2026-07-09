@@ -1,0 +1,12 @@
+title: My GitHub Pages Site
+author: GitHub User
+email: user@example.com
+description: > # this means to ignore newlines until "baseurl:"
+  A simple GitHub Pages site built with Jekyll
+baseurl: /skills-github-pages
+url: https://surajb44.github.io
+twitter_username: jekyllrb
+github_username: surajb44
+theme: minima
+plugins:
+  - jekyll-feed
