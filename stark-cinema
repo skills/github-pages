@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#0a0e17">
+    <title>Stark Cinema OS</title>
+
+    <!-- Підключення стилів Plyr -->
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+
+    <style>
+        :root {
+            --bg-color: #0a0e17;
+            --card-bg: #111827;
+            --accent-color: #00f0ff;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #1e293b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0 20px 0;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        /* Стилізація плеєра */
+        .player-wrapper {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 24px;
+        }
+
+        .plyr {
+            --plyr-color-main: var(--accent-color);
+            --plyr-video-control-color-hover: #000;
+            border-radius: 16px;
+        }
+
+        .movie-info-panel {
+            padding: 16px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 24px;
+        }
+
+        .movie-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .movie-meta {
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        /* Плейлист */
+        .playlist-header {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .playlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .playlist-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .playlist-card:active {
+            transform: scale(0.96);
+        }
+
+        .playlist-card.active {
+            border-color: var(--accent-color);
+            background: rgba(0, 240, 255, 0.1);
+        }
+
+        .card-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 4px;
+        }
+
+        .card-type {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="logo">STARK <span>CINEMA</span></div>
+        </header>
+
+        <!-- Відеоплеєр -->
+        <div class="player-wrapper">
+            <video id="stark-player" playsinline controls poster="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000">
+                <source id="video-source" src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" type="video/mp4">
+                Ваш браузер не підтримує відтворення відео.
+            </video>
+        </div>
+
+        <!-- Інформація про поточне відео -->
+        <div class="movie-info-panel">
+            <h1 class="movie-title" id="current-title">Tears of Steel</h1>
+            <div class="movie-meta" id="current-meta">Фільм / Sci-Fi • 2012</div>
+        </div>
+
+        <!-- Вибір відео -->
+        <div class="playlist-header">Доступні тайтли</div>
+        <div class="playlist-grid" id="playlist">
+            <!-- Список генерується через JS -->
+        </div>
+    </div>
+
+    <!-- Підключення скрипту Plyr -->
+    <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+    <script>
+        // Ініціалізація плеєра Plyr
+        const player = new Plyr('#stark-player', {
+            controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'fullscreen']
+        });
+
+        // База даних з робочими відео
+        const videoList = [
+            {
+                id: 1,
+                title: 'Tears of Steel',
+                type: 'Фільм / Sci-Fi (2012)',
+                poster: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000',
+                videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4'
+            },
+            {
+                id: 2,
+                title: 'Big Buck Bunny',
+                type: 'Мультфільм (2008)',
+                poster: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1000',
+                videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
+            },
+            {
+                id: 3,
+                title: 'Elephant Dream',
+                type: 'Аніме / 3D (2006)',
+                poster: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=1000',
+                videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4'
+            }
+        ];
+
+        // Рендеринг списку
+        function renderPlaylist() {
+            const container = document.getElementById('playlist');
+            container.innerHTML = '';
+
+            videoList.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = `playlist-card ${index === 0 ? 'active' : ''}`;
+                card.onclick = () => playVideo(item, card);
+                card.innerHTML = `
+                    <div class="card-title">${item.title}</div>
+                    <div class="card-type">${item.type}</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Функція переключення відео
+        function playVideo(item, cardElement) {
+            document.querySelectorAll('.playlist-card').forEach(c => c.classList.remove('active'));
+            if (cardElement) cardElement.classList.add('active');
+
+            player.source = {
+                type: 'video',
+                title: item.title,
+                sources: [
+                    {
+                        src: item.videoUrl,
+                        type: 'video/mp4'
+                    }
+                ],
+                poster: item.poster
+            };
+
+            document.getElementById('current-title').innerText = item.title;
+            document.getElementById('current-meta').innerText = item.type;
+
+            player.play();
+        }
+
+        renderPlaylist();
+    </script>
+</body>
+</html>
